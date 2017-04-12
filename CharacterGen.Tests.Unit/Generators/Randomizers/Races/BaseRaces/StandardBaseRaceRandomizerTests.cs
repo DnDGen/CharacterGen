@@ -18,6 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                     "standard base race",
                     "non-standard base race",
                     "monster base race",
+                    "aquatic base race",
                 };
             }
         }

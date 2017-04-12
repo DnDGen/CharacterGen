@@ -183,6 +183,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Haberdasher)]
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Healer)]
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Horner)]
+        [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Hunter)]
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Interpreter)]
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Jeweler)]
         [TestCase(SkillConstants.Profession, StatConstants.Wisdom, SkillConstants.Foci.Profession.Laborer)]

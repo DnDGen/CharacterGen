@@ -6,6 +6,10 @@
     <item>2</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>0</item>
+  </object>
+  <object>
     <name>Aristocrat</name>
     <item>4</item>
   </object>
@@ -122,11 +126,27 @@
     <item>8</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>2</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>2</item>
   </object>
   <object>
     <name>Lizardfolk</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>0</item>
+  </object>
+  <object>
+    <name>Merrow</name>
     <item>2</item>
   </object>
   <object>
@@ -178,11 +198,19 @@
     <item>8</item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>2</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>6</item>
   </object>
   <object>
     <name>Scorpionfolk</name>
+    <item>2</item>
+  </object>
+  <object>
+    <name>Scrag</name>
     <item>2</item>
   </object>
   <object>

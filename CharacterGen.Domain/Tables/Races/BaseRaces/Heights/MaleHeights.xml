@@ -6,6 +6,10 @@
     <item>62</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>53</item>
+  </object>
+  <object>
     <name>Azer</name>
     <item>45</item>
   </object>
@@ -134,6 +138,10 @@
     <item>58</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>58</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>30</item>
   </object>
@@ -144,6 +152,18 @@
   <object>
     <name>Lizardfolk</name>
     <item>58</item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item>50</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>57</item>
+  </object>
+  <object>
+    <name>Merrow</name>
+    <item>108</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -186,12 +206,20 @@
     <item>36</item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>56</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>70</item>
   </object>
   <object>
     <name>Scorpionfolk</name>
     <item>70</item>
+  </object>
+  <object>
+    <name>Scrag</name>
+    <item>96</item>
   </object>
   <object>
     <name>Stone Giant</name>

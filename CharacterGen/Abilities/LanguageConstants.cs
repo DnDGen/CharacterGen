@@ -26,6 +26,8 @@
         {
             public const string Druidic = "Druidic";
             public const string Grimlock = "Grimlock";
+            public const string KuoToa = "Kuo-toa";
+            public const string Sahuagin = "Sahuagin";
             public const string Slaad = "Slaad";
             public const string YuanTi = "Yuan-ti";
         }

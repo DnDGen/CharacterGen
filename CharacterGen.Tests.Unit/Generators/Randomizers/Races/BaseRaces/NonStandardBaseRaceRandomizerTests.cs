@@ -18,6 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                     "standard base race",
                     "non-standard base race",
                     "monster base race",
+                    "aquatic base race",
                 };
             }
         }
@@ -35,7 +36,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void OnlyNonStandardBaseRacesAllowed()
         {
             var baseRaces = randomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(baseRaces, Is.EquivalentTo(new[] { "non-standard base race", "base race", "monster base race" }));
+            Assert.That(baseRaces, Is.EquivalentTo(new[] { "non-standard base race", "base race", "monster base race", "aquatic base race" }));
         }
     }
 }

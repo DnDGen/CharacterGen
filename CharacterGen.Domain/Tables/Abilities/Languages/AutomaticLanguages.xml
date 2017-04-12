@@ -13,6 +13,11 @@
     <name>Adept</name>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>Common</item>
+    <item>Elven</item>
+  </object>
+  <object>
     <name>Aristocrat</name>
   </object>
   <object>
@@ -209,6 +214,10 @@
     <item>Common</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>Common</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>Draconic</item>
   </object>
@@ -225,6 +234,20 @@
     <name>Lizardfolk</name>
     <item>Common</item>
     <item>Draconic</item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item>Aquan</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>Common</item>
+    <item>Aquan</item>
+  </object>
+  <object>
+    <name>Merrow</name>
+    <item>Common</item>
+    <item>Giant</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -292,6 +315,11 @@
     <name>Rogue</name>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>Common</item>
+    <item>Sahuagin</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>Sylvan</item>
   </object>
@@ -299,6 +327,10 @@
     <name>Scorpionfolk</name>
     <item>Common</item>
     <item>Terran</item>
+  </object>
+  <object>
+    <name>Scrag</name>
+    <item>Giant</item>
   </object>
   <object>
     <name>Sorcerer</name>

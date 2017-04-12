@@ -25,6 +25,7 @@
         public static class BaseRaces
         {
             public const string Aasimar = "Aasimar";
+            public const string AquaticElf = "Aquatic Elf";
             public const string Azer = "Azer";
             public const string BlueSlaad = "Blue Slaad";
             public const string Bugbear = "Bugbear";
@@ -57,9 +58,13 @@
             public const string HoundArchon = "Hound Archon";
             public const string Human = "Human";
             public const string Janni = "Janni";
+            public const string Kapoacinth = "Kapoacinth";
             public const string Kobold = "Kobold";
             public const string LightfootHalfling = "Lightfoot Halfling";
             public const string Lizardfolk = "Lizardfolk";
+            public const string Locathah = "Locathah";
+            public const string Merfolk = "Merfolk";
+            public const string Merrow = "Merrow";
             public const string MindFlayer = "Mind Flayer";
             public const string Minotaur = "Minotaur";
             public const string MountainDwarf = "Mountain Dwarf";
@@ -70,8 +75,10 @@
             public const string Rakshasa = "Rakshasa";
             public const string RedSlaad = "Red Slaad";
             public const string RockGnome = "Rock Gnome";
+            public const string Sahuagin = "Sahuagin";
             public const string Satyr = "Satyr";
             public const string Scorpionfolk = "Scorpionfolk";
+            public const string Scrag = "Scrag";
             public const string StoneGiant = "Stone Giant";
             public const string StormGiant = "Storm Giant";
             public const string Svirfneblin = "Svirfneblin";

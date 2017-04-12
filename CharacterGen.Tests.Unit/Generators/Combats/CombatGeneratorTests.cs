@@ -28,7 +28,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Dictionary<string, Stat> stats;
         private Equipment equipment;
         private Race race;
-        private Dictionary<string, int> maxDexterityBonuses;
         private Dictionary<string, int> racialBaseAttackAdjustments;
         private List<string> initiativeFeats;
         private List<string> attackBonusFeats;
@@ -50,7 +49,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             stats = new Dictionary<string, Stat>();
             equipment = new Equipment();
             race = new Race();
-            maxDexterityBonuses = new Dictionary<string, int>();
             sizeModifiers = new Dictionary<string, int>();
             racialBaseAttackAdjustments = new Dictionary<string, int>();
             initiativeFeats = new List<string>();
@@ -68,9 +66,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             stats[StatConstants.Strength].Value = 600;
             racialBaseAttackAdjustments[string.Empty] = 0;
             sizeModifiers[race.Size] = 0;
-            maxDexterityBonuses[string.Empty] = 42;
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus, It.IsAny<string>())).Returns((string table, string name) => maxDexterityBonuses[name]);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers, It.IsAny<string>())).Returns((string table, string name) => sizeModifiers[name]);
             mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack))
                 .Returns(() => baseAttackType);
@@ -322,8 +318,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void AdjustedDexterityBonusIsBonus()
         {
-            equipment.Armor = new Item { Name = "armor" };
-            maxDexterityBonuses[equipment.Armor.Name] = 17;
+            equipment.Armor = new Armor { Name = "armor", MaxDexterityBonus = 17 };
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
@@ -334,8 +329,18 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void AdjustedDexterityBonusIsMaxBonusOfArmor()
         {
-            equipment.Armor = new Item { Name = "armor" };
-            maxDexterityBonuses[equipment.Armor.Name] = 5;
+            equipment.Armor = new Armor { Name = "armor", MaxDexterityBonus = 5 };
+
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
+            var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
+
+            Assert.That(combat.AdjustedDexterityBonus, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void AdustedDexterityBonusIsMaxBonusIfShield()
+        {
+            equipment.OffHand = new Armor { Name = "shield", MaxDexterityBonus = 5 };
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
@@ -346,9 +351,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void MithralIncreasesArmorMaxDexterityBonusBy2()
         {
-            equipment.Armor = new Item { Name = "armor" };
+            equipment.Armor = new Armor { Name = "armor", MaxDexterityBonus = 5 };
             equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
-            maxDexterityBonuses[equipment.Armor.Name] = 5;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
@@ -359,8 +363,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetArmorClassFromGeneratorWithMaxDexterityBonus()
         {
-            equipment.Armor = new Item { Name = "armor" };
-            maxDexterityBonuses[equipment.Armor.Name] = 5;
+            equipment.Armor = new Armor { Name = "armor", MaxDexterityBonus = 5 };
             var armorClass = new ArmorClass();
             mockArmorClassGenerator.Setup(g => g.GenerateWith(equipment, 5, feats, race)).Returns(armorClass);
 
@@ -451,8 +454,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void InitiativeBonusUsesAdjustedDexterityBonus()
         {
-            equipment.Armor = new Item { Name = "armor" };
-            maxDexterityBonuses[equipment.Armor.Name] = 5;
+            equipment.Armor = new Armor { Name = "armor", MaxDexterityBonus = 5 };
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);

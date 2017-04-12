@@ -36,30 +36,29 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             mockCollectionSelector = new Mock<ICollectionsSelector>();
             randomizer = new TestBaseRaceRandomizer(mockPercentileResultSelector.Object, mockAdjustmentsSelector.Object, mockCollectionSelector.Object);
 
-            characterClass = new CharacterClass();
-            characterClass.Name = "class name";
-
             alignment = new Alignment();
+            characterClass = new CharacterClass();
+            alignmentRaces = new List<string>();
+            adjustments = new Dictionary<string, int>();
+
+            characterClass.Name = "class name";
+            characterClass.Level = 1;
+
             alignment.Goodness = Guid.NewGuid().ToString();
             alignment.Lawfulness = Guid.NewGuid().ToString();
-            alignmentRaces = new List<string>();
 
             alignmentRaces.Add(firstBaseRace);
             alignmentRaces.Add(secondBaseRace);
 
             var baseRaces = new[] { firstBaseRace, secondBaseRace, string.Empty };
 
-            adjustments = new Dictionary<string, int>();
             foreach (var baseRace in baseRaces)
                 adjustments.Add(baseRace, 0);
-
-            characterClass.Level = 1;
 
             mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(baseRaces);
             mockPercentileResultSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => adjustments[name]);
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentRaces);
-
 
             var index = 0;
             mockCollectionSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -223,7 +222,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                 : base(percentileResultSelector, levelAdjustmentSelector, new ConfigurableIterationGenerator(2), collectionSelector)
             { }
 
-            protected override bool BaseRaceIsAllowed(string baseRace)
+            protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)
             {
                 return baseRace != ForbiddenBaseRace;
             }

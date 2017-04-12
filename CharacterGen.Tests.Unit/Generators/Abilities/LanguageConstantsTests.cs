@@ -25,8 +25,10 @@ namespace CharacterGen.Tests.Unit.Common.Abilities
         [TestCase(LanguageConstants.Sylvan, "Sylvan")]
         [TestCase(LanguageConstants.Terran, "Terran")]
         [TestCase(LanguageConstants.Undercommon, "Undercommon")]
-        [TestCase(LanguageConstants.Special.Grimlock, "Grimlock")]
         [TestCase(LanguageConstants.Special.Druidic, "Druidic")]
+        [TestCase(LanguageConstants.Special.Grimlock, "Grimlock")]
+        [TestCase(LanguageConstants.Special.KuoToa, "Kuo-toa")]
+        [TestCase(LanguageConstants.Special.Sahuagin, "Sahuagin")]
         [TestCase(LanguageConstants.Special.Slaad, "Slaad")]
         [TestCase(LanguageConstants.Special.YuanTi, "Yuan-ti")]
         public void LanguageConstant(string constant, string value)

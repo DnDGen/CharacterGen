@@ -1,5 +1,5 @@
-﻿using CharacterGen.Races;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
@@ -30,9 +30,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
         [TestCase(RaceConstants.Ages.MiddleAge, 60)]
         [TestCase(RaceConstants.Ages.Old, 80)]
         [TestCase(RaceConstants.Ages.Venerable, 120)]
-        public override void Adjustment(string name, int adjustment)
+        public void Age(string ageDescription, int age)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(ageDescription, age);
         }
     }
 }

@@ -667,6 +667,10 @@
     <item>Craft/Hornworking</item>
   </object>
   <object>
+    <name>Profession/Hunter</name>
+    <item>Survival</item>
+  </object>
+  <object>
     <name>Profession/Interpreter</name>
   </object>
   <object>
@@ -880,6 +884,7 @@
     <name>Survival</name>
     <item>Knowledge/Nature</item>
     <item>Profession/Dowser</item>
+    <item>Profession/Hunter</item>
     <item>Profession/Navigator</item>
   </object>
   <object>

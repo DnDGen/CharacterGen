@@ -41,31 +41,23 @@ namespace CharacterGen.Domain.Generators.Items
             var twoWeaponFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded);
             var hasTwoWeaponFeats = feats.Any(f => twoWeaponFeats.Contains(f.Name));
 
-            var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
-            var twoHandedWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.TwoHanded);
-            var oneHandedMeleeWeapons = meleeWeapons.Except(twoHandedWeapons);
-            var foci = feats.Where(f => f.Name != FeatConstants.WeaponFamiliarity).SelectMany(f => f.Foci);
-
-            if (hasTwoWeaponFeats && foci.Intersect(oneHandedMeleeWeapons).Any())
+            if (hasTwoWeaponFeats)
             {
                 equipment.PrimaryHand = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
                 equipment.OffHand = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
             }
-            else
+
+            if (equipment.PrimaryHand == null)
             {
                 equipment.PrimaryHand = weaponGenerator.GenerateFrom(feats, characterClass, race);
             }
 
-            var hasUnarmedStrikeFocus = foci.Any(f => f == FeatConstants.Foci.UnarmedStrike);
-
             if (equipment.PrimaryHand != null)
             {
-                var baseWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, equipment.PrimaryHand.Name);
-
-                if (WeaponRequiresAmmunition(baseWeaponTypes))
+                var ammunitionType = GetRequiredAmmunition(equipment.PrimaryHand);
+                if (!string.IsNullOrEmpty(ammunitionType))
                 {
-                    var ammunitionType = baseWeaponTypes.Last();
-                    var ammunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunitionType);
+                    var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, ammunitionType);
 
                     if (ammunition != null)
                         equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
@@ -96,12 +88,10 @@ namespace CharacterGen.Domain.Generators.Items
                     {
                         equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { rangedWeapon });
 
-                        var baseRangedWeaponTypes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, rangedWeapon.Name);
-
-                        if (WeaponRequiresAmmunition(baseRangedWeaponTypes))
+                        ammunitionType = GetRequiredAmmunition(rangedWeapon);
+                        if (!string.IsNullOrEmpty(ammunitionType))
                         {
-                            var ammunitionType = baseRangedWeaponTypes.Last();
-                            var ammunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunitionType);
+                            var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, ammunitionType);
 
                             if (ammunition != null)
                                 equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
@@ -116,9 +106,21 @@ namespace CharacterGen.Domain.Generators.Items
             return equipment;
         }
 
-        private bool WeaponRequiresAmmunition(IEnumerable<string> baseWeaponTypes)
+        private string GetRequiredAmmunition(Weapon weapon)
         {
-            return baseWeaponTypes.Count() > 1;
+            var arrowWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.Arrow);
+            if (arrowWeapons.Any(w => weapon.NameMatches(w)))
+                return WeaponConstants.Arrow;
+
+            var crossbowWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.CrossbowBolt);
+            if (crossbowWeapons.Any(w => weapon.NameMatches(w)))
+                return WeaponConstants.CrossbowBolt;
+
+            var slingWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.SlingBullet);
+            if (slingWeapons.Any(w => weapon.NameMatches(w)))
+                return WeaponConstants.SlingBullet;
+
+            return string.Empty;
         }
     }
 }

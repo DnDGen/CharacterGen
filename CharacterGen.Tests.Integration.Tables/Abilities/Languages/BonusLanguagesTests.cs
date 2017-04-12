@@ -32,6 +32,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Draconic,
             LanguageConstants.Halfling,
             LanguageConstants.Sylvan)]
+        [TestCase(RaceConstants.BaseRaces.AquaticElf,
+            LanguageConstants.Aquan,
+            LanguageConstants.Draconic,
+            LanguageConstants.Gnoll,
+            LanguageConstants.Goblin,
+            LanguageConstants.Orc,
+            LanguageConstants.Gnome,
+            LanguageConstants.Sylvan)]
         [TestCase(RaceConstants.BaseRaces.Azer,
             LanguageConstants.Abyssal,
             LanguageConstants.Aquan,
@@ -197,6 +205,14 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Ignan,
             LanguageConstants.Infernal,
             LanguageConstants.Terran)]
+        [TestCase(RaceConstants.BaseRaces.Kapoacinth,
+            LanguageConstants.Aquan,
+            LanguageConstants.Dwarven,
+            LanguageConstants.Elven,
+            LanguageConstants.Gnome,
+            LanguageConstants.Halfling,
+            LanguageConstants.Giant,
+            LanguageConstants.Terran)]
         [TestCase(RaceConstants.BaseRaces.Kobold,
             LanguageConstants.Common,
             LanguageConstants.Undercommon)]
@@ -211,6 +227,16 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Goblin,
             LanguageConstants.Orc,
             LanguageConstants.Gnoll)]
+        [TestCase(RaceConstants.BaseRaces.Locathah, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Merfolk,
+            LanguageConstants.Elven,
+            LanguageConstants.Sylvan,
+            LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.Merrow,
+            LanguageConstants.Aquan,
+            LanguageConstants.Goblin,
+            LanguageConstants.Orc,
+            LanguageConstants.Dwarven)]
         [TestCase(RaceConstants.BaseRaces.Minotaur,
             LanguageConstants.Terran,
             LanguageConstants.Goblin,
@@ -252,10 +278,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Goblin,
             LanguageConstants.Giant,
             LanguageConstants.Orc)]
+        [TestCase(RaceConstants.BaseRaces.Sahuagin,
+            LanguageConstants.Draconic,
+            LanguageConstants.Elven,
+            LanguageConstants.Special.KuoToa,
+            LanguageConstants.Undercommon)]
         [TestCase(RaceConstants.BaseRaces.Satyr,
             LanguageConstants.Common,
             LanguageConstants.Elven,
             LanguageConstants.Gnome)]
+        [TestCase(RaceConstants.BaseRaces.Scrag,
+            LanguageConstants.Aquan,
+            LanguageConstants.Common,
+            LanguageConstants.Orc)]
         [TestCase(RaceConstants.BaseRaces.StoneGiant,
             LanguageConstants.Common,
             LanguageConstants.Draconic,

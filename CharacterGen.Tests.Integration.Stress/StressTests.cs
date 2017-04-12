@@ -81,23 +81,23 @@ namespace CharacterGen.Tests.Integration.Stress
 
             var events = EventQueue.DequeueAll(clientId);
 
-            //INFO: We want to truncate the events to just a summary per second, so last event per minute
-            events = events.GroupBy(e => e.When.Second).Select(g => g.First());
+            //INFO: Get the 10 most recent events for CharacterGen
+            events = events.Where(e => e.Source == "CharacterGen");
+            events = events.OrderByDescending(e => e.When);
+            events = events.Take(10);
+            events = events.OrderBy(e => e.When);
 
             foreach (var genEvent in events)
                 Console.WriteLine($"[{genEvent.When.ToShortTimeString()}] {genEvent.Source}: {genEvent.Message}");
         }
 
-        protected void Stress(Action makeAssertions)
+        protected void Stress(Action generateAndMakeAssertions)
         {
-            do makeAssertions();
+            do generateAndMakeAssertions();
             while (TestShouldKeepRunning());
 
             var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
             Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
-
-            if (Stopwatch.Elapsed.TotalSeconds > timeLimitInSeconds + 5)
-                Assert.Fail($"Something took way too long after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
         }
 
         protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)

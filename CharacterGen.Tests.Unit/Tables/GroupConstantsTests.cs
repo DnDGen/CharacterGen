@@ -8,6 +8,7 @@ namespace CharacterGen.Tests.Unit.Tables
     {
         [TestCase(GroupConstants.AddMonsterHitDiceToPower, "Add Monster Hit Dice to Power")]
         [TestCase(GroupConstants.All, "All")]
+        [TestCase(GroupConstants.Aquatic, "Aquatic")]
         [TestCase(GroupConstants.ArmorBonus, "Armor Bonus")]
         [TestCase(GroupConstants.ArmorCheckPenalty, "Armor Check Penalty")]
         [TestCase(GroupConstants.AverageBaseAttack, "Average Base Attack")]

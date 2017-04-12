@@ -11,7 +11,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             : base(percentileResultSelector, adjustmentSelector, generator, collectionSelector)
         { }
 
-        protected override bool BaseRaceIsAllowed(string baseRace)
+        protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)
         {
             var standardBaseRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
             return standardBaseRaces.Contains(baseRace);

@@ -14,6 +14,7 @@ namespace CharacterGen.Abilities.Skills
         public int ArmorCheckPenalty { get; set; }
         public bool CircumstantialBonus { get; set; }
         public int RankCap { get; set; }
+        public bool HasArmorCheckPenalty { get; set; }
 
         public double EffectiveRanks
         {

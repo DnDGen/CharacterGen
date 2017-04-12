@@ -39,17 +39,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         public void StressNPCSetClassName()
         {
             ClassNameRandomizer = AnyNPCClassNameRandomizer;
-            Stress(AssertNPCSetClassName);
-        }
-
-        private void AssertNPCSetClassName()
-        {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            SetClassNameRandomizer.SetClassName = characterClass.Name;
-
-            var baseRace = SetClassNameRandomizer.Randomize(alignment);
-            Assert.That(baseRace, Is.EqualTo(SetClassNameRandomizer.SetClassName));
+            Stress(AssertClassName);
         }
     }
 }

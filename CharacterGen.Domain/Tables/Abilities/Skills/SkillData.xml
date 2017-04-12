@@ -891,6 +891,13 @@
     <item>Horner</item>
   </object>
   <object>
+    <name>Profession/Hunter</name>
+    <item>Wisdom</item>
+    <item>Profession</item>
+    <item>0</item>
+    <item>Hunter</item>
+  </object>
+  <object>
     <name>Profession/Interpreter</name>
     <item>Wisdom</item>
     <item>Profession</item>

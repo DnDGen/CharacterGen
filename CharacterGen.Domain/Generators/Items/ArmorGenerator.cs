@@ -31,7 +31,7 @@ namespace CharacterGen.Domain.Generators.Items
             this.generator = generator;
         }
 
-        public Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        public Armor GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var effectiveLevel = GetEffectiveLevel(characterClass);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
@@ -41,25 +41,27 @@ namespace CharacterGen.Domain.Generators.Items
             if (proficientArmors.Any() == false)
                 return null;
 
-            return generator.Generate(() => GenerateArmor(power),
-                a => ArmorIsValid(a, proficientArmors, characterClass, race),
+            var item = generator.Generate(() => GenerateArmor(power, proficientArmors),
+                a => ArmorIsValid(a, characterClass, race),
                 () => GenerateDefaultArmor(power, proficientArmors, race),
-                $"{power} armor from [{string.Join(",", proficientArmors)}]");
+                $"{power} armor from [{string.Join(", ", proficientArmors)}]");
+
+            return item as Armor;
         }
 
         private Item GenerateDefaultArmor(string power, IEnumerable<string> proficientArmors, Race race)
         {
-            var standardArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, GroupConstants.Standard + ItemTypeConstants.Armor);
+            var standardArmors = ArmorConstants.GetBaseNames();
             var standardProficientArmors = standardArmors.Intersect(proficientArmors);
 
-            var template = new Item();
+            var template = new Armor();
             template.Name = collectionsSelector.SelectRandomFrom(standardProficientArmors);
             template.ItemType = ItemTypeConstants.Armor;
+            template.Size = race.Size;
 
             if (power == PowerConstants.Mundane)
             {
-                template.Traits.Add(race.Size);
-                return mundaneArmorGenerator.Generate(template, true);
+                return mundaneArmorGenerator.GenerateFrom(template, true);
             }
 
             template.Magic.Bonus = 1;
@@ -71,7 +73,7 @@ namespace CharacterGen.Domain.Generators.Items
             return (int)Math.Max(1, characterClass.EffectiveLevel);
         }
 
-        public Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
+        public Armor GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var effectiveLevel = GetEffectiveLevel(characterClass);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
@@ -81,19 +83,23 @@ namespace CharacterGen.Domain.Generators.Items
             if (proficientShields.Any() == false)
                 return null;
 
-            return generator.Generate(() => GenerateArmor(power),
-                s => ArmorIsValid(s, proficientShields, characterClass, race, true),
+            var item = generator.Generate(() => GenerateArmor(power, proficientShields),
+                s => ArmorIsValid(s, characterClass, race, true),
                 () => GenerateDefaultArmor(power, proficientShields, race),
                 $"{power} shield from [{string.Join(",", proficientShields)}]");
+
+            return item as Armor;
         }
 
-        private bool ArmorIsValid(Item armor, IEnumerable<string> proficientArmors, CharacterClass characterClass, Race race, bool isShield = false)
+        private bool ArmorIsValid(Item item, CharacterClass characterClass, Race race, bool isShield = false)
         {
-            if (armor == null)
+            if (item == null)
                 return true;
 
-            if (armor.ItemType != ItemTypeConstants.Armor)
+            if (!(item is Armor))
                 return false;
+
+            var armor = item as Armor;
 
             if (armor.Attributes.Contains(AttributeConstants.Shield) != isShield)
                 return false;
@@ -101,19 +107,15 @@ namespace CharacterGen.Domain.Generators.Items
             if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.Name == CharacterClassConstants.Druid)
                 return false;
 
-            if (armor.IsMagical == false && armor.Traits.Contains(race.Size) == false)
-                return false;
-
-            var baseArmorType = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, armor.Name).First();
-            return proficientArmors.Contains(baseArmorType);
+            return armor.Size == race.Size;
         }
 
-        private Item GenerateArmor(string power)
+        private Item GenerateArmor(string power, IEnumerable<string> proficientArmors)
         {
             if (power == PowerConstants.Mundane)
-                return mundaneArmorGenerator.Generate();
+                return mundaneArmorGenerator.GenerateFrom(proficientArmors);
 
-            return magicalArmorGenerator.GenerateAtPower(power);
+            return magicalArmorGenerator.GenerateFromSubset(power, proficientArmors);
         }
 
         private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType)

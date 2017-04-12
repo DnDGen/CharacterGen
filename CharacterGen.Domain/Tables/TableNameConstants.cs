@@ -8,8 +8,6 @@
             {
                 public const string AerialSpeeds = "AerialSpeeds";
                 public const string ArcaneSpellFailures = "ArcaneSpellFailures";
-                public const string ArmorBonuses = "ArmorBonuses";
-                public const string ArmorCheckPenalties = "ArmorCheckPenalties";
                 public const string ChallengeRatings = "ChallengeRatings";
                 public const string ClassHitDice = "ClassHitDice";
                 public const string CohortLevels = "CohortLevels";
@@ -19,13 +17,13 @@
                 public const string LandSpeeds = "LandSpeeds";
                 public const string LeadershipModifiers = "LeadershipModifiers";
                 public const string LevelAdjustments = "LevelAdjustments";
-                public const string MaxDexterityBonus = "MaxDexterityBonus";
                 public const string MonsterHitDice = "MonsterHitDice";
                 public const string ProhibitedFieldQuantities = "ProhibitedFieldQuantities";
                 public const string RacialBaseAttackAdjustments = "RacialBaseAttackAdjustments";
                 public const string SizeModifiers = "SizeModifiers";
                 public const string SkillPoints = "SkillPoints";
                 public const string SpecialistFieldQuantities = "SpecialistFieldQuantities";
+                public const string SwimSpeeds = "SwimSpeeds";
             }
 
             internal static class Collection

@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
@@ -8,6 +7,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
@@ -24,18 +24,14 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<MundaneItemGenerator> mockMundaneWeaponGenerator;
         private Mock<MagicalItemGenerator> mockMagicalWeaponGenerator;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Generator generator;
-        private Item magicalWeapon;
+        private Weapon magicalWeapon;
         private List<Feat> feats;
         private List<string> proficiencyFeats;
         private CharacterClass characterClass;
-        private List<string> baseWeaponTypes;
-        private List<string> weapons;
         private List<string> allProficientWeapons;
         private Race race;
-        private List<string> meleeWeapons;
-        private List<string> twoHandedWeapons;
-        private List<string> ammunitions;
+        private string powerTableName;
+        private string power;
 
         [SetUp]
         public void Setup()
@@ -44,62 +40,43 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMundaneWeaponGenerator = new Mock<MundaneItemGenerator>();
             mockMagicalWeaponGenerator = new Mock<MagicalItemGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            generator = new ConfigurableIterationGenerator(3);
+            var generator = new ConfigurableIterationGenerator(3);
             weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object, generator);
-            magicalWeapon = new Item();
+            magicalWeapon = new Weapon();
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             proficiencyFeats = new List<string>();
-            baseWeaponTypes = new List<string>();
-            weapons = new List<string>();
             allProficientWeapons = new List<string>();
             race = new Race();
-            meleeWeapons = new List<string>();
-            twoHandedWeapons = new List<string>();
-            ammunitions = new List<string>();
 
             race.Size = "size";
             race.BaseRace = "base race";
-            magicalWeapon = CreateWeapon("magical weapon");
+            magicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Club);
             magicalWeapon.IsMagical = true;
-            magicalWeapon.Attributes = new[] { AttributeConstants.Melee };
             characterClass.Name = "class name";
             characterClass.Level = 9266;
-            baseWeaponTypes.Add("base weapon");
-            weapons.Remove(magicalWeapon.Name);
-            weapons.Add(baseWeaponTypes[0]);
-            weapons.Add("different weapon");
-            meleeWeapons.Remove(magicalWeapon.Name);
-            meleeWeapons.Add(baseWeaponTypes[0]);
-            meleeWeapons.Add("different melee weapon");
             feats.Add(new Feat { Name = "all proficiency", Foci = new[] { FeatConstants.Foci.All } });
             proficiencyFeats.Add(feats[0].Name);
-            allProficientWeapons.Remove(magicalWeapon.Name);
-            allProficientWeapons.Add(baseWeaponTypes[0]);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns("power");
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, It.IsAny<string>()))
-                .Returns((string table, string name) => new[] { name });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
-                .Returns(proficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, magicalWeapon.Name))
-                .Returns(baseWeaponTypes);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, baseWeaponTypes[0]))
-                .Returns(baseWeaponTypes);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.Foci.Weapons))
-                .Returns(weapons);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee))
-                .Returns(meleeWeapons);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.TwoHanded))
-                .Returns(twoHandedWeapons);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition))
-                .Returns(ammunitions);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name))
-                .Returns(allProficientWeapons);
+            powerTableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, 9266);
+            power = "power";
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(magicalWeapon);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name)).Returns(allProficientWeapons);
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+        }
+
+        private IEnumerable<string> ProficientWeaponSet(IEnumerable<string> weapons)
+        {
+            return It.Is<IEnumerable<string>>(ss => ss.Intersect(weapons).Count() == weapons.Count() && weapons.Count() == ss.Count());
+        }
+
+        private IEnumerable<string> ProficientWeaponSet()
+        {
+            return ProficientWeaponSet(allProficientWeapons);
         }
 
         [Test]
@@ -119,51 +96,73 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateMundaneWeapon()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Club);
+            allProficientWeapons.Remove(magicalWeapon.Name);
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet())).Returns(mundaneWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
         }
 
-        private Item CreateWeapon(string name)
+        private Weapon CreateWeapon(string name)
         {
-            var weapon = new Item();
+            var weapons = WeaponConstants.GetBaseNames();
+            if (!weapons.Contains(name))
+                throw new ArgumentException($"{name} is not a valid weapon");
+
+            var weapon = new Weapon();
             weapon.Name = name;
             weapon.ItemType = ItemTypeConstants.Weapon;
-            weapon.Traits.Add(race.Size);
+            weapon.Size = race.Size;
 
-            weapons.Add(name);
             allProficientWeapons.Add(name);
-            meleeWeapons.Add(name);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<Weapon>(w => w.Name == weapon.Name), false)).Returns(weapon);
+
+            return weapon;
+        }
+
+        private Weapon CreateOneHandedMeleeWeapon(string name)
+        {
+            var weapon = CreateWeapon(name);
+            weapon.Attributes = new[] { AttributeConstants.Melee, AttributeConstants.Ranged };
+
+            return weapon;
+        }
+
+        private Weapon CreateTwoHandedMeleeWeapon(string name)
+        {
+            var weapon = CreateWeapon(name);
+            weapon.Attributes = new[] { AttributeConstants.Melee, AttributeConstants.Ranged, AttributeConstants.TwoHanded };
+
+            return weapon;
+        }
+
+        private Weapon CreateRangedWeapon(string name)
+        {
+            var weapon = CreateWeapon(name);
+            weapon.Attributes = new[] { AttributeConstants.Ranged };
+
+            return weapon;
+        }
+
+        private Weapon CreateAmmunition(string name)
+        {
+            var weapon = CreateWeapon(name);
+            weapon.Attributes = new[] { AttributeConstants.Ranged, AttributeConstants.Ammunition };
 
             return weapon;
         }
 
         [Test]
-        public void IfCannotWieldMundaneWeapon_Regenerate()
-        {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
-
-            allProficientWeapons.Remove(wrongMundaneWeapon.Name);
-
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(mundaneWeapon));
-        }
-
-        [Test]
         public void IfNotAMundaneWeapon_Regenerate()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = new Item { Name = WeaponConstants.Glaive, ItemType = ItemTypeConstants.Weapon };
 
-            wrongMundaneWeapon.ItemType = "not weapon";
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.GenerateFrom(ProficientWeaponSet())).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon));
@@ -172,12 +171,14 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void CanWieldSpecificMundaneWeaponProficiency()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            mockMundaneWeaponGenerator.SetupSequence(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -187,13 +188,17 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferMundaneWeaponsPickedAsFocusForNonProficiencyFeats()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMundaneWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(wrongSpecialties))).Returns(wrongMundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -203,13 +208,17 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void DoNotPreferMundaneWeaponPickedAsFocusForWeaponFamiliarity()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate()).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = new[] { wrongMundaneWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(wrongSpecialties))).Returns(wrongMundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(mundaneWeapon), weapon.Name);
@@ -218,32 +227,39 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferAnyMundaneWeaponsPickedAsFocusForNonProficiencyFeats()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var otherMundaneWeapon = CreateWeapon("other mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
-                .Returns(wrongMundaneWeapon).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var otherMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Spear);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMundaneWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name } });
-            feats.Add(new Feat { Name = "feat4", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
+            var multipleSpecialties = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name };
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(wrongSpecialties))).Returns(wrongMundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(multipleSpecialties))).Returns(otherMundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = multipleSpecialties });
+            feats.Add(new Feat { Name = "feat4", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(otherMundaneWeapon));
+            Assert.That(weapon, Is.EqualTo(otherMundaneWeapon), weapon.Name);
         }
 
         [Test]
         public void PreferMundaneWeaponsPickedAsFocusForProficiencyFeats()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
-                .Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet())).Returns(wrongMundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -253,15 +269,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferAnyMundaneWeaponsPickedAsFocusForProficiencyFeats()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var otherMundaneWeapon = CreateWeapon("other mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
-                .Returns(wrongMundaneWeapon).Returns(otherMundaneWeapon).Returns(mundaneWeapon);
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var otherMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Spear);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { mundaneWeapon.Name } });
+            var specialties = new[] { mundaneWeapon.Name };
+            var multipleSpecialties = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name };
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet())).Returns(wrongMundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(specialties))).Returns(mundaneWeapon);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet(multipleSpecialties))).Returns(otherMundaneWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = multipleSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
             proficiencyFeats.Add(feats[2].Name);
 
@@ -272,10 +292,10 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void NoPreferenceForMundaneWeapons()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.GenerateFrom(ProficientWeaponSet()))
                 .Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -290,26 +310,11 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void IfCannotWieldMagicalWeapon_Regenerate()
-        {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
-
-            allProficientWeapons.Remove(wrongMagicalWeapon.Name);
-
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(magicalWeapon));
-        }
-
-        [Test]
         public void IfMagicalWeaponIsNotWeapon_Regenerate()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var wrongMagicalWeapon = new Item { Name = WeaponConstants.Halberd, ItemType = ItemTypeConstants.Weapon };
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
-
-            wrongMagicalWeapon.ItemType = "not weapon";
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon));
@@ -318,11 +323,11 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void CanWieldSpecificMagicalWeaponProficiency()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
+            var specialties = new[] { magicalWeapon.Name };
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { magicalWeapon.Name } });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -332,12 +337,15 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferMagicalWeaponsPickedAsFocusForNonProficiencyFeats()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
+            var specialties = new[] { magicalWeapon.Name };
+            var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(wrongMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -347,12 +355,15 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void DoNotPreferMagicalWeaponsPickedAsFocusForWeaponFamiliarity()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
 
-            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = new[] { wrongMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
+            var specialties = new[] { magicalWeapon.Name };
+            var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(wrongMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
@@ -361,14 +372,22 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferAnyMagicalWeaponsPickedAsFocusForNonProficiencyFeats()
         {
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var otherMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.LightCrossbow);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
+
+            var specialties = new[] { magicalWeapon.Name };
+            var multipleSpecialties = new[] { magicalWeapon.Name, otherMagicalWeapon.Name };
+            var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(wrongMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(multipleSpecialties))).Returns(otherMagicalWeapon);
+
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(wrongMagicalWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0], otherMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat4", Foci = new[] { baseWeaponTypes[0] } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = multipleSpecialties });
+            feats.Add(new Feat { Name = "feat4", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -378,11 +397,13 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferMagicalWeaponsPickedAsFocusForProficiencyFeats()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            var specialties = new[] { magicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(wrongMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -392,13 +413,18 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void PreferAnyMagicalWeaponsPickedAsFocusForProficiencyFeats()
         {
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+            var otherMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.LightCrossbow);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0], otherMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
+            var specialties = new[] { magicalWeapon.Name };
+            var multipleSpecialties = new[] { magicalWeapon.Name, otherMagicalWeapon.Name };
+            var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(wrongMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(magicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(multipleSpecialties))).Returns(otherMagicalWeapon);
+
+            feats.Add(new Feat { Name = "feat2", Foci = multipleSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add(feats[1].Name);
             proficiencyFeats.Add(feats[2].Name);
 
@@ -409,51 +435,54 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void NoPreferenceForMagicalWeapons()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(magicalWeapon));
+            Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
         }
 
         [Test]
         public void MundaneWeaponMustFitCharacter()
         {
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            var wrongMundaneWeapon = CreateWeapon("wrong mundane weapon");
-            var otherWrongMundaneWeapon = CreateWeapon("other wrong mundane weapon");
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.SetupSequence(g => g.Generate())
+            var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            var otherWrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Flail);
+
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.SetupSequence(g => g.GenerateFrom(ProficientWeaponSet()))
                 .Returns(wrongMundaneWeapon).Returns(otherWrongMundaneWeapon).Returns(mundaneWeapon);
 
-            wrongMundaneWeapon.Traits.Clear();
-            wrongMundaneWeapon.Traits.Add("bigger size");
-            otherWrongMundaneWeapon.Traits.Clear();
-            otherWrongMundaneWeapon.Traits.Add("smaller size");
+            wrongMundaneWeapon.Size = "bigger size";
+            otherWrongMundaneWeapon.Size = "smaller size";
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(mundaneWeapon));
+            Assert.That(weapon, Is.EqualTo(mundaneWeapon), weapon.Name);
         }
 
         [Test]
-        public void MagicalWeaponDoesNotHaveToFitCharacter()
+        public void MagicalWeaponMustFitCharacter()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
+            var magicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
+            var otherWrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Flail);
 
-            race.Size = "other size";
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
+                .Returns(wrongMagicalWeapon).Returns(otherWrongMagicalWeapon).Returns(magicalWeapon);
+
+            wrongMagicalWeapon.Size = "bigger size";
+            otherWrongMagicalWeapon.Size = "smaller size";
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(magicalWeapon));
+            Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
         }
 
         [Test]
         public void SaveBonusesOfAllDoNotCountAsProficiencyFeats()
         {
             feats.Add(new Feat { Name = FeatConstants.SaveBonus, Foci = new[] { FeatConstants.Foci.All } });
-            feats[0].Foci = new[] { baseWeaponTypes[0] };
+            feats[0].Foci = new[] { magicalWeapon.Name };
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
@@ -462,10 +491,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GeneralWeaponCannotBeAmmunition()
         {
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var ammunition = CreateAmmunition(WeaponConstants.Arrow);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(ammunition).Returns(magicalWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -475,31 +502,30 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateMundaneDefaultWeapon()
         {
-            var wrongWeapon = CreateWeapon("wrong weapon");
+            var wrongWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Sai);
+            wrongWeapon.Size = "wrong size";
 
-            allProficientWeapons.Remove("wrong weapon");
+            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(ProficientWeaponSet())).Returns(wrongWeapon);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom("Level9266Power")).Returns(PowerConstants.Mundane);
-            mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(wrongWeapon);
-
-            var defaultWeapon = new Item();
-            mockMundaneWeaponGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == "base weapon" && i.Traits.Single() == race.Size), true))
+            var defaultWeapon = new Weapon();
+            mockMundaneWeaponGenerator.Setup(g => g.GenerateFrom(It.Is<Weapon>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == allProficientWeapons[0] && i.Size == race.Size), true))
                 .Returns(defaultWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(defaultWeapon));
+            Assert.That(weapon, Is.EqualTo(defaultWeapon), weapon.Name);
         }
 
         [Test]
         public void GenerateMagicalDefaultWeapon()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(wrongMagicalWeapon);
+            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
+            wrongMagicalWeapon.Size = "wrong size";
 
-            allProficientWeapons.Remove(wrongMagicalWeapon.Name);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(wrongMagicalWeapon);
 
-            var defaultWeapon = new Item();
-            mockMagicalWeaponGenerator.Setup(g => g.Generate(It.Is<Item>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == "base weapon" && i.Magic.Bonus == 1), true))
+            var defaultWeapon = new Weapon();
+            mockMagicalWeaponGenerator.Setup(g => g.Generate(It.Is<Weapon>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == allProficientWeapons[0] && i.Magic.Bonus == 1), true))
                 .Returns(defaultWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -509,66 +535,21 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateAmmunition()
         {
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var ammunition = CreateAmmunition(WeaponConstants.Arrow);
+
+            var ammunitions = new[] { "ammo" };
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet(ammunitions)))
                 .Returns(magicalWeapon).Returns(ammunition);
 
-            allProficientWeapons.Remove("ammunition");
-            allProficientWeapons.Add("ammo");
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunition.Name))
-                .Returns(new[] { "ammo" });
-
-            var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, "ammo");
+            var generatedAmmunition = weaponGenerator.GenerateAmmunition(characterClass, race, "ammo");
             Assert.That(generatedAmmunition, Is.EqualTo(ammunition), generatedAmmunition.Name);
-        }
-
-        [Test]
-        public void GenerateAmmunitionForSpecificRangedWeaponFocus()
-        {
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
-
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(ammunition);
-
-            baseWeaponTypes.Add("ammunition");
-
-            var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, "ammunition");
-            Assert.That(generatedAmmunition, Is.Not.Null);
-            Assert.That(generatedAmmunition, Is.EqualTo(ammunition), generatedAmmunition.Name);
-        }
-
-        [Test]
-        public void GenerateNoAmmunition()
-        {
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            var mundaneWeapon = CreateWeapon("mundane weapon");
-            mockMundaneWeaponGenerator.Setup(g => g.Generate()).Returns(mundaneWeapon);
-
-            var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, "ammunition");
-            Assert.That(generatedAmmunition, Is.Null);
-        }
-
-        [Test]
-        public void ReturnNullIfNotProficientInAmmunition()
-        {
-            var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, "ammunition");
-            Assert.That(generatedAmmunition, Is.Null);
         }
 
         [Test]
         public void MeleeWeaponMustBeMelee()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(rangedWeapon).Returns(magicalWeapon);
 
             var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
@@ -578,15 +559,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfMeleeWeaponFails_TryWithoutNonProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.LightCrossbow);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+            var wrongSpecialties = new[] { rangedWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
@@ -596,16 +578,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfMeleeWeaponFailsAgain_TryWithoutSpecificProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
-            meleeWeapons.Remove(otherMagicalWeapon.Name);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateRangedWeapon(WeaponConstants.LightCrossbow);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var wrongSpecialties = new[] { rangedWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
+
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
@@ -615,10 +600,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateNoMeleeWeapon()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
 
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(rangedWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
             proficiencyFeats.Add("feat2");
@@ -628,11 +612,32 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
+        public void IfMeleeWeaponsPossible_ReturnWeapon()
+        {
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherRangedWeapon = CreateRangedWeapon(WeaponConstants.Shortbow);
+
+            var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(magicalWeapon));
+        }
+
+        [Test]
+        public void IfNoMeleeWeaponsPossible_ReturnNothing()
+        {
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherRangedWeapon = CreateRangedWeapon(WeaponConstants.Shortbow);
+            allProficientWeapons.Remove(magicalWeapon.Name);
+
+            var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
+            mockMagicalWeaponGenerator.Verify(g => g.GenerateFromSubset(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()), Times.Never);
+        }
+
+        [Test]
         public void OneHandedMeleeWeaponMustBeMelee()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(rangedWeapon).Returns(magicalWeapon);
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -642,10 +647,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void OneHandedMeleeWeaponMustBeOneHanded()
         {
-            var twoHandedWeapon = CreateWeapon("two-handed weapon");
-            twoHandedWeapons.Add(twoHandedWeapon.Name);
+            var twoHandedWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Greataxe);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(twoHandedWeapon).Returns(magicalWeapon);
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -655,15 +659,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfOneHandedMeleeWeaponFails_TryWithoutNonProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.LightCrossbow);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+            var wrongSpecialties = new[] { rangedWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -673,16 +678,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfOneHandedMeleeWeaponFailsAgain_TryWithoutSpecificProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
-            meleeWeapons.Remove(otherMagicalWeapon.Name);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.LightCrossbow);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(rangedWeapon).Returns(otherMagicalWeapon).Returns(magicalWeapon);
+            var wrongSpecialties = new[] { rangedWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
@@ -692,26 +697,50 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void DoNotGenerateOneHandedMeleeWeapon()
         {
-            weapons.Clear();
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var twoHandedWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Greataxe);
 
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var twoHandedWeapon = CreateWeapon("two-handed weapon");
-            twoHandedWeapons.Add(twoHandedWeapon.Name);
+            var wrongSpecialties = new[] { rangedWeapon.Name };
+            var specialties = new[] { twoHandedWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(rangedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(twoHandedWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(twoHandedWeapon);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(rangedWeapon).Returns(twoHandedWeapon).Returns(twoHandedWeapon);
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
+            proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
             Assert.That(weapon, Is.Null);
         }
 
         [Test]
+        public void IfOneHandedMeleeWeaponsPossible_ReturnWeapon()
+        {
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var twoHandedWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Greataxe);
+
+            var weapon = weaponGenerator.GenerateMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(magicalWeapon));
+        }
+
+        [Test]
+        public void IfNoOneHandedMeleeWeaponsPossible_ReturnNothing()
+        {
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var twoHandedWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Greataxe);
+            allProficientWeapons.Remove(magicalWeapon.Name);
+
+            var weapon = weaponGenerator.GenerateOneHandedMeleeFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
+            mockMagicalWeaponGenerator.Verify(g => g.GenerateFromSubset(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()), Times.Never);
+        }
+
+        [Test]
         public void RangedWeaponMustNotBeMelee()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
                 .Returns(magicalWeapon).Returns(rangedWeapon);
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -721,16 +750,16 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfRangedWeaponFails_TryWithoutNonProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
-            meleeWeapons.Remove(otherMagicalWeapon.Name);
+            var meleeWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateRangedWeapon(WeaponConstants.LightCrossbow);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(otherMagicalWeapon).Returns(rangedWeapon);
+            var wrongSpecialties = new[] { meleeWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(meleeWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -740,15 +769,18 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void IfGenerationOfRangedWeaponFailsAgain_TryWithoutSpecificProficiencyWeaponFoci()
         {
-            var rangedWeapon = CreateWeapon("ranged weapon");
-            meleeWeapons.Remove(rangedWeapon.Name);
-            var otherMagicalWeapon = CreateWeapon("other magical weapon");
+            var meleeWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longbow);
+            var otherMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.LightCrossbow);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Bolas);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(otherMagicalWeapon).Returns(rangedWeapon);
+            var wrongSpecialties = new[] { meleeWeapon.Name };
+            var specialties = new[] { otherMagicalWeapon.Name };
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(wrongSpecialties))).Returns(meleeWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet(specialties))).Returns(otherMagicalWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(rangedWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { otherMagicalWeapon.Name } });
+            feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
+            feats.Add(new Feat { Name = "feat3", Foci = specialties });
             proficiencyFeats.Add("feat3");
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -759,23 +791,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void RangedWeaponCannotBeAmmunition()
         {
-            meleeWeapons.Remove(baseWeaponTypes[0]);
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(ammunition).Returns(magicalWeapon);
+            var ammunition = CreateAmmunition(WeaponConstants.Arrow);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
+                .Returns(ammunition).Returns(rangedWeapon);
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
+            Assert.That(weapon, Is.EqualTo(rangedWeapon), weapon.Name);
         }
 
         [Test]
         public void GenerateNoRangedWeapon()
         {
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("power")).Returns(magicalWeapon);
-
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { baseWeaponTypes[0] } });
+            feats.Add(new Feat { Name = "feat2", Foci = new[] { magicalWeapon.Name } });
             proficiencyFeats.Add("feat2");
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -783,40 +811,29 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void GetAmmunitionForRangedWeaponThatIsNotNonProficiencyFocus()
+        public void IfRangedWeaponsPossible_ReturnWeapon()
         {
-            var wrongMagicalWeapon = CreateWeapon("wrong magical weapon");
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
+            var meleeWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Scythe);
+            var twoHandedMeleeWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Sickle);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            var ammunition = CreateAmmunition(WeaponConstants.SlingBullet);
 
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(wrongMagicalWeapon).Returns(magicalWeapon).Returns(ammunition);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset(power, ProficientWeaponSet())).Returns(rangedWeapon);
 
-            feats.Add(new Feat { Name = "feat2", Foci = new[] { wrongMagicalWeapon.Name } });
-            feats.Add(new Feat { Name = "feat3", Foci = new[] { baseWeaponTypes[0] } });
-            proficiencyFeats.Add(feats[2].Name);
-
-            baseWeaponTypes.Add("ammunition");
-
-            var ammo = weaponGenerator.GenerateAmmunition(feats, characterClass, race, "ammunition");
-            Assert.That(ammo, Is.EqualTo(ammunition));
+            var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(rangedWeapon), weapon.Name);
         }
 
         [Test]
-        public void CanGetAmmunitionWhenNotExplicitlyProficientWithAmmunition()
+        public void IfNoRangedWeaponsPossible_ReturnNothing()
         {
-            var ammunition = CreateWeapon("ammunition");
-            meleeWeapons.Remove(ammunition.Name);
-            ammunitions.Add(ammunition.Name);
-            allProficientWeapons.Remove(ammunition.Name);
-            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateAtPower("power"))
-                .Returns(magicalWeapon).Returns(ammunition);
+            var meleeWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Scythe);
+            var otherMeleeWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Sickle);
+            var ammunition = CreateAmmunition(WeaponConstants.SlingBullet);
 
-            baseWeaponTypes.Add(ammunition.Name);
-
-            var generatedAmmunition = weaponGenerator.GenerateAmmunition(feats, characterClass, race, ammunition.Name);
-            Assert.That(generatedAmmunition, Is.EqualTo(ammunition), generatedAmmunition.Name);
+            var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.Null);
+            mockMagicalWeaponGenerator.Verify(g => g.GenerateFromSubset(It.IsAny<string>(), It.IsAny<IEnumerable<string>>()), Times.Never);
         }
 
         [TestCase(1, 1)]
@@ -845,14 +862,32 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             characterClass.Name = "class name";
             characterClass.IsNPC = true;
 
-            var npcWeapon = CreateWeapon("npc weapon");
+            var npcWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Glaive);
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("npc power")).Returns(npcWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset("npc power", ProficientWeaponSet())).Returns(npcWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(npcWeapon));
+        }
+
+        [Test]
+        public void LevelAdjustmentAffectsNPCLevelForWeapon()
+        {
+            characterClass.Level = 9266;
+            characterClass.LevelAdjustment = 90210;
+            characterClass.Name = "class name";
+            characterClass.IsNPC = true;
+
+            var playerWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Glaive);
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.EffectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset("npc power", ProficientWeaponSet())).Returns(playerWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(playerWeapon));
         }
 
         [TestCase(1, 1)]
@@ -881,11 +916,29 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             characterClass.Name = "class name";
             characterClass.IsNPC = false;
 
-            var playerWeapon = CreateWeapon("player weapon");
+            var playerWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Glaive);
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
-            mockMagicalWeaponGenerator.Setup(g => g.GenerateAtPower("player power")).Returns(playerWeapon);
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset("player power", ProficientWeaponSet())).Returns(playerWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(playerWeapon));
+        }
+
+        [Test]
+        public void LevelAdjustmentAffectsPlayerLevelForWeapon()
+        {
+            characterClass.Level = 9266;
+            characterClass.LevelAdjustment = 90210;
+            characterClass.Name = "class name";
+            characterClass.IsNPC = false;
+
+            var playerWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Glaive);
+
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.EffectiveLevel);
+            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockMagicalWeaponGenerator.Setup(g => g.GenerateFromSubset("player power", ProficientWeaponSet())).Returns(playerWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(playerWeapon));

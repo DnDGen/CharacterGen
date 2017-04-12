@@ -323,6 +323,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
                 SkillConstants.Foci.Profession.Haberdasher,
                 SkillConstants.Foci.Profession.Healer,
                 SkillConstants.Foci.Profession.Horner,
+                SkillConstants.Foci.Profession.Hunter,
                 SkillConstants.Foci.Profession.Interpreter,
                 SkillConstants.Foci.Profession.Jeweler,
                 SkillConstants.Foci.Profession.Laborer,

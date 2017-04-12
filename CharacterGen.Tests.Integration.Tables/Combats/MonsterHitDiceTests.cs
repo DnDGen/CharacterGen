@@ -21,6 +21,7 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
             AssertCollectionNames(monsters);
         }
 
+        [TestCase(RaceConstants.BaseRaces.AquaticElf, 0)]
         [TestCase(RaceConstants.BaseRaces.Azer, 2)]
         [TestCase(RaceConstants.BaseRaces.BlueSlaad, 8)]
         [TestCase(RaceConstants.BaseRaces.Bugbear, 3)]
@@ -42,8 +43,12 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.BaseRaces.Hobgoblin, 0)]
         [TestCase(RaceConstants.BaseRaces.HoundArchon, 6)]
         [TestCase(RaceConstants.BaseRaces.Janni, 6)]
+        [TestCase(RaceConstants.BaseRaces.Kapoacinth, 4)]
         [TestCase(RaceConstants.BaseRaces.Kobold, 0)]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk, 2)]
+        [TestCase(RaceConstants.BaseRaces.Locathah, 0)]
+        [TestCase(RaceConstants.BaseRaces.Merfolk, 0)]
+        [TestCase(RaceConstants.BaseRaces.Merrow, 4)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
@@ -52,8 +57,10 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.BaseRaces.Pixie, 0)]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, 7)]
         [TestCase(RaceConstants.BaseRaces.RedSlaad, 7)]
+        [TestCase(RaceConstants.BaseRaces.Sahuagin, 2)]
         [TestCase(RaceConstants.BaseRaces.Satyr, 5)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, 12)]
+        [TestCase(RaceConstants.BaseRaces.Scrag, 6)]
         [TestCase(RaceConstants.BaseRaces.StoneGiant, 14)]
         [TestCase(RaceConstants.BaseRaces.StormGiant, 19)]
         [TestCase(RaceConstants.BaseRaces.Troglodyte, 2)]
@@ -61,9 +68,9 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.BaseRaces.YuanTiAbomination, 9)]
         [TestCase(RaceConstants.BaseRaces.YuanTiHalfblood, 7)]
         [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, 4)]
-        public void MonsterHitDice(string name, int hitDice)
+        public void MonsterHitDice(string monster, int hitDice)
         {
-            base.Adjustment(name, hitDice);
+            base.Adjustment(monster, hitDice);
         }
     }
 }

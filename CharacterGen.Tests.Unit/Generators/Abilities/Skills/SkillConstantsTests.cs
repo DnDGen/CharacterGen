@@ -143,6 +143,7 @@ namespace CharacterGen.Tests.Unit.Common.Abilities.Skills
         [TestCase(SkillConstants.Foci.Profession.Haberdasher, "Haberdasher")]
         [TestCase(SkillConstants.Foci.Profession.Healer, "Healer")]
         [TestCase(SkillConstants.Foci.Profession.Horner, "Horner")]
+        [TestCase(SkillConstants.Foci.Profession.Hunter, "Hunter")]
         [TestCase(SkillConstants.Foci.Profession.Interpreter, "Interpreter")]
         [TestCase(SkillConstants.Foci.Profession.Jeweler, "Jeweler")]
         [TestCase(SkillConstants.Foci.Profession.Laborer, "Laborer")]

@@ -71,6 +71,39 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Aristocrat</name>
   </object>
   <object>
@@ -1253,6 +1286,39 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1353,6 +1419,105 @@
   </object>
   <object>
     <name>Lizardfolk</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Merrow</name>
     <item>Air</item>
     <item>Animal</item>
     <item>Chaos</item>
@@ -1759,6 +1924,39 @@
     <name>Rogue</name>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1793,6 +1991,39 @@
   </object>
   <object>
     <name>Scorpionfolk</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Scrag</name>
     <item>Air</item>
     <item>Animal</item>
     <item>Chaos</item>

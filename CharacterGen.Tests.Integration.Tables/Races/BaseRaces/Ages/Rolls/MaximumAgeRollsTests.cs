@@ -22,6 +22,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         }
 
         [TestCase(RaceConstants.BaseRaces.Aasimar, "2d20")]
+        [TestCase(RaceConstants.BaseRaces.AquaticElf, "4d100")]
         [TestCase(RaceConstants.BaseRaces.Azer, "2d100")]
         [TestCase(RaceConstants.BaseRaces.Bugbear, "2d10")]
         [TestCase(RaceConstants.BaseRaces.Centaur, "2d12")]
@@ -52,6 +53,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.Kobold, "1d20")]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling, "5d20")]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk, "2d20")]
+        [TestCase(RaceConstants.BaseRaces.Locathah, "2d20")]
+        [TestCase(RaceConstants.BaseRaces.Merfolk, "3d10")]
+        [TestCase(RaceConstants.BaseRaces.Merrow, "3d20")]
         [TestCase(RaceConstants.BaseRaces.MindFlayer, "3d10")]
         [TestCase(RaceConstants.BaseRaces.Minotaur, "2d10")]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, "2d100")]
@@ -61,9 +65,11 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.Pixie, "10d100")]
         [TestCase(RaceConstants.BaseRaces.Rakshasa, "2d20")]
         [TestCase(RaceConstants.BaseRaces.RockGnome, "3d100")]
+        [TestCase(RaceConstants.BaseRaces.Sahuagin, "3d20")]
         [TestCase(RaceConstants.BaseRaces.Satyr, "4d12")]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk, "2d10")]
-        [TestCase(RaceConstants.BaseRaces.StoneGiant, "20d10")]
+        [TestCase(RaceConstants.BaseRaces.Scrag, "2d20")]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant, "2d100")]
         [TestCase(RaceConstants.BaseRaces.StormGiant, "15d10")]
         [TestCase(RaceConstants.BaseRaces.Svirfneblin, "3d100")]
         [TestCase(RaceConstants.BaseRaces.TallfellowHalfling, "5d20")]
@@ -85,6 +91,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
         [TestCase(RaceConstants.BaseRaces.Gargoyle)]
         [TestCase(RaceConstants.BaseRaces.GraySlaad)]
         [TestCase(RaceConstants.BaseRaces.GreenSlaad)]
+        [TestCase(RaceConstants.BaseRaces.Kapoacinth)]
         [TestCase(RaceConstants.BaseRaces.RedSlaad)]
         public void ImmortalCreatures(string creature)
         {

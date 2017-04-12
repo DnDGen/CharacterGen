@@ -11,6 +11,7 @@ using Ninject;
 using NUnit.Framework;
 using System;
 using System.Linq;
+using TreasureGen.Items;
 
 namespace CharacterGen.Tests.Integration.Stress.Characters
 {
@@ -39,28 +40,35 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         public CharacterVerifier CharacterVerifier { get; set; }
         [Inject]
         public Random Random { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AquaticBase)]
+        public RaceRandomizer AquaticBaseRaceRandomizer { get; set; }
 
         [Test]
         public void StressCharacter()
         {
-            Stress(AssertCharacter);
+            Stress(GenerateAndAssertCharacter);
         }
 
-        protected void AssertCharacter()
+        private void GenerateAndAssertCharacter()
         {
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty);
+            AssertPlayerCharacter(character);
+        }
+
+        private void AssertPlayerCharacter(Character character)
+        {
+            Assert.That(character.Class.IsNPC, Is.False, character.Summary);
         }
 
         [Test]
         public void StressNPC()
         {
-            Stress(AssertNPC);
+            Stress(GenerateAndAssertNPC);
         }
 
-        private void AssertNPC()
+        private void GenerateAndAssertNPC()
         {
             var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
@@ -69,12 +77,35 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        public void BUG_StressFirstLevelCommoner()
+        public void StressAquatic()
         {
-            Stress(AssertFirstLevelCommoner);
+            Stress(GenerateAndAssertAquatic);
         }
 
-        private void AssertFirstLevelCommoner()
+        private void GenerateAndAssertAquatic()
+        {
+            var aquaticCharacter = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, AquaticBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+
+            CharacterVerifier.AssertCharacter(aquaticCharacter);
+            AssertPlayerCharacter(aquaticCharacter);
+            Assert.That(aquaticCharacter.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.AquaticElf)
+                .Or.EqualTo(RaceConstants.BaseRaces.Kapoacinth)
+                .Or.EqualTo(RaceConstants.BaseRaces.Locathah)
+                .Or.EqualTo(RaceConstants.BaseRaces.Merfolk)
+                .Or.EqualTo(RaceConstants.BaseRaces.Merrow)
+                .Or.EqualTo(RaceConstants.BaseRaces.Sahuagin)
+                .Or.EqualTo(RaceConstants.BaseRaces.Scrag));
+            Assert.That(aquaticCharacter.Race.SwimSpeed.Value, Is.Positive);
+        }
+
+        //INFO: Sometimes a first-level commoner only knows unarmed strike.  Other times, she only knows one weapon (melee or ranged), and is unable to generate the other
+        [Test]
+        public void BUG_StressFirstLevelCommoner()
+        {
+            Stress(GenerateAndAssertFirstLevelCommoner);
+        }
+
+        private void GenerateAndAssertFirstLevelCommoner()
         {
             SetClassNameRandomizer.SetClassName = CharacterClassConstants.Commoner;
             SetLevelRandomizer.SetLevel = 1;
@@ -98,20 +129,85 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(commoner.Magic.SpellsPerDay, Is.Empty);
         }
 
+        //INFO: We are testing the efficiency of the weapon and armor generators here
+        [Test]
+        public void BUG_StressHighLevelFighter()
+        {
+            Stress(GenerateAndAssertHighLevelFighter);
+        }
+
+        private void GenerateAndAssertHighLevelFighter()
+        {
+            SetClassNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            SetLevelRandomizer.SetLevel = 20;
+            SetLevelRandomizer.AllowAdjustments = false;
+
+            var fighter = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+
+            CharacterVerifier.AssertCharacter(fighter);
+            AssertPlayerCharacter(fighter);
+            Assert.That(fighter.Class.IsNPC, Is.False, fighter.Summary);
+            Assert.That(fighter.Class.Level, Is.EqualTo(20), fighter.Summary);
+            Assert.That(fighter.Class.Name, Is.EqualTo(CharacterClassConstants.Fighter), fighter.Summary);
+            Assert.That(fighter.Class.ProhibitedFields, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Class.SpecialistFields, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Magic.Animal, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Magic.ArcaneSpellFailure, Is.EqualTo(0), fighter.Summary);
+            Assert.That(fighter.Magic.KnownSpells, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Magic.PreparedSpells, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Magic.SpellsPerDay, Is.Empty, fighter.Summary);
+            Assert.That(fighter.Equipment.Armor, Is.Not.Null, fighter.Summary + " armor");
+            Assert.That(fighter.Equipment.PrimaryHand, Is.Not.Null, fighter.Summary + " primary hand");
+        }
+
+        //INFO: The bug here is that the rare size (Huge) makes the equipment take much longer to generate
+        [Test]
+        public void BUG_StressStormGiant()
+        {
+            Stress(GenerateAndAssertStormGiant);
+        }
+
+        private void GenerateAndAssertStormGiant()
+        {
+            SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.StormGiant;
+
+            var stormGiant = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+
+            CharacterVerifier.AssertCharacter(stormGiant);
+            AssertPlayerCharacter(stormGiant);
+            Assert.That(stormGiant.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.StormGiant));
+            Assert.That(stormGiant.Race.Size, Is.EqualTo(RaceConstants.Sizes.Huge));
+            Assert.That(stormGiant.Equipment.Armor, Is.Not.Null, stormGiant.Summary + " armor");
+            Assert.That(stormGiant.Equipment.Armor.Size, Is.EqualTo(stormGiant.Race.Size));
+            Assert.That(stormGiant.Equipment.PrimaryHand, Is.Not.Null, stormGiant.Summary + " primary hand");
+            Assert.That(stormGiant.Equipment.PrimaryHand.Size, Is.EqualTo(stormGiant.Race.Size));
+
+            if (stormGiant.Equipment.OffHand != null && stormGiant.Equipment.OffHand is Weapon)
+            {
+                var weapon = stormGiant.Equipment.OffHand as Weapon;
+                Assert.That(weapon.Size, Is.EqualTo(stormGiant.Race.Size));
+            }
+            else if (stormGiant.Equipment.OffHand != null && stormGiant.Equipment.OffHand is Armor)
+            {
+                var armor = stormGiant.Equipment.OffHand as Armor;
+                Assert.That(armor.Attributes, Contains.Item(AttributeConstants.Shield));
+                Assert.That(armor.Size, Is.EqualTo(stormGiant.Race.Size));
+            }
+        }
+
         [Test]
         public void StressSpellcaster()
         {
-            Stress(AssertSpellcaster);
+            Stress(GenerateAndAssertSpellcaster);
         }
 
-        private void AssertSpellcaster()
+        private void GenerateAndAssertSpellcaster()
         {
             var spellcaster = Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicStatsRandomizer),
                 c => c.Class.Level > 3);
 
             CharacterVerifier.AssertCharacter(spellcaster);
-            Assert.That(spellcaster.Equipment.Treasure.Items, Is.Not.Empty);
-
+            AssertPlayerCharacter(spellcaster);
             AssertSpellcaster(spellcaster);
         }
 
@@ -177,13 +273,14 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(spell.Metamagic, Is.Empty, spell.Source + spell.Name);
         }
 
+        //INFO: Want to verify rakshasas have native sorcerer spells and additional spellcaster class spells
         [Test]
         public void BUG_StressRakshasaSpellcaster()
         {
-            Stress(AssertRakshasaSpellcaster);
+            Stress(GenerateAndAssertRakshasaSpellcaster);
         }
 
-        private void AssertRakshasaSpellcaster()
+        private void GenerateAndAssertRakshasaSpellcaster()
         {
             SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Rakshasa;
 
@@ -192,19 +289,19 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                 c => true);
 
             CharacterVerifier.AssertCharacter(spellcaster);
-            Assert.That(spellcaster.Equipment.Treasure.Items, Is.Not.Empty);
-            Assert.That(spellcaster.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Rakshasa));
-
+            AssertPlayerCharacter(spellcaster);
             AssertSpellcaster(spellcaster);
+
+            Assert.That(spellcaster.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Rakshasa));
         }
 
         [Test]
         public void BUG_StressUndeadCharacter()
         {
-            Stress(AssertUndead);
+            Stress(GenerateAndAssertUndead);
         }
 
-        private void AssertUndead()
+        private void GenerateAndAssertUndead()
         {
             var undeadMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             undeadMetaraceRandomizer.ForceMetarace = true;
@@ -212,12 +309,17 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, undeadMetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
+            AssertPlayerCharacter(character);
+            AssertUndead(character);
+        }
+
+        private void AssertUndead(Character character)
+        {
             Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost)
                 .Or.EqualTo(RaceConstants.Metaraces.Lich)
                 .Or.EqualTo(RaceConstants.Metaraces.Mummy)
                 .Or.EqualTo(RaceConstants.Metaraces.Vampire));
             Assert.That(character.Race.ChallengeRating, Is.Positive, character.Summary);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
             Assert.That(character.Ability.Stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution), character.Summary);
             Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Summary);
         }
@@ -225,10 +327,10 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         [Test]
         public void BUG_StressPlanetouchedCharacter()
         {
-            Stress(AssertPlanetouched);
+            Stress(GenerateAndAssertPlanetouched);
         }
 
-        private void AssertPlanetouched()
+        private void GenerateAndAssertPlanetouched()
         {
             var planetouched = new[] { RaceConstants.BaseRaces.Aasimar, RaceConstants.BaseRaces.Tiefling };
             var randomIndex = Random.Next(2);
@@ -237,25 +339,30 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
+            AssertPlayerCharacter(character);
             Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Aasimar).Or.EqualTo(RaceConstants.BaseRaces.Tiefling));
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
             Assert.That(character.Class.LevelAdjustment, Is.Positive);
         }
 
         [Test]
         public void BUG_StressGhost()
         {
-            Stress(AssertGhost);
+            Stress(() => GenerateAndAssertGhost());
         }
 
-        private void AssertGhost()
+        private void GenerateAndAssertGhost()
         {
-            SetMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
-
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, SetMetaraceRandomizer, RawStatsRandomizer);
+            var character = GetGhost();
 
             CharacterVerifier.AssertCharacter(character);
-            Assert.That(character.Equipment.Treasure.Items, Is.Not.Empty, character.Summary);
+            AssertPlayerCharacter(character);
+            AssertGhost(character);
+        }
+
+        private void AssertGhost(Character character)
+        {
+            AssertUndead(character);
+
             Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost));
             Assert.That(character.Race.AerialSpeed.Value, Is.Positive);
             Assert.That(character.Race.AerialSpeed.Description, Is.Not.Empty);
@@ -277,6 +384,12 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
             Assert.That(ghostSpecialAttackFeats.Count, Is.EqualTo(ghostSpecialAttackFeat.Foci.Count()));
             Assert.That(ghostSpecialAttackFeats.Count, Is.InRange(1, 3));
+        }
+
+        private Character GetGhost()
+        {
+            SetMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
+            return CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, SetMetaraceRandomizer, RawStatsRandomizer);
         }
     }
 }

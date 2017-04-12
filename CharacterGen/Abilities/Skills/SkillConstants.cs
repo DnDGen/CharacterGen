@@ -158,6 +158,7 @@
                 public const string Haberdasher = "Haberdasher";
                 public const string Healer = "Healer";
                 public const string Horner = "Horner";
+                public const string Hunter = "Hunter";
                 public const string Interpreter = "Interpreter";
                 public const string Jeweler = "Jeweler";
                 public const string Laborer = "Laborer";

@@ -8,7 +8,7 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal interface IArmorGenerator
     {
-        Item GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
-        Item GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Armor GenerateArmorFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Armor GenerateShieldFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
     }
 }

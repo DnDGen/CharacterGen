@@ -6,6 +6,10 @@
     <item>1d8</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>6d6</item>
+  </object>
+  <object>
     <name>Azer</name>
     <item>5d6</item>
   </object>
@@ -134,6 +138,10 @@
     <item>1d6</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>1d6</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>1d6</item>
   </object>
@@ -144,6 +152,18 @@
   <object>
     <name>Lizardfolk</name>
     <item>1d6</item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item>1d6</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>2d6</item>
+  </object>
+  <object>
+    <name>Merrow</name>
+    <item>3d6</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -186,11 +206,19 @@
     <item>6d6</item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>1d6</item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item>2d8</item>
   </object>
   <object>
     <name>Scorpionfolk</name>
+    <item>1d6</item>
+  </object>
+  <object>
+    <name>Scrag</name>
     <item>1d6</item>
   </object>
   <object>

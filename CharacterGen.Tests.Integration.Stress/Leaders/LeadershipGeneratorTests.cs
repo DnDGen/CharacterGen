@@ -43,7 +43,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
             Assert.That(leadership.FollowerQuantities.Level3, Is.InRange(leadership.FollowerQuantities.Level4, leadership.FollowerQuantities.Level2));
             Assert.That(leadership.FollowerQuantities.Level4, Is.InRange(leadership.FollowerQuantities.Level5, leadership.FollowerQuantities.Level3));
             Assert.That(leadership.FollowerQuantities.Level5, Is.InRange(leadership.FollowerQuantities.Level6, leadership.FollowerQuantities.Level4));
-            Assert.That(leadership.FollowerQuantities.Level6, Is.InRange(0, leadership.FollowerQuantities.Level5));
+            Assert.That(leadership.FollowerQuantities.Level6, Is.AtMost(leadership.FollowerQuantities.Level5));
             Assert.That(leadership.FollowerQuantities.Level1, Is.Not.Negative);
             Assert.That(leadership.FollowerQuantities.Level2, Is.Not.Negative);
             Assert.That(leadership.FollowerQuantities.Level3, Is.Not.Negative);
@@ -124,10 +124,10 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressNPCCohort()
         {
-            Stress(AssertNPCCohort);
+            Stress(GeneratAndAssertNPCCohort);
         }
 
-        public void AssertNPCCohort()
+        public void GeneratAndAssertNPCCohort()
         {
             var leaderAlignment = GetNewAlignment();
             var leaderClass = NPCClassNameRandomizer.Randomize(leaderAlignment);
@@ -142,10 +142,10 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressFollower()
         {
-            Stress(AssertFollower);
+            Stress(GenerateAndAssertFollower);
         }
 
-        public void AssertFollower()
+        public void GenerateAndAssertFollower()
         {
             var leaderAlignment = GetNewAlignment();
             var leaderClass = GetNewCharacterClass(leaderAlignment);
@@ -160,10 +160,10 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressNPCFollower()
         {
-            Stress(AssertNPCFollower);
+            Stress(GenerateAndAssertNPCFollower);
         }
 
-        public void AssertNPCFollower()
+        public void GenerateAndAssertNPCFollower()
         {
             var leaderAlignment = GetNewAlignment();
             var leaderClass = NPCClassNameRandomizer.Randomize(leaderAlignment);

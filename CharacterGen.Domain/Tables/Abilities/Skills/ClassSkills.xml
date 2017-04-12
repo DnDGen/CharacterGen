@@ -51,6 +51,10 @@
     <item>Appraise</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>Swim</item>
+  </object>
+  <object>
     <name>Architect</name>
     <item>Knowledge/Architecture and Engineering</item>
   </object>
@@ -552,6 +556,10 @@
     <name>Human</name>
   </object>
   <object>
+    <name>Hunter</name>
+    <item>Survival</item>
+  </object>
+  <object>
     <name>Illusion</name>
   </object>
   <object>
@@ -572,6 +580,13 @@
   <object>
     <name>Jeweler</name>
     <item>Craft/Jewelmaking</item>
+  </object>
+  <object>
+    <name>Kapoacinth</name>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Swim</item>
   </object>
   <object>
     <name>Knowledge</name>
@@ -607,6 +622,13 @@
     <item>Knowledge/Local</item>
   </object>
   <object>
+    <name>Locathah</name>
+    <item>Craft</item>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Swim</item>
+  </object>
+  <object>
     <name>Locksmith</name>
     <item>Craft/Locksmithing</item>
   </object>
@@ -628,6 +650,18 @@
     <name>Matchmaker</name>
     <item>Diplomacy</item>
     <item>Sense Motive</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Swim</item>
+  </object>
+  <object>
+    <name>Merrow</name>
+    <item>Listen</item>
+    <item>Spot</item>
+    <item>Swim</item>
   </object>
   <object>
     <name>Midwife</name>
@@ -837,6 +871,17 @@
     <item>Knowledge</item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>Handle Animal</item>
+    <item>Hide</item>
+    <item>Listen</item>
+    <item>Profession/Hunter</item>
+    <item>Ride</item>
+    <item>Spot</item>
+    <item>Survival</item>
+    <item>Swim</item>
+  </object>
+  <object>
     <name>Sailor Crewmember</name>
     <item>Swim</item>
   </object>
@@ -865,6 +910,10 @@
     <item>Listen</item>
     <item>Sense Motive</item>
     <item>Spot</item>
+  </object>
+  <object>
+    <name>Scrag</name>
+    <item>Swim</item>
   </object>
   <object>
     <name>Sculptor</name>

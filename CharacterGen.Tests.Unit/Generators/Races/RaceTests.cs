@@ -36,6 +36,8 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.AerialSpeed, Is.Not.Null);
             Assert.That(race.AerialSpeed.Unit, Is.EqualTo("feet per round"));
             Assert.That(race.ChallengeRating, Is.EqualTo(0));
+            Assert.That(race.SwimSpeed, Is.Not.Null);
+            Assert.That(race.SwimSpeed.Unit, Is.EqualTo("feet per round"));
         }
 
         [Test]

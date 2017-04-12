@@ -60,7 +60,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.6.0.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.7.0.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -118,6 +118,7 @@
     <Compile Include="Generators\Randomizers\CharacterClasses\ClassNames\SetClassNameRandomizer.cs" />
     <Compile Include="Generators\Randomizers\CharacterClasses\Levels\SetLevelRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\MonsterBaseRaceRandomizer.cs" />
+    <Compile Include="Generators\Randomizers\Races\BaseRaces\AquaticBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\NonMonsterBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Randomizers\Races\BaseRaces\SetBaseRaceRandomizer.cs" />
     <Compile Include="Generators\Abilities\StatsGenerator.cs" />
@@ -960,9 +961,6 @@
     <EmbeddedResource Include="Tables\CharacterClasses\SpecialistFields.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Combats\ArmorBonuses.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Tables\Combats\ArmorClassModifiers.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -975,15 +973,9 @@
     <EmbeddedResource Include="Tables\Combats\RacialBaseAttackAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Items\ArmorCheckPenalties.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Tables\Items\ItemGroups.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Tables\Items\MaxDexterityBonus.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Items\Powers\Level10Power.xml" />
@@ -2877,6 +2869,51 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Races\AerialManeuverability.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\SwimSpeeds.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Aquatic ElfAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Aquatic ElfFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\KapoacinthFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\KapoacinthAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\LocathahFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\LocathahAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\MerrowAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\ScragAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\MerfolkAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\MerrowFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\ScragFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\MerfolkFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\SahuaginAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\SahuaginFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

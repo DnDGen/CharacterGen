@@ -10,6 +10,10 @@
     <item></item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item></item>
+  </object>
+  <object>
     <name>Azer</name>
     <item></item>
   </object>
@@ -154,6 +158,10 @@
     <item>Perfect Maneuverability</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item></item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item></item>
   </object>
@@ -167,6 +175,18 @@
   </object>
   <object>
     <name>Lizardfolk</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Locathah</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Merrow</name>
     <item></item>
   </object>
   <object>
@@ -214,11 +234,19 @@
     <item></item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item></item>
+  </object>
+  <object>
     <name>Satyr</name>
     <item></item>
   </object>
   <object>
     <name>Scorpionfolk</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Scrag</name>
     <item></item>
   </object>
   <object>

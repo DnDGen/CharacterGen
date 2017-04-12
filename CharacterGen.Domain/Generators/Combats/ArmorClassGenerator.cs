@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
-using TreasureGen.Items.Magical;
 
 namespace CharacterGen.Domain.Generators.Combats
 {
@@ -74,7 +73,10 @@ namespace CharacterGen.Domain.Generators.Combats
             var shieldBonus = 0;
 
             if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
-                shieldBonus += GetTotalItemArmorBonus(equipment.OffHand);
+            {
+                var shield = equipment.OffHand as Armor;
+                shieldBonus += shield.TotalArmorBonus;
+            }
 
             return shieldBonus;
         }
@@ -84,7 +86,7 @@ namespace CharacterGen.Domain.Generators.Combats
             var armorBonus = 0;
 
             if (equipment.Armor != null)
-                armorBonus += GetTotalItemArmorBonus(equipment.Armor);
+                armorBonus += equipment.Armor.TotalArmorBonus;
 
             var itemNamesGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
             var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => itemNamesGrantingArmorBonuses.Contains(i.Name));
@@ -95,18 +97,6 @@ namespace CharacterGen.Domain.Generators.Combats
             var maxArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
 
             return Math.Max(armorBonus, maxArmorBonus);
-        }
-
-        private int GetTotalItemArmorBonus(Item item)
-        {
-            var armorBonuses = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorBonuses);
-
-            if (item.Magic.Curse == CurseConstants.OppositeEffect)
-                return armorBonuses[item.Name] - item.Magic.Bonus;
-            else if (item.Magic.Curse == CurseConstants.Delusion)
-                return armorBonuses[item.Name];
-
-            return armorBonuses[item.Name] + item.Magic.Bonus;
         }
 
         private int GetSizeModifier(Race race)

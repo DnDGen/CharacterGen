@@ -46,7 +46,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             return !string.IsNullOrEmpty(baseRace)
                 && LevelAdjustmentIsAllowed(baseRace, characterClass.Level)
                 && BaseRaceCanBeAlignment(baseRace, alignment)
-                && BaseRaceIsAllowed(baseRace);
+                && BaseRaceIsAllowedByRandomizer(baseRace);
         }
 
         private bool BaseRaceCanBeAlignment(string baseRace, Alignment alignment)
@@ -62,7 +62,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             return levelAdjustment < level;
         }
 
-        protected abstract bool BaseRaceIsAllowed(string baseRace);
+        protected abstract bool BaseRaceIsAllowedByRandomizer(string baseRace);
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
         {

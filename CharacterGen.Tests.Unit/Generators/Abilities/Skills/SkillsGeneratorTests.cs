@@ -83,6 +83,56 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Skills
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
         }
 
+        [Test]
+        public void GetSkills()
+        {
+            characterClass.Level = 1;
+            classSkillPoints = 2;
+            AddClassSkills(3);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            Assert.That(skills, Is.Not.Empty);
+
+            foreach (var skill in skills)
+            {
+                Assert.That(skill, Is.Not.Null);
+                Assert.That(skill.Name, Is.Not.Empty);
+                Assert.That(skill.RankCap, Is.Positive);
+                Assert.That(skill.BaseStat, Is.Not.Null);
+                Assert.That(stats.Values, Contains.Item(skill.BaseStat));
+            }
+        }
+
+        [Test]
+        public void SkillHasArmorCheckPenalty()
+        {
+            characterClass.Level = 1;
+            classSkillPoints = 2;
+            AddClassSkills(3);
+
+            var armorCheckSkills = new[] { "other skill", classSkills[0] };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.First(s => s.Name == classSkills[0]);
+            Assert.That(skill.HasArmorCheckPenalty, Is.True);
+        }
+
+        [Test]
+        public void SkillDoesNotHaveArmorCheckPenalty()
+        {
+            characterClass.Level = 1;
+            classSkillPoints = 2;
+            AddClassSkills(3);
+
+            var armorCheckSkills = new[] { "other skill", "different skill" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+
+            var skills = skillsGenerator.GenerateWith(characterClass, race, stats);
+            var skill = skills.First(s => s.Name == classSkills[0]);
+            Assert.That(skill.HasArmorCheckPenalty, Is.False);
+        }
+
         [TestCase(1, 4)]
         [TestCase(2, 5)]
         [TestCase(3, 6)]

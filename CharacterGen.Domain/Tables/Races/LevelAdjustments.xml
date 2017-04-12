@@ -18,6 +18,10 @@
     <item>3</item>
   </object>
   <object>
+    <name>Aquatic Elf</name>
+    <item>0</item>
+  </object>
+  <object>
     <name>Azer</name>
     <item>4</item>
   </object>
@@ -390,6 +394,10 @@
     <item>5</item>
   </object>
   <object>
+    <name>Kapoacinth</name>
+    <item>5</item>
+  </object>
+  <object>
     <name>Kobold</name>
     <item>0</item>
   </object>
@@ -426,6 +434,10 @@
     <item>1</item>
   </object>
   <object>
+    <name>Locathah</name>
+    <item>1</item>
+  </object>
+  <object>
     <name>Magma Mephit</name>
     <item>6</item>
   </object>
@@ -436,6 +448,14 @@
   <object>
     <name>Megaraptor</name>
     <item>9</item>
+  </object>
+  <object>
+    <name>Merfolk</name>
+    <item>1</item>
+  </object>
+  <object>
+    <name>Merrow</name>
+    <item>2</item>
   </object>
   <object>
     <name>Mind Flayer</name>
@@ -526,6 +546,10 @@
     <item>0</item>
   </object>
   <object>
+    <name>Sahuagin</name>
+    <item>2</item>
+  </object>
+  <object>
     <name>Salt Mephit</name>
     <item>6</item>
   </object>
@@ -536,6 +560,10 @@
   <object>
     <name>Scorpionfolk</name>
     <item>4</item>
+  </object>
+  <object>
+    <name>Scrag</name>
+    <item>5</item>
   </object>
   <object>
     <name>Shocker Lizard</name>

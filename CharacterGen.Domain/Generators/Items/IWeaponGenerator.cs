@@ -8,10 +8,10 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal interface IWeaponGenerator
     {
-        Item GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
-        Item GenerateAmmunition(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, string ammunitionType);
-        Item GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
-        Item GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
-        Item GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Weapon GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Weapon GenerateAmmunition(CharacterClass characterClass, Race race, string ammunitionType);
+        Weapon GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Weapon GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
+        Weapon GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race);
     }
 }

@@ -31,6 +31,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         private Alignment alignment;
         private Dictionary<string, int> landSpeeds;
         private Dictionary<string, int> aerialSpeeds;
+        private Dictionary<string, int> swimSpeeds;
         private Dictionary<string, int> ages;
         private Dictionary<string, int> challengeRatings;
         private Dictionary<string, int> maleHeights;
@@ -63,6 +64,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             alignment = new Alignment();
             landSpeeds = new Dictionary<string, int>();
             aerialSpeeds = new Dictionary<string, int>();
+            swimSpeeds = new Dictionary<string, int>();
             classType = CharacterClassConstants.TrainingTypes.Intuitive;
             baseRaceSize = RaceConstants.Sizes.Medium;
             baseRacesWithWings = new List<string>();
@@ -99,6 +101,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ChallengeRatings, It.IsAny<string>())).Returns((string table, string name) => challengeRatings[name]);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.AerialSpeeds, It.IsAny<string>())).Returns((string table, string name) => aerialSpeeds[name]);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LandSpeeds, It.IsAny<string>())).Returns((string table, string name) => landSpeeds[name]);
+            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SwimSpeeds, It.IsAny<string>())).Returns((string table, string name) => swimSpeeds[name]);
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, "Male");
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName, It.IsAny<string>())).Returns((string table, string name) => maleHeights[name]);
@@ -171,6 +174,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
                 landSpeeds[baseRace] = 9266;
 
             aerialSpeeds[baseRace] = 0;
+            swimSpeeds[baseRace] = 0;
             aerialManeuverability[baseRace] = new List<string> { string.Empty };
             challengeRatings[baseRace] = 0;
         }
@@ -469,6 +473,28 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.AerialSpeed.Description, Is.Empty);
         }
 
+        [Test]
+        public void GetSwimSpeed()
+        {
+            swimSpeeds[BaseRace] = 42;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.SwimSpeed.Value, Is.EqualTo(42));
+            Assert.That(race.SwimSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.SwimSpeed.Description, Is.Empty);
+        }
+
+        [Test]
+        public void NoSwimSpeed()
+        {
+            swimSpeeds[BaseRace] = 0;
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.SwimSpeed.Value, Is.EqualTo(0));
+            Assert.That(race.SwimSpeed.Unit, Is.EqualTo("feet per round"));
+            Assert.That(race.SwimSpeed.Description, Is.Empty);
+        }
+
         [TestCase(1, "Short")]
         [TestCase(2, "Average")]
         [TestCase(3, "Tall")]
@@ -481,6 +507,18 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.Height.Value, Is.EqualTo(209 + roll));
             Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
             Assert.That(race.Height.Description, Is.EqualTo(description));
+        }
+
+        [Test]
+        public void GetNonRandomMaleHeight()
+        {
+            SetUpRoll("10d4", 1, 1, 1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Height.Value, Is.EqualTo(210));
+            Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
+            Assert.That(race.Height.Description, Is.EqualTo("Average"));
         }
 
         [TestCase(1, "Short")]
@@ -497,6 +535,18 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.Height.Description, Is.EqualTo(description));
         }
 
+        [Test]
+        public void GetNonRandomFemaleHeight()
+        {
+            SetUpRoll("10d4", 1, 1, 1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Height.Value, Is.EqualTo(903));
+            Assert.That(race.Height.Unit, Is.EqualTo("Inches"));
+            Assert.That(race.Height.Description, Is.EqualTo("Average"));
+        }
+
         [TestCase(1, "Light")]
         [TestCase(2, "Average")]
         [TestCase(3, "Heavy")]
@@ -511,6 +561,18 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.Weight.Description, Is.EqualTo(description));
         }
 
+        [Test]
+        public void GetNonRandomMaleWeight()
+        {
+            SetUpRoll("92d66", 1, 1, 1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Weight.Value, Is.EqualTo(126));
+            Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
+            Assert.That(race.Weight.Description, Is.EqualTo("Average"));
+        }
+
         [TestCase(1, "Light")]
         [TestCase(2, "Average")]
         [TestCase(3, "Heavy")]
@@ -523,6 +585,18 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             Assert.That(race.Weight.Value, Is.EqualTo(2 + 104 * roll));
             Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
             Assert.That(race.Weight.Description, Is.EqualTo(description));
+        }
+
+        [Test]
+        public void GetNonRandomFemaleWeight()
+        {
+            SetUpRoll("92d66", 1, 1, 1);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
+            Assert.That(race.Weight.Value, Is.EqualTo(106));
+            Assert.That(race.Weight.Unit, Is.EqualTo("Pounds"));
+            Assert.That(race.Weight.Description, Is.EqualTo("Average"));
         }
 
         [TestCase(CharacterClassConstants.TrainingTypes.Intuitive, 90525)]

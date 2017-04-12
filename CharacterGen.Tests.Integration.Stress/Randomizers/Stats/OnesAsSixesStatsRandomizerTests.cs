@@ -35,8 +35,6 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Stats
             Assert.That(stats[StatConstants.Intelligence].Value, Is.InRange(6, 18));
             Assert.That(stats[StatConstants.Strength].Value, Is.InRange(6, 18));
             Assert.That(stats[StatConstants.Wisdom].Value, Is.InRange(6, 18));
-
-            Assert.That(stats.Count, Is.EqualTo(6));
         }
 
         [Test]

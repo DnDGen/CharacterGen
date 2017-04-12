@@ -4,6 +4,7 @@
     {
         public const string AddMonsterHitDiceToPower = "Add Monster Hit Dice to Power";
         public const string All = "All";
+        public const string Aquatic = "Aquatic";
         public const string ArmorBonus = "Armor Bonus";
         public const string ArmorCheckPenalty = "Armor Check Penalty";
         public const string AverageBaseAttack = "Average Base Attack";

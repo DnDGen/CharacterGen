@@ -18,6 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
                     "standard base race",
                     "non-standard base race",
                     "monster base race",
+                    "aquatic base race",
                 };
             }
         }
@@ -28,7 +29,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             randomizer = new NonMonsterBaseRaceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, mockCollectionSelector.Object, generator);
 
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
-                .Returns(new[] { "monster base race", "other base race" });
+                .Returns(new[] { "monster base race", "aquatic base race", "other base race" });
         }
 
         [Test]

@@ -290,6 +290,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void BaseRaceRandomizerNamedAquaticIsAquaticBaseRaceRandomizer()
+        {
+            AssertNamedIsInstanceOf<RaceRandomizer, AquaticBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AquaticBase);
+        }
+
+        [Test]
         public void BaseRaceRandomizerNamedNonStandardIsNonStandardBaseRaceRandomizer()
         {
             AssertNamedIsInstanceOf<RaceRandomizer, NonStandardBaseRaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.NonStandardBase);
@@ -314,6 +320,7 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.AquaticBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.MonsterBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase)]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.NonStandardBase)]

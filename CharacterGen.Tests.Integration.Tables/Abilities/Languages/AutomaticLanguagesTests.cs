@@ -33,8 +33,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(CharacterClassConstants.Bard)]
         [TestCase(CharacterClassConstants.Cleric)]
         [TestCase(CharacterClassConstants.Commoner)]
-        [TestCase(CharacterClassConstants.Druid,
-            LanguageConstants.Special.Druidic)]
+        [TestCase(CharacterClassConstants.Druid, LanguageConstants.Special.Druidic)]
         [TestCase(CharacterClassConstants.Expert)]
         [TestCase(CharacterClassConstants.Fighter)]
         [TestCase(CharacterClassConstants.Monk)]
@@ -47,11 +46,13 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Aasimar,
             LanguageConstants.Common,
             LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.BaseRaces.AquaticElf,
+            LanguageConstants.Common,
+            LanguageConstants.Elven)]
         [TestCase(RaceConstants.BaseRaces.Azer,
             LanguageConstants.Common,
             LanguageConstants.Ignan)]
-        [TestCase(RaceConstants.BaseRaces.BlueSlaad,
-            LanguageConstants.Special.Slaad)]
+        [TestCase(RaceConstants.BaseRaces.BlueSlaad, LanguageConstants.Special.Slaad)]
         [TestCase(RaceConstants.BaseRaces.Bugbear,
             LanguageConstants.Common,
             LanguageConstants.Goblin)]
@@ -74,8 +75,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Derro,
             LanguageConstants.Common,
             LanguageConstants.Dwarven)]
-        [TestCase(RaceConstants.BaseRaces.Doppelganger,
-            LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Doppelganger, LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Drow,
             LanguageConstants.Common,
             LanguageConstants.Elven,
@@ -84,10 +84,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Common,
             LanguageConstants.Dwarven,
             LanguageConstants.Undercommon)]
-        [TestCase(RaceConstants.BaseRaces.Gargoyle,
-            LanguageConstants.Common)]
-        [TestCase(RaceConstants.BaseRaces.Gnoll,
-            LanguageConstants.Gnoll)]
+        [TestCase(RaceConstants.BaseRaces.Gargoyle, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Gnoll, LanguageConstants.Gnoll)]
         [TestCase(RaceConstants.BaseRaces.Goblin,
             LanguageConstants.Common,
             LanguageConstants.Goblin)]
@@ -114,45 +112,44 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.FrostGiant,
             LanguageConstants.Common,
             LanguageConstants.Giant)]
-        [TestCase(RaceConstants.Metaraces.HalfCelestial,
-            LanguageConstants.Celestial)]
-        [TestCase(RaceConstants.Metaraces.HalfDragon,
-            LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.Metaraces.HalfCelestial, LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.Metaraces.HalfDragon, LanguageConstants.Draconic)]
         [TestCase(RaceConstants.BaseRaces.HalfElf,
             LanguageConstants.Common,
             LanguageConstants.Elven)]
-        [TestCase(RaceConstants.Metaraces.HalfFiend,
-            LanguageConstants.Infernal)]
+        [TestCase(RaceConstants.Metaraces.HalfFiend, LanguageConstants.Infernal)]
         [TestCase(RaceConstants.BaseRaces.HalfOrc,
             LanguageConstants.Common,
             LanguageConstants.Orc)]
-        [TestCase(RaceConstants.BaseRaces.Harpy,
-            LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Harpy, LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.HighElf,
             LanguageConstants.Common,
             LanguageConstants.Elven)]
         [TestCase(RaceConstants.BaseRaces.HillDwarf,
             LanguageConstants.Common,
             LanguageConstants.Dwarven)]
-        [TestCase(RaceConstants.BaseRaces.HillGiant,
-            LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.HillGiant, LanguageConstants.Giant)]
         [TestCase(RaceConstants.BaseRaces.Hobgoblin,
             LanguageConstants.Common,
             LanguageConstants.Goblin)]
-        [TestCase(RaceConstants.BaseRaces.HoundArchon,
-            LanguageConstants.Celestial)]
-        [TestCase(RaceConstants.BaseRaces.Human,
-            LanguageConstants.Common)]
-        [TestCase(RaceConstants.BaseRaces.Janni,
-            LanguageConstants.Common)]
-        [TestCase(RaceConstants.BaseRaces.Kobold,
-            LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.HoundArchon, LanguageConstants.Celestial)]
+        [TestCase(RaceConstants.BaseRaces.Human, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Janni, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Kapoacinth, LanguageConstants.Common)]
+        [TestCase(RaceConstants.BaseRaces.Kobold, LanguageConstants.Draconic)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling,
             LanguageConstants.Common,
             LanguageConstants.Halfling)]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk,
             LanguageConstants.Common,
             LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.Locathah, LanguageConstants.Aquan)]
+        [TestCase(RaceConstants.BaseRaces.Merfolk,
+            LanguageConstants.Common,
+            LanguageConstants.Aquan)]
+        [TestCase(RaceConstants.BaseRaces.Merrow,
+            LanguageConstants.Common,
+            LanguageConstants.Giant)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer,
             LanguageConstants.Common,
             LanguageConstants.Undercommon)]
@@ -177,18 +174,19 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Rakshasa,
             LanguageConstants.Common,
             LanguageConstants.Infernal)]
-        [TestCase(RaceConstants.BaseRaces.RedSlaad,
-            LanguageConstants.Special.Slaad)]
+        [TestCase(RaceConstants.BaseRaces.RedSlaad, LanguageConstants.Special.Slaad)]
         [TestCase(RaceConstants.BaseRaces.RockGnome,
             LanguageConstants.Common,
             LanguageConstants.Gnome)]
-        [TestCase(RaceConstants.BaseRaces.Satyr,
-            LanguageConstants.Sylvan)]
+        [TestCase(RaceConstants.BaseRaces.Sahuagin,
+            LanguageConstants.Common,
+            LanguageConstants.Special.Sahuagin)]
+        [TestCase(RaceConstants.BaseRaces.Satyr, LanguageConstants.Sylvan)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk,
             LanguageConstants.Common,
             LanguageConstants.Terran)]
-        [TestCase(RaceConstants.BaseRaces.StoneGiant,
-            LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.Scrag, LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.StoneGiant, LanguageConstants.Giant)]
         [TestCase(RaceConstants.BaseRaces.StormGiant,
             LanguageConstants.Common,
             LanguageConstants.Giant)]
@@ -202,10 +200,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
         [TestCase(RaceConstants.BaseRaces.Tiefling,
             LanguageConstants.Common,
             LanguageConstants.Infernal)]
-        [TestCase(RaceConstants.BaseRaces.Troglodyte,
-            LanguageConstants.Draconic)]
-        [TestCase(RaceConstants.BaseRaces.Troll,
-            LanguageConstants.Giant)]
+        [TestCase(RaceConstants.BaseRaces.Troglodyte, LanguageConstants.Draconic)]
+        [TestCase(RaceConstants.BaseRaces.Troll, LanguageConstants.Giant)]
         [TestCase(RaceConstants.BaseRaces.WildElf,
             LanguageConstants.Common,
             LanguageConstants.Elven)]
@@ -222,10 +218,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Special.YuanTi,
             LanguageConstants.Common)]
         [TestCase(RaceConstants.Metaraces.Ghost)]
-        [TestCase(RaceConstants.Metaraces.Lich,
-            LanguageConstants.Common)]
-        [TestCase(RaceConstants.Metaraces.Mummy,
-            LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.Lich, LanguageConstants.Common)]
+        [TestCase(RaceConstants.Metaraces.Mummy, LanguageConstants.Common)]
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Vampire)]
         [TestCase(RaceConstants.Metaraces.Werebear)]

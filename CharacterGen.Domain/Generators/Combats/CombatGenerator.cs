@@ -127,15 +127,18 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetAdjustedDexterityBonus(Stat dexterity, Equipment equipment)
         {
-            if (equipment.Armor == null)
-                return dexterity.Bonus;
+            var maxDexterityBonus = dexterity.Bonus;
 
-            var maxDexterityBonus = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MaxDexterityBonus, equipment.Armor.Name);
+            if (equipment.Armor != null)
+                maxDexterityBonus = Math.Min(maxDexterityBonus, equipment.Armor.TotalMaxDexterityBonus);
 
-            if (equipment.Armor.Traits.Contains(TraitConstants.SpecialMaterials.Mithral))
-                maxDexterityBonus += 2;
+            if (equipment.OffHand is Armor)
+            {
+                var shield = equipment.OffHand as Armor;
+                maxDexterityBonus = Math.Min(maxDexterityBonus, shield.TotalMaxDexterityBonus);
+            }
 
-            return Math.Min(dexterity.Bonus, maxDexterityBonus);
+            return maxDexterityBonus;
         }
 
         private int GetInitiativeBonus(int dexterityBonus, IEnumerable<Feat> feats)

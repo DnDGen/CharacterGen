@@ -207,7 +207,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateNoArcaneSpellFailureIfNotArcaneSpellcaster()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -221,7 +221,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateNoArcaneSpellFailureIfBardWithLightArmor()
         {
             characterClass.Name = CharacterClassConstants.Bard;
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -234,7 +234,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateArcaneSpellFailureIfArcaneSpellcasterWithLightArmor()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -248,7 +248,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateNoArcaneSpellFailureIfNotBardOrArcaneSpellcasterWithLightArmor()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -272,7 +272,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateArcaneSpellFailureIfArcaneSpellcasterAndHasArmor()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -285,7 +285,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateArcaneSpellFailureIfArcaneSpellcasterAndHasShield()
         {
-            equipment.OffHand = new Item();
+            equipment.OffHand = new Armor();
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -300,7 +300,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateNoArcaneSpellFailureIfArcaneSpellcasterAndNotShieldInOffHand()
         {
-            equipment.OffHand = new Item();
+            equipment.OffHand = new Weapon();
             equipment.OffHand.Name = "weapon";
             arcaneSpellFailures[equipment.OffHand.Name] = 9266;
 
@@ -313,10 +313,10 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void GenerateArcaneSpellFailureIfArcaneSpellcasterAndHasArmorAndShield()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
 
-            equipment.OffHand = new Item();
+            equipment.OffHand = new Armor();
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -334,7 +334,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateArcaneSpellFailureIfBardWithNonLightArmor()
         {
             characterClass.Name = CharacterClassConstants.Bard;
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
 
@@ -367,11 +367,11 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateArcaneSpellFailureIfBardWithShieldAndLightArmor()
         {
             characterClass.Name = CharacterClassConstants.Bard;
-            equipment.OffHand = new Item();
+            equipment.OffHand = new Armor();
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
 
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
@@ -388,10 +388,10 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void GenerateArcaneSpellFailureIfBardWithNonLightArmorAndShield()
         {
             characterClass.Name = CharacterClassConstants.Bard;
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
 
-            equipment.OffHand = new Item();
+            equipment.OffHand = new Armor();
             equipment.OffHand.Name = "shield";
             equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
@@ -409,7 +409,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void MithralArmorDecreasesArcaneSpellFailureBy10()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.Armor.Name] = 9266;
@@ -423,7 +423,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void MithralArmorCannotDecreasesArcaneSpellFailureBelow0()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.Armor.Name] = 5;
@@ -437,7 +437,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void MithralArmorCannotDecreasesShieldArcaneSpellFailure()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             equipment.Armor.Traits.Add(TraitConstants.SpecialMaterials.Mithral);
             arcaneSpellFailures[equipment.Armor.Name] = 5;
@@ -489,7 +489,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [Test]
         public void MithralShieldCannotDecreasesArmorArcaneSpellFailure()
         {
-            equipment.Armor = new Item();
+            equipment.Armor = new Armor();
             equipment.Armor.Name = "armor";
             arcaneSpellFailures[equipment.Armor.Name] = 5;
 

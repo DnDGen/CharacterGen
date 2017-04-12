@@ -7,6 +7,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
     public class RaceRandomizerTypeConstantsTests
     {
         [TestCase(RaceRandomizerTypeConstants.BaseRace.AnyBase, "Any Base")]
+        [TestCase(RaceRandomizerTypeConstants.BaseRace.AquaticBase, "Aquatic Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.MonsterBase, "Monster Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase, "Non-Monster Base")]
         [TestCase(RaceRandomizerTypeConstants.BaseRace.NonStandardBase, "Non-Standard Base")]

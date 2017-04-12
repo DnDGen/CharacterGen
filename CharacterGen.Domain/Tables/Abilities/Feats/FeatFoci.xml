@@ -10,6 +10,8 @@
     <name>Exotic Weapon Proficiency</name>
     <item>Kama</item>
     <item>Nunchaku</item>
+    <item>Sai</item>
+    <item>Bolas</item>
     <item>Siangham</item>
     <item>Bastard sword</item>
     <item>Dwarven waraxe</item>
@@ -73,6 +75,8 @@
   </object>
   <object>
     <name>Martial Weapon Proficiency</name>
+    <item>Composite longbow</item>
+    <item>Composite shortbow</item>
     <item>Longsword</item>
     <item>Longbow</item>
     <item>Shortbow</item>
@@ -84,7 +88,7 @@
     <item>Sap</item>
     <item>Short sword</item>
     <item>Battleaxe</item>
-    <item>Light flail</item>
+    <item>Flail</item>
     <item>Heavy pick</item>
     <item>Rapier</item>
     <item>Scimitar</item>
@@ -145,6 +149,7 @@
     <item>Morningstar</item>
     <item>Shortspear</item>
     <item>Longspear</item>
+    <item>Spear</item>
     <item>Dart</item>
     <item>Javelin</item>
     <item>Sling</item>
@@ -271,6 +276,7 @@
     <item>Profession/Haberdasher</item>
     <item>Profession/Healer</item>
     <item>Profession/Horner</item>
+    <item>Profession/Hunter</item>
     <item>Profession/Interpreter</item>
     <item>Profession/Jeweler</item>
     <item>Profession/Laborer</item>
@@ -329,13 +335,17 @@
     <name>Weapons</name>
     <item>Bastard sword</item>
     <item>Battleaxe</item>
+    <item>Bolas</item>
     <item>Club</item>
+    <item>Composite longbow</item>
+    <item>Composite shortbow</item>
     <item>Dagger</item>
     <item>Dart</item>
     <item>Dire flail</item>
     <item>Dwarven urgrosh</item>
     <item>Dwarven waraxe</item>
     <item>Falchion</item>
+    <item>Flail</item>
     <item>Gauntlet</item>
     <item>Glaive</item>
     <item>Gnome hooked hammer</item>
@@ -344,7 +354,6 @@
     <item>Greatsword</item>
     <item>Guisarme</item>
     <item>Halberd</item>
-    <item>Halfspear</item>
     <item>Handaxe</item>
     <item>Hand crossbow</item>
     <item>Heavy crossbow</item>
@@ -356,7 +365,6 @@
     <item>Kukri</item>
     <item>Lance</item>
     <item>Light crossbow</item>
-    <item>Light flail</item>
     <item>Light hammer</item>
     <item>Light mace</item>
     <item>Light pick</item>
@@ -373,6 +381,7 @@
     <item>Rapier</item>
     <item>Heavy repeating crossbow</item>
     <item>Light repeating crossbow</item>
+    <item>Sai</item>
     <item>Sap</item>
     <item>Scimitar</item>
     <item>Scythe</item>
@@ -383,6 +392,7 @@
     <item>Siangham</item>
     <item>Sickle</item>
     <item>Sling</item>
+    <item>Spear</item>
     <item>Spiked chain</item>
     <item>Spiked gauntlet</item>
     <item>Throwing axe</item>
@@ -395,13 +405,17 @@
     <name>Weapons with unarmed</name>
     <item>Bastard sword</item>
     <item>Battleaxe</item>
+    <item>Bolas</item>
     <item>Club</item>
+    <item>Composite longbow</item>
+    <item>Composite shortbow</item>
     <item>Dagger</item>
     <item>Dart</item>
     <item>Dire flail</item>
     <item>Dwarven urgrosh</item>
     <item>Dwarven waraxe</item>
     <item>Falchion</item>
+    <item>Flail</item>
     <item>Gauntlet</item>
     <item>Glaive</item>
     <item>Gnome hooked hammer</item>
@@ -410,7 +424,6 @@
     <item>Greatsword</item>
     <item>Guisarme</item>
     <item>Halberd</item>
-    <item>Halfspear</item>
     <item>Handaxe</item>
     <item>Hand crossbow</item>
     <item>Heavy crossbow</item>
@@ -422,7 +435,6 @@
     <item>Kukri</item>
     <item>Lance</item>
     <item>Light crossbow</item>
-    <item>Light flail</item>
     <item>Light hammer</item>
     <item>Light mace</item>
     <item>Light pick</item>
@@ -439,6 +451,7 @@
     <item>Rapier</item>
     <item>Heavy repeating crossbow</item>
     <item>Light repeating crossbow</item>
+    <item>Sai</item>
     <item>Sap</item>
     <item>Scimitar</item>
     <item>Scythe</item>
@@ -449,6 +462,7 @@
     <item>Siangham</item>
     <item>Sickle</item>
     <item>Sling</item>
+    <item>Spear</item>
     <item>Spiked chain</item>
     <item>Spiked gauntlet</item>
     <item>Throwing axe</item>
@@ -462,13 +476,17 @@
     <name>Weapons with unarmed and grapple</name>
     <item>Bastard sword</item>
     <item>Battleaxe</item>
+    <item>Bolas</item>
     <item>Club</item>
+    <item>Composite longbow</item>
+    <item>Composite shortbow</item>
     <item>Dagger</item>
     <item>Dart</item>
     <item>Dire flail</item>
     <item>Dwarven urgrosh</item>
     <item>Dwarven waraxe</item>
     <item>Falchion</item>
+    <item>Flail</item>
     <item>Gauntlet</item>
     <item>Glaive</item>
     <item>Gnome hooked hammer</item>
@@ -477,7 +495,6 @@
     <item>Greatsword</item>
     <item>Guisarme</item>
     <item>Halberd</item>
-    <item>Halfspear</item>
     <item>Handaxe</item>
     <item>Hand crossbow</item>
     <item>Heavy crossbow</item>
@@ -489,7 +506,6 @@
     <item>Kukri</item>
     <item>Lance</item>
     <item>Light crossbow</item>
-    <item>Light flail</item>
     <item>Light hammer</item>
     <item>Light mace</item>
     <item>Light pick</item>
@@ -506,6 +522,7 @@
     <item>Rapier</item>
     <item>Heavy repeating crossbow</item>
     <item>Light repeating crossbow</item>
+    <item>Sai</item>
     <item>Sap</item>
     <item>Scimitar</item>
     <item>Scythe</item>
@@ -516,6 +533,7 @@
     <item>Siangham</item>
     <item>Sickle</item>
     <item>Sling</item>
+    <item>Spear</item>
     <item>Spiked chain</item>
     <item>Spiked gauntlet</item>
     <item>Throwing axe</item>
@@ -530,13 +548,17 @@
     <name>Weapons with unarmed, grapple, and ray</name>
     <item>Bastard sword</item>
     <item>Battleaxe</item>
+    <item>Bolas</item>
     <item>Club</item>
+    <item>Composite longbow</item>
+    <item>Composite shortbow</item>
     <item>Dagger</item>
     <item>Dart</item>
     <item>Dire flail</item>
     <item>Dwarven urgrosh</item>
     <item>Dwarven waraxe</item>
     <item>Falchion</item>
+    <item>Flail</item>
     <item>Gauntlet</item>
     <item>Glaive</item>
     <item>Gnome hooked hammer</item>
@@ -545,7 +567,6 @@
     <item>Greatsword</item>
     <item>Guisarme</item>
     <item>Halberd</item>
-    <item>Halfspear</item>
     <item>Handaxe</item>
     <item>Hand crossbow</item>
     <item>Heavy crossbow</item>
@@ -557,7 +578,6 @@
     <item>Kukri</item>
     <item>Lance</item>
     <item>Light crossbow</item>
-    <item>Light flail</item>
     <item>Light hammer</item>
     <item>Light mace</item>
     <item>Light pick</item>
@@ -574,6 +594,7 @@
     <item>Rapier</item>
     <item>Heavy repeating crossbow</item>
     <item>Light repeating crossbow</item>
+    <item>Sai</item>
     <item>Sap</item>
     <item>Scimitar</item>
     <item>Scythe</item>
@@ -584,6 +605,7 @@
     <item>Siangham</item>
     <item>Sickle</item>
     <item>Sling</item>
+    <item>Spear</item>
     <item>Spiked chain</item>
     <item>Spiked gauntlet</item>
     <item>Throwing axe</item>

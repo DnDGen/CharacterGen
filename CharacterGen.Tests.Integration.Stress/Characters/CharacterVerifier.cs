@@ -90,6 +90,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
             VerifyLandSpeed(character);
             VerifyAerialSpeed(character);
+            VerifySwimSpeed(character);
             VerifyAge(character);
             VerifyMaximumAge(character);
             VerifyHeight(character);
@@ -99,7 +100,11 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private void VerifyLandSpeed(Character character)
         {
             Assert.That(character.Race.LandSpeed.Value, Is.Positive, character.Summary);
-            Assert.That(character.Race.LandSpeed.Value % 10, Is.EqualTo(0), character.Summary);
+            Assert.That(character.Race.LandSpeed.Value % 5, Is.EqualTo(0), character.Summary);
+
+            if (character.Race.LandSpeed.Value >= 10)
+                Assert.That(character.Race.LandSpeed.Value % 10, Is.EqualTo(0), character.Summary);
+
             Assert.That(character.Race.LandSpeed.Unit, Is.EqualTo("feet per round"), character.Summary);
             Assert.That(character.Race.LandSpeed.Description, Is.Empty, character.Summary);
         }
@@ -107,7 +112,11 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private void VerifyAerialSpeed(Character character)
         {
             Assert.That(character.Race.AerialSpeed.Value, Is.Not.Negative, character.Summary);
-            Assert.That(character.Race.AerialSpeed.Value % 10, Is.EqualTo(0), character.Summary);
+            Assert.That(character.Race.AerialSpeed.Value % 5, Is.EqualTo(0), character.Summary);
+
+            if (character.Race.AerialSpeed.Value >= 10)
+                Assert.That(character.Race.AerialSpeed.Value % 10, Is.EqualTo(0), character.Summary);
+
             Assert.That(character.Race.AerialSpeed.Unit, Is.EqualTo("feet per round"), character.Summary);
 
             if (character.Race.AerialSpeed.Value == 0)
@@ -117,6 +126,14 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
             if (character.Race.HasWings)
                 Assert.That(character.Race.AerialSpeed.Value, Is.Positive, character.Summary);
+        }
+
+        private void VerifySwimSpeed(Character character)
+        {
+            Assert.That(character.Race.SwimSpeed.Value, Is.Not.Negative, character.Summary);
+            Assert.That(character.Race.SwimSpeed.Value % 10, Is.EqualTo(0), character.Summary);
+            Assert.That(character.Race.SwimSpeed.Unit, Is.EqualTo("feet per round"), character.Summary);
+            Assert.That(character.Race.SwimSpeed.Description, Is.Empty, character.Summary);
         }
 
         private void VerifyAge(Character character)
@@ -237,14 +254,90 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void VerifyEquipment(Character character)
         {
-            if (character.Ability.Feats.SelectMany(f => f.Foci).Any(f => f == FeatConstants.Foci.UnarmedStrike) == false)
+            if (character.Ability.Feats.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
             {
                 var feats = GetAllFeatsMessage(character.Ability.Feats);
 
                 Assert.That(character.Equipment.PrimaryHand, Is.Not.Null, feats);
-                Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), feats);
                 Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty, feats);
-                Assert.That(character.Equipment.PrimaryHand.Quantity, Is.Positive, feats);
+                Assert.That(character.Equipment.PrimaryHand.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.Quantity, Is.Positive, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.CriticalMultiplier, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.Damage, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.DamageType, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size), character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.ThreatRange, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+
+                if (!character.Equipment.PrimaryHand.IsMagical)
+                    Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size));
+
+                if (character.Equipment.OffHand != null)
+                {
+                    Assert.That(character.Equipment.OffHand, Is.InstanceOf<Armor>().Or.InstanceOf<Weapon>(), feats);
+
+                    if (character.Equipment.OffHand is Weapon)
+                    {
+                        var weapon = character.Equipment.OffHand as Weapon;
+                        Assert.That(weapon, Is.Not.Null, feats);
+                        Assert.That(weapon.Name, Is.Not.Empty, feats);
+                        Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), character.Equipment.OffHand.Name);
+                        Assert.That(weapon.Quantity, Is.Positive, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.CriticalMultiplier, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.Damage, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.DamageType, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
+                        Assert.That(weapon.ThreatRange, Is.Not.Empty, character.Equipment.OffHand.Name);
+
+                        if (weapon != character.Equipment.PrimaryHand)
+                        {
+                            Assert.That(weapon.Attributes, Is.All.Not.EqualTo(AttributeConstants.TwoHanded));
+                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
+                        }
+                        else
+                        {
+                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.TwoHanded));
+                        }
+
+                        if (!weapon.IsMagical)
+                            Assert.That(weapon.Size, Is.EqualTo(character.Race.Size));
+                    }
+                    else if (character.Equipment.OffHand is Armor)
+                    {
+                        var shield = character.Equipment.OffHand as Armor;
+                        Assert.That(shield, Is.Not.Null, feats);
+                        Assert.That(shield.Name, Is.Not.Empty, feats);
+                        Assert.That(shield.ItemType, Is.EqualTo(ItemTypeConstants.Armor), character.Equipment.OffHand.Name);
+                        Assert.That(shield.Quantity, Is.Positive, character.Equipment.OffHand.Name);
+                        Assert.That(shield.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.OffHand.Name);
+                        Assert.That(shield.ArmorBonus, Is.Positive, character.Equipment.OffHand.Name);
+                        Assert.That(shield.ArmorCheckPenalty, Is.Not.Positive, character.Equipment.OffHand.Name);
+                        Assert.That(shield.MaxDexterityBonus, Is.Not.Negative, character.Equipment.OffHand.Name);
+                        Assert.That(shield.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
+                        Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield));
+
+                        if (!shield.IsMagical)
+                            Assert.That(shield.Size, Is.EqualTo(character.Race.Size));
+                    }
+                }
+
+                if (character.Equipment.Armor != null)
+                {
+                    Assert.That(character.Equipment.Armor, Is.Not.Null, feats);
+                    Assert.That(character.Equipment.Armor.Name, Is.Not.Empty, feats);
+                    Assert.That(character.Equipment.Armor.ItemType, Is.EqualTo(ItemTypeConstants.Armor), character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.Quantity, Is.Positive, character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.ArmorBonus, Is.Positive, character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.ArmorCheckPenalty, Is.Not.Positive, character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.MaxDexterityBonus, Is.Not.Negative, character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.Size, Is.EqualTo(character.Race.Size), character.Equipment.Armor.Name);
+                    Assert.That(character.Equipment.Armor.Attributes, Is.All.Not.EqualTo(AttributeConstants.Shield));
+
+                    if (!character.Equipment.Armor.IsMagical)
+                        Assert.That(character.Equipment.Armor.Size, Is.EqualTo(character.Race.Size));
+                }
             }
 
             Assert.That(character.Equipment.Treasure, Is.Not.Null, character.Summary);

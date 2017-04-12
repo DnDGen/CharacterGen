@@ -102,19 +102,15 @@ namespace CharacterGen.Domain.Generators.Characters
             character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, stats, baseAttack);
             character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
 
-            var armorCheckPenaltySkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);
+            var armorCheckPenaltySkills = character.Ability.Skills.Where(s => s.HasArmorCheckPenalty);
 
-            foreach (var skillName in armorCheckPenaltySkills)
+            foreach (var skill in armorCheckPenaltySkills)
             {
-                var skill = character.Ability.Skills.FirstOrDefault(s => s.IsEqualTo(skillName));
-                if (skill == null)
-                    continue;
-
-                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.Armor, skillName);
+                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.Armor, skill.Name);
 
                 if (character.Equipment.OffHand != null && character.Equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
                 {
-                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.OffHand, skillName);
+                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.OffHand, skill.Name);
                 }
             }
 
@@ -125,27 +121,20 @@ namespace CharacterGen.Domain.Generators.Characters
             return character;
         }
 
-        private int ComputeArmorCheckPenalty(Item armor, string skillName)
+        private int ComputeArmorCheckPenalty(Item item, string skillName)
         {
-            if (armor == null)
+            if (item == null || !(item is Armor))
                 return 0;
+
+            var armor = item as Armor;
 
             if (skillName == SkillConstants.Swim && armor.Name == ArmorConstants.PlateArmorOfTheDeep)
                 return 0;
 
-            var armorCheckPenalties = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ArmorCheckPenalties);
-            var armorCheckPenalty = armorCheckPenalties[armor.Name];
-
-            var armorSpecialMaterials = armor.Traits.Intersect(armorCheckPenalties.Keys);
-            armorCheckPenalty += armorSpecialMaterials.Sum(m => armorCheckPenalties[m]);
-
-            if (armorCheckPenalty > 0)
-                return 0;
-
             if (skillName == SkillConstants.Swim)
-                return armorCheckPenalty * 2;
+                return armor.TotalArmorCheckPenalty * 2;
 
-            return armorCheckPenalty;
+            return armor.TotalArmorCheckPenalty;
         }
 
         private CharacterClass EditCharacterClass(Alignment alignment, CharacterClass characterClass, Race race, ILevelRandomizer levelRandomizer)

@@ -189,6 +189,9 @@ namespace CharacterGen.Domain.Generators.Abilities
                 if (skill == null)
                 {
                     skill = new Skill(skillSelection.SkillName, stats[skillSelection.BaseStatName], characterClass.Level + 3, skillSelection.Focus);
+
+                    var skillsWithArmorCheckPenalties = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);
+                    skill.HasArmorCheckPenalty = skillsWithArmorCheckPenalties.Contains(skill.Name);
                     skills.Add(skill);
                 }
 

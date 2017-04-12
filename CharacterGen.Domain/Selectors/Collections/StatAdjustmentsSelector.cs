@@ -19,13 +19,17 @@ namespace CharacterGen.Domain.Selectors.Collections
         {
             var adjustments = new Dictionary<string, int>();
             var stats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.StatGroups, GroupConstants.All);
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.AGEStatAdjustments, race.Age.Description);
+            var agingEffects = innerSelector.SelectAllFrom(tableName);
 
             foreach (var stat in stats)
             {
-                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, stat);
+                tableName = string.Format(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, stat);
                 var statAdjustments = innerSelector.SelectAllFrom(tableName);
 
-                adjustments[stat] = statAdjustments[race.BaseRace] + statAdjustments[race.Metarace];
+                adjustments[stat] = statAdjustments[race.BaseRace];
+                adjustments[stat] += statAdjustments[race.Metarace];
+                adjustments[stat] += agingEffects[stat];
             }
 
             return adjustments;

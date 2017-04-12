@@ -271,8 +271,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Profession,
             SkillConstants.Spellcraft)]
         [TestCase(CharacterClassConstants.Domains.Air)]
-        [TestCase(CharacterClassConstants.Domains.Animal,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
+        [TestCase(CharacterClassConstants.Domains.Animal, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
         [TestCase(CharacterClassConstants.Domains.Chaos)]
         [TestCase(CharacterClassConstants.Domains.Death)]
         [TestCase(CharacterClassConstants.Domains.Destruction)]
@@ -281,18 +280,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Domains.Fire)]
         [TestCase(CharacterClassConstants.Domains.Good)]
         [TestCase(CharacterClassConstants.Domains.Healing)]
-        [TestCase(CharacterClassConstants.Domains.Knowledge,
-            SkillConstants.Knowledge + GroupConstants.All)]
+        [TestCase(CharacterClassConstants.Domains.Knowledge, SkillConstants.Knowledge + GroupConstants.All)]
         [TestCase(CharacterClassConstants.Domains.Law)]
         [TestCase(CharacterClassConstants.Domains.Luck)]
         [TestCase(CharacterClassConstants.Domains.Magic)]
-        [TestCase(CharacterClassConstants.Domains.Plant,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
+        [TestCase(CharacterClassConstants.Domains.Plant, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
         [TestCase(CharacterClassConstants.Domains.Protection)]
         [TestCase(CharacterClassConstants.Domains.Strength)]
         [TestCase(CharacterClassConstants.Domains.Sun)]
-        [TestCase(CharacterClassConstants.Domains.Travel,
-            SkillConstants.Survival)]
+        [TestCase(CharacterClassConstants.Domains.Travel, SkillConstants.Survival)]
         [TestCase(CharacterClassConstants.Domains.Trickery,
             SkillConstants.Bluff,
             SkillConstants.Disguise,
@@ -308,6 +304,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(CharacterClassConstants.Schools.Necromancy)]
         [TestCase(CharacterClassConstants.Schools.Transmutation)]
         [TestCase(RaceConstants.BaseRaces.Aasimar)]
+        [TestCase(RaceConstants.BaseRaces.AquaticElf, SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.Azer,
             SkillConstants.Appraise,
             SkillConstants.Climb,
@@ -462,11 +459,29 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Ride,
             SkillConstants.SenseMotive,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Kapoacinth,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
+            SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.Kobold)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling)]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk,
             SkillConstants.Balance,
             SkillConstants.Jump,
+            SkillConstants.Swim)]
+        [TestCase(RaceConstants.BaseRaces.Locathah,
+            SkillConstants.Craft,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
+            SkillConstants.Swim)]
+        [TestCase(RaceConstants.BaseRaces.Merfolk,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
+            SkillConstants.Swim)]
+        [TestCase(RaceConstants.BaseRaces.Merrow,
+            SkillConstants.Listen,
+            SkillConstants.Spot,
             SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer,
             SkillConstants.Bluff,
@@ -511,6 +526,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.MoveSilently,
             SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.RockGnome)]
+        [TestCase(RaceConstants.BaseRaces.Sahuagin,
+            SkillConstants.HandleAnimal,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Hunter,
+            SkillConstants.Ride,
+            SkillConstants.Spot,
+            SkillConstants.Survival,
+            SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.Satyr,
             SkillConstants.Bluff,
             SkillConstants.Hide,
@@ -525,6 +549,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Listen,
             SkillConstants.SenseMotive,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Scrag, SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.StoneGiant,
             SkillConstants.Climb,
             SkillConstants.Hide,
@@ -576,170 +601,109 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Foci.Profession.Adviser,
             SkillConstants.Diplomacy,
             SkillConstants.Knowledge)]
-        [TestCase(SkillConstants.Foci.Profession.Alchemist,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy)]
-        [TestCase(SkillConstants.Foci.Profession.AnimalGroomer,
-            SkillConstants.HandleAnimal)]
-        [TestCase(SkillConstants.Foci.Profession.AnimalTrainer,
-            SkillConstants.HandleAnimal)]
-        [TestCase(SkillConstants.Foci.Profession.Apothecary,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
-        [TestCase(SkillConstants.Foci.Profession.Appraiser,
-            SkillConstants.Appraise)]
-        [TestCase(SkillConstants.Foci.Profession.Architect,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.ArchitectureAndEngineering)]
-        [TestCase(SkillConstants.Foci.Profession.Armorer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Armorsmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Barrister,
-            SkillConstants.Diplomacy)]
-        [TestCase(SkillConstants.Foci.Profession.Blacksmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Blacksmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Bookbinder,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bookbinding)]
-        [TestCase(SkillConstants.Foci.Profession.Bowyer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Brazier,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brassmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Brewer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brewing)]
+        [TestCase(SkillConstants.Foci.Profession.Alchemist, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy)]
+        [TestCase(SkillConstants.Foci.Profession.AnimalGroomer, SkillConstants.HandleAnimal)]
+        [TestCase(SkillConstants.Foci.Profession.AnimalTrainer, SkillConstants.HandleAnimal)]
+        [TestCase(SkillConstants.Foci.Profession.Apothecary, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
+        [TestCase(SkillConstants.Foci.Profession.Appraiser, SkillConstants.Appraise)]
+        [TestCase(SkillConstants.Foci.Profession.Architect, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.ArchitectureAndEngineering)]
+        [TestCase(SkillConstants.Foci.Profession.Armorer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Armorsmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Barrister, SkillConstants.Diplomacy)]
+        [TestCase(SkillConstants.Foci.Profession.Blacksmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Blacksmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Bookbinder, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bookbinding)]
+        [TestCase(SkillConstants.Foci.Profession.Bowyer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Brazier, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brassmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Brewer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brewing)]
         [TestCase(SkillConstants.Foci.Profession.Butler,
             SkillConstants.Diplomacy,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.NobilityAndRoyalty)]
-        [TestCase(SkillConstants.Foci.Profession.Carpenter,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
-        [TestCase(SkillConstants.Foci.Profession.Cartographer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Mapmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Cartwright,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
-        [TestCase(SkillConstants.Foci.Profession.Chandler,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Candlemaking)]
+        [TestCase(SkillConstants.Foci.Profession.Carpenter, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
+        [TestCase(SkillConstants.Foci.Profession.Cartographer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Mapmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Cartwright, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
+        [TestCase(SkillConstants.Foci.Profession.Chandler, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Candlemaking)]
         [TestCase(SkillConstants.Foci.Profession.CityGuide,
             SkillConstants.Diplomacy,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Local)]
         [TestCase(SkillConstants.Foci.Profession.Clerk)]
-        [TestCase(SkillConstants.Foci.Profession.Cobbler,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shoemaking)]
-        [TestCase(SkillConstants.Foci.Profession.Coffinmaker,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
+        [TestCase(SkillConstants.Foci.Profession.Cobbler, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shoemaking)]
+        [TestCase(SkillConstants.Foci.Profession.Coffinmaker, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
         [TestCase(SkillConstants.Foci.Profession.Coiffeur)]
         [TestCase(SkillConstants.Foci.Profession.Cook)]
-        [TestCase(SkillConstants.Foci.Profession.Coppersmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Coppersmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Craftsman,
-            SkillConstants.Craft)]
+        [TestCase(SkillConstants.Foci.Profession.Coppersmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Coppersmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Craftsman, SkillConstants.Craft)]
         [TestCase(SkillConstants.Foci.Profession.Dowser,
             SkillConstants.Bluff,
             SkillConstants.Survival)]
-        [TestCase(SkillConstants.Foci.Profession.Dyer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Dyemaking)]
-        [TestCase(SkillConstants.Foci.Profession.Embalmer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy)]
-        [TestCase(SkillConstants.Foci.Profession.Engineer,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.ArchitectureAndEngineering)]
-        [TestCase(SkillConstants.Foci.Profession.Entertainer,
-            SkillConstants.Perform)]
-        [TestCase(SkillConstants.Foci.Profession.ExoticAnimalTrainer,
-            SkillConstants.HandleAnimal)]
-        [TestCase(SkillConstants.Foci.Profession.Farmer,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
-        [TestCase(SkillConstants.Foci.Profession.Fletcher,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Dyer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Dyemaking)]
+        [TestCase(SkillConstants.Foci.Profession.Embalmer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy)]
+        [TestCase(SkillConstants.Foci.Profession.Engineer, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.ArchitectureAndEngineering)]
+        [TestCase(SkillConstants.Foci.Profession.Entertainer, SkillConstants.Perform)]
+        [TestCase(SkillConstants.Foci.Profession.ExoticAnimalTrainer, SkillConstants.HandleAnimal)]
+        [TestCase(SkillConstants.Foci.Profession.Farmer, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]
+        [TestCase(SkillConstants.Foci.Profession.Fletcher, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking)]
         [TestCase(SkillConstants.Foci.Profession.Footman,
             SkillConstants.Diplomacy,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.NobilityAndRoyalty)]
-        [TestCase(SkillConstants.Foci.Profession.Gemcutter,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Gemcutting)]
-        [TestCase(SkillConstants.Foci.Profession.Goldsmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Goldsmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Gemcutter, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Gemcutting)]
+        [TestCase(SkillConstants.Foci.Profession.Goldsmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Goldsmithing)]
         [TestCase(SkillConstants.Foci.Profession.Governess,
             SkillConstants.Diplomacy,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.NobilityAndRoyalty)]
-        [TestCase(SkillConstants.Foci.Profession.Haberdasher,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hatmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Healer,
-            SkillConstants.Heal)]
-        [TestCase(SkillConstants.Foci.Profession.Horner,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hornworking)]
+        [TestCase(SkillConstants.Foci.Profession.Haberdasher, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hatmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Healer, SkillConstants.Heal)]
+        [TestCase(SkillConstants.Foci.Profession.Horner, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hornworking)]
+        [TestCase(SkillConstants.Foci.Profession.Hunter, SkillConstants.Survival)]
         [TestCase(SkillConstants.Foci.Profession.Interpreter)]
-        [TestCase(SkillConstants.Foci.Profession.Jeweler,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Jewelmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Jeweler, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Jewelmaking)]
         [TestCase(SkillConstants.Foci.Profession.Laborer)]
         [TestCase(SkillConstants.Foci.Profession.Launderer)]
-        [TestCase(SkillConstants.Foci.Profession.Limner,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting)]
-        [TestCase(SkillConstants.Foci.Profession.LocalCourier,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Local)]
-        [TestCase(SkillConstants.Foci.Profession.Locksmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Locksmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Maid,
-            SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.NobilityAndRoyalty)]
-        [TestCase(SkillConstants.Foci.Profession.Masseuse,
-            SkillConstants.Heal)]
+        [TestCase(SkillConstants.Foci.Profession.Limner, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting)]
+        [TestCase(SkillConstants.Foci.Profession.LocalCourier, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Local)]
+        [TestCase(SkillConstants.Foci.Profession.Locksmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Locksmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Maid, SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.NobilityAndRoyalty)]
+        [TestCase(SkillConstants.Foci.Profession.Masseuse, SkillConstants.Heal)]
         [TestCase(SkillConstants.Foci.Profession.Matchmaker,
             SkillConstants.Diplomacy,
             SkillConstants.SenseMotive)]
-        [TestCase(SkillConstants.Foci.Profession.Midwife,
-            SkillConstants.Heal)]
-        [TestCase(SkillConstants.Foci.Profession.Miller,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Milling)]
-        [TestCase(SkillConstants.Foci.Profession.Navigator,
-            SkillConstants.Survival)]
+        [TestCase(SkillConstants.Foci.Profession.Midwife, SkillConstants.Heal)]
+        [TestCase(SkillConstants.Foci.Profession.Miller, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Milling)]
+        [TestCase(SkillConstants.Foci.Profession.Navigator, SkillConstants.Survival)]
         [TestCase(SkillConstants.Foci.Profession.Nursemaid)]
         [TestCase(SkillConstants.Foci.Profession.OutOfTownCourier,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Local,
             SkillConstants.Ride)]
-        [TestCase(SkillConstants.Foci.Profession.Painter,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting)]
-        [TestCase(SkillConstants.Foci.Profession.Parchmentmaker,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Parchmentmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Pewterer,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Pewtermaking)]
+        [TestCase(SkillConstants.Foci.Profession.Painter, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting)]
+        [TestCase(SkillConstants.Foci.Profession.Parchmentmaker, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Parchmentmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Pewterer, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Pewtermaking)]
         [TestCase(SkillConstants.Foci.Profession.Polisher)]
         [TestCase(SkillConstants.Foci.Profession.Porter)]
-        [TestCase(SkillConstants.Foci.Profession.Potter,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Potterymaking)]
-        [TestCase(SkillConstants.Foci.Profession.Sage,
-            SkillConstants.Knowledge)]
-        [TestCase(SkillConstants.Foci.Profession.SailorCrewmember,
-            SkillConstants.Swim)]
+        [TestCase(SkillConstants.Foci.Profession.Potter, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Potterymaking)]
+        [TestCase(SkillConstants.Foci.Profession.Sage, SkillConstants.Knowledge)]
+        [TestCase(SkillConstants.Foci.Profession.SailorCrewmember, SkillConstants.Swim)]
         [TestCase(SkillConstants.Foci.Profession.SailorMate,
             SkillConstants.Intimidate,
             SkillConstants.Swim)]
         [TestCase(SkillConstants.Foci.Profession.Scribe)]
-        [TestCase(SkillConstants.Foci.Profession.Sculptor,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Sculpting)]
-        [TestCase(SkillConstants.Foci.Profession.Shepherd,
-            SkillConstants.HandleAnimal)]
-        [TestCase(SkillConstants.Foci.Profession.Shipwright,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shipmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Silversmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Silversmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Skinner,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Skinning)]
-        [TestCase(SkillConstants.Foci.Profession.Soapmaker,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Soapmaking)]
-        [TestCase(SkillConstants.Foci.Profession.Soothsayer,
-            SkillConstants.Bluff)]
-        [TestCase(SkillConstants.Foci.Profession.Tanner,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Tanning)]
-        [TestCase(SkillConstants.Foci.Profession.Teacher,
-            SkillConstants.Knowledge)]
+        [TestCase(SkillConstants.Foci.Profession.Sculptor, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Sculpting)]
+        [TestCase(SkillConstants.Foci.Profession.Shepherd, SkillConstants.HandleAnimal)]
+        [TestCase(SkillConstants.Foci.Profession.Shipwright, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shipmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Silversmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Silversmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Skinner, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Skinning)]
+        [TestCase(SkillConstants.Foci.Profession.Soapmaker, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Soapmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Soothsayer, SkillConstants.Bluff)]
+        [TestCase(SkillConstants.Foci.Profession.Tanner, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Tanning)]
+        [TestCase(SkillConstants.Foci.Profession.Teacher, SkillConstants.Knowledge)]
         [TestCase(SkillConstants.Foci.Profession.Teamster,
             SkillConstants.HandleAnimal,
             SkillConstants.Ride)]
         [TestCase(SkillConstants.Foci.Profession.Trader,
             SkillConstants.Appraise,
             SkillConstants.SenseMotive)]
-        [TestCase(SkillConstants.Foci.Profession.Valet,
-            SkillConstants.Diplomacy)]
-        [TestCase(SkillConstants.Foci.Profession.Vintner,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Winemaking)]
-        [TestCase(SkillConstants.Foci.Profession.Weaponsmith,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaponsmithing)]
-        [TestCase(SkillConstants.Foci.Profession.Weaver,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaving)]
-        [TestCase(SkillConstants.Foci.Profession.Wheelwright,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Wheelmaking)]
+        [TestCase(SkillConstants.Foci.Profession.Valet, SkillConstants.Diplomacy)]
+        [TestCase(SkillConstants.Foci.Profession.Vintner, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Winemaking)]
+        [TestCase(SkillConstants.Foci.Profession.Weaponsmith, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaponsmithing)]
+        [TestCase(SkillConstants.Foci.Profession.Weaver, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaving)]
+        [TestCase(SkillConstants.Foci.Profession.Wheelwright, SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Wheelmaking)]
         [TestCase(SkillConstants.Foci.Profession.WildernessGuide,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Local,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature)]

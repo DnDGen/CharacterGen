@@ -60,7 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.6.0.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.7.0.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -123,11 +123,16 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\TransmutationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AasimarFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\KapoacinthFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GargoyleFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GreenSlaadFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GraySlaadFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeathSlaadFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AquaticElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HoundArchonFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\LocathahFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MerfolkFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MerrowFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\RedSlaadFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\BlueSlaadFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\CloudGiantFeatDataTests.cs" />
@@ -138,10 +143,12 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\JanniFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\PixieFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\RakshasaFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\SahuaginFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\StormGiantFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\StoneGiantFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\ScorpionfolkFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\SatyrFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\ScragFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\TrollFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\YuanTiPurebloodFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\YuanTiHalfbloodFeatDataTests.cs" />
@@ -318,7 +325,6 @@
     <Compile Include="CharacterClasses\HasSpecialistFields\WarriorHasSpecialistFieldsTests.cs" />
     <Compile Include="CharacterClasses\HasSpecialistFields\WizardHasSpecialistFieldsTests.cs" />
     <Compile Include="Combats\SizeModifiersTests.cs" />
-    <Compile Include="Items\ArmorCheckPenaltiesTests.cs" />
     <Compile Include="Items\Powers\CrossPowersTests.cs" />
     <Compile Include="Items\Powers\Level22PowerTests.cs" />
     <Compile Include="Items\Powers\Level23PowerTests.cs" />
@@ -708,8 +714,13 @@
     <Compile Include="Races\AerialManeuverabilityTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AasimarAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AzerAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\KapoacinthAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GargoyleAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\AquaticElfAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HoundArchonAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\LocathahAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\MerfolkAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\MerrowAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\RedSlaadAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GreenSlaadAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GraySlaadAgesTests.cs" />
@@ -735,6 +746,7 @@
     <Compile Include="Races\BaseRaces\Ages\HarpyAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HalfOrcAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HighElfAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\SahuaginAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\StoneGiantAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\StormGiantAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\HillGiantAgesTests.cs" />
@@ -763,6 +775,7 @@
     <Compile Include="Races\BaseRaces\Ages\SvirfneblinAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TallfellowHalflingAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TieflingAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\ScragAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TrollAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\TroglodyteAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\WildElfAgesTests.cs" />
@@ -784,6 +797,7 @@
     <Compile Include="Races\BaseRaces\Ages\HumanAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Heights\MaleHeightsTests.cs" />
     <Compile Include="Races\AerialSpeedsTests.cs" />
+    <Compile Include="Races\BaseRaces\SwimSpeedsTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralAristocratBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralCommonerBaseRacesTests.cs" />
     <Compile Include="Races\BaseRaces\Neutral\NeutralAdeptBaseRacesTests.cs" />
@@ -800,7 +814,6 @@
     <Compile Include="CharacterClasses\SpecialistFieldQuantitiesTests.cs" />
     <Compile Include="CharacterClasses\SpecialistFieldsTests.cs" />
     <Compile Include="CollectionTests.cs" />
-    <Compile Include="Combats\ArmorBonusesTests.cs" />
     <Compile Include="Combats\ArmorClassModifiersTests.cs" />
     <Compile Include="Combats\ClassHitDiceTests.cs" />
     <Compile Include="Combats\MonsterHitDiceTests.cs" />
@@ -808,7 +821,6 @@
     <Compile Include="DataTests.cs" />
     <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Items\ItemGroupsTests.cs" />
-    <Compile Include="Items\MaxDexterityBonusTests.cs" />
     <Compile Include="Items\Powers\Level10PowerTests.cs" />
     <Compile Include="Items\Powers\Level11PowerTests.cs" />
     <Compile Include="Items\Powers\Level12PowerTests.cs" />

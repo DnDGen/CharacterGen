@@ -363,46 +363,6 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Cook)]
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Coppersmith,
             SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Coppersmithing)]
-        [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Craftsman,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Armorsmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Blacksmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bookbinding,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brassmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brewing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Candlemaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Cloth,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Coppersmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Dyemaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Gemcutting,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Glass,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Goldsmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hatmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hornworking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Jewelmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Leather,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Locksmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Mapmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Milling,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Parchmentmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Pewtermaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Potterymaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Sculpting,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shipmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shoemaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Silversmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Skinning,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Soapmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Stonemasonry,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Tanning,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Trapmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaponsmithing,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaving,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Wheelmaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Winemaking,
-            SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking)]
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Dowser,
             SkillConstants.Bluff,
             SkillConstants.Survival)]
@@ -444,6 +404,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Heal)]
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Horner,
             SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hornworking)]
+        [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Hunter,
+            SkillConstants.Survival)]
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Interpreter)]
         [TestCase(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Jeweler,
             SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Jewelmaking)]
@@ -561,6 +523,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         [TestCase(SkillConstants.Survival,
             SkillConstants.Knowledge + "/" + SkillConstants.Foci.Knowledge.Nature,
             SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Dowser,
+            SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Hunter,
             SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Navigator)]
         [TestCase(SkillConstants.Swim,
             SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.SailorCrewmember,
@@ -576,6 +539,55 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
         public void SynergySkills(string skill, params string[] synergies)
         {
             base.DistinctCollection(skill, synergies);
+        }
+
+        [Test]
+        public void CraftsmanSkillSynergy()
+        {
+            var skills = new[]
+            {
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Alchemy,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Armorsmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Blacksmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bookbinding,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Bowmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brassmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Brewing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Candlemaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Cloth,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Coppersmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Dyemaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Gemcutting,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Glass,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Goldsmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hatmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Hornworking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Jewelmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Leather,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Locksmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Mapmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Milling,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Painting,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Parchmentmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Pewtermaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Potterymaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Sculpting,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shipmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Shoemaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Silversmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Skinning,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Soapmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Stonemasonry,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Tanning,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Trapmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaponsmithing,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Weaving,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Wheelmaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Winemaking,
+                SkillConstants.Craft + "/" + SkillConstants.Foci.Craft.Woodworking,
+            };
+
+            DistinctCollection(SkillConstants.Profession + "/" + SkillConstants.Foci.Profession.Craftsman, skills);
         }
     }
 }

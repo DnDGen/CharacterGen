@@ -6,6 +6,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
 using RollGen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -65,6 +66,7 @@ namespace CharacterGen.Domain.Generators.Races
             race.HasWings = DetermineIfRaceHasWings(race);
             race.LandSpeed = DetermineLandSpeed(race);
             race.AerialSpeed = DetermineAerialSpeed(race);
+            race.SwimSpeed = DetermineSwimSpeed(race);
             race.ChallengeRating = DetermineChallengeRating(race);
             race.MaximumAge = DetermineMaximumAge(race);
 
@@ -92,40 +94,39 @@ namespace CharacterGen.Domain.Generators.Races
 
         private string GetHeightDescription(Race race, int heightModifier)
         {
-            var roll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.HeightRolls, race.BaseRace).Single();
-            var percentile = GetPercentile(roll, heightModifier);
-
-            if (percentile < 1d / 3)
-                return "Short";
-
-            if (percentile > 2d / 3)
-                return "Tall";
-
-            return "Average";
+            return GetDescription(TableNameConstants.Set.Collection.HeightRolls, race, heightModifier, "Short", "Average", "Tall");
         }
 
         private string GetWeightDescription(Race race, int weightModifier)
         {
-            var roll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, race.BaseRace).Single();
-            var percentile = GetPercentile(roll, weightModifier);
-
-            if (percentile < 1d / 3)
-                return "Light";
-
-            if (percentile > 2d / 3)
-                return "Heavy";
-
-            return "Average";
+            return GetDescription(TableNameConstants.Set.Collection.WeightRolls, race, weightModifier, "Light", "Average", "Heavy");
         }
 
-        private double GetPercentile(string roll, int modifier)
+        private string GetDescription(string tableName, Race race, int modifier, params string[] descriptions)
+        {
+            var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            var percentile = GetPercentile(roll, modifier);
+
+            var rawIndex = percentile * descriptions.Length;
+            rawIndex = Math.Floor(rawIndex);
+
+            var index = Convert.ToInt32(rawIndex);
+            index = Math.Min(index, descriptions.Count() - 1);
+
+            return descriptions[index];
+        }
+
+        private double GetPercentile(string roll, double modifier)
         {
             var minimumRoll = dice.Roll(roll).AsPotentialMinimum();
             var maximumRoll = dice.Roll(roll).AsPotentialMaximum();
             var totalRange = maximumRoll - minimumRoll;
             var range = modifier - minimumRoll;
 
-            return (double)range / totalRange;
+            if (totalRange > 0)
+                return range / totalRange;
+
+            return .5;
         }
 
         private int DetermineChallengeRating(Race race)
@@ -231,6 +232,14 @@ namespace CharacterGen.Domain.Generators.Races
         private bool SpeedIsPreset(int speed)
         {
             return speed > 0 && speed % 10 == 0;
+        }
+
+        private Measurement DetermineSwimSpeed(Race race)
+        {
+            var measurement = new Measurement("feet per round");
+            measurement.Value = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SwimSpeeds, race.BaseRace);
+
+            return measurement;
         }
 
         private Measurement DetermineAge(Race race, CharacterClass characterClass)

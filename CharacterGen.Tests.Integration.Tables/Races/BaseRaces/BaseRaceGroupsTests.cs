@@ -17,9 +17,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [Test]
         public override void CollectionNames()
         {
+            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+
             var names = new[]
             {
                 GroupConstants.All,
+                GroupConstants.Aquatic,
                 GroupConstants.HasWings,
                 GroupConstants.Monsters,
                 GroupConstants.Standard,
@@ -30,20 +33,25 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.Sizes.Medium,
                 RaceConstants.Sizes.Small,
                 RaceConstants.Sizes.Tiny,
-                AlignmentConstants.ChaoticEvil,
-                AlignmentConstants.ChaoticGood,
-                AlignmentConstants.ChaoticNeutral,
-                AlignmentConstants.LawfulEvil,
-                AlignmentConstants.LawfulGood,
-                AlignmentConstants.LawfulNeutral,
-                AlignmentConstants.NeutralEvil,
-                AlignmentConstants.NeutralGood,
-                AlignmentConstants.TrueNeutral,
             };
+
+            names = names.Union(alignmentGroups[GroupConstants.All]).ToArray();
 
             AssertCollectionNames(names);
         }
 
+        [TestCase(GroupConstants.Aquatic,
+            RaceConstants.BaseRaces.AquaticElf,
+            RaceConstants.BaseRaces.Kapoacinth,
+            RaceConstants.BaseRaces.Locathah,
+            RaceConstants.BaseRaces.Merfolk,
+            RaceConstants.BaseRaces.Merrow,
+            RaceConstants.BaseRaces.Sahuagin,
+            RaceConstants.BaseRaces.Scrag)]
+        [TestCase(GroupConstants.HasWings,
+            RaceConstants.BaseRaces.Gargoyle,
+            RaceConstants.BaseRaces.Harpy,
+            RaceConstants.BaseRaces.Pixie)]
         [TestCase(GroupConstants.Standard,
             RaceConstants.BaseRaces.HalfElf,
             RaceConstants.BaseRaces.HalfOrc,
@@ -64,49 +72,16 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             RaceConstants.BaseRaces.FrostGiant,
             RaceConstants.BaseRaces.GreenSlaad,
             RaceConstants.BaseRaces.HillGiant,
+            RaceConstants.BaseRaces.Merrow,
             RaceConstants.BaseRaces.Minotaur,
             RaceConstants.BaseRaces.Ogre,
             RaceConstants.BaseRaces.OgreMage,
             RaceConstants.BaseRaces.RedSlaad,
             RaceConstants.BaseRaces.Scorpionfolk,
+            RaceConstants.BaseRaces.Scrag,
             RaceConstants.BaseRaces.StoneGiant,
             RaceConstants.BaseRaces.Troll,
             RaceConstants.BaseRaces.YuanTiAbomination)]
-        [TestCase(RaceConstants.Sizes.Medium,
-            RaceConstants.BaseRaces.Aasimar,
-            RaceConstants.BaseRaces.Azer,
-            RaceConstants.BaseRaces.Bugbear,
-            RaceConstants.BaseRaces.DeathSlaad,
-            RaceConstants.BaseRaces.DeepDwarf,
-            RaceConstants.BaseRaces.Doppelganger,
-            RaceConstants.BaseRaces.Drow,
-            RaceConstants.BaseRaces.DuergarDwarf,
-            RaceConstants.BaseRaces.Gargoyle,
-            RaceConstants.BaseRaces.Gnoll,
-            RaceConstants.BaseRaces.GrayElf,
-            RaceConstants.BaseRaces.GraySlaad,
-            RaceConstants.BaseRaces.Grimlock,
-            RaceConstants.BaseRaces.HalfElf,
-            RaceConstants.BaseRaces.HalfOrc,
-            RaceConstants.BaseRaces.Harpy,
-            RaceConstants.BaseRaces.HighElf,
-            RaceConstants.BaseRaces.HillDwarf,
-            RaceConstants.BaseRaces.Hobgoblin,
-            RaceConstants.BaseRaces.HoundArchon,
-            RaceConstants.BaseRaces.Human,
-            RaceConstants.BaseRaces.Janni,
-            RaceConstants.BaseRaces.Lizardfolk,
-            RaceConstants.BaseRaces.MindFlayer,
-            RaceConstants.BaseRaces.MountainDwarf,
-            RaceConstants.BaseRaces.Orc,
-            RaceConstants.BaseRaces.Rakshasa,
-            RaceConstants.BaseRaces.Satyr,
-            RaceConstants.BaseRaces.Tiefling,
-            RaceConstants.BaseRaces.Troglodyte,
-            RaceConstants.BaseRaces.WildElf,
-            RaceConstants.BaseRaces.WoodElf,
-            RaceConstants.BaseRaces.YuanTiHalfblood,
-            RaceConstants.BaseRaces.YuanTiPureblood)]
         [TestCase(RaceConstants.Sizes.Small,
             RaceConstants.BaseRaces.DeepHalfling,
             RaceConstants.BaseRaces.Derro,
@@ -119,10 +94,6 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             RaceConstants.BaseRaces.Svirfneblin,
             RaceConstants.BaseRaces.TallfellowHalfling)]
         [TestCase(RaceConstants.Sizes.Tiny)]
-        [TestCase(GroupConstants.HasWings,
-            RaceConstants.BaseRaces.Gargoyle,
-            RaceConstants.BaseRaces.Harpy,
-            RaceConstants.BaseRaces.Pixie)]
         public void BaseRaceGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
@@ -133,6 +104,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         {
             var baseRaces = new[]
             {
+                RaceConstants.BaseRaces.AquaticElf,
                 RaceConstants.BaseRaces.Azer,
                 RaceConstants.BaseRaces.BlueSlaad,
                 RaceConstants.BaseRaces.Bugbear,
@@ -154,8 +126,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Hobgoblin,
                 RaceConstants.BaseRaces.HoundArchon,
                 RaceConstants.BaseRaces.Janni,
+                RaceConstants.BaseRaces.Kapoacinth,
                 RaceConstants.BaseRaces.Kobold,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
+                RaceConstants.BaseRaces.Merrow,
                 RaceConstants.BaseRaces.MindFlayer,
                 RaceConstants.BaseRaces.Minotaur,
                 RaceConstants.BaseRaces.Ogre,
@@ -164,8 +140,10 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Pixie,
                 RaceConstants.BaseRaces.Rakshasa,
                 RaceConstants.BaseRaces.RedSlaad,
+                RaceConstants.BaseRaces.Sahuagin,
                 RaceConstants.BaseRaces.Satyr,
                 RaceConstants.BaseRaces.Scorpionfolk,
+                RaceConstants.BaseRaces.Scrag,
                 RaceConstants.BaseRaces.StoneGiant,
                 RaceConstants.BaseRaces.StormGiant,
                 RaceConstants.BaseRaces.Troglodyte,
@@ -184,6 +162,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             var baseRaces = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.AquaticElf,
                 RaceConstants.BaseRaces.Azer,
                 RaceConstants.BaseRaces.BlueSlaad,
                 RaceConstants.BaseRaces.Bugbear,
@@ -216,9 +195,13 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.HoundArchon,
                 RaceConstants.BaseRaces.Human,
                 RaceConstants.BaseRaces.Janni,
+                RaceConstants.BaseRaces.Kapoacinth,
                 RaceConstants.BaseRaces.Kobold,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
+                RaceConstants.BaseRaces.Merrow,
                 RaceConstants.BaseRaces.MindFlayer,
                 RaceConstants.BaseRaces.Minotaur,
                 RaceConstants.BaseRaces.MountainDwarf,
@@ -229,8 +212,10 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Rakshasa,
                 RaceConstants.BaseRaces.RedSlaad,
                 RaceConstants.BaseRaces.RockGnome,
+                RaceConstants.BaseRaces.Sahuagin,
                 RaceConstants.BaseRaces.Satyr,
                 RaceConstants.BaseRaces.Scorpionfolk,
+                RaceConstants.BaseRaces.Scrag,
                 RaceConstants.BaseRaces.StoneGiant,
                 RaceConstants.BaseRaces.StormGiant,
                 RaceConstants.BaseRaces.Svirfneblin,
@@ -246,6 +231,55 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             };
 
             base.DistinctCollection(GroupConstants.All, baseRaces);
+        }
+
+        [Test]
+        public void MediumBaseRaces()
+        {
+            var baseRaces = new[]
+            {
+                RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.AquaticElf,
+                RaceConstants.BaseRaces.Azer,
+                RaceConstants.BaseRaces.Bugbear,
+                RaceConstants.BaseRaces.DeathSlaad,
+                RaceConstants.BaseRaces.DeepDwarf,
+                RaceConstants.BaseRaces.Doppelganger,
+                RaceConstants.BaseRaces.Drow,
+                RaceConstants.BaseRaces.DuergarDwarf,
+                RaceConstants.BaseRaces.Gargoyle,
+                RaceConstants.BaseRaces.Gnoll,
+                RaceConstants.BaseRaces.GrayElf,
+                RaceConstants.BaseRaces.GraySlaad,
+                RaceConstants.BaseRaces.Grimlock,
+                RaceConstants.BaseRaces.HalfElf,
+                RaceConstants.BaseRaces.HalfOrc,
+                RaceConstants.BaseRaces.Harpy,
+                RaceConstants.BaseRaces.HighElf,
+                RaceConstants.BaseRaces.HillDwarf,
+                RaceConstants.BaseRaces.Hobgoblin,
+                RaceConstants.BaseRaces.HoundArchon,
+                RaceConstants.BaseRaces.Human,
+                RaceConstants.BaseRaces.Janni,
+                RaceConstants.BaseRaces.Kapoacinth,
+                RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
+                RaceConstants.BaseRaces.MindFlayer,
+                RaceConstants.BaseRaces.MountainDwarf,
+                RaceConstants.BaseRaces.Orc,
+                RaceConstants.BaseRaces.Rakshasa,
+                RaceConstants.BaseRaces.Sahuagin,
+                RaceConstants.BaseRaces.Satyr,
+                RaceConstants.BaseRaces.Tiefling,
+                RaceConstants.BaseRaces.Troglodyte,
+                RaceConstants.BaseRaces.WildElf,
+                RaceConstants.BaseRaces.WoodElf,
+                RaceConstants.BaseRaces.YuanTiHalfblood,
+                RaceConstants.BaseRaces.YuanTiPureblood,
+            };
+
+            base.DistinctCollection(RaceConstants.Sizes.Medium, baseRaces);
         }
 
         [Test]
@@ -279,6 +313,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             var baseRaces = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.AquaticElf,
                 RaceConstants.BaseRaces.Centaur,
                 RaceConstants.BaseRaces.CloudGiant,
                 RaceConstants.BaseRaces.DeepDwarf,
@@ -295,6 +330,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Janni,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
                 RaceConstants.BaseRaces.MountainDwarf,
                 RaceConstants.BaseRaces.Pixie,
                 RaceConstants.BaseRaces.RockGnome,
@@ -315,6 +352,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             var baseRaces = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.AquaticElf,
                 RaceConstants.BaseRaces.BlueSlaad,
                 RaceConstants.BaseRaces.Centaur,
                 RaceConstants.BaseRaces.CloudGiant,
@@ -362,9 +400,12 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Kobold,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
                 RaceConstants.BaseRaces.MindFlayer,
                 RaceConstants.BaseRaces.MountainDwarf,
                 RaceConstants.BaseRaces.OgreMage,
+                RaceConstants.BaseRaces.Sahuagin,
                 RaceConstants.BaseRaces.Scorpionfolk,
                 RaceConstants.BaseRaces.StoneGiant,
                 RaceConstants.BaseRaces.Svirfneblin,
@@ -399,6 +440,8 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Janni,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
                 RaceConstants.BaseRaces.RedSlaad,
                 RaceConstants.BaseRaces.RockGnome,
                 RaceConstants.BaseRaces.Satyr,
@@ -418,6 +461,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
             var baseRaces = new[]
             {
                 RaceConstants.BaseRaces.Aasimar,
+                RaceConstants.BaseRaces.AquaticElf,
                 RaceConstants.BaseRaces.BlueSlaad,
                 RaceConstants.BaseRaces.Bugbear,
                 RaceConstants.BaseRaces.DeathSlaad,
@@ -438,13 +482,18 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.HillGiant,
                 RaceConstants.BaseRaces.Human,
                 RaceConstants.BaseRaces.Janni,
+                RaceConstants.BaseRaces.Kapoacinth,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
+                RaceConstants.BaseRaces.Merrow,
                 RaceConstants.BaseRaces.Minotaur,
                 RaceConstants.BaseRaces.Ogre,
                 RaceConstants.BaseRaces.Orc,
                 RaceConstants.BaseRaces.RedSlaad,
                 RaceConstants.BaseRaces.Satyr,
+                RaceConstants.BaseRaces.Scrag,
                 RaceConstants.BaseRaces.StoneGiant,
                 RaceConstants.BaseRaces.StormGiant,
                 RaceConstants.BaseRaces.Svirfneblin,
@@ -487,6 +536,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.Orc,
                 RaceConstants.BaseRaces.Rakshasa,
+                RaceConstants.BaseRaces.Sahuagin,
                 RaceConstants.BaseRaces.Scorpionfolk,
                 RaceConstants.BaseRaces.Tiefling,
             };
@@ -521,15 +571,21 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Hobgoblin,
                 RaceConstants.BaseRaces.Human,
                 RaceConstants.BaseRaces.Janni,
+                RaceConstants.BaseRaces.Kapoacinth,
                 RaceConstants.BaseRaces.Kobold,
                 RaceConstants.BaseRaces.LightfootHalfling,
                 RaceConstants.BaseRaces.Lizardfolk,
+                RaceConstants.BaseRaces.Locathah,
+                RaceConstants.BaseRaces.Merfolk,
+                RaceConstants.BaseRaces.Merrow,
                 RaceConstants.BaseRaces.MindFlayer,
                 RaceConstants.BaseRaces.Minotaur,
                 RaceConstants.BaseRaces.Ogre,
                 RaceConstants.BaseRaces.OgreMage,
                 RaceConstants.BaseRaces.Orc,
+                RaceConstants.BaseRaces.Sahuagin,
                 RaceConstants.BaseRaces.Scorpionfolk,
+                RaceConstants.BaseRaces.Scrag,
                 RaceConstants.BaseRaces.StoneGiant,
                 RaceConstants.BaseRaces.Svirfneblin,
                 RaceConstants.BaseRaces.TallfellowHalfling,
@@ -570,11 +626,14 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Harpy,
                 RaceConstants.BaseRaces.HillGiant,
                 RaceConstants.BaseRaces.Human,
+                RaceConstants.BaseRaces.Kapoacinth,
+                RaceConstants.BaseRaces.Merrow,
                 RaceConstants.BaseRaces.Minotaur,
                 RaceConstants.BaseRaces.Ogre,
                 RaceConstants.BaseRaces.Orc,
                 RaceConstants.BaseRaces.RedSlaad,
                 RaceConstants.BaseRaces.Satyr,
+                RaceConstants.BaseRaces.Scrag,
                 RaceConstants.BaseRaces.StormGiant,
                 RaceConstants.BaseRaces.Tiefling,
                 RaceConstants.BaseRaces.Troglodyte,
@@ -590,24 +649,14 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [Test]
         public void AllBaseRacesHaveFullAlignmentGroup()
         {
-            var fullAlignments = new[]
-            {
-                AlignmentConstants.ChaoticEvil,
-                AlignmentConstants.ChaoticNeutral,
-                AlignmentConstants.ChaoticGood,
-                AlignmentConstants.LawfulEvil,
-                AlignmentConstants.LawfulNeutral,
-                AlignmentConstants.LawfulGood,
-                AlignmentConstants.NeutralEvil,
-                AlignmentConstants.TrueNeutral,
-                AlignmentConstants.NeutralGood,
-            };
-
+            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
             var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var baseRaces = baseRaceGroups[GroupConstants.All];
-            var alignmentBaseRaces = baseRaceGroups.Where(kvp => fullAlignments.Contains(kvp.Key)).SelectMany(kvp => kvp.Value).Distinct();
+            var alignmentBaseRaces = baseRaceGroups
+                .Where(kvp => alignmentGroups[GroupConstants.All].Contains(kvp.Key)) //Get alignment-key base race groups
+                .SelectMany(kvp => kvp.Value) //get base races in those groups
+                .Distinct();
 
-            AssertCollection(alignmentBaseRaces, baseRaces);
+            AssertCollection(alignmentBaseRaces, baseRaceGroups[GroupConstants.All]);
         }
     }
 }

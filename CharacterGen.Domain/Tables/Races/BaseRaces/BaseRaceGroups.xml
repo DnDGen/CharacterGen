@@ -4,6 +4,7 @@
   <object>
     <name>All</name>
     <item>Aasimar</item>
+    <item>Aquatic Elf</item>
     <item>Azer</item>
     <item>Blue Slaad</item>
     <item>Bugbear</item>
@@ -36,9 +37,13 @@
     <item>Hound Archon</item>
     <item>Human</item>
     <item>Janni</item>
+    <item>Kapoacinth</item>
     <item>Kobold</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
+    <item>Merrow</item>
     <item>Mind Flayer</item>
     <item>Minotaur</item>
     <item>Mountain Dwarf</item>
@@ -49,8 +54,10 @@
     <item>Rakshasa</item>
     <item>Red Slaad</item>
     <item>Rock Gnome</item>
+    <item>Sahuagin</item>
     <item>Satyr</item>
     <item>Scorpionfolk</item>
+    <item>Scrag</item>
     <item>Stone Giant</item>
     <item>Storm Giant</item>
     <item>Svirfneblin</item>
@@ -63,6 +70,16 @@
     <item>Yuan-ti Abomination</item>
     <item>Yuan-ti Halfblood</item>
     <item>Yuan-ti Pureblood</item>
+  </object>
+  <object>
+    <name>Aquatic</name>
+    <item>Aquatic Elf</item>
+    <item>Kapoacinth</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
+    <item>Merrow</item>
+    <item>Sahuagin</item>
+    <item>Scrag</item>
   </object>
   <object>
     <name>Has Wings</name>
@@ -94,15 +111,21 @@
     <item>Hobgoblin</item>
     <item>Human</item>
     <item>Janni</item>
+    <item>Kapoacinth</item>
     <item>Kobold</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
+    <item>Merrow</item>
     <item>Mind Flayer</item>
     <item>Minotaur</item>
     <item>Ogre</item>
     <item>Ogre Mage</item>
     <item>Orc</item>
+    <item>Sahuagin</item>
     <item>Scorpionfolk</item>
+    <item>Scrag</item>
     <item>Stone Giant</item>
     <item>Svirfneblin</item>
     <item>Tallfellow Halfling</item>
@@ -135,6 +158,8 @@
     <item>Janni</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
     <item>Red Slaad</item>
     <item>Rock Gnome</item>
     <item>Satyr</item>
@@ -147,6 +172,7 @@
   <object>
     <name>Neutral Good</name>
     <item>Aasimar</item>
+    <item>Aquatic Elf</item>
     <item>Centaur</item>
     <item>Cloud Giant</item>
     <item>Deep Dwarf</item>
@@ -163,6 +189,8 @@
     <item>Janni</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
     <item>Mountain Dwarf</item>
     <item>Pixie</item>
     <item>Rock Gnome</item>
@@ -195,6 +223,7 @@
     <item>Ogre Mage</item>
     <item>Orc</item>
     <item>Rakshasa</item>
+    <item>Sahuagin</item>
     <item>Scorpionfolk</item>
     <item>Tiefling</item>
   </object>
@@ -216,9 +245,12 @@
     <item>Kobold</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
     <item>Mind Flayer</item>
     <item>Mountain Dwarf</item>
     <item>Ogre Mage</item>
+    <item>Sahuagin</item>
     <item>Scorpionfolk</item>
     <item>Stone Giant</item>
     <item>Svirfneblin</item>
@@ -265,11 +297,14 @@
     <item>Harpy</item>
     <item>Hill Giant</item>
     <item>Human</item>
+    <item>Kapoacinth</item>
+    <item>Merrow</item>
     <item>Minotaur</item>
     <item>Ogre</item>
     <item>Orc</item>
     <item>Red Slaad</item>
     <item>Satyr</item>
+    <item>Scrag</item>
     <item>Storm Giant</item>
     <item>Tiefling</item>
     <item>Troglodyte</item>
@@ -281,6 +316,7 @@
   <object>
     <name>Chaotic Neutral</name>
     <item>Aasimar</item>
+    <item>Aquatic Elf</item>
     <item>Blue Slaad</item>
     <item>Bugbear</item>
     <item>Death Slaad</item>
@@ -301,13 +337,18 @@
     <item>Hill Giant</item>
     <item>Human</item>
     <item>Janni</item>
+    <item>Kapoacinth</item>
     <item>Lightfoot Halfling</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
+    <item>Merrow</item>
     <item>Minotaur</item>
     <item>Ogre</item>
     <item>Orc</item>
     <item>Red Slaad</item>
     <item>Satyr</item>
+    <item>Scrag</item>
     <item>Stone Giant</item>
     <item>Storm Giant</item>
     <item>Svirfneblin</item>
@@ -324,6 +365,7 @@
   <object>
     <name>Chaotic Good</name>
     <item>Aasimar</item>
+    <item>Aquatic Elf</item>
     <item>Blue Slaad</item>
     <item>Centaur</item>
     <item>Cloud Giant</item>
@@ -375,11 +417,13 @@
     <item>Frost Giant</item>
     <item>Green Slaad</item>
     <item>Hill Giant</item>
+    <item>Merrow</item>
     <item>Minotaur</item>
     <item>Ogre</item>
     <item>Ogre Mage</item>
     <item>Red Slaad</item>
     <item>Scorpionfolk</item>
+    <item>Scrag</item>
     <item>Stone Giant</item>
     <item>Troll</item>
     <item>Yuan-ti Abomination</item>
@@ -387,6 +431,7 @@
   <object>
     <name>Medium</name>
     <item>Aasimar</item>
+    <item>Aquatic Elf</item>
     <item>Azer</item>
     <item>Bugbear</item>
     <item>Death Slaad</item>
@@ -408,11 +453,15 @@
     <item>Hound Archon</item>
     <item>Human</item>
     <item>Janni</item>
+    <item>Kapoacinth</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
     <item>Mind Flayer</item>
     <item>Mountain Dwarf</item>
     <item>Orc</item>
     <item>Rakshasa</item>
+    <item>Sahuagin</item>
     <item>Satyr</item>
     <item>Tiefling</item>
     <item>Troglodyte</item>
@@ -440,6 +489,7 @@
   <object>
     <name>Monsters</name>
     <item>Azer</item>
+    <item>Aquatic Elf</item>
     <item>Blue Slaad</item>
     <item>Bugbear</item>
     <item>Centaur</item>
@@ -460,8 +510,12 @@
     <item>Hobgoblin</item>
     <item>Hound Archon</item>
     <item>Janni</item>
+    <item>Kapoacinth</item>
     <item>Kobold</item>
     <item>Lizardfolk</item>
+    <item>Locathah</item>
+    <item>Merfolk</item>
+    <item>Merrow</item>
     <item>Mind Flayer</item>
     <item>Minotaur</item>
     <item>Ogre</item>
@@ -470,8 +524,10 @@
     <item>Pixie</item>
     <item>Rakshasa</item>
     <item>Red Slaad</item>
+    <item>Sahuagin</item>
     <item>Satyr</item>
     <item>Scorpionfolk</item>
+    <item>Scrag</item>
     <item>Stone Giant</item>
     <item>Storm Giant</item>
     <item>Troglodyte</item>

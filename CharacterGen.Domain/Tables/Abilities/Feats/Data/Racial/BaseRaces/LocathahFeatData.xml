@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Simple Weapon ProficiencyLongspear</name>
+    <item>Simple Weapon Proficiency</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Longspear</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Simple Weapon ProficiencyLight crossbow</name>
+    <item>Simple Weapon Proficiency</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Light crossbow</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Weapon FocusLongspear</name>
+    <item>Weapon Focus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Longspear</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Natural Armor</name>
+    <item>Natural Armor</item>
+    <item></item>
+    <item>0</item>
+    <item>3</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Skill BonusSwim</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>8</item>
+    <item>Swim</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Skill BonusSwimTake 10</name>
+    <item>Skill Bonus</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Swim (can always take 10)</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>RunSwim</name>
+    <item>Run</item>
+    <item></item>
+    <item>0</item>
+    <item>0</item>
+    <item>Can use while swimming in a straight line</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+</items>

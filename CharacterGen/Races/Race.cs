@@ -17,6 +17,7 @@ namespace CharacterGen.Races
         public Measurement Weight { get; set; }
         public Measurement LandSpeed { get; set; }
         public Measurement AerialSpeed { get; set; }
+        public Measurement SwimSpeed { get; set; }
 
         public string Gender
         {
@@ -53,6 +54,7 @@ namespace CharacterGen.Races
             Weight = new Measurement("Pounds");
             LandSpeed = new Measurement("feet per round");
             AerialSpeed = new Measurement("feet per round");
+            SwimSpeed = new Measurement("feet per round");
         }
     }
 }

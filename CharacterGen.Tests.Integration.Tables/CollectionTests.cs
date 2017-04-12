@@ -30,6 +30,11 @@ namespace CharacterGen.Tests.Integration.Tables
             AssertCollection(table.Keys, names);
         }
 
+        protected IEnumerable<string> GetCollection(string name)
+        {
+            return table[name];
+        }
+
         private void AssertUnique(IEnumerable<string> collection)
         {
             var duplicateItems = collection.Where(s => collection.Count(c => c == s) > 1);

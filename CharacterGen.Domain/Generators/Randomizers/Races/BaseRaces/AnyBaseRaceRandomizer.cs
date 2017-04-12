@@ -8,7 +8,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
         public AnyBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, Generator generator, ICollectionsSelector collectionSelector)
             : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionSelector) { }
 
-        protected override bool BaseRaceIsAllowed(string baseRace)
+        protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)
         {
             return true;
         }

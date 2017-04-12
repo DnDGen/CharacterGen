@@ -30,9 +30,9 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
         [TestCase(RaceConstants.Ages.MiddleAge, 100)]
         [TestCase(RaceConstants.Ages.Old, 150)]
         [TestCase(RaceConstants.Ages.Venerable, 200)]
-        public override void Adjustment(string name, int adjustment)
+        public void Age(string ageDescription, int age)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(ageDescription, age);
         }
     }
 }

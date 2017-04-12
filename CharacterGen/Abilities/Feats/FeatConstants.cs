@@ -7,6 +7,7 @@
         public const string Agile = "Agile";
         public const string Alertness = "Alertness";
         public const string AlternateForm = "Alternate Form";
+        public const string Amphibious = "Amphibious";
         public const string AnimalAffinity = "Animal Affinity";
         public const string ArmorBonus = "Armor Bonus";
         public const string Athletic = "Athletic";
@@ -20,8 +21,10 @@
         public const string BardicKnowledge = "Bardic Knowledge";
         public const string BardicMusic = "Bardic Music";
         public const string BlindFight = "Blind-Fight";
+        public const string Blindsense = "Blindsense";
         public const string Blindsight = "Blindsight";
         public const string BloodDrain = "Blood Drain";
+        public const string BloodFrenzy = "Blood Frenzy";
         public const string Camouflage = "Camouflage";
         public const string CaptivatingSong = "Captivating Song";
         public const string CastSpellBonus = "Cast Spell Bonus";
@@ -83,9 +86,11 @@
         public const string Flight = "Flight";
         public const string FlurryOfBlows = "Flurry of Blows";
         public const string Freeze = "Freeze";
+        public const string FreshwaterSensitivity = "Freshwater Sensitivity";
         public const string FrightfulMoan = "Frightful Moan";
         public const string GaseousForm = "Gaseous Form";
         public const string GhostSpecialAttack = "Ghost Special Attack";
+        public const string Gills = "Gills";
         public const string GoodFortune = "Good Fortune";
         public const string GreatCleave = "Great Cleave";
         public const string GreaterFlurry = "Greater Flurry";
@@ -221,8 +226,9 @@
         public const string SnatchArrows = "Snatch Arrows";
         public const string SneakAttack = "Sneak Attack";
         public const string SongOfFreedom = "Song of Freedom";
-        public const string SpellLikeAbility = "Spell-Like Ability";
+        public const string SpeakWithSharks = "Speak with Sharks";
         public const string SpellFocus = "Spell Focus";
+        public const string SpellLikeAbility = "Spell-Like Ability";
         public const string SpellMastery = "Spell Mastery";
         public const string SpellPenetration = "Spell Penetration";
         public const string SpellResistance = "Spell Resistance";
@@ -239,6 +245,7 @@
         public const string StunningCroak = "Stunning Croak";
         public const string StunningFist = "Stunning Fist";
         public const string Suggestion = "Suggestion";
+        public const string SuperiorLowLightVision = "Superior Low-Light Vision";
         public const string SupernaturalStrength = "Supernatural Strength";
         public const string SummonSlaad = "Summon Slaad";
         public const string SwiftTracker = "Swift Tracker";
@@ -265,6 +272,7 @@
         public const string VulnerabilityToSunlight = "Vulnerability to Sunlight";
         public const string VulnerabilityToEffect = "Vulnerability to Effect";
         public const string WaterBreathing = "Water Breathing";
+        public const string WaterDependent = "Water Dependent";
         public const string WeaponFamiliarity = "Weapon Familiarity";
         public const string WeaponFinesse = "Weapon Finesse";
         public const string WeaponFocus = "Weapon Focus";
