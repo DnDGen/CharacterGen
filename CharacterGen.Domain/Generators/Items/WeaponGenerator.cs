@@ -75,7 +75,7 @@ namespace CharacterGen.Domain.Generators.Items
 
         private bool WeaponIsAmmunition(Weapon weapon)
         {
-            return weapon.Attributes.Contains(AttributeConstants.Ammunition);
+            return weapon.Attributes.Contains(AttributeConstants.Ammunition) && !weapon.Attributes.Contains(AttributeConstants.Thrown);
         }
 
         public Weapon GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)

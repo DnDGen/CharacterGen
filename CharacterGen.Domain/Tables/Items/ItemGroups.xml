@@ -2,29 +2,6 @@
 
 <items>
   <object>
-    <name>Arrow</name>
-    <item>Longbow</item>
-    <item>Shortbow</item>
-    <item>Composite longbow</item>
-    <item>Composite (+0) longbow</item>
-    <item>Composite (+1) longbow</item>
-    <item>Composite (+2) longbow</item>
-    <item>Composite (+3) longbow</item>
-    <item>Composite (+4) longbow</item>
-    <item>Composite shortbow</item>
-    <item>Composite (+0) shortbow</item>
-    <item>Composite (+1) shortbow</item>
-    <item>Composite (+2) shortbow</item>
-  </object>
-  <object>
-    <name>Crossbow bolt</name>
-    <item>Hand crossbow</item>
-    <item>Light crossbow</item>
-    <item>Heavy crossbow</item>
-    <item>Light repeating crossbow</item>
-    <item>Heavy repeating crossbow</item>
-  </object>
-  <object>
     <name>Heavy Armor Proficiency</name>
     <item>Splint mail</item>
     <item>Banded mail</item>
@@ -55,10 +32,6 @@
     <item>Light steel shield</item>
     <item>Heavy wooden shield</item>
     <item>Heavy steel shield</item>
-  </object>
-  <object>
-    <name>Sling bullet</name>
-    <item>Sling</item>
   </object>
   <object>
     <name>Tower Shield Proficiency</name>

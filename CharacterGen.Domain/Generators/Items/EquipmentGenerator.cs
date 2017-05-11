@@ -20,8 +20,7 @@ namespace CharacterGen.Domain.Generators.Items
         private ITreasureGenerator treasureGenerator;
         private Generator generator;
 
-        public EquipmentGenerator(ICollectionsSelector collectionsSelector, IWeaponGenerator weaponGenerator,
-            ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator, Generator generator)
+        public EquipmentGenerator(ICollectionsSelector collectionsSelector, IWeaponGenerator weaponGenerator, ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.armorGenerator = armorGenerator;
@@ -54,13 +53,10 @@ namespace CharacterGen.Domain.Generators.Items
 
             if (equipment.PrimaryHand != null)
             {
-                var ammunitionType = GetRequiredAmmunition(equipment.PrimaryHand);
-                if (!string.IsNullOrEmpty(ammunitionType))
+                if (!string.IsNullOrEmpty(equipment.PrimaryHand.Ammunition))
                 {
-                    var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, ammunitionType);
-
-                    if (ammunition != null)
-                        equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
+                    var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, equipment.PrimaryHand.Ammunition);
+                    equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
                 }
 
                 if (equipment.PrimaryHand.Attributes.Contains(AttributeConstants.TwoHanded))
@@ -88,13 +84,10 @@ namespace CharacterGen.Domain.Generators.Items
                     {
                         equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { rangedWeapon });
 
-                        ammunitionType = GetRequiredAmmunition(rangedWeapon);
-                        if (!string.IsNullOrEmpty(ammunitionType))
+                        if (!string.IsNullOrEmpty(rangedWeapon.Ammunition))
                         {
-                            var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, ammunitionType);
-
-                            if (ammunition != null)
-                                equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
+                            var ammunition = weaponGenerator.GenerateAmmunition(characterClass, race, rangedWeapon.Ammunition);
+                            equipment.Treasure.Items = equipment.Treasure.Items.Union(new[] { ammunition });
                         }
                     }
                 }

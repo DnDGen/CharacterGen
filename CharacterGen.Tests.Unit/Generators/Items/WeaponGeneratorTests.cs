@@ -499,6 +499,19 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
         }
 
+        //INFO: Example here is Shurikens
+        [Test]
+        public void ThrownAmmunitionIsAllowed()
+        {
+            var shuriken = CreateAmmunition(WeaponConstants.Shuriken);
+            shuriken.Attributes = shuriken.Attributes.Union(new[] { AttributeConstants.Thrown });
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
+                .Returns(shuriken).Returns(magicalWeapon);
+
+            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(shuriken), weapon.Name);
+        }
+
         [Test]
         public void GenerateMundaneDefaultWeapon()
         {
@@ -798,6 +811,20 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
             Assert.That(weapon, Is.EqualTo(rangedWeapon), weapon.Name);
+        }
+
+        //INFO: Example here is Shurikens
+        [Test]
+        public void RangedThrownAmmunitionIsAllowed()
+        {
+            var shuriken = CreateAmmunition(WeaponConstants.Shuriken);
+            var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
+            shuriken.Attributes = shuriken.Attributes.Union(new[] { AttributeConstants.Thrown });
+            mockMagicalWeaponGenerator.SetupSequence(g => g.GenerateFromSubset(power, ProficientWeaponSet()))
+                .Returns(shuriken).Returns(rangedWeapon);
+
+            var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
+            Assert.That(weapon, Is.EqualTo(shuriken), weapon.Name);
         }
 
         [Test]

@@ -43,8 +43,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockArmorGenerator = new Mock<IArmorGenerator>();
             mockTreasureGenerator = new Mock<ITreasureGenerator>();
             generator = new ConfigurableIterationGenerator(3);
-            equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object,
-                mockTreasureGenerator.Object, mockArmorGenerator.Object, generator);
+            equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object, mockTreasureGenerator.Object, mockArmorGenerator.Object, generator);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             meleeWeapon = new Weapon();
@@ -220,26 +219,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             ammo.Name = "ammo";
             ammo.Attributes = new[] { AttributeConstants.Ammunition };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.Arrow)).Returns(new[] { meleeWeapon.Name });
-            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, WeaponConstants.Arrow)).Returns(ammo);
-
-            var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
-            Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
-            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
-        }
-
-        [TestCase(WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CrossbowBolt)]
-        [TestCase(WeaponConstants.SlingBullet)]
-        public void GetAmmunitionTypeForRanged(string ammunitionType)
-        {
-            var ammo = new Weapon();
-            ammo.Name = "ammo";
-            ammo.Attributes = new[] { AttributeConstants.Ammunition };
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunitionType)).Returns(new[] { meleeWeapon.Name });
-            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, ammunitionType)).Returns(ammo);
+            meleeWeapon.Ammunition = "ammo";
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, "ammo")).Returns(ammo);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
@@ -417,9 +398,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var ammo = new Weapon();
             ammo.Name = "ammunition";
             ammo.Attributes = new[] { AttributeConstants.Ammunition };
+            rangedWeapon.Ammunition = "ammunition";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.Arrow)).Returns(new[] { rangedWeapon.Name });
-            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, WeaponConstants.Arrow)).Returns(ammo);
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, "ammunition")).Returns(ammo);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
@@ -428,23 +409,21 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
         }
 
-        [TestCase(WeaponConstants.Arrow)]
-        [TestCase(WeaponConstants.CrossbowBolt)]
-        [TestCase(WeaponConstants.SlingBullet)]
-        public void GetAmmunitionTypeForBackupRanged(string ammunitionType)
+        [Test]
+        public void IfPrimaryHandIsMelee_GenerateRangedWithoutAmmunitionToCarry()
         {
             var ammo = new Weapon();
             ammo.Name = "ammunition";
             ammo.Attributes = new[] { AttributeConstants.Ammunition };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ammunitionType)).Returns(new[] { rangedWeapon.Name });
-            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, ammunitionType)).Returns(ammo);
+            mockWeaponGenerator.Setup(g => g.GenerateAmmunition(characterClass, race, It.IsAny<string>())).Returns(ammo);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
             Assert.That(equipment.PrimaryHand, Is.EqualTo(meleeWeapon));
             Assert.That(equipment.Treasure.Items, Contains.Item(treasureItem));
             Assert.That(equipment.Treasure.Items, Contains.Item(rangedWeapon));
-            Assert.That(equipment.Treasure.Items, Contains.Item(ammo));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.EqualTo(ammo));
+            Assert.That(equipment.Treasure.Items, Is.All.Not.Null);
         }
 
         [Test]
