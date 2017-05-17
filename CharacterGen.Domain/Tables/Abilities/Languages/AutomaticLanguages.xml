@@ -128,6 +128,14 @@
     <name>Ghost</name>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item>Githyanki</item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item>Githzerai</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Gnoll</item>
   </object>
@@ -220,6 +228,10 @@
   <object>
     <name>Kobold</name>
     <item>Draconic</item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
+    <item>Kuo-toa</item>
   </object>
   <object>
     <name>Lich</name>

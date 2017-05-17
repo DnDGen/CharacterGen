@@ -112,6 +112,27 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.KuoToa,
+            CharacterClassConstants.Domains.Destruction,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Water,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
         [TestCase(RaceConstants.BaseRaces.Orc,
             CharacterClassConstants.Domains.Air,
             CharacterClassConstants.Domains.Animal,
@@ -188,6 +209,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
         [TestCase(RaceConstants.BaseRaces.ForestGnome)]
         [TestCase(RaceConstants.BaseRaces.Gargoyle)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
         [TestCase(RaceConstants.BaseRaces.Gnoll)]
         [TestCase(RaceConstants.BaseRaces.Goblin)]
         [TestCase(RaceConstants.BaseRaces.GrayElf)]

@@ -41,10 +41,11 @@ namespace CharacterGen.Domain.Generators.Items
             if (proficientArmors.Any() == false)
                 return null;
 
-            var item = generator.Generate(() => GenerateArmor(power, proficientArmors),
+            var item = generator.Generate(
+                () => GenerateArmor(power, proficientArmors),
+                $"{power} armor from [{string.Join(", ", proficientArmors)}]",
                 a => ArmorIsValid(a, characterClass, race),
-                () => GenerateDefaultArmor(power, proficientArmors, race),
-                $"{power} armor from [{string.Join(", ", proficientArmors)}]");
+                () => GenerateDefaultArmor(power, proficientArmors, race));
 
             return item as Armor;
         }
@@ -83,10 +84,11 @@ namespace CharacterGen.Domain.Generators.Items
             if (proficientShields.Any() == false)
                 return null;
 
-            var item = generator.Generate(() => GenerateArmor(power, proficientShields),
+            var item = generator.Generate(
+                () => GenerateArmor(power, proficientShields),
+                $"{power} shield from [{string.Join(",", proficientShields)}]",
                 s => ArmorIsValid(s, characterClass, race, true),
-                () => GenerateDefaultArmor(power, proficientShields, race),
-                $"{power} shield from [{string.Join(",", proficientShields)}]");
+                () => GenerateDefaultArmor(power, proficientShields, race));
 
             return item as Armor;
         }

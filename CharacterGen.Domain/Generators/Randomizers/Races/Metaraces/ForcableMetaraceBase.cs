@@ -39,9 +39,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
+                $"metarace from [{string.Join(",", allowedMetaraces)}]",
                 m => allowedMetaraces.Contains(m),
-                () => GetDefaultMetarace(allowedMetaraces),
-                $"metarace from [{string.Join(",", allowedMetaraces)}]");
+                () => GetDefaultMetarace(allowedMetaraces));
         }
 
         private string GetDefaultMetarace(IEnumerable<string> allowedMetaraces)

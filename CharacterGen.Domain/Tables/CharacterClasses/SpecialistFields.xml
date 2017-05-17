@@ -659,6 +659,50 @@
     <item>Transmutation</item>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item>Air</item>
+    <item>Animal</item>
+    <item>Chaos</item>
+    <item>Death</item>
+    <item>Destruction</item>
+    <item>Earth</item>
+    <item>Evil</item>
+    <item>Fire</item>
+    <item>Good</item>
+    <item>Healing</item>
+    <item>Knowledge</item>
+    <item>Law</item>
+    <item>Luck</item>
+    <item>Magic</item>
+    <item>Plant</item>
+    <item>Protection</item>
+    <item>Strength</item>
+    <item>Sun</item>
+    <item>Travel</item>
+    <item>Trickery</item>
+    <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Air</item>
     <item>Animal</item>
@@ -1341,6 +1385,20 @@
     <item>Travel</item>
     <item>Trickery</item>
     <item>War</item>
+    <item>Water</item>
+    <item>Abjuration</item>
+    <item>Conjuration</item>
+    <item>Divination</item>
+    <item>Enchantment</item>
+    <item>Evocation</item>
+    <item>Illusion</item>
+    <item>Necromancy</item>
+    <item>Transmutation</item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
+    <item>Destruction</item>
+    <item>Evil</item>
     <item>Water</item>
     <item>Abjuration</item>
     <item>Conjuration</item>

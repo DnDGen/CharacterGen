@@ -26,6 +26,8 @@ namespace CharacterGen.Tests.Unit.Common.Abilities
         [TestCase(LanguageConstants.Terran, "Terran")]
         [TestCase(LanguageConstants.Undercommon, "Undercommon")]
         [TestCase(LanguageConstants.Special.Druidic, "Druidic")]
+        [TestCase(LanguageConstants.Special.Githyanki, "Githyanki")]
+        [TestCase(LanguageConstants.Special.Githzerai, "Githzerai")]
         [TestCase(LanguageConstants.Special.Grimlock, "Grimlock")]
         [TestCase(LanguageConstants.Special.KuoToa, "Kuo-toa")]
         [TestCase(LanguageConstants.Special.Sahuagin, "Sahuagin")]

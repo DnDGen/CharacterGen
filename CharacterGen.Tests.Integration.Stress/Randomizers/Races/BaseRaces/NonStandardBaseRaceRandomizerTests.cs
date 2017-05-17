@@ -31,6 +31,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.ForestGnome,
                     RaceConstants.BaseRaces.FrostGiant,
                     RaceConstants.BaseRaces.Gargoyle,
+                    RaceConstants.BaseRaces.Githyanki,
+                    RaceConstants.BaseRaces.Githzerai,
                     RaceConstants.BaseRaces.Gnoll,
                     RaceConstants.BaseRaces.Goblin,
                     RaceConstants.BaseRaces.GrayElf,

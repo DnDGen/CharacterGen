@@ -133,6 +133,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Halfling,
             LanguageConstants.Giant,
             LanguageConstants.Terran)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki,
+            LanguageConstants.Common,
+            LanguageConstants.Infernal,
+            LanguageConstants.Draconic,
+            LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai,
+            LanguageConstants.Common,
+            LanguageConstants.Special.Slaad,
+            LanguageConstants.Undercommon)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             LanguageConstants.Common,
             LanguageConstants.Goblin,
@@ -215,6 +224,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Languages
             LanguageConstants.Terran)]
         [TestCase(RaceConstants.BaseRaces.Kobold,
             LanguageConstants.Common,
+            LanguageConstants.Undercommon)]
+        [TestCase(RaceConstants.BaseRaces.KuoToa,
+            LanguageConstants.Aquan,
             LanguageConstants.Undercommon)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling,
             LanguageConstants.Dwarven,

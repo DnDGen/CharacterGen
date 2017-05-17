@@ -25,6 +25,8 @@
         public static class Special
         {
             public const string Druidic = "Druidic";
+            public const string Githyanki = "Githyanki";
+            public const string Githzerai = "Githzerai";
             public const string Grimlock = "Grimlock";
             public const string KuoToa = "Kuo-toa";
             public const string Sahuagin = "Sahuagin";

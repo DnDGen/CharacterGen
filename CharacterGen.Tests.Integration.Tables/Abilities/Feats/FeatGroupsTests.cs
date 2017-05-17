@@ -19,24 +19,24 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Feats
         {
             var names = new[]
             {
+                AttributeConstants.Shield + GroupConstants.Proficiency,
+                FeatConstants.AttackBonus,
+                FeatConstants.SkillBonus,
+                GroupConstants.AddMonsterHitDiceToPower,
                 GroupConstants.FighterBonusFeats,
                 GroupConstants.HasClassRequirements,
                 GroupConstants.HasSkillRequirements,
                 GroupConstants.HasStatRequirements,
-                ItemTypeConstants.Weapon + GroupConstants.Proficiency,
-                ItemTypeConstants.Armor + GroupConstants.Proficiency,
-                FeatConstants.SkillBonus,
+                GroupConstants.Initiative,
+                GroupConstants.SavingThrows,
                 GroupConstants.TakenMultipleTimes,
                 GroupConstants.TwoHanded,
                 GroupConstants.WizardBonusFeats,
+                ItemTypeConstants.Weapon + GroupConstants.Proficiency,
+                ItemTypeConstants.Armor + GroupConstants.Proficiency,
                 SavingThrowConstants.Fortitude,
                 SavingThrowConstants.Reflex,
                 SavingThrowConstants.Will,
-                GroupConstants.SavingThrows,
-                GroupConstants.Initiative,
-                AttributeConstants.Shield + GroupConstants.Proficiency,
-                GroupConstants.AddMonsterHitDiceToPower,
-                FeatConstants.AttackBonus,
             };
 
             AssertCollectionNames(names);

@@ -37,8 +37,9 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
             FeatConstants.DodgeBonus,
             FeatConstants.Dodge)]
         [TestCase(GroupConstants.ArmorBonus,
+            FeatConstants.InertialArmor,
             WondrousItemConstants.BracersOfArmor)]
-        public override void DistinctCollection(string name, params string[] collection)
+        public void ArmorClassModifier(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

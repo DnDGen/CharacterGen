@@ -391,6 +391,8 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Hide,
             SkillConstants.Listen,
             SkillConstants.Spot)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
         [TestCase(RaceConstants.BaseRaces.Gnoll,
             SkillConstants.Listen,
             SkillConstants.Spot)]
@@ -465,6 +467,15 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Skills
             SkillConstants.Spot,
             SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.Kobold)]
+        [TestCase(RaceConstants.BaseRaces.KuoToa,
+            SkillConstants.Craft,
+            SkillConstants.EscapeArtist,
+            SkillConstants.Knowledge,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Search,
+            SkillConstants.Spot,
+            SkillConstants.Swim)]
         [TestCase(RaceConstants.BaseRaces.LightfootHalfling)]
         [TestCase(RaceConstants.BaseRaces.Lizardfolk,
             SkillConstants.Balance,

@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Abilities.Feats;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
@@ -21,7 +20,6 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
 
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Generator generator;
         private IAnimalGenerator animalGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;

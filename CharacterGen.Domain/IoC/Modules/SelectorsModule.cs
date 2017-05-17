@@ -12,11 +12,15 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<IAdjustmentsSelector>().To<AdjustmentsSelector>();
             Bind<IPercentileSelector>().To<PercentileSelector>();
             Bind<IStatAdjustmentsSelector>().To<StatAdjustmentsSelector>();
-            Bind<ICollectionsSelector>().To<CollectionsSelector>();
             Bind<ISkillSelector>().To<SkillSelector>();
-            Bind<IFeatsSelector>().To<FeatsSelector>();
             Bind<IBooleanPercentileSelector>().To<BooleanPercentileSelector>();
             Bind<ILeadershipSelector>().To<LeadershipSelector>();
+
+            Bind<IFeatsSelector>().To<FeatsSelector>().WhenInjectedInto<FeatsSelectorEventGenDecorator>();
+            Bind<IFeatsSelector>().To<FeatsSelectorEventGenDecorator>();
+
+            Bind<ICollectionsSelector>().To<CollectionsSelector>().WhenInjectedInto<CollectionsSelectorEventGenDecorator>();
+            Bind<ICollectionsSelector>().To<CollectionsSelectorEventGenDecorator>();
         }
     }
 }

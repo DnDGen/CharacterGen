@@ -172,6 +172,7 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var alignment = generator.Generate(
                 () => alignmentGenerator.GenerateWith(alignmentRandomizer),
+                "alignment",
                 a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
                 () => DefaultIsIncompatible<Alignment>(),
                 "Incompatible alignment");
@@ -192,6 +193,7 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var characterClass = generator.Generate(
                 () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
+                "character class",
                 c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
                 () => DefaultIsIncompatible<CharacterClass>(),
                 "Incompatible character class");
@@ -207,6 +209,7 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var race = generator.Generate(
                 () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
+                "race",
                 r => randomizerVerifier.VerifyRaceCompatibility(r, characterClass, levelRandomizer),
                 () => DefaultIsIncompatible<Race>(),
                 "Incompatible race");

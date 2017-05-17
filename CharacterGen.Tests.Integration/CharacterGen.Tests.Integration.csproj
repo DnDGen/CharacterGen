@@ -44,34 +44,6 @@
       <HintPath>..\packages\Albatross.Expression.1.3.6218.36673\lib\net40\Albatross.Expression.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EquipmentGen.Generators, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Generators.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Mappers.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Mappers.Interfaces, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Mappers.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Selectors.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Selectors.Interfaces, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Selectors.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Tables.dll</HintPath>
-    </Reference>
-    <Reference Include="EquipmentGen.Tables.Interfaces, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EquipmentGen.Backend.2.1.1\lib\EquipmentGen.Tables.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="EventGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EventGen.1.0.0\lib\EventGen.dll</HintPath>
       <Private>True</Private>

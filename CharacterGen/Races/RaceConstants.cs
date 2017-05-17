@@ -42,6 +42,8 @@
             public const string ForestGnome = "Forest Gnome";
             public const string FrostGiant = "Frost Giant";
             public const string Gargoyle = "Gargoyle";
+            public const string Githyanki = "Githyanki";
+            public const string Githzerai = "Githzerai";
             public const string Goblin = "Goblin";
             public const string Gnoll = "Gnoll";
             public const string GrayElf = "Gray Elf";
@@ -60,6 +62,7 @@
             public const string Janni = "Janni";
             public const string Kapoacinth = "Kapoacinth";
             public const string Kobold = "Kobold";
+            public const string KuoToa = "Kuo-toa";
             public const string LightfootHalfling = "Lightfoot Halfling";
             public const string Lizardfolk = "Lizardfolk";
             public const string Locathah = "Locathah";

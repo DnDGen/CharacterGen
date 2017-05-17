@@ -74,6 +74,14 @@
     <item>220</item>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item>130</item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item>130</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>150</item>
   </object>
@@ -144,6 +152,10 @@
   <object>
     <name>Kobold</name>
     <item>20</item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
+    <item>90</item>
   </object>
   <object>
     <name>Lightfoot Halfling</name>

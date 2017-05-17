@@ -2,6 +2,7 @@
 using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Combats;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
@@ -18,6 +19,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         private Dictionary<string, Stat> stats;
         private List<Skill> skills;
         private CharacterClass characterClass;
+        private BaseAttack baseAttack;
 
         [SetUp]
         public void Setup()
@@ -25,9 +27,11 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection = new AdditionalFeatSelection();
             feats = new List<Feat>();
             stats = new Dictionary<string, Stat>();
-            stats["stat"] = new Stat("stat");
             skills = new List<Skill>();
             characterClass = new CharacterClass();
+            baseAttack = new BaseAttack();
+
+            stats["stat"] = new Stat("stat");
         }
 
         [Test]
@@ -47,7 +51,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         [Test]
         public void ImmutableRequirementsMetIfNoRequirements()
         {
-            var met = selection.ImmutableRequirementsMet(0, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.True);
         }
 
@@ -62,7 +66,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         public void BaseAttackRequirementNotMet()
         {
             selection.RequiredBaseAttack = 2;
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            baseAttack.BaseBonus = 1;
+
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.False);
         }
 
@@ -73,8 +79,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             stats["stat"].Value = 15;
             stats["other stat"] = new Stat("other stat");
             stats["other stat"].Value = 157;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.False);
         }
 
@@ -88,8 +95,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             skills[0].ClassSkill = false;
             skills[1].Ranks = 10;
             skills[1].ClassSkill = false;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.False);
         }
 
@@ -108,8 +116,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             skills[0].ClassSkill = true;
             skills[1].Ranks = 1;
             skills[1].ClassSkill = true;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.True);
         }
 
@@ -119,8 +128,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.RequiredSkills = new[] { new RequiredSkillSelection { Skill = "skill", Ranks = 0 } };
             skills.Add(new Skill("skill", stats["stat"], 10));
             skills[0].ClassSkill = false;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.True);
         }
 
@@ -131,8 +141,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.RequiredCharacterClasses["other class name"] = 2;
             characterClass.Name = "different class name";
             characterClass.Level = 3;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.False);
         }
 
@@ -143,8 +154,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.RequiredCharacterClasses["other class name"] = 2;
             characterClass.Name = "other class name";
             characterClass.Level = 1;
+            baseAttack.BaseBonus = 1;
 
-            var met = selection.ImmutableRequirementsMet(1, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.False);
         }
 
@@ -182,8 +194,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.RequiredCharacterClasses["class name"] = 1;
             characterClass.Name = "class name";
             characterClass.Level = 1;
+            baseAttack.BaseBonus = 2;
 
-            var met = selection.ImmutableRequirementsMet(2, stats, skills, characterClass);
+            var met = selection.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass);
             Assert.That(met, Is.True);
         }
 

@@ -64,6 +64,11 @@
   <object>
     <lower>59</lower>
     <content>Hobgoblin</content>
+    <upper>70</upper>
+  </object>
+  <object>
+    <lower>71</lower>
+    <content>Githyanki</content>
     <upper>72</upper>
   </object>
   <object>

@@ -26,7 +26,7 @@ namespace CharacterGen.Domain.Generators.Combats
         {
             var armorClass = new ArmorClass();
             armorClass.AdjustedDexterityBonus = adjustedDexterityBonus;
-            armorClass.ArmorBonus = GetArmorBonus(equipment);
+            armorClass.ArmorBonus = GetArmorBonus(equipment, feats);
             armorClass.DeflectionBonus = GetDeflectionBonus(equipment.Treasure.Items);
             armorClass.DodgeBonus = GetDodgeBonus(feats);
             armorClass.NaturalArmorBonus = GetNaturalArmorBonus(equipment.Treasure.Items, feats, race);
@@ -72,7 +72,7 @@ namespace CharacterGen.Domain.Generators.Combats
         {
             var shieldBonus = 0;
 
-            if (equipment.OffHand != null && equipment.OffHand.ItemType == ItemTypeConstants.Armor && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+            if (equipment.OffHand != null && equipment.OffHand is Armor)
             {
                 var shield = equipment.OffHand as Armor;
                 shieldBonus += shield.TotalArmorBonus;
@@ -81,22 +81,27 @@ namespace CharacterGen.Domain.Generators.Combats
             return shieldBonus;
         }
 
-        private int GetArmorBonus(Equipment equipment)
+        private int GetArmorBonus(Equipment equipment, IEnumerable<Feat> feats)
         {
             var armorBonus = 0;
 
             if (equipment.Armor != null)
                 armorBonus += equipment.Armor.TotalArmorBonus;
 
-            var itemNamesGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
-            var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => itemNamesGrantingArmorBonuses.Contains(i.Name));
+            var thingsGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
+            var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => thingsGrantingArmorBonuses.Contains(i.Name));
 
-            if (itemsGrantingArmorBonus.Any() == false)
-                return armorBonus;
+            if (itemsGrantingArmorBonus.Any())
+            {
+                var maxItemArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
+                armorBonus = Math.Max(armorBonus, maxItemArmorBonus);
+            }
 
-            var maxArmorBonus = itemsGrantingArmorBonus.Max(i => i.Magic.Bonus);
+            var featsGrantingArmorBonus = feats.Where(f => thingsGrantingArmorBonuses.Contains(f.Name));
+            var featArmorBonus = featsGrantingArmorBonus.Sum(f => f.Power);
+            armorBonus += featArmorBonus;
 
-            return Math.Max(armorBonus, maxArmorBonus);
+            return armorBonus;
         }
 
         private int GetSizeModifier(Race race)

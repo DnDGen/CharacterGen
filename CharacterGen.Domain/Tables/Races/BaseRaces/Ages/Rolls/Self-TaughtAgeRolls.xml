@@ -74,6 +74,14 @@
     <item>1d6</item>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item>3d6</item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item>3d6</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>1d6</item>
   </object>
@@ -143,6 +151,10 @@
   </object>
   <object>
     <name>Kobold</name>
+    <item>1d6</item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
     <item>1d6</item>
   </object>
   <object>

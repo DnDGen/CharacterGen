@@ -90,6 +90,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             AssertPlayerCharacter(aquaticCharacter);
             Assert.That(aquaticCharacter.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.AquaticElf)
                 .Or.EqualTo(RaceConstants.BaseRaces.Kapoacinth)
+                .Or.EqualTo(RaceConstants.BaseRaces.KuoToa)
                 .Or.EqualTo(RaceConstants.BaseRaces.Locathah)
                 .Or.EqualTo(RaceConstants.BaseRaces.Merfolk)
                 .Or.EqualTo(RaceConstants.BaseRaces.Merrow)

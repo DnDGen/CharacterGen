@@ -32,16 +32,16 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
+                $"class name from [{string.Join(",", possibleClassNames)}]",
                 c => possibleClassNames.Contains(c),
-                () => collectionsSelector.SelectRandomFrom(possibleClassNames),
-                $"class name from [{string.Join(",", possibleClassNames)}]");
+                () => collectionsSelector.SelectRandomFrom(possibleClassNames));
         }
 
         protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);
 
         public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
         {
-            var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
             var classNames = percentileResultSelector.SelectAllFrom(tableName);
             return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }

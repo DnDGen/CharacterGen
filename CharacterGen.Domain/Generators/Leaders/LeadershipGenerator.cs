@@ -158,9 +158,10 @@ namespace CharacterGen.Domain.Generators
         {
             var alignment = generator.Generate(
                 () => collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment),
+                "Cohort or follower alignment",
                 a => allowLeaderAlignment || a != leaderAlignment,
                 () => leaderAlignment,
-                $"Leader alignment {leaderAlignment}");
+                $"Cohort or follower alignment of {leaderAlignment}");
 
             return new Alignment(alignment);
         }

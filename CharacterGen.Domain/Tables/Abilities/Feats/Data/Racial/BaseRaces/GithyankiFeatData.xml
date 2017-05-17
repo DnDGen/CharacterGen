@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+  <object>
+    <name>Spell Resistance</name>
+    <item>Spell Resistance</item>
+    <item></item>
+    <item>0</item>
+    <item>5</item>
+    <item>Add class levels to power</item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+  <object>
+    <name>Darkvision</name>
+    <item>Darkvision</item>
+    <item></item>
+    <item>0</item>
+    <item>60</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+    <item>0</item>
+    <item></item>
+  </object>
+</items>

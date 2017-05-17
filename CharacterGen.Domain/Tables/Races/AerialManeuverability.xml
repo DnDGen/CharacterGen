@@ -82,6 +82,14 @@
     <item>Perfect Maneuverability</item>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item></item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item></item>
   </object>
@@ -163,6 +171,10 @@
   </object>
   <object>
     <name>Kobold</name>
+    <item></item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
     <item></item>
   </object>
   <object>

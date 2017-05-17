@@ -217,6 +217,19 @@
     <item>Terran</item>
   </object>
   <object>
+    <name>Githyanki</name>
+    <item>Common</item>
+    <item>Infernal</item>
+    <item>Draconic</item>
+    <item>Undercommon</item>
+  </object>
+  <object>
+    <name>Githzerai</name>
+    <item>Common</item>
+    <item>Slaad</item>
+    <item>Undercommon</item>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Common</item>
     <item>Goblin</item>
@@ -413,6 +426,11 @@
   <object>
     <name>Kobold</name>
     <item>Common</item>
+    <item>Undercommon</item>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
+    <item>Aquan</item>
     <item>Undercommon</item>
   </object>
   <object>

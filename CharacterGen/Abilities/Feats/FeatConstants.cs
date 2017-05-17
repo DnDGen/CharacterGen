@@ -4,6 +4,7 @@
     {
         public const string AbundantStep = "Abundant Step";
         public const string Acrobatic = "Acrobatic";
+        public const string Adhesive = "Adhesive";
         public const string Agile = "Agile";
         public const string Alertness = "Alertness";
         public const string AlternateForm = "Alternate Form";
@@ -133,17 +134,20 @@
         public const string ImprovedUnarmedStrike = "Improved Unarmed Strike";
         public const string ImprovedUncannyDodge = "Improved Uncanny Dodge";
         public const string IndomitableWill = "Indomitable Will";
+        public const string InertialArmor = "Inertial Armor";
         public const string InspireCompetence = "Inspire Competence";
         public const string InspireCourage = "Inspire Courage";
         public const string InspireGreatness = "Inspire Greatness";
         public const string InspireHeroics = "Inspire Heroics";
         public const string Investigator = "Investigator";
         public const string IronWill = "Iron Will";
+        public const string KeenSight = "Keen Sight";
         public const string KiStrike = "Ki Strike";
         public const string LayOnHands = "Lay On Hands";
         public const string Leadership = "Leadership";
         public const string LightArmorProficiency = "Light Armor Proficiency";
         public const string LightBlindness = "Light Blindness";
+        public const string LightningBolt = "Lightning Bolt";
         public const string LightningReflexes = "Lightning Reflexes";
         public const string LightSensitivity = "Light Sensitivity";
         public const string LowLightVision = "Low-Light Vision";
@@ -218,6 +222,7 @@
         public const string SkillMastery = "Skill Mastery";
         public const string SlaadFever = "Slaad Fever";
         public const string Slam = "Slam";
+        public const string Slippery = "Slippery";
         public const string SlipperyMind = "Slippery Mind";
         public const string SlowFall = "Slow Fall";
         public const string Smite = "Smite";

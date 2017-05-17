@@ -38,6 +38,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void CollectionsSelectorsIsDecorated()
+        {
+            AssertIsInstanceOf<ICollectionsSelector, CollectionsSelectorEventGenDecorator>();
+        }
+
+        [Test]
         public void SkillSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<ISkillSelector>();
@@ -47,6 +53,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void FeatsSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IFeatsSelector>();
+        }
+
+        [Test]
+        public void FeatsSelectorsIsDecorated()
+        {
+            AssertIsInstanceOf<IFeatsSelector, FeatsSelectorEventGenDecorator>();
         }
 
         [Test]

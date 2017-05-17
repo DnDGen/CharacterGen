@@ -123,6 +123,8 @@
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Classes\WizardFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\CharacterClasses\Schools\TransmutationFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AasimarFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GithyankiFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GithzeraiFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\KapoacinthFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GargoyleFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\GreenSlaadFeatDataTests.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\DeathSlaadFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\AquaticElfFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\HoundArchonFeatDataTests.cs" />
+    <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\KuoToaFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\LocathahFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MerfolkFeatDataTests.cs" />
     <Compile Include="Abilities\Feats\Data\Racial\BaseRaces\MerrowFeatDataTests.cs" />
@@ -714,6 +717,9 @@
     <Compile Include="Races\AerialManeuverabilityTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AasimarAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AzerAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\GithzeraiAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\KuoToaAgesTests.cs" />
+    <Compile Include="Races\BaseRaces\Ages\GithyankiAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\KapoacinthAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\GargoyleAgesTests.cs" />
     <Compile Include="Races\BaseRaces\Ages\AquaticElfAgesTests.cs" />

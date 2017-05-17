@@ -30,6 +30,11 @@
   <object>
     <lower>26</lower>
     <content>Human</content>
+    <upper>95</upper>
+  </object>
+  <object>
+    <lower>96</lower>
+    <content>Githzerai</content>
     <upper>97</upper>
   </object>
   <object>

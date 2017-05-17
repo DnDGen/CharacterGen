@@ -441,6 +441,12 @@
     <item>Craft/Gemcutting</item>
   </object>
   <object>
+    <name>Githyanki</name>
+  </object>
+  <object>
+    <name>Githzerai</name>
+  </object>
+  <object>
     <name>Gnoll</name>
     <item>Listen</item>
     <item>Spot</item>
@@ -594,6 +600,17 @@
   </object>
   <object>
     <name>Kobold</name>
+  </object>
+  <object>
+    <name>Kuo-toa</name>
+    <item>Craft</item>
+    <item>Escape Artist</item>
+    <item>Knowledge</item>
+    <item>Listen</item>
+    <item>Move Silently</item>
+    <item>Search</item>
+    <item>Spot</item>
+    <item>Swim</item>
   </object>
   <object>
     <name>Laborer</name>

@@ -46,6 +46,7 @@ namespace CharacterGen.Tests.Integration.Stress
 
         private int iterations;
         private Guid clientId;
+        private DateTime eventCheckpoint;
 
         public StressTests()
         {
@@ -56,9 +57,9 @@ namespace CharacterGen.Tests.Integration.Stress
             var stressTestCasesCount = methods.Sum(m => m.GetCustomAttributes<TestCaseAttribute>().Count());
             var stressTestsTotal = stressTestsCount + stressTestCasesCount;
 
-            var twoHourTimeLimitPerTest = TravisJobBuildTimeLimit / stressTestsTotal;
+            var timeLimitPerTest = TravisJobBuildTimeLimit / stressTestsTotal;
 #if STRESS
-            timeLimitInSeconds = Math.Min(twoHourTimeLimitPerTest, TravisJobOutputTimeLimit - 10);
+            timeLimitInSeconds = Math.Min(timeLimitPerTest, TravisJobOutputTimeLimit - 10);
 #else
             timeLimitInSeconds = 1;
 #endif
@@ -67,18 +68,52 @@ namespace CharacterGen.Tests.Integration.Stress
         [SetUp]
         public void StressSetup()
         {
-            iterations = 0;
-            Stopwatch.Start();
-
             clientId = Guid.NewGuid();
             ClientIdManager.SetClientID(clientId);
+
+            iterations = 0;
+            eventCheckpoint = new DateTime();
+
+            Stopwatch.Start();
         }
 
         [TearDown]
         public void StressTearDown()
         {
-            Stopwatch.Reset();
+            WriteStressSummary();
+            WriteEventSummary();
 
+            Stopwatch.Reset();
+        }
+
+        private void AssertEventSpacing()
+        {
+            var events = EventQueue.DequeueAll(clientId);
+
+            //INFO: Have to put the events back in the queue for the summary at the end of the test
+            foreach (var genEvent in events)
+                EventQueue.Enqueue(genEvent);
+
+            var newEvents = events.Where(e => e.When > eventCheckpoint).ToArray();
+
+            for (var i = 1; i < newEvents.Length; i++)
+            {
+                var failureMessage = $"{GetMessage(newEvents[i - 1])}\n{GetMessage(newEvents[i])}";
+                Assert.That(newEvents[i].When, Is.EqualTo(newEvents[i - 1].When).Within(1).Seconds, failureMessage);
+            }
+
+            if (newEvents.Any())
+                eventCheckpoint = newEvents.Last().When;
+        }
+
+        private void WriteStressSummary()
+        {
+            var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
+            Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
+        }
+
+        private void WriteEventSummary()
+        {
             var events = EventQueue.DequeueAll(clientId);
 
             //INFO: Get the 10 most recent events for CharacterGen
@@ -88,23 +123,34 @@ namespace CharacterGen.Tests.Integration.Stress
             events = events.OrderBy(e => e.When);
 
             foreach (var genEvent in events)
-                Console.WriteLine($"[{genEvent.When.ToShortTimeString()}] {genEvent.Source}: {genEvent.Message}");
+                Console.WriteLine(GetMessage(genEvent));
+        }
+
+        private string GetMessage(GenEvent genEvent)
+        {
+            return $"[{genEvent.When.ToLongTimeString()}] {genEvent.Source}: {genEvent.Message}";
         }
 
         protected void Stress(Action generateAndMakeAssertions)
         {
-            do generateAndMakeAssertions();
+            do
+            {
+                generateAndMakeAssertions();
+                AssertEventSpacing();
+            }
             while (TestShouldKeepRunning());
 
-            var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
-            Console.WriteLine($"Stress test complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
         }
 
         protected T Generate<T>(Func<T> generate, Func<T, bool> isValid)
         {
             T generatedObject;
 
-            do generatedObject = generate();
+            do
+            {
+                generatedObject = generate();
+                AssertEventSpacing();
+            }
             while (isValid(generatedObject) == false);
 
             return generatedObject;
@@ -114,14 +160,16 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             T generatedObject;
 
-            do generatedObject = generate();
+            do
+            {
+                generatedObject = generate();
+                AssertEventSpacing();
+            }
             while (TestShouldKeepRunning() && isValid(generatedObject) == false);
 
-            var iterationsPerSecond = Math.Round(iterations / Stopwatch.Elapsed.TotalSeconds, 2);
-            Console.WriteLine($"Generation complete after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
 
             if (TestShouldKeepRunning() == false && isValid(generatedObject) == false)
-                Assert.Fail($"Generation timed out after {Stopwatch.Elapsed} and {iterations} iterations, or {iterationsPerSecond} iterations per second");
+                Assert.Fail($"Generation timed out after {Stopwatch.Elapsed} and {iterations} iterations");
 
             return generatedObject;
         }

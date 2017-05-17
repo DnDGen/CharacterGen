@@ -69,11 +69,7 @@ namespace CharacterGen.Domain.Generators.Races
             race.SwimSpeed = DetermineSwimSpeed(race);
             race.ChallengeRating = DetermineChallengeRating(race);
             race.MaximumAge = DetermineMaximumAge(race);
-
-            race.Age = generator.Generate(() => DetermineAge(race, characterClass),
-                (a) => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
-                () => GetDefaultAge(race, characterClass),
-                $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
+            race.Age = DetermineAge(race, characterClass);
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.GENDERHeights, race.Gender);
             var baseHeight = adjustmentsSelector.SelectFrom(tableName, race.BaseRace);
@@ -242,10 +238,10 @@ namespace CharacterGen.Domain.Generators.Races
             return measurement;
         }
 
-        private Measurement DetermineAge(Race race, CharacterClass characterClass)
+        private Measurement GenerateAge(Race race, CharacterClass characterClass)
         {
             var age = new Measurement("Years");
-            age.Value = GetAgeInYears(race, characterClass, race.MaximumAge.Value);
+            age.Value = GetAgeInYears(race, characterClass);
             age.Description = GetAgeDescription(race, age.Value);
 
             return age;
@@ -275,6 +271,18 @@ namespace CharacterGen.Domain.Generators.Races
             return measurement;
         }
 
+        private Measurement DetermineAge(Race race, CharacterClass characterClass)
+        {
+            var age = generator.Generate(
+                () => GenerateAge(race, characterClass),
+                $"age for {race.Summary} {characterClass.Summary}",
+                (a) => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
+                () => GetDefaultAge(race, characterClass),
+                $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
+
+            return age;
+        }
+
         private int GetMaximumAge(Race race)
         {
             var maximumAgeRoll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, race.BaseRace).Single();
@@ -298,17 +306,17 @@ namespace CharacterGen.Domain.Generators.Races
             return ages.OrderByDescending(kvp => kvp.Value).First().Key;
         }
 
-        private int GetAgeInYears(Race race, CharacterClass characterClass, int maximumAge)
+        private int GetAgeInYears(Race race, CharacterClass characterClass)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, race.BaseRace);
             var adultAge = adjustmentsSelector.SelectFrom(tableName, RaceConstants.Ages.Adulthood);
-            var additionalAge = GetAdditionalAge(race.BaseRace, characterClass, maximumAge);
+            var additionalAge = GetAdditionalAge(race.BaseRace, characterClass);
             var ageInYears = adultAge + additionalAge;
 
             return ageInYears;
         }
 
-        private int GetAdditionalAge(string baseRace, CharacterClass characterClass, int maximumAge)
+        private int GetAdditionalAge(string baseRace, CharacterClass characterClass)
         {
             var classType = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);

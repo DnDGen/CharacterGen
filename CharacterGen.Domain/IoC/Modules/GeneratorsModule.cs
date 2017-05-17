@@ -32,36 +32,72 @@ namespace CharacterGen.Domain.IoC.Modules
     {
         public override void Load()
         {
-            Bind<ICharacterGenerator>().To<CharacterGenerator>().WhenInjectedInto<CharacterGeneratorEventGenDecorator>();
-            Bind<ICharacterGenerator>().To<CharacterGeneratorEventGenDecorator>();
-
-            Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
-            Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
-            Bind<ILanguageGenerator>().To<LanguageGenerator>();
-            Bind<IRaceGenerator>().To<RaceGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
-            Bind<IStatsGenerator>().To<StatsGenerator>();
             Bind<ILeadershipGenerator>().ToProvider<LeadershipGeneratorProvider>();
             Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
-            Bind<ICombatGenerator>().To<CombatGenerator>();
-
-            Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
-            Bind<ISkillsGenerator>().To<SkillsGenerator>();
-            Bind<IFeatsGenerator>().To<FeatsGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
             Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();
-            Bind<IAdditionalFeatsGenerator>().To<AdditionalFeatsGenerator>();
-            Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>();
-            Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>();
-            Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>();
             Bind<IArmorGenerator>().ToProvider<ArmorGeneratorProvider>();
             Bind<IWeaponGenerator>().ToProvider<WeaponGeneratorProvider>();
-            Bind<IMagicGenerator>().To<MagicGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().To<AnimalGenerator>();
             Bind<Generator>().To<IterativeGenerator>();
 
+            BindDecoratedGenerators();
+            BindRandomizers();
+        }
+
+        private void BindDecoratedGenerators()
+        {
+            Bind<ICharacterGenerator>().To<CharacterGenerator>().WhenInjectedInto<CharacterGeneratorEventGenDecorator>();
+            Bind<ICharacterGenerator>().To<CharacterGeneratorEventGenDecorator>();
+
+            Bind<IAlignmentGenerator>().To<AlignmentGenerator>().WhenInjectedInto<AlignmentGeneratorEventGenDecorator>();
+            Bind<IAlignmentGenerator>().To<AlignmentGeneratorEventGenDecorator>();
+
+            Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>().WhenInjectedInto<CharacterClassGeneratorEventGenDecorator>();
+            Bind<ICharacterClassGenerator>().To<CharacterClassGeneratorEventGenDecorator>();
+
+            Bind<IRaceGenerator>().To<RaceGenerator>().WhenInjectedInto<RaceGeneratorEventGenDecorator>();
+            Bind<IRaceGenerator>().To<RaceGeneratorEventGenDecorator>();
+
+            Bind<IStatsGenerator>().To<StatsGenerator>().WhenInjectedInto<StatsGeneratorEventGenDecorator>();
+            Bind<IStatsGenerator>().To<StatsGeneratorEventGenDecorator>();
+
+            Bind<ICombatGenerator>().To<CombatGenerator>().WhenInjectedInto<CombatGeneratorEventGenDecorator>();
+            Bind<ICombatGenerator>().To<CombatGeneratorEventGenDecorator>();
+
+            Bind<ISkillsGenerator>().To<SkillsGenerator>().WhenInjectedInto<SkillsGeneratorEventGenDecorator>();
+            Bind<ISkillsGenerator>().To<SkillsGeneratorEventGenDecorator>();
+
+            Bind<IFeatsGenerator>().To<FeatsGenerator>().WhenInjectedInto<FeatsGeneratorEventGenDecorator>();
+            Bind<IFeatsGenerator>().To<FeatsGeneratorEventGenDecorator>();
+
+            Bind<IAdditionalFeatsGenerator>().To<AdditionalFeatsGenerator>().WhenInjectedInto<AdditionalFeatsGeneratorEventGenDecorator>();
+            Bind<IAdditionalFeatsGenerator>().To<AdditionalFeatsGeneratorEventGenDecorator>();
+
+            Bind<IClassFeatsGenerator>().To<ClassFeatsGenerator>().WhenInjectedInto<ClassFeatsGeneratorEventGenDecorator>();
+            Bind<IClassFeatsGenerator>().To<ClassFeatsGeneratorEventGenDecorator>();
+
+            Bind<IRacialFeatsGenerator>().To<RacialFeatsGenerator>().WhenInjectedInto<RacialFeatsGeneratorEventGenDecorator>();
+            Bind<IRacialFeatsGenerator>().To<RacialFeatsGeneratorEventGenDecorator>();
+
+            Bind<IFeatFocusGenerator>().To<FeatFocusGenerator>().WhenInjectedInto<FeatFocusGeneratorEventGenDecorator>();
+            Bind<IFeatFocusGenerator>().To<FeatFocusGeneratorEventGenDecorator>();
+
+            Bind<ILanguageGenerator>().To<LanguageGenerator>().WhenInjectedInto<LanguageGeneratorEventGenDecorator>();
+            Bind<ILanguageGenerator>().To<LanguageGeneratorEventGenDecorator>();
+
+            Bind<IEquipmentGenerator>().To<EquipmentGenerator>().WhenInjectedInto<EquipmentGeneratorEventGenDecorator>();
+            Bind<IEquipmentGenerator>().To<EquipmentGeneratorEventGenDecorator>();
+
+            Bind<IMagicGenerator>().To<MagicGenerator>().WhenInjectedInto<MagicGeneratorEventGenDecorator>();
+            Bind<IMagicGenerator>().To<MagicGeneratorEventGenDecorator>();
+        }
+
+        private void BindRandomizers()
+        {
             Bind<IAlignmentRandomizer>().To<AnyAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Any);
             Bind<IAlignmentRandomizer>().To<ChaoticAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Chaotic);
             Bind<IAlignmentRandomizer>().To<EvilAlignmentRandomizer>().Named(AlignmentRandomizerTypeConstants.Evil);

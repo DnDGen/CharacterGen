@@ -66,6 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generators\Abilities\AbilitiesGenerator.cs" />
+    <Compile Include="Generators\Abilities\Feats\AdditionalFeatsGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\Feats\ClassFeatsGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\Feats\FeatFocusGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\Feats\RacialFeatsGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\Feats\FeatsGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\LanguageGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\SkillsGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Abilities\StatsGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Abilities\Feats\AdditionalFeatsGenerator.cs" />
     <Compile Include="Generators\Abilities\Feats\ClassFeatsGenerator.cs" />
     <Compile Include="Generators\Abilities\Feats\FeatFocusGenerator.cs" />
@@ -82,9 +90,12 @@
     <Compile Include="Generators\Abilities\IStatsGenerator.cs" />
     <Compile Include="Generators\Abilities\SkillsGenerator.cs" />
     <Compile Include="Generators\Alignments\AlignmentGenerator.cs" />
+    <Compile Include="Generators\Alignments\AlignmentGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Characters\CharacterGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Classes\CharacterClassGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Classes\CharacterClassGenerator.cs" />
     <Compile Include="Generators\Characters\CharacterGenerator.cs" />
+    <Compile Include="Generators\Combats\CombatGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Combats\ArmorClassGenerator.cs" />
     <Compile Include="Generators\Combats\CombatGenerator.cs" />
     <Compile Include="Generators\Combats\HitPointsGenerator.cs" />
@@ -97,6 +108,9 @@
     <Compile Include="Generators\Generator.cs" />
     <Compile Include="Generators\Alignments\IAlignmentGenerator.cs" />
     <Compile Include="Generators\Classes\ICharacterClassGenerator.cs" />
+    <Compile Include="Generators\Items\EquipmentGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Magics\MagicGeneratorEventGenDecorator.cs" />
+    <Compile Include="Generators\Races\RaceGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Races\IRaceGenerator.cs" />
     <Compile Include="Generators\Items\IArmorGenerator.cs" />
     <Compile Include="Generators\Items\IEquipmentGenerator.cs" />
@@ -185,6 +199,8 @@
     <Compile Include="Mappers\Percentiles\PercentileMapperCachingProxy.cs" />
     <Compile Include="Mappers\Percentiles\PercentileXmlMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selectors\Collections\CollectionsSelectorEventGenDecorator.cs" />
+    <Compile Include="Selectors\Collections\FeatsSelectorEventGenDecorator.cs" />
     <Compile Include="Selectors\Collections\AdjustmentsSelector.cs" />
     <Compile Include="Selectors\Percentiles\BooleanPercentileSelector.cs" />
     <Compile Include="Selectors\Collections\CollectionsSelector.cs" />
@@ -2914,6 +2930,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\SahuaginFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\GithyankiAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\GithzeraiAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\Kuo-toaAges.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\GithzeraiFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\GithyankiFeatData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Tables\Abilities\Feats\Data\Racial\BaseRaces\Kuo-toaFeatData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -39,12 +39,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             race = new Race();
 
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.SizeModifiers)).Returns(sizeModifiers);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size))
-                .Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
-                .Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
-                .Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size)).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor)).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection)).Returns(Enumerable.Empty<string>());
 
             race.Size = "size";
             sizeModifiers["size"] = 0;
@@ -82,8 +79,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void ShieldBonusesApplied()
         {
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var armorClass = GenerateAndAssertArmorClass(11, 11);
             Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
@@ -181,8 +176,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
@@ -199,6 +192,78 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             var armorClass = GenerateAndAssertArmorClass(13, 13);
             Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
+        }
+
+        //INFO: Example here is Githzerai's Inertial Armor
+        [Test]
+        public void AddArmorBonusFromFeats()
+        {
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
+
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].Power = 1;
+            feats[1].Name = "other feat";
+            feats[1].Power = -1;
+
+            var armorClass = GenerateAndAssertArmorClass(11, 11);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(1));
+        }
+
+        //INFO: Example here is Githzerai's Inertial Armor
+        [Test]
+        public void AddArmorBonusFromFeatsInAdditionToArmor()
+        {
+            equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
+            equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
+
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].Power = 1;
+            feats[1].Name = "other feat";
+            feats[1].Power = -1;
+
+            var armorClass = GenerateAndAssertArmorClass(13, 13);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(2));
+            Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
+        }
+
+        //INFO: Example here is Githzerai's Inertial Armor
+        [Test]
+        public void AddArmorBonusFromFeatsInAdditionToItem()
+        {
+            equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
+            equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+                .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
+
+            var bracers = new Item();
+            bracers.Name = "bracers";
+            bracers.Magic.Bonus = 2;
+
+            var thing = new Item();
+            thing.Name = "thing";
+            thing.Magic.Bonus = -1;
+
+            equipment.Treasure.Items = new[] { bracers, thing };
+
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].Power = 1;
+            feats[1].Name = "other feat";
+            feats[1].Power = -1;
+
+            var armorClass = GenerateAndAssertArmorClass(14, 14);
+            Assert.That(armorClass.ArmorBonus, Is.EqualTo(3));
             Assert.That(armorClass.ShieldBonus, Is.EqualTo(1));
         }
 
@@ -232,8 +297,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void ShieldEnhancementBonusApplied()
         {
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 0 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
 
             var armorClass = GenerateAndAssertArmorClass(11, 11);
@@ -244,7 +307,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void OffhandNonArmorEnhancementBonusNotApplied()
         {
             equipment.OffHand = new Item { Name = "item" };
-            equipment.OffHand.ItemType = "not armor";
+            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
             equipment.OffHand.Magic.Bonus = 1;
 
             GenerateAndAssertArmorClass();
@@ -532,8 +595,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 1;
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
             equipment.OffHand.Magic.Bonus = 1;
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
             var ring = new Item();
             ring.Name = "ring";
@@ -618,8 +679,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void CursedShieldWithOppositeEffectHasNegativeBonus()
         {
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 3 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
             equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
 
@@ -631,8 +690,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void CursedShieldWithOppositeEffectHasNegativeEffect()
         {
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 2;
             equipment.OffHand.Magic.Curse = CurseConstants.OppositeEffect;
 
@@ -695,8 +752,6 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void CursedShieldWithDelusionHasNoBonus()
         {
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 3 };
-            equipment.OffHand.ItemType = ItemTypeConstants.Armor;
-            equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
             equipment.OffHand.Magic.Bonus = 1;
             equipment.OffHand.Magic.Curse = CurseConstants.Delusion;
 

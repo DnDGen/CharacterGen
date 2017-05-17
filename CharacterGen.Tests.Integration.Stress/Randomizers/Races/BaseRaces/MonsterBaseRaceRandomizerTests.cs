@@ -12,6 +12,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         {
             get
             {
+                //INFO: Not including aquatic, as they cannot randomly appear
                 return new[]
                 {
                     RaceConstants.BaseRaces.Azer,
@@ -25,6 +26,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
                     RaceConstants.BaseRaces.FireGiant,
                     RaceConstants.BaseRaces.FrostGiant,
                     RaceConstants.BaseRaces.Gargoyle,
+                    RaceConstants.BaseRaces.Githyanki,
+                    RaceConstants.BaseRaces.Githzerai,
                     RaceConstants.BaseRaces.Gnoll,
                     RaceConstants.BaseRaces.Goblin,
                     RaceConstants.BaseRaces.GraySlaad,

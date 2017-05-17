@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Generators
             this.maxRetries = maxRetries;
         }
 
-        public T Generate<T>(Func<T> buildInstructions, Func<T, bool> isValid, Func<T> buildDefault, string defaultDescription)
+        public T Generate<T>(Func<T> buildInstructions, string description, Func<T, bool> isValid, Func<T> buildDefault, string defaultDescription)
         {
             T builtObject;
             var retries = 1;

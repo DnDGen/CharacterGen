@@ -419,7 +419,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
         }
 
         [Test]
-        public void DoNotGetMoreWizardFeatsIfNoneAvailable()
+        public void IfNoWizardFeatsAvailable_ThenStop()
         {
             characterClass.Name = CharacterClassConstants.Wizard;
             characterClass.Level = 10;
@@ -471,6 +471,9 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities.Feats
             characterClass.Level = 3;
             AddFeatSelections(3);
             additionalFeatSelections[1].RequiredFeats = new[] { new RequiredFeatSelection { Feat = additionalFeatSelections[0].Feat } };
+
+            var index = 0;
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<AdditionalFeatSelection>>())).Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.ElementAt(index++ % fs.Count()));
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var featNames = feats.Select(f => f.Name);

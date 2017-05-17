@@ -2,6 +2,7 @@
 using CharacterGen.Abilities.Skills;
 using CharacterGen.Abilities.Stats;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Combats;
 using CharacterGen.Domain.Tables;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace CharacterGen.Domain.Selectors.Selections
             Frequency = new Frequency();
         }
 
-        public bool ImmutableRequirementsMet(int baseAttack, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, CharacterClass characterClass)
+        public bool ImmutableRequirementsMet(BaseAttack baseAttack, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, CharacterClass characterClass)
         {
             foreach (var stat in RequiredStats)
                 if (stats[stat.Key].Value < stat.Value)
@@ -41,7 +42,7 @@ namespace CharacterGen.Domain.Selectors.Selections
             if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.Name) == false || RequiredCharacterClasses[characterClass.Name] > characterClass.Level))
                 return false;
 
-            if (baseAttack < RequiredBaseAttack)
+            if (baseAttack.BaseBonus < RequiredBaseAttack)
                 return false;
 
             return !RequiredSkills.Any() || RequiredSkills.Any(s => s.RequirementMet(skills));
@@ -49,6 +50,9 @@ namespace CharacterGen.Domain.Selectors.Selections
 
         public bool MutableRequirementsMet(IEnumerable<Feat> feats)
         {
+            if (!RequiredFeats.Any())
+                return true;
+
             var proficiencyRequirement = RequiredFeats.FirstOrDefault(f => f.Feat == ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>
+    <object>
+        <name>Adulthood</name>
+        <item>20</item>
+    </object>
+    <object>
+        <name>Middle Age</name>
+        <item>50</item>
+    </object>
+    <object>
+        <name>Old</name>
+        <item>75</item>
+    </object>
+    <object>
+        <name>Venerable</name>
+        <item>100</item>
+    </object>
+</items>

@@ -29,7 +29,12 @@
   <object>
     <lower>29</lower>
     <content>Human</content>
-    <upper>81</upper>
+    <upper>76</upper>
+  </object>
+  <object>
+    <lower>77</lower>
+    <content>Githyanki</content>
+    <upper>77</upper>
   </object>
   <object>
     <lower>78</lower>

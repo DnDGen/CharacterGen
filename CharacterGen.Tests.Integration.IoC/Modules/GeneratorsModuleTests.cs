@@ -35,6 +35,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void AlignmentGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IAlignmentGenerator, AlignmentGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void CharacterGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ICharacterGenerator>();
@@ -53,6 +59,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void CharacterClassGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<ICharacterClassGenerator, CharacterClassGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void HitPointsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IHitPointsGenerator>();
@@ -65,9 +77,21 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void LanguageGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<ILanguageGenerator, LanguageGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void RaceGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IRaceGenerator>();
+        }
+
+        [Test]
+        public void RaceGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IRaceGenerator, RaceGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -80,6 +104,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void StatsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IStatsGenerator>();
+        }
+
+        [Test]
+        public void StatsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IStatsGenerator, StatsGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -459,14 +489,22 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
             AssertNotSingleton<ISetStatsRandomizer>();
         }
 
+        [Test]
         public void AbilitiesGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IAbilitiesGenerator>();
         }
 
+        [Test]
         public void CombatGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ICombatGenerator>();
+        }
+
+        [Test]
+        public void CombatGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<ICombatGenerator, CombatGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -476,9 +514,21 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void EquipmentGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IEquipmentGenerator, EquipmentGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void SkillsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<ISkillsGenerator>();
+        }
+
+        [Test]
+        public void SkillsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<ISkillsGenerator, SkillsGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -488,9 +538,21 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void FeatsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IFeatsGenerator, FeatsGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void AdditionalFeatsGeneratorIsNotBuiltAsSingleton()
         {
             AssertNotSingleton<IAdditionalFeatsGenerator>();
+        }
+
+        [Test]
+        public void AdditionalFeatsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IAdditionalFeatsGenerator, AdditionalFeatsGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -500,9 +562,21 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
+        public void ClassFeatsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IClassFeatsGenerator, ClassFeatsGeneratorEventGenDecorator>();
+        }
+
+        [Test]
         public void RacialFeatsGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IRacialFeatsGenerator>();
+        }
+
+        [Test]
+        public void RacialFeatsGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IRacialFeatsGenerator, RacialFeatsGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -515,6 +589,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void FeatFocusGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IFeatFocusGenerator>();
+        }
+
+        [Test]
+        public void FeatFocusGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IFeatFocusGenerator, FeatFocusGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -533,6 +613,12 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void MagicGeneratorIsNotASingleton()
         {
             AssertNotSingleton<IMagicGenerator>();
+        }
+
+        [Test]
+        public void MagicGeneratorIsDecorated()
+        {
+            AssertIsInstanceOf<IMagicGenerator, MagicGeneratorEventGenDecorator>();
         }
 
         [Test]
