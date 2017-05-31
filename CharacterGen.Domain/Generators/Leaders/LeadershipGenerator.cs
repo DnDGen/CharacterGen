@@ -7,7 +7,7 @@ using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace CharacterGen.Domain.Generators
         private IClassNameRandomizer anyNPCClassNameRandomizer;
         private RaceRandomizer anyBaseRaceRandomizer;
         private RaceRandomizer anyMetaraceRandomizer;
-        private IStatsRandomizer rawStatsRandomizer;
+        private IAbilitiesRandomizer rawAbilitiesRandomizer;
         private IBooleanPercentileSelector booleanPercentileSelector;
         private ICollectionsSelector collectionsSelector;
         private Generator generator;
@@ -40,7 +40,7 @@ namespace CharacterGen.Domain.Generators
             IClassNameRandomizer anyPlayerClassNameRandomizer,
             RaceRandomizer anyBaseRaceRandomizer,
             RaceRandomizer anyMetaraceRandomizer,
-            IStatsRandomizer rawStatsRandomizer,
+            IAbilitiesRandomizer rawAbilitiesRandomizer,
             IBooleanPercentileSelector booleanPercentileSelector,
             ICollectionsSelector collectionsSelector,
             Generator generator,
@@ -55,7 +55,7 @@ namespace CharacterGen.Domain.Generators
             this.anyPlayerClassNameRandomizer = anyPlayerClassNameRandomizer;
             this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
             this.anyMetaraceRandomizer = anyMetaraceRandomizer;
-            this.rawStatsRandomizer = rawStatsRandomizer;
+            this.rawAbilitiesRandomizer = rawAbilitiesRandomizer;
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.generator = generator;
@@ -149,9 +149,9 @@ namespace CharacterGen.Domain.Generators
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             if (npcs.Contains(leaderClass))
-                return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
+                return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
 
-            return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawStatsRandomizer);
+            return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
         }
 
         private Alignment GetAlignment(string leaderAlignment, bool allowLeaderAlignment = true)

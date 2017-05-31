@@ -57,7 +57,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
             Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
-            Assert.That(first.MinimumStats, Is.Empty);
+            Assert.That(first.MinimumAbilities, Is.Empty);
             Assert.That(first.RandomFociQuantity, Is.Empty);
 
             var firstRequirement = first.RequiredFeats.First();
@@ -76,14 +76,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.MaximumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(last.MinimumStats["stat"], Is.EqualTo(14));
-            Assert.That(last.MinimumStats["other stat"], Is.EqualTo(14));
-            Assert.That(last.MinimumStats.Count, Is.EqualTo(2));
+            Assert.That(last.MinimumAbilities["stat"], Is.EqualTo(14));
+            Assert.That(last.MinimumAbilities["other stat"], Is.EqualTo(14));
+            Assert.That(last.MinimumAbilities.Count, Is.EqualTo(2));
             Assert.That(last.RandomFociQuantity, Is.EqualTo("12d34"));
             Assert.That(last.RequiredFeats, Is.Empty);
         }
 
-        private IEnumerable<string> BuildRacialFeatData(string featName, string focus, int frequencyQuantity, string frequencyTimePeriod, int maxHitDice, int minHitDice, int power, string randomFociQuantity, int requiredStatValue, string size, params string[] requiredStats)
+        private IEnumerable<string> BuildRacialFeatData(string featName, string focus, int frequencyQuantity, string frequencyTimePeriod, int maxHitDice, int minHitDice, int power, string randomFociQuantity, int requiredStatValue, string size, params string[] requiredAbilities)
         {
             var data = new List<string>(11);
             while (data.Count < data.Capacity)
@@ -97,7 +97,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             data[DataIndexConstants.RacialFeatData.MinimumHitDiceRequirementIndex] = minHitDice.ToString();
             data[DataIndexConstants.RacialFeatData.PowerIndex] = power.ToString();
             data[DataIndexConstants.RacialFeatData.RandomFociQuantity] = randomFociQuantity;
-            data[DataIndexConstants.RacialFeatData.RequiredStatIndex] = string.Join(",", requiredStats);
+            data[DataIndexConstants.RacialFeatData.RequiredStatIndex] = string.Join(",", requiredAbilities);
             data[DataIndexConstants.RacialFeatData.RequiredStatMinimumValueIndex] = requiredStatValue.ToString();
             data[DataIndexConstants.RacialFeatData.SizeRequirementIndex] = size;
 
@@ -132,7 +132,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(first.Frequency.TimePeriod, Is.Empty);
             Assert.That(first.MaximumHitDieRequirement, Is.EqualTo(600));
-            Assert.That(first.MinimumStats, Is.Empty);
+            Assert.That(first.MinimumAbilities, Is.Empty);
             Assert.That(first.RandomFociQuantity, Is.Empty);
 
             var firstRequirement = first.RequiredFeats.First();
@@ -151,9 +151,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.Frequency.Quantity, Is.EqualTo(42));
             Assert.That(last.Frequency.TimePeriod, Is.EqualTo("fortnight"));
             Assert.That(last.MaximumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(last.MinimumStats["stat"], Is.EqualTo(14));
-            Assert.That(last.MinimumStats["other stat"], Is.EqualTo(14));
-            Assert.That(last.MinimumStats.Count, Is.EqualTo(2));
+            Assert.That(last.MinimumAbilities["stat"], Is.EqualTo(14));
+            Assert.That(last.MinimumAbilities["other stat"], Is.EqualTo(14));
+            Assert.That(last.MinimumAbilities.Count, Is.EqualTo(2));
             Assert.That(last.RandomFociQuantity, Is.EqualTo("12d34"));
             Assert.That(last.RequiredFeats, Is.Empty);
         }
@@ -184,7 +184,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
-            Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
+            Assert.That(first.FrequencyQuantityAbility, Is.EqualTo("stat"));
             Assert.That(first.MaximumLevel, Is.EqualTo(4));
             Assert.That(first.SizeRequirement, Is.Empty);
             Assert.That(first.AllowFocusOfAll, Is.True);
@@ -203,7 +203,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.Empty);
-            Assert.That(last.FrequencyQuantityStat, Is.Empty);
+            Assert.That(last.FrequencyQuantityAbility, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
             Assert.That(last.SizeRequirement, Is.EqualTo("large"));
@@ -256,7 +256,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.Power, Is.EqualTo(0));
             Assert.That(first.Frequency.Quantity, Is.EqualTo(3));
             Assert.That(first.Frequency.TimePeriod, Is.EqualTo("Daily"));
-            Assert.That(first.FrequencyQuantityStat, Is.EqualTo("stat"));
+            Assert.That(first.FrequencyQuantityAbility, Is.EqualTo("stat"));
             Assert.That(first.MaximumLevel, Is.EqualTo(4));
             Assert.That(first.SizeRequirement, Is.Empty);
             Assert.That(first.AllowFocusOfAll, Is.True);
@@ -275,7 +275,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.Power, Is.EqualTo(9266));
             Assert.That(last.Frequency.Quantity, Is.EqualTo(0));
             Assert.That(last.Frequency.TimePeriod, Is.Empty);
-            Assert.That(last.FrequencyQuantityStat, Is.Empty);
+            Assert.That(last.FrequencyQuantityAbility, Is.Empty);
             Assert.That(last.MaximumLevel, Is.EqualTo(0));
             Assert.That(last.RequiredFeats, Is.Empty);
             Assert.That(last.SizeRequirement, Is.EqualTo("large"));
@@ -294,7 +294,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements)).Returns(new[] { "additional feat 1" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements)).Returns(new[] { "additional feat 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements)).Returns(new[] { "additional feat 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements)).Returns(new[] { "additional feat 2" });
 
             var feat1ClassRequirements = new Dictionary<string, int>();
             feat1ClassRequirements["class 1"] = 3;
@@ -314,7 +314,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             feat2StatRequirements["stat 1"] = 13;
             feat2StatRequirements["stat 2"] = 16;
 
-            tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "additional feat 2");
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, "additional feat 2");
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat2StatRequirements);
 
             var additionalFeats = featsSelector.SelectAdditional();
@@ -341,7 +341,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.RequiredFeats.Count(), Is.EqualTo(2));
 
             Assert.That(first.RequiredSkills, Is.Empty);
-            Assert.That(first.RequiredStats, Is.Empty);
+            Assert.That(first.RequiredAbilities, Is.Empty);
             Assert.That(first.FocusType, Is.Empty);
 
             Assert.That(last.Feat, Is.EqualTo("additional feat 2"));
@@ -362,9 +362,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(requiredSkills.Length, Is.EqualTo(2));
 
             Assert.That(last.RequiredSkills.Count, Is.EqualTo(2));
-            Assert.That(last.RequiredStats["stat 1"], Is.EqualTo(13));
-            Assert.That(last.RequiredStats["stat 2"], Is.EqualTo(16));
-            Assert.That(last.RequiredStats.Count, Is.EqualTo(2));
+            Assert.That(last.RequiredAbilities["stat 1"], Is.EqualTo(13));
+            Assert.That(last.RequiredAbilities["stat 2"], Is.EqualTo(16));
+            Assert.That(last.RequiredAbilities.Count, Is.EqualTo(2));
             Assert.That(last.FocusType, Is.EqualTo("focus"));
         }
 

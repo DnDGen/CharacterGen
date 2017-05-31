@@ -1,10 +1,10 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
 using Moq;
@@ -25,7 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private ICombatGenerator combatGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private Equipment equipment;
         private Race race;
         private Dictionary<string, int> racialBaseAttackAdjustments;
@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             characterClass = new CharacterClass();
             feats = new List<Feat>();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             equipment = new Equipment();
             race = new Race();
             sizeModifiers = new Dictionary<string, int>();
@@ -58,12 +58,12 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             characterClass.Name = "class name";
             characterClass.Level = 20;
             race.Size = "size";
-            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
-            stats[StatConstants.Constitution].Value = 9266;
-            stats[StatConstants.Dexterity] = new Stat(StatConstants.Dexterity);
-            stats[StatConstants.Dexterity].Value = 42;
-            stats[StatConstants.Strength] = new Stat(StatConstants.Strength);
-            stats[StatConstants.Strength].Value = 600;
+            stats[AbilityConstants.Constitution] = new Ability(AbilityConstants.Constitution);
+            stats[AbilityConstants.Constitution].Value = 9266;
+            stats[AbilityConstants.Dexterity] = new Ability(AbilityConstants.Dexterity);
+            stats[AbilityConstants.Dexterity].Value = 42;
+            stats[AbilityConstants.Strength] = new Ability(AbilityConstants.Strength);
+            stats[AbilityConstants.Strength].Value = 600;
             racialBaseAttackAdjustments[string.Empty] = 0;
             sizeModifiers[race.Size] = 0;
 
@@ -228,8 +228,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void SetStatBonusesOnBaseAttack()
         {
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
-            Assert.That(baseAttack.StrengthBonus, Is.EqualTo(stats[StatConstants.Strength].Bonus));
-            Assert.That(baseAttack.DexterityBonus, Is.EqualTo(stats[StatConstants.Dexterity].Bonus));
+            Assert.That(baseAttack.StrengthBonus, Is.EqualTo(stats[AbilityConstants.Strength].Bonus));
+            Assert.That(baseAttack.DexterityBonus, Is.EqualTo(stats[AbilityConstants.Dexterity].Bonus));
         }
 
         [Test]
@@ -388,7 +388,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetHitPointsFromGenerator()
         {
-            mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats)).Returns(90210);
+            mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, stats[AbilityConstants.Constitution].Bonus, race, feats)).Returns(90210);
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
@@ -399,7 +399,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void GetHitPointsFromGeneratorWhenCharacterDoesNotHaveConstitution()
         {
-            stats.Remove(StatConstants.Constitution);
+            stats.Remove(AbilityConstants.Constitution);
 
             mockHitPointsGenerator.Setup(g => g.GenerateWith(characterClass, 0, race, feats)).Returns(90210);
 
@@ -443,7 +443,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void InitiativeBonusIncludesNegativeDexterityBonus()
         {
-            stats[StatConstants.Dexterity].Value = 1;
+            stats[AbilityConstants.Dexterity].Value = 1;
 
             var baseAttack = combatGenerator.GenerateBaseAttackWith(characterClass, race, stats);
             var combat = combatGenerator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);

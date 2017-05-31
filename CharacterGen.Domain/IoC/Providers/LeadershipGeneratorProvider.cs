@@ -6,7 +6,7 @@ using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 using Ninject;
 using Ninject.Activation;
 
@@ -24,7 +24,7 @@ namespace CharacterGen.Domain.IoC.Providers
             var anyNPCClassNameRandomizer = context.Kernel.Get<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
             var anyBaseRaceRandomizer = context.Kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
             var anyMetaraceRandomizer = context.Kernel.Get<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-            var rawStatsRandomizer = context.Kernel.Get<IStatsRandomizer>(StatsRandomizerTypeConstants.Raw);
+            var rawAbilitiesRandomizer = context.Kernel.Get<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
             var adjustmentsSelector = context.Kernel.Get<IAdjustmentsSelector>();
             var booleanPercentileSelector = context.Kernel.Get<IBooleanPercentileSelector>();
             var leadershipSelector = context.Kernel.Get<ILeadershipSelector>();
@@ -40,7 +40,7 @@ namespace CharacterGen.Domain.IoC.Providers
                 anyPlayerClassNameRandomizer,
                 anyBaseRaceRandomizer,
                 anyMetaraceRandomizer,
-                rawStatsRandomizer,
+                rawAbilitiesRandomizer,
                 booleanPercentileSelector,
                 collectionsSelector,
                 generator,

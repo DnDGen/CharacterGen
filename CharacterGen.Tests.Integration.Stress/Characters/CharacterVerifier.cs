@@ -1,9 +1,9 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.Characters;
+using CharacterGen.Feats;
 using CharacterGen.Races;
+using CharacterGen.Skills;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +33,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             VerifyCharacterClass(character);
             VerifyRace(character);
             VerifyAbilities(character);
+            VerifyLanguages(character);
+            VerifySkills(character);
+            VerifyFeats(character);
             VerifyEquipment(character);
             VerifyMagic(character);
             VerifyCombat(character);
@@ -176,27 +179,24 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(character.Race.Weight.Description, Is.EqualTo("Light").Or.EqualTo("Average").Or.EqualTo("Heavy"), character.Summary);
         }
 
-        private void VerifyAbilities(Character character)
+        private void VerifyLanguages(Character character)
         {
-            VerifyStats(character);
-            VerifySkills(character);
-            VerifyFeats(character);
-            Assert.That(character.Ability.Languages, Is.Not.Empty, character.Summary);
+            Assert.That(character.Languages, Is.Not.Empty, character.Summary);
         }
 
-        private void VerifyStats(Character character)
+        private void VerifyAbilities(Character character)
         {
-            Assert.That(character.Ability.Stats.Count, Is.InRange(5, 6), character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Charisma), character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Dexterity), character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Intelligence), character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Strength), character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Wisdom), character.Summary);
+            Assert.That(character.Abilities.Count, Is.InRange(5, 6), character.Summary);
+            Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Charisma), character.Summary);
+            Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Dexterity), character.Summary);
+            Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Intelligence), character.Summary);
+            Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Strength), character.Summary);
+            Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Wisdom), character.Summary);
 
-            if (character.Ability.Stats.Count == 6)
-                Assert.That(character.Ability.Stats.Keys, Contains.Item(StatConstants.Constitution), character.Summary);
+            if (character.Abilities.Count == 6)
+                Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Constitution), character.Summary);
 
-            foreach (var statKVP in character.Ability.Stats)
+            foreach (var statKVP in character.Abilities)
             {
                 var stat = statKVP.Value;
                 Assert.That(stat.Name, Is.EqualTo(statKVP.Key), character.Summary);
@@ -206,16 +206,16 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void VerifySkills(Character character)
         {
-            Assert.That(character.Ability.Skills, Is.Not.Empty, character.Summary);
+            Assert.That(character.Skills, Is.Not.Empty, character.Summary);
 
-            foreach (var skill in character.Ability.Skills)
+            foreach (var skill in character.Skills)
             {
                 Assert.That(skill.ArmorCheckPenalty, Is.Not.Positive, character.Summary);
                 Assert.That(skill.Ranks, Is.AtMost(skill.RankCap), character.Summary);
                 Assert.That(skill.RankCap, Is.Positive, character.Summary);
                 Assert.That(skill.Bonus, Is.Not.Negative);
-                Assert.That(skill.BaseStat, Is.Not.Null);
-                Assert.That(character.Ability.Stats.Values, Contains.Item(skill.BaseStat));
+                Assert.That(skill.BaseAbility, Is.Not.Null);
+                Assert.That(character.Abilities.Values, Contains.Item(skill.BaseAbility));
                 Assert.That(skill.Focus, Is.Not.Null);
 
                 if (skillsWithFoci.Contains(skill.Name))
@@ -224,15 +224,15 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                     Assert.That(skill.Focus, Is.Empty);
             }
 
-            var skillNamesAndFoci = character.Ability.Skills.Select(s => s.Name + s.Focus);
+            var skillNamesAndFoci = character.Skills.Select(s => s.Name + s.Focus);
             Assert.That(skillNamesAndFoci, Is.Unique);
         }
 
         private void VerifyFeats(Character character)
         {
-            Assert.That(character.Ability.Feats, Is.Not.Empty, character.Summary);
+            Assert.That(character.Feats, Is.Not.Empty, character.Summary);
 
-            foreach (var feat in character.Ability.Feats)
+            foreach (var feat in character.Feats)
             {
                 Assert.That(feat.Name, Is.Not.Empty, character.Summary);
                 Assert.That(feat.Foci, Is.Not.Null, feat.Name);
@@ -254,9 +254,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void VerifyEquipment(Character character)
         {
-            if (character.Ability.Feats.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
+            if (character.Feats.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
             {
-                var feats = GetAllFeatsMessage(character.Ability.Feats);
+                var feats = GetAllFeatsMessage(character.Feats);
 
                 Assert.That(character.Equipment.PrimaryHand, Is.Not.Null, feats);
                 Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty, feats);
@@ -385,8 +385,8 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private void VerifyCombat(Character character)
         {
             Assert.That(character.Combat.BaseAttack.BaseBonus, Is.Not.Negative, character.Summary);
-            Assert.That(character.Combat.BaseAttack.DexterityBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Dexterity].Bonus), character.Summary);
-            Assert.That(character.Combat.BaseAttack.StrengthBonus, Is.EqualTo(character.Ability.Stats[StatConstants.Strength].Bonus), character.Summary);
+            Assert.That(character.Combat.BaseAttack.DexterityBonus, Is.EqualTo(character.Abilities[AbilityConstants.Dexterity].Bonus), character.Summary);
+            Assert.That(character.Combat.BaseAttack.StrengthBonus, Is.EqualTo(character.Abilities[AbilityConstants.Strength].Bonus), character.Summary);
             Assert.That(character.Combat.BaseAttack.AllMeleeBonuses.Count, Is.InRange(1, 4), character.Summary);
             Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.InRange(1, 4), character.Summary);
             Assert.That(character.Combat.BaseAttack.AllRangedBonuses.Count, Is.EqualTo(character.Combat.BaseAttack.AllMeleeBonuses.Count()), character.Summary);
@@ -398,22 +398,22 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(character.Combat.BaseAttack.AllRangedBonuses.First(), Is.EqualTo(character.Combat.BaseAttack.RangedBonus));
             Assert.That(character.Combat.BaseAttack.RacialModifier, Is.Not.Negative);
 
-            if (character.Ability.Stats[StatConstants.Dexterity].Bonus != character.Ability.Stats[StatConstants.Strength].Bonus)
+            if (character.Abilities[AbilityConstants.Dexterity].Bonus != character.Abilities[AbilityConstants.Strength].Bonus)
                 Assert.That(character.Combat.BaseAttack.AllMeleeBonuses, Is.Not.EquivalentTo(character.Combat.BaseAttack.AllRangedBonuses), character.Summary);
 
             Assert.That(character.Combat.HitPoints, Is.AtLeast(character.Class.Level), character.Summary);
             Assert.That(character.Combat.ArmorClass.Full, Is.Positive, character.Summary);
             Assert.That(character.Combat.ArmorClass.FlatFooted, Is.Positive, character.Summary);
             Assert.That(character.Combat.ArmorClass.Touch, Is.Positive, character.Summary);
-            Assert.That(character.Combat.AdjustedDexterityBonus, Is.AtMost(character.Ability.Stats[StatConstants.Dexterity].Bonus), character.Summary);
+            Assert.That(character.Combat.AdjustedDexterityBonus, Is.AtMost(character.Abilities[AbilityConstants.Dexterity].Bonus), character.Summary);
             Assert.That(character.Combat.InitiativeBonus, Is.AtLeast(character.Combat.AdjustedDexterityBonus));
 
-            Assert.That(character.Combat.SavingThrows.Reflex, Is.AtLeast(character.Ability.Stats[StatConstants.Dexterity].Bonus));
-            Assert.That(character.Combat.SavingThrows.Will, Is.AtLeast(character.Ability.Stats[StatConstants.Wisdom].Bonus));
-            Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.EqualTo(character.Ability.Stats.ContainsKey(StatConstants.Constitution)));
+            Assert.That(character.Combat.SavingThrows.Reflex, Is.AtLeast(character.Abilities[AbilityConstants.Dexterity].Bonus));
+            Assert.That(character.Combat.SavingThrows.Will, Is.AtLeast(character.Abilities[AbilityConstants.Wisdom].Bonus));
+            Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.EqualTo(character.Abilities.ContainsKey(AbilityConstants.Constitution)));
 
             if (character.Combat.SavingThrows.HasFortitudeSave)
-                Assert.That(character.Combat.SavingThrows.Fortitude, Is.AtLeast(character.Ability.Stats[StatConstants.Constitution].Bonus));
+                Assert.That(character.Combat.SavingThrows.Fortitude, Is.AtLeast(character.Abilities[AbilityConstants.Constitution].Bonus));
         }
 
         private string GetAllFeatsMessage(IEnumerable<Feat> feats)

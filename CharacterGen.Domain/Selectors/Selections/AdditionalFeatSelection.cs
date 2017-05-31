@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Feats;
+using CharacterGen.Skills;
+using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Tables;
@@ -17,7 +17,7 @@ namespace CharacterGen.Domain.Selectors.Selections
         public int Power { get; set; }
         public IEnumerable<RequiredFeatSelection> RequiredFeats { get; set; }
         public int RequiredBaseAttack { get; set; }
-        public Dictionary<string, int> RequiredStats { get; set; }
+        public Dictionary<string, int> RequiredAbilities { get; set; }
         public IEnumerable<RequiredSkillSelection> RequiredSkills { get; set; }
         public Dictionary<string, int> RequiredCharacterClasses { get; set; }
         public string FocusType { get; set; }
@@ -26,17 +26,17 @@ namespace CharacterGen.Domain.Selectors.Selections
         {
             Feat = string.Empty;
             RequiredFeats = Enumerable.Empty<RequiredFeatSelection>();
-            RequiredStats = new Dictionary<string, int>();
+            RequiredAbilities = new Dictionary<string, int>();
             RequiredSkills = Enumerable.Empty<RequiredSkillSelection>();
             RequiredCharacterClasses = new Dictionary<string, int>();
             FocusType = string.Empty;
             Frequency = new Frequency();
         }
 
-        public bool ImmutableRequirementsMet(BaseAttack baseAttack, Dictionary<string, Stat> stats, IEnumerable<Skill> skills, CharacterClass characterClass)
+        public bool ImmutableRequirementsMet(BaseAttack baseAttack, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, CharacterClass characterClass)
         {
-            foreach (var stat in RequiredStats)
-                if (stats[stat.Key].Value < stat.Value)
+            foreach (var stat in RequiredAbilities)
+                if (abilities[stat.Key].Value < stat.Value)
                     return false;
 
             if (RequiredCharacterClasses.Any() && (RequiredCharacterClasses.ContainsKey(characterClass.Name) == false || RequiredCharacterClasses[characterClass.Name] > characterClass.Level))

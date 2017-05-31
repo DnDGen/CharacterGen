@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Feats;
+using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Selectors.Collections;
@@ -18,14 +18,14 @@ namespace CharacterGen.Domain.Generators.Combats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public SavingThrows GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<string, Stat> stats)
+        public SavingThrows GenerateWith(CharacterClass characterClass, IEnumerable<Feat> feats, Dictionary<string, Ability> abilities)
         {
             var savingThrows = new SavingThrows();
 
-            savingThrows.HasFortitudeSave = stats.ContainsKey(StatConstants.Constitution);
+            savingThrows.HasFortitudeSave = abilities.ContainsKey(AbilityConstants.Constitution);
 
-            savingThrows.Reflex = stats[StatConstants.Dexterity].Bonus;
-            savingThrows.Will = stats[StatConstants.Wisdom].Bonus;
+            savingThrows.Reflex = abilities[AbilityConstants.Dexterity].Bonus;
+            savingThrows.Will = abilities[AbilityConstants.Wisdom].Bonus;
 
             savingThrows.Reflex += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Reflex);
             savingThrows.Will += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Will);
@@ -45,7 +45,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
             if (savingThrows.HasFortitudeSave)
             {
-                savingThrows.Fortitude = stats[StatConstants.Constitution].Bonus;
+                savingThrows.Fortitude = abilities[AbilityConstants.Constitution].Bonus;
                 savingThrows.Fortitude += GetClassSavingThrowBonus(characterClass, SavingThrowConstants.Fortitude);
                 savingThrows.Fortitude += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Fortitude);
 

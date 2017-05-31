@@ -1,27 +1,29 @@
 ﻿using CharacterGen.Characters;
 using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
-using CharacterGen.Domain.Generators.Abilities.Feats;
 using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
+using CharacterGen.Domain.Generators.Languages;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Generators.Races;
+using CharacterGen.Domain.Generators.Randomizers.Abilities;
 using CharacterGen.Domain.Generators.Randomizers.Alignments;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels;
 using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
-using CharacterGen.Domain.Generators.Randomizers.Stats;
+using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Generators.Verifiers;
 using CharacterGen.Domain.IoC.Providers;
 using CharacterGen.Leaders;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
 using CharacterGen.Verifiers;
 using Ninject;
 using Ninject.Modules;
@@ -35,7 +37,6 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
             Bind<ILeadershipGenerator>().ToProvider<LeadershipGeneratorProvider>();
-            Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
             Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();
             Bind<IArmorGenerator>().ToProvider<ArmorGeneratorProvider>();
@@ -62,8 +63,8 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<IRaceGenerator>().To<RaceGenerator>().WhenInjectedInto<RaceGeneratorEventGenDecorator>();
             Bind<IRaceGenerator>().To<RaceGeneratorEventGenDecorator>();
 
-            Bind<IStatsGenerator>().To<StatsGenerator>().WhenInjectedInto<StatsGeneratorEventGenDecorator>();
-            Bind<IStatsGenerator>().To<StatsGeneratorEventGenDecorator>();
+            Bind<IAbilitiesGenerator>().To<AbilitiesGenerator>().WhenInjectedInto<AbilitiesGeneratorEventGenDecorator>();
+            Bind<IAbilitiesGenerator>().To<AbilitiesGeneratorEventGenDecorator>();
 
             Bind<ICombatGenerator>().To<CombatGenerator>().WhenInjectedInto<CombatGeneratorEventGenDecorator>();
             Bind<ICombatGenerator>().To<CombatGeneratorEventGenDecorator>();
@@ -143,21 +144,21 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta)).Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             Bind<RaceRandomizer>().To<NoMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NoMeta);
 
-            Bind<IStatsRandomizer>().To<AverageStatsRandomizer>().Named(StatsRandomizerTypeConstants.Average);
-            Bind<IStatsRandomizer>().To<BestOfFourStatsRandomizer>().Named(StatsRandomizerTypeConstants.BestOfFour);
-            Bind<IStatsRandomizer>().To<GoodStatsRandomizer>().Named(StatsRandomizerTypeConstants.Good);
-            Bind<IStatsRandomizer>().To<HeroicStatsRandomizer>().Named(StatsRandomizerTypeConstants.Heroic);
-            Bind<IStatsRandomizer>().To<OnesAsSixesStatsRandomizer>().Named(StatsRandomizerTypeConstants.OnesAsSixes);
-            Bind<IStatsRandomizer>().To<PoorStatsRandomizer>().Named(StatsRandomizerTypeConstants.Poor);
-            Bind<IStatsRandomizer>().To<RawStatsRandomizer>().Named(StatsRandomizerTypeConstants.Raw);
-            Bind<IStatsRandomizer>().To<TwoTenSidedDiceStatsRandomizer>().Named(StatsRandomizerTypeConstants.TwoTenSidedDice);
+            Bind<IAbilitiesRandomizer>().To<AverageAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Average);
+            Bind<IAbilitiesRandomizer>().To<BestOfFourAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.BestOfFour);
+            Bind<IAbilitiesRandomizer>().To<GoodAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Good);
+            Bind<IAbilitiesRandomizer>().To<HeroicAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Heroic);
+            Bind<IAbilitiesRandomizer>().To<OnesAsSixesAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.OnesAsSixes);
+            Bind<IAbilitiesRandomizer>().To<PoorAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Poor);
+            Bind<IAbilitiesRandomizer>().To<RawAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Raw);
+            Bind<IAbilitiesRandomizer>().To<TwoTenSidedDiceAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.TwoTenSidedDice);
 
             Bind<ISetAlignmentRandomizer>().To<SetAlignmentRandomizer>();
             Bind<ISetClassNameRandomizer>().To<SetClassNameRandomizer>();
             Bind<ISetLevelRandomizer>().To<SetLevelRandomizer>();
             Bind<ISetBaseRaceRandomizer>().To<SetBaseRaceRandomizer>();
             Bind<ISetMetaraceRandomizer>().To<SetMetaraceRandomizer>();
-            Bind<ISetStatsRandomizer>().To<SetStatsRandomizer>();
+            Bind<ISetAbilitiesRandomizer>().To<SetAbilitiesRandomizer>();
         }
     }
 }

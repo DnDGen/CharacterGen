@@ -1,10 +1,10 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
@@ -28,7 +28,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private List<Feat> feats;
         private Alignment alignment;
         private Race race;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private Equipment equipment;
         private Dictionary<string, int> arcaneSpellFailures;
         private List<string> classesThatPrepareSpells;
@@ -45,7 +45,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             feats = new List<Feat>();
             alignment = new Alignment();
             race = new Race();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             equipment = new Equipment();
             arcaneSpellFailures = new Dictionary<string, int>();
             classesThatPrepareSpells = new List<string>();

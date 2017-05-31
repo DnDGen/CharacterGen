@@ -1,11 +1,12 @@
 ﻿using CharacterGen.Abilities;
-using CharacterGen.Abilities.Feats;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using CharacterGen.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,10 @@ namespace CharacterGen.Characters
         public Race Race { get; set; }
         public string InterestingTrait { get; set; }
         public Combat Combat { get; set; }
-        public Ability Ability { get; set; }
+        public IEnumerable<Skill> Skills { get; set; }
+        public IEnumerable<string> Languages { get; set; }
+        public IEnumerable<Feat> Feats { get; set; }
+        public Dictionary<string, Ability> Abilities { get; set; }
         public Equipment Equipment { get; set; }
         public Magic Magic { get; set; }
 
@@ -27,7 +31,7 @@ namespace CharacterGen.Characters
         {
             get
             {
-                return Ability.Feats.Any(f => f.Name == FeatConstants.Leadership);
+                return Feats.Any(f => f.Name == FeatConstants.Leadership);
             }
         }
 
@@ -75,7 +79,10 @@ namespace CharacterGen.Characters
             Race = new Race();
             InterestingTrait = string.Empty;
             Combat = new Combat();
-            Ability = new Ability();
+            Skills = Enumerable.Empty<Skill>();
+            Languages = Enumerable.Empty<string>();
+            Feats = Enumerable.Empty<Feat>();
+            Abilities = new Dictionary<string, Ability>();
             Equipment = new Equipment();
             Magic = new Magic();
 

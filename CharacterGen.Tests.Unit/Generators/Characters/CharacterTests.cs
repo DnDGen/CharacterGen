@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Characters;
+﻿using CharacterGen.Characters;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using NUnit.Framework;
 
@@ -23,7 +23,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             Assert.That(character.Class, Is.Not.Null);
             Assert.That(character.InterestingTrait, Is.Empty);
             Assert.That(character.Race, Is.Not.Null);
-            Assert.That(character.Ability, Is.Not.Null);
+            Assert.That(character.Feats, Is.Empty);
+            Assert.That(character.Languages, Is.Empty);
+            Assert.That(character.Skills, Is.Empty);
+            Assert.That(character.Abilities, Is.Empty);
             Assert.That(character.Combat, Is.Not.Null);
             Assert.That(character.Equipment, Is.Not.Null);
             Assert.That(character.Magic, Is.Not.Null);
@@ -34,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IsLeaderIfHasLeadershipFeat()
         {
-            character.Ability.Feats = new[]
+            character.Feats = new[]
             {
                 new Feat { Name = FeatConstants.Leadership },
                 new Feat { Name = "other feat" }
@@ -46,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IsNotLeaderIfDoesNotHaveLeadershipFeat()
         {
-            character.Ability.Feats = new[]
+            character.Feats = new[]
             {
                 new Feat { Name = "feat" },
                 new Feat { Name = "other feat" }

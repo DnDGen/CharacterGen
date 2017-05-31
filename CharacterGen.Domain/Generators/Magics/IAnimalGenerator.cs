@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Alignments;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using System.Collections.Generic;
 

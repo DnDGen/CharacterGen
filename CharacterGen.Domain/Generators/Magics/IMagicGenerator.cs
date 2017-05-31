@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Feats;
+using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Items;
@@ -11,6 +11,6 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal interface IMagicGenerator
     {
-        Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> feats, Equipment equipment);
+        Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Feat> feats, Equipment equipment);
     }
 }

@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Domain.Selectors.Selections;
+﻿using CharacterGen.Domain.Selectors.Selections;
+using CharacterGen.Feats;
 using NUnit.Framework;
 using System.Collections.Generic;
 

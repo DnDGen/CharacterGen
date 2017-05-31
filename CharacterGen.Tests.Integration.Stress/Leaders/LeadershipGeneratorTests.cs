@@ -1,8 +1,8 @@
-﻿using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Characters;
 using CharacterGen.Leaders;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.CharacterClasses;
-using CharacterGen.Randomizers.Stats;
 using CharacterGen.Tests.Integration.Stress.Characters;
 using Ninject;
 using NUnit.Framework;
@@ -17,8 +17,8 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         public ILeadershipGenerator LeadershipGenerator { get; set; }
         [Inject]
         public ICharacterGenerator CharacterGenerator { get; set; }
-        [Inject, Named(StatsRandomizerTypeConstants.Heroic)]
-        public IStatsRandomizer HeroicStatsRandomizer { get; set; }
+        [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
+        public IAbilitiesRandomizer HeroicAbilitiesRandomizer { get; set; }
         [Inject, Named(LevelRandomizerTypeConstants.VeryHigh)]
         public ILevelRandomizer VeryHighLevelRandomizer { get; set; }
         [Inject]
@@ -76,9 +76,9 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
 
         private Leadership GenerateLeadership()
         {
-            var leader = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, VeryHighLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicStatsRandomizer);
+            var leader = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, VeryHighLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer);
 
-            return LeadershipGenerator.GenerateLeadership(leader.Class.Level, leader.Ability.Stats[StatConstants.Charisma].Bonus, leader.Magic.Animal);
+            return LeadershipGenerator.GenerateLeadership(leader.Class.Level, leader.Abilities[AbilityConstants.Charisma].Bonus, leader.Magic.Animal);
         }
 
         [Test]

@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Domain.Selectors.Selections;
+using CharacterGen.Skills;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -11,14 +11,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
     {
         private RequiredSkillSelection requiredSkillSelection;
         private List<Skill> otherSkills;
-        private Stat baseStat;
+        private Ability baseStat;
 
         [SetUp]
         public void Setup()
         {
             requiredSkillSelection = new RequiredSkillSelection();
             otherSkills = new List<Skill>();
-            baseStat = new Stat("stat name");
+            baseStat = new Ability("stat name");
         }
 
         [Test]

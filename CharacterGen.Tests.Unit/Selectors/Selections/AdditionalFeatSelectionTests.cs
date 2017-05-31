@@ -1,10 +1,10 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
+using CharacterGen.Skills;
 using NUnit.Framework;
 using System.Collections.Generic;
 using TreasureGen.Items;
@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
     {
         private AdditionalFeatSelection selection;
         private List<Feat> feats;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private List<Skill> skills;
         private CharacterClass characterClass;
         private BaseAttack baseAttack;
@@ -26,12 +26,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection = new AdditionalFeatSelection();
             feats = new List<Feat>();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             skills = new List<Skill>();
             characterClass = new CharacterClass();
             baseAttack = new BaseAttack();
 
-            stats["stat"] = new Stat("stat");
+            stats["stat"] = new Ability("stat");
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             Assert.That(selection.RequiredBaseAttack, Is.EqualTo(0));
             Assert.That(selection.RequiredFeats, Is.Empty);
             Assert.That(selection.RequiredSkills, Is.Empty);
-            Assert.That(selection.RequiredStats, Is.Empty);
+            Assert.That(selection.RequiredAbilities, Is.Empty);
             Assert.That(selection.RequiredCharacterClasses, Is.Empty);
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Power, Is.EqualTo(0));
@@ -75,9 +75,9 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         [Test]
         public void StatRequirementsNotMet()
         {
-            selection.RequiredStats["stat"] = 16;
+            selection.RequiredAbilities["stat"] = 16;
             stats["stat"].Value = 15;
-            stats["other stat"] = new Stat("other stat");
+            stats["other stat"] = new Ability("other stat");
             stats["other stat"].Value = 157;
             baseAttack.BaseBonus = 1;
 
@@ -165,10 +165,10 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection.RequiredBaseAttack = 2;
 
-            selection.RequiredStats["stat"] = 16;
-            stats["stat"] = new Stat("stat");
+            selection.RequiredAbilities["stat"] = 16;
+            stats["stat"] = new Ability("stat");
             stats["stat"].Value = 16;
-            stats["other stat"] = new Stat("other stat");
+            stats["other stat"] = new Ability("other stat");
             stats["other stat"].Value = 15;
 
             selection.RequiredSkills = new[]

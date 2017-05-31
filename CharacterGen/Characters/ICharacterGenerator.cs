@@ -1,7 +1,7 @@
 ﻿using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 
 namespace CharacterGen.Characters
 {
@@ -9,6 +9,6 @@ namespace CharacterGen.Characters
     {
         Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer);
+            IAbilitiesRandomizer statsRandomizer);
     }
 }

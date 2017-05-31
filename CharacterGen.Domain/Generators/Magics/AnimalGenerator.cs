@@ -1,8 +1,8 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Alignments;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Magics;
 using CharacterGen.Races;
 using System.Collections.Generic;

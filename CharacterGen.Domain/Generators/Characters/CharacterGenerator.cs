@@ -1,24 +1,30 @@
-﻿using CharacterGen.Abilities.Skills;
-using CharacterGen.Alignments;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Characters;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
+using CharacterGen.Domain.Generators.Languages;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Generators.Races;
+using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
+using CharacterGen.Items;
 using CharacterGen.Races;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Skills;
 using CharacterGen.Verifiers;
 using CharacterGen.Verifiers.Exceptions;
+using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
 
@@ -32,12 +38,15 @@ namespace CharacterGen.Domain.Generators.Characters
         private IAdjustmentsSelector adjustmentsSelector;
         private IRandomizerVerifier randomizerVerifier;
         private IPercentileSelector percentileSelector;
-        private IAbilitiesGenerator abilitiesGenerator;
         private ICombatGenerator combatGenerator;
         private IEquipmentGenerator equipmentGenerator;
         private IMagicGenerator magicGenerator;
         private Generator generator;
         private ICollectionsSelector collectionsSelector;
+        private IAbilitiesGenerator abilitiesGenerator;
+        private ILanguageGenerator languageGenerator;
+        private ISkillsGenerator skillsGenerator;
+        private IFeatsGenerator featsGenerator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator,
             ICharacterClassGenerator characterClassGenerator,
@@ -45,12 +54,15 @@ namespace CharacterGen.Domain.Generators.Characters
             IAdjustmentsSelector adjustmentsSelector,
             IRandomizerVerifier randomizerVerifier,
             IPercentileSelector percentileSelector,
-            IAbilitiesGenerator abilitiesGenerator,
             ICombatGenerator combatGenerator,
             IEquipmentGenerator equipmentGenerator,
             IMagicGenerator magicGenerator,
             Generator generator,
-            ICollectionsSelector collectionsSelector)
+            ICollectionsSelector collectionsSelector,
+            IAbilitiesGenerator abilitiesGenerator,
+            ILanguageGenerator languageGenerator,
+            ISkillsGenerator skillsGenerator,
+            IFeatsGenerator featsGenerator)
         {
             this.alignmentGenerator = alignmentGenerator;
             this.characterClassGenerator = characterClassGenerator;
@@ -59,11 +71,14 @@ namespace CharacterGen.Domain.Generators.Characters
             this.combatGenerator = combatGenerator;
             this.equipmentGenerator = equipmentGenerator;
             this.generator = generator;
+            this.languageGenerator = languageGenerator;
+            this.skillsGenerator = skillsGenerator;
+            this.featsGenerator = featsGenerator;
+            this.magicGenerator = magicGenerator;
 
             this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
-            this.magicGenerator = magicGenerator;
             this.collectionsSelector = collectionsSelector;
         }
 
@@ -72,7 +87,7 @@ namespace CharacterGen.Domain.Generators.Characters
             ILevelRandomizer levelRandomizer,
             RaceRandomizer baseRaceRandomizer,
             RaceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer)
+            IAbilitiesRandomizer statsRandomizer)
         {
             VerifyRandomizers(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
@@ -86,7 +101,7 @@ namespace CharacterGen.Domain.Generators.Characters
             ILevelRandomizer levelRandomizer,
             RaceRandomizer baseRaceRandomizer,
             RaceRandomizer metaraceRandomizer,
-            IStatsRandomizer statsRandomizer)
+            IAbilitiesRandomizer statsRandomizer)
         {
             var character = new Character();
 
@@ -96,29 +111,86 @@ namespace CharacterGen.Domain.Generators.Characters
 
             character.Class = EditCharacterClass(character.Alignment, character.Class, character.Race, levelRandomizer);
 
-            var stats = abilitiesGenerator.GenerateStats(character.Class, character.Race, statsRandomizer);
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, stats);
+            character.Abilities = abilitiesGenerator.GenerateWith(statsRandomizer, character.Class, character.Race);
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, character.Abilities);
 
-            character.Ability = abilitiesGenerator.GenerateWith(character.Class, character.Race, stats, baseAttack);
-            character.Equipment = equipmentGenerator.GenerateWith(character.Ability.Feats, character.Class, character.Race);
+            character.Skills = skillsGenerator.GenerateWith(character.Class, character.Race, character.Abilities);
 
-            var armorCheckPenaltySkills = character.Ability.Skills.Where(s => s.HasArmorCheckPenalty);
+            character.Feats = featsGenerator.GenerateWith(character.Class, character.Race, character.Abilities, character.Skills, baseAttack);
+            character.Skills = UpdateSkillsFromFeats(character.Skills, character.Feats);
 
-            foreach (var skill in armorCheckPenaltySkills)
+            character.Equipment = equipmentGenerator.GenerateWith(character.Feats, character.Class, character.Race);
+            character.Skills = UpdateSkillsFromEquipment(character.Skills, character.Equipment);
+
+            character.Languages = languageGenerator.GenerateWith(character.Race, character.Class, character.Abilities, character.Skills);
+
+            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Feats, character.Abilities, character.Equipment);
+            character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
+            character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Abilities, character.Feats, character.Equipment);
+
+            return character;
+        }
+
+        private IEnumerable<Skill> UpdateSkillsFromFeats(IEnumerable<Skill> skills, IEnumerable<Feat> feats)
+        {
+            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
+            var featGrantingSkillBonuses = feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
+            var allSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
+
+            foreach (var feat in featGrantingSkillBonuses)
             {
-                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.Armor, skill.Name);
-
-                if (character.Equipment.OffHand != null && character.Equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+                if (feat.Foci.Any())
                 {
-                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(character.Equipment.OffHand, skill.Name);
+                    foreach (var focus in feat.Foci)
+                    {
+                        if (allSkillNames.Any(s => focus.StartsWith(s)) == false)
+                            continue;
+
+                        var skillName = allSkillNames.First(s => focus.StartsWith(s));
+                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
+
+                        if (skill == null)
+                            continue;
+
+                        var circumstantial = allSkillNames.Contains(focus) == false;
+                        skill.CircumstantialBonus |= circumstantial;
+
+                        if (!circumstantial)
+                            skill.Bonus += feat.Power;
+                    }
+                }
+                else
+                {
+                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
+
+                    foreach (var skillName in skillsToReceiveBonus)
+                    {
+                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
+
+                        if (skill != null)
+                            skill.Bonus += feat.Power;
+                    }
                 }
             }
 
-            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Ability.Feats, character.Ability.Stats, character.Equipment);
-            character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
-            character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Ability.Stats, character.Ability.Feats, character.Equipment);
+            return skills;
+        }
 
-            return character;
+        private IEnumerable<Skill> UpdateSkillsFromEquipment(IEnumerable<Skill> skills, Equipment equipment)
+        {
+            var armorCheckPenaltySkills = skills.Where(s => s.HasArmorCheckPenalty);
+
+            foreach (var skill in armorCheckPenaltySkills)
+            {
+                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.Armor, skill.Name);
+
+                if (equipment.OffHand != null && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+                {
+                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.OffHand, skill.Name);
+                }
+            }
+
+            return skills;
         }
 
         private int ComputeArmorCheckPenalty(Item item, string skillName)

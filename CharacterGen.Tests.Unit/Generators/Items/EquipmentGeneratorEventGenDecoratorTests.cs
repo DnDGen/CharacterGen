@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Items;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
 using EventGen;

@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using NUnit.Framework;
 using TreasureGen.Items.Magical;
 

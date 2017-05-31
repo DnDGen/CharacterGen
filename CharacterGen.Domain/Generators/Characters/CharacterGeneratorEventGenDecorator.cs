@@ -2,7 +2,7 @@
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 using EventGen;
 
 namespace CharacterGen.Domain.Generators.Characters
@@ -18,7 +18,7 @@ namespace CharacterGen.Domain.Generators.Characters
             this.eventQueue = eventQueue;
         }
 
-        public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, IStatsRandomizer statsRandomizer)
+        public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, IAbilitiesRandomizer statsRandomizer)
         {
             eventQueue.Enqueue("CharacterGen", "Beginning character generation");
             var character = innerGenerator.GenerateWith(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer, statsRandomizer);

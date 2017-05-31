@@ -1,14 +1,11 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Combats;
 using CharacterGen.Domain.Generators.Abilities;
-using CharacterGen.Domain.Generators.Abilities.Feats;
 using CharacterGen.Domain.Selectors.Collections;
+using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -19,417 +16,669 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
     [TestFixture]
     public class AbilitiesGeneratorTests
     {
-        private IAbilitiesGenerator abilitiesGenerator;
-        private Mock<IStatsRandomizer> mockStatsRandomizer;
-        private Mock<IStatsGenerator> mockStatsGenerator;
-        private Mock<ILanguageGenerator> mockLanguageGenerator;
-        private Mock<ISkillsGenerator> mockSkillsGenerator;
-        private Mock<IFeatsGenerator> mockFeatsGenerator;
+        private Mock<IAbilityAdjustmentsSelector> mockAbilityAdjustmentsSelector;
+        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private CharacterClass characterClass;
+        private IAbilitiesGenerator abilitiesGenerator;
+
+        private Mock<IAbilitiesRandomizer> mockAbilitiesRandomizer;
+        private Mock<ISetAbilitiesRandomizer> mockSetAbilitiesRandomizer;
+        private Dictionary<string, Ability> randomizedAbilities;
+        private Dictionary<string, int> racialAdjustments;
         private Race race;
-        private Dictionary<string, Stat> stats;
-        private BaseAttack baseAttack;
-        private List<string> featSkillFoci;
+        private CharacterClass characterClass;
+        private List<string> undead;
+        private List<string> abilityPriorities;
 
         [SetUp]
         public void Setup()
         {
-            mockStatsRandomizer = new Mock<IStatsRandomizer>();
-            mockStatsGenerator = new Mock<IStatsGenerator>();
-            mockLanguageGenerator = new Mock<ILanguageGenerator>();
-            mockSkillsGenerator = new Mock<ISkillsGenerator>();
-            mockFeatsGenerator = new Mock<IFeatsGenerator>();
+            mockAbilityAdjustmentsSelector = new Mock<IAbilityAdjustmentsSelector>();
+            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            abilitiesGenerator = new AbilitiesGenerator(mockStatsGenerator.Object, mockLanguageGenerator.Object,
-                mockSkillsGenerator.Object, mockFeatsGenerator.Object, mockCollectionsSelector.Object);
-            stats = new Dictionary<string, Stat>();
-            baseAttack = new BaseAttack();
-            characterClass = new CharacterClass();
+            abilitiesGenerator = new AbilitiesGenerator(mockBooleanPercentileSelector.Object, mockAbilityAdjustmentsSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+
+            mockAbilitiesRandomizer = new Mock<IAbilitiesRandomizer>();
+            mockSetAbilitiesRandomizer = new Mock<ISetAbilitiesRandomizer>();
+
+            randomizedAbilities = new Dictionary<string, Ability>();
             race = new Race();
-            featSkillFoci = new List<string>();
+            racialAdjustments = new Dictionary<string, int>();
+            characterClass = new CharacterClass();
+            undead = new List<string>();
+            abilityPriorities = new List<string>();
 
             characterClass.Name = "class name";
-            stats[StatConstants.Intelligence] = new Stat(StatConstants.Intelligence);
-            stats[StatConstants.Intelligence].Value = 9266;
-            featSkillFoci.Add("skill 1");
-            featSkillFoci.Add("skill 2");
-            featSkillFoci.Add("skill 3");
-            featSkillFoci.Add("skill 4");
-            featSkillFoci.Add("skill 5");
+            characterClass.Level = 1;
+            race.BaseRace = "base race";
+            race.Metarace = "metarace";
 
-            mockStatsGenerator.Setup(g => g.GenerateWith(mockStatsRandomizer.Object, characterClass, race)).Returns(stats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
+            randomizedAbilities[AbilityConstants.Charisma] = new Ability(AbilityConstants.Charisma);
+            randomizedAbilities[AbilityConstants.Constitution] = new Ability(AbilityConstants.Constitution);
+            randomizedAbilities[AbilityConstants.Dexterity] = new Ability(AbilityConstants.Dexterity);
+            randomizedAbilities[AbilityConstants.Intelligence] = new Ability(AbilityConstants.Intelligence);
+            randomizedAbilities[AbilityConstants.Strength] = new Ability(AbilityConstants.Strength);
+            randomizedAbilities[AbilityConstants.Wisdom] = new Ability(AbilityConstants.Wisdom);
+
+            abilityPriorities.Add(AbilityConstants.Strength);
+            abilityPriorities.Add(AbilityConstants.Wisdom);
+
+            racialAdjustments[AbilityConstants.Charisma] = 0;
+            racialAdjustments[AbilityConstants.Constitution] = 0;
+            racialAdjustments[AbilityConstants.Dexterity] = 0;
+            racialAdjustments[AbilityConstants.Intelligence] = 0;
+            racialAdjustments[AbilityConstants.Strength] = 0;
+            racialAdjustments[AbilityConstants.Wisdom] = 0;
+
+            mockSetAbilitiesRandomizer.SetupAllProperties();
+
+            mockAbilityAdjustmentsSelector.Setup(p => p.SelectFor(race)).Returns(racialAdjustments);
+            mockAbilitiesRandomizer.Setup(r => r.Randomize()).Returns(randomizedAbilities);
+            mockSetAbilitiesRandomizer.Setup(r => r.Randomize()).Returns(randomizedAbilities);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(undead);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name)).Returns(abilityPriorities);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.Last());
         }
 
         [Test]
-        public void GetStatsFromStatsGenerator()
+        public void RandomizesAbilityValues()
         {
-            var generatedStats = abilitiesGenerator.GenerateStats(characterClass, race, mockStatsRandomizer.Object);
-            Assert.That(generatedStats, Is.EqualTo(stats));
+            abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            mockAbilitiesRandomizer.Verify(r => r.Randomize(), Times.Once);
         }
 
         [Test]
-        public void SetAbilityStats()
+        public void PrioritizesAbilitiesByClass()
         {
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Stats, Is.EqualTo(stats));
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(18));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(16));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+        }
+
+        private void AssertAbilities(Dictionary<string, Ability> abilities)
+        {
+            foreach (var abilityKVP in abilities)
+            {
+                var ability = abilityKVP.Value;
+                Assert.That(ability.Name, Is.EqualTo(abilityKVP.Key));
+                Assert.That(ability.Value, Is.AtLeast(3));
+            }
         }
 
         [Test]
-        public void GetSkillsFromSkillGenerator()
+        public void IfMultipleSecondPriorityAbilities_DoNotCompeteAmongstThemselves()
         {
-            var skills = new List<Skill>();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            abilityPriorities.Add(AbilityConstants.Charisma);
+            randomizedAbilities[AbilityConstants.Charisma].Value = 17;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
 
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills, Is.EqualTo(skills));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(18));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(16));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(17));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
         }
 
         [Test]
-        public void GetLanguagesFromLanguageGenerator()
+        public void IfMultipleSecondPriorityAbilities_StillHigherThanNonPriorityAbilities()
         {
-            var skills = new List<Skill>();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            abilityPriorities.Add(AbilityConstants.Charisma);
+            randomizedAbilities[AbilityConstants.Charisma].Value = 9;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
 
-            var languages = new[] { "language 1", "language 2" };
-            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass.Name, stats[StatConstants.Intelligence].Bonus, skills))
-                .Returns(languages);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Languages, Is.EqualTo(languages));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(18));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(16));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(9));
         }
 
         [Test]
-        public void GetFeatsFromFeatGenerator()
+        public void DoNotPrioritizeSecondPriorityAbilityMoreThanOnce()
         {
-            var skills = new List<Skill>();
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            abilityPriorities.Add(AbilityConstants.Charisma);
+            randomizedAbilities[AbilityConstants.Strength].Value = 19;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Constitution].Value = 17;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = 16;
 
-            var feats = new List<Feat>();
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Feats, Is.EqualTo(feats));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(19));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(18));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(17));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(16));
         }
 
         [Test]
-        public void ApplyFeatThatGrantSkillBonusesToSkills()
+        public void DoNotPrioritizeIfAllValuesTheSame()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
-
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills.Add(new Skill("skill 3", baseStat, 1));
-            skills.Add(new Skill("skill 4", baseStat, 1));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            skills[2].Bonus = 3;
-            skills[3].Bonus = 4;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Power = 1;
-            feats[1].Name = "feat2";
-            feats[1].Power = 2;
-            feats[2].Name = "feat3";
-            feats[2].Power = 3;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 4" });
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(10));
         }
 
         [Test]
-        public void ApplyFeatThatGrantSkillBonusesToSkillsWithFocus()
+        public void DoNotPrioritizeSecondaryPrioritiesIfTheyAreAllAlreadyGreaterThanNonPriorityAbilities()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            abilityPriorities.Add(AbilityConstants.Charisma);
+            randomizedAbilities[AbilityConstants.Strength].Value = 17;
+            randomizedAbilities[AbilityConstants.Charisma].Value = 18;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = 19;
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills.Add(new Skill("skill 3", baseStat, 1, "other focus"));
-            skills.Add(new Skill("skill 3", baseStat, 1, "focus"));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            skills[2].Bonus = 3;
-            skills[3].Bonus = 4;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Power = 1;
-            feats[1].Name = "feat2";
-            feats[1].Power = 2;
-            feats[2].Name = "feat3";
-            feats[2].Power = 3;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 3/focus" });
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(19));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(17));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(18));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(10));
         }
 
         [Test]
-        public void IfFocusIsSkill_ApplyBonusToThatSkill()
+        public void IfNoSecondPriorityAbilities_OnlyPrioritiesTheFirst()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            abilityPriorities.Remove(AbilityConstants.Strength);
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 12;
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills.Add(new Skill("skill 3", baseStat, 1));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            skills[2].Bonus = 3;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 2", "skill 3", "non-skill focus" };
-            feats[0].Power = 4;
-            feats[1].Name = "feat2";
-            feats[1].Foci = new[] { "skill 3", "non-skill focus" };
-            feats[1].Power = 1;
-            feats[2].Name = "feat1";
-            feats[2].Foci = new[] { "skill 2", "non-skill focus" };
-            feats[2].Power = 3;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
-            Assert.That(ability.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(9));
-            Assert.That(ability.Skills.First(s => s.Name == "skill 3").Bonus, Is.EqualTo(8));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(16));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(12));
         }
 
         [Test]
-        public void IfFocusIsSkillWithFocus_ApplyBonusToThatSkill()
+        public void DoNotPrioritizeAbilitiesIfNoPriorities()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            abilityPriorities.Clear();
+            randomizedAbilities[AbilityConstants.Charisma].Value = 17;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
 
-            skills.Add(new Skill("skill 1", baseStat, 1, "focus 1"));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills.Add(new Skill("skill 1", baseStat, 1, "focus 2"));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            skills[2].Bonus = 3;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 2", "skill 1/focus 2", "non-skill focus" };
-            feats[0].Power = 4;
-            feats[1].Name = "feat2";
-            feats[1].Foci = new[] { "skill 1/focus 2", "non-skill focus" };
-            feats[1].Power = 1;
-            feats[2].Name = "feat1";
-            feats[2].Foci = new[] { "skill 2", "non-skill focus" };
-            feats[2].Power = 3;
-
-            featSkillFoci.Add("skill 1/focus 1");
-            featSkillFoci.Add("skill 1/focus 2");
-            featSkillFoci.Add("skill 1/focus 3");
-            featSkillFoci.Remove("skill 1"); //INFO: Doing this because a skill either has focus all the time or never
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(1));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(9));
-            Assert.That(ability.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(8));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(16));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(17));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(18));
         }
 
         [Test]
-        public void OnlyApplySkillFeatToSkillsIfSkillFocusIsPurelySkill()
+        public void AdjustsAbilitiesByRace()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            racialAdjustments[AbilityConstants.Dexterity] = 1;
+            racialAdjustments[AbilityConstants.Strength] = -1;
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills[0].Bonus = 1;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
-            feats[0].Power = 1;
-
-            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(11));
         }
 
         [Test]
-        public void NoCircumstantialBonusIfBonusApplied()
+        public void AdjustAbilitiesAfterPrioritizing()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
+            racialAdjustments[AbilityConstants.Dexterity] = 9266;
+            racialAdjustments[AbilityConstants.Strength] = -10;
+            racialAdjustments[AbilityConstants.Wisdom] = -7;
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Power = 1;
-            feats[1].Name = "feat2";
-            feats[1].Foci = new[] { "skill 2", "non-skill focus" };
-            feats[1].Power = 2;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(2));
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.False);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(4));
-            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(8));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9276));
         }
 
         [Test]
-        public void IfSkillBonusFocusIsNotPurelySkill_MarkSkillAsHavingCircumstantialBonus()
+        public void IncreaseFirstPriorityAbility()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            characterClass.Level = 4;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills[0].Bonus = 1;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
-            feats[0].Power = 1;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
         }
 
         [Test]
-        public void MarkSkillWithCircumstantialBonusWhenOtherFociDoNotHaveCircumstantialBonus()
+        public void IncreaseSecondPriorityAbility()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            characterClass.Level = 4;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
-
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
-            feats[0].Power = 1;
-
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
-
-            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
-
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
         }
 
         [Test]
-        public void CircumstantialBonusIsNotOverwritten()
+        public void IncreaseRandomPriorityAbilityThatIsNotFirstPriority()
         {
-            var skills = new List<Skill>();
-            var baseStat = new Stat("base stat");
+            abilityPriorities.Add(AbilityConstants.Charisma);
+            characterClass.Level = 4;
 
-            skills.Add(new Skill("skill 1", baseStat, 1));
-            skills.Add(new Skill("skill 2", baseStat, 1));
-            skills[0].Bonus = 1;
-            skills[1].Bonus = 2;
-            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats)).Returns(skills);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
-            var feats = new List<Feat>();
-            feats.Add(new Feat());
-            feats.Add(new Feat());
-            feats[0].Name = "feat1";
-            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
-            feats[0].Power = 1;
-            feats[1].Name = "feat2";
-            feats[1].Foci = new[] { "skill 1" };
-            feats[1].Power = 1;
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+        }
 
-            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
+        [Test]
+        public void DoNotIncreaseSecondPriorityAbilityIfNone()
+        {
+            abilityPriorities.Remove(AbilityConstants.Strength);
+            characterClass.Level = 4;
 
-            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
-                .Returns(featGrantingSkillBonuses);
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
-            var ability = abilitiesGenerator.GenerateWith(characterClass, race, stats, baseAttack);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
-            Assert.That(ability.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void IncreaseRandomAbilityIfNoPriorities()
+        {
+            abilityPriorities.Clear();
+            characterClass.Level = 4;
+
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.ElementAt(2));
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(11));
+        }
+
+        [Test]
+        public void IncreasingIsAfterPrioritizationAndAdjustments()
+        {
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 18;
+            randomizedAbilities[AbilityConstants.Strength].Value = 16;
+            racialAdjustments[AbilityConstants.Dexterity] = 9266;
+            racialAdjustments[AbilityConstants.Strength] = -10;
+            racialAdjustments[AbilityConstants.Wisdom] = -7;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            characterClass.Level = 4;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9276));
+        }
+
+        [TestCase(1, 0)]
+        [TestCase(2, 0)]
+        [TestCase(3, 0)]
+        [TestCase(4, 1)]
+        [TestCase(5, 1)]
+        [TestCase(6, 1)]
+        [TestCase(7, 1)]
+        [TestCase(8, 2)]
+        [TestCase(9, 2)]
+        [TestCase(10, 2)]
+        [TestCase(11, 2)]
+        [TestCase(12, 3)]
+        [TestCase(13, 3)]
+        [TestCase(14, 3)]
+        [TestCase(15, 3)]
+        [TestCase(16, 4)]
+        [TestCase(17, 4)]
+        [TestCase(18, 4)]
+        [TestCase(19, 4)]
+        [TestCase(20, 5)]
+        public void IncreaseAbility(int level, int increase)
+        {
+            characterClass.Level = level;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10 + increase));
+        }
+
+        [Test]
+        public void DetermineWhichAbilityToIncreasePerLevel()
+        {
+            characterClass.Level = 12;
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+                .Returns(true).Returns(false).Returns(true);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(12));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void IncreasesIgnorePrioritization()
+        {
+            characterClass.Level = 12;
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+                .Returns(true).Returns(false).Returns(false);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(12));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void CannotHaveAbilityLessThan3()
+        {
+            racialAdjustments[AbilityConstants.Strength] = -9266;
+            randomizedAbilities[AbilityConstants.Strength].Value = 3;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void SetMinimumAbilityBeforeIncreasingAbilities()
+        {
+            racialAdjustments[AbilityConstants.Strength] = -9266;
+            randomizedAbilities[AbilityConstants.Strength].Value = 3;
+
+            characterClass.Level = 4;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void UndeadHaveNoConstitution()
+        {
+            undead.Add(race.Metarace);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadDoNotTryToIncreaseConstitution()
+        {
+            abilityPriorities.Clear();
+            abilityPriorities.Add(AbilityConstants.Constitution);
+            abilityPriorities.Add(AbilityConstants.Strength);
+
+            undead.Add(race.Metarace);
+            characterClass.Level = 4;
+            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadDoNotTryToIncreaseConstitutionWhenNoPriorities()
+        {
+            abilityPriorities.Clear();
+
+            undead.Add(race.Metarace);
+            characterClass.Level = 4;
+
+            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
+                .Returns(AbilityConstants.Constitution)
+                .Returns(AbilityConstants.Intelligence);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void AdjustSetAbilities()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = 10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = 11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = 12;
+            randomizedAbilities[AbilityConstants.Strength].Value = 8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = 13;
+
+            racialAdjustments[AbilityConstants.Charisma] = 1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = 3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = 5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            characterClass.Level = 20;
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+                .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = true;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(12));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(4));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(21));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void DoNotAdjustSetAbilities()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = 10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = 11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = 12;
+            randomizedAbilities[AbilityConstants.Strength].Value = 8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = 13;
+
+            racialAdjustments[AbilityConstants.Charisma] = 1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = 3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = 5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            characterClass.Level = 20;
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+                .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(12));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(8));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(13));
+        }
+
+        [Test]
+        public void CannotHaveSetAbilityBelow3IfAdjustingAbilities()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = -10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = -11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = -9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = -12;
+            randomizedAbilities[AbilityConstants.Strength].Value = -8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = -13;
+
+            racialAdjustments[AbilityConstants.Charisma] = -1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = -3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = -5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = true;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void CannotHaveSetAbilityBelow3IfNotAdjustingAbilities()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = -10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = -11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = -9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = -12;
+            randomizedAbilities[AbilityConstants.Strength].Value = -8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = -13;
+
+            racialAdjustments[AbilityConstants.Charisma] = -1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = -3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = -5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void UndeadStillHaveNoConstitutionWhenNotAdjustSetAbilities()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = 10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = 11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = 9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = 12;
+            randomizedAbilities[AbilityConstants.Strength].Value = 8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = 13;
+
+            racialAdjustments[AbilityConstants.Charisma] = 1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = 3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = 5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            characterClass.Level = 20;
+            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+                .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
+            undead.Add(race.Metarace);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(12));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(8));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(13));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadStillHaveNoConstitutionWhenAdjustingSetAbilitiesBelow3()
+        {
+            randomizedAbilities[AbilityConstants.Charisma].Value = -10;
+            randomizedAbilities[AbilityConstants.Constitution].Value = -11;
+            randomizedAbilities[AbilityConstants.Dexterity].Value = -9;
+            randomizedAbilities[AbilityConstants.Intelligence].Value = -12;
+            randomizedAbilities[AbilityConstants.Strength].Value = -8;
+            randomizedAbilities[AbilityConstants.Wisdom].Value = -13;
+
+            racialAdjustments[AbilityConstants.Charisma] = -1;
+            racialAdjustments[AbilityConstants.Constitution] = -2;
+            racialAdjustments[AbilityConstants.Dexterity] = -3;
+            racialAdjustments[AbilityConstants.Intelligence] = -4;
+            racialAdjustments[AbilityConstants.Strength] = -5;
+            racialAdjustments[AbilityConstants.Wisdom] = -6;
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
+
+            mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
+            undead.Add(race.Metarace);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockSetAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(3));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(3));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
         }
     }
 }

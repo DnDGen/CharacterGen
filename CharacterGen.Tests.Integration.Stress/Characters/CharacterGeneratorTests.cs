@@ -1,12 +1,12 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Characters;
+using CharacterGen.Feats;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
 using Ninject;
 using NUnit.Framework;
 using System;
@@ -20,12 +20,12 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
     {
         [Inject]
         public ICharacterGenerator CharacterGenerator { get; set; }
-        [Inject, Named(StatsRandomizerTypeConstants.Raw)]
-        public IStatsRandomizer RawStatsRandomizer { get; set; }
+        [Inject, Named(AbilitiesRandomizerTypeConstants.Raw)]
+        public IAbilitiesRandomizer RawAbilitiesRandomizer { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
         public IClassNameRandomizer NPCClassNameRandomizer { get; set; }
-        [Inject, Named(StatsRandomizerTypeConstants.Heroic)]
-        public IStatsRandomizer HeroicStatsRandomizer { get; set; }
+        [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
+        public IAbilitiesRandomizer HeroicAbilitiesRandomizer { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.Spellcaster)]
         public IClassNameRandomizer SpellcasterClassNameRandomizer { get; set; }
         [Inject]
@@ -51,7 +51,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertCharacter()
         {
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
             AssertPlayerCharacter(character);
@@ -70,7 +70,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertNPC()
         {
-            var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var npc = CharacterGenerator.GenerateWith(AlignmentRandomizer, NPCClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(npc);
             Assert.That(npc.Class.IsNPC, Is.True);
@@ -84,7 +84,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertAquatic()
         {
-            var aquaticCharacter = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, AquaticBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var aquaticCharacter = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, AquaticBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(aquaticCharacter);
             AssertPlayerCharacter(aquaticCharacter);
@@ -111,7 +111,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             SetClassNameRandomizer.SetClassName = CharacterClassConstants.Commoner;
             SetLevelRandomizer.SetLevel = 1;
 
-            var commoner = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var commoner = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(commoner);
             Assert.That(commoner.Class.IsNPC, Is.True);
@@ -143,7 +143,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             SetLevelRandomizer.SetLevel = 20;
             SetLevelRandomizer.AllowAdjustments = false;
 
-            var fighter = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var fighter = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(fighter);
             AssertPlayerCharacter(fighter);
@@ -172,7 +172,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         {
             SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.StormGiant;
 
-            var stormGiant = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var stormGiant = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(stormGiant);
             AssertPlayerCharacter(stormGiant);
@@ -204,7 +204,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertSpellcaster()
         {
-            var spellcaster = Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicStatsRandomizer),
+            var spellcaster = Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer),
                 c => c.Class.Level > 3);
 
             CharacterVerifier.AssertCharacter(spellcaster);
@@ -286,7 +286,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Rakshasa;
 
             var spellcaster = Generate(
-                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, HeroicStatsRandomizer),
+                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer),
                 c => true);
 
             CharacterVerifier.AssertCharacter(spellcaster);
@@ -307,7 +307,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             var undeadMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             undeadMetaraceRandomizer.ForceMetarace = true;
 
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, undeadMetaraceRandomizer, RawStatsRandomizer);
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, undeadMetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
             AssertPlayerCharacter(character);
@@ -321,7 +321,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                 .Or.EqualTo(RaceConstants.Metaraces.Mummy)
                 .Or.EqualTo(RaceConstants.Metaraces.Vampire));
             Assert.That(character.Race.ChallengeRating, Is.Positive, character.Summary);
-            Assert.That(character.Ability.Stats.Keys, Is.All.Not.EqualTo(StatConstants.Constitution), character.Summary);
+            Assert.That(character.Abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution), character.Summary);
             Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Summary);
         }
 
@@ -337,7 +337,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             var randomIndex = Random.Next(2);
             SetBaseRaceRandomizer.SetBaseRace = planetouched[randomIndex];
 
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawStatsRandomizer);
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
             AssertPlayerCharacter(character);
@@ -379,9 +379,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                 FeatConstants.Telekinesis,
             };
 
-            var featNames = character.Ability.Feats.Select(f => f.Name);
+            var featNames = character.Feats.Select(f => f.Name);
             var ghostSpecialAttackFeats = featNames.Intersect(ghostSpecialAttacks);
-            var ghostSpecialAttackFeat = character.Ability.Feats.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
+            var ghostSpecialAttackFeat = character.Feats.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
 
             Assert.That(ghostSpecialAttackFeats.Count, Is.EqualTo(ghostSpecialAttackFeat.Foci.Count()));
             Assert.That(ghostSpecialAttackFeats.Count, Is.InRange(1, 3));
@@ -390,7 +390,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private Character GetGhost()
         {
             SetMetaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Ghost;
-            return CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, SetMetaraceRandomizer, RawStatsRandomizer);
+            return CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, SetMetaraceRandomizer, RawAbilitiesRandomizer);
         }
     }
 }

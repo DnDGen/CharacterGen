@@ -1,7 +1,7 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
 using System;

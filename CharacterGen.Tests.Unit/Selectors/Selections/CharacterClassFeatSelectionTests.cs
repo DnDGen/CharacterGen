@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Selections;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             Assert.That(selection.RequiredFeats, Is.Empty);
             Assert.That(selection.Power, Is.EqualTo(0));
             Assert.That(selection.MaximumLevel, Is.EqualTo(0));
-            Assert.That(selection.FrequencyQuantityStat, Is.Empty);
+            Assert.That(selection.FrequencyQuantityAbility, Is.Empty);
             Assert.That(selection.SizeRequirement, Is.Empty);
             Assert.That(selection.AllowFocusOfAll, Is.False);
         }

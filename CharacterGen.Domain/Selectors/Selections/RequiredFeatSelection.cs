@@ -1,4 +1,4 @@
-﻿using CharacterGen.Abilities.Feats;
+﻿using CharacterGen.Feats;
 using System.Collections.Generic;
 using System.Linq;
 

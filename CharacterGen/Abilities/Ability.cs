@@ -1,24 +1,23 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace CharacterGen.Abilities
+﻿namespace CharacterGen.Abilities
 {
     public class Ability
     {
-        public IEnumerable<Skill> Skills { get; set; }
-        public IEnumerable<string> Languages { get; set; }
-        public IEnumerable<Feat> Feats { get; set; }
-        public Dictionary<string, Stat> Stats { get; set; }
+        public readonly string Name;
 
-        public Ability()
+        public int Value { get; set; }
+        public int Bonus
         {
-            Skills = Enumerable.Empty<Skill>();
-            Languages = Enumerable.Empty<string>();
-            Feats = Enumerable.Empty<Feat>();
-            Stats = new Dictionary<string, Stat>();
+            get
+            {
+                var even = Value - Value % 2;
+                return (even - 10) / 2;
+            }
+        }
+
+        public Ability(string name)
+        {
+            Name = name;
+            Value = 10;
         }
     }
 }

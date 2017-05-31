@@ -1,7 +1,7 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Alignments;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using NUnit.Framework;
 using System.Linq;

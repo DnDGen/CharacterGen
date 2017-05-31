@@ -11,7 +11,7 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<ILanguageCollectionsSelector>().To<LanguageCollectionsSelector>();
             Bind<IAdjustmentsSelector>().To<AdjustmentsSelector>();
             Bind<IPercentileSelector>().To<PercentileSelector>();
-            Bind<IStatAdjustmentsSelector>().To<StatAdjustmentsSelector>();
+            Bind<IAbilityAdjustmentsSelector>().To<AbilityAdjustmentsSelector>();
             Bind<ISkillSelector>().To<SkillSelector>();
             Bind<IBooleanPercentileSelector>().To<BooleanPercentileSelector>();
             Bind<ILeadershipSelector>().To<LeadershipSelector>();

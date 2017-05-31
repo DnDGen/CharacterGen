@@ -1,8 +1,8 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
 using EventGen;
@@ -21,7 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Mock<GenEventQueue> mockEventQueue;
         private CharacterClass characterClass;
         private Race race;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private List<Feat> feats;
         private Equipment equipment;
 
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
 
             characterClass = new CharacterClass();
             race = new Race();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             feats = new List<Feat>();
             equipment = new Equipment();
 

@@ -1,9 +1,9 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
@@ -29,13 +29,13 @@ namespace CharacterGen.Domain.Generators.Magics
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Stat> stats, IEnumerable<Feat> feats, Equipment equipment)
+        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Feat> feats, Equipment equipment)
         {
             var magic = new Magic();
 
             if (characterClass.Name != CharacterClassConstants.Sorcerer || race.BaseRace != RaceConstants.BaseRaces.Rakshasa)
             {
-                magic = MakeSpells(magic, characterClass, stats);
+                magic = MakeSpells(magic, characterClass, abilities);
             }
 
             if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name == CharacterClassConstants.Sorcerer)
@@ -46,7 +46,7 @@ namespace CharacterGen.Domain.Generators.Magics
                 adjustedClass.ProhibitedFields = characterClass.ProhibitedFields;
                 adjustedClass.SpecialistFields = characterClass.SpecialistFields;
 
-                magic = MakeSpells(magic, adjustedClass, stats);
+                magic = MakeSpells(magic, adjustedClass, abilities);
             }
             else if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name != CharacterClassConstants.Sorcerer)
             {
@@ -55,7 +55,7 @@ namespace CharacterGen.Domain.Generators.Magics
                 adjustedClass.Level = 7;
 
                 var rakshasaMagic = new Magic();
-                rakshasaMagic = MakeSpells(rakshasaMagic, adjustedClass, stats);
+                rakshasaMagic = MakeSpells(rakshasaMagic, adjustedClass, abilities);
 
                 magic.SpellsPerDay = magic.SpellsPerDay.Union(rakshasaMagic.SpellsPerDay);
                 magic.KnownSpells = magic.KnownSpells.Union(rakshasaMagic.KnownSpells);
@@ -82,7 +82,7 @@ namespace CharacterGen.Domain.Generators.Magics
             return magic;
         }
 
-        private Magic MakeSpells(Magic magic, CharacterClass characterClass, Dictionary<string, Stat> stats)
+        private Magic MakeSpells(Magic magic, CharacterClass characterClass, Dictionary<string, Ability> stats)
         {
             magic.SpellsPerDay = spellsGenerator.GeneratePerDay(characterClass, stats);
             magic.KnownSpells = spellsGenerator.GenerateKnown(characterClass, stats);

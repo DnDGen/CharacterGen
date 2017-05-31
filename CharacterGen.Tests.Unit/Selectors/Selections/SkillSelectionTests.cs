@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Domain.Selectors.Selections;
+using CharacterGen.Skills;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Unit.Selectors.Selections
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.Focus = selectionFocus;
             selection.SkillName = selectionName;
 
-            var stat = new Stat("stat name");
+            var stat = new Ability("stat name");
             var skill = new Skill(skillName, stat, 0, skillFocus);
 
             var isEqual = selection.IsEqualTo(skill);
@@ -50,7 +50,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.RandomFociQuantity = 1;
             selection.SkillName = "skill";
 
-            var stat = new Stat("stat name");
+            var stat = new Ability("stat name");
             var skill = new Skill("skill", stat, 0);
 
             Assert.That(() => selection.IsEqualTo(skill), Throws.InvalidOperationException.With.Message.EqualTo("Cannot test equality of a skill selection while random foci quantity is positive"));

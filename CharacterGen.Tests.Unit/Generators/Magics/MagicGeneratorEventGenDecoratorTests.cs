@@ -1,8 +1,8 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Magics;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         private Alignment alignment;
         private CharacterClass characterClass;
         private Race race;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private List<Feat> feats;
         private Equipment equipment;
 
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             alignment = new Alignment();
             characterClass = new CharacterClass();
             race = new Race();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             feats = new List<Feat>();
             equipment = new Equipment();
 

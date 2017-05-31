@@ -1,8 +1,8 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,7 @@ namespace CharacterGen.Domain.Generators.Items
         private MagicalItemGenerator magicalArmorGenerator;
         private Generator generator;
 
-        public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector,
-            MundaneItemGenerator mundaneArmorGenerator, MagicalItemGenerator magicalArmorGenerator, Generator generator)
+        public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, MundaneItemGenerator mundaneArmorGenerator, MagicalItemGenerator magicalArmorGenerator, Generator generator)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;

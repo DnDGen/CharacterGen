@@ -1,4 +1,4 @@
-﻿using CharacterGen.Abilities.Skills;
+﻿using CharacterGen.Skills;
 using System;
 
 namespace CharacterGen.Domain.Selectors.Selections

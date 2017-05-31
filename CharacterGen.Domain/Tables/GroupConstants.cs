@@ -15,9 +15,9 @@
         public const string FighterBonusFeats = "Fighter Bonus Feats";
         public const string Genetic = "Genetic";
         public const string GoodBaseAttack = "Good Base Attack";
+        public const string HasAbilityRequirements = "Has Ability Requirements";
         public const string HasClassRequirements = "Has Class Requirements";
         public const string HasSkillRequirements = "Has Skill Requirements";
-        public const string HasStatRequirements = "Has Stat Requirements";
         public const string HasWings = "Has Wings";
         public const string Initiative = "Initiative";
         public const string Lycanthrope = "Lycanthrope";

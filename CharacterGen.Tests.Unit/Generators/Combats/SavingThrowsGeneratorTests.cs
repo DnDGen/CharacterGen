@@ -1,10 +1,10 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Generators.Combats;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private ISavingThrowsGenerator savingThrowsGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private List<string> allSaveFeats;
         private List<string> reflexSaveFeats;
         private List<string> fortitudeSaveFeats;
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             savingThrowsGenerator = new SavingThrowsGenerator(mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             allSaveFeats = new List<string>();
             reflexSaveFeats = new List<string>();
             fortitudeSaveFeats = new List<string>();
@@ -43,9 +43,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             strongReflex = new List<string>();
             strongWill = new List<string>();
 
-            stats[StatConstants.Constitution] = new Stat(StatConstants.Constitution);
-            stats[StatConstants.Dexterity] = new Stat(StatConstants.Dexterity);
-            stats[StatConstants.Wisdom] = new Stat(StatConstants.Wisdom);
+            stats[AbilityConstants.Constitution] = new Ability(AbilityConstants.Constitution);
+            stats[AbilityConstants.Dexterity] = new Ability(AbilityConstants.Dexterity);
+            stats[AbilityConstants.Wisdom] = new Ability(AbilityConstants.Wisdom);
             characterClass.Name = "class name";
             characterClass.Level = 600;
             allSaveFeats.Add("other feat");
@@ -72,9 +72,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ApplyStatBonuses()
         {
-            stats[StatConstants.Constitution].Value = 9266;
-            stats[StatConstants.Dexterity].Value = 90210;
-            stats[StatConstants.Wisdom].Value = -42;
+            stats[AbilityConstants.Constitution].Value = 9266;
+            stats[AbilityConstants.Dexterity].Value = 90210;
+            stats[AbilityConstants.Wisdom].Value = -42;
 
             var savingThrows = savingThrowsGenerator.GenerateWith(characterClass, feats, stats);
             Assert.That(savingThrows.Fortitude, Is.EqualTo(4828));
@@ -286,9 +286,9 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ApplyAllBonuses()
         {
-            stats[StatConstants.Constitution].Value = 9266;
-            stats[StatConstants.Dexterity].Value = 90210;
-            stats[StatConstants.Wisdom].Value = -42;
+            stats[AbilityConstants.Constitution].Value = 9266;
+            stats[AbilityConstants.Dexterity].Value = 90210;
+            stats[AbilityConstants.Wisdom].Value = -42;
 
             strongWill.Add(characterClass.Name);
             strongFortitude.Add(characterClass.Name);
@@ -306,10 +306,10 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void CharactersWithoutConstitutionDoNotHaveFortitudeSaves()
         {
-            stats.Remove(StatConstants.Constitution);
+            stats.Remove(AbilityConstants.Constitution);
 
-            stats[StatConstants.Dexterity].Value = 90210;
-            stats[StatConstants.Wisdom].Value = -42;
+            stats[AbilityConstants.Dexterity].Value = 90210;
+            stats[AbilityConstants.Wisdom].Value = -42;
 
             strongWill.Add(characterClass.Name);
             strongFortitude.Add(characterClass.Name);

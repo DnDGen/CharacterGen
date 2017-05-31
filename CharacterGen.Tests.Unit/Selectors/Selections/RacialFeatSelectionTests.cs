@@ -1,6 +1,6 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Domain.Selectors.Selections;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
     {
         private RacialFeatSelection selection;
         private Race race;
-        private Dictionary<string, Stat> stats;
+        private Dictionary<string, Ability> stats;
         private List<Feat> feats;
 
         [SetUp]
@@ -20,10 +20,10 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         {
             selection = new RacialFeatSelection();
             race = new Race();
-            stats = new Dictionary<string, Stat>();
+            stats = new Dictionary<string, Ability>();
             feats = new List<Feat>();
 
-            stats["stat"] = new Stat("stat");
+            stats["stat"] = new Ability("stat");
             stats["stat"].Value = 42;
         }
 
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             Assert.That(selection.FocusType, Is.Empty);
             Assert.That(selection.Frequency, Is.Not.Null);
             Assert.That(selection.MaximumHitDieRequirement, Is.EqualTo(0));
-            Assert.That(selection.MinimumStats, Is.Empty);
+            Assert.That(selection.MinimumAbilities, Is.Empty);
             Assert.That(selection.RandomFociQuantity, Is.Empty);
             Assert.That(selection.RequiredFeats, Is.Empty);
         }
@@ -105,7 +105,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         [Test]
         public void RequirementsNotMetIfDoesNotHaveMinimumStat()
         {
-            selection.MinimumStats["stat"] = 9266;
+            selection.MinimumAbilities["stat"] = 9266;
 
             var met = selection.RequirementsMet(race, 4, stats, feats);
             Assert.That(met, Is.False);
@@ -114,10 +114,10 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         [Test]
         public void RequirementsMetIfAnyMinimumStatIsMet()
         {
-            selection.MinimumStats["stat"] = 9266;
-            selection.MinimumStats["stat 2"] = 600;
+            selection.MinimumAbilities["stat"] = 9266;
+            selection.MinimumAbilities["stat 2"] = 600;
 
-            stats["stat 2"] = new Stat("stat 2");
+            stats["stat 2"] = new Ability("stat 2");
             stats["stat 2"].Value = 600;
 
             var met = selection.RequirementsMet(race, 4, stats, feats);
@@ -237,7 +237,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
             selection.SizeRequirement = race.Size;
             selection.MinimumHitDieRequirement = 3;
             selection.MaximumHitDieRequirement = 5;
-            selection.MinimumStats["stat"] = 42;
+            selection.MinimumAbilities["stat"] = 42;
 
             selection.RequiredFeats = new[]
             {

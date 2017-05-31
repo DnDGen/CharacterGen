@@ -45,7 +45,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 
                 if (string.IsNullOrEmpty(statNames[0]) == false)
                     for (var i = 0; i < statNames.Length; i++)
-                        racialFeatSelection.MinimumStats[statNames[i]] = statValue;
+                        racialFeatSelection.MinimumAbilities[statNames[i]] = statValue;
 
                 racialFeatSelections.Add(racialFeatSelection);
             }
@@ -93,11 +93,11 @@ namespace CharacterGen.Domain.Selectors.Collections
                 additionalFeatSelection.RequiredSkills = GetRequiredSkills(additionalFeatSelection.Feat);
             }
 
-            var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasStatRequirements);
+            var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements);
             if (featWithStatRequirements.Contains(dataKVP.Key))
             {
-                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, dataKVP.Key);
-                additionalFeatSelection.RequiredStats = adjustmentsSelector.SelectAllFrom(tableName);
+                var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, dataKVP.Key);
+                additionalFeatSelection.RequiredAbilities = adjustmentsSelector.SelectAllFrom(tableName);
             }
 
             return additionalFeatSelection;
@@ -121,7 +121,7 @@ namespace CharacterGen.Domain.Selectors.Collections
                 classFeatSelection.MinimumLevel = Convert.ToInt32(data[DataIndexConstants.CharacterClassFeatData.MinimumLevelRequirementIndex]);
                 classFeatSelection.Power = Convert.ToInt32(data[DataIndexConstants.CharacterClassFeatData.PowerIndex]);
                 classFeatSelection.MaximumLevel = Convert.ToInt32(data[DataIndexConstants.CharacterClassFeatData.MaximumLevelRequirementIndex]);
-                classFeatSelection.FrequencyQuantityStat = data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
+                classFeatSelection.FrequencyQuantityAbility = data[DataIndexConstants.CharacterClassFeatData.FrequencyQuantityStatIndex];
                 classFeatSelection.RequiredFeats = GetRequiredFeats(dataKVP.Key);
                 classFeatSelection.SizeRequirement = data[DataIndexConstants.CharacterClassFeatData.SizeRequirementIndex];
                 classFeatSelection.AllowFocusOfAll = Convert.ToBoolean(data[DataIndexConstants.CharacterClassFeatData.AllowFocusOfAllIndex]);

@@ -1,9 +1,9 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Alignments;
+﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Magics;
 using CharacterGen.Races;
 using Moq;

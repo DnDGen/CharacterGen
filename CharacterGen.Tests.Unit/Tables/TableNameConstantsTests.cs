@@ -24,6 +24,8 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Adjustments.SkillPoints, "SkillPoints")]
         [TestCase(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, "SpecialistFieldQuantities")]
         [TestCase(TableNameConstants.Set.Adjustments.SwimSpeeds, "SwimSpeeds")]
+        [TestCase(TableNameConstants.Set.Collection.AbilityGroups, "AbilityGroups")]
+        [TestCase(TableNameConstants.Set.Collection.AbilityPriorities, "AbilityPriorities")]
         [TestCase(TableNameConstants.Set.Collection.AdditionalFeatData, "AdditionalFeatData")]
         [TestCase(TableNameConstants.Set.Collection.AerialManeuverability, "AerialManeuverability")]
         [TestCase(TableNameConstants.Set.Collection.AlignmentGroups, "AlignmentGroups")]
@@ -51,8 +53,6 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SkillSynergy, "SkillSynergy")]
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
         [TestCase(TableNameConstants.Set.Collection.SpellGroups, "SpellGroups")]
-        [TestCase(TableNameConstants.Set.Collection.StatGroups, "StatGroups")]
-        [TestCase(TableNameConstants.Set.Collection.StatPriorities, "StatPriorities")]
         [TestCase(TableNameConstants.Set.Collection.WeightRolls, "WeightRolls")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentLawfulness, "AlignmentLawfulness")]
@@ -61,7 +61,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Percentile.Traits, "Traits")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill, "AssignPointToCrossClassSkill")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment, "AttractCohortOfDifferentAlignment")]
-        [TestCase(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityStat, "IncreaseFirstPriorityStat")]
+        [TestCase(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility, "IncreaseFirstPriorityAbility")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledCohort, "KilledCohort")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.KilledFollowers, "KilledFollowers")]
         [TestCase(TableNameConstants.Set.TrueOrFalse.Male, "Male")]
@@ -69,7 +69,7 @@ namespace CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "{0}SpellLevels")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, "{0}ClassRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.FEATSkillRankRequirements, "{0}SkillRankRequirements")]
-        [TestCase(TableNameConstants.Formattable.Adjustments.FEATStatRequirements, "{0}StatRequirements")]
+        [TestCase(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, "{0}AbilityRequirements")]
         [TestCase(TableNameConstants.Formattable.Adjustments.GENDERHeights, "{0}Heights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.GENDERWeights, "{0}Weights")]
         [TestCase(TableNameConstants.Formattable.Adjustments.LevelXAnimalTricks, "Level{0}AnimalTricks")]
@@ -104,13 +104,13 @@ namespace CharacterGen.Tests.Unit.Tables
         [Test]
         public void AgeStatAdjustmentsTable()
         {
-            Assert.That(TableNameConstants.Formattable.Adjustments.AGEStatAdjustments, Is.EqualTo("{0}StatAdjustments"));
+            Assert.That(TableNameConstants.Formattable.Adjustments.AGEAbilityAdjustments, Is.EqualTo("{0}AbilityAdjustments"));
         }
 
         [Test]
         public void StatStatAdjustmentsTable()
         {
-            Assert.That(TableNameConstants.Formattable.Adjustments.STATStatAdjustments, Is.EqualTo("{0}StatAdjustments"));
+            Assert.That(TableNameConstants.Formattable.Adjustments.ABILITYAbilityAdjustments, Is.EqualTo("{0}AbilityAdjustments"));
         }
     }
 }

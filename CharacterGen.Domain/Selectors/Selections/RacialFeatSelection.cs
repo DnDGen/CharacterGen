@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Feats;
+using CharacterGen.Abilities;
 using CharacterGen.Races;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace CharacterGen.Domain.Selectors.Selections
         public Frequency Frequency { get; set; }
         public string FocusType { get; set; }
         public int Power { get; set; }
-        public Dictionary<string, int> MinimumStats { get; set; }
+        public Dictionary<string, int> MinimumAbilities { get; set; }
         public string RandomFociQuantity { get; set; }
         public IEnumerable<RequiredFeatSelection> RequiredFeats { get; set; }
 
@@ -25,12 +25,12 @@ namespace CharacterGen.Domain.Selectors.Selections
             SizeRequirement = string.Empty;
             Frequency = new Frequency();
             FocusType = string.Empty;
-            MinimumStats = new Dictionary<string, int>();
+            MinimumAbilities = new Dictionary<string, int>();
             RandomFociQuantity = string.Empty;
             RequiredFeats = Enumerable.Empty<RequiredFeatSelection>();
         }
 
-        public bool RequirementsMet(Race race, int monsterHitDice, Dictionary<string, Stat> stats, IEnumerable<Feat> feats)
+        public bool RequirementsMet(Race race, int monsterHitDice, Dictionary<string, Ability> abilities, IEnumerable<Feat> feats)
         {
             if (string.IsNullOrEmpty(SizeRequirement) == false && SizeRequirement != race.Size)
                 return false;
@@ -38,7 +38,7 @@ namespace CharacterGen.Domain.Selectors.Selections
             if (MaximumHitDieRequirement > 0 && monsterHitDice > MaximumHitDieRequirement)
                 return false;
 
-            if (MinimumStatMet(stats) == false)
+            if (MinimumAbilityMet(abilities) == false)
                 return false;
 
             foreach (var requirement in RequiredFeats)
@@ -55,12 +55,12 @@ namespace CharacterGen.Domain.Selectors.Selections
             return monsterHitDice >= MinimumHitDieRequirement;
         }
 
-        private bool MinimumStatMet(Dictionary<string, Stat> stats)
+        private bool MinimumAbilityMet(Dictionary<string, Ability> stats)
         {
-            if (MinimumStats.Any() == false)
+            if (MinimumAbilities.Any() == false)
                 return true;
 
-            foreach (var stat in MinimumStats)
+            foreach (var stat in MinimumAbilities)
                 if (stats[stat.Key].Value >= stat.Value)
                     return true;
 

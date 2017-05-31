@@ -55,14 +55,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feats\Feat.cs" />
+    <Compile Include="Feats\FeatConstants.cs" />
+    <Compile Include="Feats\Frequency.cs" />
+    <Compile Include="Languages\LanguageConstants.cs" />
+    <Compile Include="Skills\Skill.cs" />
     <Compile Include="Abilities\Ability.cs" />
-    <Compile Include="Abilities\Feats\Feat.cs" />
-    <Compile Include="Abilities\Feats\FeatConstants.cs" />
-    <Compile Include="Abilities\Feats\Frequency.cs" />
-    <Compile Include="Abilities\LanguageConstants.cs" />
-    <Compile Include="Abilities\Skills\Skill.cs" />
-    <Compile Include="Abilities\Stats\Stat.cs" />
-    <Compile Include="Abilities\Stats\StatConstants.cs" />
+    <Compile Include="Abilities\AbilityConstants.cs" />
     <Compile Include="Alignments\Alignment.cs" />
     <Compile Include="Alignments\AlignmentConstants.cs" />
     <Compile Include="Characters\Character.cs" />
@@ -86,7 +85,7 @@
     <Compile Include="Races\Measurement.cs" />
     <Compile Include="Races\Race.cs" />
     <Compile Include="Races\RaceConstants.cs" />
-    <Compile Include="Abilities\Skills\SkillConstants.cs" />
+    <Compile Include="Skills\SkillConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomizers\Alignments\AlignmentRandomizerTypeConstants.cs" />
     <Compile Include="Randomizers\Alignments\IAlignmentRandomizer.cs" />
@@ -102,15 +101,16 @@
     <Compile Include="Randomizers\Races\ISetMetaraceRandomizer.cs" />
     <Compile Include="Randomizers\Races\RaceRandomizer.cs" />
     <Compile Include="Randomizers\Races\RaceRandomizerTypeConstants.cs" />
-    <Compile Include="Randomizers\Stats\ISetStatsRandomizer.cs" />
-    <Compile Include="Randomizers\Stats\IStatsRandomizer.cs" />
-    <Compile Include="Randomizers\Stats\StatsRandomizerTypeConstants.cs" />
+    <Compile Include="Randomizers\Abilities\ISetAbilitiesRandomizer.cs" />
+    <Compile Include="Randomizers\Abilities\IAbilitiesRandomizer.cs" />
+    <Compile Include="Randomizers\Abilities\AbilitiesRandomizerTypeConstants.cs" />
     <Compile Include="Verifiers\Exceptions\IncompatibleRandomizersException.cs" />
     <Compile Include="Verifiers\IRandomizerVerifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

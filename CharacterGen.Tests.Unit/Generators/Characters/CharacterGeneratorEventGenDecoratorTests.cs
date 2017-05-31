@@ -3,7 +3,7 @@ using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Randomizers.Abilities;
 using EventGen;
 using Moq;
 using NUnit.Framework;
@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
-        private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<IAbilitiesRandomizer> mockAbilitiesRandomizer;
 
         [SetUp]
         public void Setup()
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockStatsRandomizer = new Mock<IStatsRandomizer>();
+            mockAbilitiesRandomizer = new Mock<IAbilitiesRandomizer>();
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
         }
@@ -43,10 +43,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         public void ReturnInnerCharacter()
         {
             var character = new Character();
-            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object))
+            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object))
                 .Returns(character);
 
-            var generatedCharacter = decorator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var generatedCharacter = decorator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(generatedCharacter, Is.EqualTo(character));
         }
 
@@ -61,10 +61,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             character.Race.BaseRace = Guid.NewGuid().ToString();
             character.Race.Metarace = Guid.NewGuid().ToString();
 
-            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object))
+            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object))
                 .Returns(character);
 
-            var generatedCharacter = decorator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var generatedCharacter = decorator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(generatedCharacter, Is.EqualTo(character));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning character generation"), Times.Once);

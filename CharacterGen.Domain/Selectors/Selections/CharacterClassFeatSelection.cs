@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace CharacterGen.Domain.Selectors.Selections
         public int Power { get; set; }
         public Frequency Frequency { get; set; }
         public IEnumerable<RequiredFeatSelection> RequiredFeats { get; set; }
-        public string FrequencyQuantityStat { get; set; }
+        public string FrequencyQuantityAbility { get; set; }
         public string SizeRequirement { get; set; }
         public bool AllowFocusOfAll { get; set; }
 
@@ -25,7 +25,7 @@ namespace CharacterGen.Domain.Selectors.Selections
             FocusType = string.Empty;
             Frequency = new Frequency();
             RequiredFeats = Enumerable.Empty<RequiredFeatSelection>();
-            FrequencyQuantityStat = string.Empty;
+            FrequencyQuantityAbility = string.Empty;
             SizeRequirement = string.Empty;
         }
 

@@ -28,7 +28,7 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void StatAdjustmentsSelectorsAreNotGeneratedAsSingletons()
         {
-            AssertNotSingleton<IStatAdjustmentsSelector>();
+            AssertNotSingleton<IAbilityAdjustmentsSelector>();
         }
 
         [Test]

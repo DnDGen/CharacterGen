@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.CharacterClasses;
+using CharacterGen.Feats;
 using CharacterGen.Races;
 using System.Collections.Generic;
 using TreasureGen.Items;

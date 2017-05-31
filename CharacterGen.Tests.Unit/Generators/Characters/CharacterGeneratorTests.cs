@@ -1,7 +1,4 @@
 ﻿using CharacterGen.Abilities;
-using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Skills;
-using CharacterGen.Abilities.Stats;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Characters;
@@ -12,19 +9,24 @@ using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
+using CharacterGen.Domain.Generators.Languages;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Generators.Races;
+using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
+using CharacterGen.Skills;
 using CharacterGen.Verifiers;
 using CharacterGen.Verifiers.Exceptions;
 using Moq;
@@ -46,6 +48,9 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         private Mock<ICharacterClassGenerator> mockCharacterClassGenerator;
         private Mock<IRaceGenerator> mockRaceGenerator;
         private Mock<IAbilitiesGenerator> mockAbilitiesGenerator;
+        private Mock<ILanguageGenerator> mockLanguageGenerator;
+        private Mock<ISkillsGenerator> mockSkillsGenerator;
+        private Mock<IFeatsGenerator> mockFeatsGenerator;
         private Mock<ICombatGenerator> mockCombatGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<IRandomizerVerifier> mockRandomizerVerifier;
@@ -61,19 +66,22 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
-        private Mock<IStatsRandomizer> mockStatsRandomizer;
+        private Mock<IAbilitiesRandomizer> mockAbilitiesRandomizer;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
 
         private CharacterClass characterClass;
         private Race race;
         private Dictionary<string, int> levelAdjustments;
         private Alignment alignment;
-        private Ability ability;
         private Combat combat;
         private Equipment equipment;
         private BaseAttack baseAttack;
         private List<Feat> feats;
+        private Dictionary<string, Ability> abilities;
+        private List<Skill> skills;
+        private List<string> languages;
         private Magic magic;
+        private List<string> featSkillFoci;
 
         [SetUp]
         public void Setup()
@@ -87,11 +95,37 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
 
+            characterGenerator = new CharacterGenerator(
+                mockAlignmentGenerator.Object,
+                mockCharacterClassGenerator.Object,
+                mockRaceGenerator.Object,
+                mockAdjustmentsSelector.Object,
+                mockRandomizerVerifier.Object,
+                mockPercentileSelector.Object,
+                mockCombatGenerator.Object,
+                mockTreasureGenerator.Object,
+                mockMagicGenerator.Object,
+                generator,
+                mockCollectionsSelector.Object,
+                mockAbilitiesGenerator.Object,
+                mockLanguageGenerator.Object,
+                mockSkillsGenerator.Object,
+                mockFeatsGenerator.Object);
+
             levelAdjustments[BaseRace] = 0;
             levelAdjustments[BaseRacePlusOne] = 1;
             levelAdjustments[RaceConstants.Metaraces.None] = 0;
             levelAdjustments[Metarace] = 1;
+
             mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => levelAdjustments[name]);
+
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
+            featSkillFoci.Add("skill 3");
+            featSkillFoci.Add("skill 4");
+            featSkillFoci.Add("skill 5");
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
 
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyCompatibility(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
@@ -101,11 +135,6 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             mockRandomizerVerifier.Setup(v => v.VerifyCharacterClassCompatibility(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockLevelRandomizer.Object)).Returns(true);
             mockRandomizerVerifier.Setup(v => v.VerifyRaceCompatibility(It.IsAny<Race>(), It.IsAny<CharacterClass>(), mockSetLevelRandomizer.Object)).Returns(true);
-
-            characterGenerator = new CharacterGenerator(mockAlignmentGenerator.Object, mockCharacterClassGenerator.Object,
-                mockRaceGenerator.Object, mockAdjustmentsSelector.Object, mockRandomizerVerifier.Object, mockPercentileSelector.Object,
-                mockAbilitiesGenerator.Object, mockCombatGenerator.Object, mockTreasureGenerator.Object, mockMagicGenerator.Object, generator,
-                mockCollectionsSelector.Object);
         }
 
         private void SetUpMockRandomizers()
@@ -113,7 +142,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockStatsRandomizer = new Mock<IStatsRandomizer>();
+            mockAbilitiesRandomizer = new Mock<IAbilitiesRandomizer>();
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockSetLevelRandomizer = new Mock<ISetLevelRandomizer>();
@@ -125,6 +154,9 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         {
             mockAlignmentGenerator = new Mock<IAlignmentGenerator>();
             mockAbilitiesGenerator = new Mock<IAbilitiesGenerator>();
+            mockLanguageGenerator = new Mock<ILanguageGenerator>();
+            mockFeatsGenerator = new Mock<IFeatsGenerator>();
+            mockSkillsGenerator = new Mock<ISkillsGenerator>();
             mockCombatGenerator = new Mock<ICombatGenerator>();
             mockTreasureGenerator = new Mock<IEquipmentGenerator>();
             mockCharacterClassGenerator = new Mock<ICharacterClassGenerator>();
@@ -134,12 +166,15 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             alignment = new Alignment();
             characterClass = new CharacterClass();
             race = new Race();
-            ability = new Ability();
             equipment = new Equipment();
             combat = new Combat();
             baseAttack = new BaseAttack();
             feats = new List<Feat>();
             magic = new Magic();
+            abilities = new Dictionary<string, Ability>();
+            languages = new List<string>();
+            skills = new List<Skill>();
+            featSkillFoci = new List<string>();
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
@@ -147,25 +182,28 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             characterClass.Name = "class name";
             race.BaseRace = BaseRace;
             race.Metarace = RaceConstants.Metaraces.None;
-            ability.Feats = feats;
-            ability.Stats["stat"] = new Stat("stat");
+            abilities["ability"] = new Ability("ability");
+            languages.Add("1337");
+            languages.Add("Dothraki");
 
-            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<Dictionary<string, Stat>>())).Returns(() => new BaseAttack());
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<Dictionary<string, Ability>>())).Returns(() => new BaseAttack());
             mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), It.IsAny<CharacterClass>(), It.IsAny<Race>())).Returns(() => new Equipment());
-            mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<string, Stat>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
-            mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<Dictionary<string, Stat>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
+            mockCombatGenerator.Setup(g => g.GenerateWith(It.IsAny<BaseAttack>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Dictionary<string, Ability>>(), It.IsAny<Equipment>())).Returns(() => new Combat());
+            mockMagicGenerator.Setup(g => g.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), It.IsAny<Race>(), It.IsAny<Dictionary<string, Ability>>(), It.IsAny<IEnumerable<Feat>>(), It.IsAny<Equipment>())).Returns(() => new Magic());
 
             mockAlignmentGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
 
             mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object)).Returns(characterClass);
             mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, mockSetLevelRandomizer.Object, mockClassNameRandomizer.Object)).Returns(characterClass);
             mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object)).Returns(race);
-            mockAbilitiesGenerator.Setup(g => g.GenerateStats(characterClass, race, mockStatsRandomizer.Object)).Returns(ability.Stats);
-            mockAbilitiesGenerator.Setup(g => g.GenerateWith(characterClass, race, ability.Stats, baseAttack)).Returns(ability);
-            mockTreasureGenerator.Setup(g => g.GenerateWith(ability.Feats, characterClass, race)).Returns(equipment);
-            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, ability.Feats, ability.Stats, equipment)).Returns(combat);
-            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race, ability.Stats)).Returns(baseAttack);
-            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, race, ability.Stats, ability.Feats, equipment)).Returns(magic);
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race)).Returns(abilities);
+            mockLanguageGenerator.Setup(g => g.GenerateWith(race, characterClass, abilities, skills)).Returns(languages);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+            mockTreasureGenerator.Setup(g => g.GenerateWith(feats, characterClass, race)).Returns(equipment);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, race, feats, abilities, equipment)).Returns(combat);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, race, abilities)).Returns(baseAttack);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, race, abilities, feats, equipment)).Returns(magic);
         }
 
         [Test]
@@ -185,7 +223,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
                 mockLevelRandomizer.Object,
                 mockBaseRaceRandomizer.Object,
                 mockMetaraceRandomizer.Object,
-                mockStatsRandomizer.Object);
+                mockAbilitiesRandomizer.Object);
         }
 
         [Test]
@@ -341,14 +379,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         public void GetBaseAttackFromCombatGenerator()
         {
             GenerateCharacter();
-            mockCombatGenerator.Verify(g => g.GenerateBaseAttackWith(characterClass, race, ability.Stats), Times.Once);
-        }
-
-        [Test]
-        public void GetAbilityFromGenerator()
-        {
-            var character = GenerateCharacter();
-            Assert.That(character.Ability, Is.EqualTo(ability));
+            mockCombatGenerator.Verify(g => g.GenerateBaseAttackWith(characterClass, race, abilities), Times.Once);
         }
 
         [Test]
@@ -379,7 +410,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             race.Metarace = Metarace;
             characterClass.Level = 3;
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(1));
             Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
@@ -395,7 +426,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
 
             mockSetLevelRandomizer.Object.AllowAdjustments = false;
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(3));
             Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
@@ -411,7 +442,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
 
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(1));
             Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
@@ -428,7 +459,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
 
             mockSetLevelRandomizer.Object.AllowAdjustments = true;
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
             Assert.That(character.Class.Level, Is.EqualTo(1));
             Assert.That(character.Class.LevelAdjustment, Is.EqualTo(2));
@@ -438,150 +469,473 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void ApplyArmorCheckPenaltiesForArmor()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true }
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = new Armor { Name = "armor", ArmorCheckPenalty = -9266 };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
         }
 
         [Test]
         public void DoNotApplyPenaltyCheckForArmorIfNoArmor()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true }
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = null;
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
         }
 
         [Test]
         public void ApplyArmorCheckPenaltiesForShield()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true }
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
         }
 
         [Test]
         public void DoNotApplyPenaltyCheckForNonShields()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true }
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.OffHand = new Item { Name = "shield" };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
         }
 
         [Test]
         public void ApplyArmorCheckPenaltiesForArmorAndShield()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true }
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = new Armor { Name = "armor", ArmorCheckPenalty = -42 };
             equipment.OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
         }
 
         [Test]
         public void SwimTakesDoubleArmorCheckPenalty()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-                new Skill(SkillConstants.Swim, ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
+            skills.Add(new Skill(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = new Armor { Name = "armor", ArmorCheckPenalty = -42 };
             equipment.OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
-            Assert.That(character.Ability.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-9308 * 2));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
+            Assert.That(character.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-9308 * 2));
         }
 
         [Test]
         public void SwimTakesNoPenaltyForPlateArmorOfTheDeep()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-                new Skill(SkillConstants.Swim, ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
+            skills.Add(new Skill(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = new Armor { Name = ArmorConstants.PlateArmorOfTheDeep, ArmorCheckPenalty = -9266 };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
-            Assert.That(character.Ability.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+            Assert.That(character.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(0));
         }
 
         [Test]
         public void SwimTakesPenaltyForShieldWithPlateArmorOfTheDeep()
         {
-            ability.Skills = new[]
-            {
-                new Skill("skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = false },
-                new Skill("other skill", ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-                new Skill(SkillConstants.Swim, ability.Stats["stat"], 1) { HasArmorCheckPenalty = true },
-            };
+            skills.Add(new Skill("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false });
+            skills.Add(new Skill("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true });
+            skills.Add(new Skill(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true });
 
             equipment.Armor = new Armor { Name = ArmorConstants.PlateArmorOfTheDeep, ArmorCheckPenalty = -9266 };
             equipment.OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -90210 };
             equipment.OffHand.Attributes = new[] { AttributeConstants.Shield };
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockStatsRandomizer.Object);
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
 
-            Assert.That(character.Ability.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
-            Assert.That(character.Ability.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266 - 90210));
-            Assert.That(character.Ability.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-90210 * 2));
+            Assert.That(character.Skills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(character.Skills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266 - 90210));
+            Assert.That(character.Skills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-90210 * 2));
+        }
+
+        [Test]
+        public void GetAbilitiesFromAbilitiesGenerator()
+        {
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Abilities, Is.EqualTo(abilities));
+        }
+
+        [Test]
+        public void GetSkillsFromSkillGenerator()
+        {
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills, Is.EqualTo(skills));
+        }
+
+        [Test]
+        public void GetLanguagesFromLanguageGenerator()
+        {
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Languages, Is.EqualTo(languages));
+        }
+
+        [Test]
+        public void GetFeatsFromFeatGenerator()
+        {
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Feats, Is.EqualTo(feats));
+        }
+
+        [Test]
+        public void ApplyFeatThatGrantSkillBonusesToSkills()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills.Add(new Skill("skill 3", baseAbility, 1));
+            skills.Add(new Skill("skill 4", baseAbility, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Power = 2;
+            feats[2].Name = "feat3";
+            feats[2].Power = 3;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 4" });
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void ApplyFeatThatGrantSkillBonusesToSkillsWithFocus()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills.Add(new Skill("skill 3", baseAbility, 1, "other focus"));
+            skills.Add(new Skill("skill 3", baseAbility, 1, "focus"));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Power = 2;
+            feats[2].Name = "feat3";
+            feats[2].Power = 3;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 3/focus" });
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void IfFocusIsSkill_ApplyBonusToThatSkill()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills.Add(new Skill("skill 3", baseAbility, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 2", "skill 3", "non-skill focus" };
+            feats[0].Power = 4;
+            feats[1].Name = "feat2";
+            feats[1].Foci = new[] { "skill 3", "non-skill focus" };
+            feats[1].Power = 1;
+            feats[2].Name = "feat1";
+            feats[2].Foci = new[] { "skill 2", "non-skill focus" };
+            feats[2].Power = 3;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+            Assert.That(character.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(9));
+            Assert.That(character.Skills.First(s => s.Name == "skill 3").Bonus, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void IfFocusIsSkillWithFocus_ApplyBonusToThatSkill()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1, "focus 1"));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills.Add(new Skill("skill 1", baseAbility, 1, "focus 2"));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 2", "skill 1/focus 2", "non-skill focus" };
+            feats[0].Power = 4;
+            feats[1].Name = "feat2";
+            feats[1].Foci = new[] { "skill 1/focus 2", "non-skill focus" };
+            feats[1].Power = 1;
+            feats[2].Name = "feat1";
+            feats[2].Foci = new[] { "skill 2", "non-skill focus" };
+            feats[2].Power = 3;
+
+            featSkillFoci.Add("skill 1/focus 1");
+            featSkillFoci.Add("skill 1/focus 2");
+            featSkillFoci.Add("skill 1/focus 3");
+            featSkillFoci.Remove("skill 1"); //INFO: Doing this because a skill either has focus all the time or never
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(1));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(9));
+            Assert.That(character.Skills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void OnlyApplySkillFeatToSkillsIfSkillFocusIsPurelySkill()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills[0].Bonus = 1;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
+            feats[0].Power = 1;
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void NoCircumstantialBonusIfBonusApplied()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Foci = new[] { "skill 2", "non-skill focus" };
+            feats[1].Power = 2;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(2));
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.False);
+            Assert.That(character.Skills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(4));
+            Assert.That(character.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+        }
+
+        [Test]
+        public void IfSkillBonusFocusIsNotPurelySkill_MarkSkillAsHavingCircumstantialBonus()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills[0].Bonus = 1;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "non-skill focus" };
+            feats[0].Power = 1;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+        }
+
+        [Test]
+        public void MarkSkillWithCircumstantialBonusWhenOtherFociDoNotHaveCircumstantialBonus()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
+            feats[0].Power = 1;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(character.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+        }
+
+        [Test]
+        public void CircumstantialBonusIsNotOverwritten()
+        {
+            var skills = new List<Skill>();
+            var baseAbility = new Ability("base ability");
+
+            skills.Add(new Skill("skill 1", baseAbility, 1));
+            skills.Add(new Skill("skill 2", baseAbility, 1));
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities)).Returns(skills);
+
+            var feats = new List<Feat>();
+            feats.Add(new Feat());
+            feats.Add(new Feat());
+            feats[0].Name = "feat1";
+            feats[0].Foci = new[] { "skill 1 (with qualifiers)", "skill 2" };
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Foci = new[] { "skill 1" };
+            feats[1].Power = 1;
+
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, race, abilities, skills, baseAttack)).Returns(feats);
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(character.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
     }
 }

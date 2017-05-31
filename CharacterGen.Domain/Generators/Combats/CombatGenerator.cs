@@ -1,5 +1,5 @@
-﻿using CharacterGen.Abilities.Feats;
-using CharacterGen.Abilities.Stats;
+﻿using CharacterGen.Feats;
+using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Selectors.Collections;
@@ -31,13 +31,13 @@ namespace CharacterGen.Domain.Generators.Combats
             this.collectionsSelector = collectionsSelector;
         }
 
-        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Stat> stats)
+        public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> stats)
         {
             var baseAttack = new BaseAttack();
             baseAttack.BaseBonus = GetBaseAttackBonus(characterClass);
             baseAttack.SizeModifier = GetSizeAdjustments(race);
-            baseAttack.StrengthBonus = stats[StatConstants.Strength].Bonus;
-            baseAttack.DexterityBonus = stats[StatConstants.Dexterity].Bonus;
+            baseAttack.StrengthBonus = stats[AbilityConstants.Strength].Bonus;
+            baseAttack.DexterityBonus = stats[AbilityConstants.Dexterity].Bonus;
             baseAttack.RacialModifier = GetRacialBaseAttackAdjustments(race);
 
             return baseAttack;
@@ -85,18 +85,18 @@ namespace CharacterGen.Domain.Generators.Combats
             return sizeModifier;
         }
 
-        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Stat> stats, Equipment equipment)
+        public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Ability> stats, Equipment equipment)
         {
             var combat = new Combat();
 
             combat.BaseAttack = baseAttack;
             combat.BaseAttack.BaseBonus += GetBonusFromFeats(feats);
             combat.BaseAttack.CircumstantialBonus = IsAttackBonusCircumstantial(feats);
-            combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats[StatConstants.Dexterity], equipment);
+            combat.AdjustedDexterityBonus = GetAdjustedDexterityBonus(stats[AbilityConstants.Dexterity], equipment);
             combat.ArmorClass = armorClassGenerator.GenerateWith(equipment, combat.AdjustedDexterityBonus, feats, race);
 
-            if (stats.ContainsKey(StatConstants.Constitution))
-                combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[StatConstants.Constitution].Bonus, race, feats);
+            if (stats.ContainsKey(AbilityConstants.Constitution))
+                combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, stats[AbilityConstants.Constitution].Bonus, race, feats);
             else
                 combat.HitPoints = hitPointsGenerator.GenerateWith(characterClass, 0, race, feats);
 
@@ -125,7 +125,7 @@ namespace CharacterGen.Domain.Generators.Combats
             return attackBonusFeats.Any(f => f.Foci.Any());
         }
 
-        private int GetAdjustedDexterityBonus(Stat dexterity, Equipment equipment)
+        private int GetAdjustedDexterityBonus(Ability dexterity, Equipment equipment)
         {
             var maxDexterityBonus = dexterity.Bonus;
 

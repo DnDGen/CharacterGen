@@ -1,25 +1,27 @@
 ﻿using CharacterGen.Characters;
 using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
-using CharacterGen.Domain.Generators.Abilities.Feats;
 using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
+using CharacterGen.Domain.Generators.Languages;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Generators.Races;
+using CharacterGen.Domain.Generators.Randomizers.Abilities;
 using CharacterGen.Domain.Generators.Randomizers.Alignments;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels;
 using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
-using CharacterGen.Domain.Generators.Randomizers.Stats;
+using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Leaders;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Stats;
 using CharacterGen.Verifiers;
 using NUnit.Framework;
 
@@ -101,15 +103,15 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void StatsGeneratorIsNotBuiltAsSingleton()
+        public void AbilitiesGeneratorIsNotBuiltAsSingleton()
         {
-            AssertNotSingleton<IStatsGenerator>();
+            AssertNotSingleton<IAbilitiesGenerator>();
         }
 
         [Test]
-        public void StatsGeneratorIsDecorated()
+        public void AbilitiesGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IStatsGenerator, StatsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IAbilitiesGenerator, AbilitiesGeneratorEventGenDecorator>();
         }
 
         [Test]
@@ -423,76 +425,70 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void StatsRandomizerNamedAverageIsAverageStatsRandomizer()
+        public void AbilitiesRandomizerNamedAverageIsAverageAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, AverageStatsRandomizer>(StatsRandomizerTypeConstants.Average);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, AverageAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Average);
         }
 
         [Test]
-        public void StatsRandomizerNamedBestOfFourIsBestOfFourStatsRandomizer()
+        public void AbilitiesRandomizerNamedBestOfFourIsBestOfFourAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, BestOfFourStatsRandomizer>(StatsRandomizerTypeConstants.BestOfFour);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, BestOfFourAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.BestOfFour);
         }
 
         [Test]
-        public void StatsRandomizerNamedGoodIsGoodStatsRandomizer()
+        public void AbilitiesRandomizerNamedGoodIsGoodAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, GoodStatsRandomizer>(StatsRandomizerTypeConstants.Good);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, GoodAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Good);
         }
 
         [Test]
-        public void StatsRandomizerNamedHeroicIsHeroicStatsRandomizer()
+        public void AbilitiesRandomizerNamedHeroicIsHeroicAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, HeroicStatsRandomizer>(StatsRandomizerTypeConstants.Heroic);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, HeroicAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Heroic);
         }
 
         [Test]
-        public void StatsRandomizerNamedOnesAsSixesIsOnesAsSixesStatsRandomizer()
+        public void AbilitiesRandomizerNamedOnesAsSixesIsOnesAsSixesAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, OnesAsSixesStatsRandomizer>(StatsRandomizerTypeConstants.OnesAsSixes);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, OnesAsSixesAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.OnesAsSixes);
         }
 
         [Test]
-        public void StatsRandomizerNamedPoorIsPoorStatsRandomizer()
+        public void AbilitiesRandomizerNamedPoorIsPoorAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, PoorStatsRandomizer>(StatsRandomizerTypeConstants.Poor);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, PoorAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Poor);
         }
 
         [Test]
-        public void StatsRandomizerNamedRawIsRawStatsRandomizer()
+        public void AbilitiesRandomizerNamedRawIsRawAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, RawStatsRandomizer>(StatsRandomizerTypeConstants.Raw);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, RawAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
         }
 
         [Test]
-        public void StatsRandomizerNamedTwoTenSidedDiceIsTwoTenSidedDiceStatsRandomizer()
+        public void AbilitiesRandomizerNamedTwoTenSidedDiceIsTwoTenSidedDiceAbilitiesRandomizer()
         {
-            AssertNamedIsInstanceOf<IStatsRandomizer, TwoTenSidedDiceStatsRandomizer>(StatsRandomizerTypeConstants.TwoTenSidedDice);
+            AssertNamedIsInstanceOf<IAbilitiesRandomizer, TwoTenSidedDiceAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.TwoTenSidedDice);
         }
 
-        [TestCase(StatsRandomizerTypeConstants.Average)]
-        [TestCase(StatsRandomizerTypeConstants.BestOfFour)]
-        [TestCase(StatsRandomizerTypeConstants.Good)]
-        [TestCase(StatsRandomizerTypeConstants.Heroic)]
-        [TestCase(StatsRandomizerTypeConstants.OnesAsSixes)]
-        [TestCase(StatsRandomizerTypeConstants.Poor)]
-        [TestCase(StatsRandomizerTypeConstants.Raw)]
-        [TestCase(StatsRandomizerTypeConstants.TwoTenSidedDice)]
+        [TestCase(AbilitiesRandomizerTypeConstants.Average)]
+        [TestCase(AbilitiesRandomizerTypeConstants.BestOfFour)]
+        [TestCase(AbilitiesRandomizerTypeConstants.Good)]
+        [TestCase(AbilitiesRandomizerTypeConstants.Heroic)]
+        [TestCase(AbilitiesRandomizerTypeConstants.OnesAsSixes)]
+        [TestCase(AbilitiesRandomizerTypeConstants.Poor)]
+        [TestCase(AbilitiesRandomizerTypeConstants.Raw)]
+        [TestCase(AbilitiesRandomizerTypeConstants.TwoTenSidedDice)]
         public void StatRandomizerIsNotBuiltAsSingleton(string name)
         {
-            AssertNotSingleton<IStatsRandomizer>(name);
+            AssertNotSingleton<IAbilitiesRandomizer>(name);
         }
 
         [Test]
-        public void SetStatsRandomizerIsNotBuiltAsSingleton()
+        public void SetAbilitiesRandomizerIsNotBuiltAsSingleton()
         {
-            AssertNotSingleton<ISetStatsRandomizer>();
-        }
-
-        [Test]
-        public void AbilitiesGeneratorIsNotBuiltAsSingleton()
-        {
-            AssertNotSingleton<IAbilitiesGenerator>();
+            AssertNotSingleton<ISetAbilitiesRandomizer>();
         }
 
         [Test]

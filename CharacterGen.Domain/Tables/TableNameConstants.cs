@@ -28,6 +28,8 @@
 
             internal static class Collection
             {
+                public const string AbilityGroups = "AbilityGroups";
+                public const string AbilityPriorities = "AbilityPriorities";
                 public const string AdditionalFeatData = "AdditionalFeatData";
                 public const string AerialManeuverability = "AerialManeuverability";
                 public const string AlignmentGroups = "AlignmentGroups";
@@ -55,8 +57,6 @@
                 public const string SkillSynergy = "SkillSynergy";
                 public const string SpecialistFields = "SpecialistFields";
                 public const string SpellGroups = "SpellGroups";
-                public const string StatGroups = "StatGroups";
-                public const string StatPriorities = "StatPriorities";
                 public const string WeightRolls = "WeightRolls";
             }
 
@@ -73,7 +73,7 @@
             {
                 public const string AssignPointToCrossClassSkill = "AssignPointToCrossClassSkill";
                 public const string AttractCohortOfDifferentAlignment = "AttractCohortOfDifferentAlignment";
-                public const string IncreaseFirstPriorityStat = "IncreaseFirstPriorityStat";
+                public const string IncreaseFirstPriorityAbility = "IncreaseFirstPriorityAbility";
                 public const string KilledCohort = "KilledCohort";
                 public const string KilledFollowers = "KilledFollowers";
                 public const string Male = "Male";
@@ -84,19 +84,19 @@
         {
             internal static class Adjustments
             {
-                public const string AGEStatAdjustments = "{0}StatAdjustments";
+                public const string ABILITYAbilityAdjustments = "{0}AbilityAdjustments";
+                public const string AGEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
                 public const string CLASSSpellLevels = "{0}SpellLevels";
                 public const string FEATClassRequirements = "{0}ClassRequirements";
                 public const string FEATSkillRankRequirements = "{0}SkillRankRequirements";
-                public const string FEATStatRequirements = "{0}StatRequirements";
+                public const string FEATAbilityRequirements = "{0}AbilityRequirements";
                 public const string GENDERHeights = "{0}Heights";
                 public const string GENDERWeights = "{0}Weights";
                 public const string LevelXAnimalTricks = "Level{0}AnimalTricks";
                 public const string LevelXCLASSSpellsPerDay = "Level{0}{1}SpellsPerDay";
                 public const string LevelXCLASSKnownSpells = "Level{0}{1}KnownSpells";
                 public const string LevelXFollowerQuantities = "Level{0}FollowerQuantities";
-                public const string STATStatAdjustments = "{0}StatAdjustments";
                 public const string RACEAges = "{0}Ages";
             }
 

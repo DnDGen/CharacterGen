@@ -18,7 +18,10 @@ namespace CharacterGen.Tests.Unit.Common.Magics
         public void AnimalInitialized()
         {
             Assert.That(animal.Race, Is.Not.Null);
-            Assert.That(animal.Ability, Is.Not.Null);
+            Assert.That(animal.Abilities, Is.Empty);
+            Assert.That(animal.Feats, Is.Empty);
+            Assert.That(animal.Languages, Is.Empty);
+            Assert.That(animal.Skills, Is.Empty);
             Assert.That(animal.Combat, Is.Not.Null);
             Assert.That(animal.Tricks, Is.EqualTo(0));
         }
