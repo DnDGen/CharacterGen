@@ -1,7 +1,6 @@
-﻿using CharacterGen.Races;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
 {
@@ -26,7 +25,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
 
             AssertCollectionNames(names);
         }
-        
+
         [TestCase(RaceConstants.Ages.Adulthood, 110)]
         [TestCase(RaceConstants.Ages.MiddleAge, 175)]
         [TestCase(RaceConstants.Ages.Old, 263)]

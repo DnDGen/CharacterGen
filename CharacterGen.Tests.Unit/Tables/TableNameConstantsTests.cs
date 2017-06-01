@@ -102,15 +102,15 @@ namespace CharacterGen.Tests.Unit.Tables
         }
 
         [Test]
-        public void AgeStatAdjustmentsTable()
+        public void AgeAbilityAdjustmentsTable()
         {
             Assert.That(TableNameConstants.Formattable.Adjustments.AGEAbilityAdjustments, Is.EqualTo("{0}AbilityAdjustments"));
         }
 
         [Test]
-        public void StatStatAdjustmentsTable()
+        public void RaceAbilityAdjustmentsTable()
         {
-            Assert.That(TableNameConstants.Formattable.Adjustments.ABILITYAbilityAdjustments, Is.EqualTo("{0}AbilityAdjustments"));
+            Assert.That(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, Is.EqualTo("{0}AbilityAdjustments"));
         }
     }
 }

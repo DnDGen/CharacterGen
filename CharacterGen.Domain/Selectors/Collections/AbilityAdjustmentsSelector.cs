@@ -19,16 +19,20 @@ namespace CharacterGen.Domain.Selectors.Collections
         {
             var adjustments = new Dictionary<string, int>();
             var abilities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All);
+
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.AGEAbilityAdjustments, race.Age.Description);
             var agingEffects = innerSelector.SelectAllFrom(tableName);
 
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, race.BaseRace);
+            var baseRaceAdjustments = innerSelector.SelectAllFrom(tableName);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, race.Metarace);
+            var metaraceAdjustments = innerSelector.SelectAllFrom(tableName);
+
             foreach (var ability in abilities)
             {
-                tableName = string.Format(TableNameConstants.Formattable.Adjustments.ABILITYAbilityAdjustments, ability);
-                var abilityAdjustments = innerSelector.SelectAllFrom(tableName);
-
-                adjustments[ability] = abilityAdjustments[race.BaseRace];
-                adjustments[ability] += abilityAdjustments[race.Metarace];
+                adjustments[ability] = baseRaceAdjustments[ability];
+                adjustments[ability] += metaraceAdjustments[ability];
                 adjustments[ability] += agingEffects[ability];
             }
 

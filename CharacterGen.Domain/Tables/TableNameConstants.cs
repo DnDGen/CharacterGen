@@ -84,7 +84,7 @@
         {
             internal static class Adjustments
             {
-                public const string ABILITYAbilityAdjustments = "{0}AbilityAdjustments";
+                public const string RACEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string AGEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
                 public const string CLASSSpellLevels = "{0}SpellLevels";

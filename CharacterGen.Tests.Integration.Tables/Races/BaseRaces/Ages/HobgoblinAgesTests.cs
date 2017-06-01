@@ -1,5 +1,5 @@
-﻿using CharacterGen.Races;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using CharacterGen.Races;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages

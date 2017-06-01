@@ -32,6 +32,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             race.Metarace = "metarace";
             race.Age.Description = "super old";
 
+            allAdjustments[race.BaseRace] = new Dictionary<string, int>();
+            allAdjustments[race.Metarace] = new Dictionary<string, int>();
             allAdjustments[race.Age.Description] = new Dictionary<string, int>();
 
             abilityNames.Add("first ability");
@@ -40,15 +42,17 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.AGEAbilityAdjustments, race.Age.Description);
             mockInnerSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(allAdjustments[race.Age.Description]);
 
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, race.BaseRace);
+            mockInnerSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(allAdjustments[race.BaseRace]);
+
+            tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, race.Metarace);
+            mockInnerSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(allAdjustments[race.Metarace]);
+
             foreach (var ability in abilityNames)
             {
-                allAdjustments[ability] = new Dictionary<string, int>();
-                allAdjustments[ability][race.BaseRace] = 0;
-                allAdjustments[ability][race.Metarace] = 0;
+                allAdjustments[race.Metarace][ability] = 0;
+                allAdjustments[race.BaseRace][ability] = 0;
                 allAdjustments[race.Age.Description][ability] = 0;
-
-                tableName = string.Format(TableNameConstants.Formattable.Adjustments.ABILITYAbilityAdjustments, ability);
-                mockInnerSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(allAdjustments[ability]);
             }
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All)).Returns(abilityNames);
@@ -67,7 +71,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var adjustment = 1;
             foreach (var ability in abilityNames)
             {
-                allAdjustments[ability][race.BaseRace] = adjustment++;
+                allAdjustments[race.BaseRace][ability] = adjustment++;
             }
 
             var adjustments = selector.SelectFor(race);
@@ -85,7 +89,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var adjustment = 1;
             foreach (var ability in abilityNames)
             {
-                allAdjustments[ability][race.Metarace] = adjustment++;
+                allAdjustments[race.Metarace][ability] = adjustment++;
             }
 
             var adjustments = selector.SelectFor(race);
@@ -121,8 +125,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var adjustment = 1;
             foreach (var ability in abilityNames)
             {
-                allAdjustments[ability][race.BaseRace] = adjustment++;
-                allAdjustments[ability][race.Metarace] = adjustment++;
+                allAdjustments[race.BaseRace][ability] = adjustment++;
+                allAdjustments[race.Metarace][ability] = adjustment++;
                 allAdjustments[race.Age.Description][ability] = adjustment++;
             }
 
@@ -142,8 +146,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var adjustment = 1;
             foreach (var ability in abilityNames)
             {
-                allAdjustments[ability][race.BaseRace] = adjustment++ * Convert.ToInt32(Math.Pow(-1, adjustment));
-                allAdjustments[ability][race.Metarace] = adjustment++ * Convert.ToInt32(Math.Pow(-1, adjustment));
+                allAdjustments[race.BaseRace][ability] = adjustment++ * Convert.ToInt32(Math.Pow(-1, adjustment));
+                allAdjustments[race.Metarace][ability] = adjustment++ * Convert.ToInt32(Math.Pow(-1, adjustment));
                 allAdjustments[race.Age.Description][ability] = adjustment++ * Convert.ToInt32(Math.Pow(-1, adjustment));
             }
 

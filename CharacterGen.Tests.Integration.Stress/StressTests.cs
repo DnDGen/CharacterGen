@@ -94,7 +94,11 @@ namespace CharacterGen.Tests.Integration.Stress
             foreach (var genEvent in events)
                 EventQueue.Enqueue(genEvent);
 
+            Assert.That(events, Is.Ordered.By("When"));
+
             var newEvents = events.Where(e => e.When > eventCheckpoint).ToArray();
+
+            Assert.That(newEvents, Is.Ordered.By("When"));
 
             for (var i = 1; i < newEvents.Length; i++)
             {
@@ -116,11 +120,11 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var events = EventQueue.DequeueAll(clientId);
 
-            //INFO: Get the 10 most recent events for CharacterGen
+            //INFO: Get the 10 most recent events for CharacterGen.  We assume the events are ordered chronologically already
             events = events.Where(e => e.Source == "CharacterGen");
-            events = events.OrderByDescending(e => e.When);
+            events = events.Reverse();
             events = events.Take(10);
-            events = events.OrderBy(e => e.When);
+            events = events.Reverse();
 
             foreach (var genEvent in events)
                 Console.WriteLine(GetMessage(genEvent));

@@ -1,6 +1,4 @@
 ﻿using CharacterGen.Abilities;
-using CharacterGen.Feats;
-using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Feats;
