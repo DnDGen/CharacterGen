@@ -56,6 +56,67 @@ namespace CharacterGen.Tests.Unit.Selectors.Selections
         }
 
         [Test]
+        public void MutableRequirementsMetIfFeatNotAlreadySelected()
+        {
+            feats.Add(new Feat());
+            feats[0].Name = "other feat";
+            selection.Feat = "feat";
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void MutableRequirementsNotMetIfFeatAlreadySelected()
+        {
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            selection.Feat = "feat";
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void MutableRequirementsMetIfFeatAlreadySelectedWithFocus()
+        {
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].Foci = new[] { "focus" };
+            selection.Feat = "feat";
+            selection.FocusType = "focus type";
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
+        public void MutableRequirementsNotMetIfFeatAlreadySelectedWithFocusOfAll()
+        {
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].Foci = new[] { FeatConstants.Foci.All };
+            selection.Feat = "feat";
+            selection.FocusType = "focus type";
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.False);
+        }
+
+        [Test]
+        public void MutableRequirementsMetIfFeatAlreadySelectedAndCanBeTakenMultipleTimes()
+        {
+            feats.Add(new Feat());
+            feats[0].Name = "feat";
+            feats[0].CanBeTakenMultipleTimes = true;
+            selection.Feat = "feat";
+            selection.CanBeTakenMultipleTimes = true;
+
+            var met = selection.MutableRequirementsMet(feats);
+            Assert.That(met, Is.True);
+        }
+
+        [Test]
         public void MutableRequirementsMetIfNoRequirements()
         {
             var met = selection.MutableRequirementsMet(feats);

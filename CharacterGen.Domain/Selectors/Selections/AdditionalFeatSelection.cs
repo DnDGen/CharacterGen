@@ -1,9 +1,9 @@
-﻿using CharacterGen.Feats;
-using CharacterGen.Skills;
-using CharacterGen.Abilities;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
+using CharacterGen.Skills;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
@@ -21,6 +21,7 @@ namespace CharacterGen.Domain.Selectors.Selections
         public IEnumerable<RequiredSkillSelection> RequiredSkills { get; set; }
         public Dictionary<string, int> RequiredCharacterClasses { get; set; }
         public string FocusType { get; set; }
+        public bool CanBeTakenMultipleTimes { get; set; }
 
         public AdditionalFeatSelection()
         {
@@ -50,6 +51,9 @@ namespace CharacterGen.Domain.Selectors.Selections
 
         public bool MutableRequirementsMet(IEnumerable<Feat> feats)
         {
+            if (FeatSelected(feats) && !CanBeTakenMultipleTimes)
+                return false;
+
             if (!RequiredFeats.Any())
                 return true;
 
@@ -57,6 +61,21 @@ namespace CharacterGen.Domain.Selectors.Selections
             var requirementsWithoutProficiency = RequiredFeats.Except(new[] { proficiencyRequirement });
 
             return requirementsWithoutProficiency.All(f => f.RequirementMet(feats));
+        }
+
+        private bool FeatSelected(IEnumerable<Feat> feats)
+        {
+            return feats.Any(f => FeatSelected(f));
+        }
+
+        private bool FeatSelected(Feat feat)
+        {
+            return feat.Name == Feat && FocusSelected(feat);
+        }
+
+        private bool FocusSelected(Feat feat)
+        {
+            return string.IsNullOrEmpty(FocusType) || feat.Foci.Contains(FeatConstants.Foci.All);
         }
     }
 }

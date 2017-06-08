@@ -47,12 +47,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         [Test]
         public void ReturnInnerFeats()
         {
-            var feats = new[]
-            {
-                new Feat(),
-                new Feat(),
-            };
-
+            var feats = new FeatCollections();
             mockInnerGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var generatedFeats = decorator.GenerateWith(characterClass, race, stats, skills, baseAttack);
@@ -62,12 +57,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         [Test]
         public void LogEventsForFeatsGeneration()
         {
-            var feats = new[]
-            {
-                new Feat(),
-                new Feat(),
-            };
-
+            var feats = new FeatCollections();
             mockInnerGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, skills, baseAttack)).Returns(feats);
 
             var generatedFeats = decorator.GenerateWith(characterClass, race, stats, skills, baseAttack);

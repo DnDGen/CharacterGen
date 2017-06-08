@@ -582,7 +582,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         {
             AddFeatSelections(1);
             characterClass.Level = 3;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "feat1" });
+            additionalFeatSelections[0].CanBeTakenMultipleTimes = true;
 
             var feats = additionalFeatsGenerator.GenerateWith(characterClass, race, stats, skills, baseAttack, preselectedFeats);
             var first = feats.First();

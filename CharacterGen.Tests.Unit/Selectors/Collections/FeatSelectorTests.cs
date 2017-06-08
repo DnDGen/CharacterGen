@@ -317,6 +317,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, "additional feat 2");
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(feat2StatRequirements);
 
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes)).Returns(new[] { "additional feat 2", "additional feat 3" });
+
             var additionalFeats = featsSelector.SelectAdditional();
             Assert.That(additionalFeats.Count(), Is.EqualTo(2));
 
@@ -331,6 +333,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(first.RequiredCharacterClasses["class 1"], Is.EqualTo(3));
             Assert.That(first.RequiredCharacterClasses["class 3"], Is.EqualTo(5));
             Assert.That(first.RequiredCharacterClasses.Count, Is.EqualTo(2));
+            Assert.That(first.CanBeTakenMultipleTimes, Is.False);
 
             var firstRequirement = first.RequiredFeats.First();
             var lastRequirement = first.RequiredFeats.Last();
@@ -351,6 +354,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             Assert.That(last.RequiredBaseAttack, Is.EqualTo(0));
             Assert.That(last.RequiredCharacterClasses, Is.Empty);
             Assert.That(last.RequiredFeats, Is.Empty);
+            Assert.That(last.CanBeTakenMultipleTimes, Is.True);
 
             var requiredSkills = last.RequiredSkills.ToArray();
             Assert.That(requiredSkills[0].Skill, Is.EqualTo("skill 1"));

@@ -379,9 +379,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                 FeatConstants.Telekinesis,
             };
 
-            var featNames = character.Feats.Select(f => f.Name);
+            var featNames = character.Feats.All.Select(f => f.Name);
             var ghostSpecialAttackFeats = featNames.Intersect(ghostSpecialAttacks);
-            var ghostSpecialAttackFeat = character.Feats.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
+            var ghostSpecialAttackFeat = character.Feats.All.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
 
             Assert.That(ghostSpecialAttackFeats.Count, Is.EqualTo(ghostSpecialAttackFeat.Foci.Count()));
             Assert.That(ghostSpecialAttackFeats.Count, Is.InRange(1, 3));

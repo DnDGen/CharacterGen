@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Feats\Feat.cs" />
     <Compile Include="Feats\FeatConstants.cs" />
+    <Compile Include="Feats\FeatCollections.cs" />
     <Compile Include="Feats\Frequency.cs" />
     <Compile Include="Languages\LanguageConstants.cs" />
     <Compile Include="Skills\Skill.cs" />

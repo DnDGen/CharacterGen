@@ -22,7 +22,7 @@ namespace CharacterGen.Characters
         public Combat Combat { get; set; }
         public IEnumerable<Skill> Skills { get; set; }
         public IEnumerable<string> Languages { get; set; }
-        public IEnumerable<Feat> Feats { get; set; }
+        public FeatCollections Feats { get; set; }
         public Dictionary<string, Ability> Abilities { get; set; }
         public Equipment Equipment { get; set; }
         public Magic Magic { get; set; }
@@ -31,7 +31,7 @@ namespace CharacterGen.Characters
         {
             get
             {
-                return Feats.Any(f => f.Name == FeatConstants.Leadership);
+                return Feats.All.Any(f => f.Name == FeatConstants.Leadership);
             }
         }
 
@@ -81,7 +81,7 @@ namespace CharacterGen.Characters
             Combat = new Combat();
             Skills = Enumerable.Empty<Skill>();
             Languages = Enumerable.Empty<string>();
-            Feats = Enumerable.Empty<Feat>();
+            Feats = new FeatCollections();
             Abilities = new Dictionary<string, Ability>();
             Equipment = new Equipment();
             Magic = new Magic();

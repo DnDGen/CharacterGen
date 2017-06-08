@@ -117,16 +117,16 @@ namespace CharacterGen.Domain.Generators.Characters
             character.Skills = skillsGenerator.GenerateWith(character.Class, character.Race, character.Abilities);
 
             character.Feats = featsGenerator.GenerateWith(character.Class, character.Race, character.Abilities, character.Skills, baseAttack);
-            character.Skills = UpdateSkillsFromFeats(character.Skills, character.Feats);
+            character.Skills = UpdateSkillsFromFeats(character.Skills, character.Feats.All);
 
-            character.Equipment = equipmentGenerator.GenerateWith(character.Feats, character.Class, character.Race);
+            character.Equipment = equipmentGenerator.GenerateWith(character.Feats.All, character.Class, character.Race);
             character.Skills = UpdateSkillsFromEquipment(character.Skills, character.Equipment);
 
             character.Languages = languageGenerator.GenerateWith(character.Race, character.Class, character.Abilities, character.Skills);
 
-            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Feats, character.Abilities, character.Equipment);
+            character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Feats.All, character.Abilities, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
-            character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Abilities, character.Feats, character.Equipment);
+            character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Abilities, character.Feats.All, character.Equipment);
 
             return character;
         }

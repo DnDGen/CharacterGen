@@ -108,17 +108,18 @@ namespace CharacterGen.Domain.Generators.Feats
                 }
 
                 var feat = new Feat();
-                var hasMatchingFeat = feats.Any(f => FeatsMatch(f, featSelection));
+                var hasMatchingFeat = feats.Any(f => FeatsWithFociMatch(f, featSelection));
 
                 if (hasMatchingFeat)
                 {
-                    feat = feats.First(f => FeatsMatch(f, featSelection));
+                    feat = feats.First(f => FeatsWithFociMatch(f, featSelection));
                 }
                 else
                 {
                     feat.Name = featSelection.Feat;
                     feat.Frequency = featSelection.Frequency;
                     feat.Power = featSelection.Power;
+                    feat.CanBeTakenMultipleTimes = featSelection.CanBeTakenMultipleTimes;
 
                     if (featSelection.Feat == FeatConstants.SpellMastery)
                         feat.Power = abilities[AbilityConstants.Intelligence].Bonus;
@@ -164,12 +165,10 @@ namespace CharacterGen.Domain.Generators.Feats
 
         private bool FeatSelectionCanBeSelectedAgain(AdditionalFeatSelection featSelection)
         {
-            var featNamesAllowingMultipleTakes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
-            return !string.IsNullOrEmpty(featSelection.FocusType)
-                || featNamesAllowingMultipleTakes.Contains(featSelection.Feat);
+            return !string.IsNullOrEmpty(featSelection.FocusType) || featSelection.CanBeTakenMultipleTimes;
         }
 
-        private bool FeatsMatch(Feat feat, AdditionalFeatSelection featSelection)
+        private bool FeatsWithFociMatch(Feat feat, AdditionalFeatSelection featSelection)
         {
             return feat.Frequency.TimePeriod == string.Empty
                 && feat.Name == featSelection.Feat

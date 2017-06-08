@@ -230,9 +230,12 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void VerifyFeats(Character character)
         {
-            Assert.That(character.Feats, Is.Not.Empty, character.Summary);
+            Assert.That(character.Feats.Class, Is.Not.Empty, character.Summary);
+            Assert.That(character.Feats.Racial, Is.Not.Null, character.Summary);
+            Assert.That(character.Feats.Additional, Is.Not.Empty, character.Summary);
+            Assert.That(character.Feats.All, Is.Not.Empty, character.Summary);
 
-            foreach (var feat in character.Feats)
+            foreach (var feat in character.Feats.All)
             {
                 Assert.That(feat.Name, Is.Not.Empty, character.Summary);
                 Assert.That(feat.Foci, Is.Not.Null, feat.Name);
@@ -254,9 +257,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void VerifyEquipment(Character character)
         {
-            if (character.Feats.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
+            if (character.Feats.All.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
             {
-                var feats = GetAllFeatsMessage(character.Feats);
+                var feats = GetAllFeatsMessage(character.Feats.All);
 
                 Assert.That(character.Equipment.PrimaryHand, Is.Not.Null, feats);
                 Assert.That(character.Equipment.PrimaryHand.Name, Is.Not.Empty, feats);

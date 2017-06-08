@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Generators\Feats\AdditionalFeatsGeneratorEventGenDecoratorTests.cs" />
     <Compile Include="Generators\Feats\ClassFeatsGeneratorEventGenDecoratorTests.cs" />
+    <Compile Include="Generators\Feats\FeatCollectionsTests.cs" />
     <Compile Include="Generators\Feats\FeatFocusGeneratorEventGenDecoratorTests.cs" />
     <Compile Include="Generators\Feats\RacialFeatsGeneratorEventGenDecoratorTests.cs" />
     <Compile Include="Generators\Languages\LanguageGeneratorEventGenDecoratorTests.cs" />

@@ -20,7 +20,7 @@ namespace CharacterGen.Domain.Generators.Feats
             this.eventQueue = eventQueue;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack)
+        public FeatCollections GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack)
         {
             eventQueue.Enqueue("CharacterGen", $"Beginning feats generation for {characterClass.Summary} {race.Summary}");
             var feats = innerGenerator.GenerateWith(characterClass, race, abilities, skills, baseAttack);

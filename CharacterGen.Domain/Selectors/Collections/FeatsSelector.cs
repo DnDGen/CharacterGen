@@ -93,12 +93,15 @@ namespace CharacterGen.Domain.Selectors.Collections
                 additionalFeatSelection.RequiredSkills = GetRequiredSkills(additionalFeatSelection.Feat);
             }
 
-            var featWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements);
-            if (featWithStatRequirements.Contains(dataKVP.Key))
+            var featsWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements);
+            if (featsWithStatRequirements.Contains(dataKVP.Key))
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, dataKVP.Key);
                 additionalFeatSelection.RequiredAbilities = adjustmentsSelector.SelectAllFrom(tableName);
             }
+
+            var featsTakenMultipleTimes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
+            additionalFeatSelection.CanBeTakenMultipleTimes = featsTakenMultipleTimes.Contains(additionalFeatSelection.Feat);
 
             return additionalFeatSelection;
         }
