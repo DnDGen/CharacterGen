@@ -139,8 +139,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         }
 
         [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         public void SpecialNPCChallengeRatingIsClassLevel(string baseRace)
         {
             character.Class.Level = 9266;
@@ -151,8 +153,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         }
 
         [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         public void SpecialCharacterChallengeRatingIsClassLevelPlus1(string baseRace)
         {
             character.Class.Level = 9266;
@@ -163,8 +167,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         }
 
         [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         public void SpecialNPCChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
         {
             character.Class.Level = 9266;
@@ -177,8 +183,10 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         }
 
         [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Githyanki)]
+        [TestCase(RaceConstants.BaseRaces.Githzerai)]
+        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
         public void SpecialCharacterChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
         {
             character.Class.Level = 9266;

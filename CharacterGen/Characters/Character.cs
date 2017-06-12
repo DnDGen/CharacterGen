@@ -90,6 +90,8 @@ namespace CharacterGen.Characters
             {
                 RaceConstants.BaseRaces.Drow,
                 RaceConstants.BaseRaces.DuergarDwarf,
+                RaceConstants.BaseRaces.Githyanki,
+                RaceConstants.BaseRaces.Githzerai,
                 RaceConstants.BaseRaces.Svirfneblin,
             };
         }

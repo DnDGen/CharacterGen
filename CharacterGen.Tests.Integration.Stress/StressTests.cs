@@ -57,7 +57,8 @@ namespace CharacterGen.Tests.Integration.Stress
             var stressTestCasesCount = methods.Sum(m => m.GetCustomAttributes<TestCaseAttribute>().Count());
             var stressTestsTotal = stressTestsCount + stressTestCasesCount;
 
-            var timeLimitPerTest = TravisJobBuildTimeLimit / stressTestsTotal;
+            var timeLimitPerTest = TravisJobBuildTimeLimit / stressTestsTotal - 1;
+            Assert.That(timeLimitPerTest, Is.AtLeast(10));
 #if STRESS
             timeLimitInSeconds = Math.Min(timeLimitPerTest, TravisJobOutputTimeLimit - 10);
 #else
