@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen</id>
-    <version>9.0.0</version>
+    <version>9.0.1</version>
     <title>CharacterGen</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -10,7 +10,7 @@
       This generates characters for the Dungeons and Dragons 3.5 system.  One can generate characters at random or within certain parameters.  Characters are equipped.
     </description>
     <releaseNotes>
-      Features #97, #105, #106, #107
+      Bug #108
     </releaseNotes>
     <summary>
       This generates characters for the Dungeons and Dragons 3.5 system.
