@@ -5,6 +5,7 @@ using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Languages;
@@ -18,7 +19,6 @@ using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
 using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Generators.Verifiers;
-using CharacterGen.Domain.IoC.Providers;
 using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
@@ -36,14 +36,15 @@ namespace CharacterGen.Domain.IoC.Modules
         {
             Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
-            Bind<ILeadershipGenerator>().ToProvider<LeadershipGeneratorProvider>();
+            Bind<ILeadershipGenerator>().To<LeadershipGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
             Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();
-            Bind<IArmorGenerator>().ToProvider<ArmorGeneratorProvider>();
-            Bind<IWeaponGenerator>().ToProvider<WeaponGeneratorProvider>();
+            Bind<IArmorGenerator>().To<ArmorGenerator>();
+            Bind<IWeaponGenerator>().To<WeaponGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().To<AnimalGenerator>();
             Bind<Generator>().To<IterativeGenerator>();
+            Bind<JustInTimeFactory>().To<NinjectJustInTimeFactory>();
 
             BindDecoratedGenerators();
             BindRandomizers();

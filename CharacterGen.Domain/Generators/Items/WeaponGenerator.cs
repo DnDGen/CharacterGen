@@ -1,4 +1,5 @@
 ﻿using CharacterGen.CharacterClasses;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
@@ -15,19 +16,17 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal class WeaponGenerator : IWeaponGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IPercentileSelector percentileSelector;
-        private MundaneItemGenerator mundaneWeaponGenerator;
-        private MagicalItemGenerator magicalWeaponGenerator;
-        private Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly Generator generator;
+        private readonly JustInTimeFactory justInTimeFactory;
 
-        public WeaponGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, MundaneItemGenerator mundaneWeaponGenerator, MagicalItemGenerator magicalWeaponGenerator, Generator generator)
+        public WeaponGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, Generator generator, JustInTimeFactory justInTimeFactory)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
-            this.mundaneWeaponGenerator = mundaneWeaponGenerator;
-            this.magicalWeaponGenerator = magicalWeaponGenerator;
             this.generator = generator;
+            this.justInTimeFactory = justInTimeFactory;
         }
 
         public Weapon GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
@@ -196,6 +195,8 @@ namespace CharacterGen.Domain.Generators.Items
 
         private bool ValidWeaponIsPossible(IEnumerable<string> allowedWeapons, Func<Weapon, bool> furtherValidation)
         {
+            var mundaneWeaponGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon);
+
             foreach (var allowedWeapon in allowedWeapons)
             {
                 var template = new Weapon();
@@ -242,23 +243,29 @@ namespace CharacterGen.Domain.Generators.Items
 
             if (power == PowerConstants.Mundane)
             {
+                var mundaneWeaponGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon);
                 return mundaneWeaponGenerator.GenerateFrom(template, true);
             }
 
             template.Magic.Bonus = 1;
+            var magicalWeaponGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon);
             return magicalWeaponGenerator.Generate(template, true);
         }
 
         private Item GenerateWeapon(string power, IEnumerable<string> proficientWeapons)
         {
-            var weapon = new Item();
-
             if (power == PowerConstants.Mundane)
-                weapon = mundaneWeaponGenerator.GenerateFrom(proficientWeapons);
-            else
-                weapon = magicalWeaponGenerator.GenerateFromSubset(power, proficientWeapons);
+            {
+                var mundaneWeaponGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon);
+                var mundaneWeapon = mundaneWeaponGenerator.GenerateFrom(proficientWeapons);
 
-            return weapon;
+                return mundaneWeapon;
+            }
+
+            var magicalWeaponGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon);
+            var magicalWeapon = magicalWeaponGenerator.GenerateFromSubset(power, proficientWeapons);
+
+            return magicalWeapon;
         }
 
         private bool WeaponIsValid(Item item, Race race, Func<Weapon, bool> furtherValidation)

@@ -5,6 +5,7 @@ using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Languages;
@@ -24,6 +25,11 @@ using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers;
 using NUnit.Framework;
+using RollGen;
+using TreasureGen.Generators;
+using TreasureGen.Items;
+using TreasureGen.Items.Magical;
+using TreasureGen.Items.Mundane;
 
 namespace CharacterGen.Tests.Integration.IoC.Modules
 {
@@ -639,6 +645,47 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void LeadershipGeneratorIsNotASingleton()
         {
             AssertNotSingleton<ILeadershipGenerator>();
+        }
+
+        [Test]
+        public void JustInTimeFactoryIsNotASingleton()
+        {
+            AssertNotSingleton<JustInTimeFactory>();
+        }
+
+        [Test]
+        public void EXTERNAL_DiceIsInjected()
+        {
+            AssertNotSingleton<Dice>();
+        }
+
+        [Test]
+        public void EXTERNAL_TreasureGeneratorIsInjected()
+        {
+            AssertNotSingleton<ITreasureGenerator>();
+        }
+
+        [TestCase(ItemTypeConstants.AlchemicalItem)]
+        [TestCase(ItemTypeConstants.Armor)]
+        [TestCase(ItemTypeConstants.Tool)]
+        [TestCase(ItemTypeConstants.Weapon)]
+        public void EXTERNAL_MundaneItemGeneratorIsInjected(string name)
+        {
+            AssertNotSingleton<MundaneItemGenerator>(name);
+        }
+
+        [TestCase(ItemTypeConstants.Armor)]
+        [TestCase(ItemTypeConstants.Potion)]
+        [TestCase(ItemTypeConstants.Ring)]
+        [TestCase(ItemTypeConstants.Rod)]
+        [TestCase(ItemTypeConstants.Scroll)]
+        [TestCase(ItemTypeConstants.Staff)]
+        [TestCase(ItemTypeConstants.Wand)]
+        [TestCase(ItemTypeConstants.Weapon)]
+        [TestCase(ItemTypeConstants.WondrousItem)]
+        public void EXTERNAL_MagicalItemGeneratorIsInjected(string name)
+        {
+            AssertNotSingleton<MagicalItemGenerator>(name);
         }
     }
 }

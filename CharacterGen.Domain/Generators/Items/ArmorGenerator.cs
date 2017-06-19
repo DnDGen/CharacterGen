@@ -1,4 +1,5 @@
 ﻿using CharacterGen.CharacterClasses;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
@@ -15,18 +16,16 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal class ArmorGenerator : IArmorGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IPercentileSelector percentileSelector;
-        private MundaneItemGenerator mundaneArmorGenerator;
-        private MagicalItemGenerator magicalArmorGenerator;
-        private Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly Generator generator;
+        private readonly JustInTimeFactory justInTimeFactory;
 
-        public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, MundaneItemGenerator mundaneArmorGenerator, MagicalItemGenerator magicalArmorGenerator, Generator generator)
+        public ArmorGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, Generator generator, JustInTimeFactory justInTimeFactory)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;
-            this.mundaneArmorGenerator = mundaneArmorGenerator;
-            this.magicalArmorGenerator = magicalArmorGenerator;
+            this.justInTimeFactory = justInTimeFactory;
             this.generator = generator;
         }
 
@@ -61,10 +60,12 @@ namespace CharacterGen.Domain.Generators.Items
 
             if (power == PowerConstants.Mundane)
             {
+                var mundaneArmorGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Armor);
                 return mundaneArmorGenerator.GenerateFrom(template, true);
             }
 
             template.Magic.Bonus = 1;
+            var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
             return magicalArmorGenerator.Generate(template, true);
         }
 
@@ -114,8 +115,12 @@ namespace CharacterGen.Domain.Generators.Items
         private Item GenerateArmor(string power, IEnumerable<string> proficientArmors)
         {
             if (power == PowerConstants.Mundane)
+            {
+                var mundaneArmorGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Armor);
                 return mundaneArmorGenerator.GenerateFrom(proficientArmors);
+            }
 
+            var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
             return magicalArmorGenerator.GenerateFromSubset(power, proficientArmors);
         }
 

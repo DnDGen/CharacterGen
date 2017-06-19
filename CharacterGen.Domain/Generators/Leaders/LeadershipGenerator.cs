@@ -1,13 +1,14 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Characters;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Leaders;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Abilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,50 +17,32 @@ namespace CharacterGen.Domain.Generators
 {
     internal class LeadershipGenerator : ILeadershipGenerator
     {
-        private ICharacterGenerator characterGenerator;
-        private ILeadershipSelector leadershipSelector;
-        private IPercentileSelector percentileSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private ISetLevelRandomizer setLevelRandomizer;
-        private ISetAlignmentRandomizer setAlignmentRandomizer;
-        private IClassNameRandomizer anyPlayerClassNameRandomizer;
-        private IClassNameRandomizer anyNPCClassNameRandomizer;
-        private RaceRandomizer anyBaseRaceRandomizer;
-        private RaceRandomizer anyMetaraceRandomizer;
-        private IAbilitiesRandomizer rawAbilitiesRandomizer;
-        private IBooleanPercentileSelector booleanPercentileSelector;
-        private ICollectionsSelector collectionsSelector;
-        private Generator generator;
+        private readonly ICharacterGenerator characterGenerator;
+        private readonly ILeadershipSelector leadershipSelector;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IBooleanPercentileSelector booleanPercentileSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly Generator generator;
+        private readonly JustInTimeFactory justInTimeFactrory;
 
         public LeadershipGenerator(ICharacterGenerator characterGenerator,
             ILeadershipSelector leadershipSelector,
             IPercentileSelector percentileSelector,
             IAdjustmentsSelector adjustmentsSelector,
-            ISetLevelRandomizer setLevelRandomizer,
-            ISetAlignmentRandomizer setAlignmentRandomizer,
-            IClassNameRandomizer anyPlayerClassNameRandomizer,
-            RaceRandomizer anyBaseRaceRandomizer,
-            RaceRandomizer anyMetaraceRandomizer,
-            IAbilitiesRandomizer rawAbilitiesRandomizer,
             IBooleanPercentileSelector booleanPercentileSelector,
             ICollectionsSelector collectionsSelector,
             Generator generator,
-            IClassNameRandomizer anyNPCClassNameRandomizer)
+            JustInTimeFactory justInTimeFactrory)
         {
             this.characterGenerator = characterGenerator;
             this.leadershipSelector = leadershipSelector;
             this.percentileSelector = percentileSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.setLevelRandomizer = setLevelRandomizer;
-            this.setAlignmentRandomizer = setAlignmentRandomizer;
-            this.anyPlayerClassNameRandomizer = anyPlayerClassNameRandomizer;
-            this.anyBaseRaceRandomizer = anyBaseRaceRandomizer;
-            this.anyMetaraceRandomizer = anyMetaraceRandomizer;
-            this.rawAbilitiesRandomizer = rawAbilitiesRandomizer;
             this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.generator = generator;
-            this.anyNPCClassNameRandomizer = anyNPCClassNameRandomizer;
+            this.justInTimeFactrory = justInTimeFactrory;
         }
 
         public Leadership GenerateLeadership(int level, int charismaBonus, string leaderAnimal)
@@ -143,14 +126,24 @@ namespace CharacterGen.Domain.Generators
 
         private Character GenerateFollower(Alignment alignment, int level, string leaderClass)
         {
+            var setLevelRandomizer = justInTimeFactrory.Build<ISetLevelRandomizer>();
+            var setAlignmentRandomizer = justInTimeFactrory.Build<ISetAlignmentRandomizer>();
+            var anyBaseRaceRandomizer = justInTimeFactrory.Build<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
+            var anyMetaraceRandomizer = justInTimeFactrory.Build<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            var rawAbilitiesRandomizer = justInTimeFactrory.Build<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+
             setLevelRandomizer.SetLevel = level;
             setAlignmentRandomizer.SetAlignment = alignment;
 
             var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             if (npcs.Contains(leaderClass))
+            {
+                var anyNPCClassNameRandomizer = justInTimeFactrory.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
                 return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
+            }
 
+            var anyPlayerClassNameRandomizer = justInTimeFactrory.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
             return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
         }
 

@@ -1,4 +1,5 @@
 ﻿using CharacterGen.CharacterClasses;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
@@ -24,6 +25,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<MundaneItemGenerator> mockMundaneWeaponGenerator;
         private Mock<MagicalItemGenerator> mockMagicalWeaponGenerator;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<JustInTimeFactory> mockJustInTimeFactory;
         private Weapon magicalWeapon;
         private List<Feat> feats;
         private List<string> proficiencyFeats;
@@ -41,7 +43,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockMagicalWeaponGenerator = new Mock<MagicalItemGenerator>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             var generator = new ConfigurableIterationGenerator(3);
-            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneWeaponGenerator.Object, mockMagicalWeaponGenerator.Object, generator);
+            mockJustInTimeFactory = new Mock<JustInTimeFactory>();
+            weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, generator, mockJustInTimeFactory.Object);
             magicalWeapon = new Weapon();
             feats = new List<Feat>();
             characterClass = new CharacterClass();
@@ -67,6 +70,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+
+            mockJustInTimeFactory.Setup(f => f.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon)).Returns(mockMundaneWeaponGenerator.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon)).Returns(mockMagicalWeaponGenerator.Object);
         }
 
         private IEnumerable<string> ProficientWeaponSet(IEnumerable<string> weapons)

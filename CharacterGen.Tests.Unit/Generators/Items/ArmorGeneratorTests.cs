@@ -1,5 +1,5 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<MundaneItemGenerator> mockMundaneArmorGenerator;
         private Mock<MagicalItemGenerator> mockMagicalArmorGenerator;
-        private Generator generator;
+        private Mock<JustInTimeFactory> mockJustInTimeFactory;
         private IArmorGenerator armorGenerator;
         private List<Feat> feats;
         private CharacterClass characterClass;
@@ -44,8 +44,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockMundaneArmorGenerator = new Mock<MundaneItemGenerator>();
             mockMagicalArmorGenerator = new Mock<MagicalItemGenerator>();
-            generator = new ConfigurableIterationGenerator(3);
-            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockMundaneArmorGenerator.Object, mockMagicalArmorGenerator.Object, generator);
+            var generator = new ConfigurableIterationGenerator(3);
+            mockJustInTimeFactory = new Mock<JustInTimeFactory>();
+            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, generator, mockJustInTimeFactory.Object);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             armorProficiencyFeats = new List<string>();
@@ -85,6 +86,9 @@ namespace CharacterGen.Tests.Unit.Generators.Items
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+
+            mockJustInTimeFactory.Setup(f => f.Build<MundaneItemGenerator>(ItemTypeConstants.Armor)).Returns(mockMundaneArmorGenerator.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<MagicalItemGenerator>(ItemTypeConstants.Armor)).Returns(mockMagicalArmorGenerator.Object);
         }
 
         [Test]

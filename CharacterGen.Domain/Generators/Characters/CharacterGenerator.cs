@@ -32,21 +32,21 @@ namespace CharacterGen.Domain.Generators.Characters
 {
     internal class CharacterGenerator : ICharacterGenerator
     {
-        private IAlignmentGenerator alignmentGenerator;
-        private ICharacterClassGenerator characterClassGenerator;
-        private IRaceGenerator raceGenerator;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private IRandomizerVerifier randomizerVerifier;
-        private IPercentileSelector percentileSelector;
-        private ICombatGenerator combatGenerator;
-        private IEquipmentGenerator equipmentGenerator;
-        private IMagicGenerator magicGenerator;
-        private Generator generator;
-        private ICollectionsSelector collectionsSelector;
-        private IAbilitiesGenerator abilitiesGenerator;
-        private ILanguageGenerator languageGenerator;
-        private ISkillsGenerator skillsGenerator;
-        private IFeatsGenerator featsGenerator;
+        private readonly IAlignmentGenerator alignmentGenerator;
+        private readonly ICharacterClassGenerator characterClassGenerator;
+        private readonly IRaceGenerator raceGenerator;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IRandomizerVerifier randomizerVerifier;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly ICombatGenerator combatGenerator;
+        private readonly IEquipmentGenerator equipmentGenerator;
+        private readonly IMagicGenerator magicGenerator;
+        private readonly Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAbilitiesGenerator abilitiesGenerator;
+        private readonly ILanguageGenerator languageGenerator;
+        private readonly ISkillsGenerator skillsGenerator;
+        private readonly IFeatsGenerator featsGenerator;
 
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator,
             ICharacterClassGenerator characterClassGenerator,
@@ -135,7 +135,7 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
             var featGrantingSkillBonuses = feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
-            var allSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
+            var allSkillFocusNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
 
             foreach (var feat in featGrantingSkillBonuses)
             {
@@ -143,16 +143,16 @@ namespace CharacterGen.Domain.Generators.Characters
                 {
                     foreach (var focus in feat.Foci)
                     {
-                        if (allSkillNames.Any(s => focus.StartsWith(s)) == false)
+                        if (!allSkillFocusNames.Any(s => focus.StartsWith(s)))
                             continue;
 
-                        var skillName = allSkillNames.First(s => focus.StartsWith(s));
+                        var skillName = allSkillFocusNames.First(s => focus.StartsWith(s));
                         var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
 
                         if (skill == null)
                             continue;
 
-                        var circumstantial = allSkillNames.Contains(focus) == false;
+                        var circumstantial = !allSkillFocusNames.Contains(focus);
                         skill.CircumstantialBonus |= circumstantial;
 
                         if (!circumstantial)
@@ -232,7 +232,7 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
-            if (verified == false)
+            if (!verified)
                 throw new IncompatibleRandomizersException();
         }
 

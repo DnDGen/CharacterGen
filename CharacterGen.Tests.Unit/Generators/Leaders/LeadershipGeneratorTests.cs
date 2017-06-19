@@ -1,14 +1,15 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Characters;
 using CharacterGen.Domain.Generators;
+using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Leaders;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Abilities;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IClassNameRandomizer> mockAnyNPCClassNameRandomizer;
-        private Generator generator;
+        private Mock<JustInTimeFactory> mockJustInTimeFactory;
         private List<string> allowedAlignments;
         private string leaderAlignment;
         private FollowerQuantities followerQuantities;
@@ -53,22 +54,17 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
             mockRawAbilityRandomizer = new Mock<IAbilitiesRandomizer>();
             mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            generator = new ConfigurableIterationGenerator(2);
+            var generator = new ConfigurableIterationGenerator(2);
             mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockJustInTimeFactory = new Mock<JustInTimeFactory>();
             leadershipGenerator = new LeadershipGenerator(mockCharacterGenerator.Object,
                 mockLeadershipSelector.Object,
                 mockPercentileSelector.Object,
                 mockAdjustmentsSelector.Object,
-                mockSetLevelRandomizer.Object,
-                mockSetAlignmentRandomizer.Object,
-                mockAnyPlayerClassNameRandomizer.Object,
-                mockAnyBaseRaceRandomizer.Object,
-                mockAnyMetaraceRandomizer.Object,
-                mockRawAbilityRandomizer.Object,
                 mockBooleanPercentileSelector.Object,
                 mockCollectionsSelector.Object,
                 generator,
-                mockAnyNPCClassNameRandomizer.Object);
+                mockJustInTimeFactory.Object);
 
             allowedAlignments = new List<string>();
             followerQuantities = new FollowerQuantities();
@@ -87,6 +83,14 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment)).Returns(() => allowedAlignments[index++ % allowedAlignments.Count]);
+
+            mockJustInTimeFactory.Setup(f => f.Build<ISetAlignmentRandomizer>()).Returns(mockSetAlignmentRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<ISetLevelRandomizer>()).Returns(mockSetLevelRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase)).Returns(mockAnyBaseRaceRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta)).Returns(mockAnyMetaraceRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw)).Returns(mockRawAbilityRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC)).Returns(mockAnyNPCClassNameRandomizer.Object);
+            mockJustInTimeFactory.Setup(f => f.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer)).Returns(mockAnyPlayerClassNameRandomizer.Object);
         }
 
         [Test]

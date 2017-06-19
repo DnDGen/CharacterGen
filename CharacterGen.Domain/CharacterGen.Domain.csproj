@@ -60,11 +60,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.7.1.0\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.7.1.1\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generators\Factories\JustInTimeFactory.cs" />
+    <Compile Include="Generators\Factories\NinjectJustInTimeFactory.cs" />
     <Compile Include="Generators\Feats\AdditionalFeatsGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Feats\ClassFeatsGeneratorEventGenDecorator.cs" />
     <Compile Include="Generators\Feats\FeatFocusGeneratorEventGenDecorator.cs" />
@@ -183,9 +185,7 @@
     <Compile Include="Generators\Randomizers\Abilities\TwoTenSidedDiceAbilitiesRandomizer.cs" />
     <Compile Include="Generators\Verifiers\RandomizerVerifier.cs" />
     <Compile Include="IoC\CharacterGenModuleLoader.cs" />
-    <Compile Include="IoC\Providers\ArmorGeneratorProvider.cs" />
-    <Compile Include="IoC\Providers\LeadershipGeneratorProvider.cs" />
-    <Compile Include="IoC\Providers\WeaponGeneratorProvider.cs" />
+    <Compile Include="IoC\Providers\JustInTimeFactoryProvider.cs" />
     <Compile Include="IoC\Modules\GeneratorsModule.cs" />
     <Compile Include="IoC\Modules\MappersModule.cs" />
     <Compile Include="IoC\Modules\SelectorsModule.cs" />
