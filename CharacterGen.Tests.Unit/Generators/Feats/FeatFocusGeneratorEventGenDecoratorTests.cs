@@ -55,8 +55,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateAllowingFocusOfAllFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("focus"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of feat: focus"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated feat: focus"), Times.Once);
         }
 
         [Test]
@@ -67,8 +67,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateAllowingFocusOfAllFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.Empty);
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of no focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated no focus for feat"), Times.Once);
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("focus"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of feat: focus"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated feat: focus"), Times.Once);
         }
 
         [Test]
@@ -100,8 +100,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateFrom("feat", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.Empty);
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of no focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated no focus for feat"), Times.Once);
         }
 
         [Test]
@@ -121,8 +121,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateAllowingFocusOfAllFrom("feat", "focus type", skills);
             Assert.That(focus, Is.EqualTo("focus"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of feat: focus"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated feat: focus"), Times.Once);
         }
 
         [Test]
@@ -133,8 +133,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateAllowingFocusOfAllFrom("feat", "focus type", skills);
             Assert.That(focus, Is.Empty);
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of no focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated no focus for feat"), Times.Once);
         }
 
         [Test]
@@ -154,8 +154,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateFrom("feat", "focus type", skills);
             Assert.That(focus, Is.EqualTo("focus"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of feat: focus"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated feat: focus"), Times.Once);
         }
 
         [Test]
@@ -166,8 +166,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var focus = decorator.GenerateFrom("feat", "focus type", skills);
             Assert.That(focus, Is.Empty);
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning generation of focus for feat"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of no focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating focus for feat"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated no focus for feat"), Times.Once);
         }
     }
 }

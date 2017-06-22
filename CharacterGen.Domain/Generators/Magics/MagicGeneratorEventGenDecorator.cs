@@ -1,7 +1,7 @@
-﻿using CharacterGen.Feats;
-using CharacterGen.Abilities;
+﻿using CharacterGen.Abilities;
 using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
@@ -23,9 +23,9 @@ namespace CharacterGen.Domain.Generators.Magics
 
         public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Feat> feats, Equipment equipment)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning magic generation for {alignment.Full} {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating magic for {alignment.Full} {characterClass.Summary} {race.Summary}");
             var magic = innerGenerator.GenerateWith(alignment, characterClass, race, abilities, feats, equipment);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of magic");
+            eventQueue.Enqueue("CharacterGen", $"Generated magic");
 
             return magic;
         }

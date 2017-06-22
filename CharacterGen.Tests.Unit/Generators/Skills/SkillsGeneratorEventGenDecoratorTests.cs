@@ -68,8 +68,8 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             var generatedSkills = decorator.GenerateWith(characterClass, race, stats);
             Assert.That(generatedSkills, Is.EqualTo(skills));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning skills generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of skills"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating skills for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated skills: [skill 1, skill 2]"), Times.Once);
         }
     }
 }

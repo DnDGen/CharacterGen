@@ -65,8 +65,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             var generatedCombat = decorator.GenerateWith(baseAttack, characterClass, race, feats, stats, equipment);
             Assert.That(generatedCombat, Is.EqualTo(combat));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning combat statistic generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of combat statistics"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating combat statistic for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated combat statistics"), Times.Once);
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             var generatedBaseAttack = decorator.GenerateBaseAttackWith(characterClass, race, stats);
             Assert.That(generatedBaseAttack, Is.EqualTo(baseAttack));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning base attack generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of base attack"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating base attack for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated base attack"), Times.Once);
         }
     }
 }

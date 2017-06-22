@@ -20,9 +20,9 @@ namespace CharacterGen.Domain.Generators.Languages
 
         public IEnumerable<string> GenerateWith(Race race, CharacterClass characterClass, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning language generation for {characterClass.Name} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating language for {characterClass.Name} {race.Summary}");
             var languages = innerGenerator.GenerateWith(race, characterClass, abilities, skills);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of languages: {string.Join(", ", languages)}");
+            eventQueue.Enqueue("CharacterGen", $"Generated languages: {string.Join(", ", languages)}");
 
             return languages;
         }

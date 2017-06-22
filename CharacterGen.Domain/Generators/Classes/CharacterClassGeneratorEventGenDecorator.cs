@@ -4,6 +4,7 @@ using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
 using EventGen;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Classes
 {
@@ -20,9 +21,9 @@ namespace CharacterGen.Domain.Generators.Classes
 
         public CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer, IClassNameRandomizer classNameRandomizer)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning class generation for {alignment.Full}");
+            eventQueue.Enqueue("CharacterGen", $"Generating class for {alignment.Full}");
             var characterClass = innerGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of {characterClass.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generated {characterClass.Summary}");
 
             return characterClass;
         }
@@ -31,7 +32,11 @@ namespace CharacterGen.Domain.Generators.Classes
         {
             eventQueue.Enqueue("CharacterGen", $"Regenerating specialist fields for {alignment.Full} {characterClass.Summary} {race.Summary}");
             var specialistFields = innerGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-            eventQueue.Enqueue("CharacterGen", $"Completed regeneration of specialist fields: {string.Join(", ", specialistFields)}");
+
+            if (specialistFields.Any())
+                eventQueue.Enqueue("CharacterGen", $"Regenerated specialist fields: {string.Join(", ", specialistFields)}");
+            else
+                eventQueue.Enqueue("CharacterGen", $"Regenerated no specialist fields");
 
             return specialistFields;
         }

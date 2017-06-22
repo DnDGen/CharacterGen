@@ -6,6 +6,7 @@ using CharacterGen.Randomizers.CharacterClasses;
 using EventGen;
 using Moq;
 using NUnit.Framework;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Classes
 {
@@ -56,8 +57,8 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             var generatedClass = decorator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
             Assert.That(generatedClass, Is.EqualTo(characterClass));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning class generation for {alignment.Full}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of {characterClass.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating class for {alignment.Full}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated {characterClass.Summary}"), Times.Once);
         }
 
         [Test]
@@ -94,7 +95,23 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             Assert.That(generatedFields, Is.EqualTo(fields));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Regenerating specialist fields for {alignment.Full} {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed regeneration of specialist fields: {string.Join(", ", fields)}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Regenerated specialist fields: {string.Join(", ", fields)}"), Times.Once);
+        }
+
+        [Test]
+        public void LogEventsForRegenerationOfNoSpecialistFields()
+        {
+            var characterClass = new CharacterClass { Name = "class name", Level = 9266 };
+            var race = new Race { BaseRace = "base race" };
+            var fields = Enumerable.Empty<string>();
+
+            mockInnerGenerator.Setup(g => g.RegenerateSpecialistFields(alignment, characterClass, race)).Returns(fields);
+
+            var generatedFields = decorator.RegenerateSpecialistFields(alignment, characterClass, race);
+            Assert.That(generatedFields, Is.EqualTo(fields));
+            mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Regenerating specialist fields for {alignment.Full} {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Regenerated no specialist fields"), Times.Once);
         }
     }
 }

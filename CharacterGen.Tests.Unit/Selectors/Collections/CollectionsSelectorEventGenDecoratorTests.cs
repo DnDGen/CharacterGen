@@ -38,8 +38,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var group = decorator.FindGroupOf("table name", "item", "group 1", "group 2");
             Assert.That(group, Is.EqualTo("inner group"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning selection of group for item in table name from [group 1, group 2]"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed selection of inner group"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting group for item in table name from [group 1, group 2]"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected inner group"), Times.Once);
         }
 
         [Test]
@@ -67,8 +67,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var collections = decorator.SelectAllFrom("table name");
             Assert.That(collections, Is.EqualTo(allCollections));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning selection of all in table name"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed selection of all in table name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting all in table name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected all in table name"), Times.Once);
         }
 
         [Test]
@@ -90,8 +90,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var group = decorator.SelectFrom("table name", "item");
             Assert.That(group, Is.EqualTo(innerGroup));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning selection of item in table name"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed selection of [item 3, item 4]"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting item in table name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected [item 3, item 4]"), Times.Once);
         }
 
         [Test]
@@ -111,8 +111,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var randomItem = decorator.SelectRandomFrom("table name", "item");
             Assert.That(randomItem, Is.EqualTo("random item"));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning random selection from item in table name"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed random selection of random item"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Randomly selecting from item in table name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected random item"), Times.Once);
         }
 
         [Test]
@@ -134,8 +134,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var randomItem = decorator.SelectRandomFrom(collection);
             Assert.That(randomItem, Is.EqualTo(600));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning random selection from [9266, 90210, 42]"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed random selection of 600"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Randomly selecting from [9266, 90210, 42]"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected 600"), Times.Once);
         }
     }
 }

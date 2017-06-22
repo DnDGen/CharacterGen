@@ -1,7 +1,7 @@
-﻿using CharacterGen.Feats;
-using CharacterGen.Abilities;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
 using EventGen;
@@ -22,18 +22,18 @@ namespace CharacterGen.Domain.Generators.Combats
 
         public BaseAttack GenerateBaseAttackWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning base attack generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating base attack for {characterClass.Summary} {race.Summary}");
             var baseAttack = innerGenerator.GenerateBaseAttackWith(characterClass, race, abilities);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of base attack");
+            eventQueue.Enqueue("CharacterGen", $"Generated base attack");
 
             return baseAttack;
         }
 
         public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Ability> abilities, Equipment equipment)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning combat statistic generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating combat statistic for {characterClass.Summary} {race.Summary}");
             var alignment = innerGenerator.GenerateWith(baseAttack, characterClass, race, feats, abilities, equipment);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of combat statistics");
+            eventQueue.Enqueue("CharacterGen", $"Generated combat statistics");
 
             return alignment;
         }

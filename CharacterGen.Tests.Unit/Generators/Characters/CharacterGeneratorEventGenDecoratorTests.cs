@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Characters;
 using CharacterGen.Domain.Generators.Characters;
+using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
-using CharacterGen.Randomizers.Abilities;
 using EventGen;
 using Moq;
 using NUnit.Framework;
@@ -67,8 +67,8 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             var generatedCharacter = decorator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(generatedCharacter, Is.EqualTo(character));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning character generation"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of {character.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating character"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated {character.Summary}"), Times.Once);
         }
     }
 }

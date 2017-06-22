@@ -50,8 +50,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var generatedFeatSelections = decorator.SelectAdditional();
             Assert.That(generatedFeatSelections, Is.EqualTo(featSelections));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning collection of additional feat data"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed collection of additional feat data"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting additional feat data"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected additional feat data"), Times.Once);
         }
 
         [Test]
@@ -83,8 +83,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var generatedFeatSelections = decorator.SelectClass("class name");
             Assert.That(generatedFeatSelections, Is.EqualTo(featSelections));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning collection of class feat data for class name"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed collection of class feat data for class name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting class feat data for class name"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected class feat data for class name"), Times.Once);
         }
 
         [Test]
@@ -116,8 +116,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             var generatedFeatSelections = decorator.SelectRacial("race");
             Assert.That(generatedFeatSelections, Is.EqualTo(featSelections));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning collection of racial feat data for race"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed collection of racial feat data for race"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selecting racial feat data for race"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Selected racial feat data for race"), Times.Once);
         }
     }
 }

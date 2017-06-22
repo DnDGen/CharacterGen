@@ -29,15 +29,15 @@ namespace CharacterGen.Domain.Generators.Feats
 
         private void LogOpeningEvent(string feat)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning generation of focus for {feat}");
+            eventQueue.Enqueue("CharacterGen", $"Generating focus for {feat}");
         }
 
         private void LogClosingEvent(string feat, string focus)
         {
             if (string.IsNullOrEmpty(focus))
-                eventQueue.Enqueue("CharacterGen", $"Completed generation of no focus for {feat}");
+                eventQueue.Enqueue("CharacterGen", $"Generated no focus for {feat}");
             else
-                eventQueue.Enqueue("CharacterGen", $"Completed generation of {feat}: {focus}");
+                eventQueue.Enqueue("CharacterGen", $"Generated {feat}: {focus}");
         }
 
         public string GenerateAllowingFocusOfAllFrom(string feat, string focusType, IEnumerable<Skill> skills, IEnumerable<RequiredFeatSelection> requiredFeats, IEnumerable<Feat> otherFeats, CharacterClass characterClass)

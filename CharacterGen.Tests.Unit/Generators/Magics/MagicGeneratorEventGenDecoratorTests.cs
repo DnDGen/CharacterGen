@@ -69,8 +69,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             var generatedMagic = decorator.GenerateWith(alignment, characterClass, race, stats, feats, equipment);
             Assert.That(generatedMagic, Is.EqualTo(magic));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning magic generation for {alignment.Full} {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of magic"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating magic for {alignment.Full} {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated magic"), Times.Once);
         }
     }
 }

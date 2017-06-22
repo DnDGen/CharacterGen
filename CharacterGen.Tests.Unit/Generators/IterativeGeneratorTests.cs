@@ -77,8 +77,8 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(randomNumber, Is.EqualTo(2));
             Assert.That(iterations, Is.EqualTo(3));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning iterative generation of unit test"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Finished iterative generation of unit test after 3 iterations"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by iteration"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generated unit test after 3 iterations"), Times.Once);
         }
 
         [Test]
@@ -96,11 +96,11 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(number, Is.EqualTo(-1));
             Assert.That(iterations, Is.EqualTo(Limit));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(5));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning iterative generation of unit test"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 500 times"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 1000 times"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by iteration"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 500 times to generate unit test"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 1000 times to generate unit test"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating a thing and stuff by default"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Finished iterative generation of unit test after 1000 iterations"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generated unit test after 1000 iterations"), Times.Once);
         }
 
         [Test]
@@ -110,11 +110,11 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(number, Is.EqualTo(-1));
             Assert.That(iterations, Is.EqualTo(Limit));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(5));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning iterative generation of unit test"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 500 times"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 1000 times"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by iteration"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 500 times to generate unit test"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 1000 times to generate unit test"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by default"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Finished iterative generation of unit test after 1000 iterations"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generated unit test after 1000 iterations"), Times.Once);
         }
 
         [TestCase("")]
@@ -125,11 +125,11 @@ namespace CharacterGen.Tests.Unit.Generators
             Assert.That(number, Is.EqualTo(-1));
             Assert.That(iterations, Is.EqualTo(Limit));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(5));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Beginning iterative generation of unit test"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 500 times"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Iterative generation of unit test has retried 1000 times"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by iteration"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 500 times to generate unit test"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Retried 1000 times to generate unit test"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generating unit test by default"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Finished iterative generation of unit test after 1000 iterations"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", "Generated unit test after 1000 iterations"), Times.Once);
         }
 
         [Test]

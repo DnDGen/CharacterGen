@@ -19,9 +19,9 @@ namespace CharacterGen.Domain.Generators.Races
 
         public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning race generation for {alignment.Full} {characterClass.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating race for {alignment.Full} {characterClass.Summary}");
             var race = innerGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generated {race.Summary}");
 
             return race;
         }

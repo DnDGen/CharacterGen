@@ -72,8 +72,8 @@ namespace CharacterGen.Tests.Unit.Generators.Languages
             var generatedLanguages = decorator.GenerateWith(race, characterClass, abilities, skills);
             Assert.That(generatedLanguages, Is.EqualTo(languages));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning language generation for {characterClass.Name} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of languages: klingon, German"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating language for {characterClass.Name} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated languages: klingon, German"), Times.Once);
         }
     }
 }

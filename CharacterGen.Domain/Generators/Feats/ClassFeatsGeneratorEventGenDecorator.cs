@@ -5,6 +5,7 @@ using CharacterGen.Races;
 using CharacterGen.Skills;
 using EventGen;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Feats
 {
@@ -21,9 +22,11 @@ namespace CharacterGen.Domain.Generators.Feats
 
         public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Feat> racialFeats, IEnumerable<Skill> skills)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning class feats generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating class feats for {characterClass.Summary} {race.Summary}");
             var feats = innerGenerator.GenerateWith(characterClass, race, abilities, racialFeats, skills);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of class feats");
+
+            var featNames = feats.Select(f => f.Name);
+            eventQueue.Enqueue("CharacterGen", $"Generated class feats: [{string.Join(", ", featNames)}]");
 
             return feats;
         }

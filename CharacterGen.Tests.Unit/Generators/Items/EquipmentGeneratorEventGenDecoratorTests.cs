@@ -57,8 +57,8 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             var generatedEquipment = decorator.GenerateWith(feats, characterClass, race);
             Assert.That(generatedEquipment, Is.EqualTo(equipment));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning equipment generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of equipment"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating equipment for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated equipment"), Times.Once);
         }
     }
 }

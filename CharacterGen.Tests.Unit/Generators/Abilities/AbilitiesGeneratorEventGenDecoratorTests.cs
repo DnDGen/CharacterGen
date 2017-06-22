@@ -56,16 +56,18 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void LogEventsForAbilitiesGeneration()
         {
             var abilities = new Dictionary<string, Ability>();
-            abilities["ability 1"] = new Ability("ability 1");
-            abilities["ability 2"] = new Ability("ability 2");
+            abilities["ability"] = new Ability("ability");
+            abilities["ability"].Value = 9266;
+            abilities["other ability"] = new Ability("other ability");
+            abilities["other ability"].Value = 90210;
 
             mockInnerGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race)).Returns(abilities);
 
             var generatedAbilities = decorator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             Assert.That(generatedAbilities, Is.EqualTo(abilities));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning abilities generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of abilities"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating abilities for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated abilities: [ability 9266, other ability 90210]"), Times.Once);
         }
     }
 }

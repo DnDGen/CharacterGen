@@ -4,6 +4,7 @@ using CharacterGen.Races;
 using CharacterGen.Randomizers.Abilities;
 using EventGen;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Abilities
 {
@@ -20,9 +21,11 @@ namespace CharacterGen.Domain.Generators.Abilities
 
         public Dictionary<string, Ability> GenerateWith(IAbilitiesRandomizer abilitiesRandomizer, CharacterClass characterClass, Race race)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning abilities generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating abilities for {characterClass.Summary} {race.Summary}");
             var abilities = innerGenerator.GenerateWith(abilitiesRandomizer, characterClass, race);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of abilities");
+
+            var abilityDescriptions = abilities.Values.Select(a => $"{a.Name} {a.Value}");
+            eventQueue.Enqueue("CharacterGen", $"Generated abilities: [{string.Join(", ", abilityDescriptions)}]");
 
             return abilities;
         }

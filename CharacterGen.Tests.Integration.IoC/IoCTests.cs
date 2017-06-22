@@ -11,6 +11,8 @@ namespace CharacterGen.Tests.Integration.IoC
         [Inject]
         public Stopwatch Stopwatch { get; set; }
 
+        private const int TimeLimitInMilliseconds = 200;
+
         [TearDown]
         public void IoCTeardown()
         {
@@ -26,22 +28,20 @@ namespace CharacterGen.Tests.Integration.IoC
 
         private T InjectAndAssertDuration<T>()
         {
-            Stopwatch.Start();
+            Stopwatch.Restart();
 
             var instance = GetNewInstanceOf<T>();
-            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(100));
-            Stopwatch.Reset();
+            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
 
             return instance;
         }
 
         private T InjectAndAssertDuration<T>(string name)
         {
-            Stopwatch.Start();
+            Stopwatch.Restart();
 
             var instance = GetNewInstanceOf<T>(name);
-            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(100));
-            Stopwatch.Reset();
+            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
 
             return instance;
         }

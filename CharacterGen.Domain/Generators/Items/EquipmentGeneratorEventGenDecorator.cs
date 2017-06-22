@@ -20,9 +20,9 @@ namespace CharacterGen.Domain.Generators.Items
 
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning equipment generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating equipment for {characterClass.Summary} {race.Summary}");
             var equipment = innerGenerator.GenerateWith(feats, characterClass, race);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of equipment");
+            eventQueue.Enqueue("CharacterGen", $"Generated equipment");
 
             return equipment;
         }

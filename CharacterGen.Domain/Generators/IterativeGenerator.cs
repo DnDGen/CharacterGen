@@ -26,14 +26,14 @@ namespace CharacterGen.Domain.Generators
             if (string.IsNullOrEmpty(defaultDescription))
                 defaultDescription = description;
 
-            eventQueue.Enqueue("CharacterGen", $"Beginning iterative generation of {description}");
+            eventQueue.Enqueue("CharacterGen", $"Generating {description} by iteration");
 
             do
             {
                 builtObject = buildInstructions();
 
                 if (retries % numberOfRetriesUntilEventShouldFire == 0)
-                    eventQueue.Enqueue("CharacterGen", $"Iterative generation of {description} has retried {retries} times");
+                    eventQueue.Enqueue("CharacterGen", $"Retried {retries} times to generate {description}");
             }
             while (!isValid(builtObject) && retries++ < MaxRetries);
 
@@ -44,7 +44,7 @@ namespace CharacterGen.Domain.Generators
                 builtObject = buildDefault();
             }
 
-            eventQueue.Enqueue("CharacterGen", $"Finished iterative generation of {description} after {retries} iterations");
+            eventQueue.Enqueue("CharacterGen", $"Generated {description} after {retries} iterations");
 
             return builtObject;
         }

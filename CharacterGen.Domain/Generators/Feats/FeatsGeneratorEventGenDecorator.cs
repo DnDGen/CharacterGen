@@ -22,9 +22,9 @@ namespace CharacterGen.Domain.Generators.Feats
 
         public FeatCollections GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack)
         {
-            eventQueue.Enqueue("CharacterGen", $"Beginning feats generation for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating feats for {characterClass.Summary} {race.Summary}");
             var feats = innerGenerator.GenerateWith(characterClass, race, abilities, skills, baseAttack);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of feats");
+            eventQueue.Enqueue("CharacterGen", $"Generated feats");
 
             return feats;
         }

@@ -17,9 +17,9 @@ namespace CharacterGen.Domain.Generators.Alignments
 
         public Alignment GenerateWith(IAlignmentRandomizer alignmentRandomizer)
         {
-            eventQueue.Enqueue("CharacterGen", "Beginning alignment generation");
+            eventQueue.Enqueue("CharacterGen", "Generating alignment");
             var alignment = innerGenerator.GenerateWith(alignmentRandomizer);
-            eventQueue.Enqueue("CharacterGen", $"Completed generation of {alignment.Full}");
+            eventQueue.Enqueue("CharacterGen", $"Generated {alignment.Full}");
 
             return alignment;
         }

@@ -66,8 +66,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         {
             var feats = new[]
             {
-                new Feat(),
-                new Feat(),
+                new Feat { Name = "feat" },
+                new Feat { Name = "other feat" },
             };
 
             mockInnerGenerator.Setup(g => g.GenerateWith(characterClass, race, stats, racialFeats, skills)).Returns(feats);
@@ -75,8 +75,8 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
             var generatedFeats = decorator.GenerateWith(characterClass, race, stats, racialFeats, skills);
             Assert.That(generatedFeats, Is.EqualTo(feats));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Beginning class feats generation for {characterClass.Summary} {race.Summary}"), Times.Once);
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Completed generation of class feats"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating class feats for {characterClass.Summary} {race.Summary}"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated class feats: [feat, other feat]"), Times.Once);
         }
     }
 }
