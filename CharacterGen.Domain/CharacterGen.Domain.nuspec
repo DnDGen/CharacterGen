@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen.Domain</id>
-    <version>9.0.2</version>
+    <version>9.0.3</version>
     <title>CharacterGen.Domain</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -10,7 +10,7 @@
       This is a Ninject-based bootstrapper for CharacterGen
     </description>
     <releaseNotes>
-      Bug #108
+      Bug #111
     </releaseNotes>
     <summary>
       This is a Ninject-based bootstrapper for CharacterGen
@@ -22,7 +22,7 @@
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CharacterGen" version="9.0.1" />
+      <dependency id="CharacterGen" version="9.0.3" />
       <dependency id="DnDGen.TreasureGen" version="7.1.0" />
       <dependency id="DnDGen.RollGen" version="13.3.0" />
       <dependency id="Ninject" version="3.2.2" />
