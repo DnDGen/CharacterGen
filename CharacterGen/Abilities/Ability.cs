@@ -2,8 +2,7 @@
 {
     public class Ability
     {
-        public readonly string Name;
-
+        public string Name { get; private set; }
         public int Value { get; set; }
         public int Bonus
         {

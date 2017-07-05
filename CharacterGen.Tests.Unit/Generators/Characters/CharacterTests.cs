@@ -1,7 +1,10 @@
-﻿using CharacterGen.Characters;
+﻿using CharacterGen.Abilities;
+using CharacterGen.Characters;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using CharacterGen.Skills;
 using NUnit.Framework;
+using System.Linq;
 
 namespace CharacterGen.Tests.Unit.Generators.Characters
 {
@@ -196,6 +199,66 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             character.Race.ChallengeRating = 90210;
 
             Assert.That(character.ChallengeRating, Is.EqualTo(9267 + 90210));
+        }
+
+        [Test]
+        public void CanSortAbilities()
+        {
+            character.Abilities["zzzz"] = new Ability("zzzz");
+            character.Abilities["aaaa"] = new Ability("aaaa");
+            character.Abilities["kkkk"] = new Ability("kkkk");
+
+            var sortedAbilities = character.Abilities.Values.OrderBy(a => a.Name);
+            Assert.That(sortedAbilities, Is.Ordered.By("Name"));
+        }
+
+        [Test]
+        public void CanSortSkills()
+        {
+            var ability = new Ability("base ability");
+
+            character.Skills = new[]
+            {
+                new Skill("zzzz", ability, int.MaxValue),
+                new Skill("aaaa", ability, int.MaxValue),
+                new Skill("kkkk", ability, int.MaxValue),
+            };
+
+            var sortedSkills = character.Skills.OrderBy(a => a.Name);
+            Assert.That(sortedSkills, Is.Ordered.By("Name"));
+        }
+
+        [Test]
+        public void CanSortSkillsWithFocus()
+        {
+            var ability = new Ability("base ability");
+
+            character.Skills = new[]
+            {
+                new Skill("skill", ability, int.MaxValue, "zzzz"),
+                new Skill("skill", ability, int.MaxValue, "aaaa"),
+                new Skill("skill", ability, int.MaxValue, "kkkk"),
+            };
+
+            var sortedSkills = character.Skills.OrderBy(a => a.Focus);
+            Assert.That(sortedSkills, Is.Ordered.By("Focus"));
+        }
+
+        [Test]
+        public void CanSortSkillsWithAndWithoutFocus()
+        {
+            var ability = new Ability("base ability");
+
+            character.Skills = new[]
+            {
+                new Skill("zzzz", ability, int.MaxValue),
+                new Skill("aaaa", ability, int.MaxValue, "ffff"),
+                new Skill("aaaa", ability, int.MaxValue, "ff"),
+                new Skill("kkkk", ability, int.MaxValue),
+            };
+
+            var sortedSkills = character.Skills.OrderBy(a => a.Name).ThenBy(a => a.Focus);
+            Assert.That(sortedSkills, Is.Ordered.By("Name").Then.By("Focus"));
         }
     }
 }
