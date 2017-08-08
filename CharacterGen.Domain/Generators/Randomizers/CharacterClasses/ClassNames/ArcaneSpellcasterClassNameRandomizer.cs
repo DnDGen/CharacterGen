@@ -1,15 +1,16 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class ArcaneSpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public ArcaneSpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)

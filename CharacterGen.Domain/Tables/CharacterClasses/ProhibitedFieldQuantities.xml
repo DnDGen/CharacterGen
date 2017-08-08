@@ -1,124 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Abjuration</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Conjuration</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Divination</name>
-        <item>1</item>
-    </object>
-    <object>
+        <entry>1</entry>
+    </collection>
+    <collection>
         <name>Enchantment</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Evocation</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Illusion</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Necromancy</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Transmutation</name>
-        <item>2</item>
-    </object>
-    <object>
+        <entry>2</entry>
+    </collection>
+    <collection>
         <name>Air</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Animal</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Chaos</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Death</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Destruction</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Earth</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Evil</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Fire</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Good</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Healing</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Knowledge</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Law</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Luck</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Magic</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Plant</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Protection</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Strength</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Sun</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Travel</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Trickery</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>War</name>
-        <item>0</item>
-    </object>
-    <object>
+        <entry>0</entry>
+    </collection>
+    <collection>
         <name>Water</name>
-        <item>0</item>
-    </object>
-</items>
+        <entry>0</entry>
+    </collection>
+</collections>

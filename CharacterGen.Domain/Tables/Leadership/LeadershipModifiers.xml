@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name></name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Cruelty</name>
-    <item>-2</item>
-  </object>
-  <object>
+    <entry>-2</entry>
+  </collection>
+  <collection>
     <name>Aloofness</name>
-    <item>-1</item>
-  </object>
-  <object>
+    <entry>-1</entry>
+  </collection>
+  <collection>
     <name>Failure</name>
-    <item>-1</item>
-  </object>
-  <object>
+    <entry>-1</entry>
+  </collection>
+  <collection>
     <name>Special power</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Fairness and generosity</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Great renown</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Moves around a lot</name>
-    <item>-1</item>
-  </object>
-  <object>
+    <entry>-1</entry>
+  </collection>
+  <collection>
     <name>Has a stronghold, base of operations, guildhouse, or the like</name>
-    <item>2</item>
-  </object>
-</items>
+    <entry>2</entry>
+  </collection>
+</collections>

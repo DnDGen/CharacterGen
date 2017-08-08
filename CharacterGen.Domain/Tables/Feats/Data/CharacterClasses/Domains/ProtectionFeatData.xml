@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Spell-Like Ability</name>
-        <item>Spell-Like Ability</item>
-        <item>0</item>
-        <item>Grant someone you touch a resistance bonus equal to your cleric level on his or her next saving throw.</item>
-        <item>0</item>
-        <item>1</item>
-        <item>Day</item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-</items>
+        <entry>Spell-Like Ability</entry>
+        <entry>0</entry>
+        <entry>Grant someone you touch a resistance bonus equal to your cleric level on his or her next saving throw.</entry>
+        <entry>0</entry>
+        <entry>1</entry>
+        <entry>Day</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+</collections>

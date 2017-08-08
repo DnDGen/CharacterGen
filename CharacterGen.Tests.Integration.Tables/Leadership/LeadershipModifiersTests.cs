@@ -43,9 +43,9 @@ namespace CharacterGen.Tests.Integration.Tables.Leadership
         [TestCase("Great renown", 2)]
         [TestCase("Moves around a lot", -1)]
         [TestCase("Has a stronghold, base of operations, guildhouse, or the like", 2)]
-        public override void Adjustment(string name, int adjustment)
+        public void LeadershipModifier(string name, int adjustment)
         {
-            base.Adjustment(name, adjustment);
+            Adjustment(name, adjustment);
         }
     }
 }

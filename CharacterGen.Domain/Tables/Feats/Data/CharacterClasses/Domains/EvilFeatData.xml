@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Cast Spell Bonus</name>
-        <item>Cast Spell Bonus</item>
-        <item>1</item>
-        <item>Evil</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-</items>
+        <entry>Cast Spell Bonus</entry>
+        <entry>1</entry>
+        <entry>Evil</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+</collections>

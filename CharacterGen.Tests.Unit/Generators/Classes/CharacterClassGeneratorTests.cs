@@ -2,10 +2,11 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
 
         private Mock<ILevelRandomizer> mockLevelRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private ICharacterClassGenerator characterClassGenerator;
@@ -33,10 +34,10 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         [SetUp]
         public void Setup()
         {
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockPercentileSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockBooleanPercentileSelector.Object);
+            characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockPercentileSelector.Object);
 
             alignment = new Alignment();
             mockLevelRandomizer = new Mock<ILevelRandomizer>();
@@ -75,7 +76,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetSpecialistFieldsIfShouldNotHaveAny()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(false);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -87,7 +88,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetSpecialistFieldsIfNone()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
@@ -98,7 +99,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void GetSpecialistField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
@@ -117,7 +118,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void GetSpecialistFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 2;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
@@ -140,7 +141,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void CannotSpecializeInAlignmentFieldThatDoesNotMatchAlignment()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("alignment field");
             specialistFields.Add("non-alignment field");
@@ -175,7 +176,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetProhibitedFieldsIfNone()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -189,7 +190,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -206,7 +207,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void ProhibitedFieldCannotAlreadyBeASpecialistField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 1")))).Returns("field 1");
@@ -225,7 +226,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 2");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 2")))).Returns("field 2");
@@ -248,7 +249,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedFieldsFromMultipleSpecialistFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 2;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");

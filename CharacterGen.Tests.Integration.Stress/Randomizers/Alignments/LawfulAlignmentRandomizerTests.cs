@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void StressAlignment()
         {
-            Stress(AssertAlignment);
+            stressor.Stress(AssertAlignment);
         }
 
         protected void AssertAlignment()

@@ -1,312 +1,312 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Natural Armor</name>
-        <item>Natural Armor</item>
-        <item></item>
-        <item>0</item>
-        <item>3</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Natural Armor</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>3</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Darkvision</name>
-      <item>Darkvision</item>
-      <item></item>
-      <item>0</item>
-      <item>60</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Darkvision</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>60</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Save BonusWill</name>
-      <item>Save Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>6</item>
-      <item>Will</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-  </object>
-  <object>
+      <entry>Save Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>6</entry>
+      <entry>Will</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusFortitude</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>2</item>
-    <item>Fortitude</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>2</entry>
+    <entry>Fortitude</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusReflex</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>2</item>
-    <item>Reflex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>2</entry>
+    <entry>Reflex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusBluff</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Bluff</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Bluff</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusConcentration</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>6</item>
-    <item>Concentration</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>6</entry>
+    <entry>Concentration</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusHide</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Hide</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Hide</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusIntimidate</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Intimidate</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Intimidate</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusMove Silently</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Move Silently</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Move Silently</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusListen</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Listen</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Listen</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusSense Motive</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Sense Motive</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Sense Motive</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusSpot</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Spot</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Spot</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Mind Blast</name>
-    <item>Mind Blast</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Mind Blast</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Weapon</name>
-    <item>Natural Weapon</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Tentacles (x4)</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Weapon</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Tentacles (x4)</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityCharm monster</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Charm monster</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Charm monster</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityDetect thoughts</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Detect thoughts</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Detect thoughts</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityLevitate</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Levitate</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Levitate</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityPlane shift</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Plane shift</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Plane shift</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilitySuggestion</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Suggestion</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Suggestion</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Improved Grab</name>
-    <item>Improved Grab</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Improved Grab</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Extract</name>
-    <item>Extract</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Extract</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

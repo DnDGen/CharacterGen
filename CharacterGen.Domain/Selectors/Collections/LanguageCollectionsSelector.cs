@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class LanguageCollectionsSelector : ILanguageCollectionsSelector
     {
-        private ICollectionsSelector innerSelector;
+        private readonly ICollectionsSelector innerSelector;
 
         public LanguageCollectionsSelector(ICollectionsSelector innerSelector)
         {

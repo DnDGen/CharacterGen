@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Colossal</name>
-    <item>-8</item>
-  </object>
-  <object>
+    <entry>-8</entry>
+  </collection>
+  <collection>
     <name>Gargantuan</name>
-    <item>-4</item>
-  </object>
-  <object>
+    <entry>-4</entry>
+  </collection>
+  <collection>
     <name>Huge</name>
-    <item>-2</item>
-  </object>
-  <object>
+    <entry>-2</entry>
+  </collection>
+  <collection>
     <name>Large</name>
-    <item>-1</item>
-  </object>
-  <object>
+    <entry>-1</entry>
+  </collection>
+  <collection>
     <name>Medium</name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Small</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Tiny</name>
-    <item>2</item>
-  </object>
-</items>
+    <entry>2</entry>
+  </collection>
+</collections>

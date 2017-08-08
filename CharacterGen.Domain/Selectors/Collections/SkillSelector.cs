@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class SkillSelector : ISkillSelector
     {
-        private ICollectionsSelector innerSelector;
+        private readonly ICollectionsSelector innerSelector;
 
         public SkillSelector(ICollectionsSelector innerSelector)
         {

@@ -1,11 +1,12 @@
-﻿using CharacterGen.Feats;
-using CharacterGen.Abilities;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,13 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class CombatGenerator : ICombatGenerator
     {
-        private IArmorClassGenerator armorClassGenerator;
-        private IHitPointsGenerator hitPointsGenerator;
-        private ISavingThrowsGenerator savingThrowsGenerator;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IArmorClassGenerator armorClassGenerator;
+        private readonly IHitPointsGenerator hitPointsGenerator;
+        private readonly ISavingThrowsGenerator savingThrowsGenerator;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
-        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator,
-            IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
             this.armorClassGenerator = armorClassGenerator;
             this.hitPointsGenerator = hitPointsGenerator;
@@ -45,7 +45,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
         private int GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var baseAttackQuality = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack);
+            var baseAttackQuality = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack);
 
             switch (baseAttackQuality)
             {

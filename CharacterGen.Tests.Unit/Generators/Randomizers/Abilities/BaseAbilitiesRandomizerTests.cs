@@ -131,6 +131,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
                 randomizeCount++;
                 return randomizeCount >= AllowedOnRandomize;
             }
+
+            protected override string AbilitiesInvalidMessage(IEnumerable<Ability> abilities)
+            {
+                return "abilities in unit test are invalid";
+            }
         }
     }
 }

@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Barbarian</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Bard</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Cleric</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Druid</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Fighter</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Monk</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Paladin</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Ranger</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Rogue</name>
-    <item>6</item>
-  </object>
-    <object>
+    <entry>6</entry>
+  </collection>
+    <collection>
         <name>Sorcerer</name>
-        <item>6</item>
-    </object>
-    <object>
+        <entry>6</entry>
+    </collection>
+    <collection>
         <name>Wizard</name>
-        <item>6</item>
-    </object>
-</items>
+        <entry>6</entry>
+    </collection>
+</collections>

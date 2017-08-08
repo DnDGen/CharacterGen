@@ -1,14 +1,14 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 
 namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class AnyNPCClassNameRandomizer : IClassNameRandomizer
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public AnyNPCClassNameRandomizer(ICollectionsSelector collectionsSelector)
         {

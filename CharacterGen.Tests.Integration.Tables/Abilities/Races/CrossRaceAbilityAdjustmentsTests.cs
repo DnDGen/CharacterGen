@@ -1,15 +1,23 @@
-﻿using CharacterGen.Domain.Mappers.Collections;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using DnDGen.Core.Mappers.Collections;
 using Ninject;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Abilities.Races
 {
     [TestFixture]
-    public class CrossRaceAbilityAdjustmentsTests : IntegrationTests
+    public class CrossRaceAbilityAdjustmentsTests : TableTests
     {
+        protected override string tableName
+        {
+            get
+            {
+                return TableNameConstants.Set.Collection.BaseRaceGroups;
+            }
+        }
+
         [Inject]
-        internal CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionsMapper CollectionsMapper { get; set; }
 
         [Test]
         public void AllBaseRacesHaveAbilityAdjustmentTables()

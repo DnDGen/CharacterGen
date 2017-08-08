@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Sanctuary</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Shield other</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Protection from energy</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Spell immunity</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Spell resistance</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Antimagic field</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Repulsion</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Mind blank</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Prismatic sphere</name>
-    <item>9</item>
-  </object>
-</items>
+    <entry>9</entry>
+  </collection>
+</collections>

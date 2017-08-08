@@ -1,228 +1,228 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Save BonusFortitude</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>10</item>
-    <item>Fortitude</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>10</entry>
+    <entry>Fortitude</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusWill</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>7</item>
-    <item>Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>7</entry>
+    <entry>Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusReflex</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Reflex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Reflex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Armor</name>
-    <item>Natural Armor</item>
-    <item></item>
-    <item>0</item>
-    <item>12</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Armor</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>12</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Low-Light Vision</name>
-    <item>Low-Light Vision</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Low-Light Vision</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Scent</name>
-    <item>Scent</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Scent</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Light Armor Proficiency</name>
-    <item>Light Armor Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Light Armor Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Medium Armor Proficiency</name>
-    <item>Medium Armor Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Medium Armor Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Shield Proficiency</name>
-    <item>Shield Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Shield Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Rock Catching</name>
-    <item>Rock Catching</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Rock Catching</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Rock Throwing</name>
-    <item>Rock Throwing</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Rock Throwing</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Martial Weapon Proficiency</name>
-    <item>Martial Weapon Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>All</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Martial Weapon Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>All</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Simple Weapon Proficiency</name>
-    <item>Simple Weapon Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>All</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Simple Weapon Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>All</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityFog cloud</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Fog cloud</item>
-    <item>1</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Fog cloud</entry>
+    <entry>1</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityLevitate</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Levitate</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Levitate</entry>
+    <entry>3</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityObscuring mist</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Obscuring mist</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Obscuring mist</entry>
+    <entry>3</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

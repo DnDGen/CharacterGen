@@ -1,9 +1,9 @@
-﻿using CharacterGen.Feats;
-using CharacterGen.Abilities;
+﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Combats;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using CharacterGen.Feats;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +11,7 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class SavingThrowsGenerator : ISavingThrowsGenerator
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public SavingThrowsGenerator(ICollectionsSelector collectionsSelector)
         {

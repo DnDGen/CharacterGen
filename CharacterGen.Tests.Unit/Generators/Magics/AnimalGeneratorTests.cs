@@ -6,6 +6,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

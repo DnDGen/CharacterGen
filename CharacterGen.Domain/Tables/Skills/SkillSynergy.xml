@@ -1,909 +1,909 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Appraise</name>
-    <item>Profession/Appraiser</item>
-    <item>Profession/Trader</item>
-  </object>
-  <object>
+    <entry>Profession/Appraiser</entry>
+    <entry>Profession/Trader</entry>
+  </collection>
+  <collection>
     <name>Balance</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Bluff</name>
-    <item>Diplomacy</item>
-    <item>Disguise</item>
-    <item>Intimidate</item>
-    <item>Profession/Dowser</item>
-    <item>Profession/Soothsayer</item>
-    <item>Sleight of Hand</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Disguise</entry>
+    <entry>Intimidate</entry>
+    <entry>Profession/Dowser</entry>
+    <entry>Profession/Soothsayer</entry>
+    <entry>Sleight of Hand</entry>
+  </collection>
+  <collection>
     <name>Climb</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Concentration</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Craft/Alchemy</name>
-    <item>Appraise</item>
-    <item>Profession/Alchemist</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Embalmer</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Alchemist</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Embalmer</entry>
+  </collection>
+  <collection>
     <name>Craft/Armorsmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Armorer</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Armorer</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Blacksmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Blacksmith</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Blacksmith</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Bookbinding</name>
-    <item>Appraise</item>
-    <item>Profession/Bookbinder</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Bookbinder</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Bowmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Bowyer</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Fletcher</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Bowyer</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Fletcher</entry>
+  </collection>
+  <collection>
     <name>Craft/Brassmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Brazier</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Brazier</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Brewing</name>
-    <item>Appraise</item>
-    <item>Profession/Brewer</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Brewer</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Candlemaking</name>
-    <item>Appraise</item>
-    <item>Profession/Chandler</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Chandler</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Cloth</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Coppersmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Coppersmith</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Coppersmith</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Dyemaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Dyer</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Dyer</entry>
+  </collection>
+  <collection>
     <name>Craft/Gemcutting</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Gemcutter</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Gemcutter</entry>
+  </collection>
+  <collection>
     <name>Craft/Glass</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Goldsmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Goldsmith</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Goldsmith</entry>
+  </collection>
+  <collection>
     <name>Craft/Hatmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Haberdasher</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Haberdasher</entry>
+  </collection>
+  <collection>
     <name>Craft/Hornworking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Horner</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Horner</entry>
+  </collection>
+  <collection>
     <name>Craft/Jewelmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Jeweler</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Jeweler</entry>
+  </collection>
+  <collection>
     <name>Craft/Leather</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Locksmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Locksmith</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Locksmith</entry>
+  </collection>
+  <collection>
     <name>Craft/Mapmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Cartographer</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Cartographer</entry>
+  </collection>
+  <collection>
     <name>Craft/Milling</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Miller</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Miller</entry>
+  </collection>
+  <collection>
     <name>Craft/Painting</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Limner</item>
-    <item>Profession/Painter</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Limner</entry>
+    <entry>Profession/Painter</entry>
+  </collection>
+  <collection>
     <name>Craft/Parchmentmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Parchmentmaker</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Parchmentmaker</entry>
+  </collection>
+  <collection>
     <name>Craft/Pewtermaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Pewterer</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Pewterer</entry>
+  </collection>
+  <collection>
     <name>Craft/Potterymaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Potter</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Potter</entry>
+  </collection>
+  <collection>
     <name>Craft/Sculpting</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Sculptor</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Sculptor</entry>
+  </collection>
+  <collection>
     <name>Craft/Shipmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Shipwright</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Shipwright</entry>
+  </collection>
+  <collection>
     <name>Craft/Shoemaking</name>
-    <item>Appraise</item>
-    <item>Profession/Cobbler</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Cobbler</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Silversmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Silversmith</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Silversmith</entry>
+  </collection>
+  <collection>
     <name>Craft/Skinning</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Skinner</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Skinner</entry>
+  </collection>
+  <collection>
     <name>Craft/Soapmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Soapmaker</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Soapmaker</entry>
+  </collection>
+  <collection>
     <name>Craft/Stonemasonry</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Tanning</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Tanner</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Tanner</entry>
+  </collection>
+  <collection>
     <name>Craft/Trapmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Craft/Weaponsmithing</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Weaponsmith</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Weaponsmith</entry>
+  </collection>
+  <collection>
     <name>Craft/Weaving</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Weaver</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Weaver</entry>
+  </collection>
+  <collection>
     <name>Craft/Wheelmaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Wheelwright</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Wheelwright</entry>
+  </collection>
+  <collection>
     <name>Craft/Winemaking</name>
-    <item>Appraise</item>
-    <item>Profession/Craftsman</item>
-    <item>Profession/Vintner</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Craftsman</entry>
+    <entry>Profession/Vintner</entry>
+  </collection>
+  <collection>
     <name>Craft/Woodworking</name>
-    <item>Appraise</item>
-    <item>Profession/Carpenter</item>
-    <item>Profession/Cartwright</item>
-    <item>Profession/Coffinmaker</item>
-    <item>Profession/Craftsman</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Profession/Carpenter</entry>
+    <entry>Profession/Cartwright</entry>
+    <entry>Profession/Coffinmaker</entry>
+    <entry>Profession/Craftsman</entry>
+  </collection>
+  <collection>
     <name>Decipher Script</name>
-    <item>Use Magic Device</item>
-  </object>
-  <object>
+    <entry>Use Magic Device</entry>
+  </collection>
+  <collection>
     <name>Diplomacy</name>
-    <item>Profession/Barrister</item>
-    <item>Profession/Butler</item>
-    <item>Profession/City Guide</item>
-    <item>Profession/Footman</item>
-    <item>Profession/Governess</item>
-    <item>Profession/Matchmaker</item>
-    <item>Profession/Valet</item>
-  </object>
-  <object>
+    <entry>Profession/Barrister</entry>
+    <entry>Profession/Butler</entry>
+    <entry>Profession/City Guide</entry>
+    <entry>Profession/Footman</entry>
+    <entry>Profession/Governess</entry>
+    <entry>Profession/Matchmaker</entry>
+    <entry>Profession/Valet</entry>
+  </collection>
+  <collection>
     <name>Disable Device</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Disguise</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Escape Artist</name>
-    <item>Use Rope</item>
-  </object>
-  <object>
+    <entry>Use Rope</entry>
+  </collection>
+  <collection>
     <name>Forgery</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Gather Information</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Handle Animal</name>
-    <item>Profession/Animal Groomer</item>
-    <item>Profession/Animal Trainer</item>
-    <item>Profession/Exotic Animal Trainer</item>
-    <item>Profession/Shepherd</item>
-    <item>Profession/Teamster</item>
-    <item>Ride</item>
-  </object>
-  <object>
+    <entry>Profession/Animal Groomer</entry>
+    <entry>Profession/Animal Trainer</entry>
+    <entry>Profession/Exotic Animal Trainer</entry>
+    <entry>Profession/Shepherd</entry>
+    <entry>Profession/Teamster</entry>
+    <entry>Ride</entry>
+  </collection>
+  <collection>
     <name>Heal</name>
-    <item>Profession/Healer</item>
-    <item>Profession/Masseuse</item>
-    <item>Profession/Midwife</item>
-  </object>
-  <object>
+    <entry>Profession/Healer</entry>
+    <entry>Profession/Masseuse</entry>
+    <entry>Profession/Midwife</entry>
+  </collection>
+  <collection>
     <name>Hide</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Intimidate</name>
-    <item>Profession/Sailor Mate</item>
-  </object>
-  <object>
+    <entry>Profession/Sailor Mate</entry>
+  </collection>
+  <collection>
     <name>Jump</name>
-    <item>Tumble</item>
-  </object>
-  <object>
+    <entry>Tumble</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Arcana</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Spellcraft</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Spellcraft</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Architecture and Engineering</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Architect</item>
-    <item>Profession/Engineer</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Search</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Architect</entry>
+    <entry>Profession/Engineer</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Search</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Dungeoneering</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Geography</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Knowledge/History</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Local</name>
-    <item>Gather Information</item>
-    <item>Profession/Adviser</item>
-    <item>Profession/City Guide</item>
-    <item>Profession/Local Courier</item>
-    <item>Profession/Out-of-Town Courier</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Profession/Wilderness Guide</item>
-  </object>
-  <object>
+    <entry>Gather Information</entry>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/City Guide</entry>
+    <entry>Profession/Local Courier</entry>
+    <entry>Profession/Out-of-Town Courier</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Profession/Wilderness Guide</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Nature</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Apothecary</item>
-    <item>Profession/Farmer</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Profession/Wilderness Guide</item>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Apothecary</entry>
+    <entry>Profession/Farmer</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Profession/Wilderness Guide</entry>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Nobility and Royalty</name>
-    <item>Diplomacy</item>
-    <item>Profession/Adviser</item>
-    <item>Profession/Butler</item>
-    <item>Profession/Footman</item>
-    <item>Profession/Governess</item>
-    <item>Profession/Maid</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Butler</entry>
+    <entry>Profession/Footman</entry>
+    <entry>Profession/Governess</entry>
+    <entry>Profession/Maid</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+  </collection>
+  <collection>
     <name>Knowledge/Religion</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+  </collection>
+  <collection>
     <name>Knowledge/The Planes</name>
-    <item>Profession/Adviser</item>
-    <item>Profession/Sage</item>
-    <item>Profession/Teacher</item>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Profession/Adviser</entry>
+    <entry>Profession/Sage</entry>
+    <entry>Profession/Teacher</entry>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Listen</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Move Silently</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Open Lock</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Perform/Act</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Comedy</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Dance</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Keyboard instruments</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Oratory</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Percussion instruments</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Sing</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/String instruments</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Perform/Wind instruments</name>
-    <item>Profession/Entertainer</item>
-  </object>
-  <object>
+    <entry>Profession/Entertainer</entry>
+  </collection>
+  <collection>
     <name>Profession/Adviser</name>
-    <item>Diplomacy</item>
-    <item>Knowledge/Arcana</item>
-    <item>Knowledge/Architecture and Engineering</item>
-    <item>Knowledge/Dungeoneering</item>
-    <item>Knowledge/Geography</item>
-    <item>Knowledge/History</item>
-    <item>Knowledge/Local</item>
-    <item>Knowledge/Nature</item>
-    <item>Knowledge/Nobility and Royalty</item>
-    <item>Knowledge/Religion</item>
-    <item>Knowledge/The Planes</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Knowledge/Arcana</entry>
+    <entry>Knowledge/Architecture and Engineering</entry>
+    <entry>Knowledge/Dungeoneering</entry>
+    <entry>Knowledge/Geography</entry>
+    <entry>Knowledge/History</entry>
+    <entry>Knowledge/Local</entry>
+    <entry>Knowledge/Nature</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+    <entry>Knowledge/Religion</entry>
+    <entry>Knowledge/The Planes</entry>
+  </collection>
+  <collection>
     <name>Profession/Alchemist</name>
-    <item>Craft/Alchemy</item>
-  </object>
-  <object>
+    <entry>Craft/Alchemy</entry>
+  </collection>
+  <collection>
     <name>Profession/Animal Groomer</name>
-    <item>Handle Animal</item>
-  </object>
-  <object>
+    <entry>Handle Animal</entry>
+  </collection>
+  <collection>
     <name>Profession/Animal Trainer</name>
-    <item>Handle Animal</item>
-  </object>
-  <object>
+    <entry>Handle Animal</entry>
+  </collection>
+  <collection>
     <name>Profession/Apothecary</name>
-    <item>Knowledge/Nature</item>
-  </object>
-  <object>
+    <entry>Knowledge/Nature</entry>
+  </collection>
+  <collection>
     <name>Profession/Appraiser</name>
-    <item>Appraise</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+  </collection>
+  <collection>
     <name>Profession/Architect</name>
-    <item>Knowledge/Architecture and Engineering</item>
-  </object>
-  <object>
+    <entry>Knowledge/Architecture and Engineering</entry>
+  </collection>
+  <collection>
     <name>Profession/Armorer</name>
-    <item>Craft/Armorsmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Armorsmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Barrister</name>
-    <item>Diplomacy</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+  </collection>
+  <collection>
     <name>Profession/Blacksmith</name>
-    <item>Craft/Blacksmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Blacksmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Bookbinder</name>
-    <item>Craft/Bookbinding</item>
-  </object>
-  <object>
+    <entry>Craft/Bookbinding</entry>
+  </collection>
+  <collection>
     <name>Profession/Bowyer</name>
-    <item>Craft/Bowmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Bowmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Brazier</name>
-    <item>Craft/Brassmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Brassmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Brewer</name>
-    <item>Craft/Brewing</item>
-  </object>
-  <object>
+    <entry>Craft/Brewing</entry>
+  </collection>
+  <collection>
     <name>Profession/Butler</name>
-    <item>Diplomacy</item>
-    <item>Knowledge/Nobility and Royalty</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+  </collection>
+  <collection>
     <name>Profession/Carpenter</name>
-    <item>Craft/Woodworking</item>
-  </object>
-  <object>
+    <entry>Craft/Woodworking</entry>
+  </collection>
+  <collection>
     <name>Profession/Cartographer</name>
-    <item>Craft/Mapmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Mapmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Cartwright</name>
-    <item>Craft/Woodworking</item>
-  </object>
-  <object>
+    <entry>Craft/Woodworking</entry>
+  </collection>
+  <collection>
     <name>Profession/Chandler</name>
-    <item>Craft/Candlemaking</item>
-  </object>
-  <object>
+    <entry>Craft/Candlemaking</entry>
+  </collection>
+  <collection>
     <name>Profession/City Guide</name>
-    <item>Diplomacy</item>
-    <item>Knowledge/Local</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Knowledge/Local</entry>
+  </collection>
+  <collection>
     <name>Profession/Clerk</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Cobbler</name>
-    <item>Craft/Shoemaking</item>
-  </object>
-  <object>
+    <entry>Craft/Shoemaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Coffinmaker</name>
-    <item>Craft/Woodworking</item>
-  </object>
-  <object>
+    <entry>Craft/Woodworking</entry>
+  </collection>
+  <collection>
     <name>Profession/Coiffeur</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Cook</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Coppersmith</name>
-    <item>Craft/Coppersmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Coppersmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Craftsman</name>
-    <item>Craft/Alchemy</item>
-    <item>Craft/Armorsmithing</item>
-    <item>Craft/Blacksmithing</item>
-    <item>Craft/Bookbinding</item>
-    <item>Craft/Bowmaking</item>
-    <item>Craft/Brassmaking</item>
-    <item>Craft/Brewing</item>
-    <item>Craft/Candlemaking</item>
-    <item>Craft/Cloth</item>
-    <item>Craft/Coppersmithing</item>
-    <item>Craft/Dyemaking</item>
-    <item>Craft/Gemcutting</item>
-    <item>Craft/Goldsmithing</item>
-    <item>Craft/Glass</item>
-    <item>Craft/Hatmaking</item>
-    <item>Craft/Hornworking</item>
-    <item>Craft/Jewelmaking</item>
-    <item>Craft/Leather</item>
-    <item>Craft/Locksmithing</item>
-    <item>Craft/Mapmaking</item>
-    <item>Craft/Milling</item>
-    <item>Craft/Painting</item>
-    <item>Craft/Parchmentmaking</item>
-    <item>Craft/Pewtermaking</item>
-    <item>Craft/Potterymaking</item>
-    <item>Craft/Sculpting</item>
-    <item>Craft/Shipmaking</item>
-    <item>Craft/Shoemaking</item>
-    <item>Craft/Silversmithing</item>
-    <item>Craft/Skinning</item>
-    <item>Craft/Soapmaking</item>
-    <item>Craft/Stonemasonry</item>
-    <item>Craft/Tanning</item>
-    <item>Craft/Trapmaking</item>
-    <item>Craft/Weaponsmithing</item>
-    <item>Craft/Weaving</item>
-    <item>Craft/Wheelmaking</item>
-    <item>Craft/Winemaking</item>
-    <item>Craft/Woodworking</item>
-  </object>
-  <object>
+    <entry>Craft/Alchemy</entry>
+    <entry>Craft/Armorsmithing</entry>
+    <entry>Craft/Blacksmithing</entry>
+    <entry>Craft/Bookbinding</entry>
+    <entry>Craft/Bowmaking</entry>
+    <entry>Craft/Brassmaking</entry>
+    <entry>Craft/Brewing</entry>
+    <entry>Craft/Candlemaking</entry>
+    <entry>Craft/Cloth</entry>
+    <entry>Craft/Coppersmithing</entry>
+    <entry>Craft/Dyemaking</entry>
+    <entry>Craft/Gemcutting</entry>
+    <entry>Craft/Goldsmithing</entry>
+    <entry>Craft/Glass</entry>
+    <entry>Craft/Hatmaking</entry>
+    <entry>Craft/Hornworking</entry>
+    <entry>Craft/Jewelmaking</entry>
+    <entry>Craft/Leather</entry>
+    <entry>Craft/Locksmithing</entry>
+    <entry>Craft/Mapmaking</entry>
+    <entry>Craft/Milling</entry>
+    <entry>Craft/Painting</entry>
+    <entry>Craft/Parchmentmaking</entry>
+    <entry>Craft/Pewtermaking</entry>
+    <entry>Craft/Potterymaking</entry>
+    <entry>Craft/Sculpting</entry>
+    <entry>Craft/Shipmaking</entry>
+    <entry>Craft/Shoemaking</entry>
+    <entry>Craft/Silversmithing</entry>
+    <entry>Craft/Skinning</entry>
+    <entry>Craft/Soapmaking</entry>
+    <entry>Craft/Stonemasonry</entry>
+    <entry>Craft/Tanning</entry>
+    <entry>Craft/Trapmaking</entry>
+    <entry>Craft/Weaponsmithing</entry>
+    <entry>Craft/Weaving</entry>
+    <entry>Craft/Wheelmaking</entry>
+    <entry>Craft/Winemaking</entry>
+    <entry>Craft/Woodworking</entry>
+  </collection>
+  <collection>
     <name>Profession/Dowser</name>
-    <item>Bluff</item>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Bluff</entry>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Profession/Dyer</name>
-    <item>Craft/Dyemaking</item>
-  </object>
-  <object>
+    <entry>Craft/Dyemaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Embalmer</name>
-    <item>Craft/Alchemy</item>
-  </object>
-  <object>
+    <entry>Craft/Alchemy</entry>
+  </collection>
+  <collection>
     <name>Profession/Engineer</name>
-    <item>Knowledge/Architecture and Engineering</item>
-  </object>
-  <object>
+    <entry>Knowledge/Architecture and Engineering</entry>
+  </collection>
+  <collection>
     <name>Profession/Entertainer</name>
-    <item>Perform/Act</item>
-    <item>Perform/Comedy</item>
-    <item>Perform/Dance</item>
-    <item>Perform/Keyboard instruments</item>
-    <item>Perform/Oratory</item>
-    <item>Perform/Percussion instruments</item>
-    <item>Perform/Sing</item>
-    <item>Perform/String instruments</item>
-    <item>Perform/Wind instruments</item>
-  </object>
-  <object>
+    <entry>Perform/Act</entry>
+    <entry>Perform/Comedy</entry>
+    <entry>Perform/Dance</entry>
+    <entry>Perform/Keyboard instruments</entry>
+    <entry>Perform/Oratory</entry>
+    <entry>Perform/Percussion instruments</entry>
+    <entry>Perform/Sing</entry>
+    <entry>Perform/String instruments</entry>
+    <entry>Perform/Wind instruments</entry>
+  </collection>
+  <collection>
     <name>Profession/Exotic Animal Trainer</name>
-    <item>Handle Animal</item>
-  </object>
-  <object>
+    <entry>Handle Animal</entry>
+  </collection>
+  <collection>
     <name>Profession/Farmer</name>
-    <item>Knowledge/Nature</item>
-  </object>
-  <object>
+    <entry>Knowledge/Nature</entry>
+  </collection>
+  <collection>
     <name>Profession/Fletcher</name>
-    <item>Craft/Bowmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Bowmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Footman</name>
-    <item>Diplomacy</item>
-    <item>Knowledge/Nobility and Royalty</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+  </collection>
+  <collection>
     <name>Profession/Gemcutter</name>
-    <item>Craft/Gemcutting</item>
-  </object>
-  <object>
+    <entry>Craft/Gemcutting</entry>
+  </collection>
+  <collection>
     <name>Profession/Goldsmith</name>
-    <item>Craft/Goldsmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Goldsmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Governess</name>
-    <item>Diplomacy</item>
-    <item>Knowledge/Nobility and Royalty</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+  </collection>
+  <collection>
     <name>Profession/Haberdasher</name>
-    <item>Craft/Hatmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Hatmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Healer</name>
-    <item>Heal</item>
-  </object>
-  <object>
+    <entry>Heal</entry>
+  </collection>
+  <collection>
     <name>Profession/Horner</name>
-    <item>Craft/Hornworking</item>
-  </object>
-  <object>
+    <entry>Craft/Hornworking</entry>
+  </collection>
+  <collection>
     <name>Profession/Hunter</name>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Profession/Interpreter</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Jeweler</name>
-    <item>Craft/Jewelmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Jewelmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Laborer</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Launderer</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Limner</name>
-    <item>Craft/Painting</item>
-  </object>
-  <object>
+    <entry>Craft/Painting</entry>
+  </collection>
+  <collection>
     <name>Profession/Local Courier</name>
-    <item>Knowledge/Local</item>
-  </object>
-  <object>
+    <entry>Knowledge/Local</entry>
+  </collection>
+  <collection>
     <name>Profession/Locksmith</name>
-    <item>Craft/Locksmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Locksmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Maid</name>
-    <item>Knowledge/Nobility and Royalty</item>
-  </object>
-  <object>
+    <entry>Knowledge/Nobility and Royalty</entry>
+  </collection>
+  <collection>
     <name>Profession/Masseuse</name>
-    <item>Heal</item>
-  </object>
-  <object>
+    <entry>Heal</entry>
+  </collection>
+  <collection>
     <name>Profession/Matchmaker</name>
-    <item>Diplomacy</item>
-    <item>Sense Motive</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Sense Motive</entry>
+  </collection>
+  <collection>
     <name>Profession/Midwife</name>
-    <item>Heal</item>
-  </object>
-  <object>
+    <entry>Heal</entry>
+  </collection>
+  <collection>
     <name>Profession/Miller</name>
-    <item>Craft/Milling</item>
-  </object>
-  <object>
+    <entry>Craft/Milling</entry>
+  </collection>
+  <collection>
     <name>Profession/Navigator</name>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Profession/Nursemaid</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Out-of-Town Courier</name>
-    <item>Knowledge/Local</item>
-    <item>Ride</item>
-  </object>
-  <object>
+    <entry>Knowledge/Local</entry>
+    <entry>Ride</entry>
+  </collection>
+  <collection>
     <name>Profession/Painter</name>
-    <item>Craft/Painting</item>
-  </object>
-  <object>
+    <entry>Craft/Painting</entry>
+  </collection>
+  <collection>
     <name>Profession/Parchmentmaker</name>
-    <item>Craft/Parchmentmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Parchmentmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Pewterer</name>
-    <item>Craft/Pewtermaking</item>
-  </object>
-  <object>
+    <entry>Craft/Pewtermaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Polisher</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Porter</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Potter</name>
-    <item>Craft/Potterymaking</item>
-  </object>
-  <object>
+    <entry>Craft/Potterymaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Sage</name>
-    <item>Knowledge/Arcana</item>
-    <item>Knowledge/Architecture and Engineering</item>
-    <item>Knowledge/Dungeoneering</item>
-    <item>Knowledge/Geography</item>
-    <item>Knowledge/History</item>
-    <item>Knowledge/Local</item>
-    <item>Knowledge/Nature</item>
-    <item>Knowledge/Nobility and Royalty</item>
-    <item>Knowledge/Religion</item>
-    <item>Knowledge/The Planes</item>
-  </object>
-  <object>
+    <entry>Knowledge/Arcana</entry>
+    <entry>Knowledge/Architecture and Engineering</entry>
+    <entry>Knowledge/Dungeoneering</entry>
+    <entry>Knowledge/Geography</entry>
+    <entry>Knowledge/History</entry>
+    <entry>Knowledge/Local</entry>
+    <entry>Knowledge/Nature</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+    <entry>Knowledge/Religion</entry>
+    <entry>Knowledge/The Planes</entry>
+  </collection>
+  <collection>
     <name>Profession/Sailor Crewmember</name>
-    <item>Swim</item>
-  </object>
-  <object>
+    <entry>Swim</entry>
+  </collection>
+  <collection>
     <name>Profession/Sailor Mate</name>
-    <item>Intimidate</item>
-    <item>Swim</item>
-  </object>
-  <object>
+    <entry>Intimidate</entry>
+    <entry>Swim</entry>
+  </collection>
+  <collection>
     <name>Profession/Scribe</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Profession/Sculptor</name>
-    <item>Craft/Sculpting</item>
-  </object>
-  <object>
+    <entry>Craft/Sculpting</entry>
+  </collection>
+  <collection>
     <name>Profession/Shepherd</name>
-    <item>Handle Animal</item>
-  </object>
-  <object>
+    <entry>Handle Animal</entry>
+  </collection>
+  <collection>
     <name>Profession/Shipwright</name>
-    <item>Craft/Shipmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Shipmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Silversmith</name>
-    <item>Craft/Silversmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Silversmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Skinner</name>
-    <item>Craft/Skinning</item>
-  </object>
-  <object>
+    <entry>Craft/Skinning</entry>
+  </collection>
+  <collection>
     <name>Profession/Soapmaker</name>
-    <item>Craft/Soapmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Soapmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Soothsayer</name>
-    <item>Bluff</item>
-  </object>
-  <object>
+    <entry>Bluff</entry>
+  </collection>
+  <collection>
     <name>Profession/Tanner</name>
-    <item>Craft/Tanning</item>
-  </object>
-  <object>
+    <entry>Craft/Tanning</entry>
+  </collection>
+  <collection>
     <name>Profession/Teacher</name>
-    <item>Knowledge/Arcana</item>
-    <item>Knowledge/Architecture and Engineering</item>
-    <item>Knowledge/Dungeoneering</item>
-    <item>Knowledge/Geography</item>
-    <item>Knowledge/History</item>
-    <item>Knowledge/Local</item>
-    <item>Knowledge/Nature</item>
-    <item>Knowledge/Nobility and Royalty</item>
-    <item>Knowledge/Religion</item>
-    <item>Knowledge/The Planes</item>
-  </object>
-  <object>
+    <entry>Knowledge/Arcana</entry>
+    <entry>Knowledge/Architecture and Engineering</entry>
+    <entry>Knowledge/Dungeoneering</entry>
+    <entry>Knowledge/Geography</entry>
+    <entry>Knowledge/History</entry>
+    <entry>Knowledge/Local</entry>
+    <entry>Knowledge/Nature</entry>
+    <entry>Knowledge/Nobility and Royalty</entry>
+    <entry>Knowledge/Religion</entry>
+    <entry>Knowledge/The Planes</entry>
+  </collection>
+  <collection>
     <name>Profession/Teamster</name>
-    <item>Handle Animal</item>
-    <item>Ride</item>
-  </object>
-  <object>
+    <entry>Handle Animal</entry>
+    <entry>Ride</entry>
+  </collection>
+  <collection>
     <name>Profession/Trader</name>
-    <item>Appraise</item>
-    <item>Sense Motive</item>
-  </object>
-  <object>
+    <entry>Appraise</entry>
+    <entry>Sense Motive</entry>
+  </collection>
+  <collection>
     <name>Profession/Valet</name>
-    <item>Diplomacy</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+  </collection>
+  <collection>
     <name>Profession/Vintner</name>
-    <item>Craft/Winemaking</item>
-  </object>
-  <object>
+    <entry>Craft/Winemaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Weaponsmith</name>
-    <item>Craft/Weaponsmithing</item>
-  </object>
-  <object>
+    <entry>Craft/Weaponsmithing</entry>
+  </collection>
+  <collection>
     <name>Profession/Weaver</name>
-    <item>Craft/Weaving</item>
-  </object>
-  <object>
+    <entry>Craft/Weaving</entry>
+  </collection>
+  <collection>
     <name>Profession/Wheelwright</name>
-    <item>Craft/Wheelmaking</item>
-  </object>
-  <object>
+    <entry>Craft/Wheelmaking</entry>
+  </collection>
+  <collection>
     <name>Profession/Wilderness Guide</name>
-    <item>Knowledge/Local</item>
-    <item>Knowledge/Nature</item>
-  </object>
-  <object>
+    <entry>Knowledge/Local</entry>
+    <entry>Knowledge/Nature</entry>
+  </collection>
+  <collection>
     <name>Ride</name>
-    <item>Profession/Out-of-Town Courier</item>
-    <item>Profession/Teamster</item>
-  </object>
-  <object>
+    <entry>Profession/Out-of-Town Courier</entry>
+    <entry>Profession/Teamster</entry>
+  </collection>
+  <collection>
     <name>Search</name>
-    <item>Survival</item>
-  </object>
-  <object>
+    <entry>Survival</entry>
+  </collection>
+  <collection>
     <name>Sense Motive</name>
-    <item>Diplomacy</item>
-    <item>Profession/Matchmaker</item>
-    <item>Profession/Trader</item>
-  </object>
-  <object>
+    <entry>Diplomacy</entry>
+    <entry>Profession/Matchmaker</entry>
+    <entry>Profession/Trader</entry>
+  </collection>
+  <collection>
     <name>Sleight of Hand</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Spellcraft</name>
-    <item>Use Magic Device</item>
-  </object>
-  <object>
+    <entry>Use Magic Device</entry>
+  </collection>
+  <collection>
     <name>Spot</name>
-  </object>
-  <object>
+  </collection>
+  <collection>
     <name>Survival</name>
-    <item>Knowledge/Nature</item>
-    <item>Profession/Dowser</item>
-    <item>Profession/Hunter</item>
-    <item>Profession/Navigator</item>
-  </object>
-  <object>
+    <entry>Knowledge/Nature</entry>
+    <entry>Profession/Dowser</entry>
+    <entry>Profession/Hunter</entry>
+    <entry>Profession/Navigator</entry>
+  </collection>
+  <collection>
     <name>Swim</name>
-    <item>Profession/Sailor Crewmember</item>
-    <item>Profession/Sailor Mate</item>
-  </object>
-  <object>
+    <entry>Profession/Sailor Crewmember</entry>
+    <entry>Profession/Sailor Mate</entry>
+  </collection>
+  <collection>
     <name>Tumble</name>
-    <item>Balance</item>
-    <item>Jump</item>
-  </object>
-  <object>
+    <entry>Balance</entry>
+    <entry>Jump</entry>
+  </collection>
+  <collection>
     <name>Use Magic Device</name>
-    <item>Spellcraft</item>
-  </object>
-  <object>
+    <entry>Spellcraft</entry>
+  </collection>
+  <collection>
     <name>Use Rope</name>
-    <item>Climb</item>
-    <item>Escape Artist</item>
-  </object>
-</items>
+    <entry>Climb</entry>
+    <entry>Escape Artist</entry>
+  </collection>
+</collections>

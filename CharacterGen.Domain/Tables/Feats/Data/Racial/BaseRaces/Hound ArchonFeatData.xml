@@ -1,326 +1,326 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Darkvision</name>
-    <item>Darkvision</item>
-    <item></item>
-    <item>0</item>
-    <item>60</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Darkvision</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>60</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Armor</name>
-    <item>Natural Armor</item>
-    <item></item>
-    <item>0</item>
-    <item>9</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Armor</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>9</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Aura of Menace</name>
-    <item>Aura of Menace</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Will DC 15 + CHA</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Aura of Menace</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Will DC 15 + CHA</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural WeaponBite</name>
-    <item>Natural Weapon</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Bite (1d8)</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Weapon</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Bite (1d8)</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural WeaponSlam</name>
-    <item>Natural Weapon</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Slam (1d4)</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Weapon</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Slam (1d4)</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Change Shape</name>
-    <item>Change Shape</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Change Shape</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Scent</name>
-    <item>Scent</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Scent</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Damage Reduction</name>
-    <item>Damage Reduction</item>
-    <item></item>
-    <item>0</item>
-    <item>10</item>
-    <item>Must be evil to overcome</item>
-    <item>1</item>
-    <item>Hit</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Damage Reduction</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>10</entry>
+    <entry>Must be evil to overcome</entry>
+    <entry>1</entry>
+    <entry>Hit</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell Resistance</name>
-    <item>Spell Resistance</item>
-    <item></item>
-    <item>0</item>
-    <item>16</item>
-    <item>Add class levels to power</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell Resistance</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>16</entry>
+    <entry>Add class levels to power</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Low-Light Vision</name>
-    <item>Low-Light Vision</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Low-Light Vision</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save Bonus</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Against poison</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Against poison</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusFortitude</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Fortitude</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Fortitude</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusReflex</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Reflex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Reflex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusWill</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Immune to EffectElectricity</name>
-    <item>Immune to Effect</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Electricity</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Immune to Effect</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Electricity</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Immune to EffectPetrification</name>
-    <item>Immune to Effect</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Petrification</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Immune to Effect</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Petrification</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityMagic circle against chaos/law/good/evil</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Magic circle against chaos/law/good/evil</item>
-    <item>0</item>
-    <item>Constant</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Magic circle against chaos/law/good/evil</entry>
+    <entry>0</entry>
+    <entry>Constant</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityTongues</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Tongues</item>
-    <item>0</item>
-    <item>Constant</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Tongues</entry>
+    <entry>0</entry>
+    <entry>Constant</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityGreater teleport</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Greater teleport</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Greater teleport</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityAid</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Aid</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Aid</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityContinual flame</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Continual flame</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Continual flame</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityDetect chaos/law/good/evil</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Detect chaos/law/good/evil</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Detect chaos/law/good/evil</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityMessage</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Message</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Message</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

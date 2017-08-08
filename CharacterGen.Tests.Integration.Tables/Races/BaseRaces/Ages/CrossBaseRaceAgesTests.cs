@@ -1,15 +1,23 @@
-﻿using CharacterGen.Domain.Mappers.Collections;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using DnDGen.Core.Mappers.Collections;
 using Ninject;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
 {
     [TestFixture]
-    public class CrossBaseRaceAgesTests : IntegrationTests
+    public class CrossBaseRaceAgesTests : TableTests
     {
         [Inject]
-        internal CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionsMapper CollectionsMapper { get; set; }
+
+        protected override string tableName
+        {
+            get
+            {
+                return TableNameConstants.Set.Collection.BaseRaceGroups;
+            }
+        }
 
         [Test]
         public void AllBaseRacesHaveAgeTables()

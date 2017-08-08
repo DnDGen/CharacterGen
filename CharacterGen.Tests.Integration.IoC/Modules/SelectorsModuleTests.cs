@@ -1,5 +1,4 @@
 ﻿using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.IoC.Modules
@@ -20,27 +19,9 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void PercentileResultSelectorsAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<IPercentileSelector>();
-        }
-
-        [Test]
         public void StatAdjustmentsSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<IAbilityAdjustmentsSelector>();
-        }
-
-        [Test]
-        public void CollectionsSelectorsAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<ICollectionsSelector>();
-        }
-
-        [Test]
-        public void CollectionsSelectorsIsDecorated()
-        {
-            AssertIsInstanceOf<ICollectionsSelector, CollectionsSelectorEventGenDecorator>();
         }
 
         [Test]
@@ -59,12 +40,6 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         public void FeatsSelectorsIsDecorated()
         {
             AssertIsInstanceOf<IFeatsSelector, FeatsSelectorEventGenDecorator>();
-        }
-
-        [Test]
-        public void BooleanPercentileSelectorsAreNotGeneratedAsSingletons()
-        {
-            AssertNotSingleton<IBooleanPercentileSelector>();
         }
 
         [Test]

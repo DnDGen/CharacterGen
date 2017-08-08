@@ -1,10 +1,11 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,14 +13,14 @@ namespace CharacterGen.Domain.Generators.Classes
 {
     internal class CharacterClassGenerator : ICharacterClassGenerator
     {
-        private IAdjustmentsSelector adjustmentsSelector;
-        private ICollectionsSelector collectionsSelector;
-        private IBooleanPercentileSelector booleanPercentileSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileSelector;
 
-        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector, IBooleanPercentileSelector booleanPercentileSelector)
+        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector)
         {
             this.adjustmentsSelector = adjustmentsSelector;
-            this.booleanPercentileSelector = booleanPercentileSelector;
+            this.percentileSelector = percentileSelector;
             this.collectionsSelector = collectionsSelector;
         }
 
@@ -34,7 +35,7 @@ namespace CharacterGen.Domain.Generators.Classes
             characterClass.IsNPC = npcs.Contains(characterClass.Name);
 
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.Name);
-            var isSpecialist = booleanPercentileSelector.SelectFrom(tableName);
+            var isSpecialist = percentileSelector.SelectFrom<bool>(tableName);
 
             if (!isSpecialist)
                 return characterClass;

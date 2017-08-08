@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +13,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
     {
         public string SetMetarace { get; set; }
 
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public SetMetaraceRandomizer(ICollectionsSelector collectionsSelector)
         {
@@ -24,7 +24,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
         {
             var metaraces = GetAllPossible(alignment, characterClass);
 
-            if (metaraces.Any() == false)
+            if (!metaraces.Any())
                 throw new IncompatibleRandomizersException();
 
             return metaraces.Single();

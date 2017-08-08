@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Test]
         public void StressMetarace()
         {
-            Stress(AssertMetarace);
+            stressor.Stress(AssertMetarace);
         }
 
         protected void AssertMetarace()

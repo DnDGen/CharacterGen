@@ -1,102 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Skill BonusAppraise</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Appraise (Stone or metal items)</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Appraise (Stone or metal items)</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Skill BonusListen</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Listen</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Listen</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Attack BonusThrowOrSling</name>
-      <item>Attack Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>Thrown weapons and slings</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Attack Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>1</entry>
+      <entry>Thrown weapons and slings</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Save BonusFear</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Fear</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Save Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Fear</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Save BonusAll</name>
-      <item>Save Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>All</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Save Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>1</entry>
+      <entry>All</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Darkvision</name>
-        <item>Darkvision</item>
-        <item></item>
-        <item>0</item>
-        <item>60</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Darkvision</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>60</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Stonecunning</name>
-      <item>Stonecunning</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-</items>
+      <entry>Stonecunning</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+</collections>

@@ -1,9 +1,9 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +13,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
     {
         public string SetBaseRace { get; set; }
 
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public SetBaseRaceRandomizer(ICollectionsSelector collectionsSelector)
         {

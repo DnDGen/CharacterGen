@@ -1,130 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Darkvision</name>
-    <item>Darkvision</item>
-    <item></item>
-    <item>0</item>
-    <item>60</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Darkvision</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>60</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Heat</name>
-    <item>Heat</item>
-    <item></item>
-    <item>0</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Heat</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell Resistance</name>
-    <item>Spell Resistance</item>
-    <item></item>
-    <item>0</item>
-    <item>13</item>
-    <item>Add class levels to power</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell Resistance</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>13</entry>
+    <entry>Add class levels to power</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Immune to Effect</name>
-    <item>Immune to Effect</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Fire</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Immune to Effect</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Fire</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Vulnerability to Effect</name>
-    <item>Vulnerability to Effect</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Cold</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Vulnerability to Effect</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Cold</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusFortitude</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>3</item>
-    <item>Fortitude</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Fortitude</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusWill</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>3</item>
-    <item>Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusReflex</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>3</item>
-    <item>Reflex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Reflex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Armor</name>
-    <item>Natural Armor</item>
-    <item></item>
-    <item>0</item>
-    <item>6</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Natural Armor</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>6</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

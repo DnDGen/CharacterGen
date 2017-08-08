@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Abilities;
 using CharacterGen.Randomizers.Abilities;
+using DnDGen.Core.Generators;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
     {
         protected abstract int defaultValue { get; }
 
-        private Generator generator;
+        private readonly Generator generator;
 
         public BaseAbilitiesRandomizer(Generator generator)
         {
@@ -20,9 +21,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
         {
             var stats = generator.Generate(
                 () => RollAbilities(RollAbility),
-                "abilities",
                 s => AbilitiesAreAllowed(s.Values),
                 () => RollAbilities(() => defaultValue),
+                s => AbilitiesInvalidMessage(s.Values),
                 $"abilities of value {defaultValue}");
 
             return stats;
@@ -54,5 +55,6 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
 
         protected abstract int RollAbility();
         protected abstract bool AbilitiesAreAllowed(IEnumerable<Ability> abilities);
+        protected abstract string AbilitiesInvalidMessage(IEnumerable<Ability> abilities);
     }
 }

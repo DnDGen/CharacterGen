@@ -4,6 +4,7 @@ using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using RollGen;

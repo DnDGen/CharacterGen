@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class FeatsSelector : IFeatsSelector
     {
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
 
         public FeatsSelector(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {

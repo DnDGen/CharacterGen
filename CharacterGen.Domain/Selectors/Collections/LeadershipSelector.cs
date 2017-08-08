@@ -7,7 +7,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class LeadershipSelector : ILeadershipSelector
     {
-        private IAdjustmentsSelector adjustmentsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
 
         public LeadershipSelector(IAdjustmentsSelector adjustmentsSelector)
         {

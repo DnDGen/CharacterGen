@@ -1,168 +1,168 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Disrupt undead</name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Touch of fatigue</name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Cause fear</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Chill touch</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Ray of enfeeblement</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Blindness/deafness</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Command undead</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>False life</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Ghoul touch</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Scare</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Spectral hand</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Gentle repose</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Halt undead</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Ray of exhaustion</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Vampiric touch</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Animate dead</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Bestow curse</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Contagion</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Enervation</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Fear</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Blight</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Magic jar</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Symbol of pain</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Waves of fatigue</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Circle of death</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Create undead</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Eyebite</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Symbol of fear</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Undeath to death</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Control undead</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Finger of death</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Symbol of weakness</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Waves of exhaustion</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Clone</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Create greater undead</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Horrid wilting</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Symbol of death</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Astral projection</name>
-    <item>9</item>
-  </object>
-  <object>
+    <entry>9</entry>
+  </collection>
+  <collection>
     <name>Energy drain</name>
-    <item>9</item>
-  </object>
-  <object>
+    <entry>9</entry>
+  </collection>
+  <collection>
     <name>Soul bind</name>
-    <item>9</item>
-  </object>
-  <object>
+    <entry>9</entry>
+  </collection>
+  <collection>
     <name>Wail of the banshee</name>
-    <item>9</item>
-  </object>
-</items>
+    <entry>9</entry>
+  </collection>
+</collections>

@@ -1,186 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Poison</name>
-    <item>Poison</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>DC 17, initial damage is 1d4 Dex, secondary is 1d4 Dex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Poison</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>DC 17, initial damage is 1d4 Dex, secondary is 1d4 Dex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Resistance</name>
-    <item>Resistance</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Fire</item>
-    <item>1</item>
-    <item>Round</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Resistance</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Fire</entry>
+    <entry>1</entry>
+    <entry>Round</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Darkvision</name>
-    <item>Darkvision</item>
-    <item></item>
-    <item>0</item>
-    <item>60</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Darkvision</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>60</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Armor</name>
-    <item>Natural Armor</item>
-    <item></item>
-    <item>0</item>
-    <item>6</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Armor</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>6</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural WeaponSting</name>
-    <item>Natural Weapon</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Sting (1d8)</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Weapon</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Sting (1d8)</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural WeaponClaw</name>
-    <item>Natural Weapon</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Claw (1d6) x2</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Weapon</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Claw (1d6) x2</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusFortitude</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Fortitude</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Fortitude</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusReflex</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Reflex</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Reflex</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Save BonusWill</name>
-    <item>Save Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Will</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Save Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Trample</name>
-    <item>Trample</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Trample</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityMajor image</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Major image</item>
-    <item>1</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Major image</entry>
+    <entry>1</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityMirror image</name>
-    <item>Spell-Like Ability</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Mirror image</item>
-    <item>2</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Mirror image</entry>
+    <entry>2</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Spell Resistance</name>
-    <item>Spell Resistance</item>
-    <item></item>
-    <item>0</item>
-    <item>18</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Spell Resistance</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>18</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

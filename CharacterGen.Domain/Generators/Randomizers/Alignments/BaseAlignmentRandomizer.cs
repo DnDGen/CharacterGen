@@ -1,9 +1,10 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,9 +12,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
 {
     internal abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
-        private IPercentileSelector percentileResultSelector;
-        private Generator generator;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileResultSelector;
+        private readonly Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
         {
@@ -30,9 +31,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
 
             return generator.Generate(
                 GenerateAlignment,
-                $"alignment from [{string.Join(",", possibleAlignments)}]",
                 a => possibleAlignments.Contains(a),
-                () => collectionsSelector.SelectRandomFrom(possibleAlignments));
+                () => collectionsSelector.SelectRandomFrom(possibleAlignments),
+                a => $"{a.Full} is not from [{string.Join(",", possibleAlignments)}]",
+                $"alignment from [{string.Join(",", possibleAlignments)}]");
         }
 
         private Alignment GenerateAlignment()

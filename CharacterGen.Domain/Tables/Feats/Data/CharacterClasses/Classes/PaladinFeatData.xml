@@ -1,303 +1,303 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Light Armor Proficiency</name>
-    <item>Light Armor Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Light Armor Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Medium Armor Proficiency</name>
-    <item>Medium Armor Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Medium Armor Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Heavy Armor Proficiency</name>
-    <item>Heavy Armor Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Heavy Armor Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Martial Weapon Proficiency</name>
-    <item>Martial Weapon Proficiency</item>
-    <item>1</item>
-    <item>All</item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-    <object>
+    <entry>Martial Weapon Proficiency</entry>
+    <entry>1</entry>
+    <entry>All</entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+    <collection>
         <name>Simple Weapon Proficiency</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>1</item>
-        <item>All</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-  <object>
+        <entry>Simple Weapon Proficiency</entry>
+        <entry>1</entry>
+        <entry>All</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+  <collection>
     <name>Shield Proficiency</name>
-    <item>Shield Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-  <object>
+    <entry>Shield Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+  <collection>
     <name>Aura of Good</name>
-    <item>Aura of Good</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-  <object>
+    <entry>Aura of Good</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityDetect chaos/law/good/evil</name>
-    <item>Spell-Like Ability</item>
-    <item>1</item>
-    <item>Detect chaos/law/good/evil</item>
-    <item>0</item>
-    <item>0</item>
-    <item>At Will</item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry>1</entry>
+    <entry>Detect chaos/law/good/evil</entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>At Will</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Smite Evil1</name>
-    <item>Smite Evil</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>1</item>
-    <item>Day</item>
-    <item>4</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Smite Evil</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>1</entry>
+    <entry>Day</entry>
+    <entry>4</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Smite Evil2</name>
-    <item>Smite Evil</item>
-    <item>5</item>
-    <item></item>
-    <item>0</item>
-    <item>2</item>
-    <item>Day</item>
-    <item>9</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Smite Evil</entry>
+    <entry>5</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>2</entry>
+    <entry>Day</entry>
+    <entry>9</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Smite Evil3</name>
-    <item>Smite Evil</item>
-    <item>10</item>
-    <item></item>
-    <item>0</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>14</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-  <object>
+    <entry>Smite Evil</entry>
+    <entry>10</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Day</entry>
+    <entry>14</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+  <collection>
     <name>Smite Evil4</name>
-    <item>Smite Evil</item>
-    <item>15</item>
-    <item></item>
-    <item>0</item>
-    <item>4</item>
-    <item>Day</item>
-    <item>19</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Smite Evil</entry>
+    <entry>15</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Day</entry>
+    <entry>19</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Smite Evil5</name>
-    <item>Smite Evil</item>
-    <item>20</item>
-    <item></item>
-    <item>0</item>
-    <item>5</item>
-    <item>Day</item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Smite Evil</entry>
+    <entry>20</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Divine Grace</name>
-    <item>Divine Grace</item>
-    <item>2</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-  <object>
+    <entry>Divine Grace</entry>
+    <entry>2</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+  <collection>
     <name>Lay On Hands</name>
-    <item>Lay On Hands</item>
-    <item>2</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Lay On Hands</entry>
+    <entry>2</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Aura of Courage</name>
-    <item>Aura of Courage</item>
-    <item>3</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Aura of Courage</entry>
+    <entry>3</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Divine Health</name>
-    <item>Divine Health</item>
-    <item>3</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Divine Health</entry>
+    <entry>3</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Turn</name>
-    <item>Turn</item>
-    <item>4</item>
-    <item>Undead (as cleric of level - 3)</item>
-    <item>0</item>
-    <item>3</item>
-    <item>Day</item>
-    <item>0</item>
-    <item>Charisma</item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Turn</entry>
+    <entry>4</entry>
+    <entry>Undead (as cleric of level - 3)</entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Day</entry>
+    <entry>0</entry>
+    <entry>Charisma</entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityRemove disease1</name>
-    <item>Spell-Like Ability</item>
-    <item>6</item>
-    <item>Remove disease</item>
-    <item>0</item>
-    <item>1</item>
-    <item>Week</item>
-    <item>8</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry>6</entry>
+    <entry>Remove disease</entry>
+    <entry>0</entry>
+    <entry>1</entry>
+    <entry>Week</entry>
+    <entry>8</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityRemove disease2</name>
-    <item>Spell-Like Ability</item>
-    <item>9</item>
-    <item>Remove disease</item>
-    <item>0</item>
-    <item>2</item>
-    <item>Week</item>
-    <item>11</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry>9</entry>
+    <entry>Remove disease</entry>
+    <entry>0</entry>
+    <entry>2</entry>
+    <entry>Week</entry>
+    <entry>11</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityRemove disease3</name>
-    <item>Spell-Like Ability</item>
-    <item>12</item>
-    <item>Remove disease</item>
-    <item>0</item>
-    <item>3</item>
-    <item>Week</item>
-    <item>14</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry>12</entry>
+    <entry>Remove disease</entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry>Week</entry>
+    <entry>14</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityRemove disease4</name>
-    <item>Spell-Like Ability</item>
-    <item>15</item>
-    <item>Remove disease</item>
-    <item>0</item>
-    <item>4</item>
-    <item>Week</item>
-    <item>17</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Spell-Like Ability</entry>
+    <entry>15</entry>
+    <entry>Remove disease</entry>
+    <entry>0</entry>
+    <entry>4</entry>
+    <entry>Week</entry>
+    <entry>17</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Spell-Like AbilityRemove disease5</name>
-    <item>Spell-Like Ability</item>
-    <item>18</item>
-    <item>Remove disease</item>
-    <item>0</item>
-    <item>5</item>
-    <item>Week</item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-</items>
+    <entry>Spell-Like Ability</entry>
+    <entry>18</entry>
+    <entry>Remove disease</entry>
+    <entry>0</entry>
+    <entry>5</entry>
+    <entry>Week</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+</collections>

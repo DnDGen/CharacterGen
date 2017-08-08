@@ -11,9 +11,9 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class FeatsGenerator : IFeatsGenerator
     {
-        private IRacialFeatsGenerator racialFeatsGenerator;
-        private IClassFeatsGenerator classFeatsGenerator;
-        private IAdditionalFeatsGenerator additionalFeatsGenerator;
+        private readonly IRacialFeatsGenerator racialFeatsGenerator;
+        private readonly IClassFeatsGenerator classFeatsGenerator;
+        private readonly IAdditionalFeatsGenerator additionalFeatsGenerator;
 
         public FeatsGenerator(IRacialFeatsGenerator racialFeatsGenerator, IClassFeatsGenerator classFeatsGenerator, IAdditionalFeatsGenerator additionalFeatsGenerator)
         {

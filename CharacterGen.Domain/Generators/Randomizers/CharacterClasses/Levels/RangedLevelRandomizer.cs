@@ -8,7 +8,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels
     internal abstract class RangedLevelRandomizer : ILevelRandomizer
     {
         protected int rollBonus;
-        private Dice dice;
+        private readonly Dice dice;
 
         public RangedLevelRandomizer(Dice dice)
         {

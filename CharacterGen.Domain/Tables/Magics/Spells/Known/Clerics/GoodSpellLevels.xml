@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Protection from chaos/law/good/evil</name>
-    <item>1</item>
-  </object>
-  <object>
+    <entry>1</entry>
+  </collection>
+  <collection>
     <name>Aid</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Magic circle against chaos/law/good/evil</name>
-    <item>3</item>
-  </object>
-  <object>
+    <entry>3</entry>
+  </collection>
+  <collection>
     <name>Holy smite</name>
-    <item>4</item>
-  </object>
-  <object>
+    <entry>4</entry>
+  </collection>
+  <collection>
     <name>Dispel good/evil/law/chaos</name>
-    <item>5</item>
-  </object>
-  <object>
+    <entry>5</entry>
+  </collection>
+  <collection>
     <name>Blade barrier</name>
-    <item>6</item>
-  </object>
-  <object>
+    <entry>6</entry>
+  </collection>
+  <collection>
     <name>Holy word</name>
-    <item>7</item>
-  </object>
-  <object>
+    <entry>7</entry>
+  </collection>
+  <collection>
     <name>Holy aura</name>
-    <item>8</item>
-  </object>
-  <object>
+    <entry>8</entry>
+  </collection>
+  <collection>
     <name>Summon monster IX</name>
-    <item>9</item>
-  </object>
-</items>
+    <entry>9</entry>
+  </collection>
+</collections>

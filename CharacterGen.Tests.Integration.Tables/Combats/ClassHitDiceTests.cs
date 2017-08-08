@@ -1,7 +1,6 @@
 ﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 
 namespace CharacterGen.Tests.Integration.Tables.Combats
 {
@@ -16,27 +15,8 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Wizard,
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Warrior
-            };
-
-            AssertCollectionNames(names);
+            var classNameGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            AssertCollectionNames(classNameGroups[GroupConstants.All]);
         }
 
         [TestCase(CharacterClassConstants.Barbarian, 12)]
@@ -55,9 +35,9 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(CharacterClassConstants.Commoner, 4)]
         [TestCase(CharacterClassConstants.Expert, 6)]
         [TestCase(CharacterClassConstants.Warrior, 8)]
-        public override void Adjustment(string name, int adjustment)
+        public void ClassHitDice(string className, int hitDice)
         {
-            base.Adjustment(name, adjustment);
+            Adjustment(className, hitDice);
         }
     }
 }

@@ -83,9 +83,9 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(CharacterClassConstants.Domains.Trickery, 0)]
         [TestCase(CharacterClassConstants.Domains.War, 0)]
         [TestCase(CharacterClassConstants.Domains.Water, 0)]
-        public override void Adjustment(string name, int adjustment)
+        public void ProhibitedFieldQuantity(string name, int quantity)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(name, quantity);
         }
     }
 }

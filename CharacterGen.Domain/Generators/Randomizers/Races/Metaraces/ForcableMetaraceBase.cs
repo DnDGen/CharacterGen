@@ -1,11 +1,13 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,11 +17,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
     {
         public bool ForceMetarace { get; set; }
 
-        internal ICollectionsSelector collectionSelector;
-
-        private IPercentileSelector percentileResultSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private Generator generator;
+        private readonly ICollectionsSelector collectionSelector;
+        private readonly IPercentileSelector percentileResultSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly Generator generator;
 
         public ForcableMetaraceBase(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector, Generator generator, ICollectionsSelector collectionSelector)
         {
@@ -32,16 +33,17 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
         public string Randomize(Alignment alignment, CharacterClass characterClass)
         {
             var allowedMetaraces = GetAllPossible(alignment, characterClass);
-            if (allowedMetaraces.Any() == false)
+            if (!allowedMetaraces.Any())
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
 
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
-                $"metarace from [{string.Join(",", allowedMetaraces)}]",
                 m => allowedMetaraces.Contains(m),
-                () => GetDefaultMetarace(allowedMetaraces));
+                () => GetDefaultMetarace(allowedMetaraces),
+                m => $"{m} is not from [{string.Join(",", allowedMetaraces)}]",
+                $"metarace from [{string.Join(",", allowedMetaraces)}]");
         }
 
         private string GetDefaultMetarace(IEnumerable<string> allowedMetaraces)

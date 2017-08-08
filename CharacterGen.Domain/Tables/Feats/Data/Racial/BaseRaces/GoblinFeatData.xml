@@ -1,46 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Skill BonusMove Silently</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>4</item>
-        <item>Move Silently</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>4</entry>
+        <entry>Move Silently</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Skill BonusRide</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>4</item>
-      <item>Ride</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Skill Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>4</entry>
+      <entry>Ride</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Darkvision</name>
-        <item>Darkvision</item>
-        <item></item>
-        <item>0</item>
-        <item>60</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-      <item></item>
-    </object>
-</items>
+        <entry>Darkvision</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>60</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+      <entry></entry>
+    </collection>
+</collections>

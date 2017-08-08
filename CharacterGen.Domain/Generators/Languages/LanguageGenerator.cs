@@ -3,6 +3,7 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace CharacterGen.Domain.Generators.Languages
 {
     internal class LanguageGenerator : ILanguageGenerator
     {
-        private ILanguageCollectionsSelector languagesSelector;
-        private ICollectionsSelector collectionsSelector;
+        private readonly ILanguageCollectionsSelector languagesSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public LanguageGenerator(ILanguageCollectionsSelector languagesSelector, ICollectionsSelector collectionsSelector)
         {

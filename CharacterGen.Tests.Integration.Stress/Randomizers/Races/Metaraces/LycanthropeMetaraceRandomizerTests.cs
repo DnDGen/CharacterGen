@@ -33,14 +33,14 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Test]
         public void StressLycanthropeMetarace()
         {
-            Stress(AssertMetarace);
+            stressor.Stress(AssertMetarace);
         }
 
         //INFO: Because lycanthropes can only have a particular alignment, generating alignments that satisfy the randomizer takes longer
         [Test]
         public override void StressForcedMetarace()
         {
-            Stress(AssertForcedMetarace);
+            stressor.Stress(AssertForcedMetarace);
         }
     }
 }

@@ -4,6 +4,7 @@ using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 

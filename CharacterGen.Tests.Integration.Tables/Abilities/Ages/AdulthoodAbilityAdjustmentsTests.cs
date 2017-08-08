@@ -37,9 +37,9 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Ages
         [TestCase(AbilityConstants.Intelligence, 0)]
         [TestCase(AbilityConstants.Strength, 0)]
         [TestCase(AbilityConstants.Wisdom, 0)]
-        public override void Adjustment(string name, int adjustment)
+        public void AdulthoodAbilityAdjustment(string ability, int adjustment)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(ability, adjustment);
         }
     }
 }

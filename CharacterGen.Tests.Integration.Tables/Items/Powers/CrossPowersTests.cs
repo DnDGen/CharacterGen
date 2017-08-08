@@ -1,5 +1,5 @@
-﻿using CharacterGen.Domain.Mappers.Percentiles;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
+using DnDGen.Core.Mappers.Percentiles;
 using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -8,10 +8,18 @@ using System.Linq;
 namespace CharacterGen.Tests.Integration.Tables.Items.Powers
 {
     [TestFixture]
-    public class CrossPowersTests : IntegrationTests
+    public class CrossPowersTests : TableTests
     {
         [Inject]
-        internal PercentileMapper PercentileMapper { get; set; }
+        public PercentileMapper PercentileMapper { get; set; }
+
+        protected override string tableName
+        {
+            get
+            {
+                return string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, 1);
+            }
+        }
 
         private IEnumerable<int> levels;
         private IEnumerable<int> indices;

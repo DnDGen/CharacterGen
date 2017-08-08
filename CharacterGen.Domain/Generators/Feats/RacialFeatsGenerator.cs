@@ -5,6 +5,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using RollGen;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class RacialFeatsGenerator : IRacialFeatsGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private IFeatsSelector featsSelector;
-        private IFeatFocusGenerator featFocusGenerator;
-        private Dice dice;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IFeatsSelector featsSelector;
+        private readonly IFeatFocusGenerator featFocusGenerator;
+        private readonly Dice dice;
 
         public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, Dice dice)
         {

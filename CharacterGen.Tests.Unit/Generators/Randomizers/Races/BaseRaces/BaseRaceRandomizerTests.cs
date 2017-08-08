@@ -2,9 +2,10 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System;

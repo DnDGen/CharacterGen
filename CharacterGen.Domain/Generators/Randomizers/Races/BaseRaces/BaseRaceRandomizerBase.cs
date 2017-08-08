@@ -1,10 +1,12 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,11 +14,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
     internal abstract class BaseRaceRandomizerBase : RaceRandomizer
     {
-        private IPercentileSelector percentileResultSelector;
-        private IAdjustmentsSelector adjustmentSelector;
-        private Generator generator;
-
-        protected ICollectionsSelector collectionSelector;
+        private readonly IPercentileSelector percentileResultSelector;
+        private readonly IAdjustmentsSelector adjustmentSelector;
+        private readonly Generator generator;
+        private readonly ICollectionsSelector collectionSelector;
 
         public BaseRaceRandomizerBase(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector, Generator generator, ICollectionsSelector collectionSelector)
         {
@@ -36,9 +37,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
-                $"base race from [{string.Join(",", allowedBaseRaces)}]",
                 b => allowedBaseRaces.Contains(b),
-                () => collectionSelector.SelectRandomFrom(allowedBaseRaces));
+                () => collectionSelector.SelectRandomFrom(allowedBaseRaces),
+                b => $"{b} is not from [{string.Join(", ", allowedBaseRaces)}]",
+                $"base race from [{string.Join(",", allowedBaseRaces)}]");
         }
 
         private bool RaceIsAllowed(string baseRace, Alignment alignment, CharacterClass characterClass)

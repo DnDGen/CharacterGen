@@ -45,6 +45,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DnDGen.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnDGen.Core.2.2.1\lib\DnDGen.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventGen.2.0.1\lib\EventGen.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -60,7 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.7.1.2\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.8.0.2\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -86,6 +94,7 @@
     <Compile Include="Abilities\Races\VampireAbilityAdjustmentsTests.cs" />
     <Compile Include="Abilities\Races\WeretigerAbilityAdjustmentsTests.cs" />
     <Compile Include="Abilities\Races\WerewolfAbilityAdjustmentsTests.cs" />
+    <Compile Include="CharacterGenAssemblyLoader.cs" />
     <Compile Include="Feats\Data\Additional\AdditionalFeatDataTests.cs" />
     <Compile Include="Feats\Data\CharacterClasses\Classes\ExpertFeatDataTests.cs" />
     <Compile Include="Feats\Data\CharacterClasses\Classes\CommonerFeatDataTests.cs" />
@@ -909,7 +918,6 @@
     <Compile Include="Combats\MonsterHitDiceTests.cs" />
     <Compile Include="Combats\RacialBaseAttackAdjustmentsTests.cs" />
     <Compile Include="DataTests.cs" />
-    <Compile Include="EmbeddedResourceStreamLoaderTests.cs" />
     <Compile Include="Items\ItemGroupsTests.cs" />
     <Compile Include="Items\Powers\Level10PowerTests.cs" />
     <Compile Include="Items\Powers\Level11PowerTests.cs" />

@@ -1,7 +1,6 @@
 ﻿using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.PerDay.Bards
@@ -25,7 +24,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.PerDay.Bards
         }
 
         [TestCase(0, 2)]
-        public void Adjustment(int spellLevel, int quantity)
+        public void Level1BardSpellsPerDay(int spellLevel, int quantity)
         {
             base.Adjustment(spellLevel.ToString(), quantity);
         }

@@ -19,25 +19,6 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-            SpellConstants.ObscuringMist,
-            SpellConstants.FogCloud,
-            SpellConstants.WaterBreathing,
-            SpellConstants.ControlWater,
-            SpellConstants.IceStorm,
-            SpellConstants.ConeOfCold,
-            SpellConstants.AcidFog,
-            SpellConstants.HorridWilting,
-            SpellConstants.ElementalSwarm
-        };
-
-            AssertCollectionNames(names);
-        }
-
-        [Test]
-        public void AllWaterSpellsInAdjustmentsTable()
-        {
             var spellGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Water]);
         }
@@ -51,9 +32,9 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
         [TestCase(SpellConstants.AcidFog, 7)]
         [TestCase(SpellConstants.HorridWilting, 8)]
         [TestCase(SpellConstants.ElementalSwarm, 9)]
-        public override void Adjustment(string name, int adjustment)
+        public void WaterSpellLevel(string spell, int level)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(spell, level);
         }
     }
 }

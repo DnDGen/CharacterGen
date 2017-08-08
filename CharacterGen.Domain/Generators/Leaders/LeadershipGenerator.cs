@@ -1,14 +1,15 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Characters;
-using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,6 @@ namespace CharacterGen.Domain.Generators
         private readonly ILeadershipSelector leadershipSelector;
         private readonly IPercentileSelector percentileSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly IBooleanPercentileSelector booleanPercentileSelector;
         private readonly ICollectionsSelector collectionsSelector;
         private readonly Generator generator;
         private readonly JustInTimeFactory justInTimeFactrory;
@@ -30,7 +30,6 @@ namespace CharacterGen.Domain.Generators
             ILeadershipSelector leadershipSelector,
             IPercentileSelector percentileSelector,
             IAdjustmentsSelector adjustmentsSelector,
-            IBooleanPercentileSelector booleanPercentileSelector,
             ICollectionsSelector collectionsSelector,
             Generator generator,
             JustInTimeFactory justInTimeFactrory)
@@ -39,7 +38,6 @@ namespace CharacterGen.Domain.Generators
             this.leadershipSelector = leadershipSelector;
             this.percentileSelector = percentileSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.booleanPercentileSelector = booleanPercentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.generator = generator;
             this.justInTimeFactrory = justInTimeFactrory;
@@ -63,7 +61,7 @@ namespace CharacterGen.Domain.Generators
             leadership.CohortScore = leadership.Score;
             var cohortDeaths = 0;
 
-            while (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort))
+            while (percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort))
                 cohortDeaths++;
 
             leadership.CohortScore -= cohortDeaths * 2;
@@ -86,7 +84,7 @@ namespace CharacterGen.Domain.Generators
                 followerScore += leadershipAdjustments[leaderMovement];
             }
 
-            if (booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
+            if (percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
             {
                 leadershipModifiers.Add("Caused the death of followers");
                 followerScore--;
@@ -100,7 +98,7 @@ namespace CharacterGen.Domain.Generators
 
         public Character GenerateCohort(int cohortScore, int leaderLevel, string leaderAlignment, string leaderClass)
         {
-            var alignmentDiffers = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
+            var alignmentDiffers = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
             if (alignmentDiffers)
                 cohortScore--;
 
@@ -151,9 +149,9 @@ namespace CharacterGen.Domain.Generators
         {
             var alignment = generator.Generate(
                 () => collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment),
-                "Cohort or follower alignment",
                 a => allowLeaderAlignment || a != leaderAlignment,
                 () => leaderAlignment,
+                a => $"{a} cannot be the same as {leaderAlignment}",
                 $"Cohort or follower alignment of {leaderAlignment}");
 
             return new Alignment(alignment);

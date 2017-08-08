@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities;
+using DnDGen.Core.Generators;
 using RollGen;
 using System.Collections.Generic;
 
@@ -14,7 +15,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
             }
         }
 
-        private Dice dice;
+        private readonly Dice dice;
 
         public TwoTenSidedDiceAbilitiesRandomizer(Dice dice, Generator generator)
             : base(generator)
@@ -30,6 +31,11 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
         protected override bool AbilitiesAreAllowed(IEnumerable<Ability> stats)
         {
             return true;
+        }
+
+        protected override string AbilitiesInvalidMessage(IEnumerable<Ability> abilities)
+        {
+            return string.Empty;
         }
     }
 }

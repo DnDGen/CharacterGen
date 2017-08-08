@@ -1,102 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Simple Weapon ProficiencyLongspear</name>
-    <item>Simple Weapon Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Longspear</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Simple Weapon Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Longspear</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Simple Weapon ProficiencyLight crossbow</name>
-    <item>Simple Weapon Proficiency</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Light crossbow</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Simple Weapon Proficiency</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Light crossbow</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Weapon FocusLongspear</name>
-    <item>Weapon Focus</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Longspear</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Weapon Focus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Longspear</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Natural Armor</name>
-    <item>Natural Armor</item>
-    <item></item>
-    <item>0</item>
-    <item>3</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Natural Armor</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>3</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusSwim</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>8</item>
-    <item>Swim</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>8</entry>
+    <entry>Swim</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Skill BonusSwimTake 10</name>
-    <item>Skill Bonus</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Swim (can always take 10)</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-  <object>
+    <entry>Skill Bonus</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Swim (can always take 10)</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>RunSwim</name>
-    <item>Run</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item>Can use while swimming in a straight line</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-  </object>
-</items>
+    <entry>Run</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry>Can use while swimming in a straight line</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+  </collection>
+</collections>

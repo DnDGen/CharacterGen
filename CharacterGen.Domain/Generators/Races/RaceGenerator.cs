@@ -1,10 +1,12 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using RollGen;
 using System;
 using System.Collections.Generic;
@@ -14,22 +16,22 @@ namespace CharacterGen.Domain.Generators.Races
 {
     internal class RaceGenerator : IRaceGenerator
     {
-        private IBooleanPercentileSelector booleanPercentileSelector;
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private Dice dice;
-        private Generator generator;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly Dice dice;
+        private readonly Generator generator;
 
         private readonly IEnumerable<string> allSizes;
         private readonly IEnumerable<string> allClassTypes;
 
-        public RaceGenerator(IBooleanPercentileSelector booleanPercentileSelector,
+        public RaceGenerator(IPercentileSelector percentileSelector,
             ICollectionsSelector collectionsSelector,
             IAdjustmentsSelector adjustmentsSelector,
             Dice dice,
             Generator generator)
         {
-            this.booleanPercentileSelector = booleanPercentileSelector;
+            this.percentileSelector = percentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.dice = dice;
@@ -149,12 +151,12 @@ namespace CharacterGen.Domain.Generators.Races
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Cleric)
                 return false;
 
-            return booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male);
+            return percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male);
         }
 
         private string DetermineSize(string baseRace)
         {
-            var size = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, allSizes.ToArray());
+            var size = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, allSizes.ToArray());
 
             return size;
         }
@@ -275,9 +277,9 @@ namespace CharacterGen.Domain.Generators.Races
         {
             var age = generator.Generate(
                 () => GenerateAge(race, characterClass),
-                $"age for {race.Summary} {characterClass.Summary}",
-                (a) => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
+                a => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
                 () => GetDefaultAge(race, characterClass),
+                a => $"{a.Value} {a.Unit} is greater than maximum age of {race.MaximumAge.Value} {race.MaximumAge.Unit}",
                 $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
 
             return age;
@@ -318,7 +320,7 @@ namespace CharacterGen.Domain.Generators.Races
 
         private int GetAdditionalAge(string baseRace, CharacterClass characterClass)
         {
-            var classType = collectionsSelector.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
+            var classType = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
             var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
             var additionalAge = 0;

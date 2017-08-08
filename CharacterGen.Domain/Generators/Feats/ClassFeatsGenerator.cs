@@ -5,6 +5,7 @@ using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Feats;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +13,9 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class ClassFeatsGenerator : IClassFeatsGenerator
     {
-        private IFeatsSelector featsSelector;
-        private IFeatFocusGenerator featFocusGenerator;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IFeatsSelector featsSelector;
+        private readonly IFeatFocusGenerator featFocusGenerator;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public ClassFeatsGenerator(IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, ICollectionsSelector collectionsSelector)
         {

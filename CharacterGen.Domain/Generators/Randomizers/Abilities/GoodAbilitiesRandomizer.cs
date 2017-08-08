@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Abilities;
+using DnDGen.Core.Generators;
 using RollGen;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
             }
         }
 
-        private Dice dice;
+        private readonly Dice dice;
 
         public GoodAbilitiesRandomizer(Dice dice, Generator generator)
             : base(generator)
@@ -32,6 +33,12 @@ namespace CharacterGen.Domain.Generators.Randomizers.Abilities
         {
             var average = stats.Average(s => s.Value);
             return average >= 13 && average <= 15;
+        }
+
+        protected override string AbilitiesInvalidMessage(IEnumerable<Ability> abilities)
+        {
+            var average = abilities.Average(s => s.Value);
+            return $"Average ability score of {average} is not between 13 and 15";
         }
     }
 }

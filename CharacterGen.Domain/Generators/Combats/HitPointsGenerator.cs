@@ -3,6 +3,7 @@ using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using RollGen;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class HitPointsGenerator : IHitPointsGenerator
     {
-        private Dice dice;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private ICollectionsSelector collectionsSelector;
+        private readonly Dice dice;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public HitPointsGenerator(Dice dice, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {

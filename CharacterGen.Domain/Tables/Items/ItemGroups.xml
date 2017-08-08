@@ -1,40 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Heavy Armor Proficiency</name>
-    <item>Splint mail</item>
-    <item>Banded mail</item>
-    <item>Half-plate</item>
-    <item>Full plate</item>
-  </object>
-  <object>
+    <entry>Splint mail</entry>
+    <entry>Banded mail</entry>
+    <entry>Half-plate</entry>
+    <entry>Full plate</entry>
+  </collection>
+  <collection>
     <name>Light Armor Proficiency</name>
-    <item>Padded armor</item>
-    <item>Leather armor</item>
-    <item>Studded leather armor</item>
-    <item>Chain shirt</item>
-    <item>Elven chain</item>
-    <item>Celestial armor</item>
-  </object>
-  <object>
+    <entry>Padded armor</entry>
+    <entry>Leather armor</entry>
+    <entry>Studded leather armor</entry>
+    <entry>Chain shirt</entry>
+    <entry>Elven chain</entry>
+    <entry>Celestial armor</entry>
+  </collection>
+  <collection>
     <name>Medium Armor Proficiency</name>
-    <item>Hide armor</item>
-    <item>Scale mail</item>
-    <item>Chainmail</item>
-    <item>Breastplate</item>
-    <item>Full plate of speed</item>
-  </object>
-  <object>
+    <entry>Hide armor</entry>
+    <entry>Scale mail</entry>
+    <entry>Chainmail</entry>
+    <entry>Breastplate</entry>
+    <entry>Full plate of speed</entry>
+  </collection>
+  <collection>
     <name>Shield Proficiency</name>
-    <item>Buckler</item>
-    <item>Light wooden shield</item>
-    <item>Light steel shield</item>
-    <item>Heavy wooden shield</item>
-    <item>Heavy steel shield</item>
-  </object>
-  <object>
+    <entry>Buckler</entry>
+    <entry>Light wooden shield</entry>
+    <entry>Light steel shield</entry>
+    <entry>Heavy wooden shield</entry>
+    <entry>Heavy steel shield</entry>
+  </collection>
+  <collection>
     <name>Tower Shield Proficiency</name>
-    <item>Tower shield</item>
-  </object>
-</items>
+    <entry>Tower shield</entry>
+  </collection>
+</collections>

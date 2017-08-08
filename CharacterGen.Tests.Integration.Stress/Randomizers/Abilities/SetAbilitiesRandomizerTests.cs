@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void Stress()
         {
-            Stress(AssertAbilities);
+            stressor.Stress(AssertAbilities);
         }
 
         protected void AssertAbilities()

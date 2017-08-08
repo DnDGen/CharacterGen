@@ -1,15 +1,16 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Characters;
 using CharacterGen.Domain.Generators;
-using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Leaders;
 using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -30,7 +31,6 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         private Mock<RaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IAbilitiesRandomizer> mockRawAbilityRandomizer;
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IClassNameRandomizer> mockAnyNPCClassNameRandomizer;
         private Mock<JustInTimeFactory> mockJustInTimeFactory;
@@ -52,7 +52,6 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
             mockAnyBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawAbilityRandomizer = new Mock<IAbilitiesRandomizer>();
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             var generator = new ConfigurableIterationGenerator(2);
             mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
@@ -61,7 +60,6 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
                 mockLeadershipSelector.Object,
                 mockPercentileSelector.Object,
                 mockAdjustmentsSelector.Object,
-                mockBooleanPercentileSelector.Object,
                 mockCollectionsSelector.Object,
                 generator,
                 mockJustInTimeFactory.Object);
@@ -155,7 +153,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void KillingCohortsDecreasesScoreOfAttractingCohorts()
         {
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
@@ -166,7 +164,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void KillingMultipleCohortsDecreasesScoreOfAttractingCohorts()
         {
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(true).Returns(false);
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(true).Returns(false);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
@@ -211,7 +209,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void GenerateWhetherCharacterHasCausedFollowerDeathsAndApply()
         {
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99475)).Returns(followerQuantities);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
@@ -267,7 +265,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         public void AttractCohortOfSameAlignment()
         {
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
 
             var cohortAlignment = new Alignment("cohort alignment");
             var leadersAlignment = new Alignment(leaderAlignment);
@@ -286,7 +284,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         public void AttractCohortOfDifferingAlignment()
         {
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9265)).Returns(42);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
 
             var cohortAlignment = new Alignment("cohort alignment");
             allowedAlignments.Add(cohortAlignment.ToString());

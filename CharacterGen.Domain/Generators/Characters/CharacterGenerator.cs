@@ -12,7 +12,6 @@ using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Items;
@@ -24,6 +23,9 @@ using CharacterGen.Randomizers.Races;
 using CharacterGen.Skills;
 using CharacterGen.Verifiers;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
@@ -244,9 +246,9 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var alignment = generator.Generate(
                 () => alignmentGenerator.GenerateWith(alignmentRandomizer),
-                "alignment",
                 a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
                 () => DefaultIsIncompatible<Alignment>(),
+                a => $"{a.Full} is not compatible with the randomizers",
                 "Incompatible alignment");
 
             return alignment;
@@ -265,9 +267,9 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var characterClass = generator.Generate(
                 () => characterClassGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer),
-                "character class",
                 c => randomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
                 () => DefaultIsIncompatible<CharacterClass>(),
+                c => $"{c.Summary} is not compatible with {alignment} and the randomizers",
                 "Incompatible character class");
 
             return characterClass;
@@ -281,9 +283,9 @@ namespace CharacterGen.Domain.Generators.Characters
         {
             var race = generator.Generate(
                 () => raceGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer),
-                "race",
                 r => randomizerVerifier.VerifyRaceCompatibility(r, characterClass, levelRandomizer),
                 () => DefaultIsIncompatible<Race>(),
+                r => $"{r.Summary} is not compatible with {alignment}, {characterClass.Summary}, and the randomizers",
                 "Incompatible race");
 
             return race;

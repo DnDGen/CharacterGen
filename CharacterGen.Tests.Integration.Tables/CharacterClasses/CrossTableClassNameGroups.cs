@@ -1,7 +1,7 @@
-﻿using CharacterGen.Domain.Mappers.Collections;
-using CharacterGen.Domain.Mappers.Percentiles;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
+using DnDGen.Core.Mappers.Collections;
+using DnDGen.Core.Mappers.Percentiles;
 using Ninject;
 using NUnit.Framework;
 using System.Linq;
@@ -9,12 +9,20 @@ using System.Linq;
 namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
 {
     [TestFixture]
-    public class CrossTableClassNameGroups : IntegrationTests
+    public class CrossTableClassNameGroups : TableTests
     {
         [Inject]
-        internal CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionsMapper CollectionsMapper { get; set; }
         [Inject]
-        internal PercentileMapper PercentileMapper { get; set; }
+        public PercentileMapper PercentileMapper { get; set; }
+
+        protected override string tableName
+        {
+            get
+            {
+                return TableNameConstants.Set.Collection.ClassNameGroups;
+            }
+        }
 
         [Test]
         public void AllClassesHaveHasSpecialistFieldTable()

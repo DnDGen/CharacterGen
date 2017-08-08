@@ -1,11 +1,12 @@
 ﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,17 @@ namespace CharacterGen.Domain.Generators.Skills
 {
     internal class SkillsGenerator : ISkillsGenerator
     {
-        private ISkillSelector skillSelector;
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private IBooleanPercentileSelector booleanPercentileSelector;
+        private readonly ISkillSelector skillSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IPercentileSelector percentileSelector;
 
-        public SkillsGenerator(ISkillSelector skillSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector,
-            IBooleanPercentileSelector booleanPercentileSelector)
+        public SkillsGenerator(ISkillSelector skillSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IPercentileSelector percentileSelector)
         {
             this.skillSelector = skillSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.booleanPercentileSelector = booleanPercentileSelector;
+            this.percentileSelector = percentileSelector;
         }
 
         public IEnumerable<Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities)
@@ -239,13 +239,13 @@ namespace CharacterGen.Domain.Generators.Skills
             var validClassSkills = FilterOutInvalidSkills(classSkillSelections, skills);
             var validCrossClassSkills = FilterOutInvalidSkills(crossClassSkillSelections, skills);
 
-            if (validClassSkills.Any() == false)
+            if (!validClassSkills.Any())
                 return validCrossClassSkills;
 
-            if (validCrossClassSkills.Any() == false)
+            if (!validCrossClassSkills.Any())
                 return validClassSkills;
 
-            var shouldAddPointToCrossClassSkill = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
+            var shouldAddPointToCrossClassSkill = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
             if (shouldAddPointToCrossClassSkill)
                 return validCrossClassSkills;
 

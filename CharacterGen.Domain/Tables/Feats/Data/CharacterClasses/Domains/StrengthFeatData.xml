@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Supernatural Strength</name>
-        <item>Supernatural Strength</item>
-        <item>0</item>
-        <item>Enhance strength by cleric level, lasts 1 round</item>
-        <item>0</item>
-        <item>1</item>
-        <item>Day</item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-</items>
+        <entry>Supernatural Strength</entry>
+        <entry>0</entry>
+        <entry>Enhance strength by cleric level, lasts 1 round</entry>
+        <entry>0</entry>
+        <entry>1</entry>
+        <entry>Day</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+</collections>

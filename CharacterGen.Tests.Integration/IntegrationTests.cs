@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Domain.IoC;
+using DnDGen.Core.IoC;
 using EventGen.IoC;
 using Ninject;
 using NUnit.Framework;
@@ -10,7 +11,7 @@ namespace CharacterGen.Tests.Integration
     [TestFixture]
     public abstract class IntegrationTests
     {
-        private IKernel kernel;
+        protected IKernel kernel;
 
         [OneTimeSetUp]
         public void IntegrationTestsFixtureSetup()
@@ -22,6 +23,9 @@ namespace CharacterGen.Tests.Integration
 
             var eventGenLoader = new EventGenModuleLoader();
             eventGenLoader.LoadModules(kernel);
+
+            var coreLoader = new CoreModuleLoader();
+            coreLoader.LoadModules(kernel);
 
             var treasureGenLoader = new TreasureGenModuleLoader();
             treasureGenLoader.LoadModules(kernel);

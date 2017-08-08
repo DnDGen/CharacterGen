@@ -1,10 +1,11 @@
 ﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Abilities;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,14 @@ namespace CharacterGen.Domain.Generators.Abilities
 {
     internal class AbilitiesGenerator : IAbilitiesGenerator
     {
-        private IBooleanPercentileSelector booleanPercentileSelector;
-        private IAbilityAdjustmentsSelector abilityAdjustmentsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileSelector;
+        private readonly IAbilityAdjustmentsSelector abilityAdjustmentsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
-        public AbilitiesGenerator(IBooleanPercentileSelector booleanPercentileSelector, IAbilityAdjustmentsSelector abilityAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public AbilitiesGenerator(IPercentileSelector percentileSelector, IAbilityAdjustmentsSelector abilityAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
         {
-            this.booleanPercentileSelector = booleanPercentileSelector;
+            this.percentileSelector = percentileSelector;
             this.abilityAdjustmentsSelector = abilityAdjustmentsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.collectionsSelector = collectionsSelector;
@@ -140,7 +141,7 @@ namespace CharacterGen.Domain.Generators.Abilities
             if (undead.Contains(race.Metarace))
                 abilityPriorities = abilityPriorities.Except(new[] { AbilityConstants.Constitution });
 
-            if (abilityPriorities.Any() == false)
+            if (!abilityPriorities.Any())
             {
                 var ability = collectionsSelector.SelectRandomFrom(abilities.Keys);
 
@@ -151,10 +152,10 @@ namespace CharacterGen.Domain.Generators.Abilities
             }
 
             var secondPriorityAbilities = abilityPriorities.Skip(1);
-            if (secondPriorityAbilities.Any() == false)
+            if (!secondPriorityAbilities.Any())
                 return abilityPriorities.First();
 
-            var increaseFirst = booleanPercentileSelector.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility);
+            var increaseFirst = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility);
 
             if (increaseFirst)
                 return abilityPriorities.First();

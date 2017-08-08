@@ -1,4 +1,4 @@
-﻿using CharacterGen.Domain.Mappers.Percentiles;
+﻿using DnDGen.Core.Mappers.Percentiles;
 using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace CharacterGen.Tests.Integration.Tables
     public abstract class PercentileTests : TableTests
     {
         [Inject]
-        internal PercentileMapper PercentileMapper { get; set; }
+        public PercentileMapper PercentileMapper { get; set; }
 
         protected const string EmptyContent = "";
 

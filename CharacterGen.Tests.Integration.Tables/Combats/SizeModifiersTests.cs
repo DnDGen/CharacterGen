@@ -39,9 +39,9 @@ namespace CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.Sizes.Medium, 0)]
         [TestCase(RaceConstants.Sizes.Small, 1)]
         [TestCase(RaceConstants.Sizes.Tiny, 2)]
-        public override void Adjustment(string name, int adjustment)
+        public void SizeModifier(string size, int adjustment)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(size, adjustment);
         }
     }
 }

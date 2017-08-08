@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Dexterity</name>
-        <item>13</item>
-    </object>
-  <object>
+        <entry>13</entry>
+    </collection>
+  <collection>
     <name>Intelligence</name>
-    <item>13</item>
-  </object>
-</items>
+    <entry>13</entry>
+  </collection>
+</collections>

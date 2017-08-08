@@ -1,10 +1,10 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators.Factories;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,9 +41,10 @@ namespace CharacterGen.Domain.Generators.Items
 
             var item = generator.Generate(
                 () => GenerateArmor(power, proficientArmors),
-                $"{power} armor from [{string.Join(", ", proficientArmors)}]",
                 a => ArmorIsValid(a, characterClass, race),
-                () => GenerateDefaultArmor(power, proficientArmors, race));
+                () => GenerateDefaultArmor(power, proficientArmors, race),
+                a => ArmorInvalidMessage(a, characterClass, race),
+                $"{power} armor from [{string.Join(", ", proficientArmors)}]");
 
             return item as Armor;
         }
@@ -66,7 +67,7 @@ namespace CharacterGen.Domain.Generators.Items
 
             template.Magic.Bonus = 1;
             var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
-            return magicalArmorGenerator.Generate(template, true);
+            return magicalArmorGenerator.GenerateFrom(template, true);
         }
 
         private int GetEffectiveLevel(CharacterClass characterClass)
@@ -86,30 +87,44 @@ namespace CharacterGen.Domain.Generators.Items
 
             var item = generator.Generate(
                 () => GenerateArmor(power, proficientShields),
-                $"{power} shield from [{string.Join(",", proficientShields)}]",
                 s => ArmorIsValid(s, characterClass, race, true),
-                () => GenerateDefaultArmor(power, proficientShields, race));
+                () => GenerateDefaultArmor(power, proficientShields, race),
+                s => ArmorInvalidMessage(s, characterClass, race, true),
+                $"{power} shield from [{string.Join(",", proficientShields)}]");
 
             return item as Armor;
         }
 
         private bool ArmorIsValid(Item item, CharacterClass characterClass, Race race, bool isShield = false)
         {
+            var invalidMessage = ArmorInvalidMessage(item, characterClass, race, isShield);
+
+            return string.IsNullOrWhiteSpace(invalidMessage);
+        }
+
+        private string ArmorInvalidMessage(Item item, CharacterClass characterClass, Race race, bool isShield = false)
+        {
             if (item == null)
-                return true;
+                return string.Empty;
 
             if (!(item is Armor))
-                return false;
+                return $"Invalid: {item.Name} is not armor";
 
             var armor = item as Armor;
 
             if (armor.Attributes.Contains(AttributeConstants.Shield) != isShield)
-                return false;
+            {
+                var negative = isShield ? string.Empty : "not ";
+                return $"Invalid: {armor.Name} needs to {negative}be a shield";
+            }
 
             if (armor.Attributes.Contains(AttributeConstants.Metal) && characterClass.Name == CharacterClassConstants.Druid)
-                return false;
+                return $"Invalid: {armor.Name} is metal, and Druids cannot wear or use metal armor";
 
-            return armor.Size == race.Size;
+            if (armor.Size != race.Size)
+                return $"Invalid: {armor.Name} is {armor.Size}, but {race.Size} is needed";
+
+            return string.Empty;
         }
 
         private Item GenerateArmor(string power, IEnumerable<string> proficientArmors)
@@ -121,7 +136,7 @@ namespace CharacterGen.Domain.Generators.Items
             }
 
             var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
-            return magicalArmorGenerator.GenerateFromSubset(power, proficientArmors);
+            return magicalArmorGenerator.GenerateFrom(power, proficientArmors);
         }
 
         private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType)

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Rogue</name>
-        <item>10</item>
-    </object>
-    <object>
+        <entry>10</entry>
+    </collection>
+    <collection>
         <name>Monk</name>
-        <item>9</item>
-    </object>
-</items>
+        <entry>9</entry>
+    </collection>
+</collections>

@@ -4,6 +4,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class ArmorClassGenerator : IArmorClassGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
 
         public ArmorClassGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {

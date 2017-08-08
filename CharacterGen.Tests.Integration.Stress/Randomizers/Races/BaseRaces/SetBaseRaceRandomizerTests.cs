@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         [Test]
         public void Stress()
         {
-            Stress(AssertBaseRace);
+            stressor.Stress(AssertBaseRace);
         }
 
         protected void AssertBaseRace()
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         public void StressNPCSetBaseRace()
         {
             ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
-            Stress(AssertBaseRace);
+            stressor.Stress(AssertBaseRace);
         }
     }
 }

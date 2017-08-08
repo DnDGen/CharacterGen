@@ -1,42 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Lawful Evil</name>
-        <item>Blue</item>
-        <item>Green</item>
-    </object>
-    <object>
+        <entry>Blue</entry>
+        <entry>Green</entry>
+    </collection>
+    <collection>
         <name>Neutral Evil</name>
-        <item>Black</item>
-        <item>Blue</item>
-        <item>Red</item>
-        <item>Green</item>
-        <item>White</item>
-    </object>
-    <object>
+        <entry>Black</entry>
+        <entry>Blue</entry>
+        <entry>Red</entry>
+        <entry>Green</entry>
+        <entry>White</entry>
+    </collection>
+    <collection>
         <name>Chaotic Evil</name>
-        <item>Black</item>
-        <item>Red</item>
-        <item>White</item>
-    </object>
-    <object>
+        <entry>Black</entry>
+        <entry>Red</entry>
+        <entry>White</entry>
+    </collection>
+    <collection>
         <name>Lawful Good</name>
-        <item>Bronze</item>
-        <item>Gold</item>
-        <item>Silver</item>
-    </object>
-    <object>
+        <entry>Bronze</entry>
+        <entry>Gold</entry>
+        <entry>Silver</entry>
+    </collection>
+    <collection>
         <name>Neutral Good</name>
-        <item>Brass</item>
-        <item>Bronze</item>
-        <item>Copper</item>
-        <item>Gold</item>
-        <item>Silver</item>
-    </object>
-    <object>
+        <entry>Brass</entry>
+        <entry>Bronze</entry>
+        <entry>Copper</entry>
+        <entry>Gold</entry>
+        <entry>Silver</entry>
+    </collection>
+    <collection>
         <name>Chaotic Good</name>
-        <item>Brass</item>
-        <item>Copper</item>
-    </object>
-</items>
+        <entry>Brass</entry>
+        <entry>Copper</entry>
+    </collection>
+</collections>

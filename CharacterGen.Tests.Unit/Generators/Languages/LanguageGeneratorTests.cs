@@ -4,6 +4,7 @@ using CharacterGen.Domain.Generators.Languages;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

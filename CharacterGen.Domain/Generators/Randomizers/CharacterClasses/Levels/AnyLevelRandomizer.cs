@@ -7,7 +7,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.Levels
 {
     internal class AnyLevelRandomizer : ILevelRandomizer
     {
-        private Dice dice;
+        private readonly Dice dice;
 
         public AnyLevelRandomizer(Dice dice)
         {

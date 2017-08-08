@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Diplomacy</name>
-        <item>0</item>
-    </object>
-  <object>
+        <entry>0</entry>
+    </collection>
+  <collection>
     <name>Sense Motive</name>
-    <item>0</item>
-  </object>
-</items>
+    <entry>0</entry>
+  </collection>
+</collections>

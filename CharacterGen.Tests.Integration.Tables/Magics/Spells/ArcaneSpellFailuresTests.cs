@@ -93,9 +93,9 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells
         [TestCase(ArmorConstants.StuddedLeatherArmor, 15)]
         [TestCase(ArmorConstants.TowerShield, 50)]
         [TestCase(ArmorConstants.WingedShield, 15)]
-        public override void Adjustment(string name, int adjustment)
+        public void ArcaneSpellFailurePercentage(string name, int percentage)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(name, percentage);
         }
     }
 }

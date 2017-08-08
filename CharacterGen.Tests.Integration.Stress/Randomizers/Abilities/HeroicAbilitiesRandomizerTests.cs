@@ -15,7 +15,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void Stress()
         {
-            Stress(AssertAbilities);
+            stressor.Stress(AssertAbilities);
         }
 
         protected void AssertAbilities()
@@ -44,7 +44,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void NonDefaultAbilitiesOccur()
         {
-            var stats = GenerateOrFail(HeroicAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 16));
+            var stats = stressor.GenerateOrFail(HeroicAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 16));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 16);
             Assert.That(allAbilitiesAreDefault, Is.False);
         }

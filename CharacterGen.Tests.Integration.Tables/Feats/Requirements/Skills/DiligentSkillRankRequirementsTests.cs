@@ -22,9 +22,9 @@ namespace CharacterGen.Tests.Integration.Tables.Feats.Requirements.Skills
 
         [TestCase(SkillConstants.Appraise, 0)]
         [TestCase(SkillConstants.DecipherScript, 0)]
-        public override void Adjustment(string name, int adjustment)
+        public void SkillRankRequirement(string skill, int ranks)
         {
-            base.Adjustment(name, adjustment);
+            base.Adjustment(skill, ranks);
         }
     }
 }

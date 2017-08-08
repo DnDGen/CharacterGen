@@ -1,10 +1,10 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

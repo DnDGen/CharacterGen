@@ -8,6 +8,7 @@ using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System;

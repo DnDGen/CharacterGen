@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 

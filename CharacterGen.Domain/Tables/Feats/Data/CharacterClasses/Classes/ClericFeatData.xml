@@ -1,82 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Simple Weapon Proficiency</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>1</item>
-        <item>All</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Simple Weapon Proficiency</entry>
+        <entry>1</entry>
+        <entry>All</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Light Armor Proficiency</name>
-        <item>Light Armor Proficiency</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Light Armor Proficiency</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Medium Armor Proficiency</name>
-        <item>Medium Armor Proficiency</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Medium Armor Proficiency</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Heavy Armor Proficiency</name>
-        <item>Heavy Armor Proficiency</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Heavy Armor Proficiency</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Shield Proficiency</name>
-        <item>Shield Proficiency</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Shield Proficiency</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Turn</name>
-        <item>Turn</item>
-        <item>1</item>
-        <item>Undead</item>
-        <item>0</item>
-        <item>3</item>
-        <item>Day</item>
-        <item>0</item>
-        <item>Charisma</item>
-      <item></item>
-      <item>True</item>
-    </object>
-</items>
+        <entry>Turn</entry>
+        <entry>1</entry>
+        <entry>Undead</entry>
+        <entry>0</entry>
+        <entry>3</entry>
+        <entry>Day</entry>
+        <entry>0</entry>
+        <entry>Charisma</entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+</collections>

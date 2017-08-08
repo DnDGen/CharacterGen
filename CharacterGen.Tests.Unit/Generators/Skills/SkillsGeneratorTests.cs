@@ -2,11 +2,12 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Skills;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -21,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
         private ISkillsGenerator skillsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IPercentileSelector> mockPercentileSelector;
         private CharacterClass characterClass;
         private Dictionary<string, Ability> abilities;
         private List<string> classSkills;
@@ -41,9 +42,8 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockSkillSelector = new Mock<ISkillSelector>();
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
-            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object,
-                mockBooleanPercentileSelector.Object);
+            mockPercentileSelector = new Mock<IPercentileSelector>();
+            skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();
             abilities = new Dictionary<string, Ability>();
             classSkills = new List<string>();
@@ -72,7 +72,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(() => monsterHitDice);
 
             var count = 0;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -743,7 +743,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             characterClass.Level = 2;
             AddClassSkills(2);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -767,7 +767,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("class skill/focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
             mockSkillSelector.Setup(s => s.SelectFor("class skill/other focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -794,8 +794,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             characterClass.Level = 2;
             AddCrossClassSkills(2);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -817,7 +816,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             crossClassSkills.Add($"cross-class skill/other focus");
             crossClassSkills.Add($"other cross-class skill");
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
             mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/other focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
@@ -844,8 +843,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
         public void AssignPointsToClassSkills()
         {
             classSkillPoints = 1;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
@@ -863,8 +861,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
         public void AssignPointsToCrossClassSkills()
         {
             classSkillPoints = 1;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
-                .Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
@@ -884,7 +881,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 1;
             characterClass.Level = 2;
 
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true).Returns(false).Returns(false).Returns(true).Returns(false);
 
             classSkills.Add("class skill");
@@ -905,7 +902,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 2;
             AddClassSkills(3);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
@@ -928,7 +925,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 2;
             AddCrossClassSkills(3);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
@@ -1196,7 +1193,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add("skill 2");
             classSkills.Add("synergy 2");
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1233,7 +1230,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
 
             mockSkillSelector.Setup(s => s.SelectFor("synergy 1/focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
             mockSkillSelector.Setup(s => s.SelectFor("synergy 1/other focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1428,7 +1425,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add(monsterClassSkills[0]);
             crossClassSkills.Add(monsterClassSkills[1]);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
@@ -1527,7 +1524,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add(monsterClassSkills[0]);
             crossClassSkills.Add(monsterClassSkills[1]);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
@@ -1910,7 +1907,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1935,7 +1932,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
             var constitutionSelection = new SkillSelection { BaseStatName = AbilityConstants.Constitution, SkillName = "skill 4" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 

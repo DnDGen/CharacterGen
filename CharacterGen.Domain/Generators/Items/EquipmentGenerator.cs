@@ -1,9 +1,9 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +14,17 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal class EquipmentGenerator : IEquipmentGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IArmorGenerator armorGenerator;
-        private IWeaponGenerator weaponGenerator;
-        private ITreasureGenerator treasureGenerator;
-        private Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IArmorGenerator armorGenerator;
+        private readonly IWeaponGenerator weaponGenerator;
+        private readonly ITreasureGenerator treasureGenerator;
 
-        public EquipmentGenerator(ICollectionsSelector collectionsSelector, IWeaponGenerator weaponGenerator, ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator, Generator generator)
+        public EquipmentGenerator(ICollectionsSelector collectionsSelector, IWeaponGenerator weaponGenerator, ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator)
         {
             this.collectionsSelector = collectionsSelector;
             this.armorGenerator = armorGenerator;
             this.weaponGenerator = weaponGenerator;
             this.treasureGenerator = treasureGenerator;
-            this.generator = generator;
         }
 
         public Equipment GenerateWith(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)

@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Adulthood</name>
-    <item>60</item>
-  </object>
-  <object>
+    <entry>60</entry>
+  </collection>
+  <collection>
     <name>Middle Age</name>
-    <item>180</item>
-  </object>
-  <object>
+    <entry>180</entry>
+  </collection>
+  <collection>
     <name>Old</name>
-    <item>390</item>
-  </object>
-  <object>
+    <entry>390</entry>
+  </collection>
+  <collection>
     <name>Venerable</name>
-    <item>450</item>
-  </object>
-</items>
+    <entry>450</entry>
+  </collection>
+</collections>

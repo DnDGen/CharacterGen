@@ -1,8 +1,8 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +12,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
     {
         public string SetClassName { get; set; }
 
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public SetClassNameRandomizer(ICollectionsSelector collectionsSelector)
         {

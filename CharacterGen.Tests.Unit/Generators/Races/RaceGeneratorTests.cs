@@ -2,10 +2,11 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Races;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using RollGen;
@@ -20,7 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         private const string BaseRace = "base race";
         private const string Metarace = "metarace";
 
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<Dice> mockDice;
@@ -49,10 +50,10 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockPercentileSelector = new Mock<IPercentileSelector>();
             mockDice = new Mock<Dice>();
             var generator = new ConfigurableIterationGenerator(5);
-            raceGenerator = new RaceGenerator(mockBooleanPercentileSelector.Object,
+            raceGenerator = new RaceGenerator(mockPercentileSelector.Object,
                 mockCollectionsSelector.Object,
                 mockAdjustmentsSelector.Object,
                 mockDice.Object,
@@ -92,7 +93,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
 
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(BaseRace);
             mockMetaraceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(Metarace);
-            mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings)).Returns(baseRacesWithWings);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings)).Returns(metaracesWithWings);
@@ -166,7 +167,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, baseRace)).Returns(new[] { "92d66" });
             SetUpRoll("92d66", 424);
 
-            mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, It.IsAny<string[]>())).Returns(() => baseRaceSize);
+            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, It.IsAny<string[]>())).Returns(() => baseRaceSize);
 
             if (landSpeeds.Any())
                 landSpeeds[baseRace] = landSpeeds.Last().Value + 1;
@@ -203,7 +204,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void ReturnMale()
         {
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.IsMale, Is.True);
@@ -212,7 +213,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void ReturnFemale()
         {
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.IsMale, Is.False);
@@ -223,7 +224,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         {
             characterClass.Name = CharacterClassConstants.Wizard;
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
-            mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Wizard, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Wizard, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
@@ -237,7 +238,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         {
             characterClass.Name = CharacterClassConstants.Cleric;
             mockBaseRaceRandomizer.Setup(r => r.Randomize(alignment, characterClass)).Returns(RaceConstants.BaseRaces.Drow);
-            mockCollectionsSelector.Setup(s => s.FindGroupOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Cleric, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Cleric, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
@@ -501,7 +502,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetMaleHeight(int roll, string description)
         {
             SetUpRoll("10d4", roll, 1, 3);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Height.Value, Is.EqualTo(209 + roll));
@@ -513,7 +514,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomMaleHeight()
         {
             SetUpRoll("10d4", 1, 1, 1);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Height.Value, Is.EqualTo(210));
@@ -527,7 +528,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetFemaleHeight(int roll, string description)
         {
             SetUpRoll("10d4", roll, 1, 3);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Height.Value, Is.EqualTo(902 + roll));
@@ -539,7 +540,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomFemaleHeight()
         {
             SetUpRoll("10d4", 1, 1, 1);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Height.Value, Is.EqualTo(903));
@@ -553,7 +554,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetMaleWeight(int roll, string description)
         {
             SetUpRoll("92d66", roll, 1, 3);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Weight.Value, Is.EqualTo(22 + 104 * roll));
@@ -565,7 +566,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomMaleWeight()
         {
             SetUpRoll("92d66", 1, 1, 1);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Weight.Value, Is.EqualTo(126));
@@ -579,7 +580,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetFemaleWeight(int roll, string description)
         {
             SetUpRoll("92d66", roll, 1, 3);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Weight.Value, Is.EqualTo(2 + 104 * roll));
@@ -591,7 +592,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomFemaleWeight()
         {
             SetUpRoll("92d66", 1, 1, 1);
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object);
             Assert.That(race.Weight.Value, Is.EqualTo(106));

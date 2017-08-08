@@ -31,7 +31,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressLeadership()
         {
-            Stress(AssertLeadership);
+            stressor.Stress(AssertLeadership);
         }
 
         protected void AssertLeadership()
@@ -56,7 +56,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void FollowersHappen()
         {
-            var leadership = GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level1 > 0);
+            var leadership = stressor.GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level1 > 0);
 
             Assert.That(leadership, Is.Not.Null);
             Assert.That(leadership.FollowerQuantities.Level1, Is.GreaterThan(leadership.FollowerQuantities.Level2));
@@ -76,15 +76,21 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
 
         private Leadership GenerateLeadership()
         {
-            var leader = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, VeryHighLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer);
+            //INFO: Generating a high-level leader takes too long.  Instead, we wil generate the individual items.  We will ignore animals for now
+            //var leader = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, VeryHighLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer);
 
-            return LeadershipGenerator.GenerateLeadership(leader.Class.Level, leader.Abilities[AbilityConstants.Charisma].Bonus, leader.Magic.Animal);
+            //return LeadershipGenerator.GenerateLeadership(leader.Class.Level, leader.Abilities[AbilityConstants.Charisma].Bonus, leader.Magic.Animal);
+
+            var level = VeryHighLevelRandomizer.Randomize();
+            var abilities = HeroicAbilitiesRandomizer.Randomize();
+
+            return LeadershipGenerator.GenerateLeadership(level, abilities[AbilityConstants.Charisma].Bonus, string.Empty);
         }
 
         [Test]
         public void AllFollowersHappen()
         {
-            var leadership = GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level6 > 0);
+            var leadership = stressor.GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level6 > 0);
 
             Assert.That(leadership, Is.Not.Null);
             Assert.That(leadership.FollowerQuantities.Level1, Is.GreaterThan(leadership.FollowerQuantities.Level2));
@@ -105,7 +111,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressCohort()
         {
-            Stress(AssertCohort);
+            stressor.Stress(AssertCohort);
         }
 
         public void AssertCohort()
@@ -124,7 +130,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressNPCCohort()
         {
-            Stress(GeneratAndAssertNPCCohort);
+            stressor.Stress(GeneratAndAssertNPCCohort);
         }
 
         public void GeneratAndAssertNPCCohort()
@@ -142,7 +148,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressFollower()
         {
-            Stress(GenerateAndAssertFollower);
+            stressor.Stress(GenerateAndAssertFollower);
         }
 
         public void GenerateAndAssertFollower()
@@ -160,7 +166,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         [Test]
         public void StressNPCFollower()
         {
-            Stress(GenerateAndAssertNPCFollower);
+            stressor.Stress(GenerateAndAssertNPCFollower);
         }
 
         public void GenerateAndAssertNPCFollower()

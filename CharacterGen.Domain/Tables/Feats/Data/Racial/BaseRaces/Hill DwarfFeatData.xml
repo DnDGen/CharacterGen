@@ -1,158 +1,158 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Skill BonusAppraise</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Appraise (Stone or metal items)</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Appraise (Stone or metal items)</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Attack BonusGoblin</name>
-        <item>Attack Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Goblinoids</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Attack Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>1</entry>
+        <entry>Goblinoids</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Attack BonusOrc</name>
-        <item>Attack Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Orcs</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Attack Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>1</entry>
+        <entry>Orcs</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Save BonusSpell</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Spells and spell-like effects</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Save Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Spells and spell-like effects</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Save BonusPoison</name>
-        <item>Save Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Poison</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Save Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Poison</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Dodge Bonus</name>
-        <item>Dodge Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>4</item>
-        <item>Giants</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Dodge Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>4</entry>
+        <entry>Giants</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Stability</name>
-        <item>Stability</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Stability</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Weapon FamiliarityDwarven urgrosh</name>
-        <item>Weapon Familiarity</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Dwarven urgrosh</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Weapon Familiarity</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry>Dwarven urgrosh</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Weapon FamiliarityDwarven waraxe</name>
-        <item>Weapon Familiarity</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Dwarven waraxe</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Weapon Familiarity</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry>Dwarven waraxe</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Stonecunning</name>
-        <item>Stonecunning</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-    <object>
+        <entry>Stonecunning</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+    <collection>
         <name>Darkvision</name>
-        <item>Darkvision</item>
-        <item></item>
-        <item>0</item>
-        <item>60</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-      <item></item>
-    </object>
-</items>
+        <entry>Darkvision</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>60</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+      <entry></entry>
+    </collection>
+</collections>

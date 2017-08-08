@@ -1,14 +1,15 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class SpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public SpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)

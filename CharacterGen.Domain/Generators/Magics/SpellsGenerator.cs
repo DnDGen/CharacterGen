@@ -1,9 +1,10 @@
 ﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,15 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal class SpellsGenerator : ISpellsGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
-        private IBooleanPercentileSelector booleanPercentileSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IPercentileSelector percentileSelector;
 
-        public SpellsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IBooleanPercentileSelector booleanPercentileSelector)
+        public SpellsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IPercentileSelector percentileSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
-            this.booleanPercentileSelector = booleanPercentileSelector;
+            this.percentileSelector = percentileSelector;
         }
 
         public IEnumerable<SpellQuantity> GeneratePerDay(CharacterClass characterClass, Dictionary<string, Ability> abilities)
@@ -167,7 +168,7 @@ namespace CharacterGen.Domain.Generators.Magics
                 spellQuantity.HasDomainSpell = characterClass.SpecialistFields.Any() && spellQuantity.Level > 0;
                 spellQuantity.Quantity = kvp.Value;
 
-                while (booleanPercentileSelector.SelectFrom(knowsMoreSpellsTableName))
+                while (percentileSelector.SelectFrom<bool>(knowsMoreSpellsTableName))
                     spellQuantity.Quantity++;
 
                 spellQuantities.Add(spellQuantity);

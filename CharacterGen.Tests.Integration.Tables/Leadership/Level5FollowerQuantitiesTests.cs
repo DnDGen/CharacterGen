@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Domain.Tables;
 using NUnit.Framework;
-using System;
 using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Leadership
@@ -48,7 +47,7 @@ namespace CharacterGen.Tests.Integration.Tables.Leadership
         [TestCase(23, 2)]
         [TestCase(24, 2)]
         [TestCase(25, 2)]
-        public void Adjustment(Int32 leadershipScore, Int32 cohortLevel)
+        public void Level5FollowerQuantity(int leadershipScore, int cohortLevel)
         {
             base.Adjustment(leadershipScore.ToString(), cohortLevel);
         }

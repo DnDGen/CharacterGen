@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Charisma</name>
-    <item>-4</item>
-  </object>
-  <object>
+    <entry>-4</entry>
+  </collection>
+  <collection>
     <name>Constitution</name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Dexterity</name>
-    <item>2</item>
-  </object>
-  <object>
+    <entry>2</entry>
+  </collection>
+  <collection>
     <name>Intelligence</name>
-    <item>0</item>
-  </object>
-  <object>
+    <entry>0</entry>
+  </collection>
+  <collection>
     <name>Strength</name>
-    <item>-2</item>
-  </object>
-  <object>
+    <entry>-2</entry>
+  </collection>
+  <collection>
     <name>Wisdom</name>
-    <item>2</item>
-  </object>
-</items>
+    <entry>2</entry>
+  </collection>
+</collections>

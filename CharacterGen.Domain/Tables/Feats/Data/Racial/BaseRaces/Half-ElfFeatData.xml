@@ -1,130 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Skill BonusListen</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>1</item>
-        <item>Listen</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>1</entry>
+        <entry>Listen</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Skill BonusSearch</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>Search</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Skill Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>1</entry>
+      <entry>Search</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Skill BonusSpot</name>
-      <item>Skill Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>1</item>
-      <item>Spot</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Skill Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>1</entry>
+      <entry>Spot</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Skill BonusDiplomacy</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Diplomacy</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Diplomacy</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Skill BonusGather Information</name>
-        <item>Skill Bonus</item>
-        <item></item>
-        <item>0</item>
-        <item>2</item>
-        <item>Gather Information</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Skill Bonus</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>2</entry>
+        <entry>Gather Information</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Immune to Effect</name>
-      <item>Immune to Effect</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item>Sleep</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Immune to Effect</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>0</entry>
+      <entry>Sleep</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Save Bonus</name>
-      <item>Save Bonus</item>
-      <item></item>
-      <item>0</item>
-      <item>2</item>
-      <item>Enchantment</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Save Bonus</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>2</entry>
+      <entry>Enchantment</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Low-Light Vision</name>
-      <item>Low-Light Vision</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Low-Light Vision</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Elven Blood</name>
-      <item>Elven Blood</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-</items>
+      <entry>Elven Blood</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+</collections>

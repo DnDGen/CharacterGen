@@ -1,336 +1,336 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name></name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Aasimar</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Aquatic Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Azer</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Blue Slaad</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Bugbear</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Centaur</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Cloud Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Death Slaad</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Deep Halfling</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Deep Dwarf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Derro</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Doppelganger</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Drow</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Duergar Dwarf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Fire Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Forest Gnome</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Frost Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Gargoyle</name>
-    <item>Average Maneuverability</item>
-  </object>
-  <object>
+    <entry>Average Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Ghost</name>
-    <item>Perfect Maneuverability</item>
-  </object>
-  <object>
+    <entry>Perfect Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Githyanki</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Githzerai</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Gnoll</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Goblin</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Gray Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Gray Slaad</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Green Slaad</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Grimlock</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Half-Celestial</name>
-    <item>Good Maneuverability</item>
-  </object>
-  <object>
+    <entry>Good Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Half-Dragon</name>
-    <item>Average Maneuverability</item>
-  </object>
-  <object>
+    <entry>Average Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Half-Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Half-Fiend</name>
-    <item>Average Maneuverability</item>
-  </object>
-  <object>
+    <entry>Average Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Half-Orc</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Harpy</name>
-    <item>Average Maneuverability</item>
-  </object>
-  <object>
+    <entry>Average Maneuverability</entry>
+  </collection>
+  <collection>
     <name>High Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Hill Dwarf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Hill Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Hobgoblin</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Hound Archon</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Human</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Janni</name>
-    <item>Perfect Maneuverability</item>
-  </object>
-  <object>
+    <entry>Perfect Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Kapoacinth</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Kobold</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Kuo-toa</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Lich</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Lightfoot Halfling</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Lizardfolk</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Locathah</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Merfolk</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Merrow</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Mind Flayer</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Minotaur</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Mountain Dwarf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Mummy</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Ogre Mage</name>
-    <item>Good Maneuverability</item>
-  </object>
-  <object>
+    <entry>Good Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Ogre</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Orc</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Pixie</name>
-    <item>Good Maneuverability</item>
-  </object>
-  <object>
+    <entry>Good Maneuverability</entry>
+  </collection>
+  <collection>
     <name>Rakshasa</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Red Slaad</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Rock Gnome</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Sahuagin</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Satyr</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Scorpionfolk</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Scrag</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Stone Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Storm Giant</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Svirfneblin</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Tallfellow Halfling</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Tiefling</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Troglodyte</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Troll</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Vampire</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Werebear</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Wereboar</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Wererat</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Weretiger</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Werewolf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Wild Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Wood Elf</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Yuan-ti Abomination</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Yuan-ti Halfblood</name>
-    <item></item>
-  </object>
-  <object>
+    <entry></entry>
+  </collection>
+  <collection>
     <name>Yuan-ti Pureblood</name>
-    <item></item>
-  </object>
-</items>
+    <entry></entry>
+  </collection>
+</collections>

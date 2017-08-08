@@ -8,6 +8,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

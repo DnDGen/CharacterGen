@@ -1,342 +1,342 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-  <object>
+<collections>
+  <collection>
     <name>Light Armor Proficiency</name>
-    <item>Light Armor Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Light Armor Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Martial Weapon Proficiency</name>
-    <item>Martial Weapon Proficiency</item>
-    <item>1</item>
-    <item>All</item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-    <object>
+    <entry>Martial Weapon Proficiency</entry>
+    <entry>1</entry>
+    <entry>All</entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+    <collection>
         <name>Simple Weapon Proficiency</name>
-        <item>Simple Weapon Proficiency</item>
-        <item>1</item>
-        <item>All</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-  <object>
+        <entry>Simple Weapon Proficiency</entry>
+        <entry>1</entry>
+        <entry>All</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+  <collection>
     <name>Shield Proficiency</name>
-    <item>Shield Proficiency</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-    <object>
+    <entry>Shield Proficiency</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+    <collection>
         <name>Favored Enemy1</name>
-        <item>Favored Enemy</item>
-        <item>1</item>
-        <item>Favored Enemies</item>
-        <item>2</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Favored Enemy</entry>
+        <entry>1</entry>
+        <entry>Favored Enemies</entry>
+        <entry>2</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Favored Enemy2</name>
-        <item>Favored Enemy</item>
-        <item>5</item>
-        <item>Favored Enemies</item>
-        <item>2</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Favored Enemy</entry>
+        <entry>5</entry>
+        <entry>Favored Enemies</entry>
+        <entry>2</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Favored Enemy3</name>
-        <item>Favored Enemy</item>
-        <item>10</item>
-        <item>Favored Enemies</item>
-        <item>2</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Favored Enemy</entry>
+        <entry>10</entry>
+        <entry>Favored Enemies</entry>
+        <entry>2</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Favored Enemy4</name>
-        <item>Favored Enemy</item>
-        <item>15</item>
-        <item>Favored Enemies</item>
-        <item>2</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Favored Enemy</entry>
+        <entry>15</entry>
+        <entry>Favored Enemies</entry>
+        <entry>2</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Favored Enemy5</name>
-        <item>Favored Enemy</item>
-        <item>20</item>
-        <item>Favored Enemies</item>
-        <item>2</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Favored Enemy</entry>
+        <entry>20</entry>
+        <entry>Favored Enemies</entry>
+        <entry>2</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Track</name>
-        <item>Track</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Track</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Wild Empathy</name>
-        <item>Wild Empathy</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Wild Empathy</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Combat Style</name>
-        <item>Combat Style</item>
-        <item>2</item>
-        <item>Combat Style</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Combat Style</entry>
+        <entry>2</entry>
+        <entry>Combat Style</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Endurance</name>
-        <item>Endurance</item>
-        <item>3</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Endurance</entry>
+        <entry>3</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Improved Combat Style</name>
-        <item>Improved Combat Style</item>
-        <item>6</item>
-        <item>Combat Style</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Improved Combat Style</entry>
+        <entry>6</entry>
+        <entry>Combat Style</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Woodland Stride</name>
-        <item>Woodland Stride</item>
-        <item>7</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Woodland Stride</entry>
+        <entry>7</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Swift Tracker</name>
-        <item>Swift Tracker</item>
-        <item>8</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Swift Tracker</entry>
+        <entry>8</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Combat Style Mastery</name>
-        <item>Combat Style Mastery</item>
-        <item>11</item>
-        <item>Combat Style</item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Combat Style Mastery</entry>
+        <entry>11</entry>
+        <entry>Combat Style</entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Camouflage</name>
-        <item>Camouflage</item>
-        <item>13</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Camouflage</entry>
+        <entry>13</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Hide in Plain Sight</name>
-        <item>Hide in Plain Sight</item>
-        <item>17</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Hide in Plain Sight</entry>
+        <entry>17</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Rapid ShotRanger</name>
-        <item>Rapid Shot</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Rapid Shot</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Evasion</name>
-        <item>Evasion</item>
-        <item>9</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-    <object>
+        <entry>Evasion</entry>
+        <entry>9</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+    <collection>
         <name>Two-Weapon FightingRanger</name>
-        <item>Two-Weapon Fighting</item>
-        <item>1</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item></item>
-      <item>True</item>
-    </object>
-  <object>
+        <entry>Two-Weapon Fighting</entry>
+        <entry>1</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry></entry>
+      <entry>True</entry>
+    </collection>
+  <collection>
     <name>ManyshotRanger</name>
-    <item>Manyshot</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-  <object>
+    <entry>Manyshot</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+  <collection>
     <name>Improved Two-Weapon FightingRanger</name>
-    <item>Improved Two-Weapon Fighting</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Improved Two-Weapon Fighting</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Improved Precise ShotRanger</name>
-    <item>Improved Precise Shot</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-    <item>True</item>
-  </object>
-  <object>
+    <entry>Improved Precise Shot</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+    <entry>True</entry>
+  </collection>
+  <collection>
     <name>Greater Two-Weapon FightingRanger</name>
-    <item>Greater Two-Weapon Fighting</item>
-    <item>1</item>
-    <item></item>
-    <item>0</item>
-    <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    <item></item>
-      <item>True</item>
-  </object>
-</items>
+    <entry>Greater Two-Weapon Fighting</entry>
+    <entry>1</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    <entry></entry>
+      <entry>True</entry>
+  </collection>
+</collections>

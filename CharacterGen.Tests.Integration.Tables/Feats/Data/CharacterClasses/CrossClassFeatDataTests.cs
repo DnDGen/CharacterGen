@@ -1,14 +1,22 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Mappers.Collections;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Mappers.Collections;
 using Ninject;
 using NUnit.Framework;
 
 namespace CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClasses
 {
     [TestFixture]
-    public class CrossClassFeatDataTests : IntegrationTests
+    public class CrossClassFeatDataTests : TableTests
     {
+        protected override string tableName
+        {
+            get
+            {
+                return TableNameConstants.Set.Collection.ClassNameGroups;
+            }
+        }
+
         [Inject]
         internal CollectionsMapper CollectionsMapper { get; set; }
 

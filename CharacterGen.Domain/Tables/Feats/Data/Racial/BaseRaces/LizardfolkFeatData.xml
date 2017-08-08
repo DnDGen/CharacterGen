@@ -1,88 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Simple Weapon Proficiency</name>
-        <item>Simple Weapon Proficiency</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>All</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Simple Weapon Proficiency</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry>All</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Shield Proficiency</name>
-      <item>Shield Proficiency</item>
-      <item></item>
-      <item>0</item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Shield Proficiency</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
       <name>Natural Armor</name>
-      <item>Natural Armor</item>
-      <item></item>
-      <item>0</item>
-      <item>5</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+      <entry>Natural Armor</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry>5</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Hold Breath</name>
-        <item>Hold Breath</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item></item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Hold Breath</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Natural WeaponClaw</name>
-        <item>Natural Weapon</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Claw (x2)</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-      <item></item>
-      <item>0</item>
-      <item></item>
-    </object>
-    <object>
+        <entry>Natural Weapon</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry>Claw (x2)</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+      <entry>0</entry>
+      <entry></entry>
+    </collection>
+    <collection>
         <name>Natural WeaponBite</name>
-        <item>Natural Weapon</item>
-        <item></item>
-        <item>0</item>
-        <item>0</item>
-        <item>Bite</item>
-        <item>0</item>
-        <item></item>
-      <item>0</item>
-    <item></item>
-    <item>0</item>
-    <item></item>
-    </object>
-</items>
+        <entry>Natural Weapon</entry>
+        <entry></entry>
+        <entry>0</entry>
+        <entry>0</entry>
+        <entry>Bite</entry>
+        <entry>0</entry>
+        <entry></entry>
+      <entry>0</entry>
+    <entry></entry>
+    <entry>0</entry>
+    <entry></entry>
+    </collection>
+</collections>

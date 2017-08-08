@@ -88,7 +88,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         [Test]
         public void StressAnyBaseRace()
         {
-            Stress(AssertBaseRace);
+            stressor.Stress(AssertBaseRace);
         }
     }
 }

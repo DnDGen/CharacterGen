@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Fighter</name>
-        <item>4</item>
-    </object>
-</items>
+        <entry>4</entry>
+    </collection>
+</collections>

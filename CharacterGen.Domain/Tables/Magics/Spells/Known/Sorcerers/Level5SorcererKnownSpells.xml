@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>0</name>
-      <item>6</item>
-    </object>
-    <object>
+      <entry>6</entry>
+    </collection>
+    <collection>
         <name>1</name>
-      <item>4</item>
-    </object>
-  <object>
+      <entry>4</entry>
+    </collection>
+  <collection>
     <name>2</name>
-    <item>2</item>
-  </object>
-</items>
+    <entry>2</entry>
+  </collection>
+</collections>

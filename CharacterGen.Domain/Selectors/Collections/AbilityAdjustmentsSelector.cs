@@ -1,13 +1,14 @@
 ﻿using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 
 namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class AbilityAdjustmentsSelector : IAbilityAdjustmentsSelector
     {
-        private IAdjustmentsSelector innerSelector;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector innerSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public AbilityAdjustmentsSelector(IAdjustmentsSelector innerSelector, ICollectionsSelector collectionsSelector)
         {

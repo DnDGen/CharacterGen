@@ -1,4 +1,4 @@
-﻿using CharacterGen.Domain.Mappers.Collections;
+﻿using DnDGen.Core.Mappers.Collections;
 using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;

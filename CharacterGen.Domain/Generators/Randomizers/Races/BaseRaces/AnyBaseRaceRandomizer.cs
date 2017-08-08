@@ -1,5 +1,7 @@
 ﻿using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {

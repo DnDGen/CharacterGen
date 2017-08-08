@@ -1,79 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<percentile>
-  <object>
+<percentiles>
+  <percentile>
     <lower>1</lower>
     <content>Hill Dwarf</content>
     <upper>5</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>6</lower>
     <content>High Elf</content>
     <upper>20</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>21</lower>
     <content>Wild Elf</content>
     <upper>21</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>22</lower>
     <content>Wood Elf</content>
     <upper>34</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>35</lower>
     <content>Hound Archon</content>
     <upper>36</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>37</lower>
     <content>Forest Gnome</content>
     <upper>41</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>42</lower>
     <content>Rock Gnome</content>
     <upper>42</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>43</lower>
     <content>Half-Elf</content>
     <upper>57</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>58</lower>
     <content>Lightfoot Halfling</content>
     <upper>58</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>59</lower>
     <content>Tallfellow Halfling</content>
     <upper>59</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>60</lower>
     <content>Half-Orc</content>
     <upper>64</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>65</lower>
     <content>Human</content>
     <upper>96</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>97</lower>
     <content>Storm Giant</content>
     <upper>97</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>98</lower>
     <content>Cloud Giant</content>
     <upper>98</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>99</lower>
     <content>Centaur</content>
     <upper>100</upper>
-  </object>
-</percentile>
+  </percentile>
+</percentiles>

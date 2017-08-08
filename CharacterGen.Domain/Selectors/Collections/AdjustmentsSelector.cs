@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDGen.Core.Selectors.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class AdjustmentsSelector : IAdjustmentsSelector
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public AdjustmentsSelector(ICollectionsSelector collectionsSelector)
         {

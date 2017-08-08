@@ -1,9 +1,10 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,9 +12,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {
-        private IPercentileSelector percentileResultSelector;
-        private Generator generator;
-        private ICollectionsSelector collectionsSelector;
+        private readonly IPercentileSelector percentileResultSelector;
+        private readonly Generator generator;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
         {
@@ -32,9 +33,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 
             return generator.Generate(
                 () => percentileResultSelector.SelectFrom(tableName),
-                $"class name from [{string.Join(",", possibleClassNames)}]",
                 c => possibleClassNames.Contains(c),
-                () => collectionsSelector.SelectRandomFrom(possibleClassNames));
+                () => collectionsSelector.SelectRandomFrom(possibleClassNames),
+                c => $"{c} is not from [{string.Join(",", possibleClassNames)}]",
+                $"class name from [{string.Join(",", possibleClassNames)}]");
         }
 
         protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);

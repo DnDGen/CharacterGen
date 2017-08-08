@@ -1,4 +1,5 @@
 ﻿using CharacterGen.Domain.Selectors.Collections;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System;

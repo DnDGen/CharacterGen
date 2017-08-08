@@ -21,7 +21,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         [Test]
         public void StressClassName()
         {
-            Stress(AssertClassName);
+            stressor.Stress(AssertClassName);
         }
 
         protected void AssertClassName()
@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         public void StressNPCSetClassName()
         {
             ClassNameRandomizer = AnyNPCClassNameRandomizer;
-            Stress(AssertClassName);
+            stressor.Stress(AssertClassName);
         }
     }
 }

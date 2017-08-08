@@ -1,8 +1,8 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

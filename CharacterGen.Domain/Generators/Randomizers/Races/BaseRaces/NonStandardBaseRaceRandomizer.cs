@@ -1,19 +1,25 @@
 ﻿using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System.Linq;
 
 namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
     internal class NonStandardBaseRaceRandomizer : BaseRaceRandomizerBase
     {
-        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionSelector)
-        { }
+        private readonly ICollectionsSelector collectionsSelector;
+
+        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionsSelector)
+        {
+            this.collectionsSelector = collectionsSelector;
+        }
 
         protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)
         {
-            var standardBaseRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
+            var standardBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
             return !standardBaseRaces.Contains(baseRace);
         }
     }

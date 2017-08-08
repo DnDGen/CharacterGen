@@ -7,6 +7,7 @@ using CharacterGen.Feats;
 using CharacterGen.Items;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,10 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal class MagicGenerator : IMagicGenerator
     {
-        private ISpellsGenerator spellsGenerator;
-        private IAnimalGenerator animalGenerator;
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
+        private readonly ISpellsGenerator spellsGenerator;
+        private readonly IAnimalGenerator animalGenerator;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
 
         public MagicGenerator(ISpellsGenerator spellsGenerator, IAnimalGenerator animalGenerator, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {

@@ -1,9 +1,10 @@
 ﻿using CharacterGen.Alignments;
-using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
+using CharacterGen.Domain.Tables;
 using CharacterGen.Verifiers.Exceptions;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -105,7 +106,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         {
             classNameRandomizer.GetAllPossibleResults(alignment);
 
-            var tableName = string.Format("{0}CharacterClasses", alignment.Goodness);
+            var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
             mockPercentileSelector.Verify(p => p.SelectAllFrom(tableName), Times.Once);
         }
 

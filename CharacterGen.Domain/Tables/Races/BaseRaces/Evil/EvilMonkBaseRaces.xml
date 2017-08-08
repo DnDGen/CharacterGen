@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<percentile>
-  <object>
+<percentiles>
+  <percentile>
     <lower>1</lower>
     <content>Half-Elf</content>
     <upper>10</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>11</lower>
     <content>Half-Orc</content>
     <upper>20</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>21</lower>
     <content>Human</content>
     <upper>92</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>93</lower>
     <content>Scorpionfolk</content>
     <upper>93</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>94</lower>
     <content>Hobgoblin</content>
     <upper>96</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>97</lower>
     <content>Tiefling</content>
     <upper>97</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>98</lower>
     <content>Ogre Mage</content>
     <upper>99</upper>
-  </object>
-  <object>
+  </percentile>
+  <percentile>
     <lower>100</lower>
     <content>Fire Giant</content>
     <upper>100</upper>
-  </object>
-</percentile>
+  </percentile>
+</percentiles>

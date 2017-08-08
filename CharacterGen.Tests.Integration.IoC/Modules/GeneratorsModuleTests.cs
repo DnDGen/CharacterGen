@@ -1,11 +1,9 @@
 ﻿using CharacterGen.Characters;
-using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
-using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Languages;
@@ -636,21 +634,9 @@ namespace CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void IterativeGeneratorIsNotASingleton()
-        {
-            AssertNotSingleton<Generator>();
-        }
-
-        [Test]
         public void LeadershipGeneratorIsNotASingleton()
         {
             AssertNotSingleton<ILeadershipGenerator>();
-        }
-
-        [Test]
-        public void JustInTimeFactoryIsNotASingleton()
-        {
-            AssertNotSingleton<JustInTimeFactory>();
         }
 
         [Test]

@@ -1,10 +1,10 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators.Factories;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using DnDGen.Core.Generators;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -227,9 +227,10 @@ namespace CharacterGen.Domain.Generators.Items
 
             var weapon = generator.Generate(
                 () => GenerateWeapon(power, allowedWeapons),
-                $"{power} weapon from [{string.Join(",", allowedWeapons)}]",
                 w => WeaponIsValid(w, race, furtherValidation),
-                () => GenerateDefaultWeapon(power, allowedWeapons, race));
+                () => GenerateDefaultWeapon(power, allowedWeapons, race),
+                w => WeaponInvalidMessage(w, race, furtherValidation),
+                $"{power} weapon from [{string.Join(",", allowedWeapons)}]");
 
             return weapon as Weapon;
         }
@@ -249,7 +250,7 @@ namespace CharacterGen.Domain.Generators.Items
 
             template.Magic.Bonus = 1;
             var magicalWeaponGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon);
-            return magicalWeaponGenerator.Generate(template, true);
+            return magicalWeaponGenerator.GenerateFrom(template, true);
         }
 
         private Item GenerateWeapon(string power, IEnumerable<string> proficientWeapons)
@@ -263,27 +264,37 @@ namespace CharacterGen.Domain.Generators.Items
             }
 
             var magicalWeaponGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon);
-            var magicalWeapon = magicalWeaponGenerator.GenerateFromSubset(power, proficientWeapons);
+            var magicalWeapon = magicalWeaponGenerator.GenerateFrom(power, proficientWeapons);
 
             return magicalWeapon;
         }
 
         private bool WeaponIsValid(Item item, Race race, Func<Weapon, bool> furtherValidation)
         {
+            var invalidMessage = WeaponInvalidMessage(item, race, furtherValidation);
+
+            return string.IsNullOrWhiteSpace(invalidMessage);
+        }
+
+        private string WeaponInvalidMessage(Item item, Race race, Func<Weapon, bool> furtherValidation)
+        {
             if (item == null)
-                return true;
+                return string.Empty;
 
             if (!(item is Weapon))
-                return false;
+                return $"Invalid: {item.Name} is not a weapon";
 
             var weapon = item as Weapon;
 
             if (weapon.Size != race.Size)
-                return false;
+                return $"Invalid: {weapon.Name} is {weapon.Size}, but {race.Size} is needed";
 
             var isValid = furtherValidation(weapon);
 
-            return isValid;
+            if (!isValid)
+                return $"Invalid: {weapon.Name} is not valid";
+
+            return string.Empty;
         }
 
         public Weapon GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)

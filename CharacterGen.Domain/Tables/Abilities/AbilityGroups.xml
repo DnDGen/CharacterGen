@@ -1,45 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<statPriorities>
-  <object>
+<collections>
+  <collection>
     <name>AdeptSpellcasters</name>
-    <item>Wisdom</item>
-  </object>
-  <object>
+    <entry>Wisdom</entry>
+  </collection>
+  <collection>
     <name>All</name>
-    <item>Charisma</item>
-    <item>Intelligence</item>
-    <item>Wisdom</item>
-    <item>Strength</item>
-    <item>Constitution</item>
-    <item>Dexterity</item>
-  </object>
-    <object>
-        <name>BardSpellcasters</name>
-        <item>Charisma</item>
-    </object>
-    <object>
-        <name>ClericSpellcasters</name>
-        <item>Wisdom</item>
-    </object>
-    <object>
-        <name>DruidSpellcasters</name>
-        <item>Wisdom</item>
-    </object>
-    <object>
-        <name>PaladinSpellcasters</name>
-      <item>Wisdom</item>
-    </object>
-    <object>
-        <name>RangerSpellcasters</name>
-        <item>Wisdom</item>
-    </object>
-    <object>
-        <name>SorcererSpellcasters</name>
-        <item>Charisma</item>
-    </object>
-    <object>
-        <name>WizardSpellcasters</name>
-        <item>Intelligence</item>
-    </object>
-</statPriorities>
+    <entry>Charisma</entry>
+    <entry>Intelligence</entry>
+    <entry>Wisdom</entry>
+    <entry>Strength</entry>
+    <entry>Constitution</entry>
+    <entry>Dexterity</entry>
+  </collection>
+  <collection>
+    <name>BardSpellcasters</name>
+    <entry>Charisma</entry>
+  </collection>
+  <collection>
+    <name>ClericSpellcasters</name>
+    <entry>Wisdom</entry>
+  </collection>
+  <collection>
+    <name>DruidSpellcasters</name>
+    <entry>Wisdom</entry>
+  </collection>
+  <collection>
+    <name>PaladinSpellcasters</name>
+    <entry>Wisdom</entry>
+  </collection>
+  <collection>
+    <name>RangerSpellcasters</name>
+    <entry>Wisdom</entry>
+  </collection>
+  <collection>
+    <name>SorcererSpellcasters</name>
+    <entry>Charisma</entry>
+  </collection>
+  <collection>
+    <name>WizardSpellcasters</name>
+    <entry>Intelligence</entry>
+  </collection>
+</collections>

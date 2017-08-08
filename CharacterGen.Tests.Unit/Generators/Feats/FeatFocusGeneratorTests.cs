@@ -1,11 +1,11 @@
 ﻿using CharacterGen.Abilities;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Feats;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

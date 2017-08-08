@@ -5,7 +5,6 @@ using CharacterGen.Domain.Generators.Alignments;
 using CharacterGen.Domain.Generators.Characters;
 using CharacterGen.Domain.Generators.Classes;
 using CharacterGen.Domain.Generators.Combats;
-using CharacterGen.Domain.Generators.Factories;
 using CharacterGen.Domain.Generators.Feats;
 using CharacterGen.Domain.Generators.Items;
 using CharacterGen.Domain.Generators.Languages;
@@ -43,8 +42,6 @@ namespace CharacterGen.Domain.IoC.Modules
             Bind<IWeaponGenerator>().To<WeaponGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().To<AnimalGenerator>();
-            Bind<Generator>().To<IterativeGenerator>();
-            Bind<JustInTimeFactory>().To<NinjectJustInTimeFactory>();
 
             BindDecoratedGenerators();
             BindRandomizers();

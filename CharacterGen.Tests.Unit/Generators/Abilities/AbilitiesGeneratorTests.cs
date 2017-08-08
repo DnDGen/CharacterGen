@@ -2,10 +2,11 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Abilities;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Abilities;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
     public class AbilitiesGeneratorTests
     {
         private Mock<IAbilityAdjustmentsSelector> mockAbilityAdjustmentsSelector;
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private IAbilitiesGenerator abilitiesGenerator;
@@ -35,10 +36,10 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void Setup()
         {
             mockAbilityAdjustmentsSelector = new Mock<IAbilityAdjustmentsSelector>();
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
+            mockPercentileSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            abilitiesGenerator = new AbilitiesGenerator(mockBooleanPercentileSelector.Object, mockAbilityAdjustmentsSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            abilitiesGenerator = new AbilitiesGenerator(mockPercentileSelector.Object, mockAbilityAdjustmentsSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             mockAbilitiesRandomizer = new Mock<IAbilitiesRandomizer>();
             mockSetAbilitiesRandomizer = new Mock<ISetAbilitiesRandomizer>();
@@ -258,7 +259,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IncreaseFirstPriorityAbility()
         {
             characterClass.Level = 4;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -271,7 +272,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IncreaseSecondPriorityAbility()
         {
             characterClass.Level = 4;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -286,7 +287,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             abilityPriorities.Add(AbilityConstants.Charisma);
             characterClass.Level = 4;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -302,7 +303,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             abilityPriorities.Remove(AbilityConstants.Strength);
             characterClass.Level = 4;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -317,7 +318,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             abilityPriorities.Clear();
             characterClass.Level = 4;
 
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(false);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.ElementAt(2));
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
@@ -335,7 +336,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             racialAdjustments[AbilityConstants.Dexterity] = 9266;
             racialAdjustments[AbilityConstants.Strength] = -10;
             racialAdjustments[AbilityConstants.Wisdom] = -7;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
             characterClass.Level = 4;
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
@@ -368,7 +369,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IncreaseAbility(int level, int increase)
         {
             characterClass.Level = level;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -379,7 +380,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void DetermineWhichAbilityToIncreasePerLevel()
         {
             characterClass.Level = 12;
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
                 .Returns(true).Returns(false).Returns(true);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
@@ -393,7 +394,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         public void IncreasesIgnorePrioritization()
         {
             characterClass.Level = 12;
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
                 .Returns(true).Returns(false).Returns(false);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
@@ -421,7 +422,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             randomizedAbilities[AbilityConstants.Strength].Value = 3;
 
             characterClass.Level = 4;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -453,7 +454,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
 
             undead.Add(race.Metarace);
             characterClass.Level = 4;
-            mockBooleanPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
@@ -507,7 +508,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             racialAdjustments[AbilityConstants.Wisdom] = -6;
 
             characterClass.Level = 20;
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
                 .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
 
             mockSetAbilitiesRandomizer.Object.AllowAdjustments = true;
@@ -540,7 +541,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             racialAdjustments[AbilityConstants.Wisdom] = -6;
 
             characterClass.Level = 20;
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
                 .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
 
             mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;
@@ -631,7 +632,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             racialAdjustments[AbilityConstants.Wisdom] = -6;
 
             characterClass.Level = 20;
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility))
                 .Returns(true).Returns(true).Returns(false).Returns(true).Returns(false);
 
             mockSetAbilitiesRandomizer.Object.AllowAdjustments = false;

@@ -1,95 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<items>
-    <object>
+<collections>
+    <collection>
         <name>Barbarian</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Bard</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Cleric</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Druid</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Fighter</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Monk</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Paladin</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Ranger</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Rogue</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Sorcerer</name>
-    </object>
-    <object>
+    </collection>
+    <collection>
         <name>Wizard</name>
-        <item>Abjuration</item>
-        <item>Conjuration</item>
-        <item>Enchantment</item>
-        <item>Evocation</item>
-        <item>Illusion</item>
-        <item>Necromancy</item>
-        <item>Transmutation</item>
-    </object>
-    <object>
+        <entry>Abjuration</entry>
+        <entry>Conjuration</entry>
+        <entry>Enchantment</entry>
+        <entry>Evocation</entry>
+        <entry>Illusion</entry>
+        <entry>Necromancy</entry>
+        <entry>Transmutation</entry>
+    </collection>
+    <collection>
         <name>Lawful Good</name>
-        <item>Chaos</item>
-        <item>Evil</item>
-    </object>
-    <object>
+        <entry>Chaos</entry>
+        <entry>Evil</entry>
+    </collection>
+    <collection>
         <name>Neutral Good</name>
-        <item>Law</item>
-        <item>Chaos</item>
-        <item>Evil</item>
-    </object>
-    <object>
+        <entry>Law</entry>
+        <entry>Chaos</entry>
+        <entry>Evil</entry>
+    </collection>
+    <collection>
         <name>Chaotic Good</name>
-        <item>Law</item>
-        <item>Evil</item>
-    </object>
-    <object>
+        <entry>Law</entry>
+        <entry>Evil</entry>
+    </collection>
+    <collection>
         <name>Lawful Neutral</name>
-        <item>Chaos</item>
-        <item>Evil</item>
-        <item>Good</item>
-    </object>
-    <object>
+        <entry>Chaos</entry>
+        <entry>Evil</entry>
+        <entry>Good</entry>
+    </collection>
+    <collection>
         <name>True Neutral</name>
-        <item>Chaos</item>
-        <item>Law</item>
-        <item>Evil</item>
-        <item>Good</item>
-    </object>
-    <object>
+        <entry>Chaos</entry>
+        <entry>Law</entry>
+        <entry>Evil</entry>
+        <entry>Good</entry>
+    </collection>
+    <collection>
         <name>Chaotic Neutral</name>
-        <item>Law</item>
-        <item>Evil</item>
-        <item>Good</item>
-    </object>
-    <object>
+        <entry>Law</entry>
+        <entry>Evil</entry>
+        <entry>Good</entry>
+    </collection>
+    <collection>
         <name>Lawful Evil</name>
-        <item>Chaos</item>
-        <item>Good</item>
-    </object>
-    <object>
+        <entry>Chaos</entry>
+        <entry>Good</entry>
+    </collection>
+    <collection>
         <name>Neutral Evil</name>
-        <item>Chaos</item>
-        <item>Law</item>
-        <item>Good</item>
-    </object>
-    <object>
+        <entry>Chaos</entry>
+        <entry>Law</entry>
+        <entry>Good</entry>
+    </collection>
+    <collection>
         <name>Chaotic Evil</name>
-        <item>Law</item>
-        <item>Good</item>
-    </object>
-</items>
+        <entry>Law</entry>
+        <entry>Good</entry>
+    </collection>
+</collections>

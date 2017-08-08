@@ -1,10 +1,9 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Generators;
 using CharacterGen.Domain.Generators.Items;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -23,7 +22,6 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private Mock<IArmorGenerator> mockArmorGenerator;
         private Mock<ITreasureGenerator> mockTreasureGenerator;
-        private Generator generator;
         private List<Feat> feats;
         private CharacterClass characterClass;
         private Weapon meleeWeapon;
@@ -42,8 +40,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             mockArmorGenerator = new Mock<IArmorGenerator>();
             mockTreasureGenerator = new Mock<ITreasureGenerator>();
-            generator = new ConfigurableIterationGenerator(3);
-            equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object, mockTreasureGenerator.Object, mockArmorGenerator.Object, generator);
+            equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object, mockTreasureGenerator.Object, mockArmorGenerator.Object);
             feats = new List<Feat>();
             characterClass = new CharacterClass();
             meleeWeapon = new Weapon();

@@ -5,6 +5,7 @@ using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Magics;
 using CharacterGen.Races;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,8 +13,8 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal class AnimalGenerator : IAnimalGenerator
     {
-        private ICollectionsSelector collectionsSelector;
-        private IAdjustmentsSelector adjustmentsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
+        private readonly IAdjustmentsSelector adjustmentsSelector;
 
         public AnimalGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {

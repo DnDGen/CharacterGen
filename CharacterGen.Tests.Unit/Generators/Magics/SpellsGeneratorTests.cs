@@ -2,9 +2,10 @@
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Magics;
 using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Selectors.Percentiles;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Magics;
+using DnDGen.Core.Selectors.Collections;
+using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     {
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
-        private Mock<IBooleanPercentileSelector> mockBooleanPercentileSelector;
+        private Mock<IPercentileSelector> mockPercentileSelector;
         private ISpellsGenerator spellsGenerator;
         private CharacterClass characterClass;
         private Dictionary<string, Ability> abilities;
@@ -33,8 +34,8 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            mockBooleanPercentileSelector = new Mock<IBooleanPercentileSelector>();
-            spellsGenerator = new SpellsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockBooleanPercentileSelector.Object);
+            mockPercentileSelector = new Mock<IPercentileSelector>();
+            spellsGenerator = new SpellsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();
             spellcasters = new List<string>();
             abilities = new Dictionary<string, Ability>();
@@ -603,7 +604,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void CanHaveMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(tableName))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(tableName))
                 .Returns(true).Returns(false).Returns(true).Returns(false);
 
             spellsKnownForClass["0"] = 1;
@@ -623,7 +624,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void CanHaveManyMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
-            mockBooleanPercentileSelector.SetupSequence(s => s.SelectFrom(tableName))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(tableName))
                 .Returns(true).Returns(true).Returns(false)
                 .Returns(true).Returns(true).Returns(false);
 

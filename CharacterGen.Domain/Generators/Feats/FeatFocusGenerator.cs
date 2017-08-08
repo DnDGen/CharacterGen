@@ -1,9 +1,9 @@
 ﻿using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Selectors.Selections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Feats;
 using CharacterGen.Skills;
+using DnDGen.Core.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TreasureGen.Items;
@@ -12,7 +12,7 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class FeatFocusGenerator : IFeatFocusGenerator
     {
-        private ICollectionsSelector collectionsSelector;
+        private readonly ICollectionsSelector collectionsSelector;
 
         public FeatFocusGenerator(ICollectionsSelector collectionsSelector)
         {
