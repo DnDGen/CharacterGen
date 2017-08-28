@@ -19,24 +19,22 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         }
 
         [Test]
-        public void StressClassName()
+        public void StressSetClassName()
         {
             stressor.Stress(AssertClassName);
         }
 
         protected void AssertClassName()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
+            var prototype = GetCharacterPrototype();
+            SetClassNameRandomizer.SetClassName = prototype.CharacterClass.Name;
 
-            SetClassNameRandomizer.SetClassName = characterClass.Name;
-
-            var className = SetClassNameRandomizer.Randomize(alignment);
+            var className = SetClassNameRandomizer.Randomize(prototype.Alignment);
             Assert.That(className, Is.EqualTo(SetClassNameRandomizer.SetClassName));
         }
 
         [Test]
-        public void StressNPCSetClassName()
+        public void StressSetNPCClassName()
         {
             ClassNameRandomizer = AnyNPCClassNameRandomizer;
             stressor.Stress(AssertClassName);

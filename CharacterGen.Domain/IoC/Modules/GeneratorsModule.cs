@@ -33,8 +33,9 @@ namespace CharacterGen.Domain.IoC.Modules
     {
         public override void Load()
         {
-            Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<IRandomizerVerifier>().To<RandomizerVerifier>();
+
+            Bind<IHitPointsGenerator>().To<HitPointsGenerator>();
             Bind<ILeadershipGenerator>().To<LeadershipGenerator>();
             Bind<IArmorClassGenerator>().To<ArmorClassGenerator>();
             Bind<ISavingThrowsGenerator>().To<SavingThrowsGenerator>();

@@ -7,6 +7,7 @@ namespace CharacterGen.Domain.Generators.Races
 {
     internal interface IRaceGenerator
     {
-        Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer);
+        RacePrototype GeneratePrototype(Alignment alignmentPrototype, CharacterClassPrototype classPrototype, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer);
+        Race GenerateWith(Alignment alignment, CharacterClass characterClass, RacePrototype racePrototype);
     }
 }

@@ -50,16 +50,19 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TreasureGen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnDGen.TreasureGen.8.0.2\lib\TreasureGen.dll</HintPath>
+      <HintPath>..\packages\DnDGen.TreasureGen.8.1.0\lib\TreasureGen.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterClasses\CharacterClassPrototype.cs" />
+    <Compile Include="Characters\CharacterPrototype.cs" />
     <Compile Include="Feats\Feat.cs" />
     <Compile Include="Feats\FeatConstants.cs" />
     <Compile Include="Feats\FeatCollections.cs" />
     <Compile Include="Feats\Frequency.cs" />
     <Compile Include="Languages\LanguageConstants.cs" />
+    <Compile Include="Races\RacePrototype.cs" />
     <Compile Include="Skills\Skill.cs" />
     <Compile Include="Abilities\Ability.cs" />
     <Compile Include="Abilities\AbilityConstants.cs" />

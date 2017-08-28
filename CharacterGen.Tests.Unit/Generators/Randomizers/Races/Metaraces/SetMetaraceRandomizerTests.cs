@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     public class SetMetaraceRandomizerTests
     {
         private ISetMetaraceRandomizer randomizer;
-        private CharacterClass characterClass;
+        private CharacterClassPrototype characterClass;
         private Alignment alignment;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private List<string> alignmentMetaraces;
@@ -27,7 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             randomizer = new SetMetaraceRandomizer(mockCollectionsSelector.Object);
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
             alignment = new Alignment();
             alignmentMetaraces = new List<string>();
             classMetaraces = new List<string>();

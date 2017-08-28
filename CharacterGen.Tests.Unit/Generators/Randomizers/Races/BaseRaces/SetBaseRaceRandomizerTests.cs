@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     public class SetBaseRaceRandomizerTests
     {
         private ISetBaseRaceRandomizer randomizer;
-        private CharacterClass characterClass;
+        private CharacterClassPrototype characterClass;
         private Alignment alignment;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private List<string> alignmentBaseRaces;
@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
             randomizer = new SetBaseRaceRandomizer(mockCollectionsSelector.Object);
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
             alignment = new Alignment();
             alignmentBaseRaces = new List<string>();
 

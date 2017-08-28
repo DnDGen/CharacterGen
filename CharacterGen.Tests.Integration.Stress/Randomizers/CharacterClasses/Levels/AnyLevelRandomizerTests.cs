@@ -11,7 +11,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Lev
         public ILevelRandomizer AnyLevelRandomizer { get; set; }
 
         [Test]
-        public void StressLevel()
+        public void StressAnyLevel()
         {
             stressor.Stress(AssertLevel);
         }

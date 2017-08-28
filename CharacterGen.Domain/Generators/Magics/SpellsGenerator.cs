@@ -37,7 +37,8 @@ namespace CharacterGen.Domain.Generators.Magics
 
         private IEnumerable<SpellQuantity> GetSpellsPerDay(CharacterClass characterClass, Dictionary<string, Ability> abilities)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.Name);
+            var levelForSpells = Math.Min(characterClass.Level, 20);
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
             var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
@@ -92,7 +93,8 @@ namespace CharacterGen.Domain.Generators.Magics
 
         private IEnumerable<Spell> GetAllKnownSpells(CharacterClass characterClass, Dictionary<string, Ability> abilities)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, characterClass.Level, characterClass.Name);
+            var levelForSpells = Math.Min(characterClass.Level, 20);
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
             var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
@@ -151,7 +153,8 @@ namespace CharacterGen.Domain.Generators.Magics
 
         private IEnumerable<SpellQuantity> GetKnownSpellQuantities(CharacterClass characterClass, Dictionary<string, Ability> abilities)
         {
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, characterClass.Level, characterClass.Name);
+            var levelForSpells = Math.Min(characterClass.Level, 20);
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
             var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();

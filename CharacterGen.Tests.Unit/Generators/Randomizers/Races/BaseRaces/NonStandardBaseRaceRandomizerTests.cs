@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, mockCollectionSelector.Object, generator);
+            randomizer = new NonStandardBaseRaceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object, generator);
 
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard))
                 .Returns(new[] { "standard base race", "other base race" });

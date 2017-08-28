@@ -6,7 +6,7 @@ namespace CharacterGen.Randomizers.Races
 {
     public interface RaceRandomizer
     {
-        string Randomize(Alignment alignment, CharacterClass characterClass);
-        IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass);
+        string Randomize(Alignment alignment, CharacterClassPrototype characterClass);
+        IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass);
     }
 }

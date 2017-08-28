@@ -29,7 +29,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
         }
 
         [Test]
-        public void StressClassName()
+        public void StressNonSpellcasterClassName()
         {
             stressor.Stress(AssertClassName);
         }

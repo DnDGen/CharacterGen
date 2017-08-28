@@ -13,7 +13,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         public IAbilitiesRandomizer RawAbilitiesRandomizer { get; set; }
 
         [Test]
-        public void Stress()
+        public void StressRawAbilities()
         {
             stressor.Stress(AssertAbilities);
         }
@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         }
 
         [Test]
-        public void NonDefaultAbilitiesOccur()
+        public void NonDefaultRawAbilitiesOccur()
         {
             var stats = stressor.GenerateOrFail(RawAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 10);

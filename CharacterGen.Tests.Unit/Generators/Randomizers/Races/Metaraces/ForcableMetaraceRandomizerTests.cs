@@ -1,7 +1,6 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Generators.Randomizers.Races.Metaraces;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Verifiers.Exceptions;
@@ -20,13 +19,11 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         private TestForcableMetaraceRandomizer forcableMetaraceRandomizer;
         private Mock<IPercentileSelector> mockPercentileSelector;
-        private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
 
         private string firstMetarace = "first metarace";
         private string secondMetarace = "second metarace";
-        private CharacterClass characterClass;
-        private Dictionary<string, int> adjustments;
+        private CharacterClassPrototype characterClass;
         private Alignment alignment;
         private List<string> alignmentRaces;
         private List<string> classRaces;
@@ -36,19 +33,15 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionsSelector>();
-            forcableMetaraceRandomizer = new TestForcableMetaraceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            forcableMetaraceRandomizer = new TestForcableMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
-            adjustments = new Dictionary<string, int>();
             alignment = new Alignment();
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
             alignmentRaces = new List<string>();
             classRaces = new List<string>();
 
             metaraces = new List<string> { firstMetarace, secondMetarace, RaceConstants.Metaraces.None };
-            foreach (var metarace in metaraces)
-                adjustments[metarace] = 0;
 
             alignment.Goodness = Guid.NewGuid().ToString();
             alignment.Lawfulness = Guid.NewGuid().ToString();
@@ -63,7 +56,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
             mockPercentileSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(metaraces);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(firstMetarace);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => adjustments[name]);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(alignmentRaces);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(classRaces);
 
@@ -118,20 +110,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void RandomizeRerollsInvalidMetaraceBecauseNotAllowed()
         {
             forcableMetaraceRandomizer.ForbiddenMetarace = firstMetarace;
-
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstMetarace)
-                .Returns(secondMetarace);
-
-            var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-            Assert.That(metarace, Is.EqualTo(secondMetarace));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
-        }
-
-        [Test]
-        public void RandomizeRerollsInvalidMetaraceBecauseOfAdjustment()
-        {
-            adjustments[firstMetarace] = 1;
 
             mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
                 .Returns(firstMetarace)
@@ -229,16 +207,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void GetAllPossibleResultsFiltersOutMetaracesWithTooHighLevelAdjustments()
-        {
-            adjustments[firstMetarace] = 1;
-
-            var results = forcableMetaraceRandomizer.GetAllPossible(alignment, characterClass);
-            Assert.That(results, Contains.Item(secondMetarace));
-            Assert.That(results, Is.All.Not.EqualTo(firstMetarace));
-        }
-
-        [Test]
         public void GetAllPossibleResultsFiltersOutMetaracesNotAllowedByAlignment()
         {
             alignmentRaces.Remove(firstMetarace);
@@ -262,8 +230,8 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             public string ForbiddenMetarace { get; set; }
 
-            public TestForcableMetaraceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentsSelector, ICollectionsSelector collectionSelector)
-                : base(percentileResultSelector, levelAdjustmentsSelector, new ConfigurableIterationGenerator(2), collectionSelector)
+            public TestForcableMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionSelector)
+                : base(percentileResultSelector, new ConfigurableIterationGenerator(2), collectionSelector)
             { }
 
             protected override bool MetaraceIsAllowed(string metarace)

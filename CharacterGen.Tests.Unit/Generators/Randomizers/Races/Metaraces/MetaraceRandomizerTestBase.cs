@@ -16,10 +16,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void MetaraceRandomizerTestBaseSetup()
         {
             mockPercentileSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(metaraces);
-
-            foreach (var metarace in metaraces)
-                adjustments[metarace] = 0;
-
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(metaraces);
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(metaraces);
         }

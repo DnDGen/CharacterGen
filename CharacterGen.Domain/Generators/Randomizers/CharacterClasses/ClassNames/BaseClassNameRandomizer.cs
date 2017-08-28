@@ -12,13 +12,13 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {
-        private readonly IPercentileSelector percentileResultSelector;
+        private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
         private readonly ICollectionsSelector collectionsSelector;
 
-        public BaseClassNameRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
+        public BaseClassNameRandomizer(IPercentileSelector percentileSelector, Generator generator, ICollectionsSelector collectionsSelector)
         {
-            this.percentileResultSelector = percentileResultSelector;
+            this.percentileSelector = percentileSelector;
             this.generator = generator;
             this.collectionsSelector = collectionsSelector;
         }
@@ -32,7 +32,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
 
             return generator.Generate(
-                () => percentileResultSelector.SelectFrom(tableName),
+                () => percentileSelector.SelectFrom(tableName),
                 c => possibleClassNames.Contains(c),
                 () => collectionsSelector.SelectRandomFrom(possibleClassNames),
                 c => $"{c} is not from [{string.Join(",", possibleClassNames)}]",
@@ -44,7 +44,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
         public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
-            var classNames = percentileResultSelector.SelectAllFrom(tableName);
+            var classNames = percentileSelector.SelectAllFrom(tableName);
             return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }
     }

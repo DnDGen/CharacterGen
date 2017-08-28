@@ -16,10 +16,6 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void BaseRaceRandomizerTestBaseSetup()
         {
             mockPercentileSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(baseRaces);
-
-            foreach (var baseRace in baseRaces)
-                adjustments.Add(baseRace, 0);
-
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(baseRaces);
         }
     }

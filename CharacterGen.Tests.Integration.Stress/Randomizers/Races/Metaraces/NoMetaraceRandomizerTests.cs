@@ -14,17 +14,16 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         }
 
         [Test]
-        public void StressMetarace()
+        public void StressNoMetarace()
         {
             stressor.Stress(AssertMetarace);
         }
 
         protected void AssertMetarace()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
+            var prototype = GetCharacterPrototype();
 
-            var metarace = MetaraceRandomizer.Randomize(alignment, characterClass);
+            var metarace = MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
     }

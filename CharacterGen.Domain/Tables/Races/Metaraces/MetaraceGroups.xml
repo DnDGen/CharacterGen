@@ -24,6 +24,7 @@
   </collection>
   <collection>
     <name>Lawful Evil</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
@@ -34,11 +35,13 @@
   </collection>
   <collection>
     <name>Lawful Neutral</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Mummy</entry>
   </collection>
   <collection>
     <name>Lawful Good</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
@@ -46,6 +49,7 @@
   </collection>
   <collection>
     <name>Chaotic Evil</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
@@ -55,16 +59,19 @@
   </collection>
   <collection>
     <name>Chaotic Neutral</name>
+    <entry></entry>
     <entry>Ghost</entry>
   </collection>
   <collection>
     <name>Chaotic Good</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
   </collection>
   <collection>
     <name>Neutral Evil</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
@@ -74,12 +81,14 @@
   </collection>
   <collection>
     <name>True Neutral</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Wereboar</entry>
     <entry>Weretiger</entry>
   </collection>
   <collection>
     <name>Neutral Good</name>
+    <entry></entry>
     <entry>Ghost</entry>
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>

@@ -20,17 +20,17 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             this.collectionsSelector = collectionsSelector;
         }
 
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var baseRaces = GetAllPossible(alignment, characterClass);
 
-            if (baseRaces.Any() == false)
+            if (!baseRaces.Any())
                 throw new IncompatibleRandomizersException();
 
             return baseRaces.Single();
         }
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var alignmentBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
 

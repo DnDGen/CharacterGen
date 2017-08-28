@@ -56,12 +56,12 @@ namespace CharacterGen.Domain.Generators.Races
             };
         }
 
-        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RacePrototype racePrototype)
         {
             var race = new Race();
 
-            race.BaseRace = baseRaceRandomizer.Randomize(alignment, characterClass);
-            race.Metarace = metaraceRandomizer.Randomize(alignment, characterClass);
+            race.BaseRace = racePrototype.BaseRace;
+            race.Metarace = racePrototype.Metarace;
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
             race.IsMale = DetermineIfMale(race.BaseRace, characterClass.Name);
             race.Size = DetermineSize(race.BaseRace);
@@ -354,6 +354,15 @@ namespace CharacterGen.Domain.Generators.Races
         {
             var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
             return dice.Roll(roll).AsSum();
+        }
+
+        public RacePrototype GeneratePrototype(Alignment alignmentPrototype, CharacterClassPrototype classPrototype, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        {
+            var prototype = new RacePrototype();
+            prototype.BaseRace = baseRaceRandomizer.Randomize(alignmentPrototype, classPrototype);
+            prototype.Metarace = metaraceRandomizer.Randomize(alignmentPrototype, classPrototype);
+
+            return prototype;
         }
     }
 }

@@ -17,10 +17,17 @@ namespace CharacterGen.Domain.Generators.Races
             this.eventQueue = eventQueue;
         }
 
-        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        public RacePrototype GeneratePrototype(Alignment alignmentPrototype, CharacterClassPrototype classPrototype, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
         {
-            eventQueue.Enqueue("CharacterGen", $"Generating race for {alignment.Full} {characterClass.Summary}");
-            var race = innerGenerator.GenerateWith(alignment, characterClass, baseRaceRandomizer, metaraceRandomizer);
+            var prototype = innerGenerator.GeneratePrototype(alignmentPrototype, classPrototype, baseRaceRandomizer, metaraceRandomizer);
+
+            return prototype;
+        }
+
+        public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RacePrototype racePrototype)
+        {
+            eventQueue.Enqueue("CharacterGen", $"Generating race for {alignment.Full} {characterClass.Summary} from prototype {racePrototype.Summary}");
+            var race = innerGenerator.GenerateWith(alignment, characterClass, racePrototype);
             eventQueue.Enqueue("CharacterGen", $"Generated {race.Summary}");
 
             return race;

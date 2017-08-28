@@ -10,10 +10,9 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
 
         protected void AssertBaseRace()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
+            var prototype = GetCharacterPrototype();
 
-            var baseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
+            var baseRace = BaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(allowedBaseRaces, Contains.Item(baseRace));
         }
     }

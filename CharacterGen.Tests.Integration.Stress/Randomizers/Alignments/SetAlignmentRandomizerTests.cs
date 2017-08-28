@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         public ISetAlignmentRandomizer SetAlignmentRandomizer { get; set; }
 
         [Test]
-        public void StressAlignment()
+        public void StressSetAlignment()
         {
             stressor.Stress(AssertAlignment);
         }
@@ -24,6 +24,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 
             var alignment = SetAlignmentRandomizer.Randomize();
             Assert.That(alignment, Is.EqualTo(SetAlignmentRandomizer.SetAlignment));
+            Assert.That(alignment.Full, Is.EqualTo(SetAlignmentRandomizer.SetAlignment.Full));
         }
     }
 }

@@ -8,6 +8,7 @@ using DnDGen.Core.Selectors.Collections;
 using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,7 +47,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             divineCasters = new List<string>();
 
             characterClass.Name = "class name";
-            characterClass.Level = 9266;
+            characterClass.Level = 9;
             spellcasters.Add(characterClass.Name);
             spellcasters.Add("other class");
             spellsPerDayForClass["0"] = 90210;
@@ -111,6 +112,33 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
 
             Assert.That(spellsPerDay.Select(s => s.Source), Is.All.EqualTo(characterClass.Name));
             Assert.That(spellsPerDay.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void IfLevelAbove20_UseLevel20SpellsPerDay()
+        {
+            characterClass.Level = 9266;
+            abilities["stat"].Value = 16;
+
+            var level20SpellsPerDay = new Dictionary<string, int>();
+            level20SpellsPerDay["0"] = 90210;
+            level20SpellsPerDay["1"] = 42;
+            level20SpellsPerDay["2"] = 600;
+            level20SpellsPerDay["3"] = 1337;
+
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, 20, characterClass.Name);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(level20SpellsPerDay);
+
+            var spellsPerDay = spellsGenerator.GeneratePerDay(characterClass, abilities).ToArray();
+            Assert.That(spellsPerDay[0].Level, Is.EqualTo(0));
+            Assert.That(spellsPerDay[0].Quantity, Is.EqualTo(90210));
+            Assert.That(spellsPerDay[1].Level, Is.EqualTo(1));
+            Assert.That(spellsPerDay[1].Quantity, Is.EqualTo(42 + 1));
+            Assert.That(spellsPerDay[2].Level, Is.EqualTo(2));
+            Assert.That(spellsPerDay[2].Quantity, Is.EqualTo(600 + 1));
+            Assert.That(spellsPerDay[3].Level, Is.EqualTo(3));
+            Assert.That(spellsPerDay[3].Quantity, Is.EqualTo(1337 + 1));
+            Assert.That(spellsPerDay.Length, Is.EqualTo(4));
         }
 
         [TestCase(1)]
@@ -261,7 +289,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void IfTotalSpellsPerDayIsGreatThan0AndDoesNotHaveDomainSpell_DoNotRemoveSpellLevel()
+        public void IfTotalSpellsPerDayIsGreaterThan0AndDoesNotHaveDomainSpell_DoNotRemoveSpellLevel()
         {
             spellsPerDayForClass["1"] = 1;
 
@@ -368,6 +396,46 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
             Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
 
             Assert.That(spellsKnown.Select(s => s.Source), Is.All.EqualTo(characterClass.Name));
+        }
+
+        [Test]
+        public void IfLevelAbove20_UseLevel20KnownSpells()
+        {
+            characterClass.Level = 9266;
+            abilities["stat"].Value = 16;
+
+            var level20KnownSpells = new Dictionary<string, int>();
+            level20KnownSpells["0"] = 90;
+            level20KnownSpells["1"] = 210;
+            level20KnownSpells["2"] = 42;
+            level20KnownSpells["3"] = 600;
+            level20KnownSpells["4"] = 13;
+            level20KnownSpells["5"] = 37;
+
+            foreach (var kvp in level20KnownSpells)
+            {
+                var spellLevel = Convert.ToInt32(kvp.Key);
+                var quantity = kvp.Value;
+
+                while (quantity-- > 0)
+                {
+                    var spell = Guid.NewGuid().ToString();
+                    classSpells.Add(spell);
+                    spellLevels[spell] = spellLevel;
+                }
+            }
+
+            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, 20, characterClass.Name);
+            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(level20KnownSpells);
+
+            var knownSpells = spellsGenerator.GenerateKnown(characterClass, abilities);
+            Assert.That(knownSpells.Count(s => s.Level == 0), Is.EqualTo(90));
+            Assert.That(knownSpells.Count(s => s.Level == 1), Is.EqualTo(210));
+            Assert.That(knownSpells.Count(s => s.Level == 2), Is.EqualTo(42));
+            Assert.That(knownSpells.Count(s => s.Level == 3), Is.EqualTo(600));
+            Assert.That(knownSpells.Count(s => s.Level == 4), Is.EqualTo(13));
+            Assert.That(knownSpells.Count(s => s.Level == 5), Is.EqualTo(37));
+            Assert.That(knownSpells.Count, Is.EqualTo(90 + 210 + 42 + 600 + 13 + 37));
         }
 
         [Test]

@@ -13,14 +13,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         private RaceRandomizer randomizer;
         private Alignment alignment;
-        private CharacterClass characterClass;
+        private CharacterClassPrototype characterClass;
 
         [SetUp]
         public void Setup()
         {
             randomizer = new NoMetaraceRandomizer();
             alignment = new Alignment();
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
         }
 
         [Test]

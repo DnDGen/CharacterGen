@@ -19,17 +19,18 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
     {
         private const string ClassName = "class name";
 
-        private Mock<ILevelRandomizer> mockLevelRandomizer;
-        private Mock<IClassNameRandomizer> mockClassNameRandomizer;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<ICollectionsSelector> mockCollectionsSelector;
         private ICharacterClassGenerator characterClassGenerator;
         private Alignment alignment;
+        private CharacterClassPrototype classPrototype;
         private Dictionary<string, int> specialistFieldQuantities;
         private Dictionary<string, int> prohibitedFieldQuantities;
         private List<string> specialistFields;
         private List<string> prohibitedFields;
+        private Mock<IClassNameRandomizer> mockClassNameRandomizer;
+        private Mock<ILevelRandomizer> mockLevelRandomizer;
 
         [SetUp]
         public void Setup()
@@ -40,36 +41,76 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockPercentileSelector.Object);
 
             alignment = new Alignment();
-            mockLevelRandomizer = new Mock<ILevelRandomizer>();
-            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            classPrototype = new CharacterClassPrototype();
             specialistFieldQuantities = new Dictionary<string, int>();
             prohibitedFieldQuantities = new Dictionary<string, int>();
             specialistFields = new List<string>();
             prohibitedFields = new List<string>();
+            mockClassNameRandomizer = new Mock<IClassNameRandomizer>();
+            mockLevelRandomizer = new Mock<ILevelRandomizer>();
+
+            classPrototype.Level = 9266;
+            classPrototype.Name = ClassName;
 
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, ClassName)).Returns(() => specialistFieldQuantities[ClassName]);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities)).Returns(prohibitedFieldQuantities);
-            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns(ClassName);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, ClassName)).Returns(specialistFields);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, ClassName)).Returns(prohibitedFields);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.First());
         }
 
         [Test]
-        public void GeneratorReturnsRandomizedLevel()
+        public void GeneratePrototype()
         {
-            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(9266);
+            var npcs = new[] { "class name", "other class name" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns("random class name");
+            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(90210);
+
+            var prototype = characterClassGenerator.GeneratePrototype(alignment, mockClassNameRandomizer.Object, mockLevelRandomizer.Object);
+            Assert.That(prototype.Level, Is.EqualTo(90210));
+            Assert.That(prototype.Name, Is.EqualTo("random class name"));
+            Assert.That(prototype.IsNPC, Is.False);
+        }
+
+        [Test]
+        public void GenerateNPCPrototype()
+        {
+            var npcs = new[] { "class name", "random class name" };
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
+
+            mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns("random class name");
+            mockLevelRandomizer.Setup(r => r.Randomize()).Returns(90210);
+
+            var prototype = characterClassGenerator.GeneratePrototype(alignment, mockClassNameRandomizer.Object, mockLevelRandomizer.Object);
+            Assert.That(prototype.Level, Is.EqualTo(90210));
+            Assert.That(prototype.Name, Is.EqualTo("random class name"));
+            Assert.That(prototype.IsNPC, Is.True);
+        }
+
+        [Test]
+        public void GeneratorReturnsClassFromPrototype()
+        {
+            classPrototype.IsNPC = false;
+
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
+            Assert.That(characterClass.Name, Is.EqualTo(ClassName));
             Assert.That(characterClass.Level, Is.EqualTo(9266));
+            Assert.That(characterClass.IsNPC, Is.False);
             Assert.That(characterClass.EffectiveLevel, Is.EqualTo(9266));
         }
 
         [Test]
-        public void GeneratorReturnsRandomizedClass()
+        public void GeneratorReturnsNPCClassFromPrototype()
         {
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            classPrototype.IsNPC = true;
+
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.Name, Is.EqualTo(ClassName));
+            Assert.That(characterClass.Level, Is.EqualTo(9266));
+            Assert.That(characterClass.IsNPC, Is.True);
+            Assert.That(characterClass.EffectiveLevel, Is.EqualTo(9266 / 2));
         }
 
         [Test]
@@ -80,7 +121,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Is.Empty);
         }
 
@@ -91,7 +132,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Is.Empty);
         }
 
@@ -109,7 +150,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             prohibitedFieldQuantities["field 1"] = 0;
             prohibitedFieldQuantities["field 2"] = 0;
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Contains.Item("field 2"));
             Assert.That(characterClass.SpecialistFields.Count(), Is.EqualTo(1));
         }
@@ -131,7 +172,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             prohibitedFieldQuantities["field 2"] = 0;
             prohibitedFieldQuantities["field 3"] = 0;
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Contains.Item("field 3"));
             Assert.That(characterClass.SpecialistFields, Contains.Item("field 1"));
             Assert.That(characterClass.SpecialistFields.Count(), Is.EqualTo(2));
@@ -156,7 +197,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
 
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("alignment field")))).Returns("alignment field");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Contains.Item("alignment field"));
             Assert.That(characterClass.SpecialistFields.Count(), Is.EqualTo(1));
         }
@@ -167,7 +208,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             prohibitedFields.Add("field 1");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 1")))).Returns("field 1");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.SpecialistFields, Is.Empty);
             Assert.That(characterClass.ProhibitedFields, Is.Empty);
         }
@@ -182,7 +223,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
 
             prohibitedFieldQuantities["field 1"] = 1;
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.ProhibitedFields, Is.Empty);
         }
 
@@ -198,7 +239,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             prohibitedFields.Add("field 1");
             prohibitedFields.Add("field 2");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 2"));
             Assert.That(characterClass.ProhibitedFields.Count(), Is.EqualTo(1));
         }
@@ -217,7 +258,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             prohibitedFields.Add("field 2");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 2")))).Returns("field 2");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 2"));
             Assert.That(characterClass.ProhibitedFields.Count(), Is.EqualTo(1));
         }
@@ -239,7 +280,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 1") && fs.Contains("field 4"))))
                 .Returns("field 4").Returns("field 1");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 4"));
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 1"));
             Assert.That(characterClass.ProhibitedFields.Count(), Is.EqualTo(2));
@@ -266,7 +307,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
             mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 3") && fs.Contains("field 5"))))
                 .Returns("field 5").Returns("field 3");
 
-            var characterClass = characterClassGenerator.GenerateWith(alignment, mockLevelRandomizer.Object, mockClassNameRandomizer.Object);
+            var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 5"));
             Assert.That(characterClass.ProhibitedFields, Contains.Item("field 3"));
             Assert.That(characterClass.ProhibitedFields.Count(), Is.EqualTo(2));

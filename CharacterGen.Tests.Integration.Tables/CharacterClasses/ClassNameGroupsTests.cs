@@ -53,14 +53,14 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
         }
 
         [TestCase(GroupConstants.Spellcasters,
+            CharacterClassConstants.Adept,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Druid,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger,
-            CharacterClassConstants.Wizard,
             CharacterClassConstants.Sorcerer,
-            CharacterClassConstants.Adept)]
+            CharacterClassConstants.Wizard)]
         [TestCase(GroupConstants.Stealth,
             CharacterClassConstants.Bard,
             CharacterClassConstants.Rogue,
@@ -87,24 +87,24 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Aristocrat,
             CharacterClassConstants.Expert)]
         [TestCase(GroupConstants.PoorBaseAttack,
-            CharacterClassConstants.Sorcerer,
-            CharacterClassConstants.Wizard,
             CharacterClassConstants.Adept,
-            CharacterClassConstants.Commoner)]
+            CharacterClassConstants.Commoner,
+            CharacterClassConstants.Sorcerer,
+            CharacterClassConstants.Wizard)]
         [TestCase(AlignmentConstants.LawfulGood,
+            CharacterClassConstants.Adept,
+            CharacterClassConstants.Aristocrat,
             CharacterClassConstants.Cleric,
+            CharacterClassConstants.Commoner,
+            CharacterClassConstants.Expert,
             CharacterClassConstants.Fighter,
             CharacterClassConstants.Monk,
             CharacterClassConstants.Paladin,
             CharacterClassConstants.Ranger,
             CharacterClassConstants.Rogue,
             CharacterClassConstants.Sorcerer,
-            CharacterClassConstants.Wizard,
-            CharacterClassConstants.Adept,
-            CharacterClassConstants.Aristocrat,
-            CharacterClassConstants.Commoner,
-            CharacterClassConstants.Expert,
-            CharacterClassConstants.Warrior)]
+            CharacterClassConstants.Warrior,
+            CharacterClassConstants.Wizard)]
         [TestCase(AlignmentConstants.NeutralGood,
             CharacterClassConstants.Cleric,
             CharacterClassConstants.Fighter,

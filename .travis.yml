@@ -12,6 +12,8 @@ script:
   - set -e
   - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CharacterGen.Tests.Integration.Tables/bin/Stress/CharacterGen.Tests.Integration.Tables.dll
   - set -e
+  - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CharacterGen.Tests.Integration/bin/Stress/CharacterGen.Tests.Integration.dll
+  - set -e
   - mono ./testrunner/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./CharacterGen.Tests.Integration.Stress/bin/Stress/CharacterGen.Tests.Integration.Stress.dll
 deploy:
   skip_cleanup: true

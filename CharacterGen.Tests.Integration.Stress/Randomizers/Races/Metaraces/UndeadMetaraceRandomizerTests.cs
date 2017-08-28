@@ -32,13 +32,13 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
         [Test]
         public void StressUndeadMetarace()
         {
-            stressor.Stress(AssertMetarace);
+            stressor.Stress(GenerateAndAssertMetarace);
         }
 
         [Test]
-        public override void StressForcedMetarace()
+        public void StressForcedUndeadMetarace()
         {
-            stressor.Stress(AssertForcedMetarace);
+            stressor.Stress(GenerateAndAssertForcedMetarace);
         }
     }
 }

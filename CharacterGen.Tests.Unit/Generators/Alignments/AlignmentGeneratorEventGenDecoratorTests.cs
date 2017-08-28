@@ -29,9 +29,10 @@ namespace CharacterGen.Tests.Unit.Generators.Alignments
         public void ReturnInnerAlignment()
         {
             var alignment = new Alignment();
-            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
+            var prototype = new Alignment();
+            mockInnerGenerator.Setup(g => g.GenerateWith(prototype)).Returns(alignment);
 
-            var generatedAlignment = decorator.GenerateWith(mockAlignmentRandomizer.Object);
+            var generatedAlignment = decorator.GenerateWith(prototype);
             Assert.That(generatedAlignment, Is.EqualTo(alignment));
         }
 
@@ -42,13 +43,41 @@ namespace CharacterGen.Tests.Unit.Generators.Alignments
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
 
-            mockInnerGenerator.Setup(g => g.GenerateWith(mockAlignmentRandomizer.Object)).Returns(alignment);
+            var prototype = new Alignment();
+            prototype.Goodness = "prototype goodness";
+            prototype.Goodness = "prototype lawfulness";
+            mockInnerGenerator.Setup(g => g.GenerateWith(prototype)).Returns(alignment);
 
-            var generatedAlignment = decorator.GenerateWith(mockAlignmentRandomizer.Object);
+            var generatedAlignment = decorator.GenerateWith(prototype);
             Assert.That(generatedAlignment, Is.EqualTo(alignment));
             mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
-            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating alignment"), Times.Once);
+            mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generating alignment from prototype {prototype.Full}"), Times.Once);
             mockEventQueue.Verify(q => q.Enqueue("CharacterGen", $"Generated lawfulness goodness"), Times.Once);
+        }
+
+        [Test]
+        public void ReturnInnerPrototype()
+        {
+            var prototype = new Alignment();
+            prototype.Goodness = "prototype goodness";
+            prototype.Goodness = "prototype lawfulness";
+            mockInnerGenerator.Setup(g => g.GeneratePrototype(mockAlignmentRandomizer.Object)).Returns(prototype);
+
+            var generatedPrototype = decorator.GeneratePrototype(mockAlignmentRandomizer.Object);
+            Assert.That(generatedPrototype, Is.EqualTo(prototype));
+        }
+
+        [Test]
+        public void DoNotLogEventsForAlignmentPrototypeGeneration()
+        {
+            var prototype = new Alignment();
+            prototype.Goodness = "prototype goodness";
+            prototype.Goodness = "prototype lawfulness";
+            mockInnerGenerator.Setup(g => g.GeneratePrototype(mockAlignmentRandomizer.Object)).Returns(prototype);
+
+            var generatedPrototype = decorator.GeneratePrototype(mockAlignmentRandomizer.Object);
+            Assert.That(generatedPrototype, Is.EqualTo(prototype));
+            mockEventQueue.Verify(q => q.Enqueue(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
     }
 }

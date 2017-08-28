@@ -20,7 +20,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
             this.collectionsSelector = collectionsSelector;
         }
 
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var metaraces = GetAllPossible(alignment, characterClass);
 
@@ -30,7 +30,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
             return metaraces.Single();
         }
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var alignmentMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
             var classMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);

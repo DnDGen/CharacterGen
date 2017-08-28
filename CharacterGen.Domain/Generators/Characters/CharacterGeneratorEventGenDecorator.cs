@@ -18,6 +18,13 @@ namespace CharacterGen.Domain.Generators.Characters
             this.eventQueue = eventQueue;
         }
 
+        public CharacterPrototype GeneratePrototypeWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        {
+            var prototype = innerGenerator.GeneratePrototypeWith(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+
+            return prototype;
+        }
+
         public Character GenerateWith(IAlignmentRandomizer alignmentRandomizer, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer, IAbilitiesRandomizer statsRandomizer)
         {
             eventQueue.Enqueue("CharacterGen", "Generating character");

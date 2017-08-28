@@ -1,14 +1,11 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Tables;
 using DnDGen.Core.Generators;
 using DnDGen.Core.Selectors.Collections;
 using DnDGen.Core.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 
 namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
 {
@@ -16,30 +13,24 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
     public abstract class RaceRandomizerTestBase
     {
         internal Mock<IPercentileSelector> mockPercentileSelector;
-        internal Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         internal Mock<ICollectionsSelector> mockCollectionSelector;
         internal Generator generator;
         protected Alignment alignment;
-        protected CharacterClass characterClass;
-        protected Dictionary<string, int> adjustments;
+        protected CharacterClassPrototype characterClass;
 
         [SetUp]
         public void RaceRandomizerTestBaseSetup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionSelector = new Mock<ICollectionsSelector>();
             generator = new ConfigurableIterationGenerator();
-            adjustments = new Dictionary<string, int>();
-            characterClass = new CharacterClass();
+            characterClass = new CharacterClassPrototype();
             alignment = new Alignment();
 
             alignment.Goodness = Guid.NewGuid().ToString();
             alignment.Lawfulness = Guid.NewGuid().ToString();
             characterClass.Level = 1;
             characterClass.Name = Guid.NewGuid().ToString();
-
-            mockAdjustmentsSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, It.IsAny<string>())).Returns((string table, string name) => adjustments[name]);
         }
     }
 }

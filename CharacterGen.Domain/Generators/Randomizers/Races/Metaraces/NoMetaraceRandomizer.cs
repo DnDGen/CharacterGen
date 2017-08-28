@@ -8,12 +8,12 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 {
     internal class NoMetaraceRandomizer : RaceRandomizer
     {
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             return RaceConstants.Metaraces.None;
         }
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             return new[] { RaceConstants.Metaraces.None };
         }

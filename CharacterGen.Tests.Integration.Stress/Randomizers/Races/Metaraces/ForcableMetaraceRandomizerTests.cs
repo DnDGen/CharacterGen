@@ -16,7 +16,7 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected abstract IEnumerable<string> allowedMetaraces { get; }
 
-        protected void AssertMetarace()
+        protected void GenerateAndAssertMetarace()
         {
             var metarace = GenerateMetarace();
             Assert.That(allowedMetaraces, Contains.Item(metarace));
@@ -24,14 +24,11 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         private string GenerateMetarace()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            return MetaraceRandomizer.Randomize(alignment, characterClass);
+            var prototype = GetCharacterPrototype();
+            return MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
         }
 
-        public abstract void StressForcedMetarace();
-
-        protected void AssertForcedMetarace()
+        protected void GenerateAndAssertForcedMetarace()
         {
             forcableMetaraceRandomizer.ForceMetarace = true;
 

@@ -15,12 +15,12 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         public Random Random { get; set; }
 
         [Test]
-        public void Stress()
+        public void StressSetAbilities()
         {
-            stressor.Stress(AssertAbilities);
+            stressor.Stress(GenerateAndAssertAbilities);
         }
 
-        protected void AssertAbilities()
+        protected void GenerateAndAssertAbilities()
         {
             SetAbilitiesRandomizer.SetCharisma = Random.Next();
             SetAbilitiesRandomizer.SetConstitution = Random.Next();

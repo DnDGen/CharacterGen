@@ -21,8 +21,7 @@ namespace CharacterGen.Domain.Selectors.Collections
 
             foreach (var kvp in collectionTable)
             {
-                var firstItem = kvp.Value.First();
-                adjustmentTable[kvp.Key] = Convert.ToInt32(firstItem);
+                adjustmentTable[kvp.Key] = GetAdjustment(kvp.Value);
             }
 
             return adjustmentTable;
@@ -30,12 +29,18 @@ namespace CharacterGen.Domain.Selectors.Collections
 
         public int SelectFrom(string tableName, string name)
         {
-            var adjustments = SelectAllFrom(tableName);
+            var collection = collectionsSelector.SelectFrom(tableName, name);
+            var adjustment = GetAdjustment(collection);
 
-            if (!adjustments.ContainsKey(name))
-                throw new ArgumentException($"No adjustment in {tableName} exists for {name}");
+            return adjustment;
+        }
 
-            return adjustments[name];
+        private int GetAdjustment(IEnumerable<string> collection)
+        {
+            var firstItem = collection.First();
+            var adjustment = Convert.ToInt32(firstItem);
+
+            return adjustment;
         }
     }
 }

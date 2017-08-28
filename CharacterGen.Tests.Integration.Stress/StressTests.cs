@@ -1,10 +1,8 @@
-﻿using CharacterGen.Alignments;
-using CharacterGen.CharacterClasses;
+﻿using CharacterGen.Characters;
 using CharacterGen.Randomizers.Alignments;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers;
-using CharacterGen.Verifiers.Exceptions;
 using DnDGen.Stress;
 using DnDGen.Stress.Events;
 using EventGen;
@@ -30,6 +28,8 @@ namespace CharacterGen.Tests.Integration.Stress
         public RaceRandomizer BaseRaceRandomizer { get; set; }
         [Inject, Named(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
         public RaceRandomizer MetaraceRandomizer { get; set; }
+        [Inject]
+        public ICharacterGenerator CharacterGenerator { get; set; }
 
         protected Stressor stressor;
 
@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Integration.Stress
         {
             var options = new StressorWithEventsOptions();
             options.RunningAssembly = Assembly.GetExecutingAssembly();
-            options.TimeLimitPercentage = .7;
+            options.TimeLimitPercentage = .90;
 
 #if STRESS
             options.IsFullStress = true;
@@ -53,36 +53,10 @@ namespace CharacterGen.Tests.Integration.Stress
             stressor = new StressorWithEvents(options);
         }
 
-        protected Alignment GetNewAlignment()
+        protected CharacterPrototype GetCharacterPrototype()
         {
-            var compatible = RandomizerVerifier.VerifyCompatibility(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer);
-
-            if (compatible == false)
-                throw new IncompatibleRandomizersException();
-
-            var alignment = stressor.Generate(
-                () => AlignmentRandomizer.Randomize(),
-                a => RandomizerVerifier.VerifyAlignmentCompatibility(a, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer));
-
-            return alignment;
-        }
-
-        protected CharacterClass GetNewCharacterClass(Alignment alignment)
-        {
-            var characterClass = stressor.Generate(
-                () => GenerateCharacterClass(alignment),
-                c => RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, c, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer));
-
-            return characterClass;
-        }
-
-        private CharacterClass GenerateCharacterClass(Alignment alignment)
-        {
-            var characterClass = new CharacterClass();
-            characterClass.Name = ClassNameRandomizer.Randomize(alignment);
-            characterClass.Level = LevelRandomizer.Randomize();
-
-            return characterClass;
+            var prototype = CharacterGenerator.GeneratePrototypeWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer);
+            return prototype;
         }
     }
 }

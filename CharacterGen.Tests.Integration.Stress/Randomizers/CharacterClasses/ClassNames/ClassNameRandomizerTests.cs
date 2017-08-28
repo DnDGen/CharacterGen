@@ -10,8 +10,8 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Cla
 
         protected void AssertClassName()
         {
-            var alignment = GetNewAlignment();
-            var className = ClassNameRandomizer.Randomize(alignment);
+            var prototype = GetCharacterPrototype();
+            var className = ClassNameRandomizer.Randomize(prototype.Alignment);
             Assert.That(allowedClassNames, Contains.Item(className));
         }
     }

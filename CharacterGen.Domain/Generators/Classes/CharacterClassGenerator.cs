@@ -24,15 +24,25 @@ namespace CharacterGen.Domain.Generators.Classes
             this.collectionsSelector = collectionsSelector;
         }
 
-        public CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer, IClassNameRandomizer classNameRandomizer)
+        public CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer)
+        {
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+
+            var prototype = new CharacterClassPrototype();
+            prototype.Name = classNameRandomizer.Randomize(alignmentPrototype);
+            prototype.Level = levelRandomizer.Randomize();
+            prototype.IsNPC = npcs.Contains(prototype.Name);
+
+            return prototype;
+        }
+
+        public CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype)
         {
             var characterClass = new CharacterClass();
 
-            characterClass.Level = levelRandomizer.Randomize();
-            characterClass.Name = classNameRandomizer.Randomize(alignment);
-
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
-            characterClass.IsNPC = npcs.Contains(characterClass.Name);
+            characterClass.Level = classPrototype.Level;
+            characterClass.Name = classPrototype.Name;
+            characterClass.IsNPC = classPrototype.IsNPC;
 
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.Name);
             var isSpecialist = percentileSelector.SelectFrom<bool>(tableName);

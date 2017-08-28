@@ -3,6 +3,7 @@ using CharacterGen.CharacterClasses;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using NUnit.Framework;
+using System.Linq;
 
 namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
 {
@@ -17,87 +18,76 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [Test]
         public override void CollectionNames()
         {
+            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+
             var names = new[]
             {
-                AlignmentConstants.LawfulEvil,
-                AlignmentConstants.LawfulGood,
-                AlignmentConstants.LawfulNeutral,
-                AlignmentConstants.ChaoticEvil,
-                AlignmentConstants.ChaoticGood,
-                AlignmentConstants.ChaoticNeutral,
-                AlignmentConstants.NeutralEvil,
-                AlignmentConstants.NeutralGood,
-                AlignmentConstants.TrueNeutral,
                 GroupConstants.Genetic,
                 GroupConstants.Lycanthrope,
                 GroupConstants.Undead,
-                CharacterClassConstants.Adept,
-                CharacterClassConstants.Aristocrat,
-                CharacterClassConstants.Barbarian,
-                CharacterClassConstants.Bard,
-                CharacterClassConstants.Cleric,
-                CharacterClassConstants.Commoner,
-                CharacterClassConstants.Druid,
-                CharacterClassConstants.Expert,
-                CharacterClassConstants.Fighter,
-                CharacterClassConstants.Monk,
-                CharacterClassConstants.Paladin,
-                CharacterClassConstants.Ranger,
-                CharacterClassConstants.Rogue,
-                CharacterClassConstants.Sorcerer,
-                CharacterClassConstants.Warrior,
-                CharacterClassConstants.Wizard,
                 GroupConstants.All,
                 GroupConstants.HasWings,
             };
 
+            names = names.Union(alignmentGroups[GroupConstants.All]).Union(classGroups[GroupConstants.All]).ToArray();
+
             AssertCollectionNames(names);
         }
 
+        [TestCase(AlignmentConstants.ChaoticEvil,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfFiend,
+            RaceConstants.Metaraces.Lich,
+            RaceConstants.Metaraces.None,
+            RaceConstants.Metaraces.Vampire,
+            RaceConstants.Metaraces.Werewolf)]
+        [TestCase(AlignmentConstants.ChaoticGood,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.HalfDragon,
+            RaceConstants.Metaraces.HalfCelestial,
+            RaceConstants.Metaraces.None)]
+        [TestCase(AlignmentConstants.ChaoticNeutral,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.None)]
         [TestCase(AlignmentConstants.LawfulGood,
             RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfCelestial,
+            RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Werebear)]
-        [TestCase(AlignmentConstants.NeutralGood,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.HalfDragon,
-            RaceConstants.Metaraces.HalfCelestial)]
-        [TestCase(AlignmentConstants.ChaoticGood,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.HalfDragon,
-            RaceConstants.Metaraces.HalfCelestial)]
         [TestCase(AlignmentConstants.LawfulEvil,
             RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
             RaceConstants.Metaraces.Lich,
             RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Vampire,
             RaceConstants.Metaraces.Wererat)]
+        [TestCase(AlignmentConstants.LawfulNeutral,
+            RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.None)]
         [TestCase(AlignmentConstants.NeutralEvil,
             RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
             RaceConstants.Metaraces.Lich,
             RaceConstants.Metaraces.Mummy,
+            RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Vampire)]
-        [TestCase(AlignmentConstants.ChaoticEvil,
+        [TestCase(AlignmentConstants.NeutralGood,
             RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.HalfDragon,
-            RaceConstants.Metaraces.HalfFiend,
-            RaceConstants.Metaraces.Lich,
-            RaceConstants.Metaraces.Vampire,
-            RaceConstants.Metaraces.Werewolf)]
-        [TestCase(AlignmentConstants.LawfulNeutral,
-            RaceConstants.Metaraces.Ghost,
-            RaceConstants.Metaraces.Mummy)]
+            RaceConstants.Metaraces.HalfCelestial,
+            RaceConstants.Metaraces.None)]
         [TestCase(AlignmentConstants.TrueNeutral,
             RaceConstants.Metaraces.Ghost,
+            RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Wereboar,
             RaceConstants.Metaraces.Weretiger)]
-        [TestCase(AlignmentConstants.ChaoticNeutral,
-            RaceConstants.Metaraces.Ghost)]
         [TestCase(GroupConstants.Genetic,
             RaceConstants.Metaraces.HalfDragon,
             RaceConstants.Metaraces.HalfFiend,
@@ -215,6 +205,32 @@ namespace CharacterGen.Tests.Integration.Tables.Races.Metaraces
             };
 
             base.DistinctCollection(className, metaraces);
+        }
+
+        [Test]
+        public void AllMetaracesHaveFullAlignmentGroup()
+        {
+            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var alignmentMetaraces = metaraceGroups
+                .Where(kvp => alignmentGroups[GroupConstants.All].Contains(kvp.Key)) //Get alignment-key metarace groups
+                .SelectMany(kvp => kvp.Value) //get metaraces in those groups
+                .Distinct();
+
+            AssertCollection(alignmentMetaraces, metaraceGroups[GroupConstants.All]);
+        }
+
+        [Test]
+        public void AllMetaracesHaveClassNameGroup()
+        {
+            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classMetaraces = metaraceGroups
+                .Where(kvp => classGroups[GroupConstants.All].Contains(kvp.Key)) //Get class-key metarace groups
+                .SelectMany(kvp => kvp.Value) //get metaraces in those groups
+                .Distinct();
+
+            AssertCollection(classMetaraces, metaraceGroups[GroupConstants.All]);
         }
     }
 }

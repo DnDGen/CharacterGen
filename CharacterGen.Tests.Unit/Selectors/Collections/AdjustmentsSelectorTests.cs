@@ -25,6 +25,8 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
             collections = new Dictionary<string, IEnumerable<string>>();
 
             mockCollectionsSelector.Setup(m => m.SelectAllFrom(TableName)).Returns(collections);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableName, It.IsAny<string>()))
+                .Returns((string table, string name) => collections[name]);
         }
 
         [Test]
@@ -58,12 +60,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         }
 
         [Test]
-        public void SelectAdjustmentThrowsExceptionIfAnyCollectionIsEmpty()
+        public void SelectAdjustmentThrowsExceptionIfCollectionIsEmpty()
         {
             collections["first"] = Enumerable.Empty<string>();
             collections["second"] = new[] { "42" };
 
-            Assert.That(() => adjustmentsSelector.SelectFrom(TableName, "second"), Throws.InstanceOf<InvalidOperationException>());
+            Assert.That(() => adjustmentsSelector.SelectFrom(TableName, "first"), Throws.InstanceOf<InvalidOperationException>());
         }
 
         [Test]
@@ -71,7 +73,7 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         {
             collections["first"] = new[] { "9266" };
 
-            Assert.That(() => adjustmentsSelector.SelectFrom(TableName, "second"), Throws.ArgumentException.With.Message.EqualTo("No adjustment in table name exists for second"));
+            Assert.That(() => adjustmentsSelector.SelectFrom(TableName, "second"), Throws.Exception);
         }
     }
 }

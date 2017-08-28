@@ -31,7 +31,7 @@ namespace CharacterGen.Domain.Generators.Combats
 
         public Combat GenerateWith(BaseAttack baseAttack, CharacterClass characterClass, Race race, IEnumerable<Feat> feats, Dictionary<string, Ability> abilities, Equipment equipment)
         {
-            eventQueue.Enqueue("CharacterGen", $"Generating combat statistic for {characterClass.Summary} {race.Summary}");
+            eventQueue.Enqueue("CharacterGen", $"Generating combat statistics for {characterClass.Summary} {race.Summary}");
             var alignment = innerGenerator.GenerateWith(baseAttack, characterClass, race, feats, abilities, equipment);
             eventQueue.Enqueue("CharacterGen", $"Generated combat statistics");
 

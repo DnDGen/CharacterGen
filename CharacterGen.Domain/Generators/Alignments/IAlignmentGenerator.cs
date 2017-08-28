@@ -5,6 +5,7 @@ namespace CharacterGen.Domain.Generators.Alignments
 {
     internal interface IAlignmentGenerator
     {
-        Alignment GenerateWith(IAlignmentRandomizer alignmentRandomizer);
+        Alignment GenerateWith(Alignment alignmentPrototype);
+        Alignment GeneratePrototype(IAlignmentRandomizer alignmentRandomizer);
     }
 }

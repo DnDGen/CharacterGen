@@ -18,30 +18,32 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
     [TestFixture]
     public class CharacterGeneratorTests : StressTests
     {
-        [Inject]
-        public ICharacterGenerator CharacterGenerator { get; set; }
-        [Inject, Named(AbilitiesRandomizerTypeConstants.Raw)]
-        public IAbilitiesRandomizer RawAbilitiesRandomizer { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
         public IClassNameRandomizer NPCClassNameRandomizer { get; set; }
-        [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
-        public IAbilitiesRandomizer HeroicAbilitiesRandomizer { get; set; }
         [Inject, Named(ClassNameRandomizerTypeConstants.Spellcaster)]
         public IClassNameRandomizer SpellcasterClassNameRandomizer { get; set; }
         [Inject]
         public ISetClassNameRandomizer SetClassNameRandomizer { get; set; }
+        [Inject, Named(LevelRandomizerTypeConstants.VeryHigh)]
+        public ILevelRandomizer VeryHighLevelRandomizer { get; set; }
         [Inject]
         public ISetLevelRandomizer SetLevelRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AquaticBase)]
+        public RaceRandomizer AquaticBaseRaceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase)]
+        public RaceRandomizer NonMonsterBaseRaceRandomizer { get; set; }
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
         [Inject]
         public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
+        [Inject, Named(AbilitiesRandomizerTypeConstants.Raw)]
+        public IAbilitiesRandomizer RawAbilitiesRandomizer { get; set; }
+        [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
+        public IAbilitiesRandomizer HeroicAbilitiesRandomizer { get; set; }
         [Inject]
         public CharacterVerifier CharacterVerifier { get; set; }
         [Inject]
         public Random Random { get; set; }
-        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AquaticBase)]
-        public RaceRandomizer AquaticBaseRaceRandomizer { get; set; }
 
         [Test]
         public void StressCharacter()
@@ -116,13 +118,11 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             CharacterVerifier.AssertCharacter(commoner);
             Assert.That(commoner.Class.IsNPC, Is.True);
             Assert.That(commoner.Class.Level, Is.EqualTo(1));
-            Assert.That(commoner.Class.EffectiveLevel, Is.EqualTo(.5), commoner.Race.BaseRace + commoner.Race.Metarace);
             Assert.That(commoner.Class.Name, Is.EqualTo(CharacterClassConstants.Commoner));
             Assert.That(commoner.Class.ProhibitedFields, Is.Empty);
             Assert.That(commoner.Class.SpecialistFields, Is.Empty);
             Assert.That(commoner.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
             Assert.That(commoner.Race.MetaraceSpecies, Is.Empty);
-            Assert.That(commoner.ChallengeRating, Is.EqualTo(.5), commoner.Race.BaseRace + commoner.Race.Metarace);
             Assert.That(commoner.Magic.Animal, Is.Empty);
             Assert.That(commoner.Magic.ArcaneSpellFailure, Is.EqualTo(0));
             Assert.That(commoner.Magic.KnownSpells, Is.Empty);
@@ -132,7 +132,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         //INFO: We are testing the efficiency of the weapon and armor generators here
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressHighLevelFighter()
         {
             stressor.Stress(GenerateAndAssertHighLevelFighter);
@@ -142,9 +142,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         {
             SetClassNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
             SetLevelRandomizer.SetLevel = 20;
-            SetLevelRandomizer.AllowAdjustments = false;
 
-            var fighter = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
+            //INFO: Using the non-monster so that we don't worry about giant sizes throwing off generation time
+            var fighter = CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, SetLevelRandomizer, NonMonsterBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(fighter);
             AssertPlayerCharacter(fighter);
@@ -164,7 +164,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         //INFO: The bug here is that the rare size (Huge) makes the equipment take much longer to generate
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        [Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressStormGiant()
         {
             stressor.Stress(GenerateAndAssertStormGiant);
@@ -199,6 +199,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressSpellcaster()
         {
             stressor.Stress(GenerateAndAssertSpellcaster);
@@ -278,7 +279,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         //INFO: Want to verify rakshasas have native sorcerer spells and additional spellcaster class spells
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressRakshasaSpellcaster()
         {
             stressor.Stress(GenerateAndAssertRakshasaSpellcaster);
@@ -299,8 +300,34 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(spellcaster.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Rakshasa));
         }
 
+        //INFO: Want to verify rakshasas have native sorcerer spells and additional sorcerer spells at 7 levels higher, even when high level
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
+        public void BUG_StressHighLevelRakshasaSorcerer()
+        {
+            stressor.Stress(GenerateAndAssertHighLevelRakshasaSorcerer);
+        }
+
+        private void GenerateAndAssertHighLevelRakshasaSorcerer()
+        {
+            SetBaseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Rakshasa;
+            SetClassNameRandomizer.SetClassName = CharacterClassConstants.Sorcerer;
+
+            var sorcerer = stressor.Generate(
+                () => CharacterGenerator.GenerateWith(AlignmentRandomizer, SetClassNameRandomizer, VeryHighLevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer),
+                c => true);
+
+            CharacterVerifier.AssertCharacter(sorcerer);
+            AssertPlayerCharacter(sorcerer);
+            AssertSpellcaster(sorcerer);
+
+            Assert.That(sorcerer.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Rakshasa));
+            Assert.That(sorcerer.Class.Name, Is.EqualTo(CharacterClassConstants.Sorcerer));
+            Assert.That(sorcerer.Class.Level, Is.AtLeast(16));
+        }
+
+        [Test]
+        [Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressUndeadCharacter()
         {
             stressor.Stress(GenerateAndAssertUndead);
@@ -330,7 +357,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressPlanetouchedCharacter()
         {
             stressor.Stress(GenerateAndAssertPlanetouched);
@@ -339,7 +366,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private void GenerateAndAssertPlanetouched()
         {
             var planetouched = new[] { RaceConstants.BaseRaces.Aasimar, RaceConstants.BaseRaces.Tiefling };
-            var randomIndex = Random.Next(2);
+            var randomIndex = Random.Next(planetouched.Length);
             SetBaseRaceRandomizer.SetBaseRace = planetouched[randomIndex];
 
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
@@ -351,7 +378,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, often overruns time limit")]
+        [Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressGhost()
         {
             stressor.Stress(() => GenerateAndAssertGhost());

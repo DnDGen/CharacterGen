@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
@@ -13,35 +12,25 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
     //INFO: We are not using the base class here, as aquatic characters will never appear randomly (which assumes mostly on land)
     internal class AquaticBaseRaceRandomizer : RaceRandomizer
     {
-        private readonly IAdjustmentsSelector adjustmentSelector;
         private readonly ICollectionsSelector collectionSelector;
 
-        public AquaticBaseRaceRandomizer(IAdjustmentsSelector adjustmentSelector, ICollectionsSelector collectionSelector)
+        public AquaticBaseRaceRandomizer(ICollectionsSelector collectionSelector)
         {
-            this.adjustmentSelector = adjustmentSelector;
             this.collectionSelector = collectionSelector;
         }
 
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var allowedBaseRaces = GetAllPossible(alignment, characterClass);
-            if (allowedBaseRaces.Any() == false)
+            if (!allowedBaseRaces.Any())
                 throw new IncompatibleRandomizersException();
 
             return collectionSelector.SelectRandomFrom(allowedBaseRaces);
         }
 
-        private bool RaceIsAllowed(string baseRace, Alignment alignment, CharacterClass characterClass)
+        private bool RaceIsAllowed(string baseRace, Alignment alignment)
         {
-            return LevelAdjustmentIsAllowed(baseRace, characterClass.Level)
-                && BaseRaceCanBeAlignment(baseRace, alignment);
-        }
-
-        private bool LevelAdjustmentIsAllowed(string baseRace, int level)
-        {
-            var levelAdjustment = adjustmentSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, baseRace);
-
-            return levelAdjustment < level;
+            return BaseRaceCanBeAlignment(baseRace, alignment);
         }
 
         private bool BaseRaceCanBeAlignment(string baseRace, Alignment alignment)
@@ -50,10 +39,10 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             return alignmentRaces.Contains(baseRace);
         }
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var aquaticBaseRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic);
-            return aquaticBaseRaces.Where(r => RaceIsAllowed(r, alignment, characterClass));
+            return aquaticBaseRaces.Where(r => RaceIsAllowed(r, alignment));
         }
     }
 }

@@ -19,10 +19,17 @@ namespace CharacterGen.Domain.Generators.Classes
             this.eventQueue = eventQueue;
         }
 
-        public CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer, IClassNameRandomizer classNameRandomizer)
+        public CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer)
         {
-            eventQueue.Enqueue("CharacterGen", $"Generating class for {alignment.Full}");
-            var characterClass = innerGenerator.GenerateWith(alignment, levelRandomizer, classNameRandomizer);
+            var prototype = innerGenerator.GeneratePrototype(alignmentPrototype, classNameRandomizer, levelRandomizer);
+
+            return prototype;
+        }
+
+        public CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype)
+        {
+            eventQueue.Enqueue("CharacterGen", $"Generating class for {alignment.Full} from prototype {classPrototype.Summary}");
+            var characterClass = innerGenerator.GenerateWith(alignment, classPrototype);
             eventQueue.Enqueue("CharacterGen", $"Generated {characterClass.Summary}");
 
             return characterClass;

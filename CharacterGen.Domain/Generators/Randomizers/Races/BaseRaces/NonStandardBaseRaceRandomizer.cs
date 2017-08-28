@@ -1,5 +1,4 @@
-﻿using CharacterGen.Domain.Selectors.Collections;
-using CharacterGen.Domain.Tables;
+﻿using CharacterGen.Domain.Tables;
 using DnDGen.Core.Generators;
 using DnDGen.Core.Selectors.Collections;
 using DnDGen.Core.Selectors.Percentiles;
@@ -11,8 +10,8 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
     {
         private readonly ICollectionsSelector collectionsSelector;
 
-        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, IAdjustmentsSelector levelAdjustmentSelector, ICollectionsSelector collectionsSelector, Generator generator)
-            : base(percentileResultSelector, levelAdjustmentSelector, generator, collectionsSelector)
+        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+            : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

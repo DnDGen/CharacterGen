@@ -31,11 +31,10 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
 
         protected void AssertMetarace()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            SetMetaraceRandomizer.SetMetarace = MetaraceRandomizer.Randomize(alignment, characterClass);
+            var prototype = GetCharacterPrototype();
+            SetMetaraceRandomizer.SetMetarace = MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
 
-            var metarace = SetMetaraceRandomizer.Randomize(alignment, characterClass);
+            var metarace = SetMetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));
         }
     }

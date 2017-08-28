@@ -49,15 +49,18 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
 
         public IEnumerable<Alignment> GetAllPossibleResults()
         {
-            var alignments = new List<Alignment>();
             var goodnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
             var lawfulnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
 
             foreach (var goodness in goodnesses)
+            {
                 foreach (var lawfulness in lawfulnesses)
-                    alignments.Add(new Alignment { Goodness = goodness, Lawfulness = lawfulness });
-
-            return alignments.Where(a => AlignmentIsAllowed(a));
+                {
+                    var alignment = new Alignment { Goodness = goodness, Lawfulness = lawfulness };
+                    if (AlignmentIsAllowed(alignment))
+                        yield return alignment;
+                }
+            }
         }
 
         protected abstract bool AlignmentIsAllowed(Alignment alignment);

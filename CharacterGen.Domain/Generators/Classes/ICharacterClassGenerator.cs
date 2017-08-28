@@ -8,7 +8,8 @@ namespace CharacterGen.Domain.Generators.Classes
 {
     internal interface ICharacterClassGenerator
     {
-        CharacterClass GenerateWith(Alignment alignment, ILevelRandomizer levelRandomizer, IClassNameRandomizer classNameRandomizer);
+        CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer);
+        CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype);
         IEnumerable<string> RegenerateSpecialistFields(Alignment alignment, CharacterClass characterClass, Race race);
     }
 }

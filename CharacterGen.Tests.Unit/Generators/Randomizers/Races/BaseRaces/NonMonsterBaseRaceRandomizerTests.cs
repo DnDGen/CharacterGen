@@ -26,7 +26,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new NonMonsterBaseRaceRandomizer(mockPercentileSelector.Object, mockAdjustmentsSelector.Object, mockCollectionSelector.Object, generator);
+            randomizer = new NonMonsterBaseRaceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object, generator);
 
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "monster base race", "aquatic base race", "other base race" });

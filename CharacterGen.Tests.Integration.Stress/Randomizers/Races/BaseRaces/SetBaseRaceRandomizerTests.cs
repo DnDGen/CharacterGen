@@ -18,18 +18,17 @@ namespace CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void Stress()
+        public void StressSetBaseRace()
         {
             stressor.Stress(AssertBaseRace);
         }
 
         protected void AssertBaseRace()
         {
-            var alignment = GetNewAlignment();
-            var characterClass = GetNewCharacterClass(alignment);
-            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(alignment, characterClass);
+            var prototype = GetCharacterPrototype();
+            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
 
-            var baseRace = SetBaseRaceRandomizer.Randomize(alignment, characterClass);
+            var baseRace = SetBaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
         }
 

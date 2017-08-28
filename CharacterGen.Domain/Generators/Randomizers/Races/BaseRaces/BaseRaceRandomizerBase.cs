@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Randomizers.Races;
 using CharacterGen.Verifiers.Exceptions;
@@ -14,39 +13,36 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
     internal abstract class BaseRaceRandomizerBase : RaceRandomizer
     {
-        private readonly IPercentileSelector percentileResultSelector;
-        private readonly IAdjustmentsSelector adjustmentSelector;
+        private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
         private readonly ICollectionsSelector collectionSelector;
 
-        public BaseRaceRandomizerBase(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentSelector, Generator generator, ICollectionsSelector collectionSelector)
+        public BaseRaceRandomizerBase(IPercentileSelector percentileSelector, Generator generator, ICollectionsSelector collectionSelector)
         {
-            this.percentileResultSelector = percentileResultSelector;
-            this.adjustmentSelector = adjustmentSelector;
+            this.percentileSelector = percentileSelector;
             this.generator = generator;
             this.collectionSelector = collectionSelector;
         }
 
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var allowedBaseRaces = GetAllPossible(alignment, characterClass);
-            if (allowedBaseRaces.Any() == false)
+            if (!allowedBaseRaces.Any())
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
 
             return generator.Generate(
-                () => percentileResultSelector.SelectFrom(tableName),
+                () => percentileSelector.SelectFrom(tableName),
                 b => allowedBaseRaces.Contains(b),
                 () => collectionSelector.SelectRandomFrom(allowedBaseRaces),
                 b => $"{b} is not from [{string.Join(", ", allowedBaseRaces)}]",
                 $"base race from [{string.Join(",", allowedBaseRaces)}]");
         }
 
-        private bool RaceIsAllowed(string baseRace, Alignment alignment, CharacterClass characterClass)
+        private bool RaceIsAllowed(string baseRace, Alignment alignment)
         {
             return !string.IsNullOrEmpty(baseRace)
-                && LevelAdjustmentIsAllowed(baseRace, characterClass.Level)
                 && BaseRaceCanBeAlignment(baseRace, alignment)
                 && BaseRaceIsAllowedByRandomizer(baseRace);
         }
@@ -57,21 +53,14 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
             return alignmentRaces.Contains(baseRace);
         }
 
-        private bool LevelAdjustmentIsAllowed(string baseRace, int level)
-        {
-            var levelAdjustment = adjustmentSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, baseRace);
-
-            return levelAdjustment < level;
-        }
-
         protected abstract bool BaseRaceIsAllowedByRandomizer(string baseRace);
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
-            var baseRaces = percentileResultSelector.SelectAllFrom(tableName);
+            var baseRaces = percentileSelector.SelectAllFrom(tableName);
 
-            return baseRaces.Where(r => RaceIsAllowed(r, alignment, characterClass));
+            return baseRaces.Where(r => RaceIsAllowed(r, alignment));
         }
     }
 }

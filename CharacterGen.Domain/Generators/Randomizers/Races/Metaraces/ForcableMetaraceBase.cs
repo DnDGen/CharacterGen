@@ -1,6 +1,5 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
-using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
 using CharacterGen.Randomizers.Races;
@@ -18,19 +17,17 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
         public bool ForceMetarace { get; set; }
 
         private readonly ICollectionsSelector collectionSelector;
-        private readonly IPercentileSelector percentileResultSelector;
-        private readonly IAdjustmentsSelector adjustmentsSelector;
+        private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
 
-        public ForcableMetaraceBase(IPercentileSelector percentileResultSelector, IAdjustmentsSelector adjustmentsSelector, Generator generator, ICollectionsSelector collectionSelector)
+        public ForcableMetaraceBase(IPercentileSelector percentileSelector, Generator generator, ICollectionsSelector collectionSelector)
         {
-            this.percentileResultSelector = percentileResultSelector;
-            this.adjustmentsSelector = adjustmentsSelector;
+            this.percentileSelector = percentileSelector;
             this.generator = generator;
             this.collectionSelector = collectionSelector;
         }
 
-        public string Randomize(Alignment alignment, CharacterClass characterClass)
+        public string Randomize(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var allowedMetaraces = GetAllPossible(alignment, characterClass);
             if (!allowedMetaraces.Any())
@@ -39,7 +36,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
 
             return generator.Generate(
-                () => percentileResultSelector.SelectFrom(tableName),
+                () => percentileSelector.SelectFrom(tableName),
                 m => allowedMetaraces.Contains(m),
                 () => GetDefaultMetarace(allowedMetaraces),
                 m => $"{m} is not from [{string.Join(",", allowedMetaraces)}]",
@@ -54,25 +51,24 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
             return collectionSelector.SelectRandomFrom(allowedMetaraces);
         }
 
-        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClass characterClass)
+        public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
-            var metaraces = percentileResultSelector.SelectAllFrom(tableName);
+            var metaraces = percentileSelector.SelectAllFrom(tableName);
             return metaraces.Where(r => RaceIsAllowed(r, alignment, characterClass));
         }
 
-        private bool RaceIsAllowed(string metarace, Alignment alignment, CharacterClass characterClass)
+        private bool RaceIsAllowed(string metarace, Alignment alignment, CharacterClassPrototype characterClass)
         {
             if (metarace == RaceConstants.Metaraces.None)
                 return !ForceMetarace;
 
-            return LevelAdjustmentIsAllowed(metarace, characterClass.Level)
-                && MetaraceCanBeAlignment(metarace, alignment)
+            return MetaraceCanBeAlignment(metarace, alignment)
                 && MetaraceCanBeClass(metarace, characterClass)
                 && MetaraceIsAllowed(metarace);
         }
 
-        private bool MetaraceCanBeClass(string metarace, CharacterClass characterClass)
+        private bool MetaraceCanBeClass(string metarace, CharacterClassPrototype characterClass)
         {
             var classRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
             return classRaces.Contains(metarace);
@@ -82,12 +78,6 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
         {
             var alignmentRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
             return alignmentRaces.Contains(metarace);
-        }
-
-        private bool LevelAdjustmentIsAllowed(string metarace, int level)
-        {
-            var levelAdjustment = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, metarace);
-            return levelAdjustment < level;
         }
 
         protected abstract bool MetaraceIsAllowed(string metarace);
