@@ -92,22 +92,23 @@ namespace CharacterGen.Domain.Generators.Verifiers
             if (!verified)
                 return false;
 
-            var baseRaces = baseRaceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
-            if (!baseRaces.Any())
-                return false;
-
             var metaraces = metaraceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
             if (!metaraces.Any())
                 return false;
 
-            if (metaraces.Count() == 1)
-            {
-                verified = VerifyMetarace(alignmentPrototype, classPrototype, metaraces.Single());
-                if (!verified)
-                    return false;
-            }
+            var validMetaraces = metaraces.Where(r => VerifyMetarace(alignmentPrototype, classPrototype, r));
+            if (!validMetaraces.Any())
+                return false;
 
-            var racePrototypes = GetAllRacePrototypes(baseRaces, metaraces);
+            var baseRaces = baseRaceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
+            if (!baseRaces.Any())
+                return false;
+
+            var validBaseRaces = baseRaces.Where(r => VerifyBaseRace(alignmentPrototype, classPrototype, r));
+            if (!validBaseRaces.Any())
+                return false;
+
+            var racePrototypes = GetAllRacePrototypes(validBaseRaces, validMetaraces);
             return racePrototypes.Any(r => VerifyRaceCompatibility(alignmentPrototype, classPrototype, r));
         }
 
@@ -150,11 +151,11 @@ namespace CharacterGen.Domain.Generators.Verifiers
             if (!verified)
                 return false;
 
-            verified = VerifyBaseRace(alignmentPrototype, classPrototype, racePrototype.BaseRace);
+            verified = VerifyMetarace(alignmentPrototype, classPrototype, racePrototype.Metarace);
             if (!verified)
                 return false;
 
-            verified = VerifyMetarace(alignmentPrototype, classPrototype, racePrototype.Metarace);
+            verified = VerifyBaseRace(alignmentPrototype, classPrototype, racePrototype.BaseRace);
             if (!verified)
                 return false;
 
