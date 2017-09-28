@@ -18,13 +18,13 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         private ISetBaseRaceRandomizer randomizer;
         private CharacterClassPrototype characterClass;
         private Alignment alignment;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private List<string> alignmentBaseRaces;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             randomizer = new SetBaseRaceRandomizer(mockCollectionsSelector.Object);
             characterClass = new CharacterClassPrototype();
             alignment = new Alignment();

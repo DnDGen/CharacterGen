@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Tables.Abilities.Races
         }
 
         [Inject]
-        public CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionMapper CollectionsMapper { get; set; }
 
         [Test]
         public void AllBaseRacesHaveAbilityAdjustmentTables()

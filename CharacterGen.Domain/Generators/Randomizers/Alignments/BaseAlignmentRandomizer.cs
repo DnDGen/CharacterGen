@@ -14,9 +14,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
     {
         private readonly IPercentileSelector percentileResultSelector;
         private readonly Generator generator;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
+        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionSelector collectionsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
             this.generator = generator;

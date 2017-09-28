@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     public class AquaticBaseRaceRandomizerTests
     {
         private RaceRandomizer aquaticBaseRaceRandomizer;
-        private Mock<ICollectionsSelector> mockCollectionSelector;
+        private Mock<ICollectionSelector> mockCollectionSelector;
 
         private string firstAquaticBaseRace = "first aquatic base race";
         private string secondAquaticBaseRace = "second aquatic base race";
@@ -29,7 +29,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            mockCollectionSelector = new Mock<ICollectionsSelector>();
+            mockCollectionSelector = new Mock<ICollectionSelector>();
             aquaticBaseRaceRandomizer = new AquaticBaseRaceRandomizer(mockCollectionSelector.Object);
 
             alignment = new Alignment();

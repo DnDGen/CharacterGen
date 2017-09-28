@@ -10,12 +10,12 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
     public class SkillSelectorTests
     {
         private ISkillSelector skillSelector;
-        private Mock<ICollectionsSelector> mockInnerSelector;
+        private Mock<ICollectionSelector> mockInnerSelector;
 
         [SetUp]
         public void Setup()
         {
-            mockInnerSelector = new Mock<ICollectionsSelector>();
+            mockInnerSelector = new Mock<ICollectionSelector>();
             skillSelector = new SkillSelector(mockInnerSelector.Object);
         }
 

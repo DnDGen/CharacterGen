@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
     {
         private TestForcableMetaraceRandomizer forcableMetaraceRandomizer;
         private Mock<IPercentileSelector> mockPercentileSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
 
         private string firstMetarace = "first metarace";
         private string secondMetarace = "second metarace";
@@ -33,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         public void Setup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             forcableMetaraceRandomizer = new TestForcableMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
             alignment = new Alignment();
@@ -230,7 +230,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             public string ForbiddenMetarace { get; set; }
 
-            public TestForcableMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionSelector)
+            public TestForcableMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionSelector)
                 : base(percentileResultSelector, new ConfigurableIterationGenerator(2), collectionSelector)
             { }
 

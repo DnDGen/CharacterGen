@@ -34,16 +34,11 @@
   <percentile>
     <lower>51</lower>
     <content>Human</content>
-    <upper>95</upper>
-  </percentile>
-  <percentile>
-    <lower>96</lower>
-    <content>Gray Elf</content>
     <upper>96</upper>
   </percentile>
   <percentile>
     <lower>97</lower>
-    <content>Lizardfolk</content>
+    <content>Gray Elf</content>
     <upper>97</upper>
   </percentile>
   <percentile>

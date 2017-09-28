@@ -13,13 +13,13 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
     {
         private ILanguageCollectionsSelector selector;
         private Race race;
-        private Mock<ICollectionsSelector> mockInnerSelector;
+        private Mock<ICollectionSelector> mockInnerSelector;
         private string className;
 
         [SetUp]
         public void Setup()
         {
-            mockInnerSelector = new Mock<ICollectionsSelector>();
+            mockInnerSelector = new Mock<ICollectionSelector>();
             selector = new LanguageCollectionsSelector(mockInnerSelector.Object);
             race = new Race();
 

@@ -21,7 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
     {
         private ISkillsGenerator skillsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private CharacterClass characterClass;
         private Dictionary<string, Ability> abilities;
@@ -40,7 +40,7 @@ namespace CharacterGen.Tests.Unit.Generators.Skills
         public void Setup()
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockSkillSelector = new Mock<ISkillSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);

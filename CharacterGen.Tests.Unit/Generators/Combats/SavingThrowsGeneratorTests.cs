@@ -14,7 +14,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
     [TestFixture]
     public class SavingThrowsGeneratorTests
     {
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private ISavingThrowsGenerator savingThrowsGenerator;
         private CharacterClass characterClass;
         private List<Feat> feats;
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             savingThrowsGenerator = new SavingThrowsGenerator(mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             feats = new List<Feat>();

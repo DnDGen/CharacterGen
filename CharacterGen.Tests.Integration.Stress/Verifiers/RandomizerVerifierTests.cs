@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Integration.Stress.Verifiers
     public class RandomizerVerifierTests : StressTests
     {
         [Inject]
-        public ICollectionsSelector CollectionsSelector { get; set; }
+        public ICollectionSelector CollectionsSelector { get; set; }
         [Inject]
         public Random Random { get; set; }
         [Inject]

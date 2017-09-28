@@ -9,9 +9,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class PhysicalCombatClassNameRandomizer : BaseClassNameRandomizer
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public PhysicalCombatClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+        public PhysicalCombatClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;

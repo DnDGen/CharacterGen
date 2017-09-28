@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClasses
         }
 
         [Inject]
-        internal CollectionsMapper CollectionsMapper { get; set; }
+        internal CollectionMapper CollectionsMapper { get; set; }
 
         [Test]
         public void AllClassesHaveFeatDataTables()

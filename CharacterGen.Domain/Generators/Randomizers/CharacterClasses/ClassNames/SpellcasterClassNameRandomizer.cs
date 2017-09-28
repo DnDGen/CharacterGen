@@ -9,9 +9,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class SpellcasterClassNameRandomizer : BaseClassNameRandomizer
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public SpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+        public SpellcasterClassNameRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;

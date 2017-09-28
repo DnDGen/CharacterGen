@@ -14,10 +14,10 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class ArmorClassGenerator : IArmorClassGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public ArmorClassGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public ArmorClassGenerator(ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;

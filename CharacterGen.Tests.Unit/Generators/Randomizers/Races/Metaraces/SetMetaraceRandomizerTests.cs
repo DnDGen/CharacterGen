@@ -18,14 +18,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         private ISetMetaraceRandomizer randomizer;
         private CharacterClassPrototype characterClass;
         private Alignment alignment;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private List<string> alignmentMetaraces;
         private List<string> classMetaraces;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             randomizer = new SetMetaraceRandomizer(mockCollectionsSelector.Object);
             characterClass = new CharacterClassPrototype();
             alignment = new Alignment();

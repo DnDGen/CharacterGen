@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
     {
         private Mock<Dice> mockDice;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private IHitPointsGenerator hitPointsGenerator;
 
         private CharacterClass characterClass;
@@ -33,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         {
             mockDice = new Mock<Dice>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             hitPointsGenerator = new HitPointsGenerator(mockDice.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             mockPartialRolls = new Dictionary<int, Mock<PartialRoll>>();

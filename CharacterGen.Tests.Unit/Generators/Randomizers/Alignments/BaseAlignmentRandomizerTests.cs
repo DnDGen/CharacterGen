@@ -23,7 +23,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         public void Setup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            var mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            var mockCollectionsSelector = new Mock<ICollectionSelector>();
             var generator = new ConfigurableIterationGenerator(2);
 
             alignmentRandomizer = new TestAlignmentRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
@@ -135,7 +135,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             public string NotAllowedLawfulness { get; set; }
             public string NotAllowedGoodness { get; set; }
 
-            public TestAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionsSelector collectionsSelector)
+            public TestAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionSelector collectionsSelector)
                 : base(innerSelector, generator, collectionsSelector)
             { }
 

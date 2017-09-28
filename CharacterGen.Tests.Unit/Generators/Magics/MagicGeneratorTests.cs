@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     {
         private Mock<ISpellsGenerator> mockSpellsGenerator;
         private Mock<IAnimalGenerator> mockAnimalGenerator;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private IMagicGenerator magicGenerator;
         private CharacterClass characterClass;
@@ -39,7 +39,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         {
             mockSpellsGenerator = new Mock<ISpellsGenerator>();
             mockAnimalGenerator = new Mock<IAnimalGenerator>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             magicGenerator = new MagicGenerator(mockSpellsGenerator.Object, mockAnimalGenerator.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
             characterClass = new CharacterClass();

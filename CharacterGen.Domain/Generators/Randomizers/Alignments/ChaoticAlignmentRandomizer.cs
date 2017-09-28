@@ -7,7 +7,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Alignments
 {
     internal class ChaoticAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public ChaoticAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionsSelector collectionsSelector)
+        public ChaoticAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionSelector collectionsSelector)
             : base(innerSelector, generator, collectionsSelector)
         { }
 

@@ -6,7 +6,7 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 {
     internal class AnyMetaraceRandomizer : ForcableMetaraceBase
     {
-        public AnyMetaraceRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionSelector)
+        public AnyMetaraceRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionSelector collectionSelector)
             : base(percentileResultSelector, generator, collectionSelector)
         { }
 

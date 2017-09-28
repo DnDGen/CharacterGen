@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         private Equipment equipment;
         private List<Feat> feats;
         private int adjustedDexterityBonus;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Race race;
         private Dictionary<string, int> sizeModifiers;
@@ -31,7 +31,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
         public void Setup()
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             armorClassGenerator = new ArmorClassGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
             equipment = new Equipment();
             feats = new List<Feat>();

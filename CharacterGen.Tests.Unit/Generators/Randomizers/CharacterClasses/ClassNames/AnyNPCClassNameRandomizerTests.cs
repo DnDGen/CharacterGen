@@ -14,14 +14,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     public class AnyNPCClassNameRandomizerTests
     {
         private IClassNameRandomizer npcRandomizer;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private List<string> npcs;
         private Alignment alignment;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             npcRandomizer = new AnyNPCClassNameRandomizer(mockCollectionsSelector.Object);
             npcs = new List<string>();
             alignment = new Alignment();

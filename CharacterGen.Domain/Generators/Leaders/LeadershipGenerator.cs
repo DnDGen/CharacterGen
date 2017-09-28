@@ -22,7 +22,7 @@ namespace CharacterGen.Domain.Generators
         private readonly ILeadershipSelector leadershipSelector;
         private readonly IPercentileSelector percentileSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly Generator generator;
         private readonly JustInTimeFactory justInTimeFactrory;
 
@@ -30,7 +30,7 @@ namespace CharacterGen.Domain.Generators
             ILeadershipSelector leadershipSelector,
             IPercentileSelector percentileSelector,
             IAdjustmentsSelector adjustmentsSelector,
-            ICollectionsSelector collectionsSelector,
+            ICollectionSelector collectionsSelector,
             Generator generator,
             JustInTimeFactory justInTimeFactrory)
         {

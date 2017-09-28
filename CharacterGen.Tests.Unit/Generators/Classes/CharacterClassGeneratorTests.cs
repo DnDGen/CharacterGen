@@ -21,7 +21,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
 
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private ICharacterClassGenerator characterClassGenerator;
         private Alignment alignment;
         private CharacterClassPrototype classPrototype;
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Classes
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             characterClassGenerator = new CharacterClassGenerator(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object, mockPercentileSelector.Object);
 
             alignment = new Alignment();

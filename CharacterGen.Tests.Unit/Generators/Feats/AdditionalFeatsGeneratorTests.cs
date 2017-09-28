@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
     [TestFixture]
     public class AdditionalFeatsGeneratorTests
     {
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IFeatsSelector> mockFeatsSelector;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();

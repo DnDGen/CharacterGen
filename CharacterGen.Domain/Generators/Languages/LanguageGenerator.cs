@@ -13,9 +13,9 @@ namespace CharacterGen.Domain.Generators.Languages
     internal class LanguageGenerator : ILanguageGenerator
     {
         private readonly ILanguageCollectionsSelector languagesSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public LanguageGenerator(ILanguageCollectionsSelector languagesSelector, ICollectionsSelector collectionsSelector)
+        public LanguageGenerator(ILanguageCollectionsSelector languagesSelector, ICollectionSelector collectionsSelector)
         {
             this.languagesSelector = languagesSelector;
             this.collectionsSelector = collectionsSelector;

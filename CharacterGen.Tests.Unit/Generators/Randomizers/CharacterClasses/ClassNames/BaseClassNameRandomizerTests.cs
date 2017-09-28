@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     {
         private TestClassRandomizer classNameRandomizer;
         private Mock<IPercentileSelector> mockPercentileSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Alignment alignment;
 
         private string firstClass = "first class";
@@ -27,7 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         public void Setup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             var generator = new ConfigurableIterationGenerator(2);
 
             classNameRandomizer = new TestClassRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
@@ -124,7 +124,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         {
             public string NotAllowedClassName { get; set; }
 
-            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionsSelector collectionsSelector)
+            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionSelector collectionsSelector)
                 : base(percentileResultSelector, generator, collectionsSelector)
             { }
 

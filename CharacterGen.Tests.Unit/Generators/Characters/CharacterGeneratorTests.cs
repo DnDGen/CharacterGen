@@ -60,7 +60,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
         private Mock<IMagicGenerator> mockMagicGenerator;
         private Generator generator;
         private ICharacterGenerator characterGenerator;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
 
         private Mock<IAlignmentRandomizer> mockAlignmentRandomizer;
         private Mock<IClassNameRandomizer> mockClassNameRandomizer;
@@ -98,7 +98,7 @@ namespace CharacterGen.Tests.Unit.Generators.Characters
             levelAdjustments = new Dictionary<string, int>();
             mockRandomizerVerifier = new Mock<IRandomizerVerifier>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
 
             characterGenerator = new CharacterGenerator(
                 mockAlignmentGenerator.Object,

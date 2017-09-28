@@ -13,9 +13,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
     {
         public string SetMetarace { get; set; }
 
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public SetMetaraceRandomizer(ICollectionsSelector collectionsSelector)
+        public SetMetaraceRandomizer(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

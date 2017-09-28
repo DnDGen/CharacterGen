@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
 {
     internal class AnyNPCClassNameRandomizer : IClassNameRandomizer
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public AnyNPCClassNameRandomizer(ICollectionsSelector collectionsSelector)
+        public AnyNPCClassNameRandomizer(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

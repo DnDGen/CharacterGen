@@ -17,9 +17,9 @@ namespace CharacterGen.Domain.Generators.Abilities
         private readonly IPercentileSelector percentileSelector;
         private readonly IAbilityAdjustmentsSelector abilityAdjustmentsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public AbilitiesGenerator(IPercentileSelector percentileSelector, IAbilityAdjustmentsSelector abilityAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public AbilitiesGenerator(IPercentileSelector percentileSelector, IAbilityAdjustmentsSelector abilityAdjustmentsSelector, IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector)
         {
             this.percentileSelector = percentileSelector;
             this.abilityAdjustmentsSelector = abilityAdjustmentsSelector;

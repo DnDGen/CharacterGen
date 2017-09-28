@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         public void Setup()
         {
             var mockPercentileSelector = new Mock<IPercentileSelector>();
-            var mockCollecionsSelector = new Mock<ICollectionsSelector>();
+            var mockCollecionsSelector = new Mock<ICollectionSelector>();
             var generator = new ConfigurableIterationGenerator();
             var randomizer = new ChaoticAlignmentRandomizer(mockPercentileSelector.Object, generator, mockCollecionsSelector.Object);
 

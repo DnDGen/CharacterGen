@@ -17,7 +17,7 @@ namespace CharacterGen.Domain.Generators.Races
     internal class RaceGenerator : IRaceGenerator
     {
         private readonly IPercentileSelector percentileSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly Dice dice;
         private readonly Generator generator;
@@ -26,7 +26,7 @@ namespace CharacterGen.Domain.Generators.Races
         private readonly IEnumerable<string> allClassTypes;
 
         public RaceGenerator(IPercentileSelector percentileSelector,
-            ICollectionsSelector collectionsSelector,
+            ICollectionSelector collectionsSelector,
             IAdjustmentsSelector adjustmentsSelector,
             Dice dice,
             Generator generator)

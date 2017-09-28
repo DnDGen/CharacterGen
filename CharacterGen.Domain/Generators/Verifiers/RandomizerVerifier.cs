@@ -1,5 +1,6 @@
 ﻿using CharacterGen.Alignments;
 using CharacterGen.CharacterClasses;
+using CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces;
 using CharacterGen.Domain.Selectors.Collections;
 using CharacterGen.Domain.Tables;
 using CharacterGen.Races;
@@ -16,9 +17,9 @@ namespace CharacterGen.Domain.Generators.Verifiers
     internal class RandomizerVerifier : IRandomizerVerifier
     {
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public RandomizerVerifier(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public RandomizerVerifier(IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector)
         {
             this.adjustmentsSelector = adjustmentsSelector;
             this.collectionsSelector = collectionsSelector;
@@ -60,11 +61,18 @@ namespace CharacterGen.Domain.Generators.Verifiers
 
             var characterClassPrototypes = GetAllCharacterClassPrototypes(classNames, levels);
 
-            //INFO: If all classes are NPCs, make sure that metarace is not forced
-            if (characterClassPrototypes.All(p => p.IsNPC) && metaraceRandomizer is IForcableMetaraceRandomizer)
+            //INFO: If all classes are NPCs, make sure that races are compatible
+            if (characterClassPrototypes.All(p => p.IsNPC))
             {
-                var forceableMetaraceRandomizer = metaraceRandomizer as IForcableMetaraceRandomizer;
-                if (forceableMetaraceRandomizer.ForceMetarace)
+                if (metaraceRandomizer is IForcableMetaraceRandomizer)
+                {
+                    var forceableMetaraceRandomizer = metaraceRandomizer as IForcableMetaraceRandomizer;
+                    if (forceableMetaraceRandomizer.ForceMetarace)
+                        return false;
+                }
+
+                //HACK: Random NPCs will never be monster base races, so explicitly filtering out those races
+                if (baseRaceRandomizer is MonsterBaseRaceRandomizer)
                     return false;
             }
 
@@ -121,12 +129,12 @@ namespace CharacterGen.Domain.Generators.Verifiers
         private IEnumerable<RacePrototype> GetAllRacePrototypes(IEnumerable<string> baseRaces, IEnumerable<string> metaraces)
         {
             //INFO: If None is an allowed metarace, test with that for expediency
-            var metaracesToTest = metaraces;
+            var metaracesToCheck = metaraces;
             if (metaraces.Contains(RaceConstants.Metaraces.None))
-                metaracesToTest = new[] { RaceConstants.Metaraces.None };
+                metaracesToCheck = new[] { RaceConstants.Metaraces.None };
 
             foreach (var baseRace in baseRaces)
-                foreach (var metarace in metaracesToTest)
+                foreach (var metarace in metaracesToCheck)
                     yield return new RacePrototype { BaseRace = baseRace, Metarace = metarace };
         }
 

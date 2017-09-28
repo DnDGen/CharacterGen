@@ -11,9 +11,9 @@ namespace CharacterGen.Domain.Generators.Combats
 {
     internal class SavingThrowsGenerator : ISavingThrowsGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public SavingThrowsGenerator(ICollectionsSelector collectionsSelector)
+        public SavingThrowsGenerator(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

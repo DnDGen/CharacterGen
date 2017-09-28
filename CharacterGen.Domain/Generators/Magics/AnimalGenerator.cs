@@ -13,10 +13,10 @@ namespace CharacterGen.Domain.Generators.Magics
 {
     internal class AnimalGenerator : IAnimalGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public AnimalGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public AnimalGenerator(ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;

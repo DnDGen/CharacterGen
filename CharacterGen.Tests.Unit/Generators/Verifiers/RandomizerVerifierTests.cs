@@ -27,7 +27,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         private Mock<RaceRandomizer> mockBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockMetaraceRandomizer;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<ISetLevelRandomizer> mockSetLevelRandomizer;
         private Mock<ISetClassNameRandomizer> mockSetClassNameRandomizer;
 
@@ -46,7 +46,7 @@ namespace CharacterGen.Tests.Unit.Generators.Verifiers
         public void Setup()
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             verifier = new RandomizerVerifier(mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
             mockAlignmentRandomizer = new Mock<IAlignmentRandomizer>();
             mockClassNameRandomizer = new Mock<IClassNameRandomizer>();

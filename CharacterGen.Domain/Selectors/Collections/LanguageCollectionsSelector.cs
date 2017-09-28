@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class LanguageCollectionsSelector : ILanguageCollectionsSelector
     {
-        private readonly ICollectionsSelector innerSelector;
+        private readonly ICollectionSelector innerSelector;
 
-        public LanguageCollectionsSelector(ICollectionsSelector innerSelector)
+        public LanguageCollectionsSelector(ICollectionSelector innerSelector)
         {
             this.innerSelector = innerSelector;
         }

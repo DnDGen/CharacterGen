@@ -19,10 +19,10 @@ namespace CharacterGen.Domain.Generators.Magics
     {
         private readonly ISpellsGenerator spellsGenerator;
         private readonly IAnimalGenerator animalGenerator;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public MagicGenerator(ISpellsGenerator spellsGenerator, IAnimalGenerator animalGenerator, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public MagicGenerator(ISpellsGenerator spellsGenerator, IAnimalGenerator animalGenerator, ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
         {
             this.spellsGenerator = spellsGenerator;
             this.animalGenerator = animalGenerator;

@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
 {
     internal class UndeadMetaraceRandomizer : ForcableMetaraceBase
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public UndeadMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+        public UndeadMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;

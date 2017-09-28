@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         private const string Metarace = "metarace";
 
         private Mock<IPercentileSelector> mockPercentileSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Mock<Dice> mockDice;
         private IRaceGenerator raceGenerator;
@@ -49,7 +49,7 @@ namespace CharacterGen.Tests.Unit.Generators.Races
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockDice = new Mock<Dice>();

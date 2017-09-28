@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
 
         protected abstract string classNameGroup { get; }
 
-        internal Mock<ICollectionsSelector> mockCollectionsSelector;
+        internal Mock<ICollectionSelector> mockCollectionsSelector;
         internal Mock<IPercentileSelector> mockPercentileResultSelector;
         internal Generator generator;
         protected IClassNameRandomizer randomizer;
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
         [SetUp]
         public void ClassNameRandomizerTestsSetup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
             generator = new ConfigurableIterationGenerator();
             alignment = new Alignment();

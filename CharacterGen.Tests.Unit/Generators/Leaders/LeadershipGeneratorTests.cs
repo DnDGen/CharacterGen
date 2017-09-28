@@ -31,7 +31,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
         private Mock<RaceRandomizer> mockAnyBaseRaceRandomizer;
         private Mock<RaceRandomizer> mockAnyMetaraceRandomizer;
         private Mock<IAbilitiesRandomizer> mockRawAbilityRandomizer;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IClassNameRandomizer> mockAnyNPCClassNameRandomizer;
         private Mock<JustInTimeFactory> mockJustInTimeFactory;
         private List<string> allowedAlignments;
@@ -52,7 +52,7 @@ namespace CharacterGen.Tests.Unit.Generators.Leaders
             mockAnyBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawAbilityRandomizer = new Mock<IAbilitiesRandomizer>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             var generator = new ConfigurableIterationGenerator(2);
             mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockJustInTimeFactory = new Mock<JustInTimeFactory>();

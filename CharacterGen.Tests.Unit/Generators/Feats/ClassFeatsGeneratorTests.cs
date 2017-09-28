@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
     {
         private Mock<IFeatsSelector> mockFeatsSelector;
         private Mock<IFeatFocusGenerator> mockFeatFocusGenerator;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private IClassFeatsGenerator classFeatsGenerator;
         private CharacterClass characterClass;
         private Dictionary<string, Ability> stats;
@@ -33,7 +33,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         {
             mockFeatsSelector = new Mock<IFeatsSelector>();
             mockFeatFocusGenerator = new Mock<IFeatFocusGenerator>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             classFeatsGenerator = new ClassFeatsGenerator(mockFeatsSelector.Object, mockFeatFocusGenerator.Object, mockCollectionsSelector.Object);
             characterClass = new CharacterClass();
             stats = new Dictionary<string, Ability>();

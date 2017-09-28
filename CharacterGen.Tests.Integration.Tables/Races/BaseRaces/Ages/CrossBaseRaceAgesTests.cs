@@ -9,7 +9,7 @@ namespace CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
     public class CrossBaseRaceAgesTests : TableTests
     {
         [Inject]
-        public CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionMapper CollectionsMapper { get; set; }
 
         protected override string tableName
         {

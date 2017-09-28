@@ -15,12 +15,12 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class AdditionalFeatsGenerator : IAdditionalFeatsGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IFeatsSelector featsSelector;
         private readonly IFeatFocusGenerator featFocusGenerator;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public AdditionalFeatsGenerator(ICollectionsSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, IAdjustmentsSelector adjustmentsSelector)
+        public AdditionalFeatsGenerator(ICollectionSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.featsSelector = featsSelector;

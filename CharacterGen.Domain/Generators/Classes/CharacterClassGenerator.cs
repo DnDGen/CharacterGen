@@ -14,10 +14,10 @@ namespace CharacterGen.Domain.Generators.Classes
     internal class CharacterClassGenerator : ICharacterClassGenerator
     {
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IPercentileSelector percentileSelector;
 
-        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector)
+        public CharacterClassGenerator(IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector, IPercentileSelector percentileSelector)
         {
             this.adjustmentsSelector = adjustmentsSelector;
             this.percentileSelector = percentileSelector;

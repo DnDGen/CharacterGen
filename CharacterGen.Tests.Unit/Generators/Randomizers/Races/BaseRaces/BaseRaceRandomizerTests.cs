@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
     {
         private TestBaseRaceRandomizer randomizer;
         private Mock<IPercentileSelector> mockPercentileResultSelector;
-        private Mock<ICollectionsSelector> mockCollectionSelector;
+        private Mock<ICollectionSelector> mockCollectionSelector;
 
         private string firstBaseRace = "first base race";
         private string secondBaseRace = "second base race";
@@ -30,7 +30,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void Setup()
         {
             mockPercentileResultSelector = new Mock<IPercentileSelector>();
-            mockCollectionSelector = new Mock<ICollectionsSelector>();
+            mockCollectionSelector = new Mock<ICollectionSelector>();
             randomizer = new TestBaseRaceRandomizer(mockPercentileResultSelector.Object, mockCollectionSelector.Object);
 
             alignment = new Alignment();
@@ -186,7 +186,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             public string ForbiddenBaseRace { get; set; }
 
-            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionSelector)
+            public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionSelector)
                 : base(percentileResultSelector, new ConfigurableIterationGenerator(2), collectionSelector)
             { }
 

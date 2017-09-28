@@ -15,9 +15,9 @@ namespace CharacterGen.Domain.Generators.Feats
     {
         private readonly IFeatsSelector featsSelector;
         private readonly IFeatFocusGenerator featFocusGenerator;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public ClassFeatsGenerator(IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, ICollectionsSelector collectionsSelector)
+        public ClassFeatsGenerator(IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, ICollectionSelector collectionsSelector)
         {
             this.featsSelector = featsSelector;
             this.featFocusGenerator = featFocusGenerator;

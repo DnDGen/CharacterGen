@@ -44,7 +44,7 @@ namespace CharacterGen.Domain.Generators.Characters
         private readonly IEquipmentGenerator equipmentGenerator;
         private readonly IMagicGenerator magicGenerator;
         private readonly Generator generator;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAbilitiesGenerator abilitiesGenerator;
         private readonly ILanguageGenerator languageGenerator;
         private readonly ISkillsGenerator skillsGenerator;
@@ -60,7 +60,7 @@ namespace CharacterGen.Domain.Generators.Characters
             IEquipmentGenerator equipmentGenerator,
             IMagicGenerator magicGenerator,
             Generator generator,
-            ICollectionsSelector collectionsSelector,
+            ICollectionSelector collectionsSelector,
             IAbilitiesGenerator abilitiesGenerator,
             ILanguageGenerator languageGenerator,
             ISkillsGenerator skillsGenerator,

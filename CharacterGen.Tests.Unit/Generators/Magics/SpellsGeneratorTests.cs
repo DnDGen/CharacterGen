@@ -18,7 +18,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     public class SpellsGeneratorTests
     {
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private ISpellsGenerator spellsGenerator;
         private CharacterClass characterClass;
@@ -34,7 +34,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         public void Setup()
         {
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             spellsGenerator = new SpellsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();

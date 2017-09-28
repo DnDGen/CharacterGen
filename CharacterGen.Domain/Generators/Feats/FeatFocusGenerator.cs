@@ -12,9 +12,9 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class FeatFocusGenerator : IFeatFocusGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public FeatFocusGenerator(ICollectionsSelector collectionsSelector)
+        public FeatFocusGenerator(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

@@ -20,9 +20,9 @@ namespace CharacterGen.Domain.Generators.Combats
         private readonly IHitPointsGenerator hitPointsGenerator;
         private readonly ISavingThrowsGenerator savingThrowsGenerator;
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator, IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector)
         {
             this.armorClassGenerator = armorClassGenerator;
             this.hitPointsGenerator = hitPointsGenerator;

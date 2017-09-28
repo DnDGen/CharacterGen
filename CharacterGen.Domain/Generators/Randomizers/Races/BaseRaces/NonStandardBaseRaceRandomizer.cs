@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
 {
     internal class NonStandardBaseRaceRandomizer : BaseRaceRandomizerBase
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionsSelector collectionsSelector, Generator generator)
+        public NonStandardBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector, Generator generator)
             : base(percentileResultSelector, generator, collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;

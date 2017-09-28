@@ -7,9 +7,9 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class AdjustmentsSelector : IAdjustmentsSelector
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public AdjustmentsSelector(ICollectionsSelector collectionsSelector)
+        public AdjustmentsSelector(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

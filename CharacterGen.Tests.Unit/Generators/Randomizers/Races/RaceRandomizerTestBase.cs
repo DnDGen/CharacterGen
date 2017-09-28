@@ -13,7 +13,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
     public abstract class RaceRandomizerTestBase
     {
         internal Mock<IPercentileSelector> mockPercentileSelector;
-        internal Mock<ICollectionsSelector> mockCollectionSelector;
+        internal Mock<ICollectionSelector> mockCollectionSelector;
         internal Generator generator;
         protected Alignment alignment;
         protected CharacterClassPrototype characterClass;
@@ -22,7 +22,7 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.Races
         public void RaceRandomizerTestBaseSetup()
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
-            mockCollectionSelector = new Mock<ICollectionsSelector>();
+            mockCollectionSelector = new Mock<ICollectionSelector>();
             generator = new ConfigurableIterationGenerator();
             characterClass = new CharacterClassPrototype();
             alignment = new Alignment();

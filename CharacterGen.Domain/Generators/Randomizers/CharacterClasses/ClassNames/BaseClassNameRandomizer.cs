@@ -14,9 +14,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
     {
         private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public BaseClassNameRandomizer(IPercentileSelector percentileSelector, Generator generator, ICollectionsSelector collectionsSelector)
+        public BaseClassNameRandomizer(IPercentileSelector percentileSelector, Generator generator, ICollectionSelector collectionsSelector)
         {
             this.percentileSelector = percentileSelector;
             this.generator = generator;

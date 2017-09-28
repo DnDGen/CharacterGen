@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
     [TestFixture]
     public class ArmorGeneratorTests
     {
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<MundaneItemGenerator> mockMundaneArmorGenerator;
         private Mock<MagicalItemGenerator> mockMagicalArmorGenerator;
@@ -40,7 +40,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockMundaneArmorGenerator = new Mock<MundaneItemGenerator>();
             mockMagicalArmorGenerator = new Mock<MagicalItemGenerator>();

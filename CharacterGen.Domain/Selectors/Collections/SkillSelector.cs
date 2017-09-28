@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Selectors.Collections
 {
     internal class SkillSelector : ISkillSelector
     {
-        private readonly ICollectionsSelector innerSelector;
+        private readonly ICollectionSelector innerSelector;
 
-        public SkillSelector(ICollectionsSelector innerSelector)
+        public SkillSelector(ICollectionSelector innerSelector)
         {
             this.innerSelector = innerSelector;
         }

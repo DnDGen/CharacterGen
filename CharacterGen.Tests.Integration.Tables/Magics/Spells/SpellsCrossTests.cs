@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Integration.Tables.Magics.Spells
     public class SpellsCrossTests : TableTests
     {
         [Inject]
-        public ICollectionsSelector CollectionsSelector { get; set; }
+        public ICollectionSelector CollectionsSelector { get; set; }
         [Inject]
         internal IAdjustmentsSelector AdjustmentsSelector { get; set; }
         [Inject]

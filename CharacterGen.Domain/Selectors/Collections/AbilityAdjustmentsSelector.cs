@@ -8,9 +8,9 @@ namespace CharacterGen.Domain.Selectors.Collections
     internal class AbilityAdjustmentsSelector : IAbilityAdjustmentsSelector
     {
         private readonly IAdjustmentsSelector innerSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public AbilityAdjustmentsSelector(IAdjustmentsSelector innerSelector, ICollectionsSelector collectionsSelector)
+        public AbilityAdjustmentsSelector(IAdjustmentsSelector innerSelector, ICollectionSelector collectionsSelector)
         {
             this.innerSelector = innerSelector;
             this.collectionsSelector = collectionsSelector;

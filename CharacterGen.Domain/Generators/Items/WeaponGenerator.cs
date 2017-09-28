@@ -16,12 +16,12 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal class WeaponGenerator : IWeaponGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
         private readonly JustInTimeFactory justInTimeFactory;
 
-        public WeaponGenerator(ICollectionsSelector collectionsSelector, IPercentileSelector percentileSelector, Generator generator, JustInTimeFactory justInTimeFactory)
+        public WeaponGenerator(ICollectionSelector collectionsSelector, IPercentileSelector percentileSelector, Generator generator, JustInTimeFactory justInTimeFactory)
         {
             this.collectionsSelector = collectionsSelector;
             this.percentileSelector = percentileSelector;

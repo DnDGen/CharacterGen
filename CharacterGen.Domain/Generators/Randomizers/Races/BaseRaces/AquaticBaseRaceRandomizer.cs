@@ -12,9 +12,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
     //INFO: We are not using the base class here, as aquatic characters will never appear randomly (which assumes mostly on land)
     internal class AquaticBaseRaceRandomizer : RaceRandomizer
     {
-        private readonly ICollectionsSelector collectionSelector;
+        private readonly ICollectionSelector collectionSelector;
 
-        public AquaticBaseRaceRandomizer(ICollectionsSelector collectionSelector)
+        public AquaticBaseRaceRandomizer(ICollectionSelector collectionSelector)
         {
             this.collectionSelector = collectionSelector;
         }

@@ -15,7 +15,7 @@ namespace CharacterGen.Tests.Unit.Generators.Languages
     [TestFixture]
     public class LanguageGeneratorTests
     {
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<ILanguageCollectionsSelector> mockLanguageSelector;
         private ILanguageGenerator languageGenerator;
         private Race race;
@@ -28,7 +28,7 @@ namespace CharacterGen.Tests.Unit.Generators.Languages
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockLanguageSelector = new Mock<ILanguageCollectionsSelector>();
             languageGenerator = new LanguageGenerator(mockLanguageSelector.Object, mockCollectionsSelector.Object);
 

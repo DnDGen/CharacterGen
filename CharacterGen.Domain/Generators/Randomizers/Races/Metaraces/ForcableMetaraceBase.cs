@@ -16,11 +16,11 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.Metaraces
     {
         public bool ForceMetarace { get; set; }
 
-        private readonly ICollectionsSelector collectionSelector;
+        private readonly ICollectionSelector collectionSelector;
         private readonly IPercentileSelector percentileSelector;
         private readonly Generator generator;
 
-        public ForcableMetaraceBase(IPercentileSelector percentileSelector, Generator generator, ICollectionsSelector collectionSelector)
+        public ForcableMetaraceBase(IPercentileSelector percentileSelector, Generator generator, ICollectionSelector collectionSelector)
         {
             this.percentileSelector = percentileSelector;
             this.generator = generator;

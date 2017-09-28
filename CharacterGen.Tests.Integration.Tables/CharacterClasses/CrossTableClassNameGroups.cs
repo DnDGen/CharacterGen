@@ -12,7 +12,7 @@ namespace CharacterGen.Tests.Integration.Tables.CharacterClasses
     public class CrossTableClassNameGroups : TableTests
     {
         [Inject]
-        public CollectionsMapper CollectionsMapper { get; set; }
+        public CollectionMapper CollectionsMapper { get; set; }
         [Inject]
         public PercentileMapper PercentileMapper { get; set; }
 

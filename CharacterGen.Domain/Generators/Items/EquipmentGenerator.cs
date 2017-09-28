@@ -14,12 +14,12 @@ namespace CharacterGen.Domain.Generators.Items
 {
     internal class EquipmentGenerator : IEquipmentGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IArmorGenerator armorGenerator;
         private readonly IWeaponGenerator weaponGenerator;
         private readonly ITreasureGenerator treasureGenerator;
 
-        public EquipmentGenerator(ICollectionsSelector collectionsSelector, IWeaponGenerator weaponGenerator, ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator)
+        public EquipmentGenerator(ICollectionSelector collectionsSelector, IWeaponGenerator weaponGenerator, ITreasureGenerator treasureGenerator, IArmorGenerator armorGenerator)
         {
             this.collectionsSelector = collectionsSelector;
             this.armorGenerator = armorGenerator;

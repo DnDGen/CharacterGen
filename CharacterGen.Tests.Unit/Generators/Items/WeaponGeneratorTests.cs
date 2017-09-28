@@ -24,7 +24,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<MundaneItemGenerator> mockMundaneWeaponGenerator;
         private Mock<MagicalItemGenerator> mockMagicalWeaponGenerator;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<JustInTimeFactory> mockJustInTimeFactory;
         private Weapon magicalWeapon;
         private List<Feat> feats;
@@ -41,7 +41,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockMundaneWeaponGenerator = new Mock<MundaneItemGenerator>();
             mockMagicalWeaponGenerator = new Mock<MagicalItemGenerator>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             var generator = new ConfigurableIterationGenerator(3);
             mockJustInTimeFactory = new Mock<JustInTimeFactory>();
             weaponGenerator = new WeaponGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, generator, mockJustInTimeFactory.Object);

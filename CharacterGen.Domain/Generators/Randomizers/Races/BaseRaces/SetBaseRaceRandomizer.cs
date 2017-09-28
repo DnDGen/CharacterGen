@@ -13,9 +13,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.Races.BaseRaces
     {
         public string SetBaseRace { get; set; }
 
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public SetBaseRaceRandomizer(ICollectionsSelector collectionsSelector)
+        public SetBaseRaceRandomizer(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

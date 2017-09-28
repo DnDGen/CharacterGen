@@ -16,14 +16,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         private Race race;
         private Mock<IAdjustmentsSelector> mockInnerSelector;
         private Dictionary<string, Dictionary<string, int>> allAdjustments;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private List<string> abilityNames;
 
         [SetUp]
         public void Setup()
         {
             mockInnerSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             selector = new AbilityAdjustmentsSelector(mockInnerSelector.Object, mockCollectionsSelector.Object);
             race = new Race();
             allAdjustments = new Dictionary<string, Dictionary<string, int>>();

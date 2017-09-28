@@ -14,13 +14,13 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
         private const string TableName = "table name";
 
         private IAdjustmentsSelector adjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Dictionary<string, IEnumerable<string>> collections;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             adjustmentsSelector = new AdjustmentsSelector(mockCollectionsSelector.Object);
             collections = new Dictionary<string, IEnumerable<string>>();
 

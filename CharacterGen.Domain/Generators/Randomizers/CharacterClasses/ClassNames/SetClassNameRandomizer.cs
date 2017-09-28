@@ -12,9 +12,9 @@ namespace CharacterGen.Domain.Generators.Randomizers.CharacterClasses.ClassNames
     {
         public string SetClassName { get; set; }
 
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public SetClassNameRandomizer(ICollectionsSelector collectionsSelector)
+        public SetClassNameRandomizer(ICollectionSelector collectionsSelector)
         {
             this.collectionsSelector = collectionsSelector;
         }

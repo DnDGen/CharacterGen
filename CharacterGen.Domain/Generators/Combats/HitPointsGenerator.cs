@@ -15,9 +15,9 @@ namespace CharacterGen.Domain.Generators.Combats
     {
         private readonly Dice dice;
         private readonly IAdjustmentsSelector adjustmentsSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
 
-        public HitPointsGenerator(Dice dice, IAdjustmentsSelector adjustmentsSelector, ICollectionsSelector collectionsSelector)
+        public HitPointsGenerator(Dice dice, IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector)
         {
             this.dice = dice;
             this.adjustmentsSelector = adjustmentsSelector;

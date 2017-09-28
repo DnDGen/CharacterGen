@@ -7,6 +7,7 @@ using CharacterGen.Races;
 using CharacterGen.Randomizers.Abilities;
 using CharacterGen.Randomizers.CharacterClasses;
 using CharacterGen.Randomizers.Races;
+using DnDGen.Core.Selectors.Collections;
 using Ninject;
 using NUnit.Framework;
 using System;
@@ -32,10 +33,14 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         public RaceRandomizer AquaticBaseRaceRandomizer { get; set; }
         [Inject, Named(RaceRandomizerTypeConstants.BaseRace.NonMonsterBase)]
         public RaceRandomizer NonMonsterBaseRaceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.MonsterBase)]
+        public RaceRandomizer MonsterBaseRaceRandomizer { get; set; }
         [Inject]
         public ISetBaseRaceRandomizer SetBaseRaceRandomizer { get; set; }
         [Inject]
         public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
+        [Inject, Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta)]
+        public IForcableMetaraceRandomizer UndeadMetaraceRandomizer { get; set; }
         [Inject, Named(AbilitiesRandomizerTypeConstants.Raw)]
         public IAbilitiesRandomizer RawAbilitiesRandomizer { get; set; }
         [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
@@ -43,7 +48,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         [Inject]
         public CharacterVerifier CharacterVerifier { get; set; }
         [Inject]
-        public Random Random { get; set; }
+        public ICollectionSelector CollectionSelector { get; set; }
 
         [Test]
         public void StressCharacter()
@@ -53,7 +58,22 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertCharacter()
         {
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
+            //INFO: Using the non-monster so that we don't worry about giant sizes throwing off generation time
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, NonMonsterBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
+
+            CharacterVerifier.AssertCharacter(character);
+            AssertPlayerCharacter(character);
+        }
+
+        [Test]
+        public void StressMonster()
+        {
+            stressor.Stress(GenerateAndAssertMonster);
+        }
+
+        private void GenerateAndAssertMonster()
+        {
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, MonsterBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
             AssertPlayerCharacter(character);
@@ -207,7 +227,8 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertSpellcaster()
         {
-            var spellcaster = stressor.Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer),
+            //INFO: Using the non-monster so that we don't worry about giant sizes throwing off generation time
+            var spellcaster = stressor.Generate(() => CharacterGenerator.GenerateWith(AlignmentRandomizer, SpellcasterClassNameRandomizer, LevelRandomizer, NonMonsterBaseRaceRandomizer, MetaraceRandomizer, HeroicAbilitiesRandomizer),
                 c => c.Class.Level > 3);
 
             CharacterVerifier.AssertCharacter(spellcaster);
@@ -335,10 +356,9 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         private void GenerateAndAssertUndead()
         {
-            var undeadMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
-            undeadMetaraceRandomizer.ForceMetarace = true;
+            UndeadMetaraceRandomizer.ForceMetarace = true;
 
-            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, undeadMetaraceRandomizer, RawAbilitiesRandomizer);
+            var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, UndeadMetaraceRandomizer, RawAbilitiesRandomizer);
 
             CharacterVerifier.AssertCharacter(character);
             AssertPlayerCharacter(character);
@@ -366,8 +386,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         private void GenerateAndAssertPlanetouched()
         {
             var planetouched = new[] { RaceConstants.BaseRaces.Aasimar, RaceConstants.BaseRaces.Tiefling };
-            var randomIndex = Random.Next(planetouched.Length);
-            SetBaseRaceRandomizer.SetBaseRace = planetouched[randomIndex];
+            SetBaseRaceRandomizer.SetBaseRace = CollectionSelector.SelectRandomFrom(planetouched);
 
             var character = CharacterGenerator.GenerateWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, SetBaseRaceRandomizer, MetaraceRandomizer, RawAbilitiesRandomizer);
 

@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
         private Mock<IAbilityAdjustmentsSelector> mockAbilityAdjustmentsSelector;
         private Mock<IPercentileSelector> mockPercentileSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private IAbilitiesGenerator abilitiesGenerator;
 
         private Mock<IAbilitiesRandomizer> mockAbilitiesRandomizer;
@@ -38,7 +38,7 @@ namespace CharacterGen.Tests.Unit.Generators.Abilities
             mockAbilityAdjustmentsSelector = new Mock<IAbilityAdjustmentsSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             abilitiesGenerator = new AbilitiesGenerator(mockPercentileSelector.Object, mockAbilityAdjustmentsSelector.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             mockAbilitiesRandomizer = new Mock<IAbilitiesRandomizer>();

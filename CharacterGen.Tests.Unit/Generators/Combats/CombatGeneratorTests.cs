@@ -20,7 +20,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
     {
         private Mock<ISavingThrowsGenerator> mockSavingThrowsGenerator;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IArmorClassGenerator> mockArmorClassGenerator;
         private Mock<IHitPointsGenerator> mockHitPointsGenerator;
         private ICombatGenerator combatGenerator;
@@ -42,7 +42,7 @@ namespace CharacterGen.Tests.Unit.Generators.Combats
             mockHitPointsGenerator = new Mock<IHitPointsGenerator>();
             mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
 
             characterClass = new CharacterClass();

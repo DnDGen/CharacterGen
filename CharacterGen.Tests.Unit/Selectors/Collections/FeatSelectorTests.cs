@@ -12,14 +12,14 @@ namespace CharacterGen.Tests.Unit.Selectors.Collections
     public class FeatSelectorTests
     {
         private IFeatsSelector featsSelector;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private Dictionary<string, IEnumerable<string>> additionalFeatsData;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             featsSelector = new FeatsSelector(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
 

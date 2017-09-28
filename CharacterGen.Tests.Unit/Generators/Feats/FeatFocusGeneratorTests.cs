@@ -17,7 +17,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
     [TestFixture]
     public class FeatFocusGeneratorTests
     {
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private IFeatFocusGenerator featFocusGenerator;
         private List<RequiredFeatSelection> requiredFeats;
         private List<Feat> otherFeats;
@@ -29,7 +29,7 @@ namespace CharacterGen.Tests.Unit.Generators.Feats
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             featFocusGenerator = new FeatFocusGenerator(mockCollectionsSelector.Object);
             requiredFeats = new List<RequiredFeatSelection>();
             otherFeats = new List<Feat>();

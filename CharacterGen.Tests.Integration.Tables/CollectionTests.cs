@@ -10,7 +10,7 @@ namespace CharacterGen.Tests.Integration.Tables
     public abstract class CollectionTests : TableTests
     {
         [Inject]
-        internal CollectionsMapper CollectionsMapper { get; set; }
+        internal CollectionMapper CollectionsMapper { get; set; }
 
         protected Dictionary<string, IEnumerable<string>> table;
         protected Dictionary<int, string> indices;

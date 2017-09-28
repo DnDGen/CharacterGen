@@ -16,11 +16,11 @@ namespace CharacterGen.Domain.Generators.Skills
     internal class SkillsGenerator : ISkillsGenerator
     {
         private readonly ISkillSelector skillSelector;
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly IPercentileSelector percentileSelector;
 
-        public SkillsGenerator(ISkillSelector skillSelector, ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IPercentileSelector percentileSelector)
+        public SkillsGenerator(ISkillSelector skillSelector, ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IPercentileSelector percentileSelector)
         {
             this.skillSelector = skillSelector;
             this.collectionsSelector = collectionsSelector;

@@ -14,13 +14,13 @@ namespace CharacterGen.Domain.Generators.Feats
 {
     internal class RacialFeatsGenerator : IRacialFeatsGenerator
     {
-        private readonly ICollectionsSelector collectionsSelector;
+        private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly IFeatsSelector featsSelector;
         private readonly IFeatFocusGenerator featFocusGenerator;
         private readonly Dice dice;
 
-        public RacialFeatsGenerator(ICollectionsSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, Dice dice)
+        public RacialFeatsGenerator(ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, Dice dice)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;

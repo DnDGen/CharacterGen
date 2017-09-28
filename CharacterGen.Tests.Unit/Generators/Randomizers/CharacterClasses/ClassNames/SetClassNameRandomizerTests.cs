@@ -15,14 +15,14 @@ namespace CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.ClassN
     public class SetClassNameRandomizerTests
     {
         private ISetClassNameRandomizer randomizer;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Alignment alignment;
         private List<string> alignmentClasses;
 
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             randomizer = new SetClassNameRandomizer(mockCollectionsSelector.Object);
             alignment = new Alignment();
             alignmentClasses = new List<string>();

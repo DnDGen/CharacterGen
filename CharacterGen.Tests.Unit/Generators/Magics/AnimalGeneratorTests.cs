@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
     {
         private const string Animal = "animal";
 
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IAdjustmentsSelector> mockAdjustmentsSelector;
         private IAnimalGenerator animalGenerator;
         private CharacterClass characterClass;
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Magics
         [SetUp]
         public void Setup()
         {
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             animalGenerator = new AnimalGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object);
 

@@ -19,7 +19,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
     {
         private IEquipmentGenerator equipmentGenerator;
         private Mock<IWeaponGenerator> mockWeaponGenerator;
-        private Mock<ICollectionsSelector> mockCollectionsSelector;
+        private Mock<ICollectionSelector> mockCollectionsSelector;
         private Mock<IArmorGenerator> mockArmorGenerator;
         private Mock<ITreasureGenerator> mockTreasureGenerator;
         private List<Feat> feats;
@@ -37,7 +37,7 @@ namespace CharacterGen.Tests.Unit.Generators.Items
         public void Setup()
         {
             mockWeaponGenerator = new Mock<IWeaponGenerator>();
-            mockCollectionsSelector = new Mock<ICollectionsSelector>();
+            mockCollectionsSelector = new Mock<ICollectionSelector>();
             mockArmorGenerator = new Mock<IArmorGenerator>();
             mockTreasureGenerator = new Mock<ITreasureGenerator>();
             equipmentGenerator = new EquipmentGenerator(mockCollectionsSelector.Object, mockWeaponGenerator.Object, mockTreasureGenerator.Object, mockArmorGenerator.Object);
