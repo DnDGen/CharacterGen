@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CharacterGen</id>
-    <version>10.0.2</version>
+    <version>10.0.3</version>
     <title>DnDGen.CharacterGen</title>
     <authors>Karl M. Speer</authors>
     <owners>cidthecoatrack</owners>
@@ -22,7 +22,7 @@
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="DnDGen.TreasureGen" version="8.1.2" />
+      <dependency id="DnDGen.TreasureGen" version="8.2.0" />
     </dependencies>
     <references></references>
     <tags> npc character equipment treasure generator dice dungeons dragons d20 dnd 3.5 gen </tags>
