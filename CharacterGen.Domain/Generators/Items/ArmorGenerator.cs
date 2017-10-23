@@ -40,7 +40,7 @@ namespace CharacterGen.Domain.Generators.Items
                 return null;
 
             var item = generator.Generate(
-                () => GenerateArmor(power, proficientArmors),
+                () => GenerateArmor(power, proficientArmors, race),
                 a => ArmorIsValid(a, characterClass, race),
                 () => GenerateDefaultArmor(power, proficientArmors, race),
                 a => ArmorInvalidMessage(a, characterClass, race),
@@ -86,7 +86,7 @@ namespace CharacterGen.Domain.Generators.Items
                 return null;
 
             var item = generator.Generate(
-                () => GenerateArmor(power, proficientShields),
+                () => GenerateArmor(power, proficientShields, race),
                 s => ArmorIsValid(s, characterClass, race, true),
                 () => GenerateDefaultArmor(power, proficientShields, race),
                 s => ArmorInvalidMessage(s, characterClass, race, true),
@@ -127,16 +127,16 @@ namespace CharacterGen.Domain.Generators.Items
             return string.Empty;
         }
 
-        private Item GenerateArmor(string power, IEnumerable<string> proficientArmors)
+        private Item GenerateArmor(string power, IEnumerable<string> proficientArmors, Race race)
         {
             if (power == PowerConstants.Mundane)
             {
                 var mundaneArmorGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Armor);
-                return mundaneArmorGenerator.GenerateFrom(proficientArmors);
+                return mundaneArmorGenerator.GenerateFrom(proficientArmors, race.Size);
             }
 
             var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
-            return magicalArmorGenerator.GenerateFrom(power, proficientArmors);
+            return magicalArmorGenerator.GenerateFrom(power, proficientArmors, race.Size);
         }
 
         private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType)

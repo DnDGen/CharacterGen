@@ -49,10 +49,8 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         {
             Assert.That(character.Summary, Is.Not.Empty);
             Assert.That(character.Summary, Contains.Substring(character.Alignment.Full));
-            Assert.That(character.Summary, Contains.Substring($"Level {character.Class.Level}"));
-            Assert.That(character.Summary, Contains.Substring(character.Class.Name));
-            Assert.That(character.Summary, Contains.Substring(character.Race.BaseRace));
-            Assert.That(character.Summary, Contains.Substring(character.Race.Metarace));
+            Assert.That(character.Summary, Contains.Substring(character.Class.Summary));
+            Assert.That(character.Summary, Contains.Substring(character.Race.Summary));
         }
 
         private void VerifyAlignment(Character character)
@@ -272,9 +270,6 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size), character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.ThreatRange, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
 
-                if (!character.Equipment.PrimaryHand.IsMagical)
-                    Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size));
-
                 if (character.Equipment.OffHand != null)
                 {
                     Assert.That(character.Equipment.OffHand, Is.InstanceOf<Armor>().Or.InstanceOf<Weapon>(), feats);
@@ -302,9 +297,6 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                         {
                             Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.TwoHanded));
                         }
-
-                        if (!weapon.IsMagical)
-                            Assert.That(weapon.Size, Is.EqualTo(character.Race.Size));
                     }
                     else if (character.Equipment.OffHand is Armor)
                     {
@@ -319,9 +311,6 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                         Assert.That(shield.MaxDexterityBonus, Is.Not.Negative, character.Equipment.OffHand.Name);
                         Assert.That(shield.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
                         Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield));
-
-                        if (!shield.IsMagical)
-                            Assert.That(shield.Size, Is.EqualTo(character.Race.Size));
                     }
                 }
 
@@ -337,9 +326,6 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
                     Assert.That(character.Equipment.Armor.MaxDexterityBonus, Is.Not.Negative, character.Equipment.Armor.Name);
                     Assert.That(character.Equipment.Armor.Size, Is.EqualTo(character.Race.Size), character.Equipment.Armor.Name);
                     Assert.That(character.Equipment.Armor.Attributes, Is.All.Not.EqualTo(AttributeConstants.Shield));
-
-                    if (!character.Equipment.Armor.IsMagical)
-                        Assert.That(character.Equipment.Armor.Size, Is.EqualTo(character.Race.Size));
                 }
             }
 

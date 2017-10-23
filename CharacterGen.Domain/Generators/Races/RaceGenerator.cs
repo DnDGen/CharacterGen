@@ -249,7 +249,7 @@ namespace CharacterGen.Domain.Generators.Races
             return age;
         }
 
-        private Measurement GetDefaultAge(Race race, CharacterClass characterClass)
+        private Measurement GetDefaultAge(Race race)
         {
             var age = new Measurement("Years");
             age.Value = race.MaximumAge.Value;
@@ -278,7 +278,7 @@ namespace CharacterGen.Domain.Generators.Races
             var age = generator.Generate(
                 () => GenerateAge(race, characterClass),
                 a => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
-                () => GetDefaultAge(race, characterClass),
+                () => GetDefaultAge(race),
                 a => $"{a.Value} {a.Unit} is greater than maximum age of {race.MaximumAge.Value} {race.MaximumAge.Unit}",
                 $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
 

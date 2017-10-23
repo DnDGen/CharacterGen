@@ -102,7 +102,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressCohort()
         {
             stressor.Stress(AssertCohort);
@@ -120,7 +120,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressNPCCohort()
         {
             stressor.Stress(GeneratAndAssertNPCCohort);
@@ -137,7 +137,7 @@ namespace CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressFollower()
         {
             stressor.Stress(GenerateAndAssertFollower);

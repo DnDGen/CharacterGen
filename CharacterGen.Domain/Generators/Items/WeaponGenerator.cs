@@ -226,7 +226,7 @@ namespace CharacterGen.Domain.Generators.Items
             var power = percentileSelector.SelectFrom(tableName);
 
             var weapon = generator.Generate(
-                () => GenerateWeapon(power, allowedWeapons),
+                () => GenerateWeapon(power, allowedWeapons, race),
                 w => WeaponIsValid(w, race, furtherValidation),
                 () => GenerateDefaultWeapon(power, allowedWeapons, race),
                 w => WeaponInvalidMessage(w, race, furtherValidation),
@@ -253,18 +253,18 @@ namespace CharacterGen.Domain.Generators.Items
             return magicalWeaponGenerator.GenerateFrom(template, true);
         }
 
-        private Item GenerateWeapon(string power, IEnumerable<string> proficientWeapons)
+        private Item GenerateWeapon(string power, IEnumerable<string> proficientWeapons, Race race)
         {
             if (power == PowerConstants.Mundane)
             {
                 var mundaneWeaponGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon);
-                var mundaneWeapon = mundaneWeaponGenerator.GenerateFrom(proficientWeapons);
+                var mundaneWeapon = mundaneWeaponGenerator.GenerateFrom(proficientWeapons, race.Size);
 
                 return mundaneWeapon;
             }
 
             var magicalWeaponGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon);
-            var magicalWeapon = magicalWeaponGenerator.GenerateFrom(power, proficientWeapons);
+            var magicalWeapon = magicalWeaponGenerator.GenerateFrom(power, proficientWeapons, race.Size);
 
             return magicalWeapon;
         }

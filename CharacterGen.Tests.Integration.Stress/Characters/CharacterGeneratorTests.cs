@@ -66,7 +66,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressMonster()
         {
             stressor.Stress(GenerateAndAssertMonster);
@@ -100,7 +100,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressAquatic()
         {
             stressor.Stress(GenerateAndAssertAquatic);
@@ -185,7 +185,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
 
         //INFO: The bug here is that the rare size (Huge) makes the equipment take much longer to generate
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressStormGiant()
         {
             stressor.Stress(GenerateAndAssertStormGiant);
@@ -220,7 +220,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressSpellcaster()
         {
             stressor.Stress(GenerateAndAssertSpellcaster);
@@ -349,7 +349,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressUndeadCharacter()
         {
             stressor.Stress(GenerateAndAssertUndead);
@@ -398,7 +398,7 @@ namespace CharacterGen.Tests.Integration.Stress.Characters
         }
 
         [Test]
-        [Ignore("Takes too long, goes over 200% of allotted time limit")]
+        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void BUG_StressGhost()
         {
             stressor.Stress(() => GenerateAndAssertGhost());
