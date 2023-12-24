@@ -4,10 +4,10 @@ using DnDGen.CharacterGen.Characters;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.TreasureGen.Items;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
 {
@@ -265,8 +265,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Equipment.PrimaryHand.Quantity, Is.Positive, character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.CriticalMultiplier, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
-                Assert.That(character.Equipment.PrimaryHand.Damage, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
-                Assert.That(character.Equipment.PrimaryHand.DamageType, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.DamageRoll, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.DamageDescription, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size), character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.ThreatRange, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
 
@@ -283,8 +283,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                         Assert.That(weapon.Quantity, Is.Positive, character.Equipment.OffHand.Name);
                         Assert.That(weapon.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.OffHand.Name);
                         Assert.That(weapon.CriticalMultiplier, Is.Not.Empty, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.Damage, Is.Not.Empty, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.DamageType, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.DamageRoll, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.DamageDescription, Is.Not.Empty, character.Equipment.OffHand.Name);
                         Assert.That(weapon.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
                         Assert.That(weapon.ThreatRange, Is.Not.Empty, character.Equipment.OffHand.Name);
 

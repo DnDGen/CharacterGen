@@ -39,7 +39,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void FeatsSelectorsIsDecorated()
         {
-            AssertIsInstanceOf<IFeatsSelector, FeatsSelectorEventGenDecorator>();
+            AssertIsInstanceOf<IFeatsSelector, FeatsSelector>();
         }
 
         [Test]

@@ -1,12 +1,10 @@
-﻿using CharacterGen.Generators.Characters;
-using DnDGen.CharacterGen.Characters;
+﻿using DnDGen.CharacterGen.Characters;
+using DnDGen.CharacterGen.Generators.Characters;
 using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.Stress;
-using DnDGen.Stress.Events;
-using EventGen;
 using Ninject;
 using NUnit.Framework;
 using System.Reflection;
@@ -37,7 +35,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress
         [OneTimeSetUp]
         public void StressSetup()
         {
-            var options = new StressorWithEventsOptions();
+            var options = new StressorOptions();
             options.RunningAssembly = Assembly.GetExecutingAssembly();
             options.TimeLimitPercentage = .90;
 
@@ -47,11 +45,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress
             options.IsFullStress = false;
 #endif
 
-            options.ClientIdManager = GetNewInstanceOf<ClientIDManager>();
-            options.EventQueue = GetNewInstanceOf<GenEventQueue>();
-            options.Source = "CharacterGen";
-
-            stressor = new StressorWithEvents(options);
+            stressor = new Stressor(options);
         }
 
         protected CharacterPrototype GetCharacterPrototype()

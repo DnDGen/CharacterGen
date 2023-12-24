@@ -21,13 +21,12 @@ using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
 using DnDGen.CharacterGen.Verifiers;
-using NUnit.Framework;
 using DnDGen.RollGen;
 using DnDGen.TreasureGen.Generators;
 using DnDGen.TreasureGen.Items;
 using DnDGen.TreasureGen.Items.Magical;
 using DnDGen.TreasureGen.Items.Mundane;
-using CharacterGen.Generators.Characters;
+using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
 {
@@ -43,7 +42,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void AlignmentGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IAlignmentGenerator, AlignmentGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IAlignmentGenerator, AlignmentGenerator>();
         }
 
         [Test]
@@ -55,7 +54,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void CharacterGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<ICharacterGenerator, CharacterGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<ICharacterGenerator, CharacterGenerator>();
         }
 
         [Test]
@@ -67,7 +66,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void CharacterClassGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<ICharacterClassGenerator, CharacterClassGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<ICharacterClassGenerator, CharacterClassGenerator>();
         }
 
         [Test]
@@ -85,7 +84,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void LanguageGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<ILanguageGenerator, LanguageGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<ILanguageGenerator, LanguageGenerator>();
         }
 
         [Test]
@@ -97,7 +96,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void RaceGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IRaceGenerator, RaceGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IRaceGenerator, RaceGenerator>();
         }
 
         [Test]
@@ -115,7 +114,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void AbilitiesGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IAbilitiesGenerator, AbilitiesGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IAbilitiesGenerator, AbilitiesGenerator>();
         }
 
         [Test]
@@ -504,7 +503,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void CombatGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<ICombatGenerator, CombatGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<ICombatGenerator, CombatGenerator>();
         }
 
         [Test]
@@ -516,7 +515,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void EquipmentGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IEquipmentGenerator, EquipmentGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IEquipmentGenerator, EquipmentGenerator>();
         }
 
         [Test]
@@ -528,7 +527,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void SkillsGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<ISkillsGenerator, SkillsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<ISkillsGenerator, SkillsGenerator>();
         }
 
         [Test]
@@ -540,7 +539,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void FeatsGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IFeatsGenerator, FeatsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IFeatsGenerator, FeatsGenerator>();
         }
 
         [Test]
@@ -552,7 +551,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void AdditionalFeatsGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IAdditionalFeatsGenerator, AdditionalFeatsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IAdditionalFeatsGenerator, AdditionalFeatsGenerator>();
         }
 
         [Test]
@@ -564,7 +563,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void ClassFeatsGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IClassFeatsGenerator, ClassFeatsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IClassFeatsGenerator, ClassFeatsGenerator>();
         }
 
         [Test]
@@ -576,7 +575,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void RacialFeatsGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IRacialFeatsGenerator, RacialFeatsGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IRacialFeatsGenerator, RacialFeatsGenerator>();
         }
 
         [Test]
@@ -594,7 +593,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void FeatFocusGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IFeatFocusGenerator, FeatFocusGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IFeatFocusGenerator, FeatFocusGenerator>();
         }
 
         [Test]
@@ -618,7 +617,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         [Test]
         public void MagicGeneratorIsDecorated()
         {
-            AssertIsInstanceOf<IMagicGenerator, MagicGeneratorEventGenDecorator>();
+            AssertIsInstanceOf<IMagicGenerator, MagicGenerator>();
         }
 
         [Test]

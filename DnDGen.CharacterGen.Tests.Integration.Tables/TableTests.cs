@@ -12,7 +12,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
         [OneTimeSetUp]
         public void TableOneTimeSetup()
         {
-            var coreLoader = new CoreModuleLoader();
+            var coreLoader = new InfrastructureModuleLoader();
             coreLoader.ReplaceAssemblyLoaderWith<CharacterGenAssemblyLoader>(kernel);
         }
     }

@@ -1,10 +1,8 @@
 ﻿using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
-using EventGen;
 using Ninject;
 using NUnit.Framework;
-using System;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
 {
@@ -15,8 +13,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
         public ICollectionSelector CollectionsSelector { get; set; }
         [Inject]
         internal IAdjustmentsSelector AdjustmentsSelector { get; set; }
-        [Inject]
-        public ClientIDManager ClientIdManager { get; set; }
 
         protected override string tableName
         {
@@ -24,13 +20,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
             {
                 return TableNameConstants.Set.Collection.ClassNameGroups;
             }
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            var clientId = Guid.NewGuid();
-            ClientIdManager.SetClientID(clientId);
         }
 
         [TestCase(1)]

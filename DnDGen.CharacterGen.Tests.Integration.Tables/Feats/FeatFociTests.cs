@@ -1,10 +1,10 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
+using DnDGen.TreasureGen.Items;
 using NUnit.Framework;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats
 {
@@ -191,7 +191,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats
         [Test]
         public void WeaponFoci()
         {
-            var allWeapons = WeaponConstants.GetBaseNames().Except(new[]
+            var allWeapons = WeaponConstants.GetAllWeapons(false, false).Except(new[]
             {
                 WeaponConstants.Arrow,
                 WeaponConstants.CrossbowBolt,
