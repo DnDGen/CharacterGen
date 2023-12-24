@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	  <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DnDGen.CharacterGen\CharacterGen.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Albatross.Expression" Version="3.0.13" />
+    <PackageReference Include="DnDGen.Infrastructure" Version="4.4.2" />
+    <PackageReference Include="DnDGen.RollGen" Version="15.5.4" />
+    <PackageReference Include="DnDGen.TreasureGen" Version="10.5.3" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
+    <PackageReference Include="NUnit" Version="4.0.1" />
+  </ItemGroup>
+</Project>
