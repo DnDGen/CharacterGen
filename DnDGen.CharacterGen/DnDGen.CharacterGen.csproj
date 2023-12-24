@@ -23,6 +23,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityGroups.xml" />
+	  <None Include="18531-twenty-sided-dice-vector-thumb.png">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+	  </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityPriorities.xml" />
