@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.Levels;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
@@ -23,7 +23,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         [Test]
         public void RandomizeReturnD20Result()
         {
-            mockDice.Setup(d => d.Roll(1).d(20).AsSum()).Returns(9266);
+            mockDice.Setup(d => d.Roll(1).d(20).AsSum<int>()).Returns(9266);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(9266));
         }

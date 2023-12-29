@@ -1,7 +1,7 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
-using NUnit.Framework;
+﻿using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.TreasureGen.Items;
+using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
 {
@@ -23,6 +23,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
                 FeatConstants.HeavyArmorProficiency,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
+                AttributeConstants.Metal,
             };
 
             AssertCollectionNames(names);
@@ -53,6 +54,21 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.LightSteelShield,
             ArmorConstants.LightWoodenShield)]
         [TestCase(FeatConstants.TowerShieldProficiency, ArmorConstants.TowerShield)]
+        [TestCase(AttributeConstants.Metal,
+            ArmorConstants.SplintMail,
+            ArmorConstants.BandedMail,
+            ArmorConstants.HalfPlate,
+            ArmorConstants.FullPlate,
+            ArmorConstants.StuddedLeatherArmor,
+            ArmorConstants.ChainShirt,
+            ArmorConstants.ElvenChain,
+            ArmorConstants.CelestialArmor,
+            ArmorConstants.ScaleMail,
+            ArmorConstants.Chainmail,
+            ArmorConstants.Breastplate,
+            ArmorConstants.FullPlateOfSpeed,
+            ArmorConstants.HeavySteelShield,
+            ArmorConstants.LightSteelShield)]
         public void ItemGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
