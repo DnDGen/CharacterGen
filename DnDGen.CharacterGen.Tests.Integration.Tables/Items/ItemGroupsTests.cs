@@ -24,6 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
                 AttributeConstants.Metal,
+                PowerConstants.Mundane,
             };
 
             AssertCollectionNames(names);
@@ -69,6 +70,25 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
             ArmorConstants.FullPlateOfSpeed,
             ArmorConstants.HeavySteelShield,
             ArmorConstants.LightSteelShield)]
+        [TestCase(PowerConstants.Mundane,
+            ArmorConstants.PaddedArmor,
+            ArmorConstants.LeatherArmor,
+            ArmorConstants.StuddedLeatherArmor,
+            ArmorConstants.ChainShirt,
+            ArmorConstants.HideArmor,
+            ArmorConstants.ScaleMail,
+            ArmorConstants.Chainmail,
+            ArmorConstants.Breastplate,
+            ArmorConstants.SplintMail,
+            ArmorConstants.BandedMail,
+            ArmorConstants.HalfPlate,
+            ArmorConstants.FullPlate,
+            ArmorConstants.Buckler,
+            ArmorConstants.HeavySteelShield,
+            ArmorConstants.HeavyWoodenShield,
+            ArmorConstants.LightSteelShield,
+            ArmorConstants.LightWoodenShield,
+            ArmorConstants.TowerShield)]
         public void ItemGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);

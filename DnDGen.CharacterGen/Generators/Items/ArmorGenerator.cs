@@ -40,9 +40,31 @@ namespace DnDGen.CharacterGen.Generators.Items
             if (proficientArmors.Any() == false)
                 return null;
 
-            var item = GenerateArmor(power, proficientArmors, race);
+            var item = GenerateArmor(power, proficientArmors, race, characterClass);
 
             return item as Armor;
+        }
+
+        //Source: https://www.d20srd.org/srd/magicItems/magicArmor.htm
+        private double GetSpecificThreshold(string power)
+        {
+            return power switch
+            {
+                PowerConstants.Minor => .98,
+                PowerConstants.Medium or PowerConstants.Major => .97,
+                _ => 1.01,
+            };
+        }
+
+        //Source: https://www.d20srd.org/srd/magicItems/magicArmor.htm
+        private int GetRollAgainThreshold(string power)
+        {
+            return power switch
+            {
+                PowerConstants.Minor => 92,
+                PowerConstants.Medium or PowerConstants.Major => 64,
+                _ => 101,
+            };
         }
 
         private int GetEffectiveLevel(CharacterClass characterClass)
@@ -60,25 +82,53 @@ namespace DnDGen.CharacterGen.Generators.Items
             if (proficientShields.Any() == false)
                 return null;
 
-            var item = GenerateArmor(power, proficientShields, race);
+            var item = GenerateArmor(power, proficientShields, race, characterClass);
 
             return item as Armor;
         }
 
-        private Item GenerateArmor(string power, IEnumerable<string> proficientArmors, Race race)
+        private Item GenerateArmor(string power, IEnumerable<string> proficientArmors, Race race, CharacterClass characterClass)
         {
+            //INFO: Need to filter out specific armors, if they aren't a possibility
+            //Even though TreasureGen can handle specific armors from base versions, there are some specific armors that jump proficiency categories,
+            //such as full plate of speed being medium proficiency instead of heavy
+            var isSpecific = false;
+            var specificThreshold = GetSpecificThreshold(power);
+            var rollAgainThreshold = GetRollAgainThreshold(power);
 
+            do
+            {
+                isSpecific = dice.Roll().Percentile().AsTrueOrFalse(specificThreshold);
+            } while (!isSpecific && dice.Roll().Percentile().AsTrueOrFalse(rollAgainThreshold));
+
+            var mundaneArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, PowerConstants.Mundane);
+            if (isSpecific && proficientArmors.Except(mundaneArmors).Any())
+            {
+                proficientArmors = proficientArmors.Except(mundaneArmors);
+            }
+            else
+            {
+                proficientArmors = proficientArmors.Intersect(mundaneArmors);
+            }
 
             var armorName = collectionsSelector.SelectRandomFrom(proficientArmors);
+            var traits = new[] { race.Size };
+            var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
+
+            //INFO: If we are able to select a metal armor here for a Druid, then it was rolled that it could be dragonhide
+            if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName) && !isSpecific)
+            {
+                traits = new[] { race.Size, TraitConstants.SpecialMaterials.Dragonhide };
+            }
 
             if (power == PowerConstants.Mundane)
             {
                 var mundaneArmorGenerator = justInTimeFactory.Build<MundaneItemGenerator>(ItemTypeConstants.Armor);
-                return mundaneArmorGenerator.Generate(armorName, race.Size);
+                return mundaneArmorGenerator.Generate(armorName, traits);
             }
 
             var magicalArmorGenerator = justInTimeFactory.Build<MagicalItemGenerator>(ItemTypeConstants.Armor);
-            return magicalArmorGenerator.Generate(power, armorName, race.Size);
+            return magicalArmorGenerator.Generate(power, armorName, traits);
         }
 
         private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType, CharacterClass characterClass)
@@ -93,25 +143,24 @@ namespace DnDGen.CharacterGen.Generators.Items
                 proficientArmors.AddRange(featArmors);
             }
 
-            //INFO: The feat proficiencies include specifics such as elven chainmail, so we need to filter just to basics
-            var mundaneArmors = ArmorConstants.GetAllArmorsAndShields(false);
-            var metalArmor = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
-
-            if (characterClass.Name == CharacterClassConstants.Druid)
+            if (characterClass.Name != CharacterClassConstants.Druid)
             {
-                //INFO: Armor has a 5% chance to be made of a special material
-                //There are 6 special materials: Adamantine, mithral, darkwood, dragonhide, cold iron, and alchemical silver
-                //So the chance of a dragonhide armor is 0.83%
-                var isSpecialMaterial = dice.Roll().Percentile().AsTrueOrFalse(.95);
-                var isDragonhide = isSpecialMaterial && dice.Roll().d6().AsTrueOrFalse(6);
-
-                if (!isSpecialMaterial || !isDragonhide)
-                {
-                    proficientArmors = proficientArmors.Except(metalArmor).ToList();
-                }
+                return proficientArmors;
             }
 
-            return proficientArmors.Intersect(mundaneArmors);
+            //INFO: Armor has a 5% chance to be made of a special material
+            var isSpecialMaterial = dice.Roll().Percentile().AsTrueOrFalse(.95);
+            //There are 3 special materials that can apply to metal armor: Adamantine, mithral, and dragonhide
+            var isDragonhide = dice.Roll().d3().AsTrueOrFalse(3);
+
+            if (!isSpecialMaterial || !isDragonhide)
+            {
+                var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
+
+                return proficientArmors.Except(metalArmors);
+            }
+
+            return proficientArmors;
         }
     }
 }

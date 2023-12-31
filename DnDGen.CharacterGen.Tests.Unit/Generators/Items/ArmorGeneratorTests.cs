@@ -6,6 +6,7 @@ using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
+using DnDGen.RollGen;
 using DnDGen.TreasureGen.Items;
 using DnDGen.TreasureGen.Items.Magical;
 using DnDGen.TreasureGen.Items.Mundane;
@@ -24,6 +25,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         private Mock<MundaneItemGenerator> mockMundaneArmorGenerator;
         private Mock<MagicalItemGenerator> mockMagicalArmorGenerator;
         private Mock<JustInTimeFactory> mockJustInTimeFactory;
+        private Mock<Dice> mockDice;
         private IArmorGenerator armorGenerator;
         private List<Feat> feats;
         private CharacterClass characterClass;
@@ -45,7 +47,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             mockMundaneArmorGenerator = new Mock<MundaneItemGenerator>();
             mockMagicalArmorGenerator = new Mock<MagicalItemGenerator>();
             mockJustInTimeFactory = new Mock<JustInTimeFactory>();
-            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockJustInTimeFactory.Object);
+            mockDice = new Mock<Dice>();
+            armorGenerator = new ArmorGenerator(mockCollectionsSelector.Object, mockPercentileSelector.Object, mockJustInTimeFactory.Object, mockDice.Object);
 
             feats = new List<Feat>();
             characterClass = new CharacterClass();
@@ -63,8 +66,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             proficientArmors.Remove(magicalArmor.Name);
             proficientArmors.Add("other armor");
+            proficientArmors.Add("specific armor");
             proficientShields.Remove(magicalShield.Name);
             proficientShields.Add("other shield");
+            proficientShields.Add("specific shield");
 
             characterClass.Level = 9266;
             feats.Add(new Feat { Name = "light proficiency" });
@@ -83,16 +88,30 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             mockMagicalArmorGenerator.Setup(g => g.Generate(power, "my random armor", race.Size)).Returns(magicalArmor);
             mockMagicalArmorGenerator.Setup(g => g.Generate(power, "my random shield", race.Size)).Returns(magicalShield);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency)).Returns(armorProficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency)).Returns(shieldProficiencyFeats);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency))
+                .Returns(armorProficiencyFeats);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
+                .Returns(shieldProficiencyFeats);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[0].Name)).Returns(proficientArmors);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[1].Name)).Returns(proficientShields);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, PowerConstants.Mundane))
+                .Returns(() => new[] { "magical armor", "magical shield", "my random armor", "my random shield" }
+                    .Union(proficientArmors)
+                    .Union(proficientShields)
+                    .Where(a => !a.Contains("specific")));
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
 
             mockJustInTimeFactory.Setup(f => f.Build<MundaneItemGenerator>(ItemTypeConstants.Armor)).Returns(mockMundaneArmorGenerator.Object);
             mockJustInTimeFactory.Setup(f => f.Build<MagicalItemGenerator>(ItemTypeConstants.Armor)).Returns(mockMagicalArmorGenerator.Object);
+
+            mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(It.IsAny<int>())).Returns(false);
+            mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(It.IsAny<double>())).Returns(false);
+            mockDice.Setup(d => d.Roll(1).d(3).AsTrueOrFalse(It.IsAny<int>())).Returns(false);
         }
 
         [Test]
