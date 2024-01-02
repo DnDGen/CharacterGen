@@ -101,14 +101,14 @@ namespace DnDGen.CharacterGen.Generators.Items
                 isSpecific = dice.Roll().Percentile().AsTrueOrFalse(specificThreshold);
             } while (!isSpecific && dice.Roll().Percentile().AsTrueOrFalse(rollAgainThreshold));
 
-            var mundaneArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, PowerConstants.Mundane);
-            if (isSpecific && proficientArmors.Except(mundaneArmors).Any())
+            var specificArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific);
+            if (isSpecific && proficientArmors.Intersect(specificArmors).Any())
             {
-                proficientArmors = proficientArmors.Except(mundaneArmors);
+                proficientArmors = proficientArmors.Intersect(specificArmors);
             }
             else
             {
-                proficientArmors = proficientArmors.Intersect(mundaneArmors);
+                proficientArmors = proficientArmors.Except(specificArmors);
             }
 
             var armorName = collectionsSelector.SelectRandomFrom(proficientArmors);
