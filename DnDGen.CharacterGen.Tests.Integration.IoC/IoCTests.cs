@@ -23,7 +23,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
         {
             var first = InjectAndAssertDuration<T>();
             var second = InjectAndAssertDuration<T>();
-            Assert.That(first, Is.EqualTo(second));
+            Assert.That(first, Is.SameAs(second));
         }
 
         private T InjectAndAssertDuration<T>()
@@ -50,14 +50,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
         {
             var first = InjectAndAssertDuration<T>();
             var second = InjectAndAssertDuration<T>();
-            Assert.That(first, Is.Not.EqualTo(second));
+            Assert.That(first, Is.Not.SameAs(second));
         }
 
         protected void AssertNotSingleton<T>(string name)
         {
             var first = InjectAndAssertDuration<T>(name);
             var second = InjectAndAssertDuration<T>(name);
-            Assert.That(first, Is.Not.EqualTo(second));
+            Assert.That(first, Is.Not.SameAs(second));
         }
 
         protected void AssertNamedIsInstanceOf<I, T>(string name)

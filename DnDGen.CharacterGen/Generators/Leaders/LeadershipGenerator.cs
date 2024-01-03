@@ -24,15 +24,14 @@ namespace DnDGen.CharacterGen.Generators
         private readonly IPercentileSelector percentileSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly ICollectionSelector collectionsSelector;
-        private readonly Generator generator;
         private readonly JustInTimeFactory justInTimeFactrory;
 
-        public LeadershipGenerator(ICharacterGenerator characterGenerator,
+        public LeadershipGenerator(
+            ICharacterGenerator characterGenerator,
             ILeadershipSelector leadershipSelector,
             IPercentileSelector percentileSelector,
             IAdjustmentsSelector adjustmentsSelector,
             ICollectionSelector collectionsSelector,
-            Generator generator,
             JustInTimeFactory justInTimeFactrory)
         {
             this.characterGenerator = characterGenerator;
@@ -40,7 +39,6 @@ namespace DnDGen.CharacterGen.Generators
             this.percentileSelector = percentileSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.collectionsSelector = collectionsSelector;
-            this.generator = generator;
             this.justInTimeFactrory = justInTimeFactrory;
         }
 
@@ -148,12 +146,12 @@ namespace DnDGen.CharacterGen.Generators
 
         private Alignment GetAlignment(string leaderAlignment, bool allowLeaderAlignment = true)
         {
-            var alignment = generator.Generate(
-                () => collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment),
-                a => allowLeaderAlignment || a != leaderAlignment,
-                () => leaderAlignment,
-                a => $"{a} cannot be the same as {leaderAlignment}",
-                $"Cohort or follower alignment of {leaderAlignment}");
+            var possibleAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment);
+
+            if (!allowLeaderAlignment)
+                possibleAlignments = possibleAlignments.Where(a => a != leaderAlignment);
+
+            var alignment = collectionsSelector.SelectRandomFrom(possibleAlignments);
 
             return new Alignment(alignment);
         }

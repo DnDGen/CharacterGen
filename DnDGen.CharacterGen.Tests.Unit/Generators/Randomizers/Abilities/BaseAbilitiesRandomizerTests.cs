@@ -1,7 +1,6 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
 {
@@ -30,112 +29,39 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
             Assert.That(abilities.Count, Is.EqualTo(6));
         }
 
-        [Test]
-        public void AbilitiesRolledTheSamePerStat()
+        [TestCase(-2)]
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        public void AbilitiesAreRolledIndividually(int rollChange)
         {
-            randomizer.Roll = 11;
+            randomizer.Roll = 9266;
+            randomizer.RollChange = rollChange;
 
             var abilities = randomizer.Randomize();
 
-            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(randomizer.Roll));
-            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(randomizer.Roll));
-            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(randomizer.Roll));
-            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(randomizer.Roll));
-            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(randomizer.Roll));
-            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(randomizer.Roll));
-        }
-
-        [Test]
-        public void AbilitiesAreRolledIndividually()
-        {
-            randomizer.Roll = 11;
-            randomizer.Reroll = 12;
-
-            var abilities = randomizer.Randomize();
-
-            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(16));
-            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(13));
-            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(14));
-            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(15));
-            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(17));
-            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(12));
-        }
-
-        [Test]
-        public void LoopUntilAbilitiesAreAllowed()
-        {
-            randomizer.Roll = 11;
-            randomizer.Reroll = 12;
-            randomizer.AllowedOnRandomize = 10;
-
-            var abilities = randomizer.Randomize();
-
-            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(16));
-            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(13));
-            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(14));
-            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(15));
-            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(17));
-            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(12));
-        }
-
-        [Test]
-        public void IfAbilitiesNeverAllowed_ReturnDefaultValues()
-        {
-            randomizer.Roll = 11;
-            randomizer.Reroll = 12;
-            randomizer.AllowedOnRandomize = int.MaxValue;
-
-            var abilities = randomizer.Randomize();
-
-            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(9266));
-            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(9266));
-            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9266));
-            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(9266));
-            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(9266));
-            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(9266));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(9266 + rollChange * 4));
+            Assert.That(abilities[AbilityConstants.Constitution].Value, Is.EqualTo(9266 + rollChange));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(9266 + rollChange * 2));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(9266 + rollChange * 3));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(9266 + rollChange * 5));
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(9266 + 0));
         }
 
         private class TestAbilityRandomizer : BaseAbilitiesRandomizer
         {
             public int Roll { get; set; }
-            public int Reroll { get; set; }
-            public int AllowedOnRandomize { get; set; }
-
-            protected override int defaultValue
-            {
-                get
-                {
-                    return 9266;
-                }
-            }
+            public int RollChange { get; set; }
 
             private int randomizeCount;
 
             public TestAbilityRandomizer()
-                : base(new ConfigurableIterationGenerator(10))
             {
                 randomizeCount = 0;
-                AllowedOnRandomize = 1;
             }
 
-            protected override int RollAbility()
-            {
-                if (randomizeCount + 1 < AllowedOnRandomize || Reroll == 0)
-                    return Roll;
-
-                return Reroll++;
-            }
-
-            protected override bool AbilitiesAreAllowed(IEnumerable<Ability> stats)
-            {
-                randomizeCount++;
-                return randomizeCount >= AllowedOnRandomize;
-            }
-
-            protected override string AbilitiesInvalidMessage(IEnumerable<Ability> abilities)
-            {
-                return "abilities in unit test are invalid";
-            }
+            protected override int RollAbility() => Roll + RollChange * randomizeCount++;
         }
     }
 }

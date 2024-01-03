@@ -1,8 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System.Collections.Generic;
@@ -13,13 +12,11 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
     internal abstract class BaseClassNameRandomizer : IClassNameRandomizer
     {
         private readonly IPercentileSelector percentileSelector;
-        private readonly Generator generator;
         private readonly ICollectionSelector collectionsSelector;
 
-        public BaseClassNameRandomizer(IPercentileSelector percentileSelector, Generator generator, ICollectionSelector collectionsSelector)
+        public BaseClassNameRandomizer(IPercentileSelector percentileSelector, ICollectionSelector collectionsSelector)
         {
             this.percentileSelector = percentileSelector;
-            this.generator = generator;
             this.collectionsSelector = collectionsSelector;
         }
 
@@ -30,13 +27,12 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
+            var className = percentileSelector.SelectFrom(tableName);
 
-            return generator.Generate(
-                () => percentileSelector.SelectFrom(tableName),
-                c => possibleClassNames.Contains(c),
-                () => collectionsSelector.SelectRandomFrom(possibleClassNames),
-                c => $"{c} is not from [{string.Join(",", possibleClassNames)}]",
-                $"class name from [{string.Join(",", possibleClassNames)}]");
+            if (possibleClassNames.Contains(className))
+                return className;
+
+            return collectionsSelector.SelectRandomFrom(possibleClassNames);
         }
 
         protected abstract bool CharacterClassIsAllowed(string className, Alignment alignment);

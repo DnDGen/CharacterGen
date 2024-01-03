@@ -1,5 +1,6 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.Randomizers.Alignments;
+using System.Collections.Generic;
 
 namespace DnDGen.CharacterGen.Generators.Alignments
 {
@@ -7,5 +8,6 @@ namespace DnDGen.CharacterGen.Generators.Alignments
     {
         Alignment GenerateWith(Alignment alignmentPrototype);
         Alignment GeneratePrototype(IAlignmentRandomizer alignmentRandomizer);
+        IEnumerable<Alignment> GeneratePrototypes(IAlignmentRandomizer alignmentRandomizer);
     }
 }

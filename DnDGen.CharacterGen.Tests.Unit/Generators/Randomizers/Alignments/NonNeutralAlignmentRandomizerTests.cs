@@ -19,8 +19,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             var mockPercentileSelector = new Mock<IPercentileSelector>();
             var mockCollectionsSelector = new Mock<ICollectionSelector>();
-            var generator = new ConfigurableIterationGenerator();
-            var randomizer = new NonNeutralAlignmentRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
+            var randomizer = new NonNeutralAlignmentRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
             mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
                 .Returns(new[] { AlignmentConstants.Good, AlignmentConstants.Neutral, AlignmentConstants.Evil });

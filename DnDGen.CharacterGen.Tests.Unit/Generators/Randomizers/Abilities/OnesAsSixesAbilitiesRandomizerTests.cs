@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
@@ -17,8 +17,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
         public void Setup()
         {
             mockDice = new Mock<Dice>();
-            var generator = new ConfigurableIterationGenerator(2);
-            randomizer = new OnesAsSixesAbilitiesRandomizer(mockDice.Object, generator);
+            randomizer = new OnesAsSixesAbilitiesRandomizer(mockDice.Object);
 
             mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 3, 4 });
         }

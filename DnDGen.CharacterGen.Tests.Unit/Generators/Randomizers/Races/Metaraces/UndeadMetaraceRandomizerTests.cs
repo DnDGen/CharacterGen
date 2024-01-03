@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -27,7 +27,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void Setup()
         {
-            randomizer = new UndeadMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object, generator);
+            randomizer = new UndeadMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
 
             mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead metarace" });

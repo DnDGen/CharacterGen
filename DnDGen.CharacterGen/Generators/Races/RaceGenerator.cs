@@ -1,10 +1,9 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Races;
-using DnDGen.Infrastructure.Generators;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using DnDGen.RollGen;
@@ -20,7 +19,6 @@ namespace DnDGen.CharacterGen.Generators.Races
         private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly Dice dice;
-        private readonly Generator generator;
 
         private readonly IEnumerable<string> allSizes;
         private readonly IEnumerable<string> allClassTypes;
@@ -28,14 +26,12 @@ namespace DnDGen.CharacterGen.Generators.Races
         public RaceGenerator(IPercentileSelector percentileSelector,
             ICollectionSelector collectionsSelector,
             IAdjustmentsSelector adjustmentsSelector,
-            Dice dice,
-            Generator generator)
+            Dice dice)
         {
             this.percentileSelector = percentileSelector;
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
             this.dice = dice;
-            this.generator = generator;
 
             allSizes = new[]
             {
@@ -275,12 +271,10 @@ namespace DnDGen.CharacterGen.Generators.Races
 
         private Measurement DetermineAge(Race race, CharacterClass characterClass)
         {
-            var age = generator.Generate(
-                () => GenerateAge(race, characterClass),
-                a => race.MaximumAge.Value >= a.Value || race.MaximumAge.Value == RaceConstants.Ages.Ageless,
-                () => GetDefaultAge(race),
-                a => $"{a.Value} {a.Unit} is greater than maximum age of {race.MaximumAge.Value} {race.MaximumAge.Unit}",
-                $"age for {race.Summary} {characterClass.Summary} of {race.MaximumAge.Value} years");
+            var age = GenerateAge(race, characterClass);
+
+            if (race.MaximumAge.Value != RaceConstants.Ages.Ageless && race.MaximumAge.Value < age.Value)
+                age.Value = race.MaximumAge.Value;
 
             return age;
         }
@@ -323,12 +317,14 @@ namespace DnDGen.CharacterGen.Generators.Races
             var classType = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
             var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
-            var additionalAge = 0;
+            var additionalAge = dice.Roll(trainingAgeRoll).AsSum();
 
-            for (var i = 0; i < characterClass.Level; i++)
-            {
-                additionalAge += dice.Roll(trainingAgeRoll).AsSum();
-            }
+            //This helps ensure that not every high-level character is old
+            //Eventually, this will be replaced by ages being rolled in the creature generator
+            //and character level won't affect age. But for now, do this
+            var ageIncreases = dice.Roll().d(characterClass.Level).Minus(1).AsSum();
+            if (ageIncreases > 0)
+                additionalAge += dice.Roll(ageIncreases).d(trainingAgeRoll).AsSum();
 
             return additionalAge;
         }
@@ -363,6 +359,27 @@ namespace DnDGen.CharacterGen.Generators.Races
             prototype.Metarace = metaraceRandomizer.Randomize(alignmentPrototype, classPrototype);
 
             return prototype;
+        }
+
+        public IEnumerable<RacePrototype> GeneratePrototypes(
+            Alignment alignmentPrototype,
+            CharacterClassPrototype classPrototype,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
+        {
+            var prototypes = new List<RacePrototype>();
+            var baseRaces = baseRaceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
+            var metaraces = metaraceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
+
+            foreach (var baseRace in baseRaces)
+            {
+                foreach (var metarace in metaraces)
+                {
+                    prototypes.Add(new RacePrototype { BaseRace = baseRace, Metarace = metarace });
+                }
+            }
+
+            return prototypes;
         }
     }
 }

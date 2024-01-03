@@ -1,9 +1,8 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System.Collections.Generic;
@@ -14,13 +13,11 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
     internal abstract class BaseRaceRandomizerBase : RaceRandomizer
     {
         private readonly IPercentileSelector percentileSelector;
-        private readonly Generator generator;
         private readonly ICollectionSelector collectionSelector;
 
-        public BaseRaceRandomizerBase(IPercentileSelector percentileSelector, Generator generator, ICollectionSelector collectionSelector)
+        public BaseRaceRandomizerBase(IPercentileSelector percentileSelector, ICollectionSelector collectionSelector)
         {
             this.percentileSelector = percentileSelector;
-            this.generator = generator;
             this.collectionSelector = collectionSelector;
         }
 
@@ -31,13 +28,12 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
+            var baseRace = percentileSelector.SelectFrom(tableName);
 
-            return generator.Generate(
-                () => percentileSelector.SelectFrom(tableName),
-                b => allowedBaseRaces.Contains(b),
-                () => collectionSelector.SelectRandomFrom(allowedBaseRaces),
-                b => $"{b} is not from [{string.Join(", ", allowedBaseRaces)}]",
-                $"base race from [{string.Join(",", allowedBaseRaces)}]");
+            if (allowedBaseRaces.Contains(baseRace))
+                return baseRace;
+
+            return collectionSelector.SelectRandomFrom(allowedBaseRaces);
         }
 
         private bool RaceIsAllowed(string baseRace, Alignment alignment)

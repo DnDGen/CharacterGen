@@ -9,6 +9,7 @@ namespace DnDGen.CharacterGen.Generators.Classes
     internal interface ICharacterClassGenerator
     {
         CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer);
+        IEnumerable<CharacterClassPrototype> GeneratePrototypes(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer);
         CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype);
         IEnumerable<string> RegenerateSpecialistFields(Alignment alignment, CharacterClass characterClass, Race race);
     }

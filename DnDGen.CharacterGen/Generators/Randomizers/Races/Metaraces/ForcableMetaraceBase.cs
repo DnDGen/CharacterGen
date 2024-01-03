@@ -1,10 +1,9 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System.Collections.Generic;
@@ -18,12 +17,10 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
 
         private readonly ICollectionSelector collectionSelector;
         private readonly IPercentileSelector percentileSelector;
-        private readonly Generator generator;
 
-        public ForcableMetaraceBase(IPercentileSelector percentileSelector, Generator generator, ICollectionSelector collectionSelector)
+        public ForcableMetaraceBase(IPercentileSelector percentileSelector, ICollectionSelector collectionSelector)
         {
             this.percentileSelector = percentileSelector;
-            this.generator = generator;
             this.collectionSelector = collectionSelector;
         }
 
@@ -34,13 +31,12 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
+            var metarace = percentileSelector.SelectFrom(tableName);
 
-            return generator.Generate(
-                () => percentileSelector.SelectFrom(tableName),
-                m => allowedMetaraces.Contains(m),
-                () => GetDefaultMetarace(allowedMetaraces),
-                m => $"{m} is not from [{string.Join(",", allowedMetaraces)}]",
-                $"metarace from [{string.Join(",", allowedMetaraces)}]");
+            if (allowedMetaraces.Contains(metarace))
+                return metarace;
+
+            return GetDefaultMetarace(allowedMetaraces);
         }
 
         private string GetDefaultMetarace(IEnumerable<string> allowedMetaraces)

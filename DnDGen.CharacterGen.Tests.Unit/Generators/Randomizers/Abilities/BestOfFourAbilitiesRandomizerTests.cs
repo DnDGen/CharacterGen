@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
@@ -17,23 +17,22 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
         public void Setup()
         {
             mockDice = new Mock<Dice>();
-            var generator = new ConfigurableIterationGenerator(2);
-            randomizer = new BestOfFourAbilitiesRandomizer(mockDice.Object, generator);
+            randomizer = new BestOfFourAbilitiesRandomizer(mockDice.Object);
 
-            mockDice.Setup(d => d.Roll("4d6k3").AsSum()).Returns(3);
+            mockDice.Setup(d => d.Roll("4d6k3").AsSum<int>()).Returns(3);
         }
 
         [Test]
         public void BestOfFourAbilitiesCalls4d6k3OncePerAbility()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll("4d6k3").AsSum(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll("4d6k3").AsSum<int>(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void BestOfFourIgnoresLowestRollPerAbility()
         {
-            mockDice.SetupSequence(d => d.Roll("4d6k3").AsSum()).Returns(9);
+            mockDice.SetupSequence(d => d.Roll("4d6k3").AsSum<int>()).Returns(9);
 
             var stats = randomizer.Randomize();
             var stat = stats.Values.First();

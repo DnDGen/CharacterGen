@@ -23,7 +23,6 @@ using DnDGen.CharacterGen.Skills;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using DnDGen.TreasureGen.Items;
@@ -43,7 +42,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
         private readonly ICombatGenerator combatGenerator;
         private readonly IEquipmentGenerator equipmentGenerator;
         private readonly IMagicGenerator magicGenerator;
-        private readonly Generator generator;
         private readonly ICollectionSelector collectionsSelector;
         private readonly IAbilitiesGenerator abilitiesGenerator;
         private readonly ILanguageGenerator languageGenerator;
@@ -59,7 +57,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
             ICombatGenerator combatGenerator,
             IEquipmentGenerator equipmentGenerator,
             IMagicGenerator magicGenerator,
-            Generator generator,
             ICollectionSelector collectionsSelector,
             IAbilitiesGenerator abilitiesGenerator,
             ILanguageGenerator languageGenerator,
@@ -72,7 +69,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
             this.abilitiesGenerator = abilitiesGenerator;
             this.combatGenerator = combatGenerator;
             this.equipmentGenerator = equipmentGenerator;
-            this.generator = generator;
             this.languageGenerator = languageGenerator;
             this.skillsGenerator = skillsGenerator;
             this.featsGenerator = featsGenerator;
@@ -233,7 +229,8 @@ namespace DnDGen.CharacterGen.Generators.Characters
                 throw new IncompatibleRandomizersException();
         }
 
-        public CharacterPrototype GeneratePrototypeWith(IAlignmentRandomizer alignmentRandomizer,
+        public CharacterPrototype GeneratePrototypeWith(
+            IAlignmentRandomizer alignmentRandomizer,
             IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer,
             RaceRandomizer baseRaceRandomizer,
@@ -241,33 +238,40 @@ namespace DnDGen.CharacterGen.Generators.Characters
         {
             var prototype = new CharacterPrototype();
 
-            prototype.Alignment = generator.Generate(
-                () => alignmentGenerator.GeneratePrototype(alignmentRandomizer),
-                a => randomizerVerifier.VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer),
-                () => DefaultIsIncompatible<Alignment>(),
-                a => $"{a.Full} is not compatible with the randomizers",
-                "Incompatible alignment");
+            var alignments = alignmentGenerator.GeneratePrototypes(alignmentRandomizer);
+            var validAlignments = randomizerVerifier.FilterAlignments(alignments, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
-            prototype.CharacterClass = generator.Generate(
-                () => characterClassGenerator.GeneratePrototype(prototype.Alignment, classNameRandomizer, levelRandomizer),
-                c => randomizerVerifier.VerifyCharacterClassCompatibility(prototype.Alignment, c, baseRaceRandomizer, metaraceRandomizer),
-                () => DefaultIsIncompatible<CharacterClassPrototype>(),
-                c => $"{c.Summary} is not compatible with {prototype.Alignment} and the randomizers",
-                "Incompatible character class");
+            if (!validAlignments.Any())
+                throw new IncompatibleRandomizersException();
 
-            prototype.Race = generator.Generate(
-                () => raceGenerator.GeneratePrototype(prototype.Alignment, prototype.CharacterClass, baseRaceRandomizer, metaraceRandomizer),
-                r => randomizerVerifier.VerifyRaceCompatibility(prototype.Alignment, prototype.CharacterClass, r),
-                () => DefaultIsIncompatible<RacePrototype>(),
-                r => $"{r.Summary} is not compatible with {prototype.Alignment}, {prototype.CharacterClass.Summary}, and the randomizers",
-                "Incompatible race");
+            prototype.Alignment = alignmentGenerator.GeneratePrototype(alignmentRandomizer);
+
+            if (!validAlignments.Contains(prototype.Alignment))
+                prototype.Alignment = collectionsSelector.SelectRandomFrom(validAlignments);
+
+            var characterClasses = characterClassGenerator.GeneratePrototypes(prototype.Alignment, classNameRandomizer, levelRandomizer);
+            var validCharacterClasses = randomizerVerifier.FilterCharacterClasses(characterClasses, prototype.Alignment, baseRaceRandomizer, metaraceRandomizer);
+
+            if (!validCharacterClasses.Any())
+                throw new IncompatibleRandomizersException();
+
+            prototype.CharacterClass = characterClassGenerator.GeneratePrototype(prototype.Alignment, classNameRandomizer, levelRandomizer);
+
+            if (!validCharacterClasses.Contains(prototype.CharacterClass))
+                prototype.CharacterClass = collectionsSelector.SelectRandomFrom(validCharacterClasses);
+
+            var races = raceGenerator.GeneratePrototypes(prototype.Alignment, prototype.CharacterClass, baseRaceRandomizer, metaraceRandomizer);
+            var validRaces = randomizerVerifier.FilterRaces(races, prototype.Alignment, prototype.CharacterClass);
+
+            if (!validRaces.Any())
+                throw new IncompatibleRandomizersException();
+
+            prototype.Race = raceGenerator.GeneratePrototype(prototype.Alignment, prototype.CharacterClass, baseRaceRandomizer, metaraceRandomizer);
+
+            if (!validRaces.Contains(prototype.Race))
+                prototype.Race = collectionsSelector.SelectRandomFrom(validRaces);
 
             return prototype;
-        }
-
-        private T DefaultIsIncompatible<T>()
-        {
-            throw new IncompatibleRandomizersException();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void Setup()
         {
-            randomizer = new AnyBaseRaceRandomizer(mockPercentileSelector.Object, generator, mockCollectionSelector.Object);
+            randomizer = new AnyBaseRaceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
         }
 
         [Test]

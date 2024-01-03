@@ -54,15 +54,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             mockAnyMetaraceRandomizer = new Mock<RaceRandomizer>();
             mockRawAbilityRandomizer = new Mock<IAbilitiesRandomizer>();
             mockCollectionsSelector = new Mock<ICollectionSelector>();
-            var generator = new ConfigurableIterationGenerator(2);
             mockAnyNPCClassNameRandomizer = new Mock<IClassNameRandomizer>();
             mockJustInTimeFactory = new Mock<JustInTimeFactory>();
-            leadershipGenerator = new LeadershipGenerator(mockCharacterGenerator.Object,
+            leadershipGenerator = new LeadershipGenerator(
+                mockCharacterGenerator.Object,
                 mockLeadershipSelector.Object,
                 mockPercentileSelector.Object,
                 mockAdjustmentsSelector.Object,
                 mockCollectionsSelector.Object,
-                generator,
                 mockJustInTimeFactory.Object);
 
             allowedAlignments = new List<string>();

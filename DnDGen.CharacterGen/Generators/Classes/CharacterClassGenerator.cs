@@ -1,9 +1,9 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System.Collections.Generic;
@@ -114,6 +114,32 @@ namespace DnDGen.CharacterGen.Generators.Classes
                 .Except(nonAlignmentFields);
 
             return PopulateFields(characterClass.SpecialistFields.Count(), applicableFields);
+        }
+
+        public IEnumerable<CharacterClassPrototype> GeneratePrototypes(
+            Alignment alignmentPrototype,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer)
+        {
+            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var classNames = classNameRandomizer.GetAllPossibleResults(alignmentPrototype);
+            var levels = levelRandomizer.GetAllPossibleResults();
+            var prototypes = new List<CharacterClassPrototype>();
+
+            foreach (var className in classNames)
+            {
+                foreach (var level in levels)
+                {
+                    var prototype = new CharacterClassPrototype();
+                    prototype.Name = className;
+                    prototype.Level = level;
+                    prototype.IsNPC = npcs.Contains(className);
+
+                    prototypes.Add(prototype);
+                }
+            }
+
+            return prototypes;
         }
     }
 }

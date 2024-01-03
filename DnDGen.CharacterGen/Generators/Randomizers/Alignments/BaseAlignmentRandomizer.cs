@@ -1,8 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Alignments;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System.Collections.Generic;
@@ -13,13 +12,11 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Alignments
     internal abstract class BaseAlignmentRandomizer : IAlignmentRandomizer
     {
         private readonly IPercentileSelector percentileResultSelector;
-        private readonly Generator generator;
         private readonly ICollectionSelector collectionsSelector;
 
-        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionSelector collectionsSelector)
+        public BaseAlignmentRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector)
         {
             this.percentileResultSelector = percentileResultSelector;
-            this.generator = generator;
             this.collectionsSelector = collectionsSelector;
         }
 
@@ -29,12 +26,11 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Alignments
             if (possibleAlignments.Any() == false)
                 throw new IncompatibleRandomizersException();
 
-            return generator.Generate(
-                GenerateAlignment,
-                a => possibleAlignments.Contains(a),
-                () => collectionsSelector.SelectRandomFrom(possibleAlignments),
-                a => $"{a.Full} is not from [{string.Join(",", possibleAlignments)}]",
-                $"alignment from [{string.Join(",", possibleAlignments)}]");
+            var alignment = GenerateAlignment();
+            if (possibleAlignments.Contains(alignment))
+                return alignment;
+
+            return collectionsSelector.SelectRandomFrom(possibleAlignments);
         }
 
         private Alignment GenerateAlignment()

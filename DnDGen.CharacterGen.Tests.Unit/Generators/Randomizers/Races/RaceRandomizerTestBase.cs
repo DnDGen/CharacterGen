@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -14,7 +13,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races
     {
         internal Mock<IPercentileSelector> mockPercentileSelector;
         internal Mock<ICollectionSelector> mockCollectionSelector;
-        internal Generator generator;
         protected Alignment alignment;
         protected CharacterClassPrototype characterClass;
 
@@ -23,7 +21,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockCollectionSelector = new Mock<ICollectionSelector>();
-            generator = new ConfigurableIterationGenerator();
             characterClass = new CharacterClassPrototype();
             alignment = new Alignment();
 

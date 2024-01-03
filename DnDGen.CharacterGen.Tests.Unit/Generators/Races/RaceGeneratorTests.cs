@@ -53,12 +53,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockDice = new Mock<Dice>();
-            var generator = new ConfigurableIterationGenerator(5);
-            raceGenerator = new RaceGenerator(mockPercentileSelector.Object,
+            raceGenerator = new RaceGenerator(
+                mockPercentileSelector.Object,
                 mockCollectionsSelector.Object,
                 mockAdjustmentsSelector.Object,
-                mockDice.Object,
-                generator);
+                mockDice.Object);
 
             alignment = new Alignment();
             characterClass = new CharacterClass();

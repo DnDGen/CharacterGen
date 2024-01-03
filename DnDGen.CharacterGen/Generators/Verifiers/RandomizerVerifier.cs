@@ -1,12 +1,12 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
@@ -205,6 +205,30 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
         {
             var classRaces = collectionsSelector.SelectFrom(tableName, classPrototype.Name);
             return classRaces.Contains(race);
+        }
+
+        public IEnumerable<Alignment> FilterAlignments(
+            IEnumerable<Alignment> alignments,
+            IClassNameRandomizer classNameRandomizer,
+            ILevelRandomizer levelRandomizer,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
+        {
+            return alignments.Where(a => VerifyAlignmentCompatibility(a, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer));
+        }
+
+        public IEnumerable<CharacterClassPrototype> FilterCharacterClasses(
+            IEnumerable<CharacterClassPrototype> characterClasses,
+            Alignment alignment,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
+        {
+            return characterClasses.Where(c => VerifyCharacterClassCompatibility(alignment, c, baseRaceRandomizer, metaraceRandomizer));
+        }
+
+        public IEnumerable<RacePrototype> FilterRaces(IEnumerable<RacePrototype> races, Alignment alignment, CharacterClassPrototype characterClass)
+        {
+            return races.Where(r => VerifyRaceCompatibility(alignment, characterClass, r));
         }
     }
 }

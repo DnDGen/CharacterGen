@@ -15,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         [SetUp]
         public void Setup()
         {
-            randomizer = new StealthClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object, generator);
+            randomizer = new StealthClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object);
         }
 
         [Test]

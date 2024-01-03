@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
@@ -231,7 +231,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             public string ForbiddenMetarace { get; set; }
 
             public TestForcableMetaraceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionSelector)
-                : base(percentileResultSelector, new ConfigurableIterationGenerator(2), collectionSelector)
+                : base(percentileResultSelector, collectionSelector)
             { }
 
             protected override bool MetaraceIsAllowed(string metarace)

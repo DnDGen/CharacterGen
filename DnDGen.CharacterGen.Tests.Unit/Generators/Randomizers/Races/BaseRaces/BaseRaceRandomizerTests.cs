@@ -86,43 +86,44 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         }
 
         [Test]
-        public void RandomizeRerollsEmptyBaseRace()
+        public void RandomizeDefaultsOnEmptyBaseRace()
         {
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(string.Empty)
-                .Returns(firstBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(string.Empty);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(firstBaseRace));
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Test]
-        public void RandomizeRerollsInvalidBaseRaceBecauseNotAllowed()
+        public void RandomizeRandomlyDefaultsOnEmptyBaseRace()
+        {
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(string.Empty);
+            mockCollectionSelector.Setup(s => s.SelectRandomFrom(new[] { firstBaseRace, secondBaseRace })).Returns(secondBaseRace);
+
+            var baseRace = randomizer.Randomize(alignment, characterClass);
+            Assert.That(baseRace, Is.EqualTo(secondBaseRace));
+        }
+
+        [Test]
+        public void RandomizeDefaultsBaseRaceBecauseNotAllowed()
         {
             randomizer.ForbiddenBaseRace = firstBaseRace;
 
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstBaseRace)
-                .Returns(secondBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(secondBaseRace));
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Test]
-        public void RandomizeRerollsInvalidBaseRaceBecauseAlignmentDoesNotAllow()
+        public void RandomizeDefaultsInvalidBaseRaceBecauseAlignmentDoesNotAllow()
         {
             alignmentRaces.Remove(firstBaseRace);
 
-            mockPercentileResultSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstBaseRace)
-                .Returns(secondBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(secondBaseRace));
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Test]
@@ -187,7 +188,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             public string ForbiddenBaseRace { get; set; }
 
             public TestBaseRaceRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionSelector)
-                : base(percentileResultSelector, new ConfigurableIterationGenerator(2), collectionSelector)
+                : base(percentileResultSelector, collectionSelector)
             { }
 
             protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)

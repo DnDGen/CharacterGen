@@ -2,7 +2,6 @@
 using DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -28,9 +27,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
             mockCollectionsSelector = new Mock<ICollectionSelector>();
-            var generator = new ConfigurableIterationGenerator(2);
 
-            classNameRandomizer = new TestClassRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
+            classNameRandomizer = new TestClassRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
             alignment = new Alignment();
             alignment.Goodness = AlignmentConstants.Good;
@@ -73,22 +71,22 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         }
 
         [Test]
-        public void RandomizeLoopsUntilAllowedClassNameIsRolled()
-        {
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name")
-                .Returns(firstClass);
-
-            classNameRandomizer.Randomize(alignment);
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
-        }
-
-        [Test]
         public void RandomizeReturnsDefault()
         {
             mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name");
 
             var className = classNameRandomizer.Randomize(alignment);
             Assert.That(className, Is.EqualTo(firstClass));
+        }
+
+        [Test]
+        public void RandomizeReturnsRandomDefault()
+        {
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns("invalid class name");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(new[] { firstClass, secondClass })).Returns(secondClass);
+
+            var className = classNameRandomizer.Randomize(alignment);
+            Assert.That(className, Is.EqualTo(secondClass));
         }
 
         [Test]
@@ -124,8 +122,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         {
             public string NotAllowedClassName { get; set; }
 
-            public TestClassRandomizer(IPercentileSelector percentileResultSelector, Generator generator, ICollectionSelector collectionsSelector)
-                : base(percentileResultSelector, generator, collectionsSelector)
+            public TestClassRandomizer(IPercentileSelector percentileResultSelector, ICollectionSelector collectionsSelector)
+                : base(percentileResultSelector, collectionsSelector)
             { }
 
             protected override bool CharacterClassIsAllowed(string className, Alignment alignment)

@@ -1,5 +1,4 @@
 ﻿using DnDGen.CharacterGen.Alignments;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 
@@ -7,8 +6,8 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Alignments
 {
     internal class NonEvilAlignmentRandomizer : BaseAlignmentRandomizer
     {
-        public NonEvilAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionSelector collectionsSelector)
-            : base(innerSelector, generator, collectionsSelector)
+        public NonEvilAlignmentRandomizer(IPercentileSelector innerSelector, ICollectionSelector collectionsSelector)
+            : base(innerSelector, collectionsSelector)
         { }
 
         protected override bool AlignmentIsAllowed(Alignment alignment)

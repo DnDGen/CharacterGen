@@ -102,9 +102,15 @@ namespace DnDGen.CharacterGen.Generators.Items
             } while (!isSpecific && dice.Roll().Percentile().AsTrueOrFalse(rollAgainThreshold));
 
             var specificArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific);
-            if (isSpecific && proficientArmors.Intersect(specificArmors).Any())
+            var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
+
+            if (isSpecific && proficientArmors.Intersect(specificArmors).Any()
+                && (characterClass.Name != CharacterClassConstants.Druid || proficientArmors.Intersect(specificArmors.Except(metalArmors)).Any()))
             {
-                proficientArmors = proficientArmors.Intersect(specificArmors);
+                if (characterClass.Name == CharacterClassConstants.Druid)
+                    proficientArmors = proficientArmors.Intersect(specificArmors.Except(metalArmors));
+                else
+                    proficientArmors = proficientArmors.Intersect(specificArmors);
             }
             else
             {
@@ -113,10 +119,10 @@ namespace DnDGen.CharacterGen.Generators.Items
 
             var armorName = collectionsSelector.SelectRandomFrom(proficientArmors);
             var traits = new[] { race.Size };
-            var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
 
             //INFO: If we are able to select a metal armor here for a Druid, then it was rolled that it could be dragonhide
-            if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName) && !isSpecific)
+            //if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName) && !isSpecific)
+            if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName))
             {
                 traits = new[] { race.Size, TraitConstants.SpecialMaterials.Dragonhide };
             }

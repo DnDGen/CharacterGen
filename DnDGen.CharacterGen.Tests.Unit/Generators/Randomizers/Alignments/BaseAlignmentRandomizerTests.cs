@@ -2,7 +2,6 @@
 using DnDGen.CharacterGen.Generators.Randomizers.Alignments;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
-using DnDGen.Infrastructure.Generators;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -24,9 +23,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             mockPercentileSelector = new Mock<IPercentileSelector>();
             var mockCollectionsSelector = new Mock<ICollectionSelector>();
-            var generator = new ConfigurableIterationGenerator(2);
-
-            alignmentRandomizer = new TestAlignmentRandomizer(mockPercentileSelector.Object, generator, mockCollectionsSelector.Object);
+            alignmentRandomizer = new TestAlignmentRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
             mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(new[] { "other lawfulness", "lawfulness" });
             mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });
@@ -135,8 +132,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             public string NotAllowedLawfulness { get; set; }
             public string NotAllowedGoodness { get; set; }
 
-            public TestAlignmentRandomizer(IPercentileSelector innerSelector, Generator generator, ICollectionSelector collectionsSelector)
-                : base(innerSelector, generator, collectionsSelector)
+            public TestAlignmentRandomizer(IPercentileSelector innerSelector, ICollectionSelector collectionsSelector)
+                : base(innerSelector, collectionsSelector)
             { }
 
             protected override bool AlignmentIsAllowed(Alignment alignment)

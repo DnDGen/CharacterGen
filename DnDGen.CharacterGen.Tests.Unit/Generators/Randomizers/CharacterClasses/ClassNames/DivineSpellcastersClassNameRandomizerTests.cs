@@ -1,5 +1,4 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
 using NUnit.Framework;
 
@@ -16,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         [SetUp]
         public void Setup()
         {
-            randomizer = new DivineSpellcasterClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object, generator);
+            randomizer = new DivineSpellcasterClassNameRandomizer(mockPercentileResultSelector.Object, mockCollectionsSelector.Object);
         }
 
         [Test]
