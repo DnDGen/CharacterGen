@@ -59,7 +59,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(alignmentRaces);
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(classRaces);
 
-
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
         }
@@ -81,71 +80,98 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeRerollsNoMetarace()
         {
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(RaceConstants.Metaraces.None)
-                .Returns(firstMetarace);
+            //mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
+            //    .Returns(RaceConstants.Metaraces.None)
+            //    .Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
 
             forcableMetaraceRandomizer.ForceMetarace = true;
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(firstMetarace));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
         }
 
         [Test]
         public void RandomizeDoesNotRerollNoMetarace()
         {
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(RaceConstants.Metaraces.None)
-                .Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
 
             forcableMetaraceRandomizer.ForceMetarace = false;
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
-        public void RandomizeRerollsInvalidMetaraceBecauseNotAllowed()
+        public void RandomizeRerollsInvalidMetaraceBecauseNotAllowed_None()
         {
             forcableMetaraceRandomizer.ForbiddenMetarace = firstMetarace;
 
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstMetarace)
-                .Returns(secondMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-            Assert.That(metarace, Is.EqualTo(secondMetarace));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]
-        public void RandomizeRerollsInvalidMetaraceBecauseAlignmentDoesNotAllow()
+        public void RandomizeRerollsInvalidMetaraceBecauseNotAllowed_Forced()
+        {
+            forcableMetaraceRandomizer.ForbiddenMetarace = firstMetarace;
+
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(secondMetarace));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidMetaraceBecauseAlignmentDoesNotAllow_None()
         {
             alignmentRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstMetarace)
-                .Returns(secondMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
-            Assert.That(metarace, Is.EqualTo(secondMetarace));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
 
         [Test]
-        public void RandomizeRerollsInvalidMetaraceBecauseClassDoesNotAllow()
+        public void RandomizeRerollsInvalidMetaraceBecauseAlignmentDoesNotAllow_Forced()
         {
-            classRaces.Remove(firstMetarace);
+            alignmentRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-                .Returns(firstMetarace)
-                .Returns(secondMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+
+            forcableMetaraceRandomizer.ForceMetarace = true;
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(secondMetarace));
-            mockPercentileSelector.Verify(p => p.SelectFrom(It.IsAny<string>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidMetaraceBecauseClassDoesNotAllow_None()
+        {
+            classRaces.Remove(firstMetarace);
+
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+
+            var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+        }
+
+        [Test]
+        public void RandomizeRerollsInvalidMetaraceBecauseClassDoesNotAllow_Forced()
+        {
+            classRaces.Remove(firstMetarace);
+
+            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+
+            forcableMetaraceRandomizer.ForceMetarace = true;
+
+            var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
+            Assert.That(metarace, Is.EqualTo(secondMetarace));
         }
 
         [Test]

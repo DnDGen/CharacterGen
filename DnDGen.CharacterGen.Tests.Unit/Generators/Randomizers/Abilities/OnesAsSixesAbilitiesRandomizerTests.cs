@@ -1,9 +1,9 @@
-﻿using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
+﻿using DnDGen.CharacterGen.Abilities;
+using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
 {
@@ -19,24 +19,35 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
             mockDice = new Mock<Dice>();
             randomizer = new OnesAsSixesAbilitiesRandomizer(mockDice.Object);
 
-            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 3, 4 });
+            mockDice.SetupSequence(d => d.Roll("3d6t1").AsSum<int>())
+                .Returns(6).Returns(18).Returns(10)
+                .Returns(17).Returns(12).Returns(8);
         }
 
         [Test]
-        public void OnesAsSixesAbilitiesCalls3d6OncePerAbility()
+        public void Randomize_CallsRollPerStat()
         {
-            var abilities = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d(6).AsIndividualRolls(), Times.Exactly(abilities.Count));
+            var stats = randomizer.Randomize();
+            mockDice.Verify(d => d.Roll("3d6t1").AsSum<int>(), Times.Exactly(stats.Count));
         }
 
         [Test]
-        public void OnesAsSixesTreatsOnesAsSixes()
+        public void Randomize_ReturnRandomizedStats()
         {
-            mockDice.Setup(d => d.Roll(3).d(6).AsIndividualRolls()).Returns(new[] { 2, 3, 1 });
-
-            var abilities = randomizer.Randomize();
-            var ability = abilities.Values.First();
-            Assert.That(ability.Value, Is.EqualTo(11));
+            var stats = randomizer.Randomize();
+            Assert.That(stats, Has.Count.EqualTo(6)
+                .And.ContainKey(AbilityConstants.Charisma)
+                .And.ContainKey(AbilityConstants.Constitution)
+                .And.ContainKey(AbilityConstants.Dexterity)
+                .And.ContainKey(AbilityConstants.Intelligence)
+                .And.ContainKey(AbilityConstants.Strength)
+                .And.ContainKey(AbilityConstants.Wisdom));
+            Assert.That(stats[AbilityConstants.Strength].Value, Is.EqualTo(12));
+            Assert.That(stats[AbilityConstants.Constitution].Value, Is.EqualTo(18));
+            Assert.That(stats[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(stats[AbilityConstants.Intelligence].Value, Is.EqualTo(17));
+            Assert.That(stats[AbilityConstants.Wisdom].Value, Is.EqualTo(8));
+            Assert.That(stats[AbilityConstants.Charisma].Value, Is.EqualTo(6));
         }
     }
 }

@@ -19,20 +19,20 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
             mockDice = new Mock<Dice>();
             randomizer = new TwoTenSidedDiceAbilitiesRandomizer(mockDice.Object);
 
-            mockDice.Setup(d => d.Roll(It.IsAny<int>()).d(It.IsAny<int>()).AsSum()).Returns(1);
+            mockDice.Setup(d => d.Roll(It.IsAny<int>()).d(It.IsAny<int>()).AsSum<int>()).Returns(1);
         }
 
         [Test]
         public void TwoTenSidedDiceCalls2d10PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(2).d(10).AsSum(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(2).d(10).AsSum<int>(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void TwoTenSidedDiceReturnsUnmodified2d10PerStat()
         {
-            mockDice.Setup(d => d.Roll(2).d(10).AsSum()).Returns(11);
+            mockDice.Setup(d => d.Roll(2).d(10).AsSum<int>()).Returns(11);
 
             var stats = randomizer.Randomize();
             foreach (var stat in stats.Values)
@@ -42,7 +42,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
         [Test]
         public void RolledAbilitiesAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.Roll(2).d(10).AsSum())
+            mockDice.SetupSequence(d => d.Roll(2).d(10).AsSum<int>())
                 .Returns(9266).Returns(-42).Returns(int.MaxValue)
                 .Returns(int.MinValue).Returns(0).Returns(1337);
 

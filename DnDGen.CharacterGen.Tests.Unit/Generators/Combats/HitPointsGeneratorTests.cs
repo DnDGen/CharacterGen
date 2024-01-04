@@ -1,13 +1,13 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Combats;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
-using DnDGen.CharacterGen.Races;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Collections.Generic;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
@@ -62,7 +62,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
                 mockPartialRolls[quantity] = new Mock<PartialRoll>();
 
             var endRoll = new Mock<PartialRoll>();
-            endRoll.Setup(r => r.AsIndividualRolls()).Returns(rolls);
+            endRoll.Setup(r => r.AsIndividualRolls<int>()).Returns(rolls);
 
             mockPartialRolls[quantity].Setup(r => r.d(die)).Returns(endRoll.Object);
         }
@@ -306,7 +306,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             characterClass.Level = 3;
             constitutionBonus = -2;
 
-            mockDice.SetupSequence(d => d.Roll(3).d(9266).AsIndividualRolls()).Returns(new[] { 1, 2, 4 });
+            mockDice.SetupSequence(d => d.Roll(3).d(9266).AsIndividualRolls<int>()).Returns(new[] { 1, 2, 4 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(4));
@@ -316,7 +316,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         public void MinimumCheckAppliedPerMonsterHitDie()
         {
             characterClass.Level = 2;
-            mockDice.Setup(d => d.Roll(2).d(9266).AsIndividualRolls()).Returns(new[] { 90210, 42 });
+            mockDice.Setup(d => d.Roll(2).d(9266).AsIndividualRolls<int>()).Returns(new[] { 90210, 42 });
 
             race.BaseRace = "baserace";
             constitutionBonus = -2;
@@ -329,7 +329,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             monsterHitDice["baserace"] = 3;
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
-            mockDice.SetupSequence(d => d.Roll(3).d(8).AsIndividualRolls()).Returns(new[] { 1, 2, 4 });
+            mockDice.SetupSequence(d => d.Roll(3).d(8).AsIndividualRolls<int>()).Returns(new[] { 1, 2, 4 });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
             Assert.That(hitPoints, Is.EqualTo(90252));
@@ -340,7 +340,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         {
             characterClass.Level = 5;
             var mockClassPartialRoll = new Mock<PartialRoll>();
-            mockClassPartialRoll.Setup(r => r.d(12).AsIndividualRolls()).Returns(new[] { 4, 5, 7, 10, 12 });
+            mockClassPartialRoll.Setup(r => r.d(12).AsIndividualRolls<int>()).Returns(new[] { 4, 5, 7, 10, 12 });
             mockDice.Setup(d => d.Roll(5)).Returns(mockClassPartialRoll.Object);
             constitutionBonus = -5;
 
@@ -357,7 +357,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.MonsterHitDice)).Returns(monsterHitDice);
 
             var mockRacePartialRoll = new Mock<PartialRoll>();
-            mockRacePartialRoll.Setup(r => r.d(12).AsIndividualRolls()).Returns(new[] { 1, 3, 8 });
+            mockRacePartialRoll.Setup(r => r.d(12).AsIndividualRolls<int>()).Returns(new[] { 1, 3, 8 });
             mockDice.Setup(d => d.Roll(3)).Returns(mockRacePartialRoll.Object);
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);

@@ -19,20 +19,20 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
             mockDice = new Mock<Dice>();
             randomizer = new RawAbilitiesRandomizer(mockDice.Object);
 
-            mockDice.Setup(d => d.Roll(It.IsAny<int>()).d(It.IsAny<int>()).AsSum()).Returns(1);
+            mockDice.Setup(d => d.Roll(It.IsAny<int>()).d(It.IsAny<int>()).AsSum<int>()).Returns(1);
         }
 
         [Test]
         public void RawAbilitiesCalls3d6PerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(6).AsSum<int>(), Times.Exactly(stats.Count));
         }
 
         [Test]
         public void RawAbilitiesReturnsUnmodified3d6PerStat()
         {
-            mockDice.Setup(d => d.Roll(3).d(6).AsSum()).Returns(12);
+            mockDice.Setup(d => d.Roll(3).d(6).AsSum<int>()).Returns(12);
             var stats = randomizer.Randomize();
 
             foreach (var stat in stats.Values)
@@ -42,7 +42,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
         [Test]
         public void RolledAbilitiesAreAlwaysAllowed()
         {
-            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum<int>())
                 .Returns(9266).Returns(-42).Returns(int.MaxValue)
                 .Returns(int.MinValue).Returns(0).Returns(1337);
 

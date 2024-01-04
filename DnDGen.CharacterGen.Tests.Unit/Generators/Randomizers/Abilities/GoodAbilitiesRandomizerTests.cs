@@ -1,9 +1,9 @@
-﻿using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
+﻿using DnDGen.CharacterGen.Abilities;
+using DnDGen.CharacterGen.Generators.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
 {
@@ -11,74 +11,47 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Abilities
     public class GoodAbilitiesRandomizerTests
     {
         private const int min = 13;
-        private const int max = 15;
+        private const int max = 16;
         private const int middle = (max + min) / 2;
 
         private IAbilitiesRandomizer randomizer;
         private Mock<Dice> mockDice;
 
-
         [SetUp]
         public void Setup()
         {
             mockDice = new Mock<Dice>();
-            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
+            mockDice.SetupSequence(d => d.Roll(3).d(2).Plus(10).AsSum<int>())
                 .Returns(min).Returns(max).Returns(middle)
-                .Returns(min - 1).Returns(max + 1).Returns(middle);
+                .Returns(min + 1).Returns(max - 1).Returns(middle);
 
             randomizer = new GoodAbilitiesRandomizer(mockDice.Object);
         }
 
         [Test]
-        public void GoodCalls3d6PerStat()
+        public void Randomize_CallsRollPerStat()
         {
             var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count));
+            mockDice.Verify(d => d.Roll(3).d(2).Plus(10).AsSum<int>(), Times.Exactly(stats.Count));
         }
 
         [Test]
-        public void AllowIfStatAverageIsInRange()
+        public void Randomize_ReturnRandomizedStats()
         {
             var stats = randomizer.Randomize();
-            var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.InRange(min, max));
-        }
-
-        [Test]
-        public void RerollIfStatAverageIsGreaterThanFifteen()
-        {
-            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
-                .Returns(min).Returns(max).Returns(middle)
-                .Returns(min - 1).Returns(max + 1).Returns(9000) //invalid average
-                .Returns(min).Returns(max).Returns(middle)
-                .Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
-
-            var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count * 2));
-        }
-
-        [Test]
-        public void RerollIfStatAverageIsLessThanThirteen()
-        {
-            mockDice.SetupSequence(d => d.Roll(3).d(6).AsSum())
-                .Returns(min).Returns(max).Returns(middle)
-                .Returns(min - 1).Returns(max + 1).Returns(3) //invalid average
-                .Returns(min).Returns(max).Returns(middle)
-                .Returns(min - 1).Returns(max + 1).Returns(middle); //valid average
-
-            var stats = randomizer.Randomize();
-            mockDice.Verify(d => d.Roll(3).d(6).AsSum(), Times.Exactly(stats.Count * 2));
-        }
-
-        [Test]
-        public void DefaultValueIs13()
-        {
-            mockDice.Setup(d => d.Roll(3).d(6).AsSum()).Returns(9);
-
-            var stats = randomizer.Randomize();
-
-            foreach (var stat in stats.Values)
-                Assert.That(stat.Value, Is.EqualTo(13));
+            Assert.That(stats, Has.Count.EqualTo(6)
+                .And.ContainKey(AbilityConstants.Charisma)
+                .And.ContainKey(AbilityConstants.Constitution)
+                .And.ContainKey(AbilityConstants.Dexterity)
+                .And.ContainKey(AbilityConstants.Intelligence)
+                .And.ContainKey(AbilityConstants.Strength)
+                .And.ContainKey(AbilityConstants.Wisdom));
+            Assert.That(stats[AbilityConstants.Strength].Value, Is.EqualTo(15));
+            Assert.That(stats[AbilityConstants.Constitution].Value, Is.EqualTo(16));
+            Assert.That(stats[AbilityConstants.Dexterity].Value, Is.EqualTo(14));
+            Assert.That(stats[AbilityConstants.Intelligence].Value, Is.EqualTo(14));
+            Assert.That(stats[AbilityConstants.Wisdom].Value, Is.EqualTo(14));
+            Assert.That(stats[AbilityConstants.Charisma].Value, Is.EqualTo(13));
         }
     }
 }

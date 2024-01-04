@@ -360,23 +360,26 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IncompatibleAlignmentIsRegenerated()
         {
+            var otherAlignmentPrototype = new Alignment("other prototype");
             var otherAlignment = new Alignment("other alignment");
             mockAlignmentGenerator.Setup(g => g.GeneratePrototype(mockAlignmentRandomizer.Object)).Returns(new Alignment("wrong alignment"));
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(new[] { alignment, otherAlignment })).Returns(otherAlignment);
+            mockAlignmentGenerator.Setup(g => g.GenerateWith(otherAlignmentPrototype)).Returns(otherAlignment);
+
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(new[] { alignmentPrototype, otherAlignment })).Returns(otherAlignmentPrototype);
 
             mockCharacterClassGenerator
-                .Setup(g => g.GeneratePrototype(otherAlignment, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
+                .Setup(g => g.GeneratePrototype(otherAlignmentPrototype, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
                 .Returns(expectedCharacterClassPrototype);
             mockCharacterClassGenerator
-                .Setup(g => g.GeneratePrototypes(otherAlignment, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
+                .Setup(g => g.GeneratePrototypes(otherAlignmentPrototype, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
                 .Returns(new[] { expectedCharacterClassPrototype, new CharacterClassPrototype { Name = "other class" } });
             mockCharacterClassGenerator.Setup(g => g.GenerateWith(otherAlignment, expectedCharacterClassPrototype)).Returns(characterClass);
 
             mockRaceGenerator
-                .Setup(g => g.GeneratePrototype(otherAlignment, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Setup(g => g.GeneratePrototype(otherAlignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
                 .Returns(expectedRacePrototype);
             mockRaceGenerator
-                .Setup(g => g.GeneratePrototypes(otherAlignment, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Setup(g => g.GeneratePrototypes(otherAlignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
                 .Returns(new[] { expectedRacePrototype, new RacePrototype { BaseRace = "other race" } });
             mockRaceGenerator.Setup(g => g.GenerateWith(otherAlignment, characterClass, expectedRacePrototype)).Returns(race);
 
@@ -385,33 +388,70 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         }
 
         [Test]
-        public void IncompatibleCharacterClassIsRegenerated()
+        public void NoFilteredAlignmentsIndicatesIncompatibleRandomizers()
         {
             mockRandomizerVerifier
-                .SetupSequence(v => v.VerifyCharacterClassCompatibility(
-                    alignmentPrototype,
-                    It.Is<CharacterClassPrototype>(p => p.Name == expectedCharacterClassPrototype.Name && p.Level == expectedCharacterClassPrototype.Level),
+                .Setup(v => v.FilterAlignments(
+                    It.IsAny<IEnumerable<Alignment>>(),
+                    mockClassNameRandomizer.Object,
+                    mockLevelRandomizer.Object,
                     mockBaseRaceRandomizer.Object,
                     mockMetaraceRandomizer.Object))
-                .Returns(false)
-                .Returns(true);
+                .Returns(Enumerable.Empty<Alignment>());
 
-            GenerateCharacter();
-            mockCharacterClassGenerator.Verify(f => f.GeneratePrototype(It.IsAny<Alignment>(), It.IsAny<IClassNameRandomizer>(), It.IsAny<ILevelRandomizer>()), Times.Exactly(2));
-            mockCharacterClassGenerator.Verify(f => f.GeneratePrototype(alignmentPrototype, mockClassNameRandomizer.Object, mockLevelRandomizer.Object), Times.Exactly(2));
-            mockCharacterClassGenerator.Verify(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClassPrototype>()), Times.Once);
+            Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
-        public void NullCharacterClassIndicatesIncompatibleRandomizers()
+        public void IncompatibleCharacterClassIsRegenerated()
+        {
+            var otherClassPrototype = new CharacterClassPrototype { Name = "other prototype" };
+            var otherClass = new CharacterClass { Name = "other class" };
+            mockCharacterClassGenerator
+                .Setup(g => g.GeneratePrototype(alignmentPrototype, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
+                .Returns(new CharacterClassPrototype { Name = "wrong class" });
+            mockCharacterClassGenerator
+                .Setup(g => g.GeneratePrototypes(alignmentPrototype, mockClassNameRandomizer.Object, mockLevelRandomizer.Object))
+                .Returns(new[] { expectedCharacterClassPrototype, otherClassPrototype });
+            mockCharacterClassGenerator.Setup(g => g.GenerateWith(alignment, otherClassPrototype)).Returns(otherClass);
+
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(new[] { expectedCharacterClassPrototype, otherClassPrototype }))
+                .Returns(otherClassPrototype);
+
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototype(alignmentPrototype, otherClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(expectedRacePrototype);
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototypes(alignmentPrototype, otherClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new[] { expectedRacePrototype, new RacePrototype { BaseRace = "other race" } });
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, otherClass, expectedRacePrototype)).Returns(race);
+
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, otherClass, race)).Returns(abilities);
+            mockLanguageGenerator.Setup(g => g.GenerateWith(race, otherClass, abilities, skills)).Returns(languages);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(otherClass, race, abilities)).Returns(skills);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(otherClass, race, abilities)).Returns(baseAttack);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(otherClass, race, abilities, skills, baseAttack)).Returns(featCollections);
+
+            //INFO: Because the "All" on feat collections is dynamic, we can't test for it specifically
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), otherClass, race)).Returns(equipment);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, otherClass, race, It.IsAny<IEnumerable<Feat>>(), abilities, equipment)).Returns(combat);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, otherClass, race, abilities, It.IsAny<IEnumerable<Feat>>(), equipment)).Returns(magic);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Class, Is.EqualTo(otherClass));
+        }
+
+        [Test]
+        public void NoFilteredCharacterClassIndicatesIncompatibleRandomizers()
         {
             mockRandomizerVerifier
-                .Setup(v => v.VerifyCharacterClassCompatibility(
+                .Setup(v => v.FilterCharacterClasses(
+                    It.IsAny<IEnumerable<CharacterClassPrototype>>(),
                     It.IsAny<Alignment>(),
-                    It.IsAny<CharacterClassPrototype>(),
                     mockBaseRaceRandomizer.Object,
                     mockMetaraceRandomizer.Object))
-                .Returns(false);
+                .Returns(Enumerable.Empty<CharacterClassPrototype>());
 
             Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }
@@ -419,31 +459,47 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IncompatibleRaceIsRegenerated()
         {
-            mockRandomizerVerifier
-                .SetupSequence(v => v.VerifyRaceCompatibility(
-                    alignmentPrototype,
-                    It.Is<CharacterClassPrototype>(p => p.Name == expectedCharacterClassPrototype.Name && p.Level == expectedCharacterClassPrototype.Level),
-                    It.Is<RacePrototype>(p => p.BaseRace == expectedRacePrototype.BaseRace && p.Metarace == expectedRacePrototype.Metarace)))
-                .Returns(false)
-                .Returns(true);
+            var otherRacePrototype = new RacePrototype { BaseRace = "other prototype" };
+            var otherRace = new Race { BaseRace = "other race" };
+            levelAdjustments["other race"] = 0;
 
-            GenerateCharacter();
-            mockRaceGenerator.Verify(f => f.GeneratePrototype(It.IsAny<Alignment>(), It.IsAny<CharacterClassPrototype>(), It.IsAny<RaceRandomizer>(), It.IsAny<RaceRandomizer>()), Times.Exactly(2));
-            mockRaceGenerator.Verify(f => f.GeneratePrototype(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object), Times.Exactly(2));
-            mockRaceGenerator.Verify(f => f.GenerateWith(It.IsAny<Alignment>(), It.IsAny<CharacterClass>(), It.IsAny<RacePrototype>()), Times.Once);
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototype(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new RacePrototype { BaseRace = "wrong race" });
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototypes(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new[] { expectedRacePrototype, otherRacePrototype });
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRacePrototype)).Returns(otherRace);
+
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(new[] { expectedRacePrototype, otherRacePrototype }))
+                .Returns(otherRacePrototype);
+
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, otherRace)).Returns(abilities);
+            mockLanguageGenerator.Setup(g => g.GenerateWith(otherRace, characterClass, abilities, skills)).Returns(languages);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities)).Returns(skills);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, otherRace, abilities)).Returns(baseAttack);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities, skills, baseAttack)).Returns(featCollections);
+
+            //INFO: Because the "All" on feat collections is dynamic, we can't test for it specifically
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), characterClass, otherRace)).Returns(equipment);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, otherRace, It.IsAny<IEnumerable<Feat>>(), abilities, equipment)).Returns(combat);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRace, abilities, It.IsAny<IEnumerable<Feat>>(), equipment)).Returns(magic);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Race, Is.EqualTo(otherRace));
         }
 
         [Test]
-        public void NullRaceIndicatesIncompatibleRandomizers()
+        public void NoFilteredRaceIndicatesIncompatibleRandomizers()
         {
             mockRandomizerVerifier
-                .Setup(v => v.VerifyRaceCompatibility(
-                    alignmentPrototype,
-                    It.IsAny<CharacterClassPrototype>(),
-                    It.IsAny<RacePrototype>()))
-                .Returns(false);
-
-            characterClass.Level = 2;
+                .Setup(v => v.FilterCharacterClasses(
+                    It.IsAny<IEnumerable<CharacterClassPrototype>>(),
+                    It.IsAny<Alignment>(),
+                    mockBaseRaceRandomizer.Object,
+                    mockMetaraceRandomizer.Object))
+                .Returns(Enumerable.Empty<CharacterClassPrototype>());
 
             Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
         }

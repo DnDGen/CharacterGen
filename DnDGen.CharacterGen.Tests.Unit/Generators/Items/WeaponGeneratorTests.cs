@@ -59,30 +59,27 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             characterClass.Level = 9266;
             feats.Add(new Feat { Name = "all proficiency", Foci = new[] { FeatConstants.Foci.All } });
             proficiencyFeats.Add(feats[0].Name);
+            allProficientWeapons.Add("other weapon");
 
             powerTableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, 9266);
             power = "power";
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
-            mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name)).Returns(allProficientWeapons);
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club))).Returns("my random weapon");
+
+            mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feats[0].Name)).Returns(allProficientWeapons);
 
             mockJustInTimeFactory.Setup(f => f.Build<MundaneItemGenerator>(ItemTypeConstants.Weapon)).Returns(mockMundaneWeaponGenerator.Object);
             mockJustInTimeFactory.Setup(f => f.Build<MagicalItemGenerator>(ItemTypeConstants.Weapon)).Returns(mockMagicalWeaponGenerator.Object);
         }
 
-        private IEnumerable<string> ProficientWeaponSet(IEnumerable<string> weapons)
+        private IEnumerable<string> ProficientSet(params string[] expected)
         {
-            return It.Is<IEnumerable<string>>(ss => ss.Intersect(weapons).Count() == weapons.Count() && weapons.Count() == ss.Count());
-        }
-
-        private IEnumerable<string> ProficientWeaponSet()
-        {
-            return ProficientWeaponSet(allProficientWeapons);
+            return It.Is<IEnumerable<string>>(ss => ss.Intersect(expected).Count() == expected.Length && ss.Count() == expected.Length);
         }
 
         [Test]
@@ -106,7 +103,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             allProficientWeapons.Remove(magicalWeapon.Name);
 
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(mundaneWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -169,7 +166,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var wrongMundaneWeapon = new Item { Name = WeaponConstants.Glaive, ItemType = ItemTypeConstants.Weapon };
 
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate("my random weapon", race.Size)).Returns(wrongMundaneWeapon).Returns(mundaneWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -184,7 +181,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
             var specialties = new[] { mundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate("my random weapon", race.Size)).Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = specialties });
@@ -203,7 +200,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var specialties = new[] { mundaneWeapon.Name };
             var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(mundaneWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -223,7 +220,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var specialties = new[] { mundaneWeapon.Name };
             var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(mundaneWeapon);
 
             feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = wrongSpecialties });
@@ -244,7 +241,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var specialties = new[] { mundaneWeapon.Name };
             var wrongSpecialties = new[] { wrongMundaneWeapon.Name };
             var multipleSpecialties = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(multipleSpecialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(multipleSpecialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(otherMundaneWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -264,7 +261,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
 
             var specialties = new[] { mundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(mundaneWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = specialties });
@@ -284,7 +281,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var specialties = new[] { mundaneWeapon.Name };
             var multipleSpecialties = new[] { mundaneWeapon.Name, otherMundaneWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(multipleSpecialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(multipleSpecialties))).Returns("my random weapon");
             mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(otherMundaneWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = multipleSpecialties });
@@ -302,7 +299,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var mundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Longsword);
             var wrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate("my random weapon", race.Size))
                 .Returns(mundaneWeapon).Returns(wrongMundaneWeapon);
 
@@ -321,7 +318,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         public void IfMagicalWeaponIsNotWeapon_Regenerate()
         {
             var wrongMagicalWeapon = new Item { Name = WeaponConstants.Halberd, ItemType = ItemTypeConstants.Weapon };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(wrongMagicalWeapon).Returns(magicalWeapon);
 
@@ -334,7 +331,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
             var specialties = new[] { magicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = new[] { magicalWeapon.Name } });
@@ -351,7 +348,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var specialties = new[] { magicalWeapon.Name };
             var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -369,7 +366,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var specialties = new[] { magicalWeapon.Name };
             var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon);
 
             feats.Add(new Feat { Name = FeatConstants.WeaponFamiliarity, Foci = wrongSpecialties });
@@ -388,7 +385,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var specialties = new[] { magicalWeapon.Name };
             var multipleSpecialties = new[] { magicalWeapon.Name, otherMagicalWeapon.Name };
             var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(multipleSpecialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(multipleSpecialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(otherMagicalWeapon);
 
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
@@ -409,7 +406,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
 
             var specialties = new[] { magicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(magicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = specialties });
@@ -428,7 +425,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var specialties = new[] { magicalWeapon.Name };
             var multipleSpecialties = new[] { magicalWeapon.Name, otherMagicalWeapon.Name };
             var wrongSpecialties = new[] { wrongMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(multipleSpecialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(multipleSpecialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(otherMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = multipleSpecialties });
@@ -444,7 +441,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         public void NoPreferenceForMagicalWeapons()
         {
             var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(magicalWeapon).Returns(wrongMagicalWeapon);
 
@@ -460,7 +457,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var otherWrongMundaneWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Flail);
 
             mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMundaneWeaponGenerator.SetupSequence(g => g.Generate("my random weapon", race.Size))
                 .Returns(wrongMundaneWeapon).Returns(otherWrongMundaneWeapon).Returns(mundaneWeapon);
 
@@ -478,7 +475,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Rapier);
             var otherWrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Flail);
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(wrongMagicalWeapon).Returns(otherWrongMagicalWeapon).Returns(magicalWeapon);
 
@@ -499,25 +496,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
         }
 
-        [Test]
-        public void GeneralWeaponCannotBeAmmunition()
-        {
-            var ammunition = CreateAmmunition(WeaponConstants.Arrow);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
-                .Returns(ammunition).Returns(magicalWeapon);
-
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(magicalWeapon), weapon.Name);
-        }
-
         //INFO: Example here is Shurikens
         [Test]
         public void ThrownAmmunitionIsAllowed()
         {
             var shuriken = CreateAmmunition(WeaponConstants.Shuriken);
             shuriken.Attributes = shuriken.Attributes.Union(new[] { AttributeConstants.Thrown });
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(shuriken).Returns(magicalWeapon);
 
@@ -526,49 +511,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         }
 
         [Test]
-        public void GenerateMundaneDefaultWeapon()
-        {
-            var wrongWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Sai);
-            wrongWeapon.Size = "wrong size";
-
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
-            mockMundaneWeaponGenerator.Setup(g => g.Generate("my random weapon", race.Size)).Returns(wrongWeapon);
-
-            var defaultWeapon = new Weapon();
-            mockMundaneWeaponGenerator.Setup(g => g.Generate(It.Is<Weapon>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == allProficientWeapons[0] && i.Size == race.Size), true))
-                .Returns(defaultWeapon);
-
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(defaultWeapon), weapon.Name);
-        }
-
-        [Test]
-        public void GenerateMagicalDefaultWeapon()
-        {
-            var wrongMagicalWeapon = CreateOneHandedMeleeWeapon(WeaponConstants.Halberd);
-            wrongMagicalWeapon.Size = "wrong size";
-
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
-            mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(wrongMagicalWeapon);
-
-            var defaultWeapon = new Weapon();
-            mockMagicalWeaponGenerator.Setup(g => g.Generate(It.Is<Weapon>(i => i.ItemType == ItemTypeConstants.Weapon && i.Name == allProficientWeapons[0] && i.Magic.Bonus == 1), true))
-                .Returns(defaultWeapon);
-
-            var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
-            Assert.That(weapon, Is.EqualTo(defaultWeapon));
-        }
-
-        [Test]
         public void GenerateAmmunition()
         {
             var ammunition = CreateAmmunition(WeaponConstants.Arrow);
 
             var ammunitions = new[] { "ammo" };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(ammunitions))).Returns("my random weapon");
-            mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
-                .Returns(magicalWeapon).Returns(ammunition);
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(ammunitions))).Returns("my random ammo");
+            mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random ammo", race.Size)).Returns(ammunition);
 
             var generatedAmmunition = weaponGenerator.GenerateAmmunition(characterClass, race, "ammo");
             Assert.That(generatedAmmunition, Is.EqualTo(ammunition), generatedAmmunition.Name);
@@ -578,7 +527,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         public void MeleeWeaponMustBeMelee()
         {
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(rangedWeapon).Returns(magicalWeapon);
 
@@ -594,7 +543,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { rangedWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(otherMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -613,7 +562,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { rangedWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon")).Returns(otherMagicalWeapon);
 
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
@@ -632,7 +581,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(rangedWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = new[] { rangedWeapon.Name } });
@@ -668,7 +617,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         public void OneHandedMeleeWeaponMustBeMelee()
         {
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(rangedWeapon).Returns(magicalWeapon);
 
@@ -681,7 +630,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             var twoHandedWeapon = CreateTwoHandedMeleeWeapon(WeaponConstants.Greataxe);
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(twoHandedWeapon).Returns(magicalWeapon);
 
@@ -697,7 +646,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { rangedWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(otherMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -716,7 +665,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { rangedWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon")).Returns(otherMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -735,8 +684,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { rangedWeapon.Name };
             var specialties = new[] { twoHandedWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(twoHandedWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -773,7 +722,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         public void RangedWeaponMustNotBeMelee()
         {
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(magicalWeapon).Returns(rangedWeapon);
 
@@ -789,7 +738,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { meleeWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet(specialties))).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(specialties))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(otherMagicalWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -809,7 +758,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var wrongSpecialties = new[] { meleeWeapon.Name };
             var specialties = new[] { otherMagicalWeapon.Name };
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(rangedWeapon);
 
             feats.Add(new Feat { Name = "feat2", Foci = wrongSpecialties });
@@ -826,7 +775,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             var ammunition = CreateAmmunition(WeaponConstants.Arrow);
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(ammunition).Returns(rangedWeapon);
 
@@ -841,7 +790,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var shuriken = CreateAmmunition(WeaponConstants.Shuriken);
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
             shuriken.Attributes = shuriken.Attributes.Union(new[] { AttributeConstants.Thrown });
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.SetupSequence(g => g.Generate(power, "my random weapon", race.Size))
                 .Returns(shuriken).Returns(rangedWeapon);
 
@@ -867,7 +816,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var rangedWeapon = CreateRangedWeapon(WeaponConstants.Longbow);
             var ammunition = CreateAmmunition(WeaponConstants.SlingBullet);
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, "other weapon"))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate(power, "my random weapon", race.Size)).Returns(rangedWeapon);
 
             var weapon = weaponGenerator.GenerateRangedFrom(feats, characterClass, race);
@@ -916,7 +865,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, WeaponConstants.Glaive))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate("npc power", "my random weapon", race.Size)).Returns(npcWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -935,7 +884,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.EffectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, WeaponConstants.Glaive))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate("npc power", "my random weapon", race.Size)).Returns(playerWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -972,7 +921,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, WeaponConstants.Glaive))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate("player power", "my random weapon", race.Size)).Returns(playerWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);
@@ -991,7 +940,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.EffectiveLevel);
             mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientWeaponSet())).Returns("my random weapon");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet(WeaponConstants.Club, WeaponConstants.Glaive))).Returns("my random weapon");
             mockMagicalWeaponGenerator.Setup(g => g.Generate("player power", "my random weapon", race.Size)).Returns(playerWeapon);
 
             var weapon = weaponGenerator.GenerateFrom(feats, characterClass, race);

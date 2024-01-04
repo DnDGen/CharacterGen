@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.Levels;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses.Levels
@@ -22,7 +22,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         [Test]
         public void BaseIsRollOf1d5()
         {
-            mockDice.Setup(d => d.Roll(1).d(5).AsSum()).Returns(9266);
+            mockDice.Setup(d => d.Roll(1).d(5).AsSum<int>()).Returns(9266);
             var level = randomizer.Randomize();
             Assert.That(level, Is.EqualTo(9266));
         }
@@ -30,7 +30,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
         [Test]
         public void AddRollBonusToRoll()
         {
-            mockDice.Setup(d => d.Roll(1).d(5).AsSum()).Returns(9200);
+            mockDice.Setup(d => d.Roll(1).d(5).AsSum<int>()).Returns(9200);
             randomizer.RollBonus = 66;
 
             var level = randomizer.Randomize();

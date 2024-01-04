@@ -29,7 +29,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var weapon = GenerateFiltered(feats, characterClass, race, w => !WeaponIsAmmunition(w));
+            var weapon = GenerateFiltered(feats, characterClass, race);
             return weapon;
         }
 
@@ -65,7 +65,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         public Weapon GenerateAmmunition(CharacterClass characterClass, Race race, string ammunitionType)
         {
             var ammunitions = new[] { ammunitionType };
-            var ammunition = GenerateFrom(ammunitions, characterClass, race, WeaponIsAmmunition);
+            var ammunition = GenerateFrom(ammunitions, characterClass, race);
 
             return ammunition;
         }
@@ -77,11 +77,11 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var weapon = GetSequentialWeapon(feats, characterClass, race, WeaponIsMelee);
+            var weapon = GetWeapon(feats, characterClass, race, WeaponIsMelee);
             return weapon;
         }
 
-        private Weapon GetSequentialWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, Func<Weapon, bool> furtherValidation)
+        private Weapon GetWeapon(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, Func<Weapon, bool> furtherValidation)
         {
             //INFO: We want to verify that the requested weapon is even possible for this given sequential generation
             if (!ValidWeaponIsPossible(feats, furtherValidation))
@@ -90,8 +90,8 @@ namespace DnDGen.CharacterGen.Generators.Items
             var nonProficiencyFeatsWithWeaponFoci = GetNonProficiencyFeatsWithWeaponFoci(feats);
             if (ValidWeaponIsPossible(nonProficiencyFeatsWithWeaponFoci, furtherValidation))
             {
-                var weapon = GenerateFiltered(feats, characterClass, race, furtherValidation);
-                if (SequentialWeaponIsValid(weapon, furtherValidation))
+                var weapon = GenerateFiltered(feats, characterClass, race);
+                if (WeaponIsValid(weapon, furtherValidation))
                     return weapon;
             }
 
@@ -99,23 +99,23 @@ namespace DnDGen.CharacterGen.Generators.Items
             var proficiencyFeatsWithSpecificWeaponFoci = GetProficiencyFeatWithSpecificWeaponFocus(feats);
             if (ValidWeaponIsPossible(proficiencyFeatsWithSpecificWeaponFoci, furtherValidation))
             {
-                var weapon = GenerateFiltered(featSubset, characterClass, race, furtherValidation);
-                if (SequentialWeaponIsValid(weapon, furtherValidation))
+                var weapon = GenerateFiltered(featSubset, characterClass, race);
+                if (WeaponIsValid(weapon, furtherValidation))
                     return weapon;
             }
 
             featSubset = featSubset.Except(proficiencyFeatsWithSpecificWeaponFoci);
             if (ValidWeaponIsPossible(featSubset, furtherValidation))
             {
-                var weapon = GenerateFiltered(featSubset, characterClass, race, furtherValidation);
-                if (SequentialWeaponIsValid(weapon, furtherValidation))
+                var weapon = GenerateFiltered(featSubset, characterClass, race);
+                if (WeaponIsValid(weapon, furtherValidation))
                     return weapon;
             }
 
             return null;
         }
 
-        private bool SequentialWeaponIsValid(Weapon weapon, Func<Weapon, bool> furtherValidation)
+        private bool WeaponIsValid(Weapon weapon, Func<Weapon, bool> furtherValidation)
         {
             return (weapon != null && furtherValidation(weapon));
         }
@@ -125,14 +125,14 @@ namespace DnDGen.CharacterGen.Generators.Items
             return weapon.Attributes.Contains(AttributeConstants.Melee);
         }
 
-        private Weapon GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race, Func<Weapon, bool> furtherValidation)
+        private Weapon GenerateFiltered(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
             var allowedWeapons = GetAllowedWeapons(feats);
 
             if (allowedWeapons.Any() == false)
                 return null;
 
-            var filteredWeapon = GenerateFrom(allowedWeapons, characterClass, race, furtherValidation);
+            var filteredWeapon = GenerateFrom(allowedWeapons, characterClass, race);
             return filteredWeapon;
         }
 
@@ -217,7 +217,7 @@ namespace DnDGen.CharacterGen.Generators.Items
             return allowedWeapons;
         }
 
-        private Weapon GenerateFrom(IEnumerable<string> allowedWeapons, CharacterClass characterClass, Race race, Func<Weapon, bool> furtherValidation)
+        private Weapon GenerateFrom(IEnumerable<string> allowedWeapons, CharacterClass characterClass, Race race)
         {
             var effectiveLevel = (int)Math.Max(1, characterClass.EffectiveLevel);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
@@ -248,7 +248,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var weapon = GetSequentialWeapon(feats, characterClass, race, WeaponIsOneHandedMelee);
+            var weapon = GetWeapon(feats, characterClass, race, WeaponIsOneHandedMelee);
             return weapon;
         }
 
@@ -259,7 +259,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var weapon = GetSequentialWeapon(feats, characterClass, race, WeaponIsRanged);
+            var weapon = GetWeapon(feats, characterClass, race, WeaponIsRanged);
             return weapon;
         }
 

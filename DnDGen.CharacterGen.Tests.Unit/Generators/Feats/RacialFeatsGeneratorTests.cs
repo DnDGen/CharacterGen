@@ -1,14 +1,14 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Generators.Feats;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
-using DnDGen.RollGen;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -384,7 +384,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 
             var count = 1;
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
-            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+            mockDice.Setup(d => d.Roll("dice roll").AsSum<int>()).Returns(3);
 
             baseRaceFeats.Add(featSelection);
 
@@ -405,7 +405,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 
             var count = 1;
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
-            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+            mockDice.Setup(d => d.Roll("dice roll").AsSum<int>()).Returns(3);
 
             baseRaceFeats.Add(featSelection);
 
@@ -426,7 +426,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 
             var count = 1;
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++ / 2}");
-            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+            mockDice.Setup(d => d.Roll("dice roll").AsSum<int>()).Returns(3);
 
             baseRaceFeats.Add(featSelection);
 
@@ -447,7 +447,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 
             var count = 1;
             mockFeatFocusGenerator.Setup(g => g.GenerateAllowingFocusOfAllFrom("racial feat", "focus type", skills)).Returns(() => $"focus {count++}");
-            mockDice.Setup(d => d.Roll("dice roll").AsSum()).Returns(3);
+            mockDice.Setup(d => d.Roll("dice roll").AsSum<int>()).Returns(3);
 
             baseRaceFeats.Add(featSelection);
 

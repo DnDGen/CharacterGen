@@ -58,10 +58,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             classFeats.Add(new Feat { Name = Guid.NewGuid().ToString() });
             additionalFeats.Add(new Feat { Name = Guid.NewGuid().ToString() });
 
-            Assert.That(featCollections.All, Is.Not.SupersetOf(racialFeats));
-            Assert.That(featCollections.All, Is.Not.SupersetOf(classFeats));
-            Assert.That(featCollections.All, Is.Not.SupersetOf(additionalFeats));
             Assert.That(featCollections.All.Count, Is.EqualTo(3));
+            Assert.That(featCollections.All.ElementAt(0), Is.Not.SameAs(racialFeats[0]));
+            Assert.That(featCollections.All.ElementAt(0).Name, Is.EqualTo(racialFeats[0].Name));
+            Assert.That(featCollections.All.ElementAt(1), Is.Not.SameAs(classFeats[0]));
+            Assert.That(featCollections.All.ElementAt(1).Name, Is.EqualTo(classFeats[0].Name));
+            Assert.That(featCollections.All.ElementAt(2), Is.Not.SameAs(additionalFeats[0]));
+            Assert.That(featCollections.All.ElementAt(2).Name, Is.EqualTo(additionalFeats[0].Name));
         }
 
         [Test]

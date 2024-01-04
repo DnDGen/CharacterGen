@@ -15,6 +15,7 @@ using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
 {
@@ -74,13 +75,19 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             leaderAlignment = "leader alignment";
             allowedAlignments.Add(leaderAlignment);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
                 .Returns(allowedAlignments);
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcClasses);
 
             var index = 0;
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment)).Returns(() => allowedAlignments[index++ % allowedAlignments.Count]);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
+                .Returns(allowedAlignments);
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
+                .Returns((IEnumerable<string> cc) => cc.ElementAt(index++ % cc.Count()));
 
             mockJustInTimeFactory.Setup(f => f.Build<ISetAlignmentRandomizer>()).Returns(mockSetAlignmentRandomizer.Object);
             mockJustInTimeFactory.Setup(f => f.Build<ISetLevelRandomizer>()).Returns(mockSetLevelRandomizer.Object);
@@ -224,7 +231,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
@@ -239,7 +253,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             npcClasses.Add("class name");
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyNPCClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyNPCClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
@@ -253,7 +274,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(90210);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 42, leaderAlignment, "class name");
@@ -272,7 +300,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             allowedAlignments.Add(cohortAlignment.ToString());
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
@@ -290,7 +325,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             allowedAlignments.Add(cohortAlignment.ToString());
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
@@ -304,7 +346,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(0);
 
             var cohort = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(cohort);
 
             var generatedCohort = leadershipGenerator.GenerateCohort(9266, 90210, leaderAlignment, "class name");
@@ -315,7 +364,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         public void FollowerGenerated()
         {
             var follower = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(follower);
 
             var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment, "class name");
@@ -327,7 +383,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         public void NPCFollowerGenerated()
         {
             var follower = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyNPCClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyNPCClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(follower);
             npcClasses.Add("class name");
 
@@ -345,7 +408,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             allowedAlignments.Add(followerAlignment.ToString());
 
             var follower = new Character();
-            mockCharacterGenerator.Setup(g => g.GenerateWith(mockSetAlignmentRandomizer.Object, mockAnyPlayerClassNameRandomizer.Object, mockSetLevelRandomizer.Object, mockAnyBaseRaceRandomizer.Object, mockAnyMetaraceRandomizer.Object, mockRawAbilityRandomizer.Object))
+            mockCharacterGenerator
+                .Setup(g => g.GenerateWith(
+                    mockSetAlignmentRandomizer.Object,
+                    mockAnyPlayerClassNameRandomizer.Object,
+                    mockSetLevelRandomizer.Object,
+                    mockAnyBaseRaceRandomizer.Object,
+                    mockAnyMetaraceRandomizer.Object,
+                    mockRawAbilityRandomizer.Object))
                 .Returns(follower);
 
             var generatedFollower = leadershipGenerator.GenerateFollower(9266, leaderAlignment, "class name");

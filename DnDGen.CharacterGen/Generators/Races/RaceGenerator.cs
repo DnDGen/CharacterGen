@@ -245,15 +245,6 @@ namespace DnDGen.CharacterGen.Generators.Races
             return age;
         }
 
-        private Measurement GetDefaultAge(Race race)
-        {
-            var age = new Measurement("Years");
-            age.Value = race.MaximumAge.Value;
-            age.Description = GetAgeDescription(race, age.Value);
-
-            return age;
-        }
-
         private Measurement DetermineMaximumAge(Race race)
         {
             var measurement = new Measurement("Years");
