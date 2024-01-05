@@ -120,7 +120,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats
             WeaponConstants.HeavyRepeatingCrossbow,
             WeaponConstants.LightRepeatingCrossbow,
             WeaponConstants.Shuriken,
-            WeaponConstants.Net)]
+            WeaponConstants.Net,
+            WeaponConstants.PincerStaff)]
         [TestCase(FeatConstants.CombatStyle,
             FeatConstants.TwoWeaponFighting,
             FeatConstants.Foci.Archery)]

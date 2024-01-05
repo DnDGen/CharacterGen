@@ -2,6 +2,7 @@
 using DnDGen.CharacterGen.Tables;
 using DnDGen.TreasureGen.Items;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
 {
@@ -24,7 +25,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
                 FeatConstants.ShieldProficiency,
                 FeatConstants.TowerShieldProficiency,
                 AttributeConstants.Metal,
-                PowerConstants.Mundane,
+                AttributeConstants.Specific,
+                ItemTypeConstants.Weapon,
+                AttributeConstants.Ammunition,
+                AttributeConstants.Melee,
+                AttributeConstants.Ranged,
+                AttributeConstants.TwoHanded,
             };
 
             AssertCollectionNames(names);
@@ -77,6 +83,57 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items
         public void ItemGroup(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
+        }
+
+        [Test]
+        public void ItemGroup_Weapons()
+        {
+            var weapons = WeaponConstants.GetAllWeapons(false, false).ToArray();
+            base.DistinctCollection(ItemTypeConstants.Weapon, weapons);
+        }
+
+        [Test]
+        public void ItemGroup_Ammunition()
+        {
+            var weapons = WeaponConstants
+                .GetAllAmmunition(false, false)
+                .Except(new[] {
+                    WeaponConstants.Shuriken,
+                })
+                .ToArray();
+            base.DistinctCollection(AttributeConstants.Ammunition, weapons);
+        }
+
+        [Test]
+        public void ItemGroup_Melee()
+        {
+            var weapons = WeaponConstants
+                .GetAllMelee(false, false)
+                .Except(new[] {
+                    WeaponConstants.ThrowingAxe,
+                })
+                .ToArray();
+            base.DistinctCollection(AttributeConstants.Melee, weapons);
+        }
+
+        [Test]
+        public void ItemGroup_Ranged()
+        {
+            var weapons = WeaponConstants
+                .GetAllRanged(false, false, false)
+                .Union(new[] {
+                    WeaponConstants.Shuriken,
+                    WeaponConstants.ThrowingAxe,
+                })
+                .ToArray();
+            base.DistinctCollection(AttributeConstants.Ranged, weapons);
+        }
+
+        [Test]
+        public void ItemGroup_TwoHanded()
+        {
+            var weapons = WeaponConstants.GetAllTwoHandedMelee(false, false).ToArray();
+            base.DistinctCollection(AttributeConstants.TwoHanded, weapons);
         }
     }
 }

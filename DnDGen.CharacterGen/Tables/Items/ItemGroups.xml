@@ -14,8 +14,8 @@
     <entry>Leather armor</entry>
     <entry>Studded leather armor</entry>
     <entry>Chain shirt</entry>
-    <entry>Elven chain</entry>
-    <entry>Celestial armor</entry>
+    <entry>Elven Chain</entry>
+    <entry>Celestial Armor</entry>
   </collection>
   <collection>
     <name>Medium Armor Proficiency</name>
@@ -23,7 +23,7 @@
     <entry>Scale mail</entry>
     <entry>Chainmail</entry>
     <entry>Breastplate</entry>
-    <entry>Full plate of speed</entry>
+    <entry>Full Plate of Speed</entry>
   </collection>
   <collection>
     <name>Shield Proficiency</name>
@@ -37,4 +37,209 @@
     <name>Tower Shield Proficiency</name>
     <entry>Tower shield</entry>
   </collection>
+	<collection>
+		<name>Metal</name>
+		<entry>Splint mail</entry>
+		<entry>Banded mail</entry>
+		<entry>Half-plate</entry>
+		<entry>Full plate</entry>
+		<entry>Studded leather armor</entry>
+		<entry>Chain shirt</entry>
+		<entry>Elven Chain</entry>
+		<entry>Celestial Armor</entry>
+		<entry>Scale mail</entry>
+		<entry>Chainmail</entry>
+		<entry>Breastplate</entry>
+		<entry>Full Plate of Speed</entry>
+		<entry>Heavy steel shield</entry>
+		<entry>Light steel shield</entry>
+	</collection>
+	<collection>
+		<name>Specific</name>
+		<entry>Celestial Armor</entry>
+		<entry>Elven Chain</entry>
+		<entry>Full Plate of Speed</entry>
+	</collection>
+	<collection>
+		<name>Ammunition</name>
+		<entry>Arrow</entry>
+		<entry>Crossbow bolt</entry>
+		<entry>Sling bullet</entry>
+	</collection>
+	<collection>
+		<name>Melee</name>
+		<entry>Bastard sword</entry>
+		<entry>Battleaxe</entry>
+		<entry>Club</entry>
+		<entry>Dagger</entry>
+		<entry>Dwarven waraxe</entry>
+		<entry>Falchion</entry>
+		<entry>Flail</entry>
+		<entry>Gauntlet</entry>
+		<entry>Glaive</entry>
+		<entry>Greatclub</entry>
+		<entry>Guisarme</entry>
+		<entry>Halberd</entry>
+		<entry>Handaxe</entry>
+		<entry>Heavy flail</entry>
+		<entry>Heavy mace</entry>
+		<entry>Heavy pick</entry>
+		<entry>Kama</entry>
+		<entry>Kukri</entry>
+		<entry>Lance</entry>
+		<entry>Light hammer</entry>
+		<entry>Light mace</entry>
+		<entry>Light pick</entry>
+		<entry>Longspear</entry>
+		<entry>Longsword</entry>
+		<entry>Morningstar</entry>
+		<entry>Nunchaku</entry>
+		<entry>Orc double axe</entry>
+		<entry>Punching dagger</entry>
+		<entry>Quarterstaff</entry>
+		<entry>Ranseur</entry>
+		<entry>Rapier</entry>
+		<entry>Sai</entry>
+		<entry>Sap</entry>
+		<entry>Scimitar</entry>
+		<entry>Scythe</entry>
+		<entry>Short sword</entry>
+		<entry>Shortspear</entry>
+		<entry>Siangham</entry>
+		<entry>Sickle</entry>
+		<entry>Spear</entry>
+		<entry>Spiked chain</entry>
+		<entry>Spiked gauntlet</entry>
+		<entry>Trident</entry>
+		<entry>Warhammer</entry>
+		<entry>Whip</entry>
+		<entry>Dire flail</entry>
+		<entry>Gnome hooked hammer</entry>
+		<entry>Two-bladed sword</entry>
+		<entry>Dwarven urgrosh</entry>
+		<entry>Pincer staff</entry>
+		<entry>Greatsword</entry>
+		<entry>Greataxe</entry>
+	</collection>
+	<collection>
+		<name>Weapon</name>
+		<entry>Club</entry>
+		<entry>Longsword</entry>
+		<entry>Longbow</entry>
+		<entry>Shortbow</entry>
+		<entry>Dart</entry>
+		<entry>Javelin</entry>
+		<entry>Greatsword</entry>
+		<entry>Greataxe</entry>
+		<entry>Arrow</entry>
+		<entry>Crossbow bolt</entry>
+		<entry>Sling bullet</entry>
+		<entry>Gauntlet</entry>
+		<entry>Dagger</entry>
+		<entry>Short sword</entry>
+		<entry>Punching dagger</entry>
+		<entry>Battleaxe</entry>
+		<entry>Rapier</entry>
+		<entry>Kukri</entry>
+		<entry>Kama</entry>
+		<entry>Halberd</entry>
+		<entry>Glaive</entry>
+		<entry>Longspear</entry>
+		<entry>Quarterstaff</entry>
+		<entry>Spear</entry>
+		<entry>Spiked gauntlet</entry>
+		<entry>Light mace</entry>
+		<entry>Sickle</entry>
+		<entry>Light hammer</entry>
+		<entry>Warhammer</entry>
+		<entry>Handaxe</entry>
+		<entry>Light pick</entry>
+		<entry>Sap</entry>
+		<entry>Nunchaku</entry>
+		<entry>Sling</entry>
+		<entry>Composite longbow</entry>
+		<entry>Composite shortbow</entry>
+		<entry>Bolas</entry>
+		<entry>Net</entry>
+		<entry>Shuriken</entry>
+		<entry>Heavy crossbow</entry>
+		<entry>Heavy repeating crossbow</entry>
+		<entry>Hand crossbow</entry>
+		<entry>Light crossbow</entry>
+		<entry>Light repeating crossbow</entry>
+		<entry>Falchion</entry>
+		<entry>Greatclub</entry>
+		<entry>Heavy flail</entry>
+		<entry>Guisarme</entry>
+		<entry>Lance</entry>
+		<entry>Ranseur</entry>
+		<entry>Scythe</entry>
+		<entry>Orc double axe</entry>
+		<entry>Spiked chain</entry>
+		<entry>Bastard sword</entry>
+		<entry>Sai</entry>
+		<entry>Siangham</entry>
+		<entry>Heavy mace</entry>
+		<entry>Morningstar</entry>
+		<entry>Shortspear</entry>
+		<entry>Flail</entry>
+		<entry>Heavy pick</entry>
+		<entry>Scimitar</entry>
+		<entry>Trident</entry>
+		<entry>Dire flail</entry>
+		<entry>Gnome hooked hammer</entry>
+		<entry>Two-bladed sword</entry>
+		<entry>Dwarven urgrosh</entry>
+		<entry>Pincer staff</entry>
+		<entry>Throwing axe</entry>
+		<entry>Dwarven waraxe</entry>
+		<entry>Whip</entry>
+	</collection>
+	<collection>
+		<name>Two-Handed</name>
+		<entry>Greatsword</entry>
+		<entry>Greataxe</entry>
+		<entry>Halberd</entry>
+		<entry>Glaive</entry>
+		<entry>Longspear</entry>
+		<entry>Quarterstaff</entry>
+		<entry>Spear</entry>
+		<entry>Falchion</entry>
+		<entry>Greatclub</entry>
+		<entry>Heavy flail</entry>
+		<entry>Guisarme</entry>
+		<entry>Lance</entry>
+		<entry>Ranseur</entry>
+		<entry>Scythe</entry>
+		<entry>Orc double axe</entry>
+		<entry>Spiked chain</entry>
+		<entry>Bastard sword</entry>
+		<entry>Dire flail</entry>
+		<entry>Gnome hooked hammer</entry>
+		<entry>Two-bladed sword</entry>
+		<entry>Dwarven urgrosh</entry>
+		<entry>Pincer staff</entry>
+	</collection>
+	<collection>
+		<name>Ranged</name>
+		<entry>Longbow</entry>
+		<entry>Shortbow</entry>
+		<entry>Dart</entry>
+		<entry>Javelin</entry>
+		<entry>Arrow</entry>
+		<entry>Crossbow bolt</entry>
+		<entry>Sling bullet</entry>
+		<entry>Heavy crossbow</entry>
+		<entry>Heavy repeating crossbow</entry>
+		<entry>Hand crossbow</entry>
+		<entry>Light crossbow</entry>
+		<entry>Light repeating crossbow</entry>
+		<entry>Sling</entry>
+		<entry>Composite longbow</entry>
+		<entry>Composite shortbow</entry>
+		<entry>Bolas</entry>
+		<entry>Net</entry>
+		<entry>Shuriken</entry>
+		<entry>Throwing axe</entry>
+	</collection>
 </collections>

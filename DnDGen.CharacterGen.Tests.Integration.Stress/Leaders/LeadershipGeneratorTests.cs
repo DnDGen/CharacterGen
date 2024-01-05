@@ -73,7 +73,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
 
         private Leadership GenerateLeadership()
         {
-            //INFO: Generating a high-level leader takes too long.  Instead, we will generate the individual arguments.  We will ignore animals for now
+            //INFO: Generating a high-level leader takes too long. Instead, we will generate the individual arguments.  We will ignore animals for now
             var level = VeryHighLevelRandomizer.Randomize();
             var abilities = HeroicAbilitiesRandomizer.Randomize();
 
@@ -102,7 +102,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressCohort()
         {
             stressor.Stress(AssertCohort);
@@ -120,7 +119,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressNPCCohort()
         {
             stressor.Stress(GeneratAndAssertNPCCohort);
@@ -137,7 +135,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
         }
 
         [Test]
-        //[Ignore("Takes too long, goes over 200% of allotted time limit")]
         public void StressFollower()
         {
             stressor.Stress(GenerateAndAssertFollower);

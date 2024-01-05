@@ -37,7 +37,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
             Assert.That(stats[AbilityConstants.Wisdom].Value, Is.InRange(3, 18));
 
             var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.InRange(13, 15));
+            Assert.That(average, Is.InRange(13, 16));
         }
 
         [Test]

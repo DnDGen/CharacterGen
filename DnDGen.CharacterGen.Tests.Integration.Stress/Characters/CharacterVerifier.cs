@@ -268,7 +268,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Equipment.PrimaryHand.DamageRoll, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.DamageDescription, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
                 Assert.That(character.Equipment.PrimaryHand.Size, Is.EqualTo(character.Race.Size), character.Equipment.PrimaryHand.Name);
-                Assert.That(character.Equipment.PrimaryHand.ThreatRange, Is.Not.Empty, character.Equipment.PrimaryHand.Name);
+                Assert.That(character.Equipment.PrimaryHand.ThreatRange, Is.Positive, character.Equipment.PrimaryHand.Name);
 
                 if (character.Equipment.OffHand != null)
                 {
@@ -286,7 +286,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                         Assert.That(weapon.DamageRoll, Is.Not.Empty, character.Equipment.OffHand.Name);
                         Assert.That(weapon.DamageDescription, Is.Not.Empty, character.Equipment.OffHand.Name);
                         Assert.That(weapon.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
-                        Assert.That(weapon.ThreatRange, Is.Not.Empty, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.ThreatRange, Is.Positive, character.Equipment.OffHand.Name);
 
                         if (weapon != character.Equipment.PrimaryHand)
                         {

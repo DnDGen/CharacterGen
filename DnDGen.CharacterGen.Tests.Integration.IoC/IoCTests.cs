@@ -1,5 +1,4 @@
-﻿using Ninject;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Diagnostics;
 
 namespace DnDGen.CharacterGen.Tests.Integration.IoC
@@ -8,15 +7,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
     [IoC]
     public abstract class IoCTests : IntegrationTests
     {
-        [Inject]
-        public Stopwatch Stopwatch { get; set; }
-
+        private Stopwatch stopwatch;
         private const int TimeLimitInMilliseconds = 200;
 
-        [TearDown]
-        public void IoCTeardown()
+        [SetUp]
+        public void Setup()
         {
-            Stopwatch.Reset();
+            stopwatch = new Stopwatch();
         }
 
         protected void AssertSingleton<T>()
@@ -28,20 +25,20 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
 
         private T InjectAndAssertDuration<T>()
         {
-            Stopwatch.Restart();
+            stopwatch.Restart();
 
             var instance = GetNewInstanceOf<T>();
-            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
+            Assert.That(stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
 
             return instance;
         }
 
         private T InjectAndAssertDuration<T>(string name)
         {
-            Stopwatch.Restart();
+            stopwatch.Restart();
 
             var instance = GetNewInstanceOf<T>(name);
-            Assert.That(Stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
+            Assert.That(stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
 
             return instance;
         }
