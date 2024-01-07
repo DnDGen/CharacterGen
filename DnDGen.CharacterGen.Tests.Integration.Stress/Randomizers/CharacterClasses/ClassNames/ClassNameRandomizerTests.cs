@@ -11,7 +11,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
         protected void AssertClassName()
         {
             var prototype = GetCharacterPrototype();
-            var className = ClassNameRandomizer.Randomize(prototype.Alignment);
+            var className = classNameRandomizer.Randomize(prototype.Alignment);
             Assert.That(allowedClassNames, Contains.Item(className));
         }
     }

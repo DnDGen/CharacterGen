@@ -15,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
         [TearDown]
         public void TearDown()
         {
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+            classNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
         [Test]
         public void StressSetNPCClassName()
         {
-            ClassNameRandomizer = AnyNPCClassNameRandomizer;
+            classNameRandomizer = AnyNPCClassNameRandomizer;
             stressor.Stress(AssertClassName);
         }
     }

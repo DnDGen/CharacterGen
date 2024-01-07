@@ -27,7 +27,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         public void Setup()
         {
             forcableMetaraceRandomizer = GetNewInstanceOf<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonNeutral);
+            alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonNeutral);
             //INFO: We are using the non-neutral alignment, as the current genetic metaraces (Half-dragon, Half-celestial,
             //and Half-fiend) all cannot be neutral.  This makes the process faster for testing
         }
@@ -35,7 +35,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         [TearDown]
         public void TearDown()
         {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
         }
 
         [Test]

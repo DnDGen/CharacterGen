@@ -5,7 +5,6 @@ using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.Stress;
-using Ninject;
 using NUnit.Framework;
 using System.Reflection;
 
@@ -15,25 +14,17 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress
     [Stress]
     public abstract class StressTests : IntegrationTests
     {
-        [Inject]
-        public IRandomizerVerifier RandomizerVerifier { get; set; }
-        [Inject, Named(AlignmentRandomizerTypeConstants.Any)]
-        public IAlignmentRandomizer AlignmentRandomizer { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.AnyPlayer)]
-        public IClassNameRandomizer ClassNameRandomizer { get; set; }
-        [Inject, Named(LevelRandomizerTypeConstants.Any)]
-        public ILevelRandomizer LevelRandomizer { get; set; }
-        [Inject, Named(RaceRandomizerTypeConstants.BaseRace.AnyBase)]
-        public RaceRandomizer BaseRaceRandomizer { get; set; }
-        [Inject, Named(RaceRandomizerTypeConstants.Metarace.AnyMeta)]
-        public RaceRandomizer MetaraceRandomizer { get; set; }
-        [Inject]
-        public ICharacterGenerator CharacterGenerator { get; set; }
-
+        protected IRandomizerVerifier randomizerVerifier;
+        protected IAlignmentRandomizer alignmentRandomizer;
+        protected IClassNameRandomizer classNameRandomizer;
+        protected ILevelRandomizer levelRandomizer;
+        protected RaceRandomizer baseRaceRandomizer;
+        protected RaceRandomizer metaraceRandomizer;
+        protected ICharacterGenerator characterGenerator;
         protected Stressor stressor;
 
         [OneTimeSetUp]
-        public void StressSetup()
+        public void StressOneTimeSetup()
         {
             var options = new StressorOptions();
             options.RunningAssembly = Assembly.GetExecutingAssembly();
@@ -48,9 +39,21 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress
             stressor = new Stressor(options);
         }
 
+        [SetUp]
+        public void StressSetup()
+        {
+            characterGenerator = GetNewInstanceOf<ICharacterGenerator>();
+            metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            baseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
+            levelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
+            classNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+            alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            randomizerVerifier = GetNewInstanceOf<IRandomizerVerifier>();
+        }
+
         protected CharacterPrototype GetCharacterPrototype()
         {
-            var prototype = CharacterGenerator.GeneratePrototypeWith(AlignmentRandomizer, ClassNameRandomizer, LevelRandomizer, BaseRaceRandomizer, MetaraceRandomizer);
+            var prototype = characterGenerator.GeneratePrototypeWith(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             return prototype;
         }
     }

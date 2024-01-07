@@ -10,7 +10,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [SetUp]
         public void Setup()
         {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Neutral);
+            alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Neutral);
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 
         protected void AssertAlignment()
         {
-            var alignment = AlignmentRandomizer.Randomize();
+            var alignment = alignmentRandomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
                 .Or.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Evil));
@@ -35,7 +35,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralGoodnessHappens()
         {
-            var alignment = stressor.GenerateOrFail(AlignmentRandomizer.Randomize,
+            var alignment = stressor.GenerateOrFail(alignmentRandomizer.Randomize,
                 a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness != AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.Not.EqualTo(AlignmentConstants.Neutral));
@@ -45,7 +45,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void NeutralLawfulnessHappens()
         {
-            var alignment = stressor.GenerateOrFail(AlignmentRandomizer.Randomize,
+            var alignment = stressor.GenerateOrFail(alignmentRandomizer.Randomize,
                 a => a.Lawfulness == AlignmentConstants.Neutral && a.Goodness != AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));
@@ -55,7 +55,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [Test]
         public void TrueNeutralHappens()
         {
-            var alignment = stressor.GenerateOrFail(AlignmentRandomizer.Randomize,
+            var alignment = stressor.GenerateOrFail(alignmentRandomizer.Randomize,
                 a => a.Goodness == AlignmentConstants.Neutral && a.Lawfulness == AlignmentConstants.Neutral);
 
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Neutral));

@@ -248,7 +248,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
             Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             Stopwatch.Stop();
 
             var message = $"{alignmentRandomizerName};{classNameRandomizerName};{levelRandomizerName};{baseRaceRandomizerName};{metaraceRandomizerName}";
@@ -276,7 +276,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
             Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyAlignmentCompatibility(alignmentPrototype, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            var verified = randomizerVerifier.VerifyAlignmentCompatibility(alignmentPrototype, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
             Stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classNameRandomizerName};{levelRandomizerName};{baseRaceRandomizerName};{metaraceRandomizerName}";
@@ -309,7 +309,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
             Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyCharacterClassCompatibility(alignmentPrototype, classPrototype, baseRaceRandomizer, metaraceRandomizer);
+            var verified = randomizerVerifier.VerifyCharacterClassCompatibility(alignmentPrototype, classPrototype, baseRaceRandomizer, metaraceRandomizer);
             Stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classPrototype.Summary};{baseRaceRandomizerName};{metaraceRandomizerName}";
@@ -338,7 +338,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var racePrototype = BuildRandomRacePrototype();
 
             Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyRaceCompatibility(alignmentPrototype, classPrototype, racePrototype);
+            var verified = randomizerVerifier.VerifyRaceCompatibility(alignmentPrototype, classPrototype, racePrototype);
             Stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classPrototype.Summary};{racePrototype.Summary}";

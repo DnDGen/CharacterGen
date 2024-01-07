@@ -64,7 +64,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         [SetUp]
         public void Setup()
         {
-            BaseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.MonsterBase);
+            baseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.MonsterBase);
         }
 
         [Test]

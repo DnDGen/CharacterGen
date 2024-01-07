@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
-using Ninject;
 using NUnit.Framework;
 using System;
 
@@ -9,10 +8,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
     [TestFixture]
     public class SetAbilitiesRandomizerTests : StressTests
     {
-        [Inject]
-        public ISetAbilitiesRandomizer SetAbilitiesRandomizer { get; set; }
-        [Inject]
-        public Random Random { get; set; }
+        private ISetAbilitiesRandomizer setAbilitiesRandomizer;
+        private Random random;
+
+        [SetUp]
+        public void Setup()
+        {
+            setAbilitiesRandomizer = GetNewInstanceOf<ISetAbilitiesRandomizer>();
+            random = GetNewInstanceOf<Random>();
+        }
 
         [Test]
         public void StressSetAbilities()
@@ -22,14 +26,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
 
         protected void GenerateAndAssertAbilities()
         {
-            SetAbilitiesRandomizer.SetCharisma = Random.Next();
-            SetAbilitiesRandomizer.SetConstitution = Random.Next();
-            SetAbilitiesRandomizer.SetDexterity = Random.Next();
-            SetAbilitiesRandomizer.SetIntelligence = Random.Next();
-            SetAbilitiesRandomizer.SetStrength = Random.Next();
-            SetAbilitiesRandomizer.SetWisdom = Random.Next();
+            setAbilitiesRandomizer.SetCharisma = random.Next();
+            setAbilitiesRandomizer.SetConstitution = random.Next();
+            setAbilitiesRandomizer.SetDexterity = random.Next();
+            setAbilitiesRandomizer.SetIntelligence = random.Next();
+            setAbilitiesRandomizer.SetStrength = random.Next();
+            setAbilitiesRandomizer.SetWisdom = random.Next();
 
-            var stats = SetAbilitiesRandomizer.Randomize();
+            var stats = setAbilitiesRandomizer.Randomize();
 
             Assert.That(stats.Count, Is.EqualTo(6));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Charisma));
@@ -38,12 +42,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Intelligence));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Strength));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Wisdom));
-            Assert.That(stats[AbilityConstants.Charisma].Value, Is.EqualTo(SetAbilitiesRandomizer.SetCharisma));
-            Assert.That(stats[AbilityConstants.Constitution].Value, Is.EqualTo(SetAbilitiesRandomizer.SetConstitution));
-            Assert.That(stats[AbilityConstants.Dexterity].Value, Is.EqualTo(SetAbilitiesRandomizer.SetDexterity));
-            Assert.That(stats[AbilityConstants.Intelligence].Value, Is.EqualTo(SetAbilitiesRandomizer.SetIntelligence));
-            Assert.That(stats[AbilityConstants.Strength].Value, Is.EqualTo(SetAbilitiesRandomizer.SetStrength));
-            Assert.That(stats[AbilityConstants.Wisdom].Value, Is.EqualTo(SetAbilitiesRandomizer.SetWisdom));
+            Assert.That(stats[AbilityConstants.Charisma].Value, Is.EqualTo(setAbilitiesRandomizer.SetCharisma));
+            Assert.That(stats[AbilityConstants.Constitution].Value, Is.EqualTo(setAbilitiesRandomizer.SetConstitution));
+            Assert.That(stats[AbilityConstants.Dexterity].Value, Is.EqualTo(setAbilitiesRandomizer.SetDexterity));
+            Assert.That(stats[AbilityConstants.Intelligence].Value, Is.EqualTo(setAbilitiesRandomizer.SetIntelligence));
+            Assert.That(stats[AbilityConstants.Strength].Value, Is.EqualTo(setAbilitiesRandomizer.SetStrength));
+            Assert.That(stats[AbilityConstants.Wisdom].Value, Is.EqualTo(setAbilitiesRandomizer.SetWisdom));
         }
     }
 }

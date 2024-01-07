@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
-using Ninject;
 using NUnit.Framework;
 using System.Linq;
 
@@ -9,8 +8,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
     [TestFixture]
     public class HeroicAbilitiesRandomizerTests : StressTests
     {
-        [Inject, Named(AbilitiesRandomizerTypeConstants.Heroic)]
-        public IAbilitiesRandomizer HeroicAbilitiesRandomizer { get; set; }
+        private IAbilitiesRandomizer heroicAbilitiesRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            heroicAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Heroic);
+        }
 
         [Test]
         public void StressHeroicAbilities()
@@ -20,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
 
         protected void AssertAbilities()
         {
-            var stats = HeroicAbilitiesRandomizer.Randomize();
+            var stats = heroicAbilitiesRandomizer.Randomize();
             Assert.That(stats, Is.Not.Null);
 
             Assert.That(stats.Count, Is.EqualTo(6));
@@ -44,7 +48,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void NonDefaultHeroicAbilitiesOccur()
         {
-            var stats = stressor.GenerateOrFail(HeroicAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 16));
+            var stats = stressor.GenerateOrFail(heroicAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 16));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 16);
             Assert.That(allAbilitiesAreDefault, Is.False);
         }

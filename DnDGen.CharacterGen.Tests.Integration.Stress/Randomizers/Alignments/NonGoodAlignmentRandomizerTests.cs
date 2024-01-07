@@ -10,7 +10,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
         [SetUp]
         public void Setup()
         {
-            AlignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonGood);
+            alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.NonGood);
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Alignments
 
         protected void AssertAlignment()
         {
-            var alignment = AlignmentRandomizer.Randomize();
+            var alignment = alignmentRandomizer.Randomize();
             Assert.That(alignment.Goodness, Is.EqualTo(AlignmentConstants.Neutral)
                 .Or.EqualTo(AlignmentConstants.Evil));
             Assert.That(alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful)

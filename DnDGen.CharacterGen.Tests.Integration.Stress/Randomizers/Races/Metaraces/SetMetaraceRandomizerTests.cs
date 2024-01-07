@@ -13,14 +13,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         [SetUp]
         public void Setup()
         {
-            var forcableMetaraceRandomizer = MetaraceRandomizer as IForcableMetaraceRandomizer;
+            var forcableMetaraceRandomizer = metaraceRandomizer as IForcableMetaraceRandomizer;
             forcableMetaraceRandomizer.ForceMetarace = true;
         }
 
         [TearDown]
         public void TearDown()
         {
-            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         protected void AssertMetarace()
         {
             var prototype = GetCharacterPrototype();
-            SetMetaraceRandomizer.SetMetarace = MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            SetMetaraceRandomizer.SetMetarace = metaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
 
             var metarace = SetMetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));

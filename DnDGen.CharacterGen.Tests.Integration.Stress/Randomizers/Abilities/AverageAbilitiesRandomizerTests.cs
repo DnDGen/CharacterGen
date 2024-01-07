@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
-using Ninject;
 using NUnit.Framework;
 using System.Linq;
 
@@ -9,8 +8,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
     [TestFixture]
     public class AverageAbilitiesRandomizerTests : StressTests
     {
-        [Inject, Named(AbilitiesRandomizerTypeConstants.Average)]
-        public IAbilitiesRandomizer AverageAbilitiesRandomizer { get; set; }
+        private IAbilitiesRandomizer averageAbilitiesRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            averageAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Average);
+        }
 
         [Test]
         public void StressAverageAbilities()
@@ -20,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
 
         protected void GenerateAndAssertAbilities()
         {
-            var stats = AverageAbilitiesRandomizer.Randomize();
+            var stats = averageAbilitiesRandomizer.Randomize();
 
             Assert.That(stats.Count, Is.EqualTo(6));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Charisma));
@@ -43,7 +47,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void NonDefaultAverageAbilitiesOccur()
         {
-            var stats = stressor.GenerateOrFail(AverageAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
+            var stats = stressor.GenerateOrFail(averageAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 10);
             Assert.That(allAbilitiesAreDefault, Is.False);
         }

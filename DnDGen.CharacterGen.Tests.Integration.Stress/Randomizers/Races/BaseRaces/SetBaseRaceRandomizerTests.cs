@@ -14,7 +14,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         [TearDown]
         public void TearDown()
         {
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+            classNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         protected void AssertBaseRace()
         {
             var prototype = GetCharacterPrototype();
-            SetBaseRaceRandomizer.SetBaseRace = BaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            SetBaseRaceRandomizer.SetBaseRace = baseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
 
             var baseRace = SetBaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(baseRace, Is.EqualTo(SetBaseRaceRandomizer.SetBaseRace));
@@ -35,7 +35,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         [Test]
         public void StressNPCSetBaseRace()
         {
-            ClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
+            classNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
             stressor.Stress(AssertBaseRace);
         }
     }

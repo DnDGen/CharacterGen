@@ -12,7 +12,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         {
             var prototype = GetCharacterPrototype();
 
-            var baseRace = BaseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            var baseRace = baseRaceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(allowedBaseRaces, Contains.Item(baseRace));
         }
     }

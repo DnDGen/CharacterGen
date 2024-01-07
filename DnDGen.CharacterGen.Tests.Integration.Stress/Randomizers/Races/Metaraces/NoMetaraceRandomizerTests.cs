@@ -10,7 +10,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         [SetUp]
         public void Setup()
         {
-            MetaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
+            metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         {
             var prototype = GetCharacterPrototype();
 
-            var metarace = MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            var metarace = metaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
         }
     }

@@ -10,8 +10,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
     {
         protected IForcableMetaraceRandomizer forcableMetaraceRandomizer
         {
-            get { return MetaraceRandomizer as IForcableMetaraceRandomizer; }
-            set { MetaraceRandomizer = value; }
+            get { return metaraceRandomizer as IForcableMetaraceRandomizer; }
+            set { metaraceRandomizer = value; }
         }
 
         protected abstract IEnumerable<string> allowedMetaraces { get; }
@@ -25,7 +25,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         private string GenerateMetarace()
         {
             var prototype = GetCharacterPrototype();
-            return MetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            return metaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
         }
 
         protected void GenerateAndAssertForcedMetarace()

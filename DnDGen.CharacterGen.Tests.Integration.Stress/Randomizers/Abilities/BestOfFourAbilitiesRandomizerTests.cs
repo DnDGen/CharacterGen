@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
-using Ninject;
 using NUnit.Framework;
 using System.Linq;
 
@@ -9,8 +8,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
     [TestFixture]
     public class BestOfFourAbilitiesRandomizerTests : StressTests
     {
-        [Inject, Named(AbilitiesRandomizerTypeConstants.BestOfFour)]
-        public IAbilitiesRandomizer BestOfFourAbilitiesRandomizer { get; set; }
+        private IAbilitiesRandomizer bestOfFourAbilitiesRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            bestOfFourAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.BestOfFour);
+        }
 
         [Test]
         public void StressBestOfFourAbilities()
@@ -20,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
 
         protected void AssertAbilities()
         {
-            var stats = BestOfFourAbilitiesRandomizer.Randomize();
+            var stats = bestOfFourAbilitiesRandomizer.Randomize();
 
             Assert.That(stats.Count, Is.EqualTo(6));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Charisma));
@@ -40,7 +44,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void NonDefaultBestOfFourAbilitiesOccur()
         {
-            var stats = stressor.GenerateOrFail(BestOfFourAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
+            var stats = stressor.GenerateOrFail(bestOfFourAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 10);
             Assert.That(allAbilitiesAreDefault, Is.False);
         }

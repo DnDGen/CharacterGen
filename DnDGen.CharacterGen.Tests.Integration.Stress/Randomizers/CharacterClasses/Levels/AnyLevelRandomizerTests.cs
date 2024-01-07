@@ -18,7 +18,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
 
         protected void AssertLevel()
         {
-            var level = LevelRandomizer.Randomize();
+            var level = levelRandomizer.Randomize();
             Assert.That(level, Is.InRange(1, 20));
         }
     }
