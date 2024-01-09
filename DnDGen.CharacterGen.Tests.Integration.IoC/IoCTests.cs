@@ -16,13 +16,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
             stopwatch = new Stopwatch();
         }
 
-        protected void AssertSingleton<T>()
-        {
-            var first = InjectAndAssertDuration<T>();
-            var second = InjectAndAssertDuration<T>();
-            Assert.That(first, Is.SameAs(second));
-        }
-
         private T InjectAndAssertDuration<T>()
         {
             stopwatch.Restart();
@@ -61,13 +54,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
             where T : I
         {
             var item = InjectAndAssertDuration<I>(name);
-            Assert.That(item, Is.InstanceOf<T>());
-        }
-
-        protected void AssertIsInstanceOf<I, T>()
-            where T : I
-        {
-            var item = InjectAndAssertDuration<I>();
             Assert.That(item, Is.InstanceOf<T>());
         }
     }

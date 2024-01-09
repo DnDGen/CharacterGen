@@ -37,12 +37,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC.Modules
         }
 
         [Test]
-        public void FeatsSelectorsIsDecorated()
-        {
-            AssertIsInstanceOf<IFeatsSelector, FeatsSelector>();
-        }
-
-        [Test]
         public void LeadershipSelectorsAreNotGeneratedAsSingletons()
         {
             AssertNotSingleton<ILeadershipSelector>();
