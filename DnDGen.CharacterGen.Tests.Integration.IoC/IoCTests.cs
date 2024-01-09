@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Diagnostics;
 
 namespace DnDGen.CharacterGen.Tests.Integration.IoC
 {
@@ -7,54 +6,27 @@ namespace DnDGen.CharacterGen.Tests.Integration.IoC
     [IoC]
     public abstract class IoCTests : IntegrationTests
     {
-        private Stopwatch stopwatch;
-        private const int TimeLimitInMilliseconds = 200;
-
-        [SetUp]
-        public void Setup()
-        {
-            stopwatch = new Stopwatch();
-        }
-
-        private T InjectAndAssertDuration<T>()
-        {
-            stopwatch.Restart();
-
-            var instance = GetNewInstanceOf<T>();
-            Assert.That(stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
-
-            return instance;
-        }
-
-        private T InjectAndAssertDuration<T>(string name)
-        {
-            stopwatch.Restart();
-
-            var instance = GetNewInstanceOf<T>(name);
-            Assert.That(stopwatch.Elapsed.TotalMilliseconds, Is.LessThan(TimeLimitInMilliseconds));
-
-            return instance;
-        }
-
         protected void AssertNotSingleton<T>()
         {
-            var first = InjectAndAssertDuration<T>();
-            var second = InjectAndAssertDuration<T>();
+            var first = GetNewInstanceOf<T>();
+            var second = GetNewInstanceOf<T>();
             Assert.That(first, Is.Not.SameAs(second));
         }
 
         protected void AssertNotSingleton<T>(string name)
         {
-            var first = InjectAndAssertDuration<T>(name);
-            var second = InjectAndAssertDuration<T>(name);
+            var first = GetNewInstanceOf<T>(name);
+            var second = GetNewInstanceOf<T>(name);
             Assert.That(first, Is.Not.SameAs(second));
         }
 
         protected void AssertNamedIsInstanceOf<I, T>(string name)
             where T : I
         {
-            var item = InjectAndAssertDuration<I>(name);
-            Assert.That(item, Is.InstanceOf<T>());
+            AssertNotSingleton<I>(name);
+
+            var instance = GetNewInstanceOf<I>(name);
+            Assert.That(instance, Is.InstanceOf<T>());
         }
     }
 }

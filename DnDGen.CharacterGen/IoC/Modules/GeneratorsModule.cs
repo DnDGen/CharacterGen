@@ -42,13 +42,6 @@ namespace DnDGen.CharacterGen.IoC.Modules
             Bind<IWeaponGenerator>().To<WeaponGenerator>();
             Bind<ISpellsGenerator>().To<SpellsGenerator>();
             Bind<IAnimalGenerator>().To<AnimalGenerator>();
-
-            BindDecoratedGenerators();
-            BindRandomizers();
-        }
-
-        private void BindDecoratedGenerators()
-        {
             Bind<ICharacterGenerator>().To<CharacterGenerator>();
             Bind<IAlignmentGenerator>().To<AlignmentGenerator>();
             Bind<ICharacterClassGenerator>().To<CharacterClassGenerator>();
@@ -64,6 +57,8 @@ namespace DnDGen.CharacterGen.IoC.Modules
             Bind<ILanguageGenerator>().To<LanguageGenerator>();
             Bind<IEquipmentGenerator>().To<EquipmentGenerator>();
             Bind<IMagicGenerator>().To<MagicGenerator>();
+
+            BindRandomizers();
         }
 
         private void BindRandomizers()
@@ -107,10 +102,18 @@ namespace DnDGen.CharacterGen.IoC.Modules
             Bind<IForcableMetaraceRandomizer>().To<LycanthropeMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
             Bind<IForcableMetaraceRandomizer>().To<UndeadMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
 
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta)).Named(RaceRandomizerTypeConstants.Metarace.AnyMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta)).Named(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta)).Named(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
-            Bind<RaceRandomizer>().ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta)).Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
+            Bind<RaceRandomizer>()
+                .ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta))
+                .Named(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            Bind<RaceRandomizer>()
+                .ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.GeneticMeta))
+                .Named(RaceRandomizerTypeConstants.Metarace.GeneticMeta);
+            Bind<RaceRandomizer>()
+                .ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta))
+                .Named(RaceRandomizerTypeConstants.Metarace.LycanthropeMeta);
+            Bind<RaceRandomizer>()
+                .ToMethod(c => c.Kernel.Get<IForcableMetaraceRandomizer>(RaceRandomizerTypeConstants.Metarace.UndeadMeta))
+                .Named(RaceRandomizerTypeConstants.Metarace.UndeadMeta);
             Bind<RaceRandomizer>().To<NoMetaraceRandomizer>().Named(RaceRandomizerTypeConstants.Metarace.NoMeta);
 
             Bind<IAbilitiesRandomizer>().To<AverageAbilitiesRandomizer>().Named(AbilitiesRandomizerTypeConstants.Average);

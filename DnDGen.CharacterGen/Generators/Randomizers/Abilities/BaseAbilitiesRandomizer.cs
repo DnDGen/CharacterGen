@@ -6,10 +6,6 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Abilities
 {
     internal abstract class BaseAbilitiesRandomizer : IAbilitiesRandomizer
     {
-        public BaseAbilitiesRandomizer()
-        {
-        }
-
         public Dictionary<string, Ability> Randomize()
         {
             var stats = RollAbilities();
