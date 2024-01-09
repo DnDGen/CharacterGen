@@ -18,8 +18,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [Test]
         public override void CollectionNames()
         {
-            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var alignmentGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             var names = new[]
             {
@@ -210,8 +210,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [Test]
         public void AllMetaracesHaveFullAlignmentGroup()
         {
-            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var alignmentGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
             var alignmentMetaraces = metaraceGroups
                 .Where(kvp => alignmentGroups[GroupConstants.All].Contains(kvp.Key)) //Get alignment-key metarace groups
                 .SelectMany(kvp => kvp.Value) //get metaraces in those groups
@@ -223,8 +223,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [Test]
         public void AllMetaracesHaveClassNameGroup()
         {
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
             var classMetaraces = metaraceGroups
                 .Where(kvp => classGroups[GroupConstants.All].Contains(kvp.Key)) //Get class-key metarace groups
                 .SelectMany(kvp => kvp.Value) //get metaraces in those groups

@@ -69,7 +69,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [Test]
         public void AllEnchantmentSpellsInAdjustmentsTable()
         {
-            var spellGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Schools.Enchantment]);
         }
 

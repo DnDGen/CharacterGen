@@ -80,7 +80,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
         [Test]
         public void AllRangerSpellsInAdjustmentsTable()
         {
-            var spellGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Ranger]);
         }
 

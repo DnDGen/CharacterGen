@@ -1,7 +1,6 @@
 ﻿using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
@@ -9,17 +8,22 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
     [TestFixture]
     public class SpellsCrossTests : TableTests
     {
-        [Inject]
-        public ICollectionSelector CollectionsSelector { get; set; }
-        [Inject]
-        internal IAdjustmentsSelector AdjustmentsSelector { get; set; }
-
         protected override string tableName
         {
             get
             {
                 return TableNameConstants.Set.Collection.ClassNameGroups;
             }
+        }
+
+        private ICollectionSelector collectionsSelector;
+        private IAdjustmentsSelector adjustmentsSelector;
+
+        [SetUp]
+        public void Setup()
+        {
+            collectionsSelector = GetNewInstanceOf<ICollectionSelector>();
+            adjustmentsSelector = GetNewInstanceOf<IAdjustmentsSelector>();
         }
 
         [TestCase(1)]
@@ -45,12 +49,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
         public void AllSpellcastersHaveSpellsPerDayAtLevel(int level)
         {
             //INFO: We are testing up to level 30 to account for Rakshasas, who might have sorcerer spells up to level 27
-            var spellcasters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
 
             foreach (var spellcaster in spellcasters)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, level, spellcaster);
-                var spellsPerDay = AdjustmentsSelector.SelectAllFrom(tableName);
+                var spellsPerDay = adjustmentsSelector.SelectAllFrom(tableName);
                 Assert.That(spellsPerDay, Is.Not.Null, spellcaster);
             }
         }
@@ -78,12 +82,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
         public void AllSpellcastersHaveKnownSpellsAtLevel(int level)
         {
             //INFO: We are testing up to level 30 to account for Rakshasas, who might have sorcerer spells up to level 27
-            var spellcasters = CollectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
 
             foreach (var spellcaster in spellcasters)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, level, spellcaster);
-                var knownSpells = AdjustmentsSelector.SelectAllFrom(tableName);
+                var knownSpells = adjustmentsSelector.SelectAllFrom(tableName);
                 Assert.That(knownSpells, Is.Not.Null, spellcaster);
             }
         }

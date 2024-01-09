@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Mappers.Percentiles;
-using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items.Powers
     [TestFixture]
     public class CrossPowersTests : TableTests
     {
-        [Inject]
-        public PercentileMapper PercentileMapper { get; set; }
-
         protected override string tableName
         {
             get
@@ -23,10 +19,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items.Powers
 
         private IEnumerable<int> levels;
         private IEnumerable<int> indices;
+        private PercentileMapper percentileMapper;
 
         [SetUp]
         public void Setup()
         {
+            percentileMapper = GetNewInstanceOf<PercentileMapper>();
             levels = Enumerable.Range(1, 30);
             indices = Enumerable.Range(1, 100);
         }
@@ -43,7 +41,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items.Powers
         private void AssertTable(int level)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, level);
-            var table = PercentileMapper.Map(tableName);
+            var table = percentileMapper.Map(tableName);
 
             Assert.That(table, Is.Not.Null);
             Assert.That(table.Keys, Is.EquivalentTo(indices));

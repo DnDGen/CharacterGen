@@ -71,7 +71,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Palad
         [Test]
         public void AllPaladinSpellsInAdjustmentsTable()
         {
-            var spellGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Paladin]);
         }
 

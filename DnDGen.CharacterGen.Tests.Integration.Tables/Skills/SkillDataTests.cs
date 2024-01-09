@@ -17,9 +17,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
         [Test]
         public override void CollectionNames()
         {
-            var classSkills = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassSkills);
-            var skillGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SkillGroups);
-            var featFoci = CollectionsMapper.Map(TableNameConstants.Set.Collection.FeatFoci);
+            var classSkills = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassSkills);
+            var skillGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SkillGroups);
+            var featFoci = collectionsMapper.Map(TableNameConstants.Set.Collection.FeatFoci);
 
             var allClassSkills = classSkills.Values.SelectMany(v => v);
 

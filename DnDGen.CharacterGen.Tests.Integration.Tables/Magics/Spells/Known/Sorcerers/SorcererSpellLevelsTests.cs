@@ -19,7 +19,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Sorce
         [Test]
         public override void CollectionNames()
         {
-            var spellGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Sorcerer]);
         }
 

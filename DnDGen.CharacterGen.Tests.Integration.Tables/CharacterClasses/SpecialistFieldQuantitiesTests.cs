@@ -15,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public override void CollectionNames()
         {
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
             AssertCollectionNames(classGroups[GroupConstants.All]);
         }
 

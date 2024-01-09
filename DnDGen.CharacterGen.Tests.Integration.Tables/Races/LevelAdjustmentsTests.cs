@@ -117,8 +117,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
                 RaceConstants.BaseRaces.Animals.Wolverine
             };
 
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
 
             names = names.Union(baseRaceGroups[GroupConstants.All]).Union(metaraceGroups[GroupConstants.All]).ToArray();
 

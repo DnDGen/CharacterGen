@@ -17,8 +17,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
         [Test]
         public override void CollectionNames()
         {
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
 
             var names = classGroups[GroupConstants.All].Union(baseRaceGroups[GroupConstants.Monsters]);
 

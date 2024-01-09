@@ -18,8 +18,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var classes = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var classes = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             var names = classes[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]);
             AssertCollectionNames(names);

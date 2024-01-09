@@ -1,5 +1,4 @@
 ﻿using DnDGen.CharacterGen.Randomizers.Races;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metaraces
@@ -7,12 +6,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
     [TestFixture]
     public class SetMetaraceRandomizerTests : StressTests
     {
-        [Inject]
-        public ISetMetaraceRandomizer SetMetaraceRandomizer { get; set; }
+        private ISetMetaraceRandomizer setMetaraceRandomizer;
 
         [SetUp]
         public void Setup()
         {
+            setMetaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+
             var forcableMetaraceRandomizer = metaraceRandomizer as IForcableMetaraceRandomizer;
             forcableMetaraceRandomizer.ForceMetarace = true;
         }
@@ -32,10 +32,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         protected void AssertMetarace()
         {
             var prototype = GetCharacterPrototype();
-            SetMetaraceRandomizer.SetMetarace = metaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            setMetaraceRandomizer.SetMetarace = metaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
 
-            var metarace = SetMetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
-            Assert.That(metarace, Is.EqualTo(SetMetaraceRandomizer.SetMetarace));
+            var metarace = setMetaraceRandomizer.Randomize(prototype.Alignment, prototype.CharacterClass);
+            Assert.That(metarace, Is.EqualTo(setMetaraceRandomizer.SetMetarace));
         }
     }
 }

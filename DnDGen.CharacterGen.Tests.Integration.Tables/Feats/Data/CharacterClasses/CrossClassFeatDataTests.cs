@@ -1,7 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Mappers.Collections;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClasses
@@ -17,19 +16,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             }
         }
 
-        [Inject]
-        internal CollectionMapper CollectionsMapper { get; set; }
+        private CollectionMapper collectionsMapper;
+
+        [SetUp]
+        public void Setup()
+        {
+            collectionsMapper = GetNewInstanceOf<CollectionMapper>();
+        }
 
         [Test]
         public void AllClassesHaveFeatDataTables()
         {
-            var classNameGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classNameGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
             var allClasses = classNameGroups[GroupConstants.All];
 
             foreach (var className in allClasses)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, className);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -67,7 +71,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             foreach (var domain in domains)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, domain);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -91,7 +95,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             foreach (var school in schools)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, school);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }

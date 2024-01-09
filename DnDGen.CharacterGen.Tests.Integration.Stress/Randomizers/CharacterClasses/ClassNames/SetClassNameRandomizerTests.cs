@@ -1,5 +1,4 @@
 ﻿using DnDGen.CharacterGen.Randomizers.CharacterClasses;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.ClassNames
@@ -7,15 +6,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
     [TestFixture]
     public class SetClassNameRandomizerTests : StressTests
     {
-        [Inject]
-        public ISetClassNameRandomizer SetClassNameRandomizer { get; set; }
-        [Inject, Named(ClassNameRandomizerTypeConstants.AnyNPC)]
-        public IClassNameRandomizer AnyNPCClassNameRandomizer { get; set; }
+        private ISetClassNameRandomizer setClassNameRandomizer;
+        private IClassNameRandomizer anyNPCClassNameRandomizer;
 
-        [TearDown]
-        public void TearDown()
+        [SetUp]
+        public void Setup()
         {
-            classNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
+            anyNPCClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
+            setClassNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
         }
 
         [Test]
@@ -27,16 +25,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
         protected void AssertClassName()
         {
             var prototype = GetCharacterPrototype();
-            SetClassNameRandomizer.SetClassName = prototype.CharacterClass.Name;
+            setClassNameRandomizer.SetClassName = prototype.CharacterClass.Name;
 
-            var className = SetClassNameRandomizer.Randomize(prototype.Alignment);
-            Assert.That(className, Is.EqualTo(SetClassNameRandomizer.SetClassName));
+            var className = setClassNameRandomizer.Randomize(prototype.Alignment);
+            Assert.That(className, Is.EqualTo(setClassNameRandomizer.SetClassName));
         }
 
         [Test]
         public void StressSetNPCClassName()
         {
-            classNameRandomizer = AnyNPCClassNameRandomizer;
+            classNameRandomizer = anyNPCClassNameRandomizer;
             stressor.Stress(AssertClassName);
         }
     }

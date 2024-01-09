@@ -5,7 +5,6 @@ using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
 using DnDGen.CharacterGen.Verifiers;
-using Ninject;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
@@ -15,18 +14,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Verifiers
     [TestFixture]
     public class RandomizerVerifierTests : IntegrationTests
     {
-        [Inject]
-        public IRandomizerVerifier RandomizerVerifier { get; set; }
-        [Inject]
-        public Stopwatch Stopwatch { get; set; }
-
+        private IRandomizerVerifier randomizerVerifier;
+        private Stopwatch stopwatch;
         private TimeSpan timeLimit;
 
         [SetUp]
         public void Setup()
         {
-            Stopwatch.Reset();
-            timeLimit = new TimeSpan(TimeSpan.TicksPerSecond);
+            randomizerVerifier = GetNewInstanceOf<IRandomizerVerifier>();
+            stopwatch = new Stopwatch();
+            timeLimit = TimeSpan.FromSeconds(1);
         }
 
         [TestCase(AlignmentRandomizerTypeConstants.Any, ClassNameRandomizerTypeConstants.AnyNPC, LevelRandomizerTypeConstants.Any, RaceRandomizerTypeConstants.BaseRace.AnyBase, RaceRandomizerTypeConstants.Metarace.AnyMeta + ",,False", true)]
@@ -88,12 +85,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Restart();
+            var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            stopwatch.Stop();
 
             Assert.That(verified, Is.EqualTo(isValid));
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit));
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit));
         }
 
         [TestCase(AlignmentConstants.ChaoticEvil, ClassNameRandomizerTypeConstants.AnyPlayer, LevelRandomizerTypeConstants.Any, RaceRandomizerTypeConstants.BaseRace.AnyBase, RaceRandomizerTypeConstants.Metarace.AnyMeta + ",,False", true)]
@@ -142,12 +139,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Restart();
+            var verified = randomizerVerifier.VerifyAlignmentCompatibility(alignment, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
+            stopwatch.Stop();
 
             Assert.That(verified, Is.EqualTo(isValid));
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit));
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit));
         }
 
         [TestCase(AlignmentConstants.ChaoticEvil, CharacterClassConstants.Cleric, 13, false, RaceRandomizerTypeConstants.BaseRace.AnyBase, "Set," + RaceConstants.Metaraces.Ghost, true)]
@@ -194,12 +191,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyCharacterClassCompatibility(alignment, classPrototype, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Restart();
+            var verified = randomizerVerifier.VerifyCharacterClassCompatibility(alignment, classPrototype, baseRaceRandomizer, metaraceRandomizer);
+            stopwatch.Stop();
 
             Assert.That(verified, Is.EqualTo(isValid));
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit));
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit));
         }
 
         [TestCase(AlignmentConstants.ChaoticEvil, CharacterClassConstants.Cleric, 13, false, RaceConstants.BaseRaces.Human, RaceConstants.Metaraces.Ghost, true)]
@@ -287,12 +284,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Verifiers
             racePrototype.BaseRace = baseRace;
             racePrototype.Metarace = metarace;
 
-            Stopwatch.Restart();
-            var verified = RandomizerVerifier.VerifyRaceCompatibility(alignment, classPrototype, racePrototype);
-            Stopwatch.Stop();
+            stopwatch.Restart();
+            var verified = randomizerVerifier.VerifyRaceCompatibility(alignment, classPrototype, racePrototype);
+            stopwatch.Stop();
 
             Assert.That(verified, Is.EqualTo(isValid));
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit));
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit));
         }
 
         private RaceRandomizer GetMetaraceRandomizer(string name)

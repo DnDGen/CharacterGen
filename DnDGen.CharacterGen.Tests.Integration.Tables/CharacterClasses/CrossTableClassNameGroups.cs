@@ -1,8 +1,7 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Magics;
+﻿using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Mappers.Collections;
 using DnDGen.Infrastructure.Mappers.Percentiles;
-using Ninject;
 using NUnit.Framework;
 using System.Linq;
 
@@ -11,11 +10,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
     [TestFixture]
     public class CrossTableClassNameGroups : TableTests
     {
-        [Inject]
-        public CollectionMapper CollectionsMapper { get; set; }
-        [Inject]
-        public PercentileMapper PercentileMapper { get; set; }
-
         protected override string tableName
         {
             get
@@ -24,15 +18,25 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
             }
         }
 
+        private CollectionMapper collectionsMapper;
+        private PercentileMapper percentileMapper;
+
+        [SetUp]
+        public void Setup()
+        {
+            collectionsMapper = GetNewInstanceOf<CollectionMapper>();
+            percentileMapper = GetNewInstanceOf<PercentileMapper>();
+        }
+
         [Test]
         public void AllClassesHaveHasSpecialistFieldTable()
         {
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             foreach (var className in classGroups[GroupConstants.All])
             {
                 var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, className);
-                var table = PercentileMapper.Map(tableName);
+                var table = percentileMapper.Map(tableName);
                 Assert.That(table, Is.Not.Null);
                 Assert.That(table, Is.Not.Empty);
 
@@ -45,12 +49,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public void AllArcaneSpellcasterClassesHaveKnowsAdditionalSpellsTable()
         {
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             foreach (var className in classGroups[SpellConstants.Sources.Arcane])
             {
                 var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, className);
-                var table = PercentileMapper.Map(tableName);
+                var table = percentileMapper.Map(tableName);
                 Assert.That(table, Is.Not.Null);
                 Assert.That(table, Is.Not.Empty);
 

@@ -18,9 +18,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
-            var classes = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classes = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             var names = classes[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]).Union(metaraceGroups[GroupConstants.All]);
 

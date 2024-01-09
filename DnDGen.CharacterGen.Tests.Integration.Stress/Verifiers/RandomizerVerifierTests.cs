@@ -5,7 +5,6 @@ using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
 using DnDGen.Infrastructure.Selectors.Collections;
-using Ninject;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,12 +15,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
     [TestFixture]
     public class RandomizerVerifierTests : StressTests
     {
-        [Inject]
-        public ICollectionSelector CollectionsSelector { get; set; }
-        [Inject]
-        public Random Random { get; set; }
-        [Inject]
-        public Stopwatch Stopwatch { get; set; }
+        private ICollectionSelector collectionsSelector;
+        private Random random;
+        private Stopwatch stopwatch;
 
         private const string Set = "Set";
 
@@ -39,6 +35,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
         [SetUp]
         public void Setup()
         {
+            collectionsSelector = GetNewInstanceOf<ICollectionSelector>();
+            random = GetNewInstanceOf<Random>();
+            stopwatch = new Stopwatch();
+
             alignmentRandomizers = new[]
             {
                 AlignmentRandomizerTypeConstants.Any,
@@ -223,8 +223,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
                 RaceConstants.Metaraces.Werewolf,
             };
 
-            Stopwatch.Reset();
-            timeLimit = new TimeSpan(TimeSpan.TicksPerSecond);
+            stopwatch.Reset();
+            timeLimit = TimeSpan.FromSeconds(1);
         }
 
         [Test]
@@ -247,12 +247,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
+            stopwatch.Restart();
             var verified = randomizerVerifier.VerifyCompatibility(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Stop();
 
             var message = $"{alignmentRandomizerName};{classNameRandomizerName};{levelRandomizerName};{baseRaceRandomizerName};{metaraceRandomizerName}";
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit), message);
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit), message);
         }
 
         [Test]
@@ -275,17 +275,17 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
+            stopwatch.Restart();
             var verified = randomizerVerifier.VerifyAlignmentCompatibility(alignmentPrototype, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classNameRandomizerName};{levelRandomizerName};{baseRaceRandomizerName};{metaraceRandomizerName}";
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit), message);
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit), message);
         }
 
         private Alignment BuildRandomAlignmentPrototype()
         {
-            var alignmentDescription = CollectionsSelector.SelectRandomFrom(alignments);
+            var alignmentDescription = collectionsSelector.SelectRandomFrom(alignments);
             var alignment = new Alignment(alignmentDescription);
 
             return alignment;
@@ -308,19 +308,19 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var baseRaceRandomizer = GetBaseRaceRandomizer(baseRaceRandomizerName);
             var metaraceRandomizer = GetMetaraceRandomizer(metaraceRandomizerName);
 
-            Stopwatch.Restart();
+            stopwatch.Restart();
             var verified = randomizerVerifier.VerifyCharacterClassCompatibility(alignmentPrototype, classPrototype, baseRaceRandomizer, metaraceRandomizer);
-            Stopwatch.Stop();
+            stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classPrototype.Summary};{baseRaceRandomizerName};{metaraceRandomizerName}";
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit), message);
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit), message);
         }
 
         private CharacterClassPrototype BuildRandomClassPrototype()
         {
             var classPrototype = new CharacterClassPrototype();
-            classPrototype.Name = CollectionsSelector.SelectRandomFrom(classNames);
-            classPrototype.Level = Random.Next(20) + 1;
+            classPrototype.Name = collectionsSelector.SelectRandomFrom(classNames);
+            classPrototype.Level = random.Next(20) + 1;
 
             return classPrototype;
         }
@@ -337,37 +337,37 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
             var classPrototype = BuildRandomClassPrototype();
             var racePrototype = BuildRandomRacePrototype();
 
-            Stopwatch.Restart();
+            stopwatch.Restart();
             var verified = randomizerVerifier.VerifyRaceCompatibility(alignmentPrototype, classPrototype, racePrototype);
-            Stopwatch.Stop();
+            stopwatch.Stop();
 
             var message = $"{alignmentPrototype.Full};{classPrototype.Summary};{racePrototype.Summary}";
-            Assert.That(Stopwatch.Elapsed, Is.LessThan(timeLimit), message);
+            Assert.That(stopwatch.Elapsed, Is.LessThan(timeLimit), message);
         }
 
         private RacePrototype BuildRandomRacePrototype()
         {
             var racePrototype = new RacePrototype();
-            racePrototype.BaseRace = CollectionsSelector.SelectRandomFrom(baseRaces);
-            racePrototype.Metarace = CollectionsSelector.SelectRandomFrom(metaraces);
+            racePrototype.BaseRace = collectionsSelector.SelectRandomFrom(baseRaces);
+            racePrototype.Metarace = collectionsSelector.SelectRandomFrom(metaraces);
 
             return racePrototype;
         }
 
         private string GetRandomMetaraceRandomizerName()
         {
-            var metaraceRandomizerName = CollectionsSelector.SelectRandomFrom(metaraceRandomizers);
+            var metaraceRandomizerName = collectionsSelector.SelectRandomFrom(metaraceRandomizers);
 
             if (metaraceRandomizerName == RaceRandomizerTypeConstants.Metarace.NoMeta)
                 return metaraceRandomizerName;
 
             if (metaraceRandomizerName != Set)
             {
-                var force = Convert.ToBoolean(Random.Next(2));
+                var force = Convert.ToBoolean(random.Next(2));
                 return $"{metaraceRandomizerName},,{force}";
             }
 
-            var metarace = CollectionsSelector.SelectRandomFrom(metaraces);
+            var metarace = collectionsSelector.SelectRandomFrom(metaraces);
 
             return $"{metaraceRandomizerName},{metarace}";
         }
@@ -396,11 +396,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
 
         private string GetRandomBaseRaceRandomizerName()
         {
-            var baseRaceRandomizerName = CollectionsSelector.SelectRandomFrom(baseRaceRandomizers);
+            var baseRaceRandomizerName = collectionsSelector.SelectRandomFrom(baseRaceRandomizers);
             if (baseRaceRandomizerName != Set)
                 return baseRaceRandomizerName;
 
-            var baseRace = CollectionsSelector.SelectRandomFrom(baseRaces);
+            var baseRace = collectionsSelector.SelectRandomFrom(baseRaces);
 
             return $"{baseRaceRandomizerName},{baseRace}";
         }
@@ -420,11 +420,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
 
         private string GetRandomLevelRandomizerName()
         {
-            var levelRandomizerName = CollectionsSelector.SelectRandomFrom(levelRandomizers);
+            var levelRandomizerName = collectionsSelector.SelectRandomFrom(levelRandomizers);
             if (levelRandomizerName != Set)
                 return levelRandomizerName;
 
-            var level = Random.Next(20) + 1;
+            var level = random.Next(20) + 1;
 
             return $"{levelRandomizerName},{level}";
         }
@@ -444,11 +444,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
 
         private string GetRandomClassNameRandomizerName()
         {
-            var classNameRandomizerName = CollectionsSelector.SelectRandomFrom(classNameRandomizers);
+            var classNameRandomizerName = collectionsSelector.SelectRandomFrom(classNameRandomizers);
             if (classNameRandomizerName != Set)
                 return classNameRandomizerName;
 
-            var className = CollectionsSelector.SelectRandomFrom(classNames);
+            var className = collectionsSelector.SelectRandomFrom(classNames);
 
             return $"{classNameRandomizerName},{className}";
         }
@@ -468,11 +468,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
 
         private string GetRandomAlignmentRandomizerName()
         {
-            var alignmentRandomizerName = CollectionsSelector.SelectRandomFrom(alignmentRandomizers);
+            var alignmentRandomizerName = collectionsSelector.SelectRandomFrom(alignmentRandomizers);
             if (alignmentRandomizerName != Set)
                 return alignmentRandomizerName;
 
-            var alignment = CollectionsSelector.SelectRandomFrom(alignments);
+            var alignment = collectionsSelector.SelectRandomFrom(alignments);
             return $"{alignmentRandomizerName},{alignment}";
         }
 

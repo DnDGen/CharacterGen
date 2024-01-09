@@ -1,5 +1,4 @@
 ﻿using DnDGen.Infrastructure.Mappers.Collections;
-using Ninject;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +8,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
     [TestFixture]
     public abstract class CollectionTests : TableTests
     {
-        [Inject]
-        internal CollectionMapper CollectionsMapper { get; set; }
+        protected CollectionMapper collectionsMapper;
 
         protected Dictionary<string, IEnumerable<string>> table;
         protected Dictionary<int, string> indices;
@@ -18,7 +16,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
         [SetUp]
         public void CollectionSetup()
         {
-            table = CollectionsMapper.Map(tableName);
+            collectionsMapper = GetNewInstanceOf<CollectionMapper>();
+
+            table = collectionsMapper.Map(tableName);
             indices = new Dictionary<int, string>();
         }
 

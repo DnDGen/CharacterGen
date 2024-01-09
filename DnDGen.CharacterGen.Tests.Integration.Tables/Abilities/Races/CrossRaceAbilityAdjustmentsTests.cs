@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Mappers.Collections;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
@@ -16,19 +15,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
             }
         }
 
-        [Inject]
-        public CollectionMapper CollectionsMapper { get; set; }
+        private CollectionMapper collectionsMapper;
+
+        [SetUp]
+        public void Setup()
+        {
+            collectionsMapper = GetNewInstanceOf<CollectionMapper>();
+        }
 
         [Test]
         public void AllBaseRacesHaveAbilityAdjustmentTables()
         {
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
             var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
             foreach (var baseRace in allBaseRaces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, baseRace);
-                var abilityAdjustments = CollectionsMapper.Map(tableName);
+                var abilityAdjustments = collectionsMapper.Map(tableName);
 
                 Assert.That(abilityAdjustments, Is.Not.Null);
                 Assert.That(abilityAdjustments, Is.Not.Empty);
@@ -38,13 +42,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
         [Test]
         public void AllMetaracesHaveAbilityAdjustmentTables()
         {
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
             var allMetaraces = metaraceGroups[GroupConstants.All];
 
             foreach (var metarace in allMetaraces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, metarace);
-                var abilityAdjustments = CollectionsMapper.Map(tableName);
+                var abilityAdjustments = collectionsMapper.Map(tableName);
 
                 Assert.That(abilityAdjustments, Is.Not.Null);
                 Assert.That(abilityAdjustments, Is.Not.Empty);

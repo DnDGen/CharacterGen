@@ -1,7 +1,6 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Mappers.Collections;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
@@ -17,19 +16,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
             }
         }
 
-        [Inject]
-        internal CollectionMapper CollectionsMapper { get; set; }
+        private CollectionMapper collectionsMapper;
+
+        [SetUp]
+        public void Setup()
+        {
+            collectionsMapper = GetNewInstanceOf<CollectionMapper>();
+        }
 
         [Test]
         public void AllBaseRacesHaveFeatDataTables()
         {
-            var baseRaceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
             var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
             foreach (var baseRace in allBaseRaces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, baseRace);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -38,13 +42,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
         [Test]
         public void AllMetaracesHaveFeatDataTables()
         {
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
             var allMetaraces = metaraceGroups[GroupConstants.All];
 
             foreach (var metarRace in allMetaraces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, metarRace);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -70,7 +74,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
             foreach (var species in metaraceSpecies)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, species);
-                var featsData = CollectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }

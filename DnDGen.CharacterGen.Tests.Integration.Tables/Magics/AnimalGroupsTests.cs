@@ -34,9 +34,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics
                 FeatConstants.ImprovedFamiliar,
             };
 
-            var alignmentGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
-            var metaraceGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
-            var classGroups = CollectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var alignmentGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
+            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
 
             names = names.Union(alignmentGroups[GroupConstants.All])
                 .Union(metaraceGroups[GroupConstants.All])

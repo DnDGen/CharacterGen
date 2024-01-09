@@ -1,5 +1,4 @@
 ﻿using DnDGen.CharacterGen.Randomizers.CharacterClasses;
-using Ninject;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClasses.Levels
@@ -7,8 +6,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
     [TestFixture]
     public class AnyLevelRandomizerTests : StressTests
     {
-        [Inject, Named(LevelRandomizerTypeConstants.Any)]
-        public ILevelRandomizer AnyLevelRandomizer { get; set; }
+        private ILevelRandomizer anyLevelRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            anyLevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
+        }
 
         [Test]
         public void StressAnyLevel()
@@ -18,7 +22,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.CharacterClas
 
         protected void AssertLevel()
         {
-            var level = levelRandomizer.Randomize();
+            var level = anyLevelRandomizer.Randomize();
             Assert.That(level, Is.InRange(1, 20));
         }
     }

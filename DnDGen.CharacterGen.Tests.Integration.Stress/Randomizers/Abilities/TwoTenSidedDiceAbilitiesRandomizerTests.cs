@@ -1,6 +1,5 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Randomizers.Abilities;
-using Ninject;
 using NUnit.Framework;
 using System.Linq;
 
@@ -9,8 +8,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
     [TestFixture]
     public class TwoTenSidedDiceAbilitiesRandomizerTests : StressTests
     {
-        [Inject, Named(AbilitiesRandomizerTypeConstants.TwoTenSidedDice)]
-        public IAbilitiesRandomizer TwoTenSidedDiceAbilitiesRandomizer { get; set; }
+        private IAbilitiesRandomizer twoTenSidedDiceAbilitiesRandomizer;
+
+        [SetUp]
+        public void Setup()
+        {
+            twoTenSidedDiceAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.TwoTenSidedDice);
+        }
 
         [Test]
         public void StressTwoTenSidedDiceAbilities()
@@ -20,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
 
         protected void AssertAbilities()
         {
-            var stats = TwoTenSidedDiceAbilitiesRandomizer.Randomize();
+            var stats = twoTenSidedDiceAbilitiesRandomizer.Randomize();
 
             Assert.That(stats.Count, Is.EqualTo(6));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Charisma));
@@ -40,7 +44,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
         [Test]
         public void NonDefaultTwoTenSidedDiceAbilitiesOccur()
         {
-            var stats = stressor.GenerateOrFail(TwoTenSidedDiceAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
+            var stats = stressor.GenerateOrFail(twoTenSidedDiceAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 10));
             var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 10);
             Assert.That(allAbilitiesAreDefault, Is.False);
         }
