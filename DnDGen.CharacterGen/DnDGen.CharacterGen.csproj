@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-	  <Version>11.0.0</Version>
+	  <Version>11.0.1</Version>
 	  <Authors>Karl M. Speer</Authors>
 	  <Company>DnDGen</Company>
 	  <Product>CharacterGen</Product>
 	  <Description>This generates characters and NPCs for the Dungeons and Dragons 3.5 system. One can generate random characters or set various randomizers.</Description>
 	  <PackageReleaseNotes>
 		  11.0.0: .Net 6, consolidated nuget packages, removed EventGen, removed iterative generators, dependency-compatible Ninject module loading
+      11.0.1: Release fixes
 	  </PackageReleaseNotes>
 	  <PackageProjectUrl>https://github.com/DnDGen/CharacterGen</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/DnDGen/CharacterGen</RepositoryUrl>
