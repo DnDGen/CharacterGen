@@ -314,8 +314,8 @@ namespace DnDGen.CharacterGen.Generators.Races
             //Eventually, this will be replaced by ages being rolled in the creature generator
             //and character level won't affect age. But for now, do this
             var ageIncreases = dice.Roll().d(characterClass.Level).Minus(1).AsSum();
-            if (ageIncreases > 0)
-                additionalAge += dice.Roll(ageIncreases).d(trainingAgeRoll).AsSum();
+            if (ageIncreases > 0 && additionalAge > 0)
+                additionalAge += dice.Roll(ageIncreases).d(additionalAge).AsSum();
 
             return additionalAge;
         }

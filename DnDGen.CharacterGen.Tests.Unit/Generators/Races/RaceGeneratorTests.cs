@@ -10,6 +10,7 @@ using DnDGen.Infrastructure.Selectors.Percentiles;
 using DnDGen.RollGen;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,7 +89,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             SetUpTablesForMetarace(Metarace);
 
             mockDice.Setup(d => d.Roll(1).d(characterClass.Level).Minus(1).AsSum<int>()).Returns(4);
-            mockDice.Setup(d => d.Roll(4).d(It.IsAny<string>()).AsSum<int>()).Returns(8);
+            mockDice.Setup(d => d.Roll(4).d(It.IsAny<int>()).AsSum<int>()).Returns(8);
 
             mockCollectionsSelector
                 .Setup(s => s.FindCollectionOf(
@@ -665,12 +666,27 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 
             mockDice.Setup(d => d.Roll("42d600").AsSum<int>()).Returns(42);
             mockDice.Setup(d => d.Roll(1).d(level).Minus(1).AsSum<int>()).Returns(level - 1);
-            mockDice.Setup(d => d.Roll(level - 1).d("42d600").AsSum<int>()).Returns(additionalAge);
+            mockDice.Setup(d => d.Roll(level - 1).d(42).AsSum<int>()).Returns(additionalAge);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Age.Value, Is.EqualTo(90210 + 42 + additionalAge));
             Assert.That(race.Age.Unit, Is.EqualTo("Years"));
             Assert.That(race.Age.Description, Is.EqualTo(description));
+        }
+
+        [Test]
+        public void AgeIncreasesAsCharacterLevelsUp_AdditionalAgeOfZero()
+        {
+            characterClass.Level = 20;
+
+            mockDice.Setup(d => d.Roll("42d600").AsSum<int>()).Returns(0);
+            mockDice.Setup(d => d.Roll(1).d(20).Minus(1).AsSum<int>()).Returns(19);
+            mockDice.Setup(d => d.Roll(19).d(0).AsSum<int>()).Throws<Exception>();
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
+            Assert.That(race.Age.Value, Is.EqualTo(90210));
+            Assert.That(race.Age.Unit, Is.EqualTo("Years"));
+            Assert.That(race.Age.Description, Is.EqualTo(RaceConstants.Ages.Adulthood));
         }
 
         [TestCase(RaceConstants.Ages.Adulthood, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless, RaceConstants.Ages.Ageless)]
@@ -686,7 +702,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 
             mockDice.Setup(d => d.Roll("42d600").AsSum<int>()).Returns(42);
             mockDice.Setup(d => d.Roll(1).d(20).Minus(1).AsSum<int>()).Returns(19);
-            mockDice.Setup(d => d.Roll(19).d("42d600").AsSum<int>()).Returns(200);
+            mockDice.Setup(d => d.Roll(19).d(42).AsSum<int>()).Returns(200);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Age.Value, Is.EqualTo(90452));
