@@ -65,5 +65,5 @@ steps:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   displayName: Publish Artifacts
   inputs:
-    pathtoPublish: './DnDGen.CharacterGen' 
+    pathtoPublish: './DnDGen.CharacterGen/bin/Release' 
     artifactName: 'dndgen-charactergen'
