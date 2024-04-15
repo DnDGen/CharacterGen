@@ -1,12 +1,12 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Verifiers;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
