@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 	  <Version>11.0.4</Version>
+	  <Version>11.0.1</Version>
 	  <Authors>Karl M. Speer</Authors>
 	  <Company>DnDGen</Company>
 	  <Product>CharacterGen</Product>
@@ -12,6 +13,7 @@
       11.0.2: README updates
       11.0.3: Fix the 0-die additional age bug
       11.0.4: Release pipeline fixes
+		  11.0.1: Fix bug where metaraces occurred too often
 	  </PackageReleaseNotes>
 	  <PackageProjectUrl>https://github.com/DnDGen/CharacterGen</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/DnDGen/CharacterGen</RepositoryUrl>
