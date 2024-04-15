@@ -459,9 +459,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IncompatibleRaceIsRegenerated()
         {
-            var otherRacePrototype = new RacePrototype { BaseRace = "other prototype" };
-            var otherRace = new Race { BaseRace = "other race" };
+            var otherRacePrototype = new RacePrototype { BaseRace = "other prototype", Metarace = RaceConstants.Metaraces.None };
+            var otherRace = new Race { BaseRace = "other race", Metarace = RaceConstants.Metaraces.None };
             levelAdjustments["other race"] = 0;
+
+            expectedRacePrototype.Metarace = RaceConstants.Metaraces.None;
 
             mockRaceGenerator
                 .Setup(g => g.GeneratePrototype(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
@@ -502,6 +504,75 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
                 .Returns(Enumerable.Empty<CharacterClassPrototype>());
 
             Assert.That(GenerateCharacter, Throws.InstanceOf<IncompatibleRandomizersException>());
+        }
+
+        [Test]
+        public void IncompatibleRaceIsRegenerated_WithoutMetarace()
+        {
+            var otherRacePrototype = new RacePrototype { BaseRace = "other prototype", Metarace = RaceConstants.Metaraces.None };
+            var otherRace = new Race { BaseRace = "other race", Metarace = RaceConstants.Metaraces.None };
+            levelAdjustments["other race"] = 0;
+
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototype(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new RacePrototype { BaseRace = "wrong race" });
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototypes(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new[] { expectedRacePrototype, otherRacePrototype });
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRacePrototype)).Returns(otherRace);
+
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(new[] { otherRacePrototype }))
+                .Returns(otherRacePrototype);
+
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, otherRace)).Returns(abilities);
+            mockLanguageGenerator.Setup(g => g.GenerateWith(otherRace, characterClass, abilities, skills)).Returns(languages);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities)).Returns(skills);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, otherRace, abilities)).Returns(baseAttack);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities, skills, baseAttack)).Returns(featCollections);
+
+            //INFO: Because the "All" on feat collections is dynamic, we can't test for it specifically
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), characterClass, otherRace)).Returns(equipment);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, otherRace, It.IsAny<IEnumerable<Feat>>(), abilities, equipment)).Returns(combat);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRace, abilities, It.IsAny<IEnumerable<Feat>>(), equipment)).Returns(magic);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Race, Is.EqualTo(otherRace));
+        }
+
+        [Test]
+        public void IncompatibleRaceIsRegenerated_WithOnlyMetarace()
+        {
+            var otherRacePrototype = new RacePrototype { BaseRace = "other prototype", Metarace = "other metarace prototype" };
+            var otherRace = new Race { BaseRace = "other race", Metarace = "other metarace" };
+            levelAdjustments["other race"] = 0;
+            levelAdjustments["other metarace"] = 0;
+
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototype(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new RacePrototype { BaseRace = "wrong race" });
+            mockRaceGenerator
+                .Setup(g => g.GeneratePrototypes(alignmentPrototype, expectedCharacterClassPrototype, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object))
+                .Returns(new[] { expectedRacePrototype, otherRacePrototype });
+            mockRaceGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRacePrototype)).Returns(otherRace);
+
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(new[] { expectedRacePrototype, otherRacePrototype }))
+                .Returns(otherRacePrototype);
+
+            mockAbilitiesGenerator.Setup(g => g.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, otherRace)).Returns(abilities);
+            mockLanguageGenerator.Setup(g => g.GenerateWith(otherRace, characterClass, abilities, skills)).Returns(languages);
+            mockSkillsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities)).Returns(skills);
+            mockCombatGenerator.Setup(g => g.GenerateBaseAttackWith(characterClass, otherRace, abilities)).Returns(baseAttack);
+            mockFeatsGenerator.Setup(g => g.GenerateWith(characterClass, otherRace, abilities, skills, baseAttack)).Returns(featCollections);
+
+            //INFO: Because the "All" on feat collections is dynamic, we can't test for it specifically
+            mockTreasureGenerator.Setup(g => g.GenerateWith(It.IsAny<IEnumerable<Feat>>(), characterClass, otherRace)).Returns(equipment);
+            mockCombatGenerator.Setup(g => g.GenerateWith(baseAttack, characterClass, otherRace, It.IsAny<IEnumerable<Feat>>(), abilities, equipment)).Returns(combat);
+            mockMagicGenerator.Setup(g => g.GenerateWith(alignment, characterClass, otherRace, abilities, It.IsAny<IEnumerable<Feat>>(), equipment)).Returns(magic);
+
+            var character = GenerateCharacter();
+            Assert.That(character.Race, Is.EqualTo(otherRace));
         }
 
         [Test]
