@@ -21,5 +21,30 @@ namespace DnDGen.CharacterGen.Races
                 return summary;
             }
         }
+
+        public RacePrototype()
+        {
+            BaseRace = string.Empty;
+            Metarace = string.Empty;
+        }
+
+        public override string ToString()
+        {
+            return Summary;
+        }
+
+        public override bool Equals(object toCompare)
+        {
+            if (!(toCompare is RacePrototype))
+                return false;
+
+            var alignment = toCompare as RacePrototype;
+            return Summary == alignment.Summary;
+        }
+
+        public override int GetHashCode()
+        {
+            return Summary.GetHashCode();
+        }
     }
 }

@@ -108,7 +108,7 @@ namespace DnDGen.CharacterGen.Generators.Characters
             character.Class = characterClassGenerator.GenerateWith(character.Alignment, prototype.CharacterClass);
             character.Race = raceGenerator.GenerateWith(character.Alignment, character.Class, prototype.Race);
 
-            character.Class = EditCharacterClass(character.Alignment, character.Class, character.Race, levelRandomizer);
+            character.Class = EditCharacterClass(character.Alignment, character.Class, character.Race);
 
             character.Abilities = abilitiesGenerator.GenerateWith(statsRandomizer, character.Class, character.Race);
             var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, character.Abilities);
@@ -208,7 +208,7 @@ namespace DnDGen.CharacterGen.Generators.Characters
             return armor.TotalArmorCheckPenalty;
         }
 
-        private CharacterClass EditCharacterClass(Alignment alignment, CharacterClass characterClass, Race race, ILevelRandomizer levelRandomizer)
+        private CharacterClass EditCharacterClass(Alignment alignment, CharacterClass characterClass, Race race)
         {
             characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.BaseRace);
             characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.Metarace);
@@ -269,7 +269,15 @@ namespace DnDGen.CharacterGen.Generators.Characters
             prototype.Race = raceGenerator.GeneratePrototype(prototype.Alignment, prototype.CharacterClass, baseRaceRandomizer, metaraceRandomizer);
 
             if (!validRaces.Contains(prototype.Race))
+            {
+                //TODO: Filter out metaraces, only allow "None"
+                //If there are no races with No Metarace, then just let it be
+                //Otherwise, metaraces appear way too often, for how rare they are supposed to be
+                if (validRaces.Any(r => r.Metarace == RaceConstants.Metaraces.None))
+                    validRaces = validRaces.Where(r => r.Metarace == RaceConstants.Metaraces.None);
+
                 prototype.Race = collectionsSelector.SelectRandomFrom(validRaces);
+            }
 
             return prototype;
         }
