@@ -1,6 +1,6 @@
-﻿using DnDGen.CharacterGen.Selectors.Collections;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
@@ -34,9 +34,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             var baseRaceLanguages = new[] { "lang 1", "lang 2", "lang 5" };
             var metaraceLanguages = Enumerable.Empty<string>();
             var classLanguages = Enumerable.Empty<string>();
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectAutomaticLanguagesFor(race, className);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -51,9 +51,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             var baseRaceLanguages = Enumerable.Empty<string>();
             var metaraceLanguages = new[] { "lang 3", "lang 4" };
             var classLanguages = Enumerable.Empty<string>();
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectAutomaticLanguagesFor(race, className);
             Assert.That(languages, Contains.Item("lang 3"));
@@ -67,9 +67,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             var baseRaceLanguages = Enumerable.Empty<string>();
             var metaraceLanguages = Enumerable.Empty<string>();
             var classLanguages = new[] { "lang 6", "lang 7" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectAutomaticLanguagesFor(race, className);
             Assert.That(languages, Contains.Item("lang 6"));
@@ -83,9 +83,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             var baseRaceLanguages = new[] { "lang 1", "lang 2", "lang 5" };
             var metaraceLanguages = new[] { "lang 3", "lang 4" };
             var classLanguages = new[] { "lang 6", "lang 7" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectAutomaticLanguagesFor(race, className);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -104,9 +104,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             var baseRaceLanguages = new[] { "lang 1", "lang 2", "lang 4" };
             var metaraceLanguages = new[] { "lang 1", "lang 2", "lang 3" };
             var classLanguages = new[] { "lang 1", "lang 3", "lang 4" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, race.Metarace)).Returns(metaraceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AutomaticLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectAutomaticLanguagesFor(race, className);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -121,8 +121,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
         {
             var baseRaceLanguages = new[] { "lang 1", "lang 2", "lang 5" };
             var classLanguages = Enumerable.Empty<string>();
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectBonusLanguagesFor(race.BaseRace, className);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -136,8 +136,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
         {
             var baseRaceLanguages = Enumerable.Empty<string>();
             var classLanguages = new[] { "lang 3", "lang 4" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectBonusLanguagesFor(race.BaseRace, className);
             Assert.That(languages, Contains.Item("lang 3"));
@@ -150,8 +150,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
         {
             var baseRaceLanguages = new[] { "lang 1", "lang 2", "lang 5" };
             var classLanguages = new[] { "lang 3", "lang 4" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectBonusLanguagesFor(race.BaseRace, className);
             Assert.That(languages, Contains.Item("lang 1"));
@@ -167,8 +167,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
         {
             var baseRaceLanguages = new[] { "lang 1", "lang 2" };
             var classLanguages = new[] { "lang 1", "lang 3" };
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
-            mockInnerSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, race.BaseRace)).Returns(baseRaceLanguages);
+            mockInnerSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BonusLanguages, className)).Returns(classLanguages);
 
             var languages = selector.SelectBonusLanguagesFor(race.BaseRace, className);
             Assert.That(languages, Contains.Item("lang 1"));

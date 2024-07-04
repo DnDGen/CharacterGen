@@ -21,7 +21,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
         public IEnumerable<RacialFeatSelection> SelectRacial(string race)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, race);
-            var featData = collectionsSelector.SelectAllFrom(tableName);
+            var featData = collectionsSelector.SelectAllFrom(Config.Name, tableName);
             var racialFeatSelections = new List<RacialFeatSelection>();
 
             foreach (var dataKVP in featData)
@@ -56,7 +56,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
 
         public IEnumerable<AdditionalFeatSelection> SelectAdditional()
         {
-            var featData = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.AdditionalFeatData);
+            var featData = collectionsSelector.SelectAllFrom(Config.Name, TableNameConstants.Set.Collection.AdditionalFeatData);
             var additionalFeatSelections = new List<AdditionalFeatSelection>();
 
             foreach (var dataKVP in featData)
@@ -81,27 +81,27 @@ namespace DnDGen.CharacterGen.Selectors.Collections
             additionalFeatSelection.Power = Convert.ToInt32(data[DataIndexConstants.AdditionalFeatData.PowerIndex]);
             additionalFeatSelection.RequiredFeats = GetRequiredFeats(additionalFeatSelection.Feat);
 
-            var featsWithClassRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
+            var featsWithClassRequirements = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasClassRequirements);
             if (featsWithClassRequirements.Contains(dataKVP.Key))
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATClassRequirements, dataKVP.Key);
                 additionalFeatSelection.RequiredCharacterClasses = adjustmentsSelector.SelectAllFrom(tableName);
             }
 
-            var featsWithSkillRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements);
+            var featsWithSkillRequirements = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasSkillRequirements);
             if (featsWithSkillRequirements.Contains(dataKVP.Key))
             {
                 additionalFeatSelection.RequiredSkills = GetRequiredSkills(additionalFeatSelection.Feat);
             }
 
-            var featsWithStatRequirements = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements);
+            var featsWithStatRequirements = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.HasAbilityRequirements);
             if (featsWithStatRequirements.Contains(dataKVP.Key))
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.FEATAbilityRequirements, dataKVP.Key);
                 additionalFeatSelection.RequiredAbilities = adjustmentsSelector.SelectAllFrom(tableName);
             }
 
-            var featsTakenMultipleTimes = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
+            var featsTakenMultipleTimes = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes);
             additionalFeatSelection.CanBeTakenMultipleTimes = featsTakenMultipleTimes.Contains(additionalFeatSelection.Feat);
 
             return additionalFeatSelection;
@@ -110,7 +110,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
         public IEnumerable<CharacterClassFeatSelection> SelectClass(string characterClassName)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, characterClassName);
-            var featData = collectionsSelector.SelectAllFrom(tableName);
+            var featData = collectionsSelector.SelectAllFrom(Config.Name, tableName);
             var classFeatSelections = new List<CharacterClassFeatSelection>();
 
             foreach (var dataKVP in featData)
@@ -138,7 +138,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
 
         private IEnumerable<RequiredFeatSelection> GetRequiredFeats(string feat)
         {
-            var allRequiredFeats = collectionsSelector.SelectAllFrom(TableNameConstants.Set.Collection.RequiredFeats);
+            var allRequiredFeats = collectionsSelector.SelectAllFrom(Config.Name, TableNameConstants.Set.Collection.RequiredFeats);
             var requiredFeats = new List<RequiredFeatSelection>();
 
             if (allRequiredFeats.ContainsKey(feat) == false)

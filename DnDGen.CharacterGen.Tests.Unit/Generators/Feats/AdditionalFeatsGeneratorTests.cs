@@ -1,13 +1,13 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Feats;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
-using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
@@ -58,10 +58,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             monsters.Add("monster");
 
             mockFeatsSelector.Setup(s => s.SelectAdditional()).Returns(additionalFeatSelections);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats)).Returns(fighterBonusFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats)).Returns(wizardBonusFeats);
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<AdditionalFeatSelection>>())).Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(monsters);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.FighterBonusFeats))
+                .Returns(fighterBonusFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.WizardBonusFeats)).Returns(wizardBonusFeats);
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<AdditionalFeatSelection>>()))
+                .Returns((IEnumerable<AdditionalFeatSelection> fs) => fs.First());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(monsters);
         }
 
         [TestCase(1, 1)]
@@ -725,7 +729,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             characterClass.Level = 3;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
@@ -752,7 +756,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
             characterClass.Level = 3;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
@@ -776,7 +780,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))
@@ -794,7 +798,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             additionalFeatSelections[0].Power = 1;
             additionalFeatSelections[0].FocusType = GroupConstants.Skills;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TakenMultipleTimes))
                 .Returns(new[] { FeatConstants.SkillMastery });
 
             mockFeatFocusGenerator.Setup(g => g.GenerateFrom(FeatConstants.SkillMastery, GroupConstants.Skills, skills, additionalFeatSelections[0].RequiredFeats, preselectedFeats, characterClass))

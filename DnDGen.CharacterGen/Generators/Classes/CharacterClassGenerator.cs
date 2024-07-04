@@ -26,7 +26,7 @@ namespace DnDGen.CharacterGen.Generators.Classes
 
         public CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer)
         {
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var npcs = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             var prototype = new CharacterClassPrototype();
             prototype.Name = classNameRandomizer.Randomize(alignmentPrototype);
@@ -45,7 +45,7 @@ namespace DnDGen.CharacterGen.Generators.Classes
             characterClass.IsNPC = classPrototype.IsNPC;
 
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, characterClass.Name);
-            var isSpecialist = percentileSelector.SelectFrom<bool>(tableName);
+            var isSpecialist = percentileSelector.SelectFrom<bool>(Config.Name, tableName);
 
             if (!isSpecialist)
                 return characterClass;
@@ -58,9 +58,9 @@ namespace DnDGen.CharacterGen.Generators.Classes
 
         private IEnumerable<string> GenerateSpecialistFields(CharacterClass characterClass, Alignment alignment)
         {
-            var allSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
+            var allSpecialistFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
             var specialistFieldQuantity = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, characterClass.Name);
-            var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
+            var nonAlignmentFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
             var possibleSpecialistFields = allSpecialistFields.Except(nonAlignmentFields);
 
             return PopulateFields(specialistFieldQuantity, possibleSpecialistFields);
@@ -87,7 +87,7 @@ namespace DnDGen.CharacterGen.Generators.Classes
             if (!characterClass.SpecialistFields.Any())
                 return Enumerable.Empty<string>();
 
-            var allProhibitedFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, characterClass.Name);
+            var allProhibitedFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, characterClass.Name);
             var possibleProhibitedFields = allProhibitedFields.Except(characterClass.SpecialistFields);
             var prohibitedFieldQuantities = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities);
 
@@ -103,10 +103,10 @@ namespace DnDGen.CharacterGen.Generators.Classes
             if (!characterClass.SpecialistFields.Any())
                 return characterClass.SpecialistFields;
 
-            var allClassSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
-            var allBaseRaceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace);
-            var allMetaraceSpecialistFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace);
-            var nonAlignmentFields = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
+            var allClassSpecialistFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, characterClass.Name);
+            var allBaseRaceSpecialistFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace);
+            var allMetaraceSpecialistFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace);
+            var nonAlignmentFields = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString());
 
             var applicableFields = allClassSpecialistFields
                 .Intersect(allBaseRaceSpecialistFields)
@@ -121,7 +121,7 @@ namespace DnDGen.CharacterGen.Generators.Classes
             IClassNameRandomizer classNameRandomizer,
             ILevelRandomizer levelRandomizer)
         {
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var npcs = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
             var classNames = classNameRandomizer.GetAllPossibleResults(alignmentPrototype);
             var levels = levelRandomizer.GetAllPossibleResults();
             var prototypes = new List<CharacterClassPrototype>();

@@ -1,17 +1,17 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Generators.Magics
 {
@@ -68,11 +68,11 @@ namespace DnDGen.CharacterGen.Generators.Magics
             if (equipment.Armor == null && equipment.OffHand == null)
                 return magic;
 
-            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
+            var arcaneSpellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
             if (arcaneSpellcasters.Contains(characterClass.Name) == false)
                 return magic;
 
-            var lightArmor = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, FeatConstants.LightArmorProficiency);
+            var lightArmor = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, FeatConstants.LightArmorProficiency);
 
             if (equipment.Armor != null && (characterClass.Name != CharacterClassConstants.Bard || lightArmor.Contains(equipment.Armor.Name) == false))
                 magic.ArcaneSpellFailure += GetArcaneSpellFailure(equipment.Armor);
@@ -88,7 +88,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             magic.SpellsPerDay = spellsGenerator.GeneratePerDay(characterClass, stats);
             magic.KnownSpells = spellsGenerator.GenerateKnown(characterClass, stats);
 
-            var classesThatPrepareSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PreparesSpells);
+            var classesThatPrepareSpells = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.PreparesSpells);
             if (classesThatPrepareSpells.Contains(characterClass.Name))
                 magic.PreparedSpells = spellsGenerator.GeneratePrepared(characterClass, magic.KnownSpells, magic.SpellsPerDay);
 

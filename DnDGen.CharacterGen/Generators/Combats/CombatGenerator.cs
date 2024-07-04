@@ -1,16 +1,16 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Generators.Combats
 {
@@ -108,7 +108,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetBonusFromFeats(IEnumerable<Feat> feats)
         {
-            var attackBonusFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
+            var attackBonusFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
             var attackBonusFeats = feats.Where(f => attackBonusFeatNames.Contains(f.Name) && f.Foci.Any() == false);
 
             if (attackBonusFeats.Any() == false)
@@ -119,7 +119,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private bool IsAttackBonusCircumstantial(IEnumerable<Feat> feats)
         {
-            var attackBonusFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
+            var attackBonusFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus);
             var attackBonusFeats = feats.Where(f => attackBonusFeatNames.Contains(f.Name));
 
             return attackBonusFeats.Any(f => f.Foci.Any());
@@ -143,7 +143,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetInitiativeBonus(int dexterityBonus, IEnumerable<Feat> feats)
         {
-            var initiativeFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative);
+            var initiativeFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative);
             var initiativeFeats = feats.Where(f => initiativeFeatNames.Contains(f.Name));
             var initiativeFeatBonus = initiativeFeats.Sum(f => f.Power);
 

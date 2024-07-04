@@ -44,7 +44,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private bool IsNaturalArmorBonusCircumstantial(IEnumerable<Feat> feats)
         {
-            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor);
+            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor);
             var featsWithNaturalArmorBonuses = feats.Where(f => thingsThatGrantNaturalArmorBonuses.Contains(f.Name));
 
             return featsWithNaturalArmorBonuses.Any(f => f.Foci.Any());
@@ -52,7 +52,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private bool IsDodgeBonusCircumstantial(IEnumerable<Feat> feats)
         {
-            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
+            var deflectionBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
             var featsWithDeflectionBonuses = feats.Where(f => deflectionBonuses.Contains(f.Name));
 
             return featsWithDeflectionBonuses.Any(f => f.Foci.Any());
@@ -60,7 +60,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetDodgeBonus(IEnumerable<Feat> feats)
         {
-            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
+            var deflectionBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus);
             var featsWithDeflectionBonuses = feats.Where(f => deflectionBonuses.Contains(f.Name) && f.Foci.Any() == false);
 
             if (featsWithDeflectionBonuses.Any() == false)
@@ -89,7 +89,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
             if (equipment.Armor != null)
                 armorBonus += equipment.Armor.TotalArmorBonus;
 
-            var thingsGrantingArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
+            var thingsGrantingArmorBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus);
             var itemsGrantingArmorBonus = equipment.Treasure.Items.Where(i => thingsGrantingArmorBonuses.Contains(i.Name));
 
             if (itemsGrantingArmorBonus.Any())
@@ -116,7 +116,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
             if (items.Any() == false)
                 return 0;
 
-            var deflectionBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection);
+            var deflectionBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection);
             var itemsWithDeflectionBonuses = items.Where(i => deflectionBonuses.Contains(i.Name));
 
             if (itemsWithDeflectionBonuses.Any() == false)
@@ -127,7 +127,10 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetNaturalArmorBonus(IEnumerable<Item> items, IEnumerable<Feat> feats, Race race)
         {
-            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor);
+            var thingsThatGrantNaturalArmorBonuses = collectionsSelector.SelectFrom(
+                Config.Name,
+                TableNameConstants.Set.Collection.ArmorClassModifiers,
+                GroupConstants.NaturalArmor);
             var itemsWithNaturalArmorBonuses = items.Where(i => thingsThatGrantNaturalArmorBonuses.Contains(i.Name));
             var itemNaturalArmorBonuses = itemsWithNaturalArmorBonuses.Select(i => i.Magic.Bonus);
 

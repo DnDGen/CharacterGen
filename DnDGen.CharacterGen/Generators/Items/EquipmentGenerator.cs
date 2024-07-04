@@ -1,14 +1,14 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Generators;
+using DnDGen.TreasureGen.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Generators;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Generators.Items
 {
@@ -35,7 +35,7 @@ namespace DnDGen.CharacterGen.Generators.Items
             equipment.Treasure = treasureGenerator.GenerateAtLevel(effectiveLevel);
             equipment.Armor = armorGenerator.GenerateArmorFrom(feats, characterClass, race);
 
-            var twoWeaponFeats = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded);
+            var twoWeaponFeats = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded);
             var hasTwoWeaponFeats = feats.Any(f => twoWeaponFeats.Contains(f.Name));
 
             if (hasTwoWeaponFeats)
@@ -95,23 +95,6 @@ namespace DnDGen.CharacterGen.Generators.Items
                 equipment.OffHand = armorGenerator.GenerateShieldFrom(feats, characterClass, race);
 
             return equipment;
-        }
-
-        private string GetRequiredAmmunition(Weapon weapon)
-        {
-            var arrowWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.Arrow);
-            if (arrowWeapons.Any(w => weapon.NameMatches(w)))
-                return WeaponConstants.Arrow;
-
-            var crossbowWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.CrossbowBolt);
-            if (crossbowWeapons.Any(w => weapon.NameMatches(w)))
-                return WeaponConstants.CrossbowBolt;
-
-            var slingWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, WeaponConstants.SlingBullet);
-            if (slingWeapons.Any(w => weapon.NameMatches(w)))
-                return WeaponConstants.SlingBullet;
-
-            return string.Empty;
         }
     }
 }

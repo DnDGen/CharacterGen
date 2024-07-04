@@ -124,7 +124,7 @@ namespace DnDGen.CharacterGen.Generators.Characters
             character.Languages = languageGenerator.GenerateWith(character.Race, character.Class, character.Abilities, character.Skills);
 
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Feats.All, character.Abilities, character.Equipment);
-            character.InterestingTrait = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Traits);
+            character.InterestingTrait = percentileSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Traits);
             character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Abilities, character.Feats.All, character.Equipment);
 
             return character;
@@ -132,9 +132,9 @@ namespace DnDGen.CharacterGen.Generators.Characters
 
         private IEnumerable<Skill> UpdateSkillsFromFeats(IEnumerable<Skill> skills, IEnumerable<Feat> feats)
         {
-            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
+            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
             var featGrantingSkillBonuses = feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
-            var allSkillFocusNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
+            var allSkillFocusNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
 
             foreach (var feat in featGrantingSkillBonuses)
             {
@@ -160,7 +160,7 @@ namespace DnDGen.CharacterGen.Generators.Characters
                 }
                 else
                 {
-                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, feat.Name);
+                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, feat.Name);
 
                     foreach (var skillName in skillsToReceiveBonus)
                     {

@@ -1,10 +1,10 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Classes;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -52,10 +52,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             classPrototype.Level = 9266;
             classPrototype.Name = ClassName;
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, ClassName)).Returns(() => specialistFieldQuantities[ClassName]);
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SpecialistFieldQuantities, ClassName))
+                .Returns(() => specialistFieldQuantities[ClassName]);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.ProhibitedFieldQuantities)).Returns(prohibitedFieldQuantities);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, ClassName)).Returns(specialistFields);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, ClassName)).Returns(prohibitedFields);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, ClassName)).Returns(specialistFields);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, ClassName)).Returns(prohibitedFields);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.First());
         }
 
@@ -63,7 +65,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GeneratePrototype()
         {
             var npcs = new[] { "class name", "other class name" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
 
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns("random class name");
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(90210);
@@ -78,7 +80,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GenerateNPCPrototype()
         {
             var npcs = new[] { "class name", "random class name" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcs);
 
             mockClassNameRandomizer.Setup(r => r.Randomize(alignment)).Returns("random class name");
             mockLevelRandomizer.Setup(r => r.Randomize()).Returns(90210);
@@ -117,7 +119,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetSpecialistFieldsIfShouldNotHaveAny()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(false);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -129,7 +131,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetSpecialistFieldsIfNone()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
 
             var characterClass = characterClassGenerator.GenerateWith(alignment, classPrototype);
@@ -140,7 +142,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GetSpecialistField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
@@ -159,7 +161,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GetSpecialistFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 2;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
@@ -182,7 +184,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void CannotSpecializeInAlignmentFieldThatDoesNotMatchAlignment()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("alignment field");
             specialistFields.Add("non-alignment field");
@@ -190,7 +192,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
                 .Returns(new[] { "non-alignment field" });
 
             prohibitedFieldQuantities["alignment field"] = 0;
@@ -217,7 +219,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void DoNotGetProhibitedFieldsIfNone()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -231,7 +233,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
 
@@ -248,7 +250,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void ProhibitedFieldCannotAlreadyBeASpecialistField()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 1");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 1")))).Returns("field 1");
@@ -267,7 +269,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 1;
             specialistFields.Add("field 2");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(fs => fs.Contains("field 2")))).Returns("field 2");
@@ -290,7 +292,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
         public void GetProhibitedFieldsFromMultipleSpecialistFields()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, ClassName);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(tableName)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, tableName)).Returns(true);
             specialistFieldQuantities[ClassName] = 2;
             specialistFields.Add("field 1");
             specialistFields.Add("field 2");
@@ -325,7 +327,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             specialistFields.Add("specialist field");
             specialistFields.Add("other specialist field");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
                 .Returns(new[] { "metarace specialist field", "other specialist field" });
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
@@ -346,13 +348,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             specialistFields.Add("alignment specialist field");
             specialistFields.Add("other specialist field");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
                 .Returns(new[] { "metarace specialist field", "specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
                 .Returns(new[] { "base race specialist field", "specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
                 .Returns(new[] { "alignment specialist field" });
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
@@ -373,13 +375,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             specialistFields.Add("other specialist field");
             specialistFields.Add("alignment specialist field");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
                 .Returns(new[] { "metarace specialist field", "specialist field", "other specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
                 .Returns(new[] { "base race specialist field", "specialist field", "other specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
                 .Returns(new[] { "other alignment specialist field" });
 
             var count = 0;
@@ -405,13 +407,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             specialistFields.Add("other specialist field");
             specialistFields.Add("alignment specialist field");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
                 .Returns(new[] { "metarace specialist field", "specialist field", "other specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
                 .Returns(new[] { "base race specialist field", "specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
                 .Returns(new[] { "alignment specialist field" });
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
@@ -432,13 +434,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Classes
             specialistFields.Add("other specialist field");
             specialistFields.Add("alignment specialist field");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.Metarace))
                 .Returns(new[] { "metarace specialist field", "other specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpecialistFields, race.BaseRace))
                 .Returns(new[] { "base race specialist field", "specialist field" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ProhibitedFields, alignment.ToString()))
                 .Returns(new[] { "alignment specialist field" });
 
             var regeneratedSpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);

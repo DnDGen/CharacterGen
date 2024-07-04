@@ -41,7 +41,7 @@ namespace DnDGen.CharacterGen.Generators.Abilities
                 abilities = SetMinimumAbilities(abilities);
             }
 
-            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
 
             if (undead.Contains(race.Metarace))
                 abilities.Remove(AbilityConstants.Constitution);
@@ -60,7 +60,7 @@ namespace DnDGen.CharacterGen.Generators.Abilities
 
         private Dictionary<string, Ability> PrioritizeAbilities(Dictionary<string, Ability> abilities, CharacterClass characterClass)
         {
-            var abilityPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name);
+            var abilityPriorities = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name);
             if (abilityPriorities.Any() == false)
                 return abilities;
 
@@ -133,8 +133,8 @@ namespace DnDGen.CharacterGen.Generators.Abilities
 
         private string GetAbilityToIncrease(Dictionary<string, Ability> abilities, Race race, CharacterClass characterClass)
         {
-            var abilityPriorities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name);
-            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            var abilityPriorities = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name);
+            var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
 
             if (undead.Contains(race.Metarace))
                 abilityPriorities = abilityPriorities.Except(new[] { AbilityConstants.Constitution });
@@ -153,7 +153,7 @@ namespace DnDGen.CharacterGen.Generators.Abilities
             if (!secondPriorityAbilities.Any())
                 return abilityPriorities.First();
 
-            var increaseFirst = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility);
+            var increaseFirst = percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility);
 
             if (increaseFirst)
                 return abilityPriorities.First();

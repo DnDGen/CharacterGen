@@ -25,10 +25,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             var mockCollectionsSelector = new Mock<ICollectionSelector>();
             alignmentRandomizer = new TestAlignmentRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(new[] { "other lawfulness", "lawfulness" });
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });
-            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns("lawfulness");
-            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns("goodness");
+            mockPercentileSelector
+                .Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness))
+                .Returns(new[] { "other lawfulness", "lawfulness" });
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(new[] { "other goodness", "goodness" });
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns("lawfulness");
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns("goodness");
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<Alignment>>())).Returns((IEnumerable<Alignment> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -51,14 +53,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         [Test]
         public void RandomizeThrowsErrorIfNoLawfulnessPossibleResults()
         {
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(Enumerable.Empty<String>());
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness)).Returns(Enumerable.Empty<String>());
             Assert.That(() => alignmentRandomizer.Randomize(), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
         [Test]
         public void RandomizeThrowsErrorIfNoGoodnessPossibleResults()
         {
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(Enumerable.Empty<String>());
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness)).Returns(Enumerable.Empty<String>());
             Assert.That(() => alignmentRandomizer.Randomize(), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
@@ -67,7 +69,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             alignmentRandomizer.NotAllowedGoodness = "goodness";
 
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
+            mockPercentileSelector.SetupSequence(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness))
                 .Returns("goodness").Returns("other goodness");
 
             var alignment = alignmentRandomizer.Randomize();
@@ -79,7 +81,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
         {
             alignmentRandomizer.NotAllowedLawfulness = "lawfulness";
 
-            mockPercentileSelector.SetupSequence(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness))
+            mockPercentileSelector.SetupSequence(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness))
                 .Returns("lawfulness").Returns("other lawfulness");
 
             var alignment = alignmentRandomizer.Randomize();
@@ -92,10 +94,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             alignmentRandomizer.NotAllowedGoodness = "goodness";
             alignmentRandomizer.NotAllowedLawfulness = "lawfulness";
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness))
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness))
                 .Returns("lawfulness");
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness))
                 .Returns("goodness");
 
             var alignment = alignmentRandomizer.Randomize();

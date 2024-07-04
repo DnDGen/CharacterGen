@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
@@ -35,13 +35,13 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
 
         private bool BaseRaceCanBeAlignment(string baseRace, Alignment alignment)
         {
-            var alignmentRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
+            var alignmentRaces = collectionSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
             return alignmentRaces.Contains(baseRace);
         }
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
-            var aquaticBaseRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic);
+            var aquaticBaseRaces = collectionSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic);
             return aquaticBaseRaces.Where(r => RaceIsAllowed(r, alignment));
         }
     }

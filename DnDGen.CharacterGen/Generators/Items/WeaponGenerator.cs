@@ -29,8 +29,8 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
-            var ammo = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
+            var allWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
+            var ammo = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
             var filteredWeapons = allWeapons.Except(ammo);
 
             var weapon = GenerateFiltered(feats, characterClass, race, filteredWeapons);
@@ -40,7 +40,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         private IEnumerable<Feat> GetNonProficiencyFeatsWithWeaponFoci(IEnumerable<Feat> feats)
         {
             var proficiencyFeats = GetProficiencyFeats(feats);
-            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
+            var allWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
 
             var nonProficiencyFeats = feats.Except(proficiencyFeats).Where(f => f.Name != FeatConstants.WeaponFamiliarity);
             return nonProficiencyFeats.Where(f => allWeapons.Intersect(f.Foci).Any());
@@ -49,7 +49,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         private IEnumerable<Feat> GetProficiencyFeatWithSpecificWeaponFocus(IEnumerable<Feat> feats)
         {
             var proficiencyFeats = GetProficiencyFeats(feats);
-            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
+            var allWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
 
             return proficiencyFeats.Where(f => allWeapons.Intersect(f.Foci).Any());
         }
@@ -62,7 +62,10 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         private IEnumerable<Feat> GetProficiencyFeats(IEnumerable<Feat> feats)
         {
-            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency);
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(
+                Config.Name,
+                TableNameConstants.Set.Collection.FeatGroups,
+                ItemTypeConstants.Weapon + GroupConstants.Proficiency);
             return feats.Where(f => proficiencyFeatNames.Contains(f.Name));
         }
 
@@ -76,7 +79,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var meleeWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
+            var meleeWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
             var weapon = GetWeapon(feats, characterClass, race, meleeWeapons);
             return weapon;
         }
@@ -160,7 +163,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
             foreach (var feat in proficientWithAllInFeat)
             {
-                var featWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, feat.Name);
+                var featWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, feat.Name);
                 weapons.AddRange(featWeapons);
             }
 
@@ -179,7 +182,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         private IEnumerable<string> GetAllowedWeapons(IEnumerable<string> source)
         {
-            var allWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
+            var allWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, ItemTypeConstants.Weapon);
             var allowedWeapons = source.Intersect(allWeapons);
 
             return allowedWeapons;
@@ -189,7 +192,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         {
             var effectiveLevel = (int)Math.Max(1, characterClass.EffectiveLevel);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            var power = percentileSelector.SelectFrom(tableName);
+            var power = percentileSelector.SelectFrom(Config.Name, tableName);
 
             var weapon = GenerateWeapon(power, allowedWeapons, race);
 
@@ -216,8 +219,8 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateOneHandedMeleeFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var melee = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
-            var twoHanded = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.TwoHanded);
+            var melee = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Melee);
+            var twoHanded = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.TwoHanded);
             var filteredWeapons = melee.Except(twoHanded);
 
             var weapon = GetWeapon(feats, characterClass, race, filteredWeapons);
@@ -226,8 +229,8 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         public Weapon GenerateRangedFrom(IEnumerable<Feat> feats, CharacterClass characterClass, Race race)
         {
-            var rangedWeapons = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ranged);
-            var ammo = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
+            var rangedWeapons = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ranged);
+            var ammo = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Ammunition);
             var filteredWeapons = rangedWeapons.Except(ammo);
 
             var weapon = GetWeapon(feats, characterClass, race, filteredWeapons);

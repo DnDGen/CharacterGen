@@ -1,17 +1,17 @@
 ﻿using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Generators.Combats;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Generators.Combats;
 using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Items;
+using DnDGen.TreasureGen.Items.Magical;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
-using DnDGen.TreasureGen.Items.Magical;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
 {
@@ -40,9 +40,15 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             race = new Race();
 
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Adjustments.SizeModifiers)).Returns(sizeModifiers);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size)).Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor)).Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection)).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Size))
+                .Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+                .Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
+                .Returns(Enumerable.Empty<string>());
 
             race.Size = "size";
             sizeModifiers["size"] = 0;
@@ -88,7 +94,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void ArmorFromItemApplied()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -110,7 +116,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         {
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 2 };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -133,7 +139,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
             equipment.Armor.Magic.Bonus = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -155,7 +161,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         {
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -178,7 +184,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -200,7 +206,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void AddArmorBonusFromFeats()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
 
             feats.Add(new Feat());
@@ -221,7 +227,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
 
             feats.Add(new Feat());
@@ -243,7 +249,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
             equipment.OffHand = new Armor { Name = "shield", ArmorBonus = 1 };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item", "feat", "wrong feat" });
 
             var bracers = new Item();
@@ -317,7 +323,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void DeflectionBonusApplied()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
@@ -337,7 +343,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestDeflectionBonusApplies()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
@@ -357,7 +363,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void DeflectionBonusesDoNotStack()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
@@ -384,7 +390,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Name = "feat 2";
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(12, 12);
@@ -402,7 +408,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Foci = new[] { "focus" };
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(11, 11, circumstantial: true);
@@ -420,7 +426,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Name = "feat 2";
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(11, 11, circumstantial: true);
@@ -437,7 +443,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Name = "feat 2";
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(12, touch: 12);
@@ -455,7 +461,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Foci = new[] { "focus" };
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 1", "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(11, touch: 11, circumstantial: true);
@@ -473,10 +479,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Name = "feat 2";
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "other feat" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 2", "other feat" });
 
             var armorClass = GenerateAndAssertArmorClass(11, touch: 11, circumstantial: true);
@@ -486,7 +492,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void NaturalArmorBonusFromItemsApplied()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
@@ -506,7 +512,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
         [Test]
         public void OnlyHighestNaturalArmorBonusFromItemsApplies()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "ring", "other ring" });
 
             var ring = new Item();
@@ -533,7 +539,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             feats[1].Name = "feat 2";
             feats[1].Power = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1", "feat 2", "ring", "other ring" });
 
             var ring = new Item();
@@ -585,11 +591,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             otherFeat.Power = 1;
             feats.Add(otherFeat);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.Deflection))
                 .Returns(new[] { "ring" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.NaturalArmor))
                 .Returns(new[] { "feat 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.DodgeBonus))
                 .Returns(new[] { "feat 2" });
 
             equipment.Armor = new Armor { Name = "armor", ArmorBonus = 1 };
@@ -643,7 +649,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 2;
             equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -663,7 +669,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 1;
             equipment.Armor.Magic.Curse = CurseConstants.OppositeEffect;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -716,7 +722,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 2;
             equipment.Armor.Magic.Curse = CurseConstants.Delusion;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();
@@ -736,7 +742,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             equipment.Armor.Magic.Bonus = 1;
             equipment.Armor.Magic.Curse = CurseConstants.Delusion;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ArmorClassModifiers, GroupConstants.ArmorBonus))
                 .Returns(new[] { "bracers", "other item" });
 
             var bracers = new Item();

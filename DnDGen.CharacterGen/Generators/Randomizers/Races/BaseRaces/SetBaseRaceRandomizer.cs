@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
-            var alignmentBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
+            var alignmentBaseRaces = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
 
             return alignmentBaseRaces.Intersect(new[] { SetBaseRace });
         }

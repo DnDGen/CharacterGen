@@ -18,8 +18,8 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override bool CharacterClassIsAllowed(string className, Alignment alignment)
         {
-            var players = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Players);
-            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
+            var players = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Players);
+            var alignmentClasses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
             var allowedClasses = players.Intersect(alignmentClasses);
 
             return allowedClasses.Contains(className);

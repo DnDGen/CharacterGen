@@ -1,10 +1,10 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System;
@@ -20,7 +20,11 @@ namespace DnDGen.CharacterGen.Generators.Skills
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly IPercentileSelector percentileSelector;
 
-        public SkillsGenerator(ISkillSelector skillSelector, ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IPercentileSelector percentileSelector)
+        public SkillsGenerator(
+            ISkillSelector skillSelector,
+            ICollectionSelector collectionsSelector,
+            IAdjustmentsSelector adjustmentsSelector,
+            IPercentileSelector percentileSelector)
         {
             this.skillSelector = skillSelector;
             this.collectionsSelector = collectionsSelector;
@@ -30,12 +34,13 @@ namespace DnDGen.CharacterGen.Generators.Skills
 
         public IEnumerable<Skill> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities)
         {
-            var classSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, characterClass.Name).ToList(); //INFO: Calling ToList so we can add specialist skills later
-            var crossClassSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained);
+            //INFO: Calling ToList so we can add specialist skills later
+            var classSkillNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, characterClass.Name).ToList();
+            var crossClassSkillNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained);
 
             foreach (var specialistField in characterClass.SpecialistFields)
             {
-                var specialistSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, specialistField);
+                var specialistSkills = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, specialistField);
                 classSkillNames.AddRange(specialistSkills);
             }
 
@@ -51,7 +56,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
 
             skills = AddRanks(characterClass, race, abilities, classSkillSelections, crossClassSkillSelections, skills);
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            var monsters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace))
                 skills = AddMonsterSkillRanks(race, abilities, skills);
 
@@ -68,7 +73,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
                 return classSkillSelections;
 
             var profession = professionSkill.Focus;
-            var professionSkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, profession);
+            var professionSkillNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, profession);
             var professionSkillSelections = GetSkillSelections(professionSkillNames);
 
             return classSkillSelections.Union(professionSkillSelections);
@@ -76,7 +81,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
 
         private IEnumerable<SkillSelection> GetRandomClassSkillSelections()
         {
-            var allSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All);
+            var allSkills = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All);
             var randomSkillSelections = new List<SkillSelection>();
 
             while (randomSkillSelections.Count < 10)
@@ -100,7 +105,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
                 return skills;
 
             var skillsList = skills.ToList();
-            var monsterSkills = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
+            var monsterSkills = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, race.BaseRace);
             var monsterSkillSelections = GetSkillSelections(monsterSkills);
 
             foreach (var monsterSkillSelection in monsterSkillSelections)
@@ -137,8 +142,8 @@ namespace DnDGen.CharacterGen.Generators.Skills
 
         private IEnumerable<SkillSelection> GetSkillSelections(IEnumerable<string> skillNames)
         {
-            var selections = skillNames.Select(s => skillSelector.SelectFor(s));
-            var explodedSelections = selections.SelectMany(s => ExplodeSelectedSkill(s));
+            var selections = skillNames.Select(skillSelector.SelectFor);
+            var explodedSelections = selections.SelectMany(ExplodeSelectedSkill);
 
             //INFO: Calling immediate execution, since exploding includes potentially random results, and after this method is complete, we want consistent results.
             return explodedSelections.ToList();
@@ -149,7 +154,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
             if (skillSelection.RandomFociQuantity == 0)
                 return new[] { skillSelection };
 
-            var skillFoci = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName).ToList();
+            var skillFoci = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName).ToList();
 
             if (skillSelection.RandomFociQuantity >= skillFoci.Count)
             {
@@ -174,7 +179,11 @@ namespace DnDGen.CharacterGen.Generators.Skills
             return selections;
         }
 
-        private IEnumerable<Skill> InitializeSkills(Dictionary<string, Ability> stats, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections, CharacterClass characterClass)
+        private IEnumerable<Skill> InitializeSkills(
+            Dictionary<string, Ability> stats,
+            IEnumerable<SkillSelection> classSkillSelections,
+            IEnumerable<SkillSelection> crossClassSkillSelections,
+            CharacterClass characterClass)
         {
             var skills = new List<Skill>();
             var allSkillSelections = classSkillSelections.Union(crossClassSkillSelections);
@@ -190,7 +199,10 @@ namespace DnDGen.CharacterGen.Generators.Skills
                 {
                     skill = new Skill(skillSelection.SkillName, stats[skillSelection.BaseStatName], characterClass.Level + 3, skillSelection.Focus);
 
-                    var skillsWithArmorCheckPenalties = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty);
+                    var skillsWithArmorCheckPenalties = collectionsSelector.SelectFrom(
+                        Config.Name,
+                        TableNameConstants.Set.Collection.SkillGroups,
+                        GroupConstants.ArmorCheckPenalty);
                     skill.HasArmorCheckPenalty = skillsWithArmorCheckPenalties.Contains(skill.Name);
                     skills.Add(skill);
                 }
@@ -201,7 +213,13 @@ namespace DnDGen.CharacterGen.Generators.Skills
             return skills;
         }
 
-        private IEnumerable<Skill> AddRanks(CharacterClass characterClass, Race race, Dictionary<string, Ability> stats, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections, IEnumerable<Skill> skills)
+        private IEnumerable<Skill> AddRanks(
+            CharacterClass characterClass,
+            Race race,
+            Dictionary<string, Ability> stats,
+            IEnumerable<SkillSelection> classSkillSelections,
+            IEnumerable<SkillSelection> crossClassSkillSelections,
+            IEnumerable<Skill> skills)
         {
             var points = GetTotalSkillPoints(characterClass.Name, characterClass.Level, stats[AbilityConstants.Intelligence], race);
             var allSkillSelections = classSkillSelections.Union(crossClassSkillSelections);
@@ -211,7 +229,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
             {
                 var skillCollection = GetRandomSkillCollection(skills, classSkillSelections, crossClassSkillSelections);
                 var skillSelection = collectionsSelector.SelectRandomFrom(skillCollection);
-                var skill = skills.First(s => skillSelection.IsEqualTo(s));
+                var skill = skills.First(skillSelection.IsEqualTo);
 
                 skill.Ranks++;
                 points--;
@@ -234,7 +252,10 @@ namespace DnDGen.CharacterGen.Generators.Skills
             return Math.Max(perLevel * multiplier, levels);
         }
 
-        private IEnumerable<SkillSelection> GetRandomSkillCollection(IEnumerable<Skill> skills, IEnumerable<SkillSelection> classSkillSelections, IEnumerable<SkillSelection> crossClassSkillSelections)
+        private IEnumerable<SkillSelection> GetRandomSkillCollection(
+            IEnumerable<Skill> skills,
+            IEnumerable<SkillSelection> classSkillSelections,
+            IEnumerable<SkillSelection> crossClassSkillSelections)
         {
             var validClassSkills = FilterOutInvalidSkills(classSkillSelections, skills);
             var validCrossClassSkills = FilterOutInvalidSkills(crossClassSkillSelections, skills);
@@ -245,7 +266,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
             if (!validCrossClassSkills.Any())
                 return validClassSkills;
 
-            var shouldAddPointToCrossClassSkill = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
+            var shouldAddPointToCrossClassSkill = percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill);
             if (shouldAddPointToCrossClassSkill)
                 return validCrossClassSkills;
 
@@ -264,7 +285,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
             foreach (var skill in skillsWarrantingSynergy)
             {
                 var name = skill.Focus.Any() ? $"{skill.Name}/{skill.Focus}" : skill.Name;
-                var synergySkillNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, name);
+                var synergySkillNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, name);
 
                 foreach (var synergySkillName in synergySkillNames)
                 {

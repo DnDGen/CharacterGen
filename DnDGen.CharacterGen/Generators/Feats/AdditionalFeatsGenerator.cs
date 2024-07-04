@@ -1,12 +1,12 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Selectors.Selections;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,11 @@ namespace DnDGen.CharacterGen.Generators.Feats
         private readonly IFeatFocusGenerator featFocusGenerator;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public AdditionalFeatsGenerator(ICollectionSelector collectionsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, IAdjustmentsSelector adjustmentsSelector)
+        public AdditionalFeatsGenerator(
+            ICollectionSelector collectionsSelector,
+            IFeatsSelector featsSelector,
+            IFeatFocusGenerator featFocusGenerator,
+            IAdjustmentsSelector adjustmentsSelector)
         {
             this.collectionsSelector = collectionsSelector;
             this.featsSelector = featsSelector;
@@ -28,16 +32,28 @@ namespace DnDGen.CharacterGen.Generators.Feats
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public IEnumerable<Feat> GenerateWith(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        public IEnumerable<Feat> GenerateWith(
+            CharacterClass characterClass,
+            Race race,
+            Dictionary<string, Ability> abilities,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> preselectedFeats)
         {
             var additionalFeats = GetAdditionalFeats(characterClass, race, abilities, skills, baseAttack, preselectedFeats);
             var allButBonusFeats = preselectedFeats.Union(additionalFeats);
-            var bonusFeats = GetBonusFeats(characterClass, race, abilities, skills, baseAttack, allButBonusFeats);
+            var bonusFeats = GetBonusFeats(characterClass, abilities, skills, baseAttack, allButBonusFeats);
 
             return additionalFeats.Union(bonusFeats);
         }
 
-        private IEnumerable<Feat> GetAdditionalFeats(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        private IEnumerable<Feat> GetAdditionalFeats(
+            CharacterClass characterClass,
+            Race race,
+            Dictionary<string, Ability> abilities,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> preselectedFeats)
         {
             var numberOfAdditionalFeats = GetAdditionalFeatQuantity(characterClass, race);
             var feats = GetFeats(numberOfAdditionalFeats, string.Empty, characterClass, abilities, skills, baseAttack, preselectedFeats);
@@ -55,7 +71,7 @@ namespace DnDGen.CharacterGen.Generators.Feats
             if (characterClass.Name == CharacterClassConstants.Rogue && characterClass.Level >= 10)
                 numberOfAdditionalFeats += (characterClass.Level - 10) / 3 + 1;
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            var monsters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace))
             {
                 var monsterHitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
@@ -65,17 +81,28 @@ namespace DnDGen.CharacterGen.Generators.Feats
             return numberOfAdditionalFeats;
         }
 
-        private IEnumerable<Feat> GetBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats)
+        private IEnumerable<Feat> GetBonusFeats(
+            CharacterClass characterClass,
+            Dictionary<string, Ability> abilities,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> preselectedFeats)
         {
             if (characterClass.Name == CharacterClassConstants.Fighter)
-                return GetFighterFeats(characterClass, race, abilities, skills, baseAttack, preselectedFeats);
+                return GetFighterFeats(characterClass, abilities, skills, baseAttack, preselectedFeats);
             else if (characterClass.Name == CharacterClassConstants.Wizard)
-                return GetWizardBonusFeats(characterClass, race, abilities, skills, baseAttack, preselectedFeats);
+                return GetWizardBonusFeats(characterClass, abilities, skills, baseAttack, preselectedFeats);
 
             return Enumerable.Empty<Feat>();
         }
 
-        private List<Feat> PopulateFeatsFrom(CharacterClass characterClass, Dictionary<string, Ability> abilities, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> preselectedFeats, IEnumerable<AdditionalFeatSelection> sourceFeatSelections, int quantity)
+        private List<Feat> PopulateFeatsFrom(
+            CharacterClass characterClass,
+            Dictionary<string, Ability> abilities,
+            IEnumerable<Skill> skills,
+            IEnumerable<Feat> preselectedFeats,
+            IEnumerable<AdditionalFeatSelection> sourceFeatSelections,
+            int quantity)
         {
             var feats = new List<Feat>();
             var chosenFeats = new List<Feat>();
@@ -94,7 +121,13 @@ namespace DnDGen.CharacterGen.Generators.Feats
             {
                 var featSelection = collectionsSelector.SelectRandomFrom(availableFeatSelections);
 
-                var preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                var preliminaryFocus = featFocusGenerator.GenerateFrom(
+                    featSelection.Feat,
+                    featSelection.FocusType,
+                    skills,
+                    featSelection.RequiredFeats,
+                    chosenFeats,
+                    characterClass);
                 if (preliminaryFocus == FeatConstants.Foci.All)
                 {
                     quantity++;
@@ -147,7 +180,13 @@ namespace DnDGen.CharacterGen.Generators.Feats
 
                 while (featFociQuantity-- > 0 && preliminaryFocus != FeatConstants.Foci.All && string.IsNullOrEmpty(preliminaryFocus) == false)
                 {
-                    preliminaryFocus = featFocusGenerator.GenerateFrom(featSelection.Feat, featSelection.FocusType, skills, featSelection.RequiredFeats, chosenFeats, characterClass);
+                    preliminaryFocus = featFocusGenerator.GenerateFrom(
+                        featSelection.Feat,
+                        featSelection.FocusType,
+                        skills,
+                        featSelection.RequiredFeats,
+                        chosenFeats,
+                        characterClass);
                     feat.Foci = feat.Foci.Union(new[] { preliminaryFocus });
                 }
             }
@@ -178,7 +217,11 @@ namespace DnDGen.CharacterGen.Generators.Feats
                 && !string.IsNullOrEmpty(featSelection.FocusType);
         }
 
-        private IEnumerable<AdditionalFeatSelection> AddNewlyAvailableFeatSelections(IEnumerable<AdditionalFeatSelection> currentAdditionalFeatSelections, IEnumerable<AdditionalFeatSelection> sourceFeatSelections, IEnumerable<AdditionalFeatSelection> chosenFeatSelections, IEnumerable<Feat> chosenFeats)
+        private IEnumerable<AdditionalFeatSelection> AddNewlyAvailableFeatSelections(
+            IEnumerable<AdditionalFeatSelection> currentAdditionalFeatSelections,
+            IEnumerable<AdditionalFeatSelection> sourceFeatSelections,
+            IEnumerable<AdditionalFeatSelection> chosenFeatSelections,
+            IEnumerable<Feat> chosenFeats)
         {
             var missingSelections = sourceFeatSelections.Except(currentAdditionalFeatSelections);
             var newPossibleSelections = missingSelections.Except(chosenFeatSelections);
@@ -187,7 +230,12 @@ namespace DnDGen.CharacterGen.Generators.Feats
             return newFeatSelectionsWithRequirementsMet;
         }
 
-        private IEnumerable<Feat> GetFighterFeats(CharacterClass characterClass, Race race, Dictionary<string, Ability> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
+        private IEnumerable<Feat> GetFighterFeats(
+            CharacterClass characterClass,
+            Dictionary<string, Ability> stats,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> selectedFeats)
         {
             var numberOfFighterFeats = characterClass.Level / 2 + 1;
             var feats = GetFeats(numberOfFighterFeats, GroupConstants.FighterBonusFeats, characterClass, stats, skills, baseAttack, selectedFeats);
@@ -195,24 +243,36 @@ namespace DnDGen.CharacterGen.Generators.Feats
             return feats;
         }
 
-        private IEnumerable<Feat> GetFeats(int quantity, string groupName, CharacterClass characterClass, Dictionary<string, Ability> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
+        private IEnumerable<Feat> GetFeats(
+            int quantity,
+            string groupName,
+            CharacterClass characterClass,
+            Dictionary<string, Ability> stats,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> selectedFeats)
         {
             var featSelections = featsSelector.SelectAdditional();
 
             if (!string.IsNullOrEmpty(groupName))
             {
-                var groupFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, groupName);
+                var groupFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, groupName);
                 featSelections = featSelections.Where(f => groupFeatNames.Contains(f.Feat));
             }
 
             //INFO: Calling immediate execution, so this doesn't reevaluate every time the collection is called
             var availableFeats = featSelections.Where(f => f.ImmutableRequirementsMet(baseAttack, stats, skills, characterClass)).ToArray();
-            var feats = PopulateFeatsFrom(characterClass, stats, skills, baseAttack, selectedFeats, availableFeats, quantity);
+            var feats = PopulateFeatsFrom(characterClass, stats, skills, selectedFeats, availableFeats, quantity);
 
             return feats;
         }
 
-        private IEnumerable<Feat> GetWizardBonusFeats(CharacterClass characterClass, Race race, Dictionary<string, Ability> stats, IEnumerable<Skill> skills, BaseAttack baseAttack, IEnumerable<Feat> selectedFeats)
+        private IEnumerable<Feat> GetWizardBonusFeats(
+            CharacterClass characterClass,
+            Dictionary<string, Ability> stats,
+            IEnumerable<Skill> skills,
+            BaseAttack baseAttack,
+            IEnumerable<Feat> selectedFeats)
         {
             var numberOfWizardFeats = characterClass.Level / 5;
             var feats = GetFeats(numberOfWizardFeats, GroupConstants.WizardBonusFeats, characterClass, stats, skills, baseAttack, selectedFeats);

@@ -113,7 +113,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             SetUpRoll(2, 9266, 90210, 42);
 
             race.BaseRace = "differentbaserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -133,7 +134,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             SetUpRoll(2, 9266, 90210, 42);
 
             race.BaseRace = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -154,7 +156,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             SetUpRoll(2, 9266, 90210, 42);
 
             race.BaseRace = "baserace";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -177,7 +180,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             race.BaseRace = "baserace";
             constitutionBonus = 5;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -200,7 +203,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             race.BaseRace = "baserace";
             constitutionBonus = int.MinValue;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -222,7 +225,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
 
             race.BaseRace = "baserace";
             race.Metarace = RaceConstants.Metaraces.HalfDragon;
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -246,9 +249,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
 
             race.BaseRace = "baserace";
             race.Metarace = "undead";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -273,7 +276,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             SetUpRoll(2, 12, 90210, 42);
 
             race.Metarace = "undead";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
 
             var hitPoints = hitPointsGenerator.GenerateWith(characterClass, constitutionBonus, race, feats);
@@ -321,7 +324,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             race.BaseRace = "baserace";
             constitutionBonus = -2;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
 
             var monsterHitDice = new Dictionary<string, int>();
@@ -346,9 +349,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
 
             race.BaseRace = "baserace";
             race.Metarace = "undead";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "otherbaserace", "baserace" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
                 .Returns(new[] { "undead", "other undead" });
 
             var monsterHitDice = new Dictionary<string, int>();
