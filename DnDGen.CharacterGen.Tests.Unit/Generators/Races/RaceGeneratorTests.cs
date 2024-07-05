@@ -93,6 +93,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 
             mockCollectionsSelector
                 .Setup(s => s.FindCollectionOf(
+                    Config.Name,
                     TableNameConstants.Set.Collection.ClassNameGroups,
                     characterClass.Name,
                     CharacterClassConstants.TrainingTypes.Intuitive,
@@ -103,7 +104,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings)).Returns(metaracesWithWings);
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AerialManeuverability, It.IsAny<string>()))
-                .Returns((string table, string name) => aerialManeuverability[name]);
+                .Returns((string assembly, string table, string name) => aerialManeuverability[name]);
 
             mockAdjustmentsSelector
                 .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ChallengeRatings, It.IsAny<string>()))
@@ -250,7 +251,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             characterClass.Name = CharacterClassConstants.Wizard;
             racePrototype.BaseRace = RaceConstants.BaseRaces.Drow;
 
-            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Wizard, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector
+                .Setup(s => s.FindCollectionOf(
+                    Config.Name,
+                    TableNameConstants.Set.Collection.ClassNameGroups,
+                    CharacterClassConstants.Wizard,
+                    CharacterClassConstants.TrainingTypes.Intuitive,
+                    CharacterClassConstants.TrainingTypes.SelfTaught,
+                    CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
@@ -265,7 +273,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             characterClass.Name = CharacterClassConstants.Cleric;
             racePrototype.BaseRace = RaceConstants.BaseRaces.Drow;
 
-            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Cleric, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector
+                .Setup(s => s.FindCollectionOf(
+                    Config.Name,
+                    TableNameConstants.Set.Collection.ClassNameGroups,
+                    CharacterClassConstants.Cleric,
+                    CharacterClassConstants.TrainingTypes.Intuitive,
+                    CharacterClassConstants.TrainingTypes.SelfTaught,
+                    CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);

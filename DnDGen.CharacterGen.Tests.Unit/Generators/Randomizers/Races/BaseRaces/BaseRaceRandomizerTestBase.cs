@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Randomizers.Races;
+﻿using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -15,8 +15,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [SetUp]
         public void BaseRaceRandomizerTestBaseSetup()
         {
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(baseRaces);
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(baseRaces);
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, It.IsAny<string>())).Returns(baseRaces);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(baseRaces);
         }
     }
 }

@@ -43,7 +43,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionSelector>();
-            combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            combatGenerator = new CombatGenerator(
+                mockArmorClassGenerator.Object,
+                mockHitPointsGenerator.Object,
+                mockSavingThrowsGenerator.Object,
+                mockAdjustmentsSelector.Object,
+                mockCollectionsSelector.Object);
 
             characterClass = new CharacterClass();
             feats = new List<Feat>();

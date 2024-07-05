@@ -16,8 +16,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var metaraceGroups = GetTable(TableNameConstants.Set.Collection.MetaraceGroups);
 
             var names = baseRaceGroups[GroupConstants.All].Union(metaraceGroups[GroupConstants.All]);
             AssertCollectionNames(names);
@@ -40,8 +40,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [Test]
         public void AerialSpeedOf0HasEmptyManeuverability()
         {
-            var aerialSpeeds = collectionsMapper.Map(TableNameConstants.Set.Adjustments.AerialSpeeds);
-            var aerialManeuverabilities = collectionsMapper.Map(TableNameConstants.Set.Collection.AerialManeuverability);
+            var aerialSpeeds = GetTable(TableNameConstants.Set.Adjustments.AerialSpeeds);
+            var aerialManeuverabilities = GetTable(TableNameConstants.Set.Collection.AerialManeuverability);
 
             var racesWithNoAerialSpeed = aerialSpeeds.Where(s => s.Value.Single() == "0").Select(s => s.Key);
 
@@ -57,8 +57,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [Test]
         public void PositiveAerialSpeedHasManeuverability()
         {
-            var aerialSpeeds = collectionsMapper.Map(TableNameConstants.Set.Adjustments.AerialSpeeds);
-            var aerialManeuverabilities = collectionsMapper.Map(TableNameConstants.Set.Collection.AerialManeuverability);
+            var aerialSpeeds = GetTable(TableNameConstants.Set.Adjustments.AerialSpeeds);
+            var aerialManeuverabilities = GetTable(TableNameConstants.Set.Collection.AerialManeuverability);
 
             var racesWithAerialSpeed = aerialSpeeds.Where(s => s.Value.Single() != "0").Select(s => s.Key);
 

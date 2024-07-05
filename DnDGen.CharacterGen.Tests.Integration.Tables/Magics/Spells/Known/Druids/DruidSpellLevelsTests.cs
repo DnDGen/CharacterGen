@@ -198,7 +198,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [Test]
         public void AllDruidSpellsInAdjustmentsTable()
         {
-            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Druid]);
         }
 

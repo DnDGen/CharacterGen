@@ -28,7 +28,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer = new NonMonsterBaseRaceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
 
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { "monster base race", "aquatic base race", "other base race" });
         }
 

@@ -29,7 +29,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer = new LycanthropeMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
 
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
+            mockCollectionSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Lycanthrope))
                 .Returns(new[] { "lycanthrope metarace" });
         }
 

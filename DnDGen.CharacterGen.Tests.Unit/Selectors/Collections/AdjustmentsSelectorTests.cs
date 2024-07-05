@@ -24,9 +24,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
             adjustmentsSelector = new AdjustmentsSelector(mockCollectionsSelector.Object);
             collections = new Dictionary<string, IEnumerable<string>>();
 
-            mockCollectionsSelector.Setup(m => m.SelectAllFrom(TableName)).Returns(collections);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableName, It.IsAny<string>()))
-                .Returns((string table, string name) => collections[name]);
+            mockCollectionsSelector.Setup(m => m.SelectAllFrom(Config.Name, TableName)).Returns(collections);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableName, It.IsAny<string>()))
+                .Returns((string assembly, string table, string name) => collections[name]);
         }
 
         [Test]

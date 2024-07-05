@@ -41,7 +41,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Items.Powers
         private void AssertTable(int level)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, level);
-            var table = percentileMapper.Map(tableName);
+            var table = percentileMapper.Map(Config.Name, tableName);
 
             Assert.That(table, Is.Not.Null);
             Assert.That(table.Keys, Is.EquivalentTo(indices));

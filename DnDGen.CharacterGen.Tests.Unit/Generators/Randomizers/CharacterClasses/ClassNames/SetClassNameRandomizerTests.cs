@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
@@ -30,7 +30,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.Full)).Returns(alignmentClasses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignment.Full)).Returns(alignmentClasses);
         }
 
         [Test]

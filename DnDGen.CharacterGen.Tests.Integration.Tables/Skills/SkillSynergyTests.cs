@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Skills;
+﻿using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
@@ -15,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
         [Test]
         public override void CollectionNames()
         {
-            var featFoci = collectionsMapper.Map(TableNameConstants.Set.Collection.FeatFoci);
+            var featFoci = GetTable(TableNameConstants.Set.Collection.FeatFoci);
             AssertCollectionNames(featFoci[GroupConstants.Skills]);
         }
 

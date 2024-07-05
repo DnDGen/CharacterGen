@@ -49,7 +49,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
         public void AllSpellcastersHaveSpellsPerDayAtLevel(int level)
         {
             //INFO: We are testing up to level 30 to account for Rakshasas, who might have sorcerer spells up to level 27
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
 
             foreach (var spellcaster in spellcasters)
             {
@@ -82,7 +82,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells
         public void AllSpellcastersHaveKnownSpellsAtLevel(int level)
         {
             //INFO: We are testing up to level 30 to account for Rakshasas, who might have sorcerer spells up to level 27
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
 
             foreach (var spellcaster in spellcasters)
             {

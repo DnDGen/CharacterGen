@@ -18,11 +18,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
         {
             collectionsMapper = GetNewInstanceOf<CollectionMapper>();
 
-            table = collectionsMapper.Map(tableName);
+            table = GetTable(tableName);
             indices = new Dictionary<int, string>();
         }
 
         public abstract void CollectionNames();
+
+        protected Dictionary<string, IEnumerable<string>> GetTable(string table)
+        {
+            return collectionsMapper.Map(Config.Name, table);
+        }
 
         protected void AssertCollectionNames(IEnumerable<string> names)
         {

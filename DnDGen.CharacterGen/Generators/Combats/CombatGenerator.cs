@@ -22,7 +22,12 @@ namespace DnDGen.CharacterGen.Generators.Combats
         private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly ICollectionSelector collectionsSelector;
 
-        public CombatGenerator(IArmorClassGenerator armorClassGenerator, IHitPointsGenerator hitPointsGenerator, ISavingThrowsGenerator savingThrowsGenerator, IAdjustmentsSelector adjustmentsSelector, ICollectionSelector collectionsSelector)
+        public CombatGenerator(
+            IArmorClassGenerator armorClassGenerator,
+            IHitPointsGenerator hitPointsGenerator,
+            ISavingThrowsGenerator savingThrowsGenerator,
+            IAdjustmentsSelector adjustmentsSelector,
+            ICollectionSelector collectionsSelector)
         {
             this.armorClassGenerator = armorClassGenerator;
             this.hitPointsGenerator = hitPointsGenerator;
@@ -45,7 +50,13 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetBaseAttackBonus(CharacterClass characterClass)
         {
-            var baseAttackQuality = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack);
+            var baseAttackQuality = collectionsSelector.FindCollectionOf(
+                Config.Name,
+                TableNameConstants.Set.Collection.ClassNameGroups,
+                characterClass.Name,
+                GroupConstants.GoodBaseAttack,
+                GroupConstants.AverageBaseAttack,
+                GroupConstants.PoorBaseAttack);
 
             switch (baseAttackQuality)
             {

@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -19,8 +19,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var metaraceGroups = GetTable(TableNameConstants.Set.Collection.MetaraceGroups);
             var names = baseRaceGroups[GroupConstants.All].Union(metaraceGroups[GroupConstants.All]);
 
             AssertCollectionNames(names);

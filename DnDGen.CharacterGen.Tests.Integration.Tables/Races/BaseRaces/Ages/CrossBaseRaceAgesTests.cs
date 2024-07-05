@@ -26,13 +26,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages
         [Test]
         public void AllBaseRacesHaveAgeTables()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups);
             var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
             foreach (var baseRace in allBaseRaces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAges, baseRace);
-                var ages = collectionsMapper.Map(tableName);
+                var ages = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(ages, Is.Not.Null);
                 Assert.That(ages, Is.Not.Empty);

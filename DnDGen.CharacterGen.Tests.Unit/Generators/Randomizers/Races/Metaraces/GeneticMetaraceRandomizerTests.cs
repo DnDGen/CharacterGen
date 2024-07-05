@@ -29,7 +29,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             randomizer = new GeneticMetaraceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
 
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic))
+            mockCollectionSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic))
                 .Returns(new[] { "genetic metarace" });
         }
 

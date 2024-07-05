@@ -27,13 +27,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
         [Test]
         public void AllBaseRacesHaveFeatDataTables()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups);
             var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
             foreach (var baseRace in allBaseRaces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, baseRace);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -42,13 +42,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
         [Test]
         public void AllMetaracesHaveFeatDataTables()
         {
-            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var metaraceGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups);
             var allMetaraces = metaraceGroups[GroupConstants.All];
 
             foreach (var metarRace in allMetaraces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, metarRace);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -74,7 +74,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial
             foreach (var species in metaraceSpecies)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, species);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }

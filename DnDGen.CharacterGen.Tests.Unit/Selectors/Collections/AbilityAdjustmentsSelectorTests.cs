@@ -1,6 +1,6 @@
-﻿using DnDGen.CharacterGen.Selectors.Collections;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
@@ -56,7 +56,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Selectors.Collections
                 allAdjustments[race.Age.Description][ability] = 0;
             }
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All)).Returns(abilityNames);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All)).Returns(abilityNames);
         }
 
         [Test]
