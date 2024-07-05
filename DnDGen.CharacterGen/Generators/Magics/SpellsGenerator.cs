@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Magics;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using System;
@@ -26,7 +26,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         public IEnumerable<SpellQuantity> GeneratePerDay(CharacterClass characterClass, Dictionary<string, Ability> abilities)
         {
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
 
             if (spellcasters.Contains(characterClass.Name) == false)
                 return Enumerable.Empty<SpellQuantity>();
@@ -41,7 +41,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
-            var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
+            var spellAbility = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
             var maxSpellLevel = abilities[spellAbility].Value - 10;
             var spellsForCharacter = spellsForClass.Where(kvp => Convert.ToInt32(kvp.Key) <= maxSpellLevel);
 
@@ -69,13 +69,13 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         public IEnumerable<Spell> GenerateKnown(CharacterClass characterClass, Dictionary<string, Ability> abilities)
         {
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
             var spells = new List<Spell>();
 
             if (spellcasters.Contains(characterClass.Name) == false)
                 return spells;
 
-            var divineCasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine);
+            var divineCasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine);
 
             if (divineCasters.Contains(characterClass.Name))
                 return GetAllKnownSpells(characterClass, abilities);
@@ -97,7 +97,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
-            var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
+            var spellAbility = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
             var maxSpellLevel = abilities[spellAbility].Value - 10;
             var spellsForCharacter = spellsForClass.Where(kvp => Convert.ToInt32(kvp.Key) <= maxSpellLevel);
             var spells = new List<Spell>();
@@ -122,7 +122,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         private IEnumerable<string> GetSpellNames(CharacterClass characterClass)
         {
-            var spellNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, characterClass.Name);
+            var spellNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, characterClass.Name);
             var forbiddenSpellNames = GetSpellNamesForFields(characterClass.ProhibitedFields);
 
             spellNames = spellNames.Except(forbiddenSpellNames);
@@ -157,7 +157,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, levelForSpells, characterClass.Name);
             var spellsForClass = adjustmentsSelector.SelectAllFrom(tableName);
 
-            var spellAbility = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
+            var spellAbility = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters).Single();
             var maxSpellLevel = abilities[spellAbility].Value - 10;
             var spellQuantitiesForCharacter = spellsForClass.Where(kvp => Convert.ToInt32(kvp.Key) <= maxSpellLevel);
 
@@ -171,7 +171,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 spellQuantity.HasDomainSpell = characterClass.SpecialistFields.Any() && spellQuantity.Level > 0;
                 spellQuantity.Quantity = kvp.Value;
 
-                while (percentileSelector.SelectFrom<bool>(knowsMoreSpellsTableName))
+                while (percentileSelector.SelectFrom<bool>(Config.Name, knowsMoreSpellsTableName))
                     spellQuantity.Quantity++;
 
                 spellQuantities.Add(spellQuantity);
@@ -233,7 +233,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         public IEnumerable<Spell> GeneratePrepared(CharacterClass characterClass, IEnumerable<Spell> knownSpells, IEnumerable<SpellQuantity> spellsPerDay)
         {
-            var spellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
+            var spellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters);
             var spells = new List<Spell>();
 
             if (spellcasters.Contains(characterClass.Name) == false)
@@ -277,7 +277,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
             foreach (var field in fields)
             {
-                var fieldSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, field);
+                var fieldSpells = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, field);
                 fieldSpellNames.AddRange(fieldSpells);
             }
 
@@ -293,7 +293,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, field);
                 var spellLevels = adjustmentsSelector.SelectAllFrom(tableName);
 
-                var fieldSpells = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, field);
+                var fieldSpells = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, field);
                 fieldSpells = fieldSpells.Where(s => spellLevels[s] == spellLevel);
 
                 fieldSpellNames.AddRange(fieldSpells);

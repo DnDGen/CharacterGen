@@ -36,9 +36,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.CharacterClasses
 
             alignment.Goodness = "goodness";
             alignment.Lawfulness = "lawfulness";
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, classNameGroup)).Returns(groupClasses);
-            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(new[] { ClassName, AlignmentClassName, GroupClassName });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString())).Returns(alignmentClasses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, classNameGroup)).Returns(groupClasses);
+            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(Config.Name, It.IsAny<string>())).Returns(new[] { ClassName, AlignmentClassName, GroupClassName });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString())).Returns(alignmentClasses);
             alignmentClasses.Add(AlignmentClassName);
             groupClasses.Add(GroupClassName);
         }

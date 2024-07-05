@@ -1,17 +1,17 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Generators.Combats;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Generators.Combats;
 using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Items;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
 {
@@ -43,7 +43,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             mockSavingThrowsGenerator = new Mock<ISavingThrowsGenerator>();
             mockAdjustmentsSelector = new Mock<IAdjustmentsSelector>();
             mockCollectionsSelector = new Mock<ICollectionSelector>();
-            combatGenerator = new CombatGenerator(mockArmorClassGenerator.Object, mockHitPointsGenerator.Object, mockSavingThrowsGenerator.Object, mockAdjustmentsSelector.Object, mockCollectionsSelector.Object);
+            combatGenerator = new CombatGenerator(
+                mockArmorClassGenerator.Object,
+                mockHitPointsGenerator.Object,
+                mockSavingThrowsGenerator.Object,
+                mockAdjustmentsSelector.Object,
+                mockCollectionsSelector.Object);
 
             characterClass = new CharacterClass();
             feats = new List<Feat>();
@@ -68,12 +73,23 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             racialBaseAttackAdjustments[string.Empty] = 0;
             sizeModifiers[race.Size] = 0;
 
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers, It.IsAny<string>())).Returns((string table, string name) => sizeModifiers[name]);
-            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, GroupConstants.GoodBaseAttack, GroupConstants.AverageBaseAttack, GroupConstants.PoorBaseAttack))
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.SizeModifiers, It.IsAny<string>()))
+                .Returns((string table, string name) => sizeModifiers[name]);
+            mockCollectionsSelector
+                .Setup(s => s.FindCollectionOf(
+                    Config.Name,
+                    TableNameConstants.Set.Collection.ClassNameGroups,
+                    characterClass.Name,
+                    GroupConstants.GoodBaseAttack,
+                    GroupConstants.AverageBaseAttack,
+                    GroupConstants.PoorBaseAttack))
                 .Returns(() => baseAttackType);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative)).Returns(initiativeFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus)).Returns(attackBonusFeats);
-            mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, It.IsAny<string>())).Returns((string table, string name) => racialBaseAttackAdjustments[name]);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.Initiative)).Returns(initiativeFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.AttackBonus)).Returns(attackBonusFeats);
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.RacialBaseAttackAdjustments, It.IsAny<string>()))
+                .Returns((string table, string name) => racialBaseAttackAdjustments[name]);
         }
 
         [Test]

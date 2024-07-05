@@ -27,7 +27,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
-            var className = percentileSelector.SelectFrom(tableName);
+            var className = percentileSelector.SelectFrom(Config.Name, tableName);
 
             if (possibleClassNames.Contains(className))
                 return className;
@@ -40,7 +40,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
         public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCharacterClasses, alignment.Goodness);
-            var classNames = percentileSelector.SelectAllFrom(tableName);
+            var classNames = percentileSelector.SelectAllFrom(Config.Name, tableName);
             return classNames.Where(c => CharacterClassIsAllowed(c, alignment));
         }
     }

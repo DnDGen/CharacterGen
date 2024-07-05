@@ -98,7 +98,7 @@ namespace DnDGen.CharacterGen.Generators.Races
 
         private string GetDescription(string tableName, Race race, int modifier, params string[] descriptions)
         {
-            var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            var roll = collectionsSelector.SelectFrom(Config.Name, tableName, race.BaseRace).Single();
             var percentile = GetPercentile(roll, modifier);
 
             var rawIndex = percentile * descriptions.Length;
@@ -136,7 +136,7 @@ namespace DnDGen.CharacterGen.Generators.Races
             if (metarace != RaceConstants.Metaraces.HalfDragon)
                 return string.Empty;
 
-            return collectionsSelector.SelectRandomFrom(TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
+            return collectionsSelector.SelectRandomFrom(Config.Name, TableNameConstants.Set.Collection.DragonSpecies, alignment.ToString());
         }
 
         private bool DetermineIfMale(string baseRace, string className)
@@ -147,20 +147,20 @@ namespace DnDGen.CharacterGen.Generators.Races
             if (baseRace == RaceConstants.BaseRaces.Drow && className == CharacterClassConstants.Cleric)
                 return false;
 
-            return percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male);
+            return percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male);
         }
 
         private string DetermineSize(string baseRace)
         {
-            var size = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, allSizes.ToArray());
+            var size = collectionsSelector.FindCollectionOf(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, allSizes.ToArray());
 
             return size;
         }
 
         private bool DetermineIfRaceHasWings(Race race)
         {
-            var baseRacesWithWings = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings);
-            var metaracesWithWings = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings);
+            var baseRacesWithWings = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings);
+            var metaracesWithWings = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings);
 
             if (baseRacesWithWings.Contains(race.BaseRace) || metaracesWithWings.Contains(race.Metarace))
                 return true;
@@ -194,7 +194,7 @@ namespace DnDGen.CharacterGen.Generators.Races
             if (SpeedIsPreset(metaraceAerialSpeed) && metaraceAerialSpeed > baseRaceAerialSpeed)
             {
                 measurement.Value = metaraceAerialSpeed;
-                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
+                measurement.Description = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
 
                 return measurement;
             }
@@ -202,7 +202,7 @@ namespace DnDGen.CharacterGen.Generators.Races
             if (SpeedIsPreset(baseRaceAerialSpeed) && baseRaceAerialSpeed > metaraceAerialSpeed)
             {
                 measurement.Value = baseRaceAerialSpeed;
-                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.BaseRace).Single();
+                measurement.Description = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AerialManeuverability, race.BaseRace).Single();
 
                 return measurement;
             }
@@ -210,7 +210,7 @@ namespace DnDGen.CharacterGen.Generators.Races
             if (SpeedIsMultiplier(metaraceAerialSpeed) && race.HasWings)
             {
                 measurement.Value = race.LandSpeed.Value * metaraceAerialSpeed;
-                measurement.Description = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
+                measurement.Description = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AerialManeuverability, race.Metarace).Single();
 
                 return measurement;
             }
@@ -272,12 +272,12 @@ namespace DnDGen.CharacterGen.Generators.Races
 
         private int GetMaximumAge(Race race)
         {
-            var maximumAgeRoll = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, race.BaseRace).Single();
+            var maximumAgeRoll = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MaximumAgeRolls, race.BaseRace).Single();
 
             if (maximumAgeRoll == RaceConstants.Ages.Ageless.ToString())
                 return RaceConstants.Ages.Ageless;
 
-            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
             if (undead.Contains(race.Metarace))
                 return RaceConstants.Ages.Ageless;
 
@@ -305,9 +305,9 @@ namespace DnDGen.CharacterGen.Generators.Races
 
         private int GetAdditionalAge(string baseRace, CharacterClass characterClass)
         {
-            var classType = collectionsSelector.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
+            var classType = collectionsSelector.FindCollectionOf(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, characterClass.Name, allClassTypes.ToArray());
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, classType);
-            var trainingAgeRoll = collectionsSelector.SelectFrom(tableName, baseRace).Single();
+            var trainingAgeRoll = collectionsSelector.SelectFrom(Config.Name, tableName, baseRace).Single();
             var additionalAge = dice.Roll(trainingAgeRoll).AsSum();
 
             //This helps ensure that not every high-level character is old
@@ -339,7 +339,7 @@ namespace DnDGen.CharacterGen.Generators.Races
 
         private int RollModifier(Race race, string tableName)
         {
-            var roll = collectionsSelector.SelectFrom(tableName, race.BaseRace).Single();
+            var roll = collectionsSelector.SelectFrom(Config.Name, tableName, race.BaseRace).Single();
             return dice.Roll(roll).AsSum();
         }
 

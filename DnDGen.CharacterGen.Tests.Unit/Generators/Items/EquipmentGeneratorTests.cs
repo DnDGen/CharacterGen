@@ -1,16 +1,16 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Generators.Items;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Generators.Items;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen;
+using DnDGen.TreasureGen.Generators;
+using DnDGen.TreasureGen.Items;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen;
-using DnDGen.TreasureGen.Generators;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 {
@@ -68,8 +68,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             mockWeaponGenerator.Setup(g => g.GenerateMeleeFrom(feats, characterClass, race)).Returns(meleeWeapon);
             mockArmorGenerator.Setup(g => g.GenerateArmorFrom(feats, characterClass, race)).Returns(armor);
             mockTreasureGenerator.Setup(g => g.GenerateAtLevel(9266)).Returns(treasure);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency)).Returns(shieldProficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(weaponProficiencyFeats);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
+                .Returns(shieldProficiencyFeats);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency))
+                .Returns(weaponProficiencyFeats);
         }
 
         [Test]
@@ -119,7 +123,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { meleeWeapon.Name } });
@@ -141,7 +145,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "different feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { meleeWeapon.Name } });
@@ -277,7 +281,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
 
             feats.Add(new Feat { Name = "other feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             var equipment = equipmentGenerator.GenerateWith(feats, characterClass, race);
@@ -539,7 +543,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded)).Returns(twoWeaponFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded)).Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { rangedWeapon.Name, "other ranged weapon" } });
 
@@ -560,7 +564,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { meleeWeapon.Name } });
@@ -581,7 +585,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { rangedWeapon.Name, "other ranged weapon" } });
@@ -604,7 +608,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             feats.Add(new Feat { Name = "other feat" });
             feats.Add(new Feat { Name = "two-weapon feat" });
             var twoWeaponFeats = new[] { "two-weapon feat", "two-handed feat" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.TwoHanded))
                 .Returns(twoWeaponFeats);
 
             feats.Add(new Feat { Name = "proficiency feat", Foci = new[] { meleeWeapon.Name } });

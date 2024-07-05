@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
@@ -32,8 +32,8 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
 
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
-            var alignmentMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
-            var classMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
+            var alignmentMetaraces = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
+            var classMetaraces = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
 
             return alignmentMetaraces.Intersect(classMetaraces).Intersect(new[] { SetMetarace });
         }

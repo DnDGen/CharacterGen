@@ -76,14 +76,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
             allowedAlignments.Add(leaderAlignment);
 
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
                 .Returns(allowedAlignments);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcClasses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs)).Returns(npcClasses);
 
             var index = 0;
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment))
                 .Returns(allowedAlignments);
             mockCollectionsSelector
                 .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
@@ -109,7 +109,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void CharacterReputationGenerated()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 0;
@@ -122,7 +122,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void CharacterReputationAdjustmentIsApplied()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = 42;
@@ -137,7 +137,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void NegativeCharacterReputationAdjustmentIsApplied()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Reputation)).Returns("reputable");
 
             var reputationAjustments = new Dictionary<string, int>();
             reputationAjustments["reputable"] = -42;
@@ -160,7 +160,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void KillingCohortsDecreasesScoreOfAttractingCohorts()
         {
-            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(false);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
@@ -171,7 +171,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void KillingMultipleCohortsDecreasesScoreOfAttractingCohorts()
         {
-            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(true).Returns(false);
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.KilledCohort)).Returns(true).Returns(true).Returns(false);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.Score, Is.EqualTo(99476));
@@ -190,7 +190,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void GenerateLeadershipMovementFactorsAndApplyThem()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns("moves");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.LeadershipMovement)).Returns("moves");
 
             var leadershipAdjustments = new Dictionary<string, int>();
             leadershipAdjustments["moves"] = 42;
@@ -208,7 +208,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void CharacterDoesNotHaveEmptyStringLeadershipModifiers()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(string.Empty);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.LeadershipMovement)).Returns(string.Empty);
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
             Assert.That(leadership.LeadershipModifiers, Is.Empty);
         }
@@ -216,7 +216,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         [Test]
         public void GenerateWhetherCharacterHasCausedFollowerDeathsAndApply()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.KilledFollowers)).Returns(true);
             mockLeadershipSelector.Setup(s => s.SelectFollowerQuantitiesFor(99475)).Returns(followerQuantities);
 
             var leadership = leadershipGenerator.GenerateLeadership(9266, 90210, string.Empty);
@@ -293,7 +293,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         public void AttractCohortOfSameAlignment()
         {
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9266)).Returns(42);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(false);
 
             var cohortAlignment = new Alignment("cohort alignment");
             var leadersAlignment = new Alignment(leaderAlignment);
@@ -319,7 +319,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Leaders
         public void AttractCohortOfDifferingAlignment()
         {
             mockLeadershipSelector.Setup(s => s.SelectCohortLevelFor(9265)).Returns(42);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment)).Returns(true);
 
             var cohortAlignment = new Alignment("cohort alignment");
             allowedAlignments.Add(cohortAlignment.ToString());

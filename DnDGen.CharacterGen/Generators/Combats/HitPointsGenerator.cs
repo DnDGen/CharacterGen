@@ -31,7 +31,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
             var toughness = feats.Where(f => f.Name == FeatConstants.Toughness);
             hitPoints += toughness.Sum(f => f.Power);
 
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            var monsters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(race.BaseRace) == false)
                 return hitPoints;
 
@@ -41,29 +41,46 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetClassHitPoints(CharacterClass characterClass, int constitutionBonus, Race race)
         {
-            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
             if (undead.Contains(race.Metarace))
                 return RollHitPoints(characterClass.Level, 12, constitutionBonus);
 
-            var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
-            return RollHitPoints(characterClass.Level, hitDice[characterClass.Name], constitutionBonus);
+            //var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.ClassHitDice);
+            //return RollHitPoints(characterClass.Level, hitDice[characterClass.Name], constitutionBonus);
+
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.ClassHitDice, characterClass.Name);
+            return RollHitPoints(characterClass.Level, hitDice, constitutionBonus);
         }
 
         private int GetAdditionalMonsterHitDice(Race race, int constitutionBonus)
         {
-            var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
+            //var hitDice = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.MonsterHitDice);
 
-            if (hitDice[race.BaseRace] == 0)
+            //if (hitDice[race.BaseRace] == 0)
+            //    return 0;
+
+            //if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
+            //    return RollHitPoints(hitDice[race.BaseRace], 10, constitutionBonus);
+
+            //var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            //if (undead.Contains(race.Metarace))
+            //    return RollHitPoints(hitDice[race.BaseRace], 12, constitutionBonus);
+
+            //return RollHitPoints(hitDice[race.BaseRace], 8, constitutionBonus);
+
+            var hitDice = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace);
+
+            if (hitDice == 0)
                 return 0;
 
             if (race.Metarace == RaceConstants.Metaraces.HalfDragon)
-                return RollHitPoints(hitDice[race.BaseRace], 10, constitutionBonus);
+                return RollHitPoints(hitDice, 10, constitutionBonus);
 
-            var undead = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
+            var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
             if (undead.Contains(race.Metarace))
-                return RollHitPoints(hitDice[race.BaseRace], 12, constitutionBonus);
+                return RollHitPoints(hitDice, 12, constitutionBonus);
 
-            return RollHitPoints(hitDice[race.BaseRace], 8, constitutionBonus);
+            return RollHitPoints(hitDice, 8, constitutionBonus);
         }
 
         private int RollHitPoints(int quantity, int die, int constitutionBonus)

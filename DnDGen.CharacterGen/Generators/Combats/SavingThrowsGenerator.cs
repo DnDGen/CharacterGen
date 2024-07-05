@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
             savingThrows.Reflex += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Reflex);
             savingThrows.Will += GetFeatSavingThrowBonus(feats, SavingThrowConstants.Will);
 
-            var anySavingThrowFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SavingThrows);
+            var anySavingThrowFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SavingThrows);
             var anySavingThrowFeats = feats.Where(f => anySavingThrowFeatNames.Contains(f.Name));
 
             foreach (var feat in anySavingThrowFeats)
@@ -82,7 +82,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetClassSavingThrowBonus(CharacterClass characterClass, string savingThrow)
         {
-            var strong = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, savingThrow);
+            var strong = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, savingThrow);
             if (strong.Contains(characterClass.Name))
                 return characterClass.Level / 2 + 2;
 
@@ -91,7 +91,7 @@ namespace DnDGen.CharacterGen.Generators.Combats
 
         private int GetFeatSavingThrowBonus(IEnumerable<Feat> feats, string savingThrow)
         {
-            var saveFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, savingThrow);
+            var saveFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, savingThrow);
             var saveFeats = feats.Where(f => saveFeatNames.Contains(f.Name));
 
             return saveFeats.Sum(f => f.Power);

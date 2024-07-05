@@ -1,11 +1,11 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Skills;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -59,10 +59,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             characterClass.SpecialistFields = new[] { "specialist field" };
             race.BaseRace = "base race";
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "class name")).Returns(classSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "specialist field")).Returns(specialistSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained)).Returns(crossClassSkills);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All)).Returns(allSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "class name")).Returns(classSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "specialist field")).Returns(specialistSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained)).Returns(crossClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.All)).Returns(allSkills);
 
             var emptyAdjustments = new Dictionary<string, int>();
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(emptyAdjustments);
@@ -72,7 +72,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(() => monsterHitDice);
 
             var count = 0;
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -80,7 +80,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
 
             mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns((string skill) => new SkillSelection { SkillName = skill, BaseStatName = AbilityConstants.Intelligence });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
         }
 
         [Test]
@@ -111,7 +111,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             AddClassSkills(3);
 
             var armorCheckSkills = new[] { "other skill", classSkills[0] };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty))
+                .Returns(armorCheckSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             var skill = skills.First(s => s.Name == classSkills[0]);
@@ -126,7 +128,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             AddClassSkills(3);
 
             var armorCheckSkills = new[] { "other skill", "different skill" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty)).Returns(armorCheckSkills);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.ArmorCheckPenalty))
+                .Returns(armorCheckSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             var skill = skills.First(s => s.Name == classSkills[0]);
@@ -432,7 +436,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 1;
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             var skill = skills.Single();
@@ -452,7 +458,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 1;
 
             mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             var skill = skills.Single();
@@ -472,7 +480,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 1;
 
             mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             var skill = skills.Single();
@@ -492,7 +502,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -518,7 +530,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -544,7 +558,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -570,7 +586,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
@@ -599,7 +617,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
@@ -628,7 +648,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 2;
 
             mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt((index++ / 2) % ss.Count()));
@@ -657,7 +679,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -687,7 +711,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
 
             mockSkillSelector.Setup(s => s.SelectFor(crossClassSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -717,7 +743,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = SkillConstants.Foci.QuantityOfAll;
 
             mockSkillSelector.Setup(s => s.SelectFor(specialistSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName))
+                .Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -743,7 +771,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             characterClass.Level = 2;
             AddClassSkills(2);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -764,10 +792,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add($"class skill/other focus");
             classSkills.Add($"other class skill");
 
-            mockSkillSelector.Setup(s => s.SelectFor("class skill/focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
-            mockSkillSelector.Setup(s => s.SelectFor("class skill/other focus")).Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("class skill/focus"))
+                .Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("class skill/other focus"))
+                .Returns(new SkillSelection { SkillName = "class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -794,7 +826,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             characterClass.Level = 2;
             AddCrossClassSkills(2);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -816,10 +848,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             crossClassSkills.Add($"cross-class skill/other focus");
             crossClassSkills.Add($"other cross-class skill");
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
-            mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
-            mockSkillSelector.Setup(s => s.SelectFor("cross-class skill/other focus")).Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("cross-class skill/focus"))
+                .Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("cross-class skill/other focus"))
+                .Returns(new SkillSelection { SkillName = "cross-class skill", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -843,7 +879,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         public void AssignPointsToClassSkills()
         {
             classSkillPoints = 1;
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
@@ -861,7 +897,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         public void AssignPointsToCrossClassSkills()
         {
             classSkillPoints = 1;
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             classSkills.Add("class skill");
             crossClassSkills.Add("cross-class skill");
@@ -881,7 +917,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 1;
             characterClass.Level = 2;
 
-            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true).Returns(false).Returns(false).Returns(true).Returns(false);
 
             classSkills.Add("class skill");
@@ -902,9 +938,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 2;
             AddClassSkills(3);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
             var index = 0;
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3)))
+                .Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -925,9 +963,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkillPoints = 2;
             AddCrossClassSkills(3);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
             var index = 0;
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3))).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<SkillSelection>>(ss => ss.Count() == 3)))
+                .Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % 4 % 3));
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -958,10 +998,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void ApplySkillSynergyIfSufficientRanks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 3" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 4" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 4")).Returns(new[] { "synergy 5" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 4" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 4")).Returns(new[] { "synergy 5" });
 
             classSkillPoints = 2;
             characterClass.Level = 13;
@@ -1033,7 +1073,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void ApplySkillSynergyWithFociIfSufficientRanks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2/focus" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1"))
+                .Returns(new[] { "synergy 1", "synergy 2/focus" });
 
             classSkillPoints = 2;
             characterClass.Level = 13;
@@ -1045,9 +1087,15 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add("synergy 1");
             classSkills.Add("synergy 3");
 
-            mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
-            mockSkillSelector.Setup(s => s.SelectFor("skill 3")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
-            mockSkillSelector.Setup(s => s.SelectFor("synergy 2/focus")).Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("skill 2"))
+                .Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("skill 3"))
+                .Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("synergy 2/focus"))
+                .Returns(new SkillSelection { SkillName = "synergy 2", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1101,9 +1149,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add("synergy 1");
             classSkills.Add("synergy 2");
 
-            mockSkillSelector.Setup(s => s.SelectFor("skill 1")).Returns(new SkillSelection { SkillName = "skill 1", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("skill 1"))
+                .Returns(new SkillSelection { SkillName = "skill 1", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1/focus")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1/focus"))
+                .Returns(new[] { "synergy 1", "synergy 2" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1147,8 +1199,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void SkillSynergyStacks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
 
             classSkillPoints = 4;
             characterClass.Level = 2;
@@ -1183,8 +1235,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
 
             classSkillPoints = 2;
             characterClass.Level = 2;
@@ -1193,7 +1245,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add("skill 2");
             classSkills.Add("synergy 2");
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1218,8 +1270,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkillWithCorrectFocus()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1/focus" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1/focus" });
 
             classSkillPoints = 2;
             characterClass.Level = 2;
@@ -1228,9 +1280,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add("skill 2");
             classSkills.Add("synergy 1/other focus");
 
-            mockSkillSelector.Setup(s => s.SelectFor("synergy 1/focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
-            mockSkillSelector.Setup(s => s.SelectFor("synergy 1/other focus")).Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockSkillSelector
+                .Setup(s => s.SelectFor("synergy 1/focus"))
+                .Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "focus" });
+            mockSkillSelector
+                .Setup(s => s.SelectFor("synergy 1/other focus"))
+                .Returns(new SkillSelection { SkillName = "synergy 1", BaseStatName = AbilityConstants.Intelligence, Focus = "other focus" });
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1258,9 +1314,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void DoNotApplySkillSynergyIfInsufficientRanks()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 2" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 3" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 2" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 3")).Returns(new[] { "synergy 3" });
 
             classSkillPoints = 3;
             characterClass.Level = 6;
@@ -1412,7 +1468,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(20, 2, 46)]
         public void MonstersGetMoreSkillPointsByMonsterHitDice(int hitDie, int monsterSkillPoints, int monsterPoints)
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 1;
@@ -1425,7 +1481,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add(monsterClassSkills[0]);
             crossClassSkills.Add(monsterClassSkills[1]);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
@@ -1461,7 +1517,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void OldMonsterSkillsHaveCapIncreased()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             racialSkillPoints = 2;
             monsterHitDice = 1;
@@ -1511,7 +1569,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(20, 69)]
         public void MonstersApplyIntelligenceBonusToMonsterSkillPoints(int hitDie, int monsterPoints)
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 1;
@@ -1524,7 +1582,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             classSkills.Add(monsterClassSkills[0]);
             crossClassSkills.Add(monsterClassSkills[1]);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
                 .Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
@@ -1571,7 +1629,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(20)]
         public void MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(int hitDie)
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 1;
@@ -1701,7 +1759,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 1;
 
             mockSkillSelector.Setup(s => s.SelectFor(allSkills[6])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             Assert.That(skills.Count, Is.EqualTo(10));
@@ -1735,7 +1793,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             skillSelection.RandomFociQuantity = 1;
 
             mockSkillSelector.Setup(s => s.SelectFor(allSkills[0])).Returns(skillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(new[] { "random", "other random", "third random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
             Assert.That(skills.Count, Is.EqualTo(10));
@@ -1770,7 +1828,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
 
             mockSkillSelector.Setup(s => s.SelectFor(allSkills[0])).Returns(skillSelection);
             var foci = new[] { "random", "other random", "third random" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(foci);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName)).Returns(foci);
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(foci)).Returns(() => foci.ElementAt((index++ / 2) % foci.Count()));
@@ -1907,7 +1965,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(constitutionSelection);
             mockSkillSelector.Setup(s => s.SelectFor("skill 6")).Returns(constitutionSelection);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1932,7 +1990,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var constitutionSelection = new SkillSelection { BaseStatName = AbilityConstants.Constitution, SkillName = "skill 4" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 4")).Returns(constitutionSelection);
 
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1944,7 +2002,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void DoNotAssignMonsterSkillPointsToMonsterSkillsIfCharacterDoesNotHaveRequiredBaseStat()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
             classSkillPoints = 0;
@@ -1968,7 +2028,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void SelectPresetFocusForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             racialSkillPoints = 2;
             abilities[AbilityConstants.Charisma] = new Ability(AbilityConstants.Charisma);
@@ -1979,7 +2041,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var selection = new SkillSelection { BaseStatName = AbilityConstants.Charisma, Focus = "focus", SkillName = "skill with focus" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(selection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -1997,7 +2059,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void SelectRandomFocusForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters)).Returns(new[] { race.BaseRace, "other base race" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+                .Returns(new[] { race.BaseRace, "other base race" });
 
             racialSkillPoints = 2;
             abilities[AbilityConstants.Charisma] = new Ability(AbilityConstants.Charisma);
@@ -2008,7 +2072,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var randomSelection = new SkillSelection { BaseStatName = AbilityConstants.Charisma, RandomFociQuantity = 1, SkillName = "skill with random foci" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "skill with random foci"))
+                .Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2024,7 +2090,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void SelectMultipleRandomFociForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
@@ -2042,7 +2108,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var count = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(count++ % ss.Count()));
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2061,7 +2127,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void DoNotSelectRepeatedRandomFociForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
@@ -2079,7 +2145,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var count = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(count++ / 2 % ss.Count()));
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2098,7 +2164,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [Test]
         public void SelectAllRandomFociForMonsterSkill()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
 
             characterClass.Level = 20;
@@ -2113,7 +2179,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             var randomSelection = new SkillSelection { BaseStatName = AbilityConstants.Charisma, RandomFociQuantity = 3, SkillName = "skill with random foci" };
             mockSkillSelector.Setup(s => s.SelectFor("skill 2")).Returns(randomSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "skill with random foci")).Returns(new[] { "random", "other random" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2161,10 +2227,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
 
             var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2226,10 +2292,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
 
             var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2293,11 +2359,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, SkillConstants.Profession)).Returns(new[] { "random job", "other random job" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, SkillConstants.Profession)).Returns(new[] { "random job", "other random job" });
 
             var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "random job")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "random job")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2358,10 +2424,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 2")).Returns(professionBonusWithSetFocusSkillSelection);
             mockSkillSelector.Setup(s => s.SelectFor("professional skill 3")).Returns(professionBonusWithRandomFocusSkillSelection);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "professional skill 3")).Returns(new[] { "random", "other random" });
 
             var professionSkills = new[] { "professional skill 1", "professional skill 2", "professional skill 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2404,7 +2470,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
 
             var professionSkills = Enumerable.Empty<string>();
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2432,7 +2498,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(otherSkillSelection);
 
             var professionSkills = new[] { "profession skill 1", "profession skill 2", "professional skill 3" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "software developer")).Returns(professionSkills);
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2460,7 +2526,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             professionSkillSelection.Focus = "software developer";
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, $"{SkillConstants.Profession}/software developer")).Returns(new[] { "synergy 1", "synergy 2" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, $"{SkillConstants.Profession}/software developer"))
+                .Returns(new[] { "synergy 1", "synergy 2" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 
@@ -2517,7 +2585,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             professionSkillSelection.Focus = "software developer";
 
             mockSkillSelector.Setup(s => s.SelectFor(classSkills[0])).Returns(professionSkillSelection);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillSynergy, classSkills[1])).Returns(new[] { "synergy 1", $"{SkillConstants.Profession}/software developer" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, classSkills[1]))
+                .Returns(new[] { "synergy 1", $"{SkillConstants.Profession}/software developer" });
 
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities).ToArray();
 

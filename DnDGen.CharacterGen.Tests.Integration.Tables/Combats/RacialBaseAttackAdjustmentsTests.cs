@@ -16,8 +16,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var metaraceGroups = GetTable(TableNameConstants.Set.Collection.MetaraceGroups);
 
             var names = metaraceGroups[GroupConstants.All].Union(baseRaceGroups[GroupConstants.All]);
             AssertCollectionNames(names);

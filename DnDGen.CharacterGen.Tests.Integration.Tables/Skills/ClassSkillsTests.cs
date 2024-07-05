@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -18,9 +18,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
-            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
-            var skillGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SkillGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var classGroups = GetTable(TableNameConstants.Set.Collection.ClassNameGroups);
+            var skillGroups = GetTable(TableNameConstants.Set.Collection.SkillGroups);
 
             var names = new[]
             {

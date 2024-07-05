@@ -16,7 +16,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
         [Test]
         public override void CollectionNames()
         {
-            var abilityGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AbilityGroups);
+            var abilityGroups = GetTable(TableNameConstants.Set.Collection.AbilityGroups);
             AssertCollectionNames(abilityGroups[GroupConstants.All]);
         }
 

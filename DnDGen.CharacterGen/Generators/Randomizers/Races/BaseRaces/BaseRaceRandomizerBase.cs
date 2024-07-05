@@ -28,7 +28,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
-            var baseRace = percentileSelector.SelectFrom(tableName);
+            var baseRace = percentileSelector.SelectFrom(Config.Name, tableName);
 
             if (allowedBaseRaces.Contains(baseRace))
                 return baseRace;
@@ -45,7 +45,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
 
         private bool BaseRaceCanBeAlignment(string baseRace, Alignment alignment)
         {
-            var alignmentRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
+            var alignmentRaces = collectionSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full);
             return alignmentRaces.Contains(baseRace);
         }
 
@@ -54,7 +54,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
-            var baseRaces = percentileSelector.SelectAllFrom(tableName);
+            var baseRaces = percentileSelector.SelectAllFrom(Config.Name, tableName);
 
             return baseRaces.Where(r => RaceIsAllowed(r, alignment));
         }

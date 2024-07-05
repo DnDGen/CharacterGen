@@ -93,17 +93,18 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 
             mockCollectionsSelector
                 .Setup(s => s.FindCollectionOf(
+                    Config.Name,
                     TableNameConstants.Set.Collection.ClassNameGroups,
                     characterClass.Name,
                     CharacterClassConstants.TrainingTypes.Intuitive,
                     CharacterClassConstants.TrainingTypes.SelfTaught,
                     CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings)).Returns(baseRacesWithWings);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings)).Returns(metaracesWithWings);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.HasWings)).Returns(baseRacesWithWings);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.HasWings)).Returns(metaracesWithWings);
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AerialManeuverability, It.IsAny<string>()))
-                .Returns((string table, string name) => aerialManeuverability[name]);
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AerialManeuverability, It.IsAny<string>()))
+                .Returns((string assembly, string table, string name) => aerialManeuverability[name]);
 
             mockAdjustmentsSelector
                 .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ChallengeRatings, It.IsAny<string>()))
@@ -146,18 +147,18 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         private void SetUpTablesForBaseRace(string baseRace)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.Trained);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "4200d60000" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, tableName, baseRace)).Returns(new[] { "4200d60000" });
             SetUpRoll("4200d60000", 34);
 
             tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.SelfTaught);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "420d6000" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, tableName, baseRace)).Returns(new[] { "420d6000" });
             SetUpRoll("420d6000", 24);
 
             tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSTYPEAgeRolls, CharacterClassConstants.TrainingTypes.Intuitive);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(tableName, baseRace)).Returns(new[] { "42d600" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, tableName, baseRace)).Returns(new[] { "42d600" });
             SetUpRoll("42d600", 14);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, baseRace)).Returns(new[] { "4d26" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MaximumAgeRolls, baseRace)).Returns(new[] { "4d26" });
             SetUpRoll("4d26", 1000);
 
             ages = new Dictionary<string, int>();
@@ -175,14 +176,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(ages);
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(tableName, It.IsAny<string>())).Returns((string table, string name) => ages[name]);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.HeightRolls, baseRace)).Returns(new[] { "10d4" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.HeightRolls, baseRace)).Returns(new[] { "10d4" });
             SetUpRoll("10d4", 104);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.WeightRolls, baseRace)).Returns(new[] { "92d66" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.WeightRolls, baseRace)).Returns(new[] { "92d66" });
             SetUpRoll("92d66", 424);
 
             mockCollectionsSelector
-                .Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, It.IsAny<string[]>()))
+                .Setup(s => s.FindCollectionOf(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, baseRace, It.IsAny<string[]>()))
                 .Returns(() => baseRaceSize);
 
             if (landSpeeds.Any())
@@ -229,7 +230,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void ReturnMale()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.IsMale, Is.True);
@@ -238,7 +239,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void ReturnFemale()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.IsMale, Is.False);
@@ -250,7 +251,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             characterClass.Name = CharacterClassConstants.Wizard;
             racePrototype.BaseRace = RaceConstants.BaseRaces.Drow;
 
-            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Wizard, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector
+                .Setup(s => s.FindCollectionOf(
+                    Config.Name,
+                    TableNameConstants.Set.Collection.ClassNameGroups,
+                    CharacterClassConstants.Wizard,
+                    CharacterClassConstants.TrainingTypes.Intuitive,
+                    CharacterClassConstants.TrainingTypes.SelfTaught,
+                    CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
@@ -265,7 +273,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             characterClass.Name = CharacterClassConstants.Cleric;
             racePrototype.BaseRace = RaceConstants.BaseRaces.Drow;
 
-            mockCollectionsSelector.Setup(s => s.FindCollectionOf(TableNameConstants.Set.Collection.ClassNameGroups, CharacterClassConstants.Cleric, CharacterClassConstants.TrainingTypes.Intuitive, CharacterClassConstants.TrainingTypes.SelfTaught, CharacterClassConstants.TrainingTypes.Trained))
+            mockCollectionsSelector
+                .Setup(s => s.FindCollectionOf(
+                    Config.Name,
+                    TableNameConstants.Set.Collection.ClassNameGroups,
+                    CharacterClassConstants.Cleric,
+                    CharacterClassConstants.TrainingTypes.Intuitive,
+                    CharacterClassConstants.TrainingTypes.SelfTaught,
+                    CharacterClassConstants.TrainingTypes.Trained))
                 .Returns(() => classType);
 
             SetUpTablesForBaseRace(RaceConstants.BaseRaces.Drow);
@@ -384,7 +399,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             aerialSpeeds[RaceConstants.Metaraces.HalfDragon] = 2;
             racePrototype.Metarace = RaceConstants.Metaraces.HalfDragon;
 
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(TableNameConstants.Set.Collection.DragonSpecies, "lawfulness goodness")).Returns("dragon species");
+            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(Config.Name, TableNameConstants.Set.Collection.DragonSpecies, "lawfulness goodness")).Returns("dragon species");
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.MetaraceSpecies, Is.EqualTo("dragon species"));
@@ -397,7 +412,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             alignment.Lawfulness = "lawfulness";
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
-            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.DragonSpecies, It.IsAny<string>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.DragonSpecies, It.IsAny<string>()), Times.Never);
             Assert.That(race.MetaraceSpecies, Is.Empty);
         }
 
@@ -529,7 +544,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetMaleHeight(int roll, string description)
         {
             SetUpRoll("10d4", roll, 1, 3);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Height.Value, Is.EqualTo(209 + roll));
@@ -541,7 +556,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomMaleHeight()
         {
             SetUpRoll("10d4", 1, 1, 1);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Height.Value, Is.EqualTo(210));
@@ -555,7 +570,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetFemaleHeight(int roll, string description)
         {
             SetUpRoll("10d4", roll, 1, 3);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Height.Value, Is.EqualTo(902 + roll));
@@ -567,7 +582,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomFemaleHeight()
         {
             SetUpRoll("10d4", 1, 1, 1);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Height.Value, Is.EqualTo(903));
@@ -581,7 +596,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetMaleWeight(int roll, string description)
         {
             SetUpRoll("92d66", roll, 1, 3);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Weight.Value, Is.EqualTo(22 + 104 * roll));
@@ -593,7 +608,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomMaleWeight()
         {
             SetUpRoll("92d66", 1, 1, 1);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(true);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Weight.Value, Is.EqualTo(126));
@@ -607,7 +622,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetFemaleWeight(int roll, string description)
         {
             SetUpRoll("92d66", roll, 1, 3);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Weight.Value, Is.EqualTo(2 + 104 * roll));
@@ -619,7 +634,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void GetNonRandomFemaleWeight()
         {
             SetUpRoll("92d66", 1, 1, 1);
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.Male)).Returns(false);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.Weight.Value, Is.EqualTo(106));
@@ -722,7 +737,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void GetImmortalAge()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace)).Returns(new[] { RaceConstants.Ages.Ageless.ToString() });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace))
+                .Returns(new[] { RaceConstants.Ages.Ageless.ToString() });
             SetUpRoll(RaceConstants.Ages.Ageless.ToString(), -1);
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
@@ -746,7 +763,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void UndeadAreImmortal()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { Metarace });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { Metarace });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.MaximumAge.Value, Is.EqualTo(RaceConstants.Ages.Ageless));
@@ -757,7 +774,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [Test]
         public void GetMetaraceMortalAge()
         {
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead)).Returns(new[] { "other metarace" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead))
+                .Returns(new[] { "other metarace" });
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.MaximumAge.Value, Is.EqualTo(91600));
@@ -786,7 +805,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         public void DoNotRerollImmortalAge()
         {
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MaximumAgeRolls, BaseRace))
                 .Returns(new[] { RaceConstants.Ages.Ageless.ToString() });
 
             SetUpRoll(RaceConstants.Ages.Ageless.ToString(), -1);

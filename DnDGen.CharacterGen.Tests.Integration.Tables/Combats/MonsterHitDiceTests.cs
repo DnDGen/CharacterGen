@@ -15,7 +15,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
         [Test]
         public override void CollectionNames()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
             var monsters = baseRaceGroups[GroupConstants.Monsters];
 
             AssertCollectionNames(monsters);

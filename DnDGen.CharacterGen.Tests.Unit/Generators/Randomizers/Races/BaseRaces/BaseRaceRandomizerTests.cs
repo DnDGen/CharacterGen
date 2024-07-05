@@ -48,9 +48,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
 
             var baseRaces = new[] { firstBaseRace, secondBaseRace, string.Empty };
 
-            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(baseRaces);
-            mockPercentileResultSelector.Setup(s => s.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentRaces);
+            mockPercentileResultSelector.Setup(s => s.SelectAllFrom(Config.Name, It.IsAny<string>())).Returns(baseRaces);
+            mockPercentileResultSelector.Setup(s => s.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstBaseRace);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentRaces);
 
             var index = 0;
             mockCollectionSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -60,13 +60,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void RandomizeGetsAllPossibleResultsFromGetAllPossibleResults()
         {
             randomizer.Randomize(alignment, characterClass);
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<string>()), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(Config.Name, It.IsAny<string>()), Times.Once);
         }
 
         [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(It.IsAny<string>())).Returns(Enumerable.Empty<string>());
+            mockPercentileResultSelector.Setup(p => p.SelectAllFrom(Config.Name, It.IsAny<string>())).Returns(Enumerable.Empty<string>());
             Assert.That(() => randomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
@@ -82,13 +82,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.Randomize(alignment, characterClass);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSBaseRaces, alignment.Goodness, characterClass.Name);
-            mockPercentileResultSelector.Verify(p => p.SelectFrom(tableName), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectFrom(Config.Name, tableName), Times.Once);
         }
 
         [Test]
         public void RandomizeDefaultsOnEmptyBaseRace()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(string.Empty);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(string.Empty);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(firstBaseRace));
@@ -97,7 +97,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         [Test]
         public void RandomizeRandomlyDefaultsOnEmptyBaseRace()
         {
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(string.Empty);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(string.Empty);
             mockCollectionSelector.Setup(s => s.SelectRandomFrom(new[] { firstBaseRace, secondBaseRace })).Returns(secondBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
@@ -109,7 +109,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer.ForbiddenBaseRace = firstBaseRace;
 
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(secondBaseRace));
@@ -120,7 +120,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             alignmentRaces.Remove(firstBaseRace);
 
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(secondBaseRace));
@@ -131,7 +131,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             alignmentRaces.Remove(firstBaseRace);
 
-            mockPercentileResultSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstBaseRace);
+            mockPercentileResultSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstBaseRace);
 
             var baseRace = randomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(secondBaseRace));
@@ -141,7 +141,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         public void GetAllPossibleResultsGetsResultsFromSelector()
         {
             randomizer.GetAllPossible(alignment, characterClass);
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(It.IsAny<string>()), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(Config.Name, It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -160,7 +160,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             alignment.Goodness = "goodness";
 
             randomizer.GetAllPossible(alignment, characterClass);
-            mockPercentileResultSelector.Verify(p => p.SelectAllFrom("goodnessclassNameBaseRaces"), Times.Once);
+            mockPercentileResultSelector.Verify(p => p.SelectAllFrom(Config.Name, "goodnessclassNameBaseRaces"), Times.Once);
         }
 
         [Test]

@@ -27,13 +27,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
         [Test]
         public void AllClassesHaveFeatDataTables()
         {
-            var classNameGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classNameGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups);
             var allClasses = classNameGroups[GroupConstants.All];
 
             foreach (var className in allClasses)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, className);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -71,7 +71,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             foreach (var domain in domains)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, domain);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }
@@ -95,7 +95,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             foreach (var school in schools)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSFeatData, school);
-                var featsData = collectionsMapper.Map(tableName);
+                var featsData = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(featsData, Is.Not.Null);
             }

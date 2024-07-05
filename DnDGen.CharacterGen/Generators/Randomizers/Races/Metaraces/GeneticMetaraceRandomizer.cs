@@ -17,7 +17,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
 
         protected override bool MetaraceIsAllowed(string metarace)
         {
-            var geneticMetaraces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
+            var geneticMetaraces = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Genetic);
             return geneticMetaraces.Contains(metarace);
         }
     }

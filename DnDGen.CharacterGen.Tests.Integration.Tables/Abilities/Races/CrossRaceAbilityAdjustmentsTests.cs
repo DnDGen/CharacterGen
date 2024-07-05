@@ -26,13 +26,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
         [Test]
         public void AllBaseRacesHaveAbilityAdjustmentTables()
         {
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var baseRaceGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups);
             var allBaseRaces = baseRaceGroups[GroupConstants.All];
 
             foreach (var baseRace in allBaseRaces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, baseRace);
-                var abilityAdjustments = collectionsMapper.Map(tableName);
+                var abilityAdjustments = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(abilityAdjustments, Is.Not.Null);
                 Assert.That(abilityAdjustments, Is.Not.Empty);
@@ -42,13 +42,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
         [Test]
         public void AllMetaracesHaveAbilityAdjustmentTables()
         {
-            var metaraceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.MetaraceGroups);
+            var metaraceGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups);
             var allMetaraces = metaraceGroups[GroupConstants.All];
 
             foreach (var metarace in allMetaraces)
             {
                 var tableName = string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, metarace);
-                var abilityAdjustments = collectionsMapper.Map(tableName);
+                var abilityAdjustments = collectionsMapper.Map(Config.Name, tableName);
 
                 Assert.That(abilityAdjustments, Is.Not.Null);
                 Assert.That(abilityAdjustments, Is.Not.Empty);

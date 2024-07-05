@@ -34,7 +34,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         {
             var effectiveLevel = GetEffectiveLevel(characterClass);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            var power = percentileSelector.SelectFrom(tableName);
+            var power = percentileSelector.SelectFrom(Config.Name, tableName);
             var proficientArmors = GetProficientArmors(feats, ItemTypeConstants.Armor, characterClass);
 
             if (proficientArmors.Any() == false)
@@ -76,7 +76,7 @@ namespace DnDGen.CharacterGen.Generators.Items
         {
             var effectiveLevel = GetEffectiveLevel(characterClass);
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            var power = percentileSelector.SelectFrom(tableName);
+            var power = percentileSelector.SelectFrom(Config.Name, tableName);
             var proficientShields = GetProficientArmors(feats, AttributeConstants.Shield, characterClass);
 
             if (proficientShields.Any() == false)
@@ -101,8 +101,8 @@ namespace DnDGen.CharacterGen.Generators.Items
                 isSpecific = dice.Roll().Percentile().AsTrueOrFalse(specificThreshold);
             } while (!isSpecific && dice.Roll().Percentile().AsTrueOrFalse(rollAgainThreshold));
 
-            var specificArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific);
-            var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
+            var specificArmors = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific);
+            var metalArmors = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
 
             if (isSpecific && proficientArmors.Intersect(specificArmors).Any()
                 && (characterClass.Name != CharacterClassConstants.Druid || proficientArmors.Intersect(specificArmors.Except(metalArmors)).Any()))
@@ -121,7 +121,6 @@ namespace DnDGen.CharacterGen.Generators.Items
             var traits = new[] { race.Size };
 
             //INFO: If we are able to select a metal armor here for a Druid, then it was rolled that it could be dragonhide
-            //if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName) && !isSpecific)
             if (characterClass.Name == CharacterClassConstants.Druid && metalArmors.Contains(armorName))
             {
                 traits = new[] { race.Size, TraitConstants.SpecialMaterials.Dragonhide };
@@ -139,13 +138,13 @@ namespace DnDGen.CharacterGen.Generators.Items
 
         private IEnumerable<string> GetProficientArmors(IEnumerable<Feat> feats, string armorType, CharacterClass characterClass)
         {
-            var proficiencyFeatNames = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, armorType + GroupConstants.Proficiency);
+            var proficiencyFeatNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, armorType + GroupConstants.Proficiency);
             var proficiencyFeats = feats.Where(f => proficiencyFeatNames.Contains(f.Name));
             var proficientArmors = new List<string>();
 
             foreach (var feat in proficiencyFeats)
             {
-                var featArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feat.Name);
+                var featArmors = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, feat.Name);
                 proficientArmors.AddRange(featArmors);
             }
 
@@ -161,7 +160,7 @@ namespace DnDGen.CharacterGen.Generators.Items
 
             if (!isSpecialMaterial || !isDragonhide)
             {
-                var metalArmors = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
+                var metalArmors = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal);
 
                 return proficientArmors.Except(metalArmors);
             }

@@ -1,9 +1,9 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Combats;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Combats;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
 using NUnit.Framework;
@@ -53,19 +53,26 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Combats
             fortitudeSaveFeats.Add("other feat");
             willSaveFeats.Add("other feat");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SavingThrows))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.SavingThrows))
                 .Returns(allSaveFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Fortitude))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Fortitude))
                 .Returns(fortitudeSaveFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Reflex))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Reflex))
                 .Returns(reflexSaveFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Will))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, SavingThrowConstants.Will))
                 .Returns(willSaveFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Fortitude))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Fortitude))
                 .Returns(strongFortitude);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Reflex))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Reflex))
                 .Returns(strongReflex);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Will))
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SavingThrowConstants.Will))
                 .Returns(strongWill);
         }
 

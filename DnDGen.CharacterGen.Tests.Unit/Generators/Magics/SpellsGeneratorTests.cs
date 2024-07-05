@@ -1,9 +1,9 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Magics;
+using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Magics;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
@@ -68,9 +68,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellLevels[classSpells[3]] = 1;
             divineCasters.Add("other divine class");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters)).Returns(spellcasters);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine)).Returns(divineCasters);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters)).Returns(new[] { "stat" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters)).Returns(spellcasters);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine)).Returns(divineCasters);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters))
+                .Returns(new[] { "stat" });
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.Name);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellsPerDayForClass);
@@ -78,9 +80,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, characterClass.Level, characterClass.Name);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellsKnownForClass);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, characterClass.Name)).Returns(classSpells);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "domain 1")).Returns(new[] { classSpells[0], classSpells[2] });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "domain 2")).Returns(new[] { classSpells[1], classSpells[3] });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, characterClass.Name)).Returns(classSpells);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 1"))
+                .Returns(new[] { classSpells[0], classSpells[2] });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 2"))
+                .Returns(new[] { classSpells[1], classSpells[3] });
 
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, characterClass.Name);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellLevels);
@@ -482,7 +488,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "spell 5", "other special domain spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "spell 5", "other special domain spell" });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 1;
@@ -512,7 +520,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             classSpells.Add("spell 5");
             spellLevels[classSpells[4]] = 0;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "prohibited field")).Returns(new[] { "other forbidden spell", classSpells[4] });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "prohibited field"))
+                .Returns(new[] { "other forbidden spell", classSpells[4] });
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
@@ -577,7 +587,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "spell 5", "other special domain spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "spell 5", "other special domain spell" });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 2;
@@ -606,7 +618,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 0;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "spell 5", "other special domain spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "spell 5", "other special domain spell" });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 1;
@@ -652,7 +666,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 0;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "spell 5", "other special domain spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "spell 5", "other special domain spell" });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 1;
@@ -672,8 +688,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         public void CanHaveMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
-            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(tableName))
-                .Returns(true).Returns(false).Returns(true).Returns(false);
+            mockPercentileSelector
+                .SetupSequence(s => s.SelectFrom<bool>(Config.Name, tableName))
+                .Returns(true)
+                .Returns(false)
+                .Returns(true)
+                .Returns(false);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
@@ -692,7 +712,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         public void CanHaveManyMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
-            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(tableName))
+            mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(Config.Name, tableName))
                 .Returns(true).Returns(true).Returns(false)
                 .Returns(true).Returns(true).Returns(false);
 
@@ -717,7 +737,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             classSpells.Add("spell 5");
             spellLevels[classSpells[4]] = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "other special domain spell", classSpells[4] });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "other special domain spell", classSpells[4] });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 1;
@@ -744,7 +766,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             classSpells.Add("spell 5");
             spellLevels[classSpells[4]] = 1;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { classSpells[3] });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { classSpells[3] });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels[classSpells[3]] = 1;
@@ -784,7 +806,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
 
             spellsKnownForClass["1"] = 0;
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { "spell 5", "other special domain spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
+                .Returns(new[] { "spell 5", "other special domain spell" });
 
             var specialDomainSpellLevels = new Dictionary<string, int>();
             specialDomainSpellLevels["spell 5"] = 1;
@@ -911,7 +935,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsPerDay.Add(new SpellQuantity { Level = 0, Quantity = 2 });
             spellsPerDay.Add(new SpellQuantity { Level = 1, Quantity = 1, HasDomainSpell = true });
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SpellGroups, "domain 2")).Returns(new[] { classSpells[1], classSpells[3], "other spell" });
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 2"))
+                .Returns(new[] { classSpells[1], classSpells[3], "other spell" });
 
             var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay);
             Assert.That(spellsPrepared.Count(), Is.EqualTo(4));

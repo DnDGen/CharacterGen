@@ -19,8 +19,8 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         protected override bool CharacterClassIsAllowed(string className, Alignment alignment)
         {
-            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
-            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
+            var arcaneSpellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
+            var alignmentClasses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignment.ToString());
 
             var allowedClasses = arcaneSpellcasters.Intersect(alignmentClasses);
             return allowedClasses.Contains(className);

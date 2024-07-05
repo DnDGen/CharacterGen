@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.Alignments;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.CharacterClasses.ClassNames
 
         public IEnumerable<string> GetAllPossibleResults(Alignment alignment)
         {
-            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignment.Full);
+            var alignmentClasses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignment.Full);
             return alignmentClasses.Intersect(new[] { SetClassName });
         }
     }

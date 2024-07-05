@@ -1,4 +1,5 @@
 ﻿using DnDGen.CharacterGen.Feats;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 
@@ -38,7 +39,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 
             var clone = feat.Clone();
             Assert.That(clone, Is.Not.SameAs(feat));
-            Assert.That(clone, Is.EqualTo(feat));
+            Assert.That(JsonConvert.SerializeObject(clone), Is.EqualTo(JsonConvert.SerializeObject(feat)));
             Assert.That(clone.CanBeTakenMultipleTimes, Is.EqualTo(feat.CanBeTakenMultipleTimes));
             Assert.That(clone.Foci, Is.Not.SameAs(feat.Foci));
             Assert.That(clone.Foci, Is.EqualTo(feat.Foci));

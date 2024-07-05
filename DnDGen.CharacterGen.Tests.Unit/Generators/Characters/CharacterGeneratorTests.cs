@@ -129,7 +129,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             featSkillFoci.Add("skill 4");
             featSkillFoci.Add("skill 5");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
 
             mockRandomizerVerifier
                 .Setup(v => v.VerifyCompatibility(
@@ -625,7 +625,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void GetsInterestingTraitFromPercentileResultSelector()
         {
-            mockPercentileSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Percentile.Traits)).Returns("interesting trait");
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Traits)).Returns("interesting trait");
             var character = GenerateCharacter();
             Assert.That(character.InterestingTrait, Is.EqualTo("interesting trait"));
         }
@@ -877,10 +877,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[2].Power = 3;
 
             var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 4" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 4" });
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
@@ -917,10 +917,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[2].Power = 3;
 
             var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 3/focus" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(new[] { "skill 2", "skill 3/focus" });
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
@@ -958,7 +958,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[2].Power = 3;
 
             var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
@@ -1002,7 +1002,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             featCollections.Additional = feats;
 
             var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(1));
@@ -1027,7 +1027,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[0].Power = 1;
 
             var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             featCollections.Additional = feats;
 
@@ -1059,9 +1059,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             featCollections.Additional = feats;
 
             var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(new[] { "skill 1" });
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(2));
@@ -1089,7 +1089,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             featCollections.Additional = feats;
 
             var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
@@ -1114,7 +1114,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[0].Power = 1;
 
             var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus)).Returns(featGrantingSkillBonuses);
 
             var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
@@ -1144,10 +1144,16 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             feats[1].Power = 1;
 
             var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
                 .Returns(featGrantingSkillBonuses);
 
-            var character = characterGenerator.GenerateWith(mockAlignmentRandomizer.Object, mockClassNameRandomizer.Object, mockLevelRandomizer.Object, mockBaseRaceRandomizer.Object, mockMetaraceRandomizer.Object, mockAbilitiesRandomizer.Object);
+            var character = characterGenerator.GenerateWith(
+                mockAlignmentRandomizer.Object,
+                mockClassNameRandomizer.Object,
+                mockLevelRandomizer.Object,
+                mockBaseRaceRandomizer.Object,
+                mockMetaraceRandomizer.Object,
+                mockAbilitiesRandomizer.Object);
             Assert.That(character.Skills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
             Assert.That(character.Skills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
