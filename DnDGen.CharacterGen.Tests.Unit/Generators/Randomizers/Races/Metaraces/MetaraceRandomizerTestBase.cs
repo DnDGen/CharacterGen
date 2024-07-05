@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Randomizers.Races;
+﻿using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -15,9 +15,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [SetUp]
         public void MetaraceRandomizerTestBaseSetup()
         {
-            mockPercentileSelector.Setup(s => s.SelectAllFrom(It.IsAny<string>())).Returns(metaraces);
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(metaraces);
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(metaraces);
+            mockPercentileSelector.Setup(s => s.SelectAllFrom(Config.Name, It.IsAny<string>())).Returns(metaraces);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(metaraces);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(metaraces);
         }
     }
 }

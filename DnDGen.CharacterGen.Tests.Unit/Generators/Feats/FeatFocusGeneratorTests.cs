@@ -1,16 +1,16 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Feats;
 using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using DnDGen.TreasureGen.Items;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using DnDGen.TreasureGen.Items;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
 {
@@ -41,7 +41,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             characterClass.Name = "class name";
             focusTypes[GroupConstants.Skills] = featSkillFoci;
 
-            mockCollectionsSelector.Setup(s => s.SelectAllFrom(TableNameConstants.Set.Collection.FeatFoci)).Returns(focusTypes);
+            mockCollectionsSelector.Setup(s => s.SelectAllFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci)).Returns(focusTypes);
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.First());
         }
 
@@ -51,7 +51,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[""] = new[] { "school 1" };
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", string.Empty, skills, requiredFeats, otherFeats, characterClass);
-            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, It.IsAny<string>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, It.IsAny<string>()), Times.Never);
             Assert.That(focus, Is.Empty);
         }
 
@@ -105,7 +105,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
         {
             focusTypes[FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay] = new[] { FeatConstants.Foci.Ray, "weapon" };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { characterClass.Name });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
@@ -117,7 +117,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
         {
             focusTypes[FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay] = new[] { FeatConstants.Foci.Ray, "weapon" };
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { "other class name" });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
@@ -226,7 +226,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes["focus type"] = new[] { "school 1", "school 2" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
@@ -244,7 +244,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes["proficiency2"] = new[] { "school 2", "school 3" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", "focus type", skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo("school 2"));
@@ -271,7 +271,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[""] = new[] { "school 1" };
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", string.Empty, skills);
-            mockCollectionsSelector.Verify(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatFoci, It.IsAny<string>()), Times.Never);
+            mockCollectionsSelector.Verify(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, It.IsAny<string>()), Times.Never);
             Assert.That(focus, Is.Empty);
         }
 
@@ -412,7 +412,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "weapon" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmed, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.UnarmedStrike));
@@ -426,7 +426,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "weapon" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrapple, skills, requiredFeats, otherFeats, characterClass);
             Assert.That(focus, Is.EqualTo(FeatConstants.Foci.Grapple));
@@ -440,9 +440,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "weapon" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { characterClass.Name });
 
             var focus = featFocusGenerator.GenerateFrom("featToFill", FeatConstants.Foci.WeaponsWithUnarmedAndGrappleAndRay, skills, requiredFeats, otherFeats, characterClass);
@@ -457,9 +457,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes[FeatConstants.Foci.Weapons] = new[] { "weapon" };
 
             var proficiencyFeats = new[] { "proficiency1", "proficiency2" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
                 .Returns(new[] { "other class" });
 
             otherFeats.Add(new Feat());
@@ -546,7 +546,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Feats
             focusTypes["all proficiency"] = new[] { "proficiency weapon", "other weapon", "weapon" };
 
             var proficiencyFeats = new[] { "all proficiency", "specific proficiency" };
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Weapon + GroupConstants.Proficiency)).Returns(proficiencyFeats);
 
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(c => c.Single() == "weapon"))).Returns("only weapon");
 

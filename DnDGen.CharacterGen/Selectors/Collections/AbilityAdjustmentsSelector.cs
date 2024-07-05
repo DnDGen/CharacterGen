@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
 
@@ -19,7 +19,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
         public Dictionary<string, int> SelectFor(Race race)
         {
             var adjustments = new Dictionary<string, int>();
-            var abilities = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All);
+            var abilities = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, GroupConstants.All);
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.AGEAbilityAdjustments, race.Age.Description);
             var agingEffects = innerSelector.SelectAllFrom(tableName);

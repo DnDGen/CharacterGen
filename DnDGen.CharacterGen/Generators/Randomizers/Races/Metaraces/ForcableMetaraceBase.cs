@@ -31,7 +31,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
                 throw new IncompatibleRandomizersException();
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
-            var metarace = percentileSelector.SelectFrom(tableName);
+            var metarace = percentileSelector.SelectFrom(Config.Name, tableName);
 
             if (allowedMetaraces.Contains(metarace))
                 return metarace;
@@ -50,7 +50,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
         public IEnumerable<string> GetAllPossible(Alignment alignment, CharacterClassPrototype characterClass)
         {
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
-            var metaraces = percentileSelector.SelectAllFrom(tableName);
+            var metaraces = percentileSelector.SelectAllFrom(Config.Name, tableName);
             return metaraces.Where(r => RaceIsAllowed(r, alignment, characterClass));
         }
 
@@ -66,13 +66,13 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.Metaraces
 
         private bool MetaraceCanBeClass(string metarace, CharacterClassPrototype characterClass)
         {
-            var classRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
+            var classRaces = collectionSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name);
             return classRaces.Contains(metarace);
         }
 
         private bool MetaraceCanBeAlignment(string metarace, Alignment alignment)
         {
-            var alignmentRaces = collectionSelector.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
+            var alignmentRaces = collectionSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full);
             return alignmentRaces.Contains(metarace);
         }
 

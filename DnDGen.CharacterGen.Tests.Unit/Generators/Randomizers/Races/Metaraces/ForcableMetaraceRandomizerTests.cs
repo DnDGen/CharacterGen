@@ -54,10 +54,10 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             classRaces.Add(secondMetarace);
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.GOODNESSCLASSMetaraces, alignment.Goodness, characterClass.Name);
-            mockPercentileSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(metaraces);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns(firstMetarace);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(alignmentRaces);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(classRaces);
+            mockPercentileSelector.Setup(s => s.SelectAllFrom(Config.Name, tableName)).Returns(metaraces);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns(firstMetarace);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, alignment.Full)).Returns(alignmentRaces);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, characterClass.Name)).Returns(classRaces);
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -80,10 +80,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeRerollsNoMetarace()
         {
-            //mockPercentileSelector.SetupSequence(p => p.SelectFrom(It.IsAny<string>()))
-            //    .Returns(RaceConstants.Metaraces.None)
-            //    .Returns(firstMetarace);
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
 
             forcableMetaraceRandomizer.ForceMetarace = true;
 
@@ -94,7 +91,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         [Test]
         public void RandomizeDoesNotRerollNoMetarace()
         {
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(RaceConstants.Metaraces.None);
 
             forcableMetaraceRandomizer.ForceMetarace = false;
 
@@ -107,7 +104,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             forcableMetaraceRandomizer.ForbiddenMetarace = firstMetarace;
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
@@ -118,7 +115,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             forcableMetaraceRandomizer.ForbiddenMetarace = firstMetarace;
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             forcableMetaraceRandomizer.ForceMetarace = true;
 
@@ -131,7 +128,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             alignmentRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
@@ -142,7 +139,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             alignmentRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             forcableMetaraceRandomizer.ForceMetarace = true;
 
@@ -155,7 +152,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             classRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
@@ -166,7 +163,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             classRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             forcableMetaraceRandomizer.ForceMetarace = true;
 
@@ -179,7 +176,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
         {
             classRaces.Remove(firstMetarace);
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(RaceConstants.Metaraces.None));
@@ -191,7 +188,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.Metaraces
             classRaces.Remove(firstMetarace);
             forcableMetaraceRandomizer.ForceMetarace = true;
 
-            mockPercentileSelector.Setup(p => p.SelectFrom(It.IsAny<string>())).Returns(firstMetarace);
+            mockPercentileSelector.Setup(p => p.SelectFrom(Config.Name, It.IsAny<string>())).Returns(firstMetarace);
 
             var metarace = forcableMetaraceRandomizer.Randomize(alignment, characterClass);
             Assert.That(metarace, Is.EqualTo(secondMetarace));

@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.Abilities;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
@@ -16,7 +16,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
         [Test]
         public override void CollectionNames()
         {
-            var abilityGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AbilityGroups);
+            var abilityGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.AbilityGroups);
             AssertCollectionNames(abilityGroups[GroupConstants.All]);
         }
 

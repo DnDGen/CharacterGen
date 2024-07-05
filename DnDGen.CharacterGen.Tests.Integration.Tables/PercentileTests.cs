@@ -17,7 +17,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
         public void PercentileSetup()
         {
             PercentileMapper = GetNewInstanceOf<PercentileMapper>();
-            table = PercentileMapper.Map(tableName);
+            table = PercentileMapper.Map(Config.Name, tableName);
         }
 
         public abstract void TableIsComplete();

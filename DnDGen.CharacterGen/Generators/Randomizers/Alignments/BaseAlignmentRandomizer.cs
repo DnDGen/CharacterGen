@@ -37,16 +37,16 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Alignments
         {
             var alignment = new Alignment();
 
-            alignment.Lawfulness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
-            alignment.Goodness = percentileResultSelector.SelectFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
+            alignment.Lawfulness = percentileResultSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness);
+            alignment.Goodness = percentileResultSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness);
 
             return alignment;
         }
 
         public IEnumerable<Alignment> GetAllPossibleResults()
         {
-            var goodnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness);
-            var lawfulnesses = percentileResultSelector.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness);
+            var goodnesses = percentileResultSelector.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness);
+            var lawfulnesses = percentileResultSelector.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness);
 
             foreach (var goodness in goodnesses)
             {

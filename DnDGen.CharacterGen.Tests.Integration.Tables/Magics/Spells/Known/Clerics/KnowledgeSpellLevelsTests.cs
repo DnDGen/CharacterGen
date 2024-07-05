@@ -38,7 +38,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [Test]
         public void AllKnowledgeSpellsInAdjustmentsTable()
         {
-            var spellGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.SpellGroups);
+            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Knowledge]);
         }
 

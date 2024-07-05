@@ -87,16 +87,16 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             powerTableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, characterClass.Level);
             power = "my power";
 
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, ItemTypeConstants.Armor + GroupConstants.Proficiency))
                 .Returns(armorProficiencyFeats);
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, AttributeConstants.Shield + GroupConstants.Proficiency))
                 .Returns(shieldProficiencyFeats);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[0].Name)).Returns(proficientArmors);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, feats[1].Name)).Returns(proficientShields);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, feats[0].Name)).Returns(proficientArmors);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, feats[1].Name)).Returns(proficientShields);
 
             var index = 0;
 
@@ -105,13 +105,13 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
                 .Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
 
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Specific))
                 .Returns(() => new[] { magicalArmor.Name, magicalShield.Name }
                     .Union(proficientArmors)
                     .Union(proficientShields)
                     .Where(a => a.Contains("specific")));
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, AttributeConstants.Metal))
                 .Returns(() => new[] { magicalArmor.Name, magicalShield.Name }
                     .Union(proficientArmors)
                     .Union(proficientShields)
@@ -136,7 +136,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateArmorFrom_GenerateMundaneArmor()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneArmor = CreateArmor("mundane armor");
 
@@ -150,11 +150,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateArmorFrom_GenerateMundaneArmor_UseCumulativeProficiencies()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             feats.Add(new Feat { Name = "heavy proficiency" });
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "heavy proficiency"))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, "heavy proficiency"))
                 .Returns(new[] { "heavy armor", "other heavy armor" });
 
             var mundaneArmor = CreateArmor("mundane armor");
@@ -174,7 +174,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateArmorFrom_GenerateMundaneArmor_CannotBeSpecific()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneArmor = CreateArmor("mundane armor");
 
@@ -193,7 +193,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(true, false)]
         public void GenerateArmorFrom_GenerateMundaneArmor_DruidAndNonmetal_ByRoll(bool specialMaterial, bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneArmor = CreateArmor("mundane armor");
 
@@ -212,7 +212,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateArmorFrom_GenerateMundaneArmor_DruidAndMetal()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneArmor = CreateArmor("mundane armor");
 
@@ -231,7 +231,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateArmorFrom_GenerateMundaneArmor_DruidAndNonmetal_ByRandom()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneArmor = CreateArmor("mundane armor");
 
@@ -279,7 +279,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             feats.Add(new Feat { Name = "heavy proficiency" });
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "heavy proficiency"))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, "heavy proficiency"))
                 .Returns(new[] { "heavy armor", "other heavy armor" });
 
             var heavyArmor = CreateArmor("heavy armor");
@@ -300,7 +300,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -316,7 +316,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateArmorFrom_GenerateMagicalArmor_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -333,7 +333,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_NotSpecific_IfNoSpecificAvailable(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientArmors.Remove("specific armor");
             proficientArmors.Remove("specific metal armor");
@@ -375,7 +375,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, true, false)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndNonmetal_ByRoll_Specific(string power, double specificThreshold, bool specialMaterial, bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -407,7 +407,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             bool specialMaterial,
             bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -439,7 +439,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             bool specialMaterial,
             bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientArmors.Remove("specific armor");
             //Not removing the metal specific armor, as it should be removed by not allowing metal
@@ -478,7 +478,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndMetal_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -500,7 +500,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndMetal_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -523,7 +523,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndMetal_NotSpecific_WhenNoneAvailable_Proficiency(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientArmors.Remove("specific armor");
             proficientArmors.Remove("specific metal armor");
@@ -547,7 +547,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndMetal_NotSpecific_WhenNoneAvailable_AllMetal(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientArmors.Remove("specific armor");
 
@@ -585,7 +585,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndNonmetal_ByRandom_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -606,7 +606,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndNonmetal_ByRandom_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -628,7 +628,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndNonmetal_ByRandom_NotSpecific_WhenNoneAvailable_Proficiency(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -652,7 +652,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateArmorFrom_GenerateMagicalArmor_DruidAndNonmetal_ByRandom_NotSpecific_WhenNoneAvailable_AllMetal(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -681,7 +681,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateShieldFrom_GenerateMundaneShield()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneShield = CreateShield("mundane shield");
 
@@ -695,11 +695,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateShieldFrom_GenerateMundaneShield_UseCumulativeProficiencies()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             feats.Add(new Feat { Name = "heavy shield proficiency" });
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "heavy shield proficiency"))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, "heavy shield proficiency"))
                 .Returns(new[] { "heavy shield", "other heavy shield" });
 
             var mundaneShield = CreateShield("mundane shield");
@@ -719,7 +719,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateShieldFrom_GenerateMundaneShield_CannotBeSpecific()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneShield = CreateShield("mundane shield");
 
@@ -738,7 +738,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(true, false)]
         public void GenerateShieldFrom_GenerateMundaneShield_DruidAndNonmetal_ByRoll(bool specialMaterial, bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneShield = CreateShield("mundane shield");
 
@@ -757,7 +757,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateShieldFrom_GenerateMundaneShield_DruidAndMetal()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneShield = CreateShield("mundane shield");
 
@@ -776,7 +776,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [Test]
         public void GenerateShieldFrom_GenerateMundaneShield_DruidAndNonmetal_ByRandom()
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(PowerConstants.Mundane);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(PowerConstants.Mundane);
 
             var mundaneShield = CreateShield("mundane shield");
 
@@ -809,7 +809,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         {
             feats.Add(new Feat { Name = "heavy shield proficiency" });
             mockCollectionsSelector
-                .Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.ItemGroups, "heavy shield proficiency"))
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ItemGroups, "heavy shield proficiency"))
                 .Returns(new[] { "heavy shield", "other heavy shield" });
 
             var heavyShield = CreateShield("heavy shield");
@@ -830,7 +830,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -846,7 +846,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateShieldFrom_GenerateMagicalShield_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -863,7 +863,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_NotSpecific_IfNoSpecificAvailable(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientShields.Remove("specific shield");
             proficientShields.Remove("specific metal shield");
@@ -905,7 +905,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, true, false)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndNonmetal_ByRoll_Specific(string power, double specificThreshold, bool specialMaterial, bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -937,7 +937,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             bool specialMaterial,
             bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -969,7 +969,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             bool specialMaterial,
             bool dragonhide)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientShields.Remove("specific shield");
             //Not removing the metal specific shield, as it should be removed by not allowing metal
@@ -1008,7 +1008,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndMetal_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -1030,7 +1030,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndMetal_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -1053,7 +1053,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndMetal_NotSpecific_WhenNoneAvailable_Proficiency(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientShields.Remove("specific shield");
             proficientShields.Remove("specific metal shield");
@@ -1077,7 +1077,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndMetal_NotSpecific_WhenNoneAvailable_AllMetal(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             proficientShields.Remove("specific shield");
 
@@ -1115,7 +1115,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndNonmetal_ByRandom_Specific(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -1136,7 +1136,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97, 64)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndNonmetal_ByRandom_SpecificOnReroll(string power, double specificThreshold, int rollThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(rollThreshold)).Returns(true);
             mockDice.SetupSequence(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(false).Returns(true);
@@ -1158,7 +1158,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndNonmetal_ByRandom_NotSpecific_WhenNoneAvailable_Proficiency(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -1182,7 +1182,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
         [TestCase(PowerConstants.Major, 0.97)]
         public void GenerateShieldFrom_GenerateMagicalShield_DruidAndNonmetal_ByRandom_NotSpecific_WhenNoneAvailable_AllMetal(string power, double specificThreshold)
         {
-            mockPercentileSelector.Setup(s => s.SelectFrom(powerTableName)).Returns(power);
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, powerTableName)).Returns(power);
 
             mockDice.Setup(d => d.Roll(1).d(100).AsTrueOrFalse(specificThreshold)).Returns(true);
 
@@ -1242,7 +1242,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var npcArmor = CreateArmor("npc armor");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("npc power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my armor", "other armor", "metal armor", "npc armor"))).Returns("my random armor");
             mockMagicalArmorGenerator.Setup(g => g.Generate("npc power", "my random armor", race.Size)).Returns(npcArmor);
 
@@ -1261,7 +1261,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var npcArmor = CreateArmor("npc armor");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, (9266 + 90210) / 2);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("npc power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my armor", "other armor", "metal armor", "npc armor"))).Returns("my random armor");
             mockMagicalArmorGenerator.Setup(g => g.Generate("npc power", "my random armor", race.Size)).Returns(npcArmor);
 
@@ -1298,7 +1298,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var playerArmor = CreateArmor("player armor");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("player power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my armor", "other armor", "metal armor", "player armor"))).Returns("my random armor");
             mockMagicalArmorGenerator.Setup(g => g.Generate("player power", "my random armor", race.Size)).Returns(playerArmor);
 
@@ -1317,7 +1317,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var playerArmor = CreateArmor("player armor");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, 9266 + 90210);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("player power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my armor", "other armor", "metal armor", "player armor"))).Returns("my random armor");
             mockMagicalArmorGenerator.Setup(g => g.Generate("player power", "my random armor", race.Size)).Returns(playerArmor);
 
@@ -1354,7 +1354,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var npcShield = CreateShield("npc shield");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("npc power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my shield", "other shield", "metal shield", "npc shield"))).Returns("my random shield");
             mockMagicalArmorGenerator.Setup(g => g.Generate("npc power", "my random shield", race.Size)).Returns(npcShield);
 
@@ -1373,7 +1373,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var npcShield = CreateShield("npc shield");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, (9266 + 90210) / 2);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("npc power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("npc power");
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(ProficientSet("my shield", "other shield", "metal shield", "npc shield"))).Returns("my random shield");
             mockMagicalArmorGenerator.Setup(g => g.Generate("npc power", "my random shield", race.Size)).Returns(npcShield);
 
@@ -1410,7 +1410,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var playerShield = CreateShield("player shield");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, effectiveLevel);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("player power");
             mockCollectionsSelector
                 .Setup(s => s.SelectRandomFrom(ProficientSet("my shield", "other shield", "metal shield", "player shield")))
                 .Returns("my random shield");
@@ -1431,7 +1431,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Items
             var playerShield = CreateShield("player shield");
 
             var tableName = string.Format(TableNameConstants.Formattable.Percentile.LevelXPower, 9266 + 90210);
-            mockPercentileSelector.Setup(s => s.SelectFrom(tableName)).Returns("player power");
+            mockPercentileSelector.Setup(s => s.SelectFrom(Config.Name, tableName)).Returns("player power");
             mockCollectionsSelector
                 .Setup(s => s.SelectRandomFrom(ProficientSet("my shield", "other shield", "metal shield", "player shield")))
                 .Returns("my random shield");

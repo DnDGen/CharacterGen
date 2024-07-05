@@ -17,7 +17,7 @@ namespace DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces
 
         protected override bool BaseRaceIsAllowedByRandomizer(string baseRace)
         {
-            var standardBaseRaces = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
+            var standardBaseRaces = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard);
             return standardBaseRaces.Contains(baseRace);
         }
     }

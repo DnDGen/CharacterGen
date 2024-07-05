@@ -21,9 +21,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Alignments
             var mockCollectionsSelector = new Mock<ICollectionSelector>();
             var randomizer = new NonNeutralAlignmentRandomizer(mockPercentileSelector.Object, mockCollectionsSelector.Object);
 
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentGoodness))
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentGoodness))
                 .Returns(new[] { AlignmentConstants.Good, AlignmentConstants.Neutral, AlignmentConstants.Evil });
-            mockPercentileSelector.Setup(p => p.SelectAllFrom(TableNameConstants.Set.Percentile.AlignmentLawfulness))
+            mockPercentileSelector.Setup(p => p.SelectAllFrom(Config.Name, TableNameConstants.Set.Percentile.AlignmentLawfulness))
                 .Returns(new[] { AlignmentConstants.Lawful, AlignmentConstants.Neutral, AlignmentConstants.Chaotic });
 
             alignments = randomizer.GetAllPossibleResults();

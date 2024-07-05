@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -18,8 +18,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [Test]
         public override void CollectionNames()
         {
-            var alignmentGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
-            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var alignmentGroups = GetTable(TableNameConstants.Set.Collection.AlignmentGroups);
+            var classGroups = GetTable(TableNameConstants.Set.Collection.ClassNameGroups);
 
             var names = new[]
             {
@@ -1888,8 +1888,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [Test]
         public void AllBaseRacesHaveFullAlignmentGroup()
         {
-            var alignmentGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.AlignmentGroups);
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var alignmentGroups = GetTable(TableNameConstants.Set.Collection.AlignmentGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
             var alignmentBaseRaces = baseRaceGroups
                 .Where(kvp => alignmentGroups[GroupConstants.All].Contains(kvp.Key)) //Get alignment-key base race groups
                 .SelectMany(kvp => kvp.Value) //get base races in those groups
@@ -1901,8 +1901,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [Test]
         public void AllBaseRacesHaveClassNameGroup()
         {
-            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
-            var baseRaceGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.BaseRaceGroups);
+            var classGroups = GetTable(TableNameConstants.Set.Collection.ClassNameGroups);
+            var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
             var classBaseRaces = baseRaceGroups
                 .Where(kvp => classGroups[GroupConstants.All].Contains(kvp.Key)) //Get class-key base race groups
                 .SelectMany(kvp => kvp.Value) //get base races in those groups

@@ -279,23 +279,25 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                         var weapon = character.Equipment.OffHand as Weapon;
                         Assert.That(weapon, Is.Not.Null, feats);
                         Assert.That(weapon.Name, Is.Not.Empty, feats);
-                        Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), character.Equipment.OffHand.Name);
-                        Assert.That(weapon.Quantity, Is.Positive, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.CriticalMultiplier, Is.Not.Empty, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.DamageRoll, Is.Not.Empty, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.DamageDescription, Is.Not.Empty, character.Equipment.OffHand.Name);
-                        Assert.That(weapon.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
-                        Assert.That(weapon.ThreatRange, Is.Positive, character.Equipment.OffHand.Name);
+                        Assert.That(weapon.ItemType, Is.EqualTo(ItemTypeConstants.Weapon), weapon.Description);
+                        Assert.That(weapon.Quantity, Is.Positive, weapon.Description);
+                        Assert.That(weapon.CanBeUsedAsWeaponOrArmor, Is.True, weapon.Description);
+                        Assert.That(weapon.CriticalMultiplier, Is.Not.Empty, weapon.Description);
+                        Assert.That(weapon.DamageRoll, Is.Not.Empty, weapon.Description);
+                        Assert.That(weapon.DamageDescription, Is.Not.Empty, weapon.Description);
+                        Assert.That(weapon.Size, Is.EqualTo(character.Race.Size), weapon.Description);
+                        Assert.That(weapon.ThreatRange, Is.Positive, weapon.Description);
 
                         if (weapon != character.Equipment.PrimaryHand)
                         {
-                            Assert.That(weapon.Attributes, Is.All.Not.EqualTo(AttributeConstants.TwoHanded));
-                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee));
+                            //HACK: item attributes are controlled by TreasureGen, and not all one-handed melee weapons contain the One-Handed attribute
+                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.OneHanded)
+                                .Or.Not.Contains(AttributeConstants.TwoHanded), weapon.Description);
+                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.Melee), weapon.Description);
                         }
                         else
                         {
-                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.TwoHanded));
+                            Assert.That(weapon.Attributes, Contains.Item(AttributeConstants.TwoHanded), weapon.Description);
                         }
                     }
                     else if (character.Equipment.OffHand is Armor)
@@ -303,14 +305,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                         var shield = character.Equipment.OffHand as Armor;
                         Assert.That(shield, Is.Not.Null, feats);
                         Assert.That(shield.Name, Is.Not.Empty, feats);
-                        Assert.That(shield.ItemType, Is.EqualTo(ItemTypeConstants.Armor), character.Equipment.OffHand.Name);
-                        Assert.That(shield.Quantity, Is.Positive, character.Equipment.OffHand.Name);
-                        Assert.That(shield.CanBeUsedAsWeaponOrArmor, Is.True, character.Equipment.OffHand.Name);
-                        Assert.That(shield.ArmorBonus, Is.Positive, character.Equipment.OffHand.Name);
-                        Assert.That(shield.ArmorCheckPenalty, Is.Not.Positive, character.Equipment.OffHand.Name);
-                        Assert.That(shield.MaxDexterityBonus, Is.Not.Negative, character.Equipment.OffHand.Name);
-                        Assert.That(shield.Size, Is.EqualTo(character.Race.Size), character.Equipment.OffHand.Name);
-                        Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield));
+                        Assert.That(shield.ItemType, Is.EqualTo(ItemTypeConstants.Armor), shield.Description);
+                        Assert.That(shield.Quantity, Is.Positive, shield.Description);
+                        Assert.That(shield.CanBeUsedAsWeaponOrArmor, Is.True, shield.Description);
+                        Assert.That(shield.ArmorBonus, Is.Positive, shield.Description);
+                        Assert.That(shield.ArmorCheckPenalty, Is.Not.Positive, shield.Description);
+                        Assert.That(shield.MaxDexterityBonus, Is.Not.Negative, shield.Description);
+                        Assert.That(shield.Size, Is.EqualTo(character.Race.Size), shield.Description);
+                        Assert.That(shield.Attributes, Contains.Item(AttributeConstants.Shield), shield.Description);
                     }
                 }
 

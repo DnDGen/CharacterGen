@@ -1,10 +1,10 @@
 ﻿using DnDGen.CharacterGen.Abilities;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Selectors.Selections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Selectors.Selections;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.RollGen;
 using System.Collections.Generic;
@@ -20,7 +20,12 @@ namespace DnDGen.CharacterGen.Generators.Feats
         private readonly IFeatFocusGenerator featFocusGenerator;
         private readonly Dice dice;
 
-        public RacialFeatsGenerator(ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector, IFeatsSelector featsSelector, IFeatFocusGenerator featFocusGenerator, Dice dice)
+        public RacialFeatsGenerator(
+            ICollectionSelector collectionsSelector,
+            IAdjustmentsSelector adjustmentsSelector,
+            IFeatsSelector featsSelector,
+            IFeatFocusGenerator featFocusGenerator,
+            Dice dice)
         {
             this.collectionsSelector = collectionsSelector;
             this.adjustmentsSelector = adjustmentsSelector;
@@ -33,7 +38,7 @@ namespace DnDGen.CharacterGen.Generators.Feats
         {
             var baseRacialFeatSelections = featsSelector.SelectRacial(race.BaseRace);
             var metaracialFeatSelections = featsSelector.SelectRacial(race.Metarace);
-            var featToIncreasePower = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToPower);
+            var featToIncreasePower = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, GroupConstants.AddMonsterHitDiceToPower);
             var monsterHitDice = GetMonsterHitDice(race.BaseRace);
 
             foreach (var selection in metaracialFeatSelections)
@@ -85,7 +90,7 @@ namespace DnDGen.CharacterGen.Generators.Feats
 
         private int GetMonsterHitDice(string baseRace)
         {
-            var monsters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
+            var monsters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters);
             if (monsters.Contains(baseRace) == false)
                 return 1;
 

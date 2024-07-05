@@ -83,7 +83,7 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
         {
             //INFO: We only check the minimum because we only add to this level with the level adjustments in the class
             var levelToCheck = levels.Min();
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var npcs = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             foreach (var className in classNames)
             {
@@ -94,7 +94,11 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
             }
         }
 
-        public bool VerifyCharacterClassCompatibility(Alignment alignmentPrototype, CharacterClassPrototype classPrototype, RaceRandomizer baseRaceRandomizer, RaceRandomizer metaraceRandomizer)
+        public bool VerifyCharacterClassCompatibility(
+            Alignment alignmentPrototype,
+            CharacterClassPrototype classPrototype,
+            RaceRandomizer baseRaceRandomizer,
+            RaceRandomizer metaraceRandomizer)
         {
             var verified = Verify(alignmentPrototype, classPrototype);
             if (!verified)
@@ -122,7 +126,7 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
 
         private bool Verify(Alignment alignmentPrototype, CharacterClassPrototype classPrototype)
         {
-            var alignmentClasses = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, alignmentPrototype.Full);
+            var alignmentClasses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, alignmentPrototype.Full);
             return alignmentClasses.Contains(classPrototype.Name);
         }
 
@@ -197,13 +201,13 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
 
         private bool VerifyRace(Alignment alignmentPrototype, string race, string tableName)
         {
-            var alignmentRaces = collectionsSelector.SelectFrom(tableName, alignmentPrototype.Full);
+            var alignmentRaces = collectionsSelector.SelectFrom(Config.Name, tableName, alignmentPrototype.Full);
             return alignmentRaces.Contains(race);
         }
 
         private bool VerifyRace(CharacterClassPrototype classPrototype, string race, string tableName)
         {
-            var classRaces = collectionsSelector.SelectFrom(tableName, classPrototype.Name);
+            var classRaces = collectionsSelector.SelectFrom(Config.Name, tableName, classPrototype.Name);
             return classRaces.Contains(race);
         }
 

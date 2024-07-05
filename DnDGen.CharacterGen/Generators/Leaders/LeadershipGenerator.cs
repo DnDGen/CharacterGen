@@ -48,7 +48,7 @@ namespace DnDGen.CharacterGen.Generators
             leadership.Score = level + charismaBonus;
 
             var leadershipModifiers = new List<string>();
-            var reputation = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.Reputation);
+            var reputation = percentileSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Reputation);
             var leadershipAdjustments = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LeadershipModifiers);
 
             if (string.IsNullOrEmpty(reputation) == false)
@@ -60,7 +60,7 @@ namespace DnDGen.CharacterGen.Generators
             leadership.CohortScore = leadership.Score;
             var cohortDeaths = 0;
 
-            while (percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledCohort))
+            while (percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.KilledCohort))
                 cohortDeaths++;
 
             leadership.CohortScore -= cohortDeaths * 2;
@@ -75,7 +75,7 @@ namespace DnDGen.CharacterGen.Generators
                 leadership.CohortScore -= 2;
 
             var followerScore = leadership.Score;
-            var leaderMovement = percentileSelector.SelectFrom(TableNameConstants.Set.Percentile.LeadershipMovement);
+            var leaderMovement = percentileSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.LeadershipMovement);
 
             if (string.IsNullOrEmpty(leaderMovement) == false)
             {
@@ -83,7 +83,7 @@ namespace DnDGen.CharacterGen.Generators
                 followerScore += leadershipAdjustments[leaderMovement];
             }
 
-            if (percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.KilledFollowers))
+            if (percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.KilledFollowers))
             {
                 leadershipModifiers.Add("Caused the death of followers");
                 followerScore--;
@@ -97,7 +97,7 @@ namespace DnDGen.CharacterGen.Generators
 
         public Character GenerateCohort(int cohortScore, int leaderLevel, string leaderAlignment, string leaderClass)
         {
-            var alignmentDiffers = percentileSelector.SelectFrom<bool>(TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
+            var alignmentDiffers = percentileSelector.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AttractCohortOfDifferentAlignment);
             if (alignmentDiffers)
                 cohortScore--;
 
@@ -132,21 +132,33 @@ namespace DnDGen.CharacterGen.Generators
             setLevelRandomizer.SetLevel = level;
             setAlignmentRandomizer.SetAlignment = alignment;
 
-            var npcs = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
+            var npcs = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.NPCs);
 
             if (npcs.Contains(leaderClass))
             {
                 var anyNPCClassNameRandomizer = justInTimeFactrory.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
-                return characterGenerator.GenerateWith(setAlignmentRandomizer, anyNPCClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
+                return characterGenerator.GenerateWith(
+                    setAlignmentRandomizer,
+                    anyNPCClassNameRandomizer,
+                    setLevelRandomizer,
+                    anyBaseRaceRandomizer,
+                    anyMetaraceRandomizer,
+                    rawAbilitiesRandomizer);
             }
 
             var anyPlayerClassNameRandomizer = justInTimeFactrory.Build<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyPlayer);
-            return characterGenerator.GenerateWith(setAlignmentRandomizer, anyPlayerClassNameRandomizer, setLevelRandomizer, anyBaseRaceRandomizer, anyMetaraceRandomizer, rawAbilitiesRandomizer);
+            return characterGenerator.GenerateWith(
+                setAlignmentRandomizer,
+                anyPlayerClassNameRandomizer,
+                setLevelRandomizer,
+                anyBaseRaceRandomizer,
+                anyMetaraceRandomizer,
+                rawAbilitiesRandomizer);
         }
 
         private Alignment GetAlignment(string leaderAlignment, bool allowLeaderAlignment = true)
         {
-            var possibleAlignments = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment);
+            var possibleAlignments = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AlignmentGroups, leaderAlignment);
 
             if (!allowLeaderAlignment)
                 possibleAlignments = possibleAlignments.Where(a => a != leaderAlignment);

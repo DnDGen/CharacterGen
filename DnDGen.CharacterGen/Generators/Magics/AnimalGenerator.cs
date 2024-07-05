@@ -1,10 +1,10 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Selectors.Collections;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,22 +52,22 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         private IEnumerable<string> AnimalsForCharacter(CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
-            var animals = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, characterClass.Name);
-            var animalsForSize = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, race.Size);
+            var animals = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, characterClass.Name);
+            var animalsForSize = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, race.Size);
             var filteredAnimals = animals.Intersect(animalsForSize);
 
             var minimumLevels = adjustmentsSelector.SelectAllFrom(TableNameConstants.Set.Adjustments.LevelAdjustments);
             filteredAnimals = filteredAnimals.Where(a => characterClass.Level > minimumLevels[a]);
 
-            var arcaneSpellcasters = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
+            var arcaneSpellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
 
             if (arcaneSpellcasters.Contains(characterClass.Name) == false)
                 return filteredAnimals;
 
-            var improvedFamiliars = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, FeatConstants.ImprovedFamiliar);
+            var improvedFamiliars = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, FeatConstants.ImprovedFamiliar);
             var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
 
-            var animalsForMetarace = collectionsSelector.SelectFrom(TableNameConstants.Set.Collection.AnimalGroups, race.Metarace);
+            var animalsForMetarace = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, race.Metarace);
             filteredAnimals = filteredAnimals.Where(a => characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a) == false);
 
             return filteredAnimals.Intersect(animalsForMetarace);

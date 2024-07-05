@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Generators.Randomizers.Races.BaseRaces;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using Moq;
@@ -46,8 +46,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
             characterClass.Name = "class name";
             characterClass.Level = 1;
 
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentRaces);
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic)).Returns(aquaticBaseRaces);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, alignment.Full)).Returns(alignmentRaces);
+            mockCollectionSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic)).Returns(aquaticBaseRaces);
 
             var index = 0;
             mockCollectionSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
@@ -58,13 +58,15 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             var baseRace = aquaticBaseRaceRandomizer.Randomize(alignment, characterClass);
             Assert.That(baseRace, Is.EqualTo(firstAquaticBaseRace));
-            mockCollectionSelector.Verify(p => p.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic), Times.Once);
+            mockCollectionSelector.Verify(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic), Times.Once);
         }
 
         [Test]
         public void RandomizeThrowsErrorIfNoPossibleResults()
         {
-            mockCollectionSelector.Setup(p => p.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic)).Returns(Enumerable.Empty<string>());
+            mockCollectionSelector
+                .Setup(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic))
+                .Returns(Enumerable.Empty<string>());
             Assert.That(() => aquaticBaseRaceRandomizer.Randomize(alignment, characterClass), Throws.InstanceOf<IncompatibleRandomizersException>());
         }
 
@@ -73,7 +75,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             var baseRaces = aquaticBaseRaceRandomizer.GetAllPossible(alignment, characterClass);
             Assert.That(baseRaces, Is.EquivalentTo(aquaticBaseRaces));
-            mockCollectionSelector.Verify(p => p.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic), Times.Once);
+            mockCollectionSelector.Verify(p => p.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Aquatic), Times.Once);
         }
 
         [Test]

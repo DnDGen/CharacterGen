@@ -17,7 +17,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
 
         public SkillSelection SelectFor(string skill)
         {
-            var data = innerSelector.SelectFrom(TableNameConstants.Set.Collection.SkillData, skill).ToArray();
+            var data = innerSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillData, skill).ToArray();
 
             var selection = new SkillSelection();
             selection.BaseStatName = data[DataIndexConstants.SkillSelectionData.BaseStatName];

@@ -16,7 +16,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
 
         public Dictionary<string, int> SelectAllFrom(string tableName)
         {
-            var collectionTable = collectionsSelector.SelectAllFrom(tableName);
+            var collectionTable = collectionsSelector.SelectAllFrom(Config.Name, tableName);
             var adjustmentTable = new Dictionary<string, int>();
 
             foreach (var kvp in collectionTable)
@@ -29,7 +29,7 @@ namespace DnDGen.CharacterGen.Selectors.Collections
 
         public int SelectFrom(string tableName, string name)
         {
-            var collection = collectionsSelector.SelectFrom(tableName, name);
+            var collection = collectionsSelector.SelectFrom(Config.Name, tableName, name);
             var adjustment = GetAdjustment(collection);
 
             return adjustment;

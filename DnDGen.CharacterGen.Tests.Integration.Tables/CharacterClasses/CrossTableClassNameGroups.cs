@@ -31,12 +31,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public void AllClassesHaveHasSpecialistFieldTable()
         {
-            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups);
 
             foreach (var className in classGroups[GroupConstants.All])
             {
                 var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSHasSpecialistFields, className);
-                var table = percentileMapper.Map(tableName);
+                var table = percentileMapper.Map(Config.Name, tableName);
                 Assert.That(table, Is.Not.Null);
                 Assert.That(table, Is.Not.Empty);
 
@@ -49,12 +49,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [Test]
         public void AllArcaneSpellcasterClassesHaveKnowsAdditionalSpellsTable()
         {
-            var classGroups = collectionsMapper.Map(TableNameConstants.Set.Collection.ClassNameGroups);
+            var classGroups = collectionsMapper.Map(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups);
 
             foreach (var className in classGroups[SpellConstants.Sources.Arcane])
             {
                 var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, className);
-                var table = percentileMapper.Map(tableName);
+                var table = percentileMapper.Map(Config.Name, tableName);
                 Assert.That(table, Is.Not.Null);
                 Assert.That(table, Is.Not.Empty);
 

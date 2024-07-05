@@ -28,7 +28,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Randomizers.Races.BaseRaces
         {
             randomizer = new StandardBaseRaceRandomizer(mockPercentileSelector.Object, mockCollectionSelector.Object);
 
-            mockCollectionSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard))
+            mockCollectionSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Standard))
                 .Returns(new[] { "standard base race", "base race", "other base race" });
         }
 
