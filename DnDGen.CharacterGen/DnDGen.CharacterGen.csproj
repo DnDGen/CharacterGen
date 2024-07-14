@@ -1,38 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-	  <Version>11.0.6</Version>
-	  <Authors>Karl M. Speer</Authors>
-	  <Company>DnDGen</Company>
-	  <Product>CharacterGen</Product>
-	  <Description>This generates characters and NPCs for the Dungeons and Dragons 3.5 system. One can generate random characters or set various randomizers.</Description>
-	  <PackageReleaseNotes>
-		  11.0.0: .Net 6, consolidated nuget packages, removed EventGen, removed iterative generators, dependency-compatible Ninject module loading
-      11.0.1: Release pipeline fixes
-      11.0.2: README updates
-      11.0.3: Fix the 0-die additional age bug
-      11.0.4: Release pipeline fixes
-		  11.0.5: Fix bug where metaraces occurred too often
-		  11.0.6: Upgrade Infrastructure to 5.1.0
-	  </PackageReleaseNotes>
-	  <PackageProjectUrl>https://github.com/DnDGen/CharacterGen</PackageProjectUrl>
-	  <RepositoryUrl>https://github.com/DnDGen/CharacterGen</RepositoryUrl>
-	  <PackageTags>character npc generator dice dungeons dragons d20 dnd 3.5 gen</PackageTags>
-	  <PackageIcon>18531-twenty-sided-dice-vector-thumb.png</PackageIcon>
-	  <PackageIconUrl />
-	  <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>net8.0</TargetFramework>
+    <Version>12.0.0</Version>
+    <Authors>Karl M. Speer</Authors>
+    <Company>DnDGen</Company>
+    <Product>CharacterGen</Product>
+    <Description>This generates characters and NPCs for the Dungeons and Dragons 3.5 system. One can generate random characters or set various randomizers.</Description>
+    <PackageReleaseNotes>
+      12.0.0: .Net 8
+	</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/DnDGen/CharacterGen</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DnDGen/CharacterGen</RepositoryUrl>
+    <PackageTags>character npc generator dice dungeons dragons d20 dnd 3.5 gen</PackageTags>
+    <PackageIcon>18531-twenty-sided-dice-vector-thumb.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityGroups.xml" />
-	  <None Include="18531-twenty-sided-dice-vector-thumb.png">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
-	  </None>
+    <None Include="18531-twenty-sided-dice-vector-thumb.png">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityPriorities.xml" />
@@ -2972,6 +2963,7 @@
     <EmbeddedResource Include="Tables\Traits.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DnDGen.TreasureGen" Version="10.5.6" />
+    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 </Project>
