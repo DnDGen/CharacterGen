@@ -2963,7 +2963,10 @@
     <EmbeddedResource Include="Tables\Traits.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.0" />
+    <PackageReference Include="DnDGen.Infrastructure" Version="6.0.0" />
+    <PackageReference Include="DnDGen.RollGen" Version="16.0.0" />
+    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
   </ItemGroup>
 </Project>

@@ -8,9 +8,9 @@
     <ProjectReference Include="..\DnDGen.CharacterGen.Tests.Integration\DnDGen.CharacterGen.Tests.Integration.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DnDGen.Infrastructure" Version="5.1.0" />
+    <PackageReference Include="DnDGen.Infrastructure" Version="6.0.0" />
     <PackageReference Include="DnDGen.RollGen" Version="16.0.0" />
-    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.0" />
+    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.1" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NUnit" Version="4.1.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0">
