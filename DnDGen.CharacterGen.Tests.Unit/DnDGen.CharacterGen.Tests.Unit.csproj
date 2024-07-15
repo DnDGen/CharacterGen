@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyTitle>DnDGen.CharacterGen.Tests.Unit</AssemblyTitle>
@@ -22,15 +22,9 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="5.1.1" />
-    <PackageReference Include="DnDGen.Infrastructure" Version="5.0.0" />
-    <PackageReference Include="DnDGen.RollGen" Version="15.5.7" />
-    <PackageReference Include="DnDGen.TreasureGen" Version="10.5.6" />
+    <PackageReference Include="DnDGen.Infrastructure" Version="6.0.0" />
+    <PackageReference Include="DnDGen.RollGen" Version="16.0.0" />
+    <PackageReference Include="DnDGen.TreasureGen" Version="11.0.1" />
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="NUnit" Version="4.1.0" />
@@ -39,5 +33,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 </Project>
