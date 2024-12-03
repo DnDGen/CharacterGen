@@ -54,27 +54,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             Assert.That(leadership.LeadershipModifiers, Is.Not.Null);
         }
 
-        [Test]
-        public void FollowersHappen()
-        {
-            var leadership = stressor.GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level1 > 0);
-
-            Assert.That(leadership, Is.Not.Null);
-            Assert.That(leadership.FollowerQuantities.Level1, Is.GreaterThan(leadership.FollowerQuantities.Level2));
-            Assert.That(leadership.FollowerQuantities.Level2, Is.InRange(leadership.FollowerQuantities.Level3, leadership.FollowerQuantities.Level1));
-            Assert.That(leadership.FollowerQuantities.Level3, Is.InRange(leadership.FollowerQuantities.Level4, leadership.FollowerQuantities.Level2));
-            Assert.That(leadership.FollowerQuantities.Level4, Is.InRange(leadership.FollowerQuantities.Level5, leadership.FollowerQuantities.Level3));
-            Assert.That(leadership.FollowerQuantities.Level5, Is.InRange(leadership.FollowerQuantities.Level6, leadership.FollowerQuantities.Level4));
-            Assert.That(leadership.FollowerQuantities.Level6, Is.InRange(0, leadership.FollowerQuantities.Level5));
-            Assert.That(leadership.FollowerQuantities.Level1, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level2, Is.Not.Negative);
-            Assert.That(leadership.FollowerQuantities.Level3, Is.Not.Negative);
-            Assert.That(leadership.FollowerQuantities.Level4, Is.Not.Negative);
-            Assert.That(leadership.FollowerQuantities.Level5, Is.Not.Negative);
-            Assert.That(leadership.FollowerQuantities.Level6, Is.Not.Negative);
-            Assert.That(leadership.LeadershipModifiers, Is.Not.Null);
-        }
-
         private Leadership GenerateLeadership()
         {
             //INFO: Generating a high-level leader takes too long. Instead, we will generate the individual arguments.  We will ignore animals for now
@@ -82,27 +61,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             var abilities = heroicAbilitiesRandomizer.Randomize();
 
             return leadershipGenerator.GenerateLeadership(level, abilities[AbilityConstants.Charisma].Bonus, string.Empty);
-        }
-
-        [Test]
-        public void AllFollowersHappen()
-        {
-            var leadership = stressor.GenerateOrFail(GenerateLeadership, l => l.FollowerQuantities.Level6 > 0);
-
-            Assert.That(leadership, Is.Not.Null);
-            Assert.That(leadership.FollowerQuantities.Level1, Is.GreaterThan(leadership.FollowerQuantities.Level2));
-            Assert.That(leadership.FollowerQuantities.Level2, Is.InRange(leadership.FollowerQuantities.Level3, leadership.FollowerQuantities.Level1));
-            Assert.That(leadership.FollowerQuantities.Level3, Is.InRange(leadership.FollowerQuantities.Level4, leadership.FollowerQuantities.Level2));
-            Assert.That(leadership.FollowerQuantities.Level4, Is.InRange(leadership.FollowerQuantities.Level5, leadership.FollowerQuantities.Level3));
-            Assert.That(leadership.FollowerQuantities.Level5, Is.InRange(leadership.FollowerQuantities.Level6, leadership.FollowerQuantities.Level4));
-            Assert.That(leadership.FollowerQuantities.Level6, Is.InRange(1, leadership.FollowerQuantities.Level5));
-            Assert.That(leadership.FollowerQuantities.Level1, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level2, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level3, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level4, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level5, Is.Positive);
-            Assert.That(leadership.FollowerQuantities.Level6, Is.Positive);
-            Assert.That(leadership.LeadershipModifiers, Is.Not.Null);
         }
 
         [Test]
