@@ -1,6 +1,8 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Skills;
+using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
@@ -8,6 +10,7 @@ using DnDGen.CharacterGen.Skills;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
+using DnDGen.TreasureGen.Items;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -35,6 +38,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         private Race race;
         private List<string> specialistSkills;
         private List<string> allSkills;
+        private List<string> featSkillFoci;
 
         [SetUp]
         public void Setup()
@@ -45,20 +49,28 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockPercentileSelector = new Mock<IPercentileSelector>();
             skillsGenerator = new SkillsGenerator(mockSkillSelector.Object, mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();
-            abilities = new Dictionary<string, Ability>();
-            classSkills = new List<string>();
-            crossClassSkills = new List<string>();
+            abilities = [];
+            classSkills = [];
+            crossClassSkills = [];
             abilities[AbilityConstants.Intelligence] = new Ability(AbilityConstants.Intelligence);
             race = new Race();
-            specialistSkills = new List<string>();
-            allSkills = new List<string>();
-            monsterClassSkills = new List<string>();
+            specialistSkills = [];
+            allSkills = [];
+            monsterClassSkills = [];
+            featSkillFoci = [];
 
             characterClass.Name = "class name";
             characterClass.Level = 5;
-            characterClass.SpecialistFields = new[] { "specialist field" };
+            characterClass.SpecialistFields = ["specialist field"];
             race.BaseRace = "base race";
 
+            featSkillFoci.Add("skill 1");
+            featSkillFoci.Add("skill 2");
+            featSkillFoci.Add("skill 3");
+            featSkillFoci.Add("skill 4");
+            featSkillFoci.Add("skill 5");
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills)).Returns(featSkillFoci);
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "class name")).Returns(classSkills);
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, "specialist field")).Returns(specialistSkills);
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, GroupConstants.Untrained)).Returns(crossClassSkills);
@@ -72,19 +84,27 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             mockAdjustmentsSelector.Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.MonsterHitDice, race.BaseRace)).Returns(() => monsterHitDice);
 
             var count = 0;
-            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(() => Convert.ToBoolean(count++ % 2));
+            mockPercentileSelector
+                .Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill))
+                .Returns(() => Convert.ToBoolean(count++ % 2));
 
             var index = 0;
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
-            mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<SkillSelection>>())).Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % ss.Count()));
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
+                .Returns((IEnumerable<string> ss) => ss.ElementAt(index++ % ss.Count()));
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<SkillSelection>>()))
+                .Returns((IEnumerable<SkillSelection> ss) => ss.ElementAt(index++ % ss.Count()));
 
-            mockSkillSelector.Setup(s => s.SelectFor(It.IsAny<string>())).Returns((string skill) => new SkillSelection { SkillName = skill, BaseStatName = AbilityConstants.Intelligence });
+            mockSkillSelector
+                .Setup(s => s.SelectFor(It.IsAny<string>()))
+                .Returns((string skill) => new SkillSelection { SkillName = skill, BaseStatName = AbilityConstants.Intelligence });
 
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassSkills, race.BaseRace)).Returns(monsterClassSkills);
         }
 
         [Test]
-        public void GetSkills()
+        public void GenerateWith_GetSkills()
         {
             characterClass.Level = 1;
             classSkillPoints = 2;
@@ -104,7 +124,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SkillHasArmorCheckPenalty()
+        public void GenerateWith_SkillHasArmorCheckPenalty()
         {
             characterClass.Level = 1;
             classSkillPoints = 2;
@@ -121,7 +141,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SkillDoesNotHaveArmorCheckPenalty()
+        public void GenerateWith_SkillDoesNotHaveArmorCheckPenalty()
         {
             characterClass.Level = 1;
             classSkillPoints = 2;
@@ -157,7 +177,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 21)]
         [TestCase(19, 22)]
         [TestCase(20, 23)]
-        public void GetSkillPointsPerLevel(int level, int points)
+        public void GenerateWith_GetSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
             classSkillPoints = 1;
@@ -186,7 +206,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(8, 32)]
         [TestCase(9, 36)]
         [TestCase(10, 40)]
-        public void GetSkillPointsForClass(int classPoints, int points)
+        public void GenerateWith_GetSkillPointsForClass(int classPoints, int points)
         {
             characterClass.Level = 1;
             classSkillPoints = classPoints;
@@ -217,7 +237,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 42)]
         [TestCase(19, 44)]
         [TestCase(20, 46)]
-        public void AddIntelligenceBonusToSkillPointsPerLevel(int level, int points)
+        public void GenerateWith_AddIntelligenceBonusToSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
             classSkillPoints = 1;
@@ -230,7 +250,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetClassSkills()
+        public void GenerateWith_GetClassSkills()
         {
             AddClassSkills(4);
 
@@ -239,7 +259,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetCrossClassSkills()
+        public void GenerateWith_GetCrossClassSkills()
         {
             AddCrossClassSkills(4);
 
@@ -256,7 +276,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSkillsFromSpecialistFields()
+        public void GenerateWith_GetSkillsFromSpecialistFields()
         {
             AddSpecialistSkills(2);
 
@@ -273,7 +293,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotGetDuplicateSkillsFromSpecialistFields()
+        public void GenerateWith_DoNotGetDuplicateSkillsFromSpecialistFields()
         {
             AddClassSkills(1);
             specialistSkills.Add(classSkills[0]);
@@ -283,7 +303,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetAllSkills()
+        public void GenerateWith_GetAllSkills()
         {
             AddClassSkills(2);
             AddCrossClassSkills(2);
@@ -298,7 +318,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignAbilitiesToSkills()
+        public void GenerateWith_AssignAbilitiesToSkills()
         {
             AddClassSkills(1);
             AddCrossClassSkills(1);
@@ -337,7 +357,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SetClassSkill()
+        public void GenerateWith_SetClassSkill()
         {
             AddClassSkills(2);
             AddCrossClassSkills(2);
@@ -351,7 +371,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SpecialistSkillsAreClassSkills()
+        public void GenerateWith_SpecialistSkillsAreClassSkills()
         {
             AddSpecialistSkills(1);
             var skills = skillsGenerator.GenerateWith(characterClass, race, abilities);
@@ -359,7 +379,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SpecialistSkillOverwritesCrossClassSkill()
+        public void GenerateWith_SpecialistSkillOverwritesCrossClassSkill()
         {
             AddCrossClassSkills(1);
             specialistSkills.Add(crossClassSkills[0]);
@@ -369,7 +389,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetClassSkillWithSetFocus()
+        public void GenerateWith_GetClassSkillWithSetFocus()
         {
             AddClassSkills(1);
 
@@ -388,7 +408,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetCrossClassSkillWithSetFocus()
+        public void GenerateWith_GetCrossClassSkillWithSetFocus()
         {
             AddCrossClassSkills(1);
 
@@ -407,7 +427,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSpecialistSkillWithSetFocus()
+        public void GenerateWith_GetSpecialistSkillWithSetFocus()
         {
             AddSpecialistSkills(1);
 
@@ -426,7 +446,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetClassSkillWithRandomFocus()
+        public void GenerateWith_GetClassSkillWithRandomFocus()
         {
             AddClassSkills(1);
 
@@ -448,7 +468,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetCrossClassSkillWithRandomFocus()
+        public void GenerateWith_GetCrossClassSkillWithRandomFocus()
         {
             AddCrossClassSkills(1);
 
@@ -470,7 +490,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSpecialistSkillWithRandomFocus()
+        public void GenerateWith_GetSpecialistSkillWithRandomFocus()
         {
             AddSpecialistSkills(1);
 
@@ -492,7 +512,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetClassSkillWithMultipleRandomFoci()
+        public void GenerateWith_GetClassSkillWithMultipleRandomFoci()
         {
             AddClassSkills(1);
 
@@ -520,7 +540,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetCrossClassSkillWithMultipleRandomFoci()
+        public void GenerateWith_GetCrossClassSkillWithMultipleRandomFoci()
         {
             AddCrossClassSkills(1);
 
@@ -548,7 +568,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSpecialistSkillWithMultipleRandomFoci()
+        public void GenerateWith_GetSpecialistSkillWithMultipleRandomFoci()
         {
             AddSpecialistSkills(1);
 
@@ -576,7 +596,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotRepeatFociForClassSkill()
+        public void GenerateWith_DoNotRepeatFociForClassSkill()
         {
             AddClassSkills(1);
 
@@ -607,7 +627,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotRepeatFociForCrossClassSkill()
+        public void GenerateWith_DoNotRepeatFociForCrossClassSkill()
         {
             AddCrossClassSkills(1);
 
@@ -638,7 +658,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotRepeatFociForSpecialistSkill()
+        public void GenerateWith_DoNotRepeatFociForSpecialistSkill()
         {
             AddSpecialistSkills(1);
 
@@ -669,7 +689,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetClassSkillWithAllFoci()
+        public void GenerateWith_GetClassSkillWithAllFoci()
         {
             AddClassSkills(1);
 
@@ -701,7 +721,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetCrossClassSkillWithAllFoci()
+        public void GenerateWith_GetCrossClassSkillWithAllFoci()
         {
             AddCrossClassSkills(1);
 
@@ -733,7 +753,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSpecialistSkillWithAllFoci()
+        public void GenerateWith_GetSpecialistSkillWithAllFoci()
         {
             AddSpecialistSkills(1);
 
@@ -765,7 +785,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignSkillPointsRandomlyAmongClassSkills()
+        public void GenerateWith_AssignSkillPointsRandomlyAmongClassSkills()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -784,7 +804,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignSkillPointsRandomlyAmongClassSkillsWithFoci()
+        public void GenerateWith_AssignSkillPointsRandomlyAmongClassSkillsWithFoci()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -820,7 +840,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignSkillPointsRandomlyAmongCrossClassSkills()
+        public void GenerateWith_AssignSkillPointsRandomlyAmongCrossClassSkills()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -840,7 +860,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignSkillPointsRandomlyAmongCrossClassSkillsWithFoci()
+        public void GenerateWith_AssignSkillPointsRandomlyAmongCrossClassSkillsWithFoci()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -876,7 +896,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignPointsToClassSkills()
+        public void GenerateWith_AssignPointsToClassSkills()
         {
             classSkillPoints = 1;
             mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(false);
@@ -894,7 +914,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignPointsToCrossClassSkills()
+        public void GenerateWith_AssignPointsToCrossClassSkills()
         {
             classSkillPoints = 1;
             mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.AssignPointToCrossClassSkill)).Returns(true);
@@ -912,7 +932,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AssignPointsRandomlyBetweenClassAndCrossClassSkills()
+        public void GenerateWith_AssignPointsRandomlyBetweenClassAndCrossClassSkills()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -933,7 +953,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void CannotAssignMoreThanRankCapPerClassSkill()
+        public void GenerateWith_CannotAssignMoreThanRankCapPerClassSkill()
         {
             classSkillPoints = 2;
             AddClassSkills(3);
@@ -958,7 +978,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void CannotAssignMoreThanLevelPlusThreePointsPerCrossClassSkill()
+        public void GenerateWith_CannotAssignMoreThanLevelPlusThreePointsPerCrossClassSkill()
         {
             classSkillPoints = 2;
             AddCrossClassSkills(3);
@@ -983,7 +1003,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void AllSkillsMaxedOut()
+        public void GenerateWith_AllSkillsMaxedOut()
         {
             classSkillPoints = 3;
             crossClassSkills.Add("skill 1");
@@ -996,7 +1016,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ApplySkillSynergyIfSufficientRanks()
+        public void GenerateWith_ApplySkillSynergyIfSufficientRanks()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 3" });
@@ -1071,7 +1091,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ApplySkillSynergyWithFociIfSufficientRanks()
+        public void GenerateWith_ApplySkillSynergyWithFociIfSufficientRanks()
         {
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1"))
@@ -1137,7 +1157,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ApplySkillSynergyIfSufficientRanksWithFoci()
+        public void GenerateWith_ApplySkillSynergyIfSufficientRanksWithFoci()
         {
             classSkillPoints = 2;
             characterClass.Level = 13;
@@ -1197,7 +1217,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SkillSynergyStacks()
+        public void GenerateWith_SkillSynergyStacks()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1", "synergy 2" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
@@ -1233,7 +1253,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkill()
+        public void GenerateWith_DoNotApplySkillSynergyIfThereIsNoSynergisticSkill()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1" });
@@ -1268,7 +1288,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotApplySkillSynergyIfThereIsNoSynergisticSkillWithCorrectFocus()
+        public void GenerateWith_DoNotApplySkillSynergyIfThereIsNoSynergisticSkillWithCorrectFocus()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(Enumerable.Empty<string>());
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 1/focus" });
@@ -1312,7 +1332,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotApplySkillSynergyIfInsufficientRanks()
+        public void GenerateWith_DoNotApplySkillSynergyIfInsufficientRanks()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 1")).Returns(new[] { "synergy 1" });
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillSynergy, "skill 2")).Returns(new[] { "synergy 2" });
@@ -1381,7 +1401,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 42)]
         [TestCase(19, 44)]
         [TestCase(20, 46)]
-        public void HumansGetExtraSkillPointsPerLevel(int level, int points)
+        public void GenerateWith_HumansGetExtraSkillPointsPerLevel(int level, int points)
         {
             characterClass.Level = level;
             classSkillPoints = 1;
@@ -1413,7 +1433,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 84)]
         [TestCase(19, 88)]
         [TestCase(20, 92)]
-        public void AllPerLevelBonusesStack(int level, int points)
+        public void GenerateWith_AllPerLevelBonusesStack(int level, int points)
         {
             characterClass.Level = level;
             classSkillPoints = 2;
@@ -1466,7 +1486,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 2, 42)]
         [TestCase(19, 2, 44)]
         [TestCase(20, 2, 46)]
-        public void MonstersGetMoreSkillPointsByMonsterHitDice(int hitDie, int monsterSkillPoints, int monsterPoints)
+        public void GenerateWith_MonstersGetMoreSkillPointsByMonsterHitDice(int hitDie, int monsterSkillPoints, int monsterPoints)
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -1515,7 +1535,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void OldMonsterSkillsHaveCapIncreased()
+        public void GenerateWith_OldMonsterSkillsHaveCapIncreased()
         {
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -1567,7 +1587,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18, 63)]
         [TestCase(19, 66)]
         [TestCase(20, 69)]
-        public void MonstersApplyIntelligenceBonusToMonsterSkillPoints(int hitDie, int monsterPoints)
+        public void GenerateWith_MonstersApplyIntelligenceBonusToMonsterSkillPoints(int hitDie, int monsterPoints)
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -1627,7 +1647,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18)]
         [TestCase(19)]
         [TestCase(20)]
-        public void MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(int hitDie)
+        public void GenerateWith_MonstersCannotHaveFewerThan1SkillPointPerMonsterHitDie(int hitDie)
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -1666,7 +1686,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         [TestCase(18)]
         [TestCase(19)]
         [TestCase(20)]
-        public void CannotHaveFewerThan1SkillPointPerLevel(int level)
+        public void GenerateWith_CannotHaveFewerThan1SkillPointPerLevel(int level)
         {
             abilities[AbilityConstants.Intelligence].Value = -9266;
             characterClass.Level = level;
@@ -1679,7 +1699,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertGets10RandomSkillsAsClassSkills()
+        public void GenerateWith_ExpertGets10RandomSkillsAsClassSkills()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1707,7 +1727,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertGetsRandomSkillWithSetFocusAsClassSkill()
+        public void GenerateWith_ExpertGetsRandomSkillWithSetFocusAsClassSkill()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1740,7 +1760,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertGetsRandomSkillWithRandomFocusAsClassSkill()
+        public void GenerateWith_ExpertGetsRandomSkillWithRandomFocusAsClassSkill()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1774,7 +1794,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertCanTakeMultipleFociForSkills()
+        public void GenerateWith_ExpertCanTakeMultipleFociForSkills()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1812,7 +1832,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertCannotTakeDuplicateFociForSkills()
+        public void GenerateWith_ExpertCannotTakeDuplicateFociForSkills()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1863,7 +1883,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ExpertCrossClassSkillsDoNotIncludeRandomClassSkills()
+        public void GenerateWith_ExpertCrossClassSkillsDoNotIncludeRandomClassSkills()
         {
             characterClass.Name = CharacterClassConstants.Expert;
             classSkillPoints = 0;
@@ -1897,7 +1917,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void IfCharacterHasBaseStat_GetSkill()
+        public void GenerateWith_IfCharacterHasBaseStat_GetSkill()
         {
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -1925,7 +1945,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void IfCharacterDoesNotHaveBaseStat_CannotGetSkill()
+        public void GenerateWith_IfCharacterDoesNotHaveBaseStat_CannotGetSkill()
         {
             classSkills.Add("skill 1");
             classSkills.Add("skill 2");
@@ -1951,7 +1971,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotAssignSkillPointsToClassSkillsThatTheCharacterDoesNotHaveDueToNotHavingTheBaseStat()
+        public void GenerateWith_DoNotAssignSkillPointsToClassSkillsThatTheCharacterDoesNotHaveDueToNotHavingTheBaseStat()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -1979,7 +1999,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotAssignSkillPointsToCrossClassSkillsThatTheCharacterDoesNotHaveDueToNotHavingTheBaseStat()
+        public void GenerateWith_DoNotAssignSkillPointsToCrossClassSkillsThatTheCharacterDoesNotHaveDueToNotHavingTheBaseStat()
         {
             classSkillPoints = 1;
             characterClass.Level = 2;
@@ -2000,7 +2020,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotAssignMonsterSkillPointsToMonsterSkillsIfCharacterDoesNotHaveRequiredBaseStat()
+        public void GenerateWith_DoNotAssignMonsterSkillPointsToMonsterSkillsIfCharacterDoesNotHaveRequiredBaseStat()
         {
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -2026,7 +2046,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SelectPresetFocusForMonsterSkill()
+        public void GenerateWith_SelectPresetFocusForMonsterSkill()
         {
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -2057,7 +2077,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SelectRandomFocusForMonsterSkill()
+        public void GenerateWith_SelectRandomFocusForMonsterSkill()
         {
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
@@ -2088,7 +2108,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SelectMultipleRandomFociForMonsterSkill()
+        public void GenerateWith_SelectMultipleRandomFociForMonsterSkill()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -2125,7 +2145,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void DoNotSelectRepeatedRandomFociForMonsterSkill()
+        public void GenerateWith_DoNotSelectRepeatedRandomFociForMonsterSkill()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -2162,7 +2182,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void SelectAllRandomFociForMonsterSkill()
+        public void GenerateWith_SelectAllRandomFociForMonsterSkill()
         {
             mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.BaseRaceGroups, GroupConstants.Monsters))
                 .Returns(new[] { race.BaseRace, "other base race" });
@@ -2196,7 +2216,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ProfessionSkillGrantsAdditionalClassSkills()
+        public void GenerateWith_ProfessionSkillGrantsAdditionalClassSkills()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2258,7 +2278,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ProfessionSkillConvertsCrossClassSkillToClassSkill()
+        public void GenerateWith_ProfessionSkillConvertsCrossClassSkillToClassSkill()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2328,7 +2348,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void RandomProfessionSkillGrantsAdditionalClassSkills()
+        public void GenerateWith_RandomProfessionSkillGrantsAdditionalClassSkills()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2391,7 +2411,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ProfessionSkillGrantsNoDuplicateClassSkills()
+        public void GenerateWith_ProfessionSkillGrantsNoDuplicateClassSkills()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2455,7 +2475,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ProfessionSkillGrantsNoAdditionalClassSkills()
+        public void GenerateWith_ProfessionSkillGrantsNoAdditionalClassSkills()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2483,7 +2503,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void NoProfessionSkillGrantsNoAdditionalClassSkills()
+        public void GenerateWith_NoProfessionSkillGrantsNoAdditionalClassSkills()
         {
             AddClassSkills(1);
             abilities["stat 1"] = new Ability("stat 1");
@@ -2511,7 +2531,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void GetSynergyFromProfessionSkill()
+        public void GenerateWith_GetSynergyFromProfessionSkill()
         {
             classSkillPoints = 2;
             characterClass.Level = 13;
@@ -2570,7 +2590,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
         }
 
         [Test]
-        public void ApplySynergyToProfessionSkill()
+        public void GenerateWith_ApplySynergyToProfessionSkill()
         {
             classSkillPoints = 2;
             characterClass.Level = 13;
@@ -2626,6 +2646,526 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Skills
             Assert.That(skills[5].Ranks, Is.EqualTo(5));
             Assert.That(skills[5].EffectiveRanks, Is.EqualTo(5));
             Assert.That(skills[5].Bonus, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_ApplyArmorCheckPenaltiesForArmor()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = new Armor { Name = "armor", ArmorCheckPenalty = -9266 }
+            };
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_DoNotApplyPenaltyCheckForArmorIfNoArmor()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = null
+            };
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_ApplyArmorCheckPenaltiesForShield()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 }
+            };
+            equipment.OffHand.Attributes = [AttributeConstants.Shield];
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_DoNotApplyPenaltyCheckForNonShields()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                OffHand = new Item { Name = "shield" }
+            };
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_ApplyArmorCheckPenaltiesForArmorAndShield()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = new Armor { Name = "armor", ArmorCheckPenalty = -42 },
+                OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 }
+            };
+            equipment.OffHand.Attributes = [AttributeConstants.Shield];
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_SwimTakesDoubleArmorCheckPenalty()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true },
+                new(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = new Armor { Name = "armor", ArmorCheckPenalty = -42 },
+                OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -9266 }
+            };
+            equipment.OffHand.Attributes = [AttributeConstants.Shield];
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9308));
+            Assert.That(updatedSkills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-9308 * 2));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_SwimTakesNoPenaltyForPlateArmorOfTheDeep()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true },
+                new(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = new Armor { Name = ArmorConstants.PlateArmorOfTheDeep, ArmorCheckPenalty = -9266 }
+            };
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266));
+            Assert.That(updatedSkills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void UpdateSkillsFromEquipment_SwimTakesPenaltyForShieldWithPlateArmorOfTheDeep()
+        {
+            abilities["ability"] = new Ability("ability");
+            var skills = new List<Skill>
+            {
+                new("skill", abilities["ability"], 1) { HasArmorCheckPenalty = false },
+                new("other skill", abilities["ability"], 1) { HasArmorCheckPenalty = true },
+                new(SkillConstants.Swim, abilities["ability"], 1) { HasArmorCheckPenalty = true }
+            };
+
+            var equipment = new Equipment
+            {
+                Armor = new Armor { Name = ArmorConstants.PlateArmorOfTheDeep, ArmorCheckPenalty = -9266 },
+                OffHand = new Armor { Name = "shield", ArmorCheckPenalty = -90210 }
+            };
+            equipment.OffHand.Attributes = [AttributeConstants.Shield];
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromEquipment(skills, equipment).ToArray();
+
+            Assert.That(updatedSkills.First(s => s.Name == "skill").ArmorCheckPenalty, Is.EqualTo(0));
+            Assert.That(updatedSkills.First(s => s.Name == "other skill").ArmorCheckPenalty, Is.EqualTo(-9266 - 90210));
+            Assert.That(updatedSkills.First(s => s.Name == SkillConstants.Swim).ArmorCheckPenalty, Is.EqualTo(-90210 * 2));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_ApplyFeatThatGrantSkillBonusesToSkills()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1),
+                new("skill 2", baseAbility, 1),
+                new("skill 3", baseAbility, 1),
+                new("skill 4", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
+
+            var feats = new List<Feat>
+            {
+                new(),
+                new(),
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Power = 2;
+            feats[2].Name = "feat3";
+            feats[2].Power = 3;
+
+            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(["skill 1"]);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(["skill 2", "skill 4"]);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_ApplyFeatThatGrantSkillBonusesToSkillsWithFocus()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1),
+                new("skill 2", baseAbility, 1),
+                new("skill 3", baseAbility, 1, "other focus"),
+                new("skill 3", baseAbility, 1, "focus")
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+            skills[3].Bonus = 4;
+
+            var feats = new List<Feat>
+            {
+                new(),
+                new(),
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Power = 2;
+            feats[2].Name = "feat3";
+            feats[2].Power = 3;
+
+            var featGrantingSkillBonuses = new[] { "feat3", "feat1" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(["skill 1"]);
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat3")).Returns(["skill 2", "skill 3/focus"]);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(2));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(5));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(3));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[3])).Bonus, Is.EqualTo(7));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_IfFocusIsSkill_ApplyBonusToThatSkill()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1),
+                new("skill 2", baseAbility, 1),
+                new("skill 3", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+
+            var feats = new List<Feat>
+            {
+                new(),
+                new(),
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 2", "skill 3", "non-skill focus"];
+            feats[0].Power = 4;
+            feats[1].Name = "feat2";
+            feats[1].Foci = ["skill 3", "non-skill focus"];
+            feats[1].Power = 1;
+            feats[2].Name = "feat1";
+            feats[2].Foci = ["skill 2", "non-skill focus"];
+            feats[2].Power = 3;
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+            Assert.That(updatedSkills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(9));
+            Assert.That(updatedSkills.First(s => s.Name == "skill 3").Bonus, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_IfFocusIsSkillWithFocus_ApplyBonusToThatSkill()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1, "focus 1"),
+                new("skill 2", baseAbility, 1),
+                new("skill 1", baseAbility, 1, "focus 2")
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+            skills[2].Bonus = 3;
+
+            var feats = new List<Feat>
+            {
+                new(),
+                new(),
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 2", "skill 1/focus 2", "non-skill focus"];
+            feats[0].Power = 4;
+            feats[1].Name = "feat2";
+            feats[1].Foci = ["skill 1/focus 2", "non-skill focus"];
+            feats[1].Power = 1;
+            feats[2].Name = "feat1";
+            feats[2].Foci = ["skill 2", "non-skill focus"];
+            feats[2].Power = 3;
+
+            featSkillFoci.Add("skill 1/focus 1");
+            featSkillFoci.Add("skill 1/focus 2");
+            featSkillFoci.Add("skill 1/focus 3");
+            featSkillFoci.Remove("skill 1"); //INFO: Doing this because a skill either has focus all the time or never
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[0])).Bonus, Is.EqualTo(1));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[1])).Bonus, Is.EqualTo(9));
+            Assert.That(updatedSkills.First(s => s.IsEqualTo(skills[2])).Bonus, Is.EqualTo(8));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_OnlyApplySkillFeatToSkillsIfSkillFocusIsPurelySkill()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+
+            var feats = new List<Feat>
+            {
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 1 (with qualifiers)", "non-skill focus"];
+            feats[0].Power = 1;
+
+            var featGrantingSkillBonuses = new[] { "feat2", "feat1" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_NoCircumstantialBonusIfBonusApplied()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1),
+                new("skill 2", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+
+            var feats = new List<Feat>
+            {
+                new(),
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Foci = ["skill 2", "non-skill focus"];
+            feats[1].Power = 2;
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, "feat1")).Returns(["skill 1"]);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").Bonus, Is.EqualTo(2));
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.False);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 2").Bonus, Is.EqualTo(4));
+            Assert.That(updatedSkills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_IfSkillBonusFocusIsNotPurelySkill_MarkSkillAsHavingCircumstantialBonus()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+
+            var feats = new List<Feat>
+            {
+                new()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 1 (with qualifiers)", "non-skill focus"];
+            feats[0].Power = 1;
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_MarkSkillWithCircumstantialBonusWhenOtherFociDoNotHaveCircumstantialBonus()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new("skill 1", baseAbility, 1),
+                new("skill 2", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+
+            var feats = new List<Feat>
+            {
+                new Feat()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 1 (with qualifiers)", "skill 2"];
+            feats[0].Power = 1;
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
+        }
+
+        [Test]
+        public void UpdateSkillsFromFeats_CircumstantialBonusIsNotOverwritten()
+        {
+            var baseAbility = new Ability("base ability");
+
+            var skills = new List<Skill>
+            {
+                new Skill("skill 1", baseAbility, 1),
+                new Skill("skill 2", baseAbility, 1)
+            };
+            skills[0].Bonus = 1;
+            skills[1].Bonus = 2;
+
+            var feats = new List<Feat>
+            {
+                new Feat(),
+                new Feat()
+            };
+            feats[0].Name = "feat1";
+            feats[0].Foci = ["skill 1 (with qualifiers)", "skill 2"];
+            feats[0].Power = 1;
+            feats[1].Name = "feat2";
+            feats[1].Foci = ["skill 1"];
+            feats[1].Power = 1;
+
+            var featGrantingSkillBonuses = new[] { "feat1", "feat2" };
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus))
+                .Returns(featGrantingSkillBonuses);
+
+            var updatedSkills = skillsGenerator.UpdateSkillsFromFeats(skills, feats);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 1").CircumstantialBonus, Is.True);
+            Assert.That(updatedSkills.First(s => s.Name == "skill 2").CircumstantialBonus, Is.False);
         }
     }
 }

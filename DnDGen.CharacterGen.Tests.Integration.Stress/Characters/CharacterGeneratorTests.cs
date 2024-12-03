@@ -86,8 +86,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 alignmentRandomizer,
                 classNameRandomizer,
                 levelRandomizer,
-                monsterBaseRaceRandomizer
-                , metaraceRandomizer,
+                monsterBaseRaceRandomizer,
+                metaraceRandomizer,
                 rawAbilitiesRandomizer);
 
             characterVerifier.AssertCharacter(character);
