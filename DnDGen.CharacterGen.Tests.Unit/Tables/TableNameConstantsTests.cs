@@ -9,6 +9,8 @@ namespace DnDGen.CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Adjustments.AerialSpeeds, "AerialSpeeds")]
         [TestCase(TableNameConstants.Set.Adjustments.ArcaneSpellFailures, "ArcaneSpellFailures")]
         [TestCase(TableNameConstants.Set.Adjustments.ChallengeRatings, "ChallengeRatings")]
+        [TestCase(TableNameConstants.Set.Adjustments.PCChallengeRatingAdjustments, "PCChallengeRatingAdjustments")]
+        [TestCase(TableNameConstants.Set.Adjustments.NPCChallengeRatingAdjustments, "NPCChallengeRatingAdjustments")]
         [TestCase(TableNameConstants.Set.Adjustments.ClassHitDice, "ClassHitDice")]
         [TestCase(TableNameConstants.Set.Adjustments.CohortLevels, "CohortLevels")]
         [TestCase(TableNameConstants.Set.Adjustments.FeatArmorAdjustments, "FeatArmorAdjustments")]

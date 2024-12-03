@@ -9,6 +9,8 @@
                 public const string AerialSpeeds = "AerialSpeeds";
                 public const string ArcaneSpellFailures = "ArcaneSpellFailures";
                 public const string ChallengeRatings = "ChallengeRatings";
+                public const string PCChallengeRatingAdjustments = "PCChallengeRatingAdjustments";
+                public const string NPCChallengeRatingAdjustments = "NPCChallengeRatingAdjustments";
                 public const string ClassHitDice = "ClassHitDice";
                 public const string CohortLevels = "CohortLevels";
                 public const string FeatArmorAdjustments = "FeatArmorAdjustments";

@@ -33,8 +33,8 @@ namespace DnDGen.CharacterGen.Generators.Races
             this.adjustmentsSelector = adjustmentsSelector;
             this.dice = dice;
 
-            allSizes = new[]
-            {
+            allSizes =
+            [
                 RaceConstants.Sizes.Colossal,
                 RaceConstants.Sizes.Gargantuan,
                 RaceConstants.Sizes.Huge,
@@ -42,22 +42,24 @@ namespace DnDGen.CharacterGen.Generators.Races
                 RaceConstants.Sizes.Medium,
                 RaceConstants.Sizes.Small,
                 RaceConstants.Sizes.Tiny,
-            };
+            ];
 
-            allClassTypes = new[]
-            {
+            allClassTypes =
+            [
                 CharacterClassConstants.TrainingTypes.Intuitive,
                 CharacterClassConstants.TrainingTypes.SelfTaught,
                 CharacterClassConstants.TrainingTypes.Trained,
-            };
+            ];
         }
 
         public Race GenerateWith(Alignment alignment, CharacterClass characterClass, RacePrototype racePrototype)
         {
-            var race = new Race();
+            var race = new Race
+            {
+                BaseRace = racePrototype.BaseRace,
+                Metarace = racePrototype.Metarace
+            };
 
-            race.BaseRace = racePrototype.BaseRace;
-            race.Metarace = racePrototype.Metarace;
             race.MetaraceSpecies = DetermineMetaraceSpecies(alignment, race.Metarace);
             race.IsMale = DetermineIfMale(race.BaseRace, characterClass.Name);
             race.Size = DetermineSize(race.BaseRace);
@@ -66,6 +68,8 @@ namespace DnDGen.CharacterGen.Generators.Races
             race.AerialSpeed = DetermineAerialSpeed(race);
             race.SwimSpeed = DetermineSwimSpeed(race);
             race.ChallengeRating = DetermineChallengeRating(race);
+            race.PCChallengeRatingAdjustment = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.PCChallengeRatingAdjustments, race.BaseRace);
+            race.NPCChallengeRatingAdjustment = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.NPCChallengeRatingAdjustments, race.BaseRace);
             race.MaximumAge = DetermineMaximumAge(race);
             race.Age = DetermineAge(race, characterClass);
 

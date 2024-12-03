@@ -11,6 +11,8 @@ namespace DnDGen.CharacterGen.Races
         public bool HasWings { get; set; }
         public string Size { get; set; }
         public int ChallengeRating { get; set; }
+        public int PCChallengeRatingAdjustment { get; set; }
+        public int NPCChallengeRatingAdjustment { get; set; }
         public Measurement Age { get; set; }
         public Measurement MaximumAge { get; set; }
         public Measurement Height { get; set; }
@@ -55,6 +57,8 @@ namespace DnDGen.CharacterGen.Races
             LandSpeed = new Measurement("feet per round");
             AerialSpeed = new Measurement("feet per round");
             SwimSpeed = new Measurement("feet per round");
+            PCChallengeRatingAdjustment = 0;
+            NPCChallengeRatingAdjustment = -1;
         }
     }
 }
