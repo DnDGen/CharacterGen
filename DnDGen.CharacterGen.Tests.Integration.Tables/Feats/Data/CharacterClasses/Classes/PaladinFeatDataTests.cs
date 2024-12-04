@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClasses.Classes
@@ -27,7 +27,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
                 FeatConstants.HeavyArmorProficiency,
                 FeatConstants.ShieldProficiency,
                 FeatConstants.AuraOfGood,
-                FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
                 FeatConstants.SmiteEvil + "1",
                 FeatConstants.SmiteEvil + "2",
                 FeatConstants.SmiteEvil + "3",
@@ -198,9 +198,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.CharacterClass
             0,
             0,
             "", true)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DetectAlignment,
+            SpellConstants.DetectEvil,
             0,
             "",
             FeatConstants.Frequencies.AtWill,

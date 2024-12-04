@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRaces
@@ -29,12 +29,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
                 FeatConstants.NaturalArmor,
                 FeatConstants.NaturalWeapon + "Bite",
                 FeatConstants.NaturalWeapon + "Slam",
-                FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstEvil,
                 FeatConstants.SpellLikeAbility + SpellConstants.Teleport_Greater,
                 FeatConstants.SpellLikeAbility + SpellConstants.Tongues,
                 FeatConstants.SpellLikeAbility + SpellConstants.Aid,
                 FeatConstants.SpellLikeAbility + SpellConstants.ContinualFlame,
-                FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
                 FeatConstants.SpellLikeAbility + SpellConstants.Message,
                 FeatConstants.SaveBonus + SavingThrowConstants.Will,
                 FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
@@ -156,9 +156,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstEvil,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.MagicCircleAgainstAlignment,
+            SpellConstants.MagicCircleAgainstEvil,
             0,
             FeatConstants.Frequencies.Constant,
             0,
@@ -201,9 +201,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DetectAlignment,
+            SpellConstants.DetectEvil,
             0,
             FeatConstants.Frequencies.AtWill,
             0,

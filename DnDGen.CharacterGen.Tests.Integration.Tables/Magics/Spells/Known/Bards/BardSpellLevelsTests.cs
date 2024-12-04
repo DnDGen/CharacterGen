@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
@@ -43,18 +43,18 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.CharmPerson,
                 SpellConstants.ComprehendLanguages,
                 SpellConstants.Confusion_Lesser,
-                SpellConstants.CureInflictLightWounds,
+                SpellConstants.CureLightWounds,
                 SpellConstants.DetectSecretDoors,
                 SpellConstants.DisguiseSelf,
                 SpellConstants.Erase,
                 SpellConstants.ExpeditiousRetreat,
                 SpellConstants.FeatherFall,
                 SpellConstants.Grease,
-                SpellConstants.HideousLaughter,
+                SpellConstants.TashasHideousLaughter,
                 SpellConstants.Hypnotism,
                 SpellConstants.Identify,
                 SpellConstants.MagicMouth,
-                SpellConstants.MagicAura,
+                SpellConstants.NystulsMagicAura,
                 SpellConstants.ObscureObject,
                 SpellConstants.RemoveFear,
                 SpellConstants.SilentImage,
@@ -70,7 +70,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.Blur,
                 SpellConstants.CalmEmotions,
                 SpellConstants.CatsGrace,
-                SpellConstants.CureInflictModerateWounds,
+                SpellConstants.CureModerateWounds,
                 SpellConstants.Darkness,
                 SpellConstants.DazeMonster,
                 SpellConstants.DelayPoison,
@@ -103,7 +103,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.ClairaudienceClairvoyance,
                 SpellConstants.Confusion,
                 SpellConstants.CrushingDespair,
-                SpellConstants.CureInflictSeriousWounds,
+                SpellConstants.CureSeriousWounds,
                 SpellConstants.Daylight,
                 SpellConstants.DeepSlumber,
                 SpellConstants.DispelMagic,
@@ -127,9 +127,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.Slow,
                 SpellConstants.SpeakWithAnimals,
                 SpellConstants.SummonMonsterIII,
-                SpellConstants.TinyHut,
+                SpellConstants.LeomundsTinyHut,
                 SpellConstants.BreakEnchantment,
-                SpellConstants.CureInflictCriticalWounds,
+                SpellConstants.CureCriticalWounds,
                 SpellConstants.DetectScrying,
                 SpellConstants.DimensionDoor,
                 SpellConstants.DominatePerson,
@@ -143,13 +143,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.NeutralizePoison,
                 SpellConstants.RainbowPattern,
                 SpellConstants.RepelVermin,
-                SpellConstants.SecureShelter,
+                SpellConstants.LeomundsSecureShelter,
                 SpellConstants.ShadowConjuration,
                 SpellConstants.Shout,
                 SpellConstants.SpeakWithPlants,
                 SpellConstants.SummonMonsterIV,
                 SpellConstants.ZoneOfSilence,
-                SpellConstants.CureInflictLightWounds_Mass,
+                SpellConstants.CureLightWounds_Mass,
                 SpellConstants.DispelMagic_Greater,
                 SpellConstants.Dream,
                 SpellConstants.FalseVision,
@@ -169,14 +169,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
                 SpellConstants.AnimateObjects,
                 SpellConstants.CatsGrace_Mass,
                 SpellConstants.CharmMonster_Mass,
-                SpellConstants.CureInflictModerateWounds_Mass,
+                SpellConstants.CureModerateWounds_Mass,
                 SpellConstants.EaglesSplendor_Mass,
                 SpellConstants.Eyebite,
                 SpellConstants.FindThePath,
                 SpellConstants.FoxsCunning_Mass,
                 SpellConstants.GeasQuest,
                 SpellConstants.HeroesFeast,
-                SpellConstants.IrresistibleDance,
+                SpellConstants.OttosIrresistibleDance,
                 SpellConstants.PermanentImage,
                 SpellConstants.ProgrammedImage,
                 SpellConstants.ProjectImage,
@@ -220,18 +220,18 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.CharmPerson, 1)]
         [TestCase(SpellConstants.ComprehendLanguages, 1)]
         [TestCase(SpellConstants.Confusion_Lesser, 1)]
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
+        [TestCase(SpellConstants.CureLightWounds, 1)]
         [TestCase(SpellConstants.DetectSecretDoors, 1)]
         [TestCase(SpellConstants.DisguiseSelf, 1)]
         [TestCase(SpellConstants.Erase, 1)]
         [TestCase(SpellConstants.ExpeditiousRetreat, 1)]
         [TestCase(SpellConstants.FeatherFall, 1)]
         [TestCase(SpellConstants.Grease, 1)]
-        [TestCase(SpellConstants.HideousLaughter, 1)]
+        [TestCase(SpellConstants.TashasHideousLaughter, 1)]
         [TestCase(SpellConstants.Hypnotism, 1)]
         [TestCase(SpellConstants.Identify, 1)]
         [TestCase(SpellConstants.MagicMouth, 1)]
-        [TestCase(SpellConstants.MagicAura, 1)]
+        [TestCase(SpellConstants.NystulsMagicAura, 1)]
         [TestCase(SpellConstants.ObscureObject, 1)]
         [TestCase(SpellConstants.RemoveFear, 1)]
         [TestCase(SpellConstants.SilentImage, 1)]
@@ -247,7 +247,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.Blur, 2)]
         [TestCase(SpellConstants.CalmEmotions, 2)]
         [TestCase(SpellConstants.CatsGrace, 2)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 2)]
+        [TestCase(SpellConstants.CureModerateWounds, 2)]
         [TestCase(SpellConstants.Darkness, 2)]
         [TestCase(SpellConstants.DazeMonster, 2)]
         [TestCase(SpellConstants.DelayPoison, 2)]
@@ -280,7 +280,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.ClairaudienceClairvoyance, 3)]
         [TestCase(SpellConstants.Confusion, 3)]
         [TestCase(SpellConstants.CrushingDespair, 3)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 3)]
+        [TestCase(SpellConstants.CureSeriousWounds, 3)]
         [TestCase(SpellConstants.Daylight, 3)]
         [TestCase(SpellConstants.DeepSlumber, 3)]
         [TestCase(SpellConstants.DispelMagic, 3)]
@@ -304,9 +304,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.Slow, 3)]
         [TestCase(SpellConstants.SpeakWithAnimals, 3)]
         [TestCase(SpellConstants.SummonMonsterIII, 3)]
-        [TestCase(SpellConstants.TinyHut, 3)]
+        [TestCase(SpellConstants.LeomundsTinyHut, 3)]
         [TestCase(SpellConstants.BreakEnchantment, 4)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 4)]
+        [TestCase(SpellConstants.CureCriticalWounds, 4)]
         [TestCase(SpellConstants.DetectScrying, 4)]
         [TestCase(SpellConstants.DimensionDoor, 4)]
         [TestCase(SpellConstants.DominatePerson, 4)]
@@ -320,13 +320,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.NeutralizePoison, 4)]
         [TestCase(SpellConstants.RainbowPattern, 4)]
         [TestCase(SpellConstants.RepelVermin, 4)]
-        [TestCase(SpellConstants.SecureShelter, 4)]
+        [TestCase(SpellConstants.LeomundsSecureShelter, 4)]
         [TestCase(SpellConstants.ShadowConjuration, 4)]
         [TestCase(SpellConstants.Shout, 4)]
         [TestCase(SpellConstants.SpeakWithPlants, 4)]
         [TestCase(SpellConstants.SummonMonsterIV, 4)]
         [TestCase(SpellConstants.ZoneOfSilence, 4)]
-        [TestCase(SpellConstants.CureInflictLightWounds_Mass, 5)]
+        [TestCase(SpellConstants.CureLightWounds_Mass, 5)]
         [TestCase(SpellConstants.DispelMagic_Greater, 5)]
         [TestCase(SpellConstants.Dream, 5)]
         [TestCase(SpellConstants.FalseVision, 5)]
@@ -346,14 +346,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Bards
         [TestCase(SpellConstants.AnimateObjects, 6)]
         [TestCase(SpellConstants.CatsGrace_Mass, 6)]
         [TestCase(SpellConstants.CharmMonster_Mass, 6)]
-        [TestCase(SpellConstants.CureInflictModerateWounds_Mass, 6)]
+        [TestCase(SpellConstants.CureModerateWounds_Mass, 6)]
         [TestCase(SpellConstants.EaglesSplendor_Mass, 6)]
         [TestCase(SpellConstants.Eyebite, 6)]
         [TestCase(SpellConstants.FindThePath, 6)]
         [TestCase(SpellConstants.FoxsCunning_Mass, 6)]
         [TestCase(SpellConstants.GeasQuest, 6)]
         [TestCase(SpellConstants.HeroesFeast, 6)]
-        [TestCase(SpellConstants.IrresistibleDance, 6)]
+        [TestCase(SpellConstants.OttosIrresistibleDance, 6)]
         [TestCase(SpellConstants.PermanentImage, 6)]
         [TestCase(SpellConstants.ProgrammedImage, 6)]
         [TestCase(SpellConstants.ProjectImage, 6)]

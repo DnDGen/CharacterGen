@@ -1,9 +1,9 @@
 ﻿using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRaces
@@ -30,9 +30,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
                 FeatConstants.SpellLikeAbility + SpellConstants.DetectMagic,
                 FeatConstants.SpellLikeAbility + SpellConstants.DetectThoughts,
                 FeatConstants.SpellLikeAbility + SpellConstants.Fear,
-                FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromLaw,
                 FeatConstants.SpellLikeAbility + SpellConstants.SeeInvisibility,
-                FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.DispelLaw,
                 FeatConstants.SpellLikeAbility + SpellConstants.DeeperDarkness,
                 FeatConstants.SpellLikeAbility + SpellConstants.Fireball,
                 FeatConstants.ChangeShape,
@@ -130,9 +130,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.ProtectionFromLaw,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.ProtectionFromAlignment,
+            SpellConstants.ProtectionFromLaw,
             0,
             FeatConstants.Frequencies.AtWill,
             0,
@@ -148,9 +148,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelLaw,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DispelAlignment,
+            SpellConstants.DispelLaw,
             3,
             FeatConstants.Frequencies.Day,
             0,

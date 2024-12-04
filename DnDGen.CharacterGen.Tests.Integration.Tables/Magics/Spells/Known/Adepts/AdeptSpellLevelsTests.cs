@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adepts
@@ -22,7 +22,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
             var names = new[]
             {
                 SpellConstants.CreateWater,
-                SpellConstants.CureInflictMinorWounds,
+                SpellConstants.CureMinorWounds,
                 SpellConstants.DetectMagic,
                 SpellConstants.GhostSound,
                 SpellConstants.Guidance,
@@ -36,18 +36,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
                 SpellConstants.CauseFear,
                 SpellConstants.Command,
                 SpellConstants.ComprehendLanguages,
-                SpellConstants.CureInflictLightWounds,
-                SpellConstants.DetectAlignment,
+                SpellConstants.CureLightWounds,
+                SpellConstants.DetectChaos,
+                SpellConstants.DetectEvil,
+                SpellConstants.DetectGood,
+                SpellConstants.DetectLaw,
                 SpellConstants.EndureElements,
                 SpellConstants.ObscuringMist,
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromChaos,
+                SpellConstants.ProtectionFromEvil,
+                SpellConstants.ProtectionFromGood,
+                SpellConstants.ProtectionFromLaw,
                 SpellConstants.Sleep,
                 SpellConstants.Aid,
                 SpellConstants.AnimalTrance,
                 SpellConstants.BearsEndurance,
                 SpellConstants.BullsStrength,
                 SpellConstants.CatsGrace,
-                SpellConstants.CureInflictModerateWounds,
+                SpellConstants.CureModerateWounds,
                 SpellConstants.Darkness,
                 SpellConstants.DelayPoison,
                 SpellConstants.Invisibility,
@@ -60,7 +66,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
                 SpellConstants.BestowCurse,
                 SpellConstants.Contagion,
                 SpellConstants.ContinualFlame,
-                SpellConstants.CureInflictSeriousWounds,
+                SpellConstants.CureSeriousWounds,
                 SpellConstants.Daylight,
                 SpellConstants.DeeperDarkness,
                 SpellConstants.LightningBolt,
@@ -68,7 +74,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
                 SpellConstants.RemoveCurse,
                 SpellConstants.RemoveDisease,
                 SpellConstants.Tongues,
-                SpellConstants.CureInflictCriticalWounds,
+                SpellConstants.CureCriticalWounds,
                 SpellConstants.MinorCreation,
                 SpellConstants.Polymorph,
                 SpellConstants.Restoration,
@@ -77,7 +83,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
                 SpellConstants.BalefulPolymorph,
                 SpellConstants.BreakEnchantment,
                 SpellConstants.Commune,
-                SpellConstants.HealHarm,
+                SpellConstants.Heal,
                 SpellConstants.MajorCreation,
                 SpellConstants.RaiseDead,
                 SpellConstants.TrueSeeing,
@@ -95,7 +101,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
         }
 
         [TestCase(SpellConstants.CreateWater, 0)]
-        [TestCase(SpellConstants.CureInflictMinorWounds, 0)]
+        [TestCase(SpellConstants.CureMinorWounds, 0)]
         [TestCase(SpellConstants.DetectMagic, 0)]
         [TestCase(SpellConstants.GhostSound, 0)]
         [TestCase(SpellConstants.Guidance, 0)]
@@ -109,18 +115,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
         [TestCase(SpellConstants.CauseFear, 1)]
         [TestCase(SpellConstants.Command, 1)]
         [TestCase(SpellConstants.ComprehendLanguages, 1)]
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
-        [TestCase(SpellConstants.DetectAlignment, 1)]
+        [TestCase(SpellConstants.CureLightWounds, 1)]
+        [TestCase(SpellConstants.DetectChaos, 1)]
+        [TestCase(SpellConstants.DetectEvil, 1)]
+        [TestCase(SpellConstants.DetectGood, 1)]
+        [TestCase(SpellConstants.DetectLaw, 1)]
         [TestCase(SpellConstants.EndureElements, 1)]
         [TestCase(SpellConstants.ObscuringMist, 1)]
-        [TestCase(SpellConstants.ProtectionFromAlignment, 1)]
+        [TestCase(SpellConstants.ProtectionFromChaos, 1)]
+        [TestCase(SpellConstants.ProtectionFromEvil, 1)]
+        [TestCase(SpellConstants.ProtectionFromGood, 1)]
+        [TestCase(SpellConstants.ProtectionFromLaw, 1)]
         [TestCase(SpellConstants.Sleep, 1)]
         [TestCase(SpellConstants.Aid, 2)]
         [TestCase(SpellConstants.AnimalTrance, 2)]
         [TestCase(SpellConstants.BearsEndurance, 2)]
         [TestCase(SpellConstants.BullsStrength, 2)]
         [TestCase(SpellConstants.CatsGrace, 2)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 2)]
+        [TestCase(SpellConstants.CureModerateWounds, 2)]
         [TestCase(SpellConstants.Darkness, 2)]
         [TestCase(SpellConstants.DelayPoison, 2)]
         [TestCase(SpellConstants.Invisibility, 2)]
@@ -133,7 +145,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
         [TestCase(SpellConstants.BestowCurse, 3)]
         [TestCase(SpellConstants.Contagion, 3)]
         [TestCase(SpellConstants.ContinualFlame, 3)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 3)]
+        [TestCase(SpellConstants.CureSeriousWounds, 3)]
         [TestCase(SpellConstants.Daylight, 3)]
         [TestCase(SpellConstants.DeeperDarkness, 3)]
         [TestCase(SpellConstants.LightningBolt, 3)]
@@ -141,7 +153,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
         [TestCase(SpellConstants.RemoveCurse, 3)]
         [TestCase(SpellConstants.RemoveDisease, 3)]
         [TestCase(SpellConstants.Tongues, 3)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 4)]
+        [TestCase(SpellConstants.CureCriticalWounds, 4)]
         [TestCase(SpellConstants.MinorCreation, 4)]
         [TestCase(SpellConstants.Polymorph, 4)]
         [TestCase(SpellConstants.Restoration, 4)]
@@ -150,7 +162,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adept
         [TestCase(SpellConstants.BalefulPolymorph, 5)]
         [TestCase(SpellConstants.BreakEnchantment, 5)]
         [TestCase(SpellConstants.Commune, 5)]
-        [TestCase(SpellConstants.HealHarm, 5)]
+        [TestCase(SpellConstants.Heal, 5)]
         [TestCase(SpellConstants.MajorCreation, 5)]
         [TestCase(SpellConstants.RaiseDead, 5)]
         [TestCase(SpellConstants.TrueSeeing, 5)]
