@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -21,11 +21,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         {
             var names = new[]
             {
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromGood,
                 SpellConstants.Desecrate,
-                SpellConstants.MagicCircleAgainstAlignment,
+                SpellConstants.MagicCircleAgainstGood,
                 SpellConstants.UnholyBlight,
-                SpellConstants.DispelAlignment,
+                SpellConstants.DispelGood,
                 SpellConstants.CreateUndead,
                 SpellConstants.Blasphemy,
                 SpellConstants.UnholyAura,
@@ -42,11 +42,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Evil]);
         }
 
-        [TestCase(SpellConstants.ProtectionFromAlignment, 1)]
+        [TestCase(SpellConstants.ProtectionFromGood, 1)]
         [TestCase(SpellConstants.Desecrate, 2)]
-        [TestCase(SpellConstants.MagicCircleAgainstAlignment, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstGood, 3)]
         [TestCase(SpellConstants.UnholyBlight, 4)]
-        [TestCase(SpellConstants.DispelAlignment, 5)]
+        [TestCase(SpellConstants.DispelGood, 5)]
         [TestCase(SpellConstants.CreateUndead, 6)]
         [TestCase(SpellConstants.Blasphemy, 7)]
         [TestCase(SpellConstants.UnholyAura, 8)]

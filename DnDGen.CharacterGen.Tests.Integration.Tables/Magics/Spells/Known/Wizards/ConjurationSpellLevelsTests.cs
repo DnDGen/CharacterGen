@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -28,7 +28,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.ObscuringMist,
                 SpellConstants.SummonMonsterI,
                 SpellConstants.UnseenServant,
-                SpellConstants.AcidArrow,
+                SpellConstants.MelfsAcidArrow,
                 SpellConstants.FogCloud,
                 SpellConstants.Glitterdust,
                 SpellConstants.SummonMonsterII,
@@ -39,17 +39,17 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.SleetStorm,
                 SpellConstants.StinkingCloud,
                 SpellConstants.SummonMonsterIII,
-                SpellConstants.BlackTentacles,
+                SpellConstants.EvardsBlackTentacles,
                 SpellConstants.DimensionDoor,
                 SpellConstants.MinorCreation,
-                SpellConstants.SecureShelter,
+                SpellConstants.LeomundsSecureShelter,
                 SpellConstants.SolidFog,
                 SpellConstants.SummonMonsterIV,
                 SpellConstants.Cloudkill,
-                SpellConstants.MagesFaithfulHound,
+                SpellConstants.MordenkainensFaithfulHound,
                 SpellConstants.MajorCreation,
                 SpellConstants.PlanarBinding_Lesser,
-                SpellConstants.SecretChest,
+                SpellConstants.LeomundsSecretChest,
                 SpellConstants.SummonMonsterV,
                 SpellConstants.Teleport,
                 SpellConstants.WallOfStone,
@@ -57,8 +57,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.PlanarBinding,
                 SpellConstants.SummonMonsterVI,
                 SpellConstants.WallOfIron,
-                SpellConstants.InstantSummons,
-                SpellConstants.MagesMagnificentMansion,
+                SpellConstants.DrawmijsInstantSummons,
+                SpellConstants.MordenkainensMagnificentMansion,
                 SpellConstants.PhaseDoor,
                 SpellConstants.PlaneShift,
                 SpellConstants.SummonMonsterVII,
@@ -92,7 +92,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.ObscuringMist, 1)]
         [TestCase(SpellConstants.SummonMonsterI, 1)]
         [TestCase(SpellConstants.UnseenServant, 1)]
-        [TestCase(SpellConstants.AcidArrow, 2)]
+        [TestCase(SpellConstants.MelfsAcidArrow, 2)]
         [TestCase(SpellConstants.FogCloud, 2)]
         [TestCase(SpellConstants.Glitterdust, 2)]
         [TestCase(SpellConstants.SummonMonsterII, 2)]
@@ -103,17 +103,17 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.SleetStorm, 3)]
         [TestCase(SpellConstants.StinkingCloud, 3)]
         [TestCase(SpellConstants.SummonMonsterIII, 3)]
-        [TestCase(SpellConstants.BlackTentacles, 4)]
+        [TestCase(SpellConstants.EvardsBlackTentacles, 4)]
         [TestCase(SpellConstants.DimensionDoor, 4)]
         [TestCase(SpellConstants.MinorCreation, 4)]
-        [TestCase(SpellConstants.SecureShelter, 4)]
+        [TestCase(SpellConstants.LeomundsSecureShelter, 4)]
         [TestCase(SpellConstants.SolidFog, 4)]
         [TestCase(SpellConstants.SummonMonsterIV, 4)]
         [TestCase(SpellConstants.Cloudkill, 5)]
-        [TestCase(SpellConstants.MagesFaithfulHound, 5)]
+        [TestCase(SpellConstants.MordenkainensFaithfulHound, 5)]
         [TestCase(SpellConstants.MajorCreation, 5)]
         [TestCase(SpellConstants.PlanarBinding_Lesser, 5)]
-        [TestCase(SpellConstants.SecretChest, 5)]
+        [TestCase(SpellConstants.LeomundsSecretChest, 5)]
         [TestCase(SpellConstants.SummonMonsterV, 5)]
         [TestCase(SpellConstants.Teleport, 5)]
         [TestCase(SpellConstants.WallOfStone, 5)]
@@ -121,8 +121,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.PlanarBinding, 6)]
         [TestCase(SpellConstants.SummonMonsterVI, 6)]
         [TestCase(SpellConstants.WallOfIron, 6)]
-        [TestCase(SpellConstants.InstantSummons, 7)]
-        [TestCase(SpellConstants.MagesMagnificentMansion, 7)]
+        [TestCase(SpellConstants.DrawmijsInstantSummons, 7)]
+        [TestCase(SpellConstants.MordenkainensMagnificentMansion, 7)]
         [TestCase(SpellConstants.PhaseDoor, 7)]
         [TestCase(SpellConstants.PlaneShift, 7)]
         [TestCase(SpellConstants.SummonMonsterVII, 7)]

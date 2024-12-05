@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -26,7 +26,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Hypnotism,
                 SpellConstants.Sleep,
                 SpellConstants.DazeMonster,
-                SpellConstants.HideousLaughter,
+                SpellConstants.TashasHideousLaughter,
                 SpellConstants.TouchOfIdiocy,
                 SpellConstants.DeepSlumber,
                 SpellConstants.Heroism,
@@ -54,7 +54,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Binding,
                 SpellConstants.CharmMonster_Mass,
                 SpellConstants.Demand,
-                SpellConstants.IrresistibleDance,
+                SpellConstants.OttosIrresistibleDance,
                 SpellConstants.PowerWordStun,
                 SpellConstants.SymbolOfInsanity,
                 SpellConstants.Sympathy,
@@ -78,7 +78,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Hypnotism, 1)]
         [TestCase(SpellConstants.Sleep, 1)]
         [TestCase(SpellConstants.DazeMonster, 2)]
-        [TestCase(SpellConstants.HideousLaughter, 2)]
+        [TestCase(SpellConstants.TashasHideousLaughter, 2)]
         [TestCase(SpellConstants.TouchOfIdiocy, 2)]
         [TestCase(SpellConstants.DeepSlumber, 3)]
         [TestCase(SpellConstants.Heroism, 3)]
@@ -106,7 +106,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Binding, 8)]
         [TestCase(SpellConstants.CharmMonster_Mass, 8)]
         [TestCase(SpellConstants.Demand, 8)]
-        [TestCase(SpellConstants.IrresistibleDance, 8)]
+        [TestCase(SpellConstants.OttosIrresistibleDance, 8)]
         [TestCase(SpellConstants.PowerWordStun, 8)]
         [TestCase(SpellConstants.SymbolOfInsanity, 8)]
         [TestCase(SpellConstants.Sympathy, 8)]

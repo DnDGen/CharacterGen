@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -27,9 +27,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.SpellImmunity,
                 SpellConstants.RighteousMight,
                 SpellConstants.Stoneskin,
-                SpellConstants.GraspingHand,
-                SpellConstants.ClenchedFist,
-                SpellConstants.CrushingHand
+                SpellConstants.BigbysGraspingHand,
+                SpellConstants.BigbysClenchedFist,
+                SpellConstants.BigbysCrushingHand
             };
 
             AssertCollectionNames(names);
@@ -48,9 +48,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [TestCase(SpellConstants.SpellImmunity, 4)]
         [TestCase(SpellConstants.RighteousMight, 5)]
         [TestCase(SpellConstants.Stoneskin, 6)]
-        [TestCase(SpellConstants.GraspingHand, 7)]
-        [TestCase(SpellConstants.ClenchedFist, 8)]
-        [TestCase(SpellConstants.CrushingHand, 9)]
+        [TestCase(SpellConstants.BigbysGraspingHand, 7)]
+        [TestCase(SpellConstants.BigbysClenchedFist, 8)]
+        [TestCase(SpellConstants.BigbysCrushingHand, 9)]
         public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

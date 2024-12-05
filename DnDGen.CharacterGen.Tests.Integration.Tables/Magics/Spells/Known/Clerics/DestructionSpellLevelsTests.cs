@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -21,12 +21,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         {
             var names = new[]
             {
-                SpellConstants.CureInflictLightWounds,
+                SpellConstants.InflictLightWounds,
                 SpellConstants.Shatter,
                 SpellConstants.Contagion,
-                SpellConstants.CureInflictCriticalWounds,
-                SpellConstants.CureInflictLightWounds_Mass,
-                SpellConstants.HealHarm,
+                SpellConstants.InflictCriticalWounds,
+                SpellConstants.InflictLightWounds_Mass,
+                SpellConstants.Harm,
                 SpellConstants.Disintegrate,
                 SpellConstants.Earthquake,
                 SpellConstants.Implosion
@@ -42,12 +42,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Destruction]);
         }
 
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
+        [TestCase(SpellConstants.InflictLightWounds, 1)]
         [TestCase(SpellConstants.Shatter, 2)]
         [TestCase(SpellConstants.Contagion, 3)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 4)]
-        [TestCase(SpellConstants.CureInflictLightWounds_Mass, 5)]
-        [TestCase(SpellConstants.HealHarm, 6)]
+        [TestCase(SpellConstants.InflictCriticalWounds, 4)]
+        [TestCase(SpellConstants.InflictLightWounds_Mass, 5)]
+        [TestCase(SpellConstants.Harm, 6)]
         [TestCase(SpellConstants.Disintegrate, 7)]
         [TestCase(SpellConstants.Earthquake, 8)]
         [TestCase(SpellConstants.Implosion, 9)]

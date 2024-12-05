@@ -2,7 +2,7 @@
 
 <collections>
   <collection>
-    <name>Protection from chaos/law/good/evil</name>
+    <name>Protection from evil</name>
     <entry>1</entry>
   </collection>
   <collection>
@@ -10,7 +10,7 @@
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Magic circle against chaos/law/good/evil</name>
+    <name>Magic circle against evil</name>
     <entry>3</entry>
   </collection>
   <collection>
@@ -18,7 +18,7 @@
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Dispel good/evil/law/chaos</name>
+    <name>Dispel evil</name>
     <entry>5</entry>
   </collection>
   <collection>

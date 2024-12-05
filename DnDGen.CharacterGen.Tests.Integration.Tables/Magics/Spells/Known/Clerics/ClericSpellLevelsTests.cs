@@ -22,7 +22,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             var names = new[]
             {
                 SpellConstants.CreateWater,
-                SpellConstants.CureInflictMinorWounds,
+                SpellConstants.CureMinorWounds,
+                SpellConstants.InflictMinorWounds,
                 SpellConstants.DetectMagic,
                 SpellConstants.DetectPoison,
                 SpellConstants.Guidance,
@@ -38,10 +39,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.CauseFear,
                 SpellConstants.Command,
                 SpellConstants.ComprehendLanguages,
-                SpellConstants.CureInflictLightWounds,
+                SpellConstants.CureLightWounds,
+                SpellConstants.InflictLightWounds,
                 SpellConstants.CurseWater,
                 SpellConstants.Deathwatch,
-                SpellConstants.DetectAlignment,
+                SpellConstants.DetectChaos,
+                SpellConstants.DetectEvil,
+                SpellConstants.DetectGood,
+                SpellConstants.DetectLaw,
                 SpellConstants.DetectUndead,
                 SpellConstants.DivineFavor,
                 SpellConstants.Doom,
@@ -51,7 +56,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.MagicStone,
                 SpellConstants.MagicWeapon,
                 SpellConstants.ObscuringMist,
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromChaos,
+                SpellConstants.ProtectionFromEvil,
+                SpellConstants.ProtectionFromGood,
+                SpellConstants.ProtectionFromLaw,
                 SpellConstants.RemoveFear,
                 SpellConstants.Sanctuary,
                 SpellConstants.ShieldOfFaith,
@@ -63,7 +71,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.BullsStrength,
                 SpellConstants.CalmEmotions,
                 SpellConstants.Consecrate,
-                SpellConstants.CureInflictModerateWounds,
+                SpellConstants.CureModerateWounds,
+                SpellConstants.InflictModerateWounds,
                 SpellConstants.Darkness,
                 SpellConstants.DeathKnell,
                 SpellConstants.DelayPoison,
@@ -93,7 +102,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.Contagion,
                 SpellConstants.ContinualFlame,
                 SpellConstants.CreateFoodAndWater,
-                SpellConstants.CureInflictSeriousWounds,
+                SpellConstants.CureSeriousWounds,
+                SpellConstants.InflictSeriousWounds,
                 SpellConstants.Daylight,
                 SpellConstants.DeeperDarkness,
                 SpellConstants.DispelMagic,
@@ -101,7 +111,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.HelpingHand,
                 SpellConstants.InvisibilityPurge,
                 SpellConstants.LocateObject,
-                SpellConstants.MagicCircleAgainstAlignment,
+                SpellConstants.MagicCircleAgainstChaos,
+                SpellConstants.MagicCircleAgainstEvil,
+                SpellConstants.MagicCircleAgainstGood,
+                SpellConstants.MagicCircleAgainstLaw,
                 SpellConstants.MagicVestment,
                 SpellConstants.MeldIntoStone,
                 SpellConstants.ObscureObject,
@@ -119,7 +132,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.WindWall,
                 SpellConstants.AirWalk,
                 SpellConstants.ControlWater,
-                SpellConstants.CureInflictCriticalWounds,
+                SpellConstants.CureCriticalWounds,
+                SpellConstants.InflictCriticalWounds,
                 SpellConstants.DeathWard,
                 SpellConstants.DimensionalAnchor,
                 SpellConstants.DiscernLies,
@@ -143,8 +157,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.BreakEnchantment,
                 SpellConstants.Command_Greater,
                 SpellConstants.Commune,
-                SpellConstants.CureInflictLightWounds_Mass,
-                SpellConstants.DispelAlignment,
+                SpellConstants.CureLightWounds_Mass,
+                SpellConstants.InflictLightWounds_Mass,
+                SpellConstants.DispelChaos,
+                SpellConstants.DispelEvil,
+                SpellConstants.DispelGood,
+                SpellConstants.DispelLaw,
                 SpellConstants.DisruptingWeapon,
                 SpellConstants.FlameStrike,
                 SpellConstants.Hallow,
@@ -169,14 +187,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.BladeBarrier,
                 SpellConstants.BullsStrength_Mass,
                 SpellConstants.CreateUndead,
-                SpellConstants.CureInflictModerateWounds_Mass,
+                SpellConstants.CureModerateWounds_Mass,
+                SpellConstants.InflictModerateWounds_Mass,
                 SpellConstants.DispelMagic_Greater,
                 SpellConstants.EaglesSplendor_Mass,
                 SpellConstants.FindThePath,
                 SpellConstants.Forbiddance,
                 SpellConstants.GeasQuest,
                 SpellConstants.GlyphOfWarding_Greater,
-                SpellConstants.HealHarm,
+                SpellConstants.Heal,
+                SpellConstants.Harm,
                 SpellConstants.HeroesFeast,
                 SpellConstants.OwlsWisdom_Mass,
                 SpellConstants.PlanarAlly,
@@ -188,7 +208,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.WordOfRecall,
                 SpellConstants.Blasphemy,
                 SpellConstants.ControlWeather,
-                SpellConstants.CureInflictSeriousWounds_Mass,
+                SpellConstants.CureSeriousWounds_Mass,
+                SpellConstants.InflictSeriousWounds_Mass,
                 SpellConstants.Destruction,
                 SpellConstants.Dictum,
                 SpellConstants.EtherealJaunt,
@@ -206,7 +227,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.AntimagicField,
                 SpellConstants.CloakOfChaos,
                 SpellConstants.CreateGreaterUndead,
-                SpellConstants.CureInflictCriticalWounds_Mass,
+                SpellConstants.CureCriticalWounds_Mass,
+                SpellConstants.InflictCriticalWounds_Mass,
                 SpellConstants.DimensionalLock,
                 SpellConstants.DiscernLocation,
                 SpellConstants.Earthquake,
@@ -223,7 +245,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.EnergyDrain,
                 SpellConstants.Etherealness,
                 SpellConstants.Gate,
-                SpellConstants.HealHarm_Mass,
+                SpellConstants.Heal_Mass,
+                SpellConstants.Harm_Mass,
                 SpellConstants.Implosion,
                 SpellConstants.Miracle,
                 SpellConstants.SoulBind,
@@ -448,7 +471,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [TestCase(SpellConstants.AntimagicField, 8)]
         [TestCase(SpellConstants.CloakOfChaos, 8)]
         [TestCase(SpellConstants.CreateGreaterUndead, 8)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds_Mass, 8)]
+        [TestCase(SpellConstants.CureCriticalWounds_Mass, 8)]
+        [TestCase(SpellConstants.InflictCriticalWounds_Mass, 8)]
         [TestCase(SpellConstants.DimensionalLock, 8)]
         [TestCase(SpellConstants.DiscernLocation, 8)]
         [TestCase(SpellConstants.Earthquake, 8)]
@@ -465,7 +489,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [TestCase(SpellConstants.EnergyDrain, 9)]
         [TestCase(SpellConstants.Etherealness, 9)]
         [TestCase(SpellConstants.Gate, 9)]
-        [TestCase(SpellConstants.HealHarm_Mass, 9)]
+        [TestCase(SpellConstants.Heal_Mass, 9)]
+        [TestCase(SpellConstants.Harm_Mass, 9)]
         [TestCase(SpellConstants.Implosion, 9)]
         [TestCase(SpellConstants.Miracle, 9)]
         [TestCase(SpellConstants.SoulBind, 9)]

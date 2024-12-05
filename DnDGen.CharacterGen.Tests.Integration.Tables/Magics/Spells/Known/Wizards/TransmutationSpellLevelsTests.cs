@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -80,7 +80,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.MoveEarth,
                 SpellConstants.OwlsWisdom_Mass,
                 SpellConstants.StoneToFlesh,
-                SpellConstants.Transformation,
+                SpellConstants.TensersTransformation,
                 SpellConstants.ControlWeather,
                 SpellConstants.EtherealJaunt,
                 SpellConstants.ReverseGravity,
@@ -91,8 +91,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Etherealness,
                 SpellConstants.Shapechange,
                 SpellConstants.TimeStop,
-                SpellConstants.MnemonicEnhancer,
-                SpellConstants.MagesLucubration
+                SpellConstants.RarysMnemonicEnhancer,
+                SpellConstants.MordenkainensLucubration
             };
 
             AssertCollectionNames(names);
@@ -143,7 +143,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Slow, 3)]
         [TestCase(SpellConstants.WaterBreathing, 3)]
         [TestCase(SpellConstants.EnlargePerson_Mass, 4)]
-        [TestCase(SpellConstants.MnemonicEnhancer, 4)]
+        [TestCase(SpellConstants.RarysMnemonicEnhancer, 4)]
         [TestCase(SpellConstants.Polymorph, 4)]
         [TestCase(SpellConstants.ReducePerson_Mass, 4)]
         [TestCase(SpellConstants.StoneShape, 4)]
@@ -162,11 +162,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.EaglesSplendor_Mass, 6)]
         [TestCase(SpellConstants.FleshToStone, 6)]
         [TestCase(SpellConstants.FoxsCunning_Mass, 6)]
-        [TestCase(SpellConstants.MagesLucubration, 6)]
+        [TestCase(SpellConstants.MordenkainensLucubration, 6)]
         [TestCase(SpellConstants.MoveEarth, 6)]
         [TestCase(SpellConstants.OwlsWisdom_Mass, 6)]
         [TestCase(SpellConstants.StoneToFlesh, 6)]
-        [TestCase(SpellConstants.Transformation, 6)]
+        [TestCase(SpellConstants.TensersTransformation, 6)]
         [TestCase(SpellConstants.ControlWeather, 7)]
         [TestCase(SpellConstants.EtherealJaunt, 7)]
         [TestCase(SpellConstants.ReverseGravity, 7)]

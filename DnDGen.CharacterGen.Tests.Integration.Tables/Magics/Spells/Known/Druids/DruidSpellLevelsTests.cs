@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druids
@@ -22,7 +22,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
             var names = new[]
             {
                 SpellConstants.CreateWater,
-                SpellConstants.CureInflictMinorWounds,
+                SpellConstants.CureMinorWounds,
                 SpellConstants.DetectMagic,
                 SpellConstants.DetectPoison,
                 SpellConstants.Flare,
@@ -36,7 +36,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.Virtue,
                 SpellConstants.CalmAnimals,
                 SpellConstants.CharmAnimal,
-                SpellConstants.CureInflictLightWounds,
+                SpellConstants.CureLightWounds,
                 SpellConstants.DetectAnimalsOrPlants,
                 SpellConstants.DetectSnaresAndPits,
                 SpellConstants.EndureElements,
@@ -82,7 +82,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.WoodShape,
                 SpellConstants.CallLightning,
                 SpellConstants.Contagion,
-                SpellConstants.CureInflictModerateWounds,
+                SpellConstants.CureModerateWounds,
                 SpellConstants.Daylight,
                 SpellConstants.DiminishPlants,
                 SpellConstants.DominateAnimal,
@@ -107,7 +107,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.Blight,
                 SpellConstants.CommandPlants,
                 SpellConstants.ControlWater,
-                SpellConstants.CureInflictSeriousWounds,
+                SpellConstants.CureSeriousWounds,
                 SpellConstants.DispelMagic,
                 SpellConstants.FlameStrike,
                 SpellConstants.FreedomOfMovement,
@@ -126,7 +126,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.CallLightningStorm,
                 SpellConstants.CommuneWithNature,
                 SpellConstants.ControlWinds,
-                SpellConstants.CureInflictCriticalWounds,
+                SpellConstants.CureCriticalWounds,
                 SpellConstants.DeathWard,
                 SpellConstants.Hallow,
                 SpellConstants.InsectPlague,
@@ -142,7 +142,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.BearsEndurance_Mass,
                 SpellConstants.BullsStrength_Mass,
                 SpellConstants.CatsGrace_Mass,
-                SpellConstants.CureInflictLightWounds_Mass,
+                SpellConstants.CureLightWounds_Mass,
                 SpellConstants.DispelMagic_Greater,
                 SpellConstants.FindThePath,
                 SpellConstants.FireSeeds,
@@ -160,9 +160,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.Changestaff,
                 SpellConstants.ControlWeather,
                 SpellConstants.CreepingDoom,
-                SpellConstants.CureInflictModerateWounds_Mass,
+                SpellConstants.CureModerateWounds_Mass,
                 SpellConstants.FireStorm,
-                SpellConstants.HealHarm,
+                SpellConstants.Heal,
                 SpellConstants.Scrying_Greater,
                 SpellConstants.SummonNaturesAllyVII,
                 SpellConstants.Sunbeam,
@@ -171,7 +171,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.WindWalk,
                 SpellConstants.AnimalShapes,
                 SpellConstants.ControlPlants,
-                SpellConstants.CureInflictSeriousWounds_Mass,
+                SpellConstants.CureSeriousWounds_Mass,
                 SpellConstants.Earthquake,
                 SpellConstants.FingerOfDeath,
                 SpellConstants.RepelMetalOrStone,
@@ -181,7 +181,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
                 SpellConstants.Whirlwind,
                 SpellConstants.WordOfRecall,
                 SpellConstants.Antipathy,
-                SpellConstants.CureInflictCriticalWounds_Mass,
+                SpellConstants.CureCriticalWounds_Mass,
                 SpellConstants.ElementalSwarm,
                 SpellConstants.Foresight,
                 SpellConstants.Regenerate,
@@ -203,7 +203,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         }
 
         [TestCase(SpellConstants.CreateWater, 0)]
-        [TestCase(SpellConstants.CureInflictMinorWounds, 0)]
+        [TestCase(SpellConstants.CureMinorWounds, 0)]
         [TestCase(SpellConstants.DetectMagic, 0)]
         [TestCase(SpellConstants.DetectPoison, 0)]
         [TestCase(SpellConstants.Flare, 0)]
@@ -217,7 +217,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.Virtue, 0)]
         [TestCase(SpellConstants.CalmAnimals, 1)]
         [TestCase(SpellConstants.CharmAnimal, 1)]
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
+        [TestCase(SpellConstants.CureLightWounds, 1)]
         [TestCase(SpellConstants.DetectAnimalsOrPlants, 1)]
         [TestCase(SpellConstants.DetectSnaresAndPits, 1)]
         [TestCase(SpellConstants.EndureElements, 1)]
@@ -263,7 +263,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.WoodShape, 2)]
         [TestCase(SpellConstants.CallLightning, 3)]
         [TestCase(SpellConstants.Contagion, 3)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 3)]
+        [TestCase(SpellConstants.CureModerateWounds, 3)]
         [TestCase(SpellConstants.Daylight, 3)]
         [TestCase(SpellConstants.DiminishPlants, 3)]
         [TestCase(SpellConstants.DominateAnimal, 3)]
@@ -288,7 +288,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.Blight, 4)]
         [TestCase(SpellConstants.CommandPlants, 4)]
         [TestCase(SpellConstants.ControlWater, 4)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 4)]
+        [TestCase(SpellConstants.CureSeriousWounds, 4)]
         [TestCase(SpellConstants.DispelMagic, 4)]
         [TestCase(SpellConstants.FlameStrike, 4)]
         [TestCase(SpellConstants.FreedomOfMovement, 4)]
@@ -307,7 +307,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.CallLightningStorm, 5)]
         [TestCase(SpellConstants.CommuneWithNature, 5)]
         [TestCase(SpellConstants.ControlWinds, 5)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 5)]
+        [TestCase(SpellConstants.CureCriticalWounds, 5)]
         [TestCase(SpellConstants.DeathWard, 5)]
         [TestCase(SpellConstants.Hallow, 5)]
         [TestCase(SpellConstants.InsectPlague, 5)]
@@ -323,7 +323,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.BearsEndurance_Mass, 6)]
         [TestCase(SpellConstants.BullsStrength_Mass, 6)]
         [TestCase(SpellConstants.CatsGrace_Mass, 6)]
-        [TestCase(SpellConstants.CureInflictLightWounds_Mass, 6)]
+        [TestCase(SpellConstants.CureLightWounds_Mass, 6)]
         [TestCase(SpellConstants.DispelMagic_Greater, 6)]
         [TestCase(SpellConstants.FindThePath, 6)]
         [TestCase(SpellConstants.FireSeeds, 6)]
@@ -341,9 +341,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.Changestaff, 7)]
         [TestCase(SpellConstants.ControlWeather, 7)]
         [TestCase(SpellConstants.CreepingDoom, 7)]
-        [TestCase(SpellConstants.CureInflictModerateWounds_Mass, 7)]
+        [TestCase(SpellConstants.CureModerateWounds_Mass, 7)]
         [TestCase(SpellConstants.FireStorm, 7)]
-        [TestCase(SpellConstants.HealHarm, 7)]
+        [TestCase(SpellConstants.Heal, 7)]
         [TestCase(SpellConstants.Scrying_Greater, 7)]
         [TestCase(SpellConstants.SummonNaturesAllyVII, 7)]
         [TestCase(SpellConstants.Sunbeam, 7)]
@@ -352,7 +352,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.WindWalk, 7)]
         [TestCase(SpellConstants.AnimalShapes, 8)]
         [TestCase(SpellConstants.ControlPlants, 8)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds_Mass, 8)]
+        [TestCase(SpellConstants.CureSeriousWounds_Mass, 8)]
         [TestCase(SpellConstants.Earthquake, 8)]
         [TestCase(SpellConstants.FingerOfDeath, 8)]
         [TestCase(SpellConstants.RepelMetalOrStone, 8)]
@@ -362,7 +362,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Druid
         [TestCase(SpellConstants.Whirlwind, 8)]
         [TestCase(SpellConstants.WordOfRecall, 8)]
         [TestCase(SpellConstants.Antipathy, 9)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds_Mass, 9)]
+        [TestCase(SpellConstants.CureCriticalWounds_Mass, 9)]
         [TestCase(SpellConstants.ElementalSwarm, 9)]
         [TestCase(SpellConstants.Foresight, 9)]
         [TestCase(SpellConstants.Regenerate, 9)]

@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -21,11 +21,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         {
             var names = new[]
             {
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromChaos,
                 SpellConstants.CalmEmotions,
-                SpellConstants.MagicCircleAgainstAlignment,
+                SpellConstants.MagicCircleAgainstChaos,
                 SpellConstants.OrdersWrath,
-                SpellConstants.DispelAlignment,
+                SpellConstants.DispelChaos,
                 SpellConstants.HoldMonster,
                 SpellConstants.Dictum,
                 SpellConstants.ShieldOfLaw,
@@ -42,11 +42,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Law]);
         }
 
-        [TestCase(SpellConstants.ProtectionFromAlignment, 1)]
+        [TestCase(SpellConstants.ProtectionFromChaos, 1)]
         [TestCase(SpellConstants.CalmEmotions, 2)]
-        [TestCase(SpellConstants.MagicCircleAgainstAlignment, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstChaos, 3)]
         [TestCase(SpellConstants.OrdersWrath, 4)]
-        [TestCase(SpellConstants.DispelAlignment, 5)]
+        [TestCase(SpellConstants.DispelChaos, 5)]
         [TestCase(SpellConstants.HoldMonster, 6)]
         [TestCase(SpellConstants.Dictum, 7)]
         [TestCase(SpellConstants.ShieldOfLaw, 8)]

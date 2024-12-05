@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -21,7 +21,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         {
             var names = new[]
             {
-                SpellConstants.MagicAura,
+                SpellConstants.NystulsMagicAura,
                 SpellConstants.Identify,
                 SpellConstants.DispelMagic,
                 SpellConstants.ImbueWithSpellAbility,
@@ -29,7 +29,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
                 SpellConstants.AntimagicField,
                 SpellConstants.SpellTurning,
                 SpellConstants.ProtectionFromSpells,
-                SpellConstants.MagesDisjunction
+                SpellConstants.MordenkainensDisjunction
             };
 
             AssertCollectionNames(names);
@@ -42,7 +42,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Magic]);
         }
 
-        [TestCase(SpellConstants.MagicAura, 1)]
+        [TestCase(SpellConstants.NystulsMagicAura, 1)]
         [TestCase(SpellConstants.Identify, 2)]
         [TestCase(SpellConstants.DispelMagic, 3)]
         [TestCase(SpellConstants.ImbueWithSpellAbility, 4)]
@@ -50,7 +50,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [TestCase(SpellConstants.AntimagicField, 6)]
         [TestCase(SpellConstants.SpellTurning, 7)]
         [TestCase(SpellConstants.ProtectionFromSpells, 8)]
-        [TestCase(SpellConstants.MagesDisjunction, 9)]
+        [TestCase(SpellConstants.MordenkainensDisjunction, 9)]
         public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

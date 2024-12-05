@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
@@ -21,15 +21,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         {
             var names = new[]
             {
-                SpellConstants.CureInflictLightWounds,
-                SpellConstants.CureInflictModerateWounds,
-                SpellConstants.CureInflictSeriousWounds,
-                SpellConstants.CureInflictCriticalWounds,
-                SpellConstants.CureInflictLightWounds_Mass,
-                SpellConstants.HealHarm,
+                SpellConstants.CureLightWounds,
+                SpellConstants.CureModerateWounds,
+                SpellConstants.CureSeriousWounds,
+                SpellConstants.CureCriticalWounds,
+                SpellConstants.CureLightWounds_Mass,
+                SpellConstants.Heal,
                 SpellConstants.Regenerate,
-                SpellConstants.CureInflictCriticalWounds_Mass,
-                SpellConstants.HealHarm_Mass
+                SpellConstants.CureCriticalWounds_Mass,
+                SpellConstants.Heal_Mass
             };
 
             AssertCollectionNames(names);
@@ -42,15 +42,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
             AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Healing]);
         }
 
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 2)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 3)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 4)]
-        [TestCase(SpellConstants.CureInflictLightWounds_Mass, 5)]
-        [TestCase(SpellConstants.HealHarm, 6)]
+        [TestCase(SpellConstants.CureLightWounds, 1)]
+        [TestCase(SpellConstants.CureModerateWounds, 2)]
+        [TestCase(SpellConstants.CureSeriousWounds, 3)]
+        [TestCase(SpellConstants.CureCriticalWounds, 4)]
+        [TestCase(SpellConstants.CureLightWounds_Mass, 5)]
+        [TestCase(SpellConstants.Heal, 6)]
         [TestCase(SpellConstants.Regenerate, 7)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds_Mass, 8)]
-        [TestCase(SpellConstants.HealHarm_Mass, 9)]
+        [TestCase(SpellConstants.CureCriticalWounds_Mass, 8)]
+        [TestCase(SpellConstants.Heal_Mass, 9)]
         public override void Adjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

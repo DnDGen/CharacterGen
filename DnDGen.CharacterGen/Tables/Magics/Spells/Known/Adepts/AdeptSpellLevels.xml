@@ -98,23 +98,23 @@
     <entry>0</entry>
   </collection>
   <collection>
-    <name>Cure/inflict critical wounds</name>
+    <name>Cure critical wounds</name>
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Cure/inflict light wounds</name>
+    <name>Cure light wounds</name>
     <entry>1</entry>
   </collection>
   <collection>
-    <name>Cure/inflict minor wounds</name>
+    <name>Cure minor wounds</name>
     <entry>0</entry>
   </collection>
   <collection>
-    <name>Cure/inflict moderate wounds</name>
+    <name>Cure moderate wounds</name>
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Cure/inflict serious wounds</name>
+    <name>Cure serious wounds</name>
     <entry>3</entry>
   </collection>
   <collection>
@@ -130,9 +130,21 @@
     <entry>3</entry>
   </collection>
   <collection>
-    <name>Detect chaos/law/good/evil</name>
+    <name>Detect chaos</name>
     <entry>1</entry>
   </collection>
+	<collection>
+		<name>Detect law</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Detect good</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Detect evil</name>
+		<entry>1</entry>
+	</collection>
   <collection>
     <name>Detect magic</name>
     <entry>0</entry>
@@ -146,7 +158,7 @@
     <entry>0</entry>
   </collection>
   <collection>
-    <name>Heal/Harm</name>
+    <name>Heal</name>
     <entry>5</entry>
   </collection>
   <collection>
@@ -186,9 +198,21 @@
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Protection from chaos/law/good/evil</name>
+    <name>Protection from chaos</name>
     <entry>1</entry>
   </collection>
+	<collection>
+		<name>Protection from law</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Protection from good</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Protection from evil</name>
+		<entry>1</entry>
+	</collection>
   <collection>
     <name>Purify food and drink</name>
     <entry>0</entry>

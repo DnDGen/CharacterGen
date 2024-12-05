@@ -18,9 +18,21 @@
     <entry>1</entry>
   </collection>
   <collection>
-    <name>Protection from chaos/law/good/evil</name>
+    <name>Protection from chaos</name>
     <entry>1</entry>
   </collection>
+	<collection>
+		<name>Protection from law</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Protection from good</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Protection from evil</name>
+		<entry>1</entry>
+	</collection>
   <collection>
     <name>Shield</name>
     <entry>1</entry>
@@ -50,9 +62,21 @@
     <entry>3</entry>
   </collection>
   <collection>
-    <name>Magic circle against chaos/law/good/evil</name>
+    <name>Magic circle against chaos</name>
     <entry>3</entry>
   </collection>
+	<collection>
+		<name>Magic circle against law</name>
+		<entry>3</entry>
+	</collection>
+	<collection>
+		<name>Magic circle against good</name>
+		<entry>3</entry>
+	</collection>
+	<collection>
+		<name>Magic circle against evil</name>
+		<entry>3</entry>
+	</collection>
   <collection>
     <name>Nondetection</name>
     <entry>3</entry>
@@ -90,7 +114,7 @@
     <entry>5</entry>
   </collection>
   <collection>
-    <name>Mage's private sanctum</name>
+    <name>Mordenkainen's private sanctum</name>
     <entry>5</entry>
   </collection>
   <collection>
@@ -150,7 +174,7 @@
     <entry>9</entry>
   </collection>
   <collection>
-    <name>Mage's disjunction</name>
+    <name>Mordenkainen's disjunction</name>
     <entry>9</entry>
   </collection>
   <collection>

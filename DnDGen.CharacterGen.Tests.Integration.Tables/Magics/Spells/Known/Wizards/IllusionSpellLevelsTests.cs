@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -24,7 +24,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.GhostSound,
                 SpellConstants.ColorSpray,
                 SpellConstants.DisguiseSelf,
-                SpellConstants.MagicAura,
+                SpellConstants.NystulsMagicAura,
                 SpellConstants.SilentImage,
                 SpellConstants.Ventriloquism,
                 SpellConstants.Blur,
@@ -34,7 +34,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.MinorImage,
                 SpellConstants.MirrorImage,
                 SpellConstants.Misdirection,
-                SpellConstants.PhantomTrap,
+                SpellConstants.LeomundsTrap,
                 SpellConstants.Displacement,
                 SpellConstants.IllusoryScript,
                 SpellConstants.InvisibilitySphere,
@@ -81,7 +81,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.GhostSound, 0)]
         [TestCase(SpellConstants.ColorSpray, 1)]
         [TestCase(SpellConstants.DisguiseSelf, 1)]
-        [TestCase(SpellConstants.MagicAura, 1)]
+        [TestCase(SpellConstants.NystulsMagicAura, 1)]
         [TestCase(SpellConstants.SilentImage, 1)]
         [TestCase(SpellConstants.Ventriloquism, 1)]
         [TestCase(SpellConstants.Blur, 2)]
@@ -91,7 +91,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.MinorImage, 2)]
         [TestCase(SpellConstants.MirrorImage, 2)]
         [TestCase(SpellConstants.Misdirection, 2)]
-        [TestCase(SpellConstants.PhantomTrap, 2)]
+        [TestCase(SpellConstants.LeomundsTrap, 2)]
         [TestCase(SpellConstants.Displacement, 3)]
         [TestCase(SpellConstants.IllusoryScript, 3)]
         [TestCase(SpellConstants.InvisibilitySphere, 3)]

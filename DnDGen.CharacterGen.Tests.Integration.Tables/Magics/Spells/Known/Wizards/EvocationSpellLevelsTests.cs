@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -26,7 +26,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Light,
                 SpellConstants.RayOfFrost,
                 SpellConstants.BurningHands,
-                SpellConstants.FloatingDisk,
+                SpellConstants.TensersFloatingDisk,
                 SpellConstants.MagicMissile,
                 SpellConstants.ShockingGrasp,
                 SpellConstants.ContinualFlame,
@@ -38,31 +38,31 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Daylight,
                 SpellConstants.Fireball,
                 SpellConstants.LightningBolt,
-                SpellConstants.TinyHut,
+                SpellConstants.LeomundsTinyHut,
                 SpellConstants.WindWall,
                 SpellConstants.FireShield,
                 SpellConstants.IceStorm,
-                SpellConstants.ResilientSphere,
+                SpellConstants.OtilukesResilientSphere,
                 SpellConstants.Shout,
                 SpellConstants.WallOfFire,
                 SpellConstants.WallOfIce,
                 SpellConstants.ChainLightning,
                 SpellConstants.Contingency,
-                SpellConstants.ForcefulHand,
-                SpellConstants.FreezingSphere,
+                SpellConstants.BigbysForcefulHand,
+                SpellConstants.OtilukesFreezingSphere,
                 SpellConstants.DelayedBlastFireball,
                 SpellConstants.Forcecage,
-                SpellConstants.GraspingHand,
-                SpellConstants.MagesSword,
+                SpellConstants.BigbysGraspingHand,
+                SpellConstants.MordenkainensSword,
                 SpellConstants.PrismaticSpray,
-                SpellConstants.ClenchedFist,
+                SpellConstants.BigbysClenchedFist,
                 SpellConstants.PolarRay,
                 SpellConstants.Shout_Greater,
                 SpellConstants.Sunburst,
-                SpellConstants.TelekineticSphere,
-                SpellConstants.CrushingHand,
+                SpellConstants.OtilukesTelekineticSphere,
+                SpellConstants.BigbysCrushingHand,
                 SpellConstants.ConeOfCold,
-                SpellConstants.InterposingHand,
+                SpellConstants.BigbysInterposingHand,
                 SpellConstants.Sending,
                 SpellConstants.WallOfForce,
                 SpellConstants.MeteorSwarm
@@ -83,7 +83,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Light, 0)]
         [TestCase(SpellConstants.RayOfFrost, 0)]
         [TestCase(SpellConstants.BurningHands, 1)]
-        [TestCase(SpellConstants.FloatingDisk, 1)]
+        [TestCase(SpellConstants.TensersFloatingDisk, 1)]
         [TestCase(SpellConstants.MagicMissile, 1)]
         [TestCase(SpellConstants.ShockingGrasp, 1)]
         [TestCase(SpellConstants.ContinualFlame, 2)]
@@ -95,33 +95,33 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Daylight, 3)]
         [TestCase(SpellConstants.Fireball, 3)]
         [TestCase(SpellConstants.LightningBolt, 3)]
-        [TestCase(SpellConstants.TinyHut, 3)]
+        [TestCase(SpellConstants.LeomundsTinyHut, 3)]
         [TestCase(SpellConstants.WindWall, 3)]
         [TestCase(SpellConstants.FireShield, 4)]
         [TestCase(SpellConstants.IceStorm, 4)]
-        [TestCase(SpellConstants.ResilientSphere, 4)]
+        [TestCase(SpellConstants.OtilukesResilientSphere, 4)]
         [TestCase(SpellConstants.Shout, 4)]
         [TestCase(SpellConstants.WallOfFire, 4)]
         [TestCase(SpellConstants.WallOfIce, 4)]
         [TestCase(SpellConstants.ConeOfCold, 5)]
-        [TestCase(SpellConstants.InterposingHand, 5)]
+        [TestCase(SpellConstants.BigbysInterposingHand, 5)]
         [TestCase(SpellConstants.Sending, 5)]
         [TestCase(SpellConstants.WallOfForce, 5)]
         [TestCase(SpellConstants.ChainLightning, 6)]
         [TestCase(SpellConstants.Contingency, 6)]
-        [TestCase(SpellConstants.ForcefulHand, 6)]
-        [TestCase(SpellConstants.FreezingSphere, 6)]
+        [TestCase(SpellConstants.BigbysForcefulHand, 6)]
+        [TestCase(SpellConstants.OtilukesFreezingSphere, 6)]
         [TestCase(SpellConstants.DelayedBlastFireball, 7)]
         [TestCase(SpellConstants.Forcecage, 7)]
-        [TestCase(SpellConstants.GraspingHand, 7)]
-        [TestCase(SpellConstants.MagesSword, 7)]
+        [TestCase(SpellConstants.BigbysGraspingHand, 7)]
+        [TestCase(SpellConstants.MordenkainensSword, 7)]
         [TestCase(SpellConstants.PrismaticSpray, 7)]
-        [TestCase(SpellConstants.ClenchedFist, 8)]
+        [TestCase(SpellConstants.BigbysClenchedFist, 8)]
         [TestCase(SpellConstants.PolarRay, 8)]
         [TestCase(SpellConstants.Shout_Greater, 8)]
         [TestCase(SpellConstants.Sunburst, 8)]
-        [TestCase(SpellConstants.TelekineticSphere, 8)]
-        [TestCase(SpellConstants.CrushingHand, 9)]
+        [TestCase(SpellConstants.OtilukesTelekineticSphere, 8)]
+        [TestCase(SpellConstants.BigbysCrushingHand, 9)]
         [TestCase(SpellConstants.MeteorSwarm, 9)]
         public void SpellLevel(string name, int adjustment)
         {

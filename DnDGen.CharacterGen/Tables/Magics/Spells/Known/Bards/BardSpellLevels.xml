@@ -94,7 +94,7 @@
     <entry>1</entry>
   </collection>
   <collection>
-    <name>Magic aura</name>
+    <name>Nystul's magic aura</name>
     <entry>1</entry>
   </collection>
   <collection>
@@ -158,7 +158,7 @@
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Hideous laughter</name>
+    <name>Tasha's hideous laughter</name>
     <entry>1</entry>
   </collection>
   <collection>
@@ -278,7 +278,7 @@
     <entry>3</entry>
   </collection>
   <collection>
-    <name>Tiny hut</name>
+    <name>Leomund's tiny hut</name>
     <entry>3</entry>
   </collection>
   <collection>
@@ -326,7 +326,7 @@
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Secure shelter</name>
+    <name>Leomund's secure shelter</name>
     <entry>4</entry>
   </collection>
   <collection>
@@ -510,19 +510,19 @@
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Cure/inflict critical wounds</name>
+    <name>Cure critical wounds</name>
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Cure/inflict light wounds</name>
+    <name>Cure light wounds</name>
     <entry>1</entry>
   </collection>
   <collection>
-    <name>Cure/inflict moderate wounds</name>
+    <name>Cure moderate wounds</name>
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Cure/inflict serious wounds</name>
+    <name>Cure serious wounds</name>
     <entry>3</entry>
   </collection>
   <collection>
@@ -566,7 +566,7 @@
     <entry>6</entry>
   </collection>
   <collection>
-    <name>Irresistible dance</name>
+    <name>Otto's irresistible dance</name>
     <entry>6</entry>
   </collection>
   <collection>
@@ -586,11 +586,11 @@
     <entry>6</entry>
   </collection>
   <collection>
-    <name>Mass cure/inflict light wounds</name>
+    <name>Mass cure light wounds</name>
     <entry>5</entry>
   </collection>
   <collection>
-    <name>Mass cure/inflict moderate wounds</name>
+    <name>Mass cure moderate wounds</name>
     <entry>6</entry>
   </collection>
   <collection>

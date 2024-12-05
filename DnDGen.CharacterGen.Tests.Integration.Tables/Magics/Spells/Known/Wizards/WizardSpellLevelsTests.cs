@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -44,7 +44,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Alarm,
                 SpellConstants.EndureElements,
                 SpellConstants.HoldPortal,
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromChaos,
+                SpellConstants.ProtectionFromEvil,
+                SpellConstants.ProtectionFromGood,
+                SpellConstants.ProtectionFromLaw,
                 SpellConstants.Shield,
                 SpellConstants.Grease,
                 SpellConstants.MageArmor,
@@ -61,11 +64,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Hypnotism,
                 SpellConstants.Sleep,
                 SpellConstants.BurningHands,
-                SpellConstants.FloatingDisk,
+                SpellConstants.TensersFloatingDisk,
                 SpellConstants.MagicMissile,
                 SpellConstants.ShockingGrasp,
                 SpellConstants.ColorSpray,
-                SpellConstants.MagicAura,
+                SpellConstants.NystulsMagicAura,
                 SpellConstants.SilentImage,
                 SpellConstants.Ventriloquism,
                 SpellConstants.CauseFear,
@@ -83,7 +86,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.ObscureObject,
                 SpellConstants.ProtectionFromArrows,
                 SpellConstants.ResistEnergy,
-                SpellConstants.AcidArrow,
+                SpellConstants.MelfsAcidArrow,
                 SpellConstants.FogCloud,
                 SpellConstants.Glitterdust,
                 SpellConstants.SummonMonsterII,
@@ -93,7 +96,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.LocateObject,
                 SpellConstants.SeeInvisibility,
                 SpellConstants.DazeMonster,
-                SpellConstants.HideousLaughter,
+                SpellConstants.TashasHideousLaughter,
                 SpellConstants.TouchOfIdiocy,
                 SpellConstants.ContinualFlame,
                 SpellConstants.Darkness,
@@ -108,7 +111,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.MinorImage,
                 SpellConstants.MirrorImage,
                 SpellConstants.Misdirection,
-                SpellConstants.PhantomTrap,
+                SpellConstants.LeomundsTrap,
                 SpellConstants.BlindnessDeafness,
                 SpellConstants.CommandUndead,
                 SpellConstants.FalseLife,
@@ -131,7 +134,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.WhisperingWind,
                 SpellConstants.DispelMagic,
                 SpellConstants.ExplosiveRunes,
-                SpellConstants.MagicCircleAgainstAlignment,
+                SpellConstants.MagicCircleAgainstChaos,
+                SpellConstants.MagicCircleAgainstEvil,
+                SpellConstants.MagicCircleAgainstGood,
+                SpellConstants.MagicCircleAgainstLaw,
                 SpellConstants.Nondetection,
                 SpellConstants.ProtectionFromEnergy,
                 SpellConstants.PhantomSteed,
@@ -150,7 +156,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Daylight,
                 SpellConstants.Fireball,
                 SpellConstants.LightningBolt,
-                SpellConstants.TinyHut,
+                SpellConstants.LeomundsTinyHut,
                 SpellConstants.WindWall,
                 SpellConstants.Displacement,
                 SpellConstants.IllusoryScript,
@@ -176,10 +182,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.GlobeOfInvulnerability_Lesser,
                 SpellConstants.RemoveCurse,
                 SpellConstants.Stoneskin,
-                SpellConstants.BlackTentacles,
+                SpellConstants.EvardsBlackTentacles,
                 SpellConstants.DimensionDoor,
                 SpellConstants.MinorCreation,
-                SpellConstants.SecureShelter,
+                SpellConstants.LeomundsSecureShelter,
                 SpellConstants.SolidFog,
                 SpellConstants.SummonMonsterIV,
                 SpellConstants.ArcaneEye,
@@ -192,7 +198,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Geas_Lesser,
                 SpellConstants.FireShield,
                 SpellConstants.IceStorm,
-                SpellConstants.ResilientSphere,
+                SpellConstants.OtilukesResilientSphere,
                 SpellConstants.Shout,
                 SpellConstants.WallOfFire,
                 SpellConstants.WallOfIce,
@@ -212,25 +218,25 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.StoneShape,
                 SpellConstants.BreakEnchantment,
                 SpellConstants.Dismissal,
-                SpellConstants.MagesPrivateSanctum,
+                SpellConstants.MordenkainensPrivateSanctum,
                 SpellConstants.Cloudkill,
-                SpellConstants.MagesFaithfulHound,
+                SpellConstants.MordenkainensFaithfulHound,
                 SpellConstants.MajorCreation,
                 SpellConstants.PlanarBinding_Lesser,
-                SpellConstants.SecretChest,
+                SpellConstants.LeomundsSecretChest,
                 SpellConstants.SummonMonsterV,
                 SpellConstants.Teleport,
                 SpellConstants.WallOfStone,
                 SpellConstants.ContactOtherPlane,
                 SpellConstants.PryingEyes,
-                SpellConstants.TelepathicBond,
+                SpellConstants.RarysTelepathicBond,
                 SpellConstants.DominatePerson,
                 SpellConstants.Feeblemind,
                 SpellConstants.HoldMonster,
                 SpellConstants.MindFog,
                 SpellConstants.SymbolOfSleep,
                 SpellConstants.ConeOfCold,
-                SpellConstants.InterposingHand,
+                SpellConstants.BigbysInterposingHand,
                 SpellConstants.Sending,
                 SpellConstants.WallOfForce,
                 SpellConstants.Dream,
@@ -270,8 +276,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.SymbolOfPersuasion,
                 SpellConstants.ChainLightning,
                 SpellConstants.Contingency,
-                SpellConstants.ForcefulHand,
-                SpellConstants.FreezingSphere,
+                SpellConstants.BigbysForcefulHand,
+                SpellConstants.OtilukesFreezingSphere,
                 SpellConstants.Mislead,
                 SpellConstants.PermanentImage,
                 SpellConstants.ProgrammedImage,
@@ -292,12 +298,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.MoveEarth,
                 SpellConstants.OwlsWisdom_Mass,
                 SpellConstants.StoneToFlesh,
-                SpellConstants.Transformation,
+                SpellConstants.TensersTransformation,
                 SpellConstants.Banishment,
                 SpellConstants.Sequester,
                 SpellConstants.SpellTurning,
-                SpellConstants.InstantSummons,
-                SpellConstants.MagesMagnificentMansion,
+                SpellConstants.DrawmijsInstantSummons,
+                SpellConstants.MordenkainensMagnificentMansion,
                 SpellConstants.PhaseDoor,
                 SpellConstants.PlaneShift,
                 SpellConstants.SummonMonsterVII,
@@ -312,8 +318,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.SymbolOfStunning,
                 SpellConstants.DelayedBlastFireball,
                 SpellConstants.Forcecage,
-                SpellConstants.GraspingHand,
-                SpellConstants.MagesSword,
+                SpellConstants.BigbysGraspingHand,
+                SpellConstants.MordenkainensSword,
                 SpellConstants.PrismaticSpray,
                 SpellConstants.Invisibility_Mass,
                 SpellConstants.ProjectImage,
@@ -344,15 +350,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Binding,
                 SpellConstants.CharmMonster_Mass,
                 SpellConstants.Demand,
-                SpellConstants.IrresistibleDance,
+                SpellConstants.OttosIrresistibleDance,
                 SpellConstants.PowerWordStun,
                 SpellConstants.SymbolOfInsanity,
                 SpellConstants.Sympathy,
-                SpellConstants.ClenchedFist,
+                SpellConstants.BigbysClenchedFist,
                 SpellConstants.PolarRay,
                 SpellConstants.Shout_Greater,
                 SpellConstants.Sunburst,
-                SpellConstants.TelekineticSphere,
+                SpellConstants.OtilukesTelekineticSphere,
                 SpellConstants.ScintillatingPattern,
                 SpellConstants.Screen,
                 SpellConstants.ShadowEvocation_Greater,
@@ -365,7 +371,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.TemporalStasis,
                 SpellConstants.Freedom,
                 SpellConstants.Imprisonment,
-                SpellConstants.MagesDisjunction,
+                SpellConstants.MordenkainensDisjunction,
                 SpellConstants.PrismaticSphere,
                 SpellConstants.Gate,
                 SpellConstants.Refuge,
@@ -375,7 +381,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.DominateMonster,
                 SpellConstants.HoldMonster_Mass,
                 SpellConstants.PowerWordKill,
-                SpellConstants.CrushingHand,
+                SpellConstants.BigbysCrushingHand,
                 SpellConstants.MeteorSwarm,
                 SpellConstants.Shades,
                 SpellConstants.Weird,
@@ -389,8 +395,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Wish,
                 SpellConstants.ShadowConjuration,
                 SpellConstants.CreateUndead,
-                SpellConstants.MnemonicEnhancer,
-                SpellConstants.MagesLucubration
+                SpellConstants.RarysMnemonicEnhancer,
+                SpellConstants.MordenkainensLucubration
             };
 
             AssertCollectionNames(names);
@@ -425,7 +431,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Alarm, 1)]
         [TestCase(SpellConstants.EndureElements, 1)]
         [TestCase(SpellConstants.HoldPortal, 1)]
-        [TestCase(SpellConstants.ProtectionFromAlignment, 1)]
+        [TestCase(SpellConstants.ProtectionFromChaos, 1)]
+        [TestCase(SpellConstants.ProtectionFromEvil, 1)]
+        [TestCase(SpellConstants.ProtectionFromGood, 1)]
+        [TestCase(SpellConstants.ProtectionFromLaw, 1)]
         [TestCase(SpellConstants.Shield, 1)]
         [TestCase(SpellConstants.Grease, 1)]
         [TestCase(SpellConstants.MageArmor, 1)]
@@ -442,12 +451,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Hypnotism, 1)]
         [TestCase(SpellConstants.Sleep, 1)]
         [TestCase(SpellConstants.BurningHands, 1)]
-        [TestCase(SpellConstants.FloatingDisk, 1)]
+        [TestCase(SpellConstants.TensersFloatingDisk, 1)]
         [TestCase(SpellConstants.MagicMissile, 1)]
         [TestCase(SpellConstants.ShockingGrasp, 1)]
         [TestCase(SpellConstants.ColorSpray, 1)]
         [TestCase(SpellConstants.DisguiseSelf, 1)]
-        [TestCase(SpellConstants.MagicAura, 1)]
+        [TestCase(SpellConstants.NystulsMagicAura, 1)]
         [TestCase(SpellConstants.SilentImage, 1)]
         [TestCase(SpellConstants.Ventriloquism, 1)]
         [TestCase(SpellConstants.CauseFear, 1)]
@@ -465,7 +474,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.ObscureObject, 2)]
         [TestCase(SpellConstants.ProtectionFromArrows, 2)]
         [TestCase(SpellConstants.ResistEnergy, 2)]
-        [TestCase(SpellConstants.AcidArrow, 2)]
+        [TestCase(SpellConstants.MelfsAcidArrow, 2)]
         [TestCase(SpellConstants.FogCloud, 2)]
         [TestCase(SpellConstants.Glitterdust, 2)]
         [TestCase(SpellConstants.SummonMonsterII, 2)]
@@ -475,7 +484,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.LocateObject, 2)]
         [TestCase(SpellConstants.SeeInvisibility, 2)]
         [TestCase(SpellConstants.DazeMonster, 2)]
-        [TestCase(SpellConstants.HideousLaughter, 2)]
+        [TestCase(SpellConstants.TashasHideousLaughter, 2)]
         [TestCase(SpellConstants.TouchOfIdiocy, 2)]
         [TestCase(SpellConstants.ContinualFlame, 2)]
         [TestCase(SpellConstants.Darkness, 2)]
@@ -490,7 +499,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.MinorImage, 2)]
         [TestCase(SpellConstants.MirrorImage, 2)]
         [TestCase(SpellConstants.Misdirection, 2)]
-        [TestCase(SpellConstants.PhantomTrap, 2)]
+        [TestCase(SpellConstants.LeomundsTrap, 2)]
         [TestCase(SpellConstants.BlindnessDeafness, 2)]
         [TestCase(SpellConstants.CommandUndead, 2)]
         [TestCase(SpellConstants.FalseLife, 2)]
@@ -513,7 +522,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.WhisperingWind, 2)]
         [TestCase(SpellConstants.DispelMagic, 3)]
         [TestCase(SpellConstants.ExplosiveRunes, 3)]
-        [TestCase(SpellConstants.MagicCircleAgainstAlignment, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstEvil, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstChaos, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstGood, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstLaw, 3)]
         [TestCase(SpellConstants.Nondetection, 3)]
         [TestCase(SpellConstants.ProtectionFromEnergy, 3)]
         [TestCase(SpellConstants.PhantomSteed, 3)]
@@ -532,7 +544,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Daylight, 3)]
         [TestCase(SpellConstants.Fireball, 3)]
         [TestCase(SpellConstants.LightningBolt, 3)]
-        [TestCase(SpellConstants.TinyHut, 3)]
+        [TestCase(SpellConstants.LeomundsTinyHut, 3)]
         [TestCase(SpellConstants.WindWall, 3)]
         [TestCase(SpellConstants.Displacement, 3)]
         [TestCase(SpellConstants.IllusoryScript, 3)]
@@ -558,10 +570,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.GlobeOfInvulnerability_Lesser, 4)]
         [TestCase(SpellConstants.RemoveCurse, 4)]
         [TestCase(SpellConstants.Stoneskin, 4)]
-        [TestCase(SpellConstants.BlackTentacles, 4)]
+        [TestCase(SpellConstants.EvardsBlackTentacles, 4)]
         [TestCase(SpellConstants.DimensionDoor, 4)]
         [TestCase(SpellConstants.MinorCreation, 4)]
-        [TestCase(SpellConstants.SecureShelter, 4)]
+        [TestCase(SpellConstants.LeomundsSecureShelter, 4)]
         [TestCase(SpellConstants.SolidFog, 4)]
         [TestCase(SpellConstants.SummonMonsterIV, 4)]
         [TestCase(SpellConstants.ArcaneEye, 4)]
@@ -574,7 +586,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Geas_Lesser, 4)]
         [TestCase(SpellConstants.FireShield, 4)]
         [TestCase(SpellConstants.IceStorm, 4)]
-        [TestCase(SpellConstants.ResilientSphere, 4)]
+        [TestCase(SpellConstants.OtilukesResilientSphere, 4)]
         [TestCase(SpellConstants.Shout, 4)]
         [TestCase(SpellConstants.WallOfFire, 4)]
         [TestCase(SpellConstants.WallOfIce, 4)]
@@ -590,31 +602,31 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Enervation, 4)]
         [TestCase(SpellConstants.Fear, 4)]
         [TestCase(SpellConstants.EnlargePerson_Mass, 4)]
-        [TestCase(SpellConstants.MnemonicEnhancer, 4)]
+        [TestCase(SpellConstants.RarysMnemonicEnhancer, 4)]
         [TestCase(SpellConstants.Polymorph, 4)]
         [TestCase(SpellConstants.ReducePerson_Mass, 4)]
         [TestCase(SpellConstants.StoneShape, 4)]
         [TestCase(SpellConstants.BreakEnchantment, 5)]
         [TestCase(SpellConstants.Dismissal, 5)]
-        [TestCase(SpellConstants.MagesPrivateSanctum, 5)]
+        [TestCase(SpellConstants.MordenkainensPrivateSanctum, 5)]
         [TestCase(SpellConstants.Cloudkill, 5)]
-        [TestCase(SpellConstants.MagesFaithfulHound, 5)]
+        [TestCase(SpellConstants.MordenkainensFaithfulHound, 5)]
         [TestCase(SpellConstants.MajorCreation, 5)]
         [TestCase(SpellConstants.PlanarBinding_Lesser, 5)]
-        [TestCase(SpellConstants.SecretChest, 5)]
+        [TestCase(SpellConstants.LeomundsSecretChest, 5)]
         [TestCase(SpellConstants.SummonMonsterV, 5)]
         [TestCase(SpellConstants.Teleport, 5)]
         [TestCase(SpellConstants.WallOfStone, 5)]
         [TestCase(SpellConstants.ContactOtherPlane, 5)]
         [TestCase(SpellConstants.PryingEyes, 5)]
-        [TestCase(SpellConstants.TelepathicBond, 5)]
+        [TestCase(SpellConstants.RarysTelepathicBond, 5)]
         [TestCase(SpellConstants.DominatePerson, 5)]
         [TestCase(SpellConstants.Feeblemind, 5)]
         [TestCase(SpellConstants.HoldMonster, 5)]
         [TestCase(SpellConstants.MindFog, 5)]
         [TestCase(SpellConstants.SymbolOfSleep, 5)]
         [TestCase(SpellConstants.ConeOfCold, 5)]
-        [TestCase(SpellConstants.InterposingHand, 5)]
+        [TestCase(SpellConstants.BigbysInterposingHand, 5)]
         [TestCase(SpellConstants.Sending, 5)]
         [TestCase(SpellConstants.WallOfForce, 5)]
         [TestCase(SpellConstants.Dream, 5)]
@@ -654,8 +666,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.SymbolOfPersuasion, 6)]
         [TestCase(SpellConstants.ChainLightning, 6)]
         [TestCase(SpellConstants.Contingency, 6)]
-        [TestCase(SpellConstants.ForcefulHand, 6)]
-        [TestCase(SpellConstants.FreezingSphere, 6)]
+        [TestCase(SpellConstants.BigbysForcefulHand, 6)]
+        [TestCase(SpellConstants.OtilukesFreezingSphere, 6)]
         [TestCase(SpellConstants.Mislead, 6)]
         [TestCase(SpellConstants.PermanentImage, 6)]
         [TestCase(SpellConstants.ProgrammedImage, 6)]
@@ -674,16 +686,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.EaglesSplendor_Mass, 6)]
         [TestCase(SpellConstants.FleshToStone, 6)]
         [TestCase(SpellConstants.FoxsCunning_Mass, 6)]
-        [TestCase(SpellConstants.MagesLucubration, 6)]
+        [TestCase(SpellConstants.MordenkainensLucubration, 6)]
         [TestCase(SpellConstants.MoveEarth, 6)]
         [TestCase(SpellConstants.OwlsWisdom_Mass, 6)]
         [TestCase(SpellConstants.StoneToFlesh, 6)]
-        [TestCase(SpellConstants.Transformation, 6)]
+        [TestCase(SpellConstants.TensersTransformation, 6)]
         [TestCase(SpellConstants.Banishment, 7)]
         [TestCase(SpellConstants.Sequester, 7)]
         [TestCase(SpellConstants.SpellTurning, 7)]
-        [TestCase(SpellConstants.InstantSummons, 7)]
-        [TestCase(SpellConstants.MagesMagnificentMansion, 7)]
+        [TestCase(SpellConstants.DrawmijsInstantSummons, 7)]
+        [TestCase(SpellConstants.MordenkainensMagnificentMansion, 7)]
         [TestCase(SpellConstants.PhaseDoor, 7)]
         [TestCase(SpellConstants.PlaneShift, 7)]
         [TestCase(SpellConstants.SummonMonsterVII, 7)]
@@ -698,8 +710,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.SymbolOfStunning, 7)]
         [TestCase(SpellConstants.DelayedBlastFireball, 7)]
         [TestCase(SpellConstants.Forcecage, 7)]
-        [TestCase(SpellConstants.GraspingHand, 7)]
-        [TestCase(SpellConstants.MagesSword, 7)]
+        [TestCase(SpellConstants.BigbysGraspingHand, 7)]
+        [TestCase(SpellConstants.MordenkainensSword, 7)]
         [TestCase(SpellConstants.PrismaticSpray, 7)]
         [TestCase(SpellConstants.Invisibility_Mass, 7)]
         [TestCase(SpellConstants.ProjectImage, 7)]
@@ -730,15 +742,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Binding, 8)]
         [TestCase(SpellConstants.CharmMonster_Mass, 8)]
         [TestCase(SpellConstants.Demand, 8)]
-        [TestCase(SpellConstants.IrresistibleDance, 8)]
+        [TestCase(SpellConstants.OttosIrresistibleDance, 8)]
         [TestCase(SpellConstants.PowerWordStun, 8)]
         [TestCase(SpellConstants.SymbolOfInsanity, 8)]
         [TestCase(SpellConstants.Sympathy, 8)]
-        [TestCase(SpellConstants.ClenchedFist, 8)]
+        [TestCase(SpellConstants.BigbysClenchedFist, 8)]
         [TestCase(SpellConstants.PolarRay, 8)]
         [TestCase(SpellConstants.Shout_Greater, 8)]
         [TestCase(SpellConstants.Sunburst, 8)]
-        [TestCase(SpellConstants.TelekineticSphere, 8)]
+        [TestCase(SpellConstants.OtilukesTelekineticSphere, 8)]
         [TestCase(SpellConstants.ScintillatingPattern, 8)]
         [TestCase(SpellConstants.Screen, 8)]
         [TestCase(SpellConstants.ShadowEvocation_Greater, 8)]
@@ -751,7 +763,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.TemporalStasis, 8)]
         [TestCase(SpellConstants.Freedom, 9)]
         [TestCase(SpellConstants.Imprisonment, 9)]
-        [TestCase(SpellConstants.MagesDisjunction, 9)]
+        [TestCase(SpellConstants.MordenkainensDisjunction, 9)]
         [TestCase(SpellConstants.PrismaticSphere, 9)]
         [TestCase(SpellConstants.Gate, 9)]
         [TestCase(SpellConstants.Refuge, 9)]
@@ -761,7 +773,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.DominateMonster, 9)]
         [TestCase(SpellConstants.HoldMonster_Mass, 9)]
         [TestCase(SpellConstants.PowerWordKill, 9)]
-        [TestCase(SpellConstants.CrushingHand, 9)]
+        [TestCase(SpellConstants.BigbysCrushingHand, 9)]
         [TestCase(SpellConstants.MeteorSwarm, 9)]
         [TestCase(SpellConstants.Shades, 9)]
         [TestCase(SpellConstants.Weird, 9)]

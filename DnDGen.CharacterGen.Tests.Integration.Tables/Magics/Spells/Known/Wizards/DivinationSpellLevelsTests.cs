@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -41,7 +41,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Scrying,
                 SpellConstants.ContactOtherPlane,
                 SpellConstants.PryingEyes,
-                SpellConstants.TelepathicBond,
+                SpellConstants.RarysTelepathicBond,
                 SpellConstants.AnalyzeDweomer,
                 SpellConstants.LegendLore,
                 SpellConstants.TrueSeeing,
@@ -84,7 +84,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Scrying, 4)]
         [TestCase(SpellConstants.ContactOtherPlane, 5)]
         [TestCase(SpellConstants.PryingEyes, 5)]
-        [TestCase(SpellConstants.TelepathicBond, 5)]
+        [TestCase(SpellConstants.RarysTelepathicBond, 5)]
         [TestCase(SpellConstants.AnalyzeDweomer, 6)]
         [TestCase(SpellConstants.LegendLore, 6)]
         [TestCase(SpellConstants.TrueSeeing, 6)]

@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizards
@@ -25,7 +25,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Alarm,
                 SpellConstants.EndureElements,
                 SpellConstants.HoldPortal,
-                SpellConstants.ProtectionFromAlignment,
+                SpellConstants.ProtectionFromChaos,
+                SpellConstants.ProtectionFromEvil,
+                SpellConstants.ProtectionFromGood,
+                SpellConstants.ProtectionFromLaw,
                 SpellConstants.Shield,
                 SpellConstants.ArcaneLock,
                 SpellConstants.ObscureObject,
@@ -33,7 +36,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.ResistEnergy,
                 SpellConstants.DispelMagic,
                 SpellConstants.ExplosiveRunes,
-                SpellConstants.MagicCircleAgainstAlignment,
+                SpellConstants.MagicCircleAgainstChaos,
+                SpellConstants.MagicCircleAgainstEvil,
+                SpellConstants.MagicCircleAgainstGood,
+                SpellConstants.MagicCircleAgainstLaw,
                 SpellConstants.Nondetection,
                 SpellConstants.ProtectionFromEnergy,
                 SpellConstants.DimensionalAnchor,
@@ -43,7 +49,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.Stoneskin,
                 SpellConstants.BreakEnchantment,
                 SpellConstants.Dismissal,
-                SpellConstants.MagesPrivateSanctum,
+                SpellConstants.MordenkainensPrivateSanctum,
                 SpellConstants.AntimagicField,
                 SpellConstants.DispelMagic_Greater,
                 SpellConstants.GlobeOfInvulnerability,
@@ -58,7 +64,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
                 SpellConstants.ProtectionFromSpells,
                 SpellConstants.Freedom,
                 SpellConstants.Imprisonment,
-                SpellConstants.MagesDisjunction,
+                SpellConstants.MordenkainensDisjunction,
                 SpellConstants.PrismaticSphere
             };
 
@@ -76,7 +82,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Alarm, 1)]
         [TestCase(SpellConstants.EndureElements, 1)]
         [TestCase(SpellConstants.HoldPortal, 1)]
-        [TestCase(SpellConstants.ProtectionFromAlignment, 1)]
+        [TestCase(SpellConstants.ProtectionFromChaos, 1)]
+        [TestCase(SpellConstants.ProtectionFromEvil, 1)]
+        [TestCase(SpellConstants.ProtectionFromGood, 1)]
+        [TestCase(SpellConstants.ProtectionFromLaw, 1)]
         [TestCase(SpellConstants.Shield, 1)]
         [TestCase(SpellConstants.ArcaneLock, 2)]
         [TestCase(SpellConstants.ObscureObject, 2)]
@@ -84,7 +93,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.ResistEnergy, 2)]
         [TestCase(SpellConstants.DispelMagic, 3)]
         [TestCase(SpellConstants.ExplosiveRunes, 3)]
-        [TestCase(SpellConstants.MagicCircleAgainstAlignment, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstChaos, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstEvil, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstGood, 3)]
+        [TestCase(SpellConstants.MagicCircleAgainstLaw, 3)]
         [TestCase(SpellConstants.Nondetection, 3)]
         [TestCase(SpellConstants.ProtectionFromEnergy, 3)]
         [TestCase(SpellConstants.DimensionalAnchor, 4)]
@@ -94,7 +106,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.Stoneskin, 4)]
         [TestCase(SpellConstants.BreakEnchantment, 5)]
         [TestCase(SpellConstants.Dismissal, 5)]
-        [TestCase(SpellConstants.MagesPrivateSanctum, 5)]
+        [TestCase(SpellConstants.MordenkainensPrivateSanctum, 5)]
         [TestCase(SpellConstants.AntimagicField, 6)]
         [TestCase(SpellConstants.DispelMagic_Greater, 6)]
         [TestCase(SpellConstants.GlobeOfInvulnerability, 6)]
@@ -109,7 +121,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [TestCase(SpellConstants.ProtectionFromSpells, 8)]
         [TestCase(SpellConstants.Freedom, 9)]
         [TestCase(SpellConstants.Imprisonment, 9)]
-        [TestCase(SpellConstants.MagesDisjunction, 9)]
+        [TestCase(SpellConstants.MordenkainensDisjunction, 9)]
         [TestCase(SpellConstants.PrismaticSphere, 9)]
         public void SpellLevel(string name, int adjustment)
         {

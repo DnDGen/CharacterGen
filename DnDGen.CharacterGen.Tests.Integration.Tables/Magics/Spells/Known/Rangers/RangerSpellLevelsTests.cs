@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Rangers
@@ -43,7 +43,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
                 SpellConstants.Barkskin,
                 SpellConstants.BearsEndurance,
                 SpellConstants.CatsGrace,
-                SpellConstants.CureInflictLightWounds,
+                SpellConstants.CureLightWounds,
                 SpellConstants.HoldAnimal,
                 SpellConstants.OwlsWisdom,
                 SpellConstants.ProtectionFromEnergy,
@@ -53,7 +53,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
                 SpellConstants.SummonNaturesAllyII,
                 SpellConstants.WindWall,
                 SpellConstants.CommandPlants,
-                SpellConstants.CureInflictModerateWounds,
+                SpellConstants.CureModerateWounds,
                 SpellConstants.Darkvision,
                 SpellConstants.DiminishPlants,
                 SpellConstants.MagicFang_Greater,
@@ -67,7 +67,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
                 SpellConstants.WaterWalk,
                 SpellConstants.AnimalGrowth,
                 SpellConstants.CommuneWithNature,
-                SpellConstants.CureInflictSeriousWounds,
+                SpellConstants.CureSeriousWounds,
                 SpellConstants.FreedomOfMovement,
                 SpellConstants.Nondetection,
                 SpellConstants.SummonNaturesAllyIV,
@@ -106,7 +106,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
         [TestCase(SpellConstants.Barkskin, 2)]
         [TestCase(SpellConstants.BearsEndurance, 2)]
         [TestCase(SpellConstants.CatsGrace, 2)]
-        [TestCase(SpellConstants.CureInflictLightWounds, 2)]
+        [TestCase(SpellConstants.CureLightWounds, 2)]
         [TestCase(SpellConstants.HoldAnimal, 2)]
         [TestCase(SpellConstants.OwlsWisdom, 2)]
         [TestCase(SpellConstants.ProtectionFromEnergy, 2)]
@@ -116,7 +116,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
         [TestCase(SpellConstants.SummonNaturesAllyII, 2)]
         [TestCase(SpellConstants.WindWall, 2)]
         [TestCase(SpellConstants.CommandPlants, 3)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 3)]
+        [TestCase(SpellConstants.CureModerateWounds, 3)]
         [TestCase(SpellConstants.Darkvision, 3)]
         [TestCase(SpellConstants.DiminishPlants, 3)]
         [TestCase(SpellConstants.MagicFang_Greater, 3)]
@@ -130,7 +130,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Range
         [TestCase(SpellConstants.WaterWalk, 3)]
         [TestCase(SpellConstants.AnimalGrowth, 4)]
         [TestCase(SpellConstants.CommuneWithNature, 4)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 4)]
+        [TestCase(SpellConstants.CureSeriousWounds, 4)]
         [TestCase(SpellConstants.FreedomOfMovement, 4)]
         [TestCase(SpellConstants.Nondetection, 4)]
         [TestCase(SpellConstants.SummonNaturesAllyIV, 4)]
