@@ -319,9 +319,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
         private void AssertSpell(Spell spell, int minSpellLevel, int maxSpellLevel)
         {
             Assert.That(spell.Name, Is.Not.Empty);
-            Assert.That(spell.Source, Is.Not.Empty, spell.Name);
-            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Source + spell.Name);
-            Assert.That(spell.Metamagic, Is.Empty, spell.Source + spell.Name);
+            Assert.That(spell.Sources, Is.Not.Empty, spell.Name);
+            Assert.That(spell.Sources, Is.All.Not.Empty, spell.Name);
+            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Summary);
+            Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
         }
 
         //INFO: Want to verify rakshasas have native sorcerer spells and additional sorcerer spells at 7 levels higher, even when high level

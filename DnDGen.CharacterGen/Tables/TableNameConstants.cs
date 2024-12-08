@@ -89,7 +89,6 @@
                 public const string RACEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string AGEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
-                public const string CLASSSpellLevels = "{0}SpellLevels";
                 public const string FEATClassRequirements = "{0}ClassRequirements";
                 public const string FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const string FEATAbilityRequirements = "{0}AbilityRequirements";
@@ -107,6 +106,7 @@
                 public const string RACEFeatData = "{0}FeatData";
                 public const string CLASSFeatData = "{0}FeatData";
                 public const string CLASSTYPEAgeRolls = "{0}AgeRolls";
+                public const string CLASSSpellLevels = "{0}SpellLevels";
             }
 
             internal static class Percentile

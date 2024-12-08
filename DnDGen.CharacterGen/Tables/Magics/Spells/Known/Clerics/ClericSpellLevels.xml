@@ -14,17 +14,29 @@
     <entry>0</entry>
   </collection>
   <collection>
-    <name>Cure/inflict light wounds</name>
+    <name>Cure light wounds</name>
     <entry>1</entry>
   </collection>
   <collection>
-    <name>Cure/inflict moderate wounds</name>
+    <name>Cure moderate wounds</name>
     <entry>2</entry>
   </collection>
   <collection>
-    <name>Cure/inflict serious wounds</name>
+    <name>Cure serious wounds</name>
     <entry>3</entry>
   </collection>
+	<collection>
+		<name>Inflict light wounds</name>
+		<entry>1</entry>
+	</collection>
+	<collection>
+		<name>Inflict moderate wounds</name>
+		<entry>2</entry>
+	</collection>
+	<collection>
+		<name>Inflict serious wounds</name>
+		<entry>3</entry>
+	</collection>
   <collection>
     <name>Freedom of movement</name>
     <entry>4</entry>
@@ -210,13 +222,21 @@
     <entry>0</entry>
   </collection>
   <collection>
-    <name>Cure/inflict critical wounds</name>
+    <name>Cure critical wounds</name>
     <entry>4</entry>
   </collection>
   <collection>
-    <name>Cure/inflict minor wounds</name>
+    <name>Cure minor wounds</name>
     <entry>0</entry>
   </collection>
+	<collection>
+		<name>Inflict critical wounds</name>
+		<entry>4</entry>
+	</collection>
+	<collection>
+		<name>Inflict minor wounds</name>
+		<entry>0</entry>
+	</collection>
   <collection>
     <name>Curse water</name>
     <entry>1</entry>

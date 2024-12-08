@@ -378,22 +378,25 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
 
             foreach (var spell in character.Magic.KnownSpells)
             {
-                Assert.That(spell.Level, Is.Not.Negative);
-                Assert.That(spell.Metamagic, Is.Empty);
-                Assert.That(spell.Name, Is.Not.Empty);
-                Assert.That(spell.Source, Is.Not.Empty);
+                Assert.That(spell.Level, Is.Not.Negative, spell.Summary);
+                Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
+                Assert.That(spell.Name, Is.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources, Is.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources, Is.All.Not.Empty, spell.Summary);
             }
 
             foreach (var spell in character.Magic.PreparedSpells)
             {
-                Assert.That(spell.Level, Is.Not.Negative);
-                Assert.That(spell.Metamagic, Is.Empty);
-                Assert.That(spell.Name, Is.Not.Empty);
-                Assert.That(spell.Source, Is.Not.Empty);
-
-                var knownSpellNames = character.Magic.KnownSpells.Select(s => s.Name);
-                Assert.That(knownSpellNames, Contains.Item(spell.Name), character.Class.Name);
+                Assert.That(spell.Level, Is.Not.Negative, spell.Summary);
+                Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
+                Assert.That(spell.Name, Is.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources, Is.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources, Is.All.Not.Empty, spell.Summary);
             }
+
+            var knownSpellNames = character.Magic.KnownSpells.Select(s => s.Name);
+            var preparedSpellNames = character.Magic.PreparedSpells.Select(s => s.Name);
+            Assert.That(preparedSpellNames, Is.SubsetOf(knownSpellNames), character.Summary);
         }
 
         private void VerifyCombat(Character character)

@@ -209,9 +209,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
         private void AssertSpell(Spell spell, int minSpellLevel, int maxSpellLevel)
         {
             Assert.That(spell.Name, Is.Not.Empty);
-            Assert.That(spell.Source, Is.Not.Empty, spell.Name);
-            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Source + spell.Name);
-            Assert.That(spell.Metamagic, Is.Empty, spell.Source + spell.Name);
+            Assert.That(spell.Sources, Is.Not.Empty, spell.Name);
+            Assert.That(spell.Sources, Is.All.Not.Empty, spell.Name);
+            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Summary);
+            Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
         }
     }
 }

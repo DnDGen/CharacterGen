@@ -6,13 +6,13 @@ using NUnit.Framework;
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Adepts
 {
     [TestFixture]
-    public class AdeptSpellLevelsTests : AdjustmentsTests
+    public class AdeptSpellLevelsTests : CollectionTests
     {
         protected override string tableName
         {
             get
             {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Adept);
+                return string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Adept);
             }
         }
 
