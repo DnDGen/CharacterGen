@@ -2,58 +2,34 @@
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class MagicSpellLevelsTests : AdjustmentsTests
+    public class MagicSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Magic);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Magic);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.NystulsMagicAura,
-                SpellConstants.Identify,
-                SpellConstants.DispelMagic,
-                SpellConstants.ImbueWithSpellAbility,
-                SpellConstants.SpellResistance,
-                SpellConstants.AntimagicField,
-                SpellConstants.SpellTurning,
-                SpellConstants.ProtectionFromSpells,
-                SpellConstants.MordenkainensDisjunction
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllMagicSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.NystulsMagicAura)]
+        [TestCase("2", SpellConstants.Identify)]
+        [TestCase("3", SpellConstants.DispelMagic)]
+        [TestCase("4", SpellConstants.ImbueWithSpellAbility)]
+        [TestCase("5", SpellConstants.SpellResistance)]
+        [TestCase("6", SpellConstants.AntimagicField)]
+        [TestCase("7", SpellConstants.SpellTurning)]
+        [TestCase("8", SpellConstants.ProtectionFromSpells)]
+        [TestCase("9", SpellConstants.MordenkainensDisjunction)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Magic]);
-        }
-
-        [TestCase(SpellConstants.NystulsMagicAura, 1)]
-        [TestCase(SpellConstants.Identify, 2)]
-        [TestCase(SpellConstants.DispelMagic, 3)]
-        [TestCase(SpellConstants.ImbueWithSpellAbility, 4)]
-        [TestCase(SpellConstants.SpellResistance, 5)]
-        [TestCase(SpellConstants.AntimagicField, 6)]
-        [TestCase(SpellConstants.SpellTurning, 7)]
-        [TestCase(SpellConstants.ProtectionFromSpells, 8)]
-        [TestCase(SpellConstants.MordenkainensDisjunction, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

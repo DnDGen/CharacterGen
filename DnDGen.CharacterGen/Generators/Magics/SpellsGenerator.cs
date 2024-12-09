@@ -309,7 +309,8 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
             foreach (var field in fields)
             {
-                var fieldSpells = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, field);
+                var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, field);
+                var fieldSpells = collectionsSelector.SelectAllFrom(Config.Name, tableName).Values.SelectMany(v => v);
                 fieldSpellNames.AddRange(fieldSpells);
             }
 

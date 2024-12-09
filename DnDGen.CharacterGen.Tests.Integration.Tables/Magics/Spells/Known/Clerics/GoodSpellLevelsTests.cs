@@ -2,58 +2,34 @@
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class GoodSpellLevelsTests : AdjustmentsTests
+    public class GoodSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Good);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Good);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.ProtectionFromEvil,
-                SpellConstants.Aid,
-                SpellConstants.MagicCircleAgainstEvil,
-                SpellConstants.HolySmite,
-                SpellConstants.DispelEvil,
-                SpellConstants.BladeBarrier,
-                SpellConstants.HolyWord,
-                SpellConstants.HolyAura,
-                SpellConstants.SummonMonsterIX
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllGoodSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.ProtectionFromEvil)]
+        [TestCase("2", SpellConstants.Aid)]
+        [TestCase("3", SpellConstants.MagicCircleAgainstEvil)]
+        [TestCase("4", SpellConstants.HolySmite)]
+        [TestCase("5", SpellConstants.DispelEvil)]
+        [TestCase("6", SpellConstants.BladeBarrier)]
+        [TestCase("7", SpellConstants.HolyWord)]
+        [TestCase("8", SpellConstants.HolyAura)]
+        [TestCase("9", SpellConstants.SummonMonsterIX)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Good]);
-        }
-
-        [TestCase(SpellConstants.ProtectionFromEvil, 1)]
-        [TestCase(SpellConstants.Aid, 2)]
-        [TestCase(SpellConstants.MagicCircleAgainstEvil, 3)]
-        [TestCase(SpellConstants.HolySmite, 4)]
-        [TestCase(SpellConstants.DispelEvil, 5)]
-        [TestCase(SpellConstants.BladeBarrier, 6)]
-        [TestCase(SpellConstants.HolyWord, 7)]
-        [TestCase(SpellConstants.HolyAura, 8)]
-        [TestCase(SpellConstants.SummonMonsterIX, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

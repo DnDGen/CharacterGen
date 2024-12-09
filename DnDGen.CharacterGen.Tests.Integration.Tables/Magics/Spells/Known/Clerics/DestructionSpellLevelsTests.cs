@@ -2,58 +2,34 @@
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class DestructionSpellLevelsTests : AdjustmentsTests
+    public class DestructionSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Destruction);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Destruction);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.InflictLightWounds,
-                SpellConstants.Shatter,
-                SpellConstants.Contagion,
-                SpellConstants.InflictCriticalWounds,
-                SpellConstants.InflictLightWounds_Mass,
-                SpellConstants.Harm,
-                SpellConstants.Disintegrate,
-                SpellConstants.Earthquake,
-                SpellConstants.Implosion
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllDestructionSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.InflictLightWounds)]
+        [TestCase("2", SpellConstants.Shatter)]
+        [TestCase("3", SpellConstants.Contagion)]
+        [TestCase("4", SpellConstants.InflictCriticalWounds)]
+        [TestCase("5", SpellConstants.InflictLightWounds_Mass)]
+        [TestCase("6", SpellConstants.Harm)]
+        [TestCase("7", SpellConstants.Disintegrate)]
+        [TestCase("8", SpellConstants.Earthquake)]
+        [TestCase("9", SpellConstants.Implosion)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Destruction]);
-        }
-
-        [TestCase(SpellConstants.InflictLightWounds, 1)]
-        [TestCase(SpellConstants.Shatter, 2)]
-        [TestCase(SpellConstants.Contagion, 3)]
-        [TestCase(SpellConstants.InflictCriticalWounds, 4)]
-        [TestCase(SpellConstants.InflictLightWounds_Mass, 5)]
-        [TestCase(SpellConstants.Harm, 6)]
-        [TestCase(SpellConstants.Disintegrate, 7)]
-        [TestCase(SpellConstants.Earthquake, 8)]
-        [TestCase(SpellConstants.Implosion, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

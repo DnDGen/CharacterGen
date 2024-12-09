@@ -54,7 +54,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Tables
         [TestCase(TableNameConstants.Set.Collection.SkillGroups, "SkillGroups")]
         [TestCase(TableNameConstants.Set.Collection.SkillSynergy, "SkillSynergy")]
         [TestCase(TableNameConstants.Set.Collection.SpecialistFields, "SpecialistFields")]
-        [TestCase(TableNameConstants.Set.Collection.SpellGroups, "SpellGroups")]
         [TestCase(TableNameConstants.Set.Collection.WeightRolls, "WeightRolls")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentGoodness, "AlignmentGoodness")]
         [TestCase(TableNameConstants.Set.Percentile.AlignmentLawfulness, "AlignmentLawfulness")]

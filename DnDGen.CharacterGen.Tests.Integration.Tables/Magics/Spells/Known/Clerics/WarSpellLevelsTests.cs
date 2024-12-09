@@ -1,59 +1,35 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class WarSpellLevelsTests : AdjustmentsTests
+    public class WarSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.War);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.War);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.MagicWeapon,
-                SpellConstants.SpiritualWeapon,
-                SpellConstants.MagicVestment,
-                SpellConstants.DivinePower,
-                SpellConstants.FlameStrike,
-                SpellConstants.BladeBarrier,
-                SpellConstants.PowerWordBlind,
-                SpellConstants.PowerWordStun,
-                SpellConstants.PowerWordKill
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllWarSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.MagicWeapon)]
+        [TestCase("2", SpellConstants.SpiritualWeapon)]
+        [TestCase("3", SpellConstants.MagicVestment)]
+        [TestCase("4", SpellConstants.DivinePower)]
+        [TestCase("5", SpellConstants.FlameStrike)]
+        [TestCase("6", SpellConstants.BladeBarrier)]
+        [TestCase("7", SpellConstants.PowerWordBlind)]
+        [TestCase("8", SpellConstants.PowerWordStun)]
+        [TestCase("9", SpellConstants.PowerWordKill)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.War]);
-        }
-
-        [TestCase(SpellConstants.MagicWeapon, 1)]
-        [TestCase(SpellConstants.SpiritualWeapon, 2)]
-        [TestCase(SpellConstants.MagicVestment, 3)]
-        [TestCase(SpellConstants.DivinePower, 4)]
-        [TestCase(SpellConstants.FlameStrike, 5)]
-        [TestCase(SpellConstants.BladeBarrier, 6)]
-        [TestCase(SpellConstants.PowerWordBlind, 7)]
-        [TestCase(SpellConstants.PowerWordStun, 8)]
-        [TestCase(SpellConstants.PowerWordKill, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

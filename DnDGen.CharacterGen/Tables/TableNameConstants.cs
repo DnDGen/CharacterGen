@@ -58,7 +58,6 @@
                 public const string SkillGroups = "SkillGroups";
                 public const string SkillSynergy = "SkillSynergy";
                 public const string SpecialistFields = "SpecialistFields";
-                public const string SpellGroups = "SpellGroups";
                 public const string WeightRolls = "WeightRolls";
             }
 

@@ -2361,9 +2361,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Tables\Magics\Spells\SpellGroups.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Tables\Races\AerialManeuverability.xml" />
   </ItemGroup>
   <ItemGroup>

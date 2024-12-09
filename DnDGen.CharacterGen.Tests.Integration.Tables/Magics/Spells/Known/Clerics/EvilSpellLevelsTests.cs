@@ -2,58 +2,34 @@
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class EvilSpellLevelsTests : AdjustmentsTests
+    public class EvilSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Evil);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Evil);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.ProtectionFromGood,
-                SpellConstants.Desecrate,
-                SpellConstants.MagicCircleAgainstGood,
-                SpellConstants.UnholyBlight,
-                SpellConstants.DispelGood,
-                SpellConstants.CreateUndead,
-                SpellConstants.Blasphemy,
-                SpellConstants.UnholyAura,
-                SpellConstants.SummonMonsterIX
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllEvilSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.ProtectionFromGood)]
+        [TestCase("2", SpellConstants.Desecrate)]
+        [TestCase("3", SpellConstants.MagicCircleAgainstGood)]
+        [TestCase("4", SpellConstants.UnholyBlight)]
+        [TestCase("5", SpellConstants.DispelGood)]
+        [TestCase("6", SpellConstants.CreateUndead)]
+        [TestCase("7", SpellConstants.Blasphemy)]
+        [TestCase("8", SpellConstants.UnholyAura)]
+        [TestCase("9", SpellConstants.SummonMonsterIX)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Evil]);
-        }
-
-        [TestCase(SpellConstants.ProtectionFromGood, 1)]
-        [TestCase(SpellConstants.Desecrate, 2)]
-        [TestCase(SpellConstants.MagicCircleAgainstGood, 3)]
-        [TestCase(SpellConstants.UnholyBlight, 4)]
-        [TestCase(SpellConstants.DispelGood, 5)]
-        [TestCase(SpellConstants.CreateUndead, 6)]
-        [TestCase(SpellConstants.Blasphemy, 7)]
-        [TestCase(SpellConstants.UnholyAura, 8)]
-        [TestCase(SpellConstants.SummonMonsterIX, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

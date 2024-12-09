@@ -1,59 +1,35 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class KnowledgeSpellLevelsTests : AdjustmentsTests
+    public class KnowledgeSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Knowledge);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Knowledge);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.DetectSecretDoors,
-                SpellConstants.DetectThoughts,
-                SpellConstants.ClairaudienceClairvoyance,
-                SpellConstants.Divination,
-                SpellConstants.TrueSeeing,
-                SpellConstants.FindThePath,
-                SpellConstants.LegendLore,
-                SpellConstants.DiscernLocation,
-                SpellConstants.Foresight
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllKnowledgeSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.DetectSecretDoors)]
+        [TestCase("2", SpellConstants.DetectThoughts)]
+        [TestCase("3", SpellConstants.ClairaudienceClairvoyance)]
+        [TestCase("4", SpellConstants.Divination)]
+        [TestCase("5", SpellConstants.TrueSeeing)]
+        [TestCase("6", SpellConstants.FindThePath)]
+        [TestCase("7", SpellConstants.LegendLore)]
+        [TestCase("8", SpellConstants.DiscernLocation)]
+        [TestCase("9", SpellConstants.Foresight)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Knowledge]);
-        }
-
-        [TestCase(SpellConstants.DetectSecretDoors, 1)]
-        [TestCase(SpellConstants.DetectThoughts, 2)]
-        [TestCase(SpellConstants.ClairaudienceClairvoyance, 3)]
-        [TestCase(SpellConstants.Divination, 4)]
-        [TestCase(SpellConstants.TrueSeeing, 5)]
-        [TestCase(SpellConstants.FindThePath, 6)]
-        [TestCase(SpellConstants.LegendLore, 7)]
-        [TestCase(SpellConstants.DiscernLocation, 8)]
-        [TestCase(SpellConstants.Foresight, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

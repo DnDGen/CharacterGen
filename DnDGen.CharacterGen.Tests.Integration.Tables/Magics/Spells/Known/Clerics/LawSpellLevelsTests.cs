@@ -2,58 +2,34 @@
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class LawSpellLevelsTests : AdjustmentsTests
+    public class LawSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Law);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Law);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.ProtectionFromChaos,
-                SpellConstants.CalmEmotions,
-                SpellConstants.MagicCircleAgainstChaos,
-                SpellConstants.OrdersWrath,
-                SpellConstants.DispelChaos,
-                SpellConstants.HoldMonster,
-                SpellConstants.Dictum,
-                SpellConstants.ShieldOfLaw,
-                SpellConstants.SummonMonsterIX
-            };
-
+            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllLawSpellsInAdjustmentsTable()
+        [TestCase("1", SpellConstants.ProtectionFromChaos)]
+        [TestCase("2", SpellConstants.CalmEmotions)]
+        [TestCase("3", SpellConstants.MagicCircleAgainstChaos)]
+        [TestCase("4", SpellConstants.OrdersWrath)]
+        [TestCase("5", SpellConstants.DispelChaos)]
+        [TestCase("6", SpellConstants.HoldMonster)]
+        [TestCase("7", SpellConstants.Dictum)]
+        [TestCase("8", SpellConstants.ShieldOfLaw)]
+        [TestCase("9", SpellConstants.SummonMonsterIX)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Law]);
-        }
-
-        [TestCase(SpellConstants.ProtectionFromChaos, 1)]
-        [TestCase(SpellConstants.CalmEmotions, 2)]
-        [TestCase(SpellConstants.MagicCircleAgainstChaos, 3)]
-        [TestCase(SpellConstants.OrdersWrath, 4)]
-        [TestCase(SpellConstants.DispelChaos, 5)]
-        [TestCase(SpellConstants.HoldMonster, 6)]
-        [TestCase(SpellConstants.Dictum, 7)]
-        [TestCase(SpellConstants.ShieldOfLaw, 8)]
-        [TestCase(SpellConstants.SummonMonsterIX, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }
