@@ -1,164 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Daze</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Charm person</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Hypnotism</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Sleep</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Daze monster</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Hideous laughter</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Touch of idiocy</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Deep slumber</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Heroism</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Hold person</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Rage</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Suggestion</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Charm monster</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Confusion</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Crushing despair</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Lesser geas</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Dominate person</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Feeblemind</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Hold monster</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mind fog</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Symbol of sleep</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Geas/Quest</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Greater heroism</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass suggestion</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Symbol of persuasion</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass hold person</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Insanity</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Power word blind</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Symbol of stunning</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Antipathy</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Binding</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Mass charm monster</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Demand</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Irresistible dance</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Power word stun</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Symbol of insanity</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Sympathy</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Dominate monster</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Mass hold monster</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Power word kill</name>
-    <entry>9</entry>
-  </collection>
+	<collection>
+		<name>0</name>
+		<entry>Daze</entry>
+	</collection>
+	<collection>
+		<name>1</name>
+		<entry>Charm person</entry>
+		<entry>Hypnotism</entry>
+		<entry>Sleep</entry>
+	</collection>
+	<collection>
+		<name>2</name>
+		<entry>Daze monster</entry>
+		<entry>Tasha's hideous laughter</entry>
+		<entry>Touch of idiocy</entry>
+	</collection>
+	<collection>
+		<name>3</name>
+		<entry>Deep slumber</entry>
+		<entry>Heroism</entry>
+		<entry>Hold person</entry>
+		<entry>Rage</entry>
+		<entry>Suggestion</entry>
+	</collection>
+	<collection>
+		<name>4</name>
+		<entry>Charm monster</entry>
+		<entry>Confusion</entry>
+		<entry>Crushing despair</entry>
+		<entry>Lesser geas</entry>
+	</collection>
+	<collection>
+		<name>5</name>
+		<entry>Dominate person</entry>
+		<entry>Feeblemind</entry>
+		<entry>Hold monster</entry>
+		<entry>Mind fog</entry>
+		<entry>Symbol of sleep</entry>
+	</collection>
+	<collection>
+		<name>6</name>
+		<entry>Geas/Quest</entry>
+		<entry>Greater heroism</entry>
+		<entry>Mass suggestion</entry>
+		<entry>Symbol of persuasion</entry>
+	</collection>
+	<collection>
+		<name>7</name>
+		<entry>Mass hold person</entry>
+		<entry>Insanity</entry>
+		<entry>Power word blind</entry>
+		<entry>Symbol of stunning</entry>
+	</collection>
+	<collection>
+		<name>8</name>
+		<entry>Antipathy</entry>
+		<entry>Binding</entry>
+		<entry>Mass charm monster</entry>
+		<entry>Demand</entry>
+		<entry>Otto's irresistible dance</entry>
+		<entry>Power word stun</entry>
+		<entry>Symbol of insanity</entry>
+		<entry>Sympathy</entry>
+	</collection>
+	<collection>
+		<name>9</name>
+		<entry>Dominate monster</entry>
+		<entry>Mass hold monster</entry>
+		<entry>Power word kill</entry>
+	</collection>
 </collections>

@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Protection from good</name>
-    <entry>1</entry>
+    <entry>Protection from good</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Desecrate</name>
-    <entry>2</entry>
+    <entry>Desecrate</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Magic circle against good</name>
-    <entry>3</entry>
+    <entry>Magic circle against good</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Unholy blight</name>
-    <entry>4</entry>
+    <entry>Unholy blight</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Dispel good</name>
-    <entry>5</entry>
+    <entry>Dispel good</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Create undead</name>
-    <entry>6</entry>
+    <entry>Create undead</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Blasphemy</name>
-    <entry>7</entry>
+    <entry>Blasphemy</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Unholy aura</name>
-    <entry>8</entry>
+    <entry>Unholy aura</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Summon monster IX</name>
-    <entry>9</entry>
+    <entry>Summon monster IX</entry>
+	  <name>9</name>
   </collection>
 </collections>

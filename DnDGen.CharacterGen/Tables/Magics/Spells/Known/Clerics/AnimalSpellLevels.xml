@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Calm animals</name>
-    <entry>1</entry>
+	  <entry>Calm animals</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Hold animal</name>
-    <entry>2</entry>
+	  <entry>Hold animal</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Dominate animal</name>
-    <entry>3</entry>
+	  <entry>Dominate animal</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Summon nature's ally IV</name>
-    <entry>4</entry>
+	  <entry>Summon nature's ally IV</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Commune with nature</name>
-    <entry>5</entry>
+	  <entry>Commune with nature</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Antilife shell</name>
-    <entry>6</entry>
+	  <entry>Antilife shell</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Animal shapes</name>
-    <entry>7</entry>
+	  <entry>Animal shapes</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Summon nature's ally VIII</name>
-    <entry>8</entry>
+	  <entry>Summon nature's ally VIII</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Shapechange</name>
-    <entry>9</entry>
+    <entry>Shapechange</entry>
+	  <name>9</name>
   </collection>
 </collections>

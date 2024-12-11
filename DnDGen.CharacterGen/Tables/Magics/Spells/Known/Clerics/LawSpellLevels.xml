@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Protection from chaos</name>
-    <entry>1</entry>
+    <entry>Protection from chaos</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Calm emotions</name>
-    <entry>2</entry>
+    <entry>Calm emotions</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Magic circle against chaos</name>
-    <entry>3</entry>
+    <entry>Magic circle against chaos</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Order's wrath</name>
-    <entry>4</entry>
+    <entry>Order's wrath</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Dispel chaos</name>
-    <entry>5</entry>
+    <entry>Dispel chaos</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Hold monster</name>
-    <entry>6</entry>
+    <entry>Hold monster</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Dictum</name>
-    <entry>7</entry>
+    <entry>Dictum</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Shield of law</name>
-    <entry>8</entry>
+    <entry>Shield of law</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Summon monster IX</name>
-    <entry>9</entry>
+    <entry>Summon monster IX</entry>
+	  <name>9</name>
   </collection>
 </collections>

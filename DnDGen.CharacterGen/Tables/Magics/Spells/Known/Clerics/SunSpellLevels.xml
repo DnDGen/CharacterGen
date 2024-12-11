@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Endure elements</name>
-    <entry>1</entry>
+    <entry>Endure elements</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Heat metal</name>
-    <entry>2</entry>
+    <entry>Heat metal</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Searing light</name>
-    <entry>3</entry>
+    <entry>Searing light</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Fire shield</name>
-    <entry>4</entry>
+    <entry>Fire shield</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Flame strike</name>
-    <entry>5</entry>
+    <entry>Flame strike</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Fire seeds</name>
-    <entry>6</entry>
+    <entry>Fire seeds</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Sunbeam</name>
-    <entry>7</entry>
+    <entry>Sunbeam</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Sunburst</name>
-    <entry>8</entry>
+    <entry>Sunburst</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Prismatic sphere</name>
-    <entry>9</entry>
+    <entry>Prismatic sphere</entry>
+	  <name>9</name>
   </collection>
 </collections>

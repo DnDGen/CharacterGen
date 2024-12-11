@@ -1,860 +1,266 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Detect poison</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Delay poison</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Read magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Cure light wounds</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cure moderate wounds</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Cure serious wounds</name>
-    <entry>3</entry>
-  </collection>
 	<collection>
-		<name>Inflict light wounds</name>
-		<entry>1</entry>
+		<name>0</name>
+		<entry>Detect poison</entry>
+		<entry>Read magic</entry>
+		<entry>Create water</entry>
+		<entry>Cure minor wounds</entry>
+		<entry>Inflict minor wounds</entry>
+		<entry>Detect magic</entry>
+		<entry>Guidance</entry>
+		<entry>Light</entry>
+		<entry>Mending</entry>
+		<entry>Purify food and drink</entry>
+		<entry>Resistance</entry>
+		<entry>Virtue</entry>
 	</collection>
 	<collection>
-		<name>Inflict moderate wounds</name>
-		<entry>2</entry>
+		<name>1</name>
+		<entry>Cure light wounds</entry>
+		<entry>Inflict light wounds</entry>
+		<entry>Endure elements</entry>
+		<entry>Bane</entry>
+		<entry>Bless water</entry>
+		<entry>Bless</entry>
+		<entry>Cause fear</entry>
+		<entry>Command</entry>
+		<entry>Comprehend languages</entry>
+		<entry>Curse water</entry>
+		<entry>Deathwatch</entry>
+		<entry>Detect chaos</entry>
+		<entry>Detect law</entry>
+		<entry>Detect good</entry>
+		<entry>Detect evil</entry>
+		<entry>Divine favor</entry>
+		<entry>Doom</entry>
+		<entry>Detect undead</entry>
+		<entry>Entropic shield</entry>
+		<entry>Hide from undead</entry>
+		<entry>Magic stone</entry>
+		<entry>Magic weapon</entry>
+		<entry>Obscuring mist</entry>
+		<entry>Protection from chaos</entry>
+		<entry>Protection from law</entry>
+		<entry>Protection from good</entry>
+		<entry>Protection from evil</entry>
+		<entry>Remove fear</entry>
+		<entry>Sanctuary</entry>
+		<entry>Shield of faith</entry>
+		<entry>Summon monster I</entry>
 	</collection>
 	<collection>
-		<name>Inflict serious wounds</name>
-		<entry>3</entry>
-	</collection>
-  <collection>
-    <name>Freedom of movement</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Endure elements</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Neutralize poison</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Remove disease</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Repel vermin</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Water walk</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Resist energy</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Bear's endurance</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Owl's wisdom</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Protection from energy</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Wind wall</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Aid</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Air walk</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Align weapon</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Animate dead</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Animate objects</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Antilife shell</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Antimagic field</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Astral projection</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Atonement</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Augury</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Bane</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Banishment</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Bestow curse</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Blade barrier</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Blasphemy</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Bless water</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Bless</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Blindness/deafness</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Break enchantment</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Bull's strength</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Calm emotions</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Cause fear</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cloak of chaos</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Command</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Commune</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Comprehend languages</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Consecrate</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Contagion</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Continual flame</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Control water</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Control weather</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Create food and water</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Create greater undead</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Create undead</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Create water</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Cure critical wounds</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Cure minor wounds</name>
-    <entry>0</entry>
-  </collection>
-	<collection>
-		<name>Inflict critical wounds</name>
-		<entry>4</entry>
+		<name>2</name>
+		<entry>Delay poison</entry>
+		<entry>Cure moderate wounds</entry>
+		<entry>Inflict moderate wounds</entry>
+		<entry>Resist energy</entry>
+		<entry>Bear's endurance</entry>
+		<entry>Owl's wisdom</entry>
+		<entry>Aid</entry>
+		<entry>Align weapon</entry>
+		<entry>Augury</entry>
+		<entry>Bull's strength</entry>
+		<entry>Consecrate</entry>
+		<entry>Calm emotions</entry>
+		<entry>Darkness</entry>
+		<entry>Death knell</entry>
+		<entry>Desecrate</entry>
+		<entry>Eagle's splendor</entry>
+		<entry>Enthrall</entry>
+		<entry>Find traps</entry>
+		<entry>Gentle repose</entry>
+		<entry>Hold person</entry>
+		<entry>Lesser restoration</entry>
+		<entry>Make whole</entry>
+		<entry>Remove paralysis</entry>
+		<entry>Shatter</entry>
+		<entry>Shield other</entry>
+		<entry>Silence</entry>
+		<entry>Sound burst</entry>
+		<entry>Spiritual weapon</entry>
+		<entry>Status</entry>
+		<entry>Summon monster II</entry>
+		<entry>Undetectable alignment</entry>
+		<entry>Zone of truth</entry>
 	</collection>
 	<collection>
-		<name>Inflict minor wounds</name>
-		<entry>0</entry>
+		<name>3</name>
+		<entry>Cure serious wounds</entry>
+		<entry>Inflict serious wounds</entry>
+		<entry>Remove disease</entry>
+		<entry>Water walk</entry>
+		<entry>Protection from energy</entry>
+		<entry>Wind wall</entry>
+		<entry>Animate dead</entry>
+		<entry>Bestow curse</entry>
+		<entry>Blindness/deafness</entry>
+		<entry>Contagion</entry>
+		<entry>Continual flame</entry>
+		<entry>Create food and water</entry>
+		<entry>Daylight</entry>
+		<entry>Deeper darkness</entry>
+		<entry>Dispel magic</entry>
+		<entry>Glyph of warding</entry>
+		<entry>Helping hand</entry>
+		<entry>Invisibility purge</entry>
+		<entry>Locate object</entry>
+		<entry>Magic circle against chaos</entry>
+		<entry>Magic circle against law</entry>
+		<entry>Magic circle against good</entry>
+		<entry>Magic circle against evil</entry>
+		<entry>Magic vestment</entry>
+		<entry>Meld into stone</entry>
+		<entry>Obscure object</entry>
+		<entry>Prayer</entry>
+		<entry>Remove blindness/deafness</entry>
+		<entry>Remove curse</entry>
+		<entry>Searing light</entry>
+		<entry>Speak with dead</entry>
+		<entry>Stone shape</entry>
+		<entry>Summon monster III</entry>
+		<entry>Water breathing</entry>
 	</collection>
-  <collection>
-    <name>Curse water</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Darkness</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Daylight</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Death knell</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Death ward</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Deathwatch</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Deeper darkness</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Desecrate</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Destruction</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Detect chaos/law/good/evil</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Detect magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Detect undead</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Dictum</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Dimensional anchor</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Dimensional lock</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Discern lies</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Discern location</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Dismissal</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Dispel good/evil/law/chaos</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Dispel magic</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Disrupting weapon</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Divination</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Divine favor</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Divine power</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Doom</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Eagle's splendor</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Earthquake</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Energy drain</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Enthrall</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Entropic shield</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Ethereal jaunt</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Etherealness</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Find the path</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Find traps</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Fire storm</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Flame strike</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Forbiddance</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Gate</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Geas/Quest</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Gentle repose</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Giant vermin</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Glyph of warding</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Greater magic weapon</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Greater planar ally</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Greater restoration</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Greater scrying</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Greater spell immunity</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Guidance</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Hallow</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Greater command</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Greater dispel magic</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Greater glyph of warding</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Heal/Harm</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Helping hand</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Heroes' feast</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Hide from undead</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Hold person</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Holy aura</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Holy word</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Imbue with spell ability</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Implosion</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Insect plague</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Invisibility purge</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Lesser planar ally</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Lesser restoration</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Light</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Locate object</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Magic circle against chaos/law/good/evil</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Magic stone</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Magic vestment</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Magic weapon</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Make whole</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Mark of justice</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mass bear's endurance</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass bull's strength</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass eagle's splendor</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass owl's wisdom</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict critical wounds</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict light wounds</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict moderate wounds</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict serious wounds</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Mass heal/harm</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Meld into stone</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Mending</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Miracle</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Obscure object</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Obscuring mist</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Planar ally</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Plane shift</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Poison</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Prayer</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Protection from chaos/law/good/evil</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Purify food and drink</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Raise dead</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Refuge</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Regenerate</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Remove blindness/deafness</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove curse</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove fear</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Remove paralysis</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Repulsion</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Resistance</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Restoration</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Resurrection</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Righteous might</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Sanctuary</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Scrying</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Searing light</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Sending</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Shatter</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Shield of faith</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Shield of law</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Shield other</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Silence</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Slay living</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Soul bind</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Sound burst</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Speak with dead</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Spell immunity</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Spell resistance</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Spiritual weapon</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Status</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Stone shape</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Storm of vengeance</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Summon monster I</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Summon monster II</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Summon monster III</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Summon monster IV</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Summon monster V</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Summon monster VI</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Summon monster VII</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Summon monster VIII</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Summon monster IX</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Symbol of death</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Symbol of insanity</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Symbol of fear</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Symbol of pain</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Symbol of persuasion</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Symbol of sleep</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Symbol of stunning</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Symbol of weakness</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Tongues</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>True resurrection</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>True seeing</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Undeath to death</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Undetectable alignment</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Unhallow</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Unholy aura</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Virtue</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Wall of stone</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Water breathing</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Wind walk</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Word of chaos</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Word of recall</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Zone of truth</name>
-    <entry>2</entry>
-  </collection>
+	<collection>
+		<name>4</name>
+		<entry>Freedom of movement</entry>
+		<entry>Neutralize poison</entry>
+		<entry>Repel vermin</entry>
+		<entry>Air walk</entry>
+		<entry>Control water</entry>
+		<entry>Cure critical wounds</entry>
+		<entry>Inflict critical wounds</entry>
+		<entry>Death ward</entry>
+		<entry>Dimensional anchor</entry>
+		<entry>Discern lies</entry>
+		<entry>Dismissal</entry>
+		<entry>Divination</entry>
+		<entry>Divine power</entry>
+		<entry>Giant vermin</entry>
+		<entry>Greater magic weapon</entry>
+		<entry>Imbue with spell ability</entry>
+		<entry>Lesser planar ally</entry>
+		<entry>Poison</entry>
+		<entry>Restoration</entry>
+		<entry>Sending</entry>
+		<entry>Spell immunity</entry>
+		<entry>Summon monster IV</entry>
+		<entry>Tongues</entry>
+	</collection>
+	<collection>
+		<name>5</name>
+		<entry>Atonement</entry>
+		<entry>Break enchantment</entry>
+		<entry>Commune</entry>
+		<entry>Dispel good</entry>
+		<entry>Dispel evil</entry>
+		<entry>Dispel law</entry>
+		<entry>Dispel chaos</entry>
+		<entry>Disrupting weapon</entry>
+		<entry>Flame strike</entry>
+		<entry>Hallow</entry>
+		<entry>Greater command</entry>
+		<entry>Insect plague</entry>
+		<entry>Mark of justice</entry>
+		<entry>Mass cure light wounds</entry>
+		<entry>Mass inflict light wounds</entry>
+		<entry>Plane shift</entry>
+		<entry>Raise dead</entry>
+		<entry>Righteous might</entry>
+		<entry>Scrying</entry>
+		<entry>Slay living</entry>
+		<entry>Spell resistance</entry>
+		<entry>Summon monster V</entry>
+		<entry>Symbol of pain</entry>
+		<entry>Symbol of sleep</entry>
+		<entry>True seeing</entry>
+		<entry>Unhallow</entry>
+		<entry>Wall of stone</entry>
+	</collection>
+	<collection>
+		<name>6</name>
+		<entry>Animate objects</entry>
+		<entry>Antilife shell</entry>
+		<entry>Banishment</entry>
+		<entry>Blade barrier</entry>
+		<entry>Create undead</entry>
+		<entry>Find the path</entry>
+		<entry>Forbiddance</entry>
+		<entry>Geas/Quest</entry>
+		<entry>Greater dispel magic</entry>
+		<entry>Greater glyph of warding</entry>
+		<entry>Heal</entry>
+		<entry>Harm</entry>
+		<entry>Heroes' feast</entry>
+		<entry>Mass bear's endurance</entry>
+		<entry>Mass bull's strength</entry>
+		<entry>Mass eagle's splendor</entry>
+		<entry>Mass owl's wisdom</entry>
+		<entry>Mass cure moderate wounds</entry>
+		<entry>Mass inflict moderate wounds</entry>
+		<entry>Planar ally</entry>
+		<entry>Summon monster VI</entry>
+		<entry>Symbol of fear</entry>
+		<entry>Symbol of persuasion</entry>
+		<entry>Undeath to death</entry>
+		<entry>Wind walk</entry>
+		<entry>Word of recall</entry>
+	</collection>
+	<collection>
+		<name>7</name>
+		<entry>Blasphemy</entry>
+		<entry>Control weather</entry>
+		<entry>Destruction</entry>
+		<entry>Dictum</entry>
+		<entry>Ethereal jaunt</entry>
+		<entry>Greater restoration</entry>
+		<entry>Greater scrying</entry>
+		<entry>Holy word</entry>
+		<entry>Mass cure serious wounds</entry>
+		<entry>Mass inflict serious wounds</entry>
+		<entry>Refuge</entry>
+		<entry>Regenerate</entry>
+		<entry>Repulsion</entry>
+		<entry>Resurrection</entry>
+		<entry>Summon monster VII</entry>
+		<entry>Symbol of stunning</entry>
+		<entry>Symbol of weakness</entry>
+		<entry>Word of chaos</entry>
+	</collection>
+	<collection>
+		<name>8</name>
+		<entry>Antimagic field</entry>
+		<entry>Cloak of chaos</entry>
+		<entry>Create greater undead</entry>
+		<entry>Discern location</entry>
+		<entry>Dimensional lock</entry>
+		<entry>Earthquake</entry>
+		<entry>Fire storm</entry>
+		<entry>Greater planar ally</entry>
+		<entry>Greater spell immunity</entry>
+		<entry>Holy aura</entry>
+		<entry>Mass cure critical wounds</entry>
+		<entry>Shield of law</entry>
+		<entry>Mass inflict critical wounds</entry>
+		<entry>Summon monster VIII</entry>
+		<entry>Symbol of death</entry>
+		<entry>Symbol of insanity</entry>
+		<entry>Unholy aura</entry>
+	</collection>
+	<collection>
+		<name>9</name>
+		<entry>Astral projection</entry>
+		<entry>Energy drain</entry>
+		<entry>Etherealness</entry>
+		<entry>Gate</entry>
+		<entry>Implosion</entry>
+		<entry>Mass heal</entry>
+		<entry>Mass harm</entry>
+		<entry>Miracle</entry>
+		<entry>Soul bind</entry>
+		<entry>Storm of vengeance</entry>
+		<entry>Summon monster IX</entry>
+		<entry>True resurrection</entry>
+	</collection>
 </collections>

@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Cure/inflict light wounds</name>
-    <entry>1</entry>
+    <entry>Cure light wounds</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Cure/inflict moderate wounds</name>
-    <entry>2</entry>
+    <entry>Cure moderate wounds</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Cure/inflict serious wounds</name>
-    <entry>3</entry>
+    <entry>Cure serious wounds</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Cure/inflict critical wounds</name>
-    <entry>4</entry>
+    <entry>Cure critical wounds</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Mass cure/inflict light wounds</name>
-    <entry>5</entry>
+    <entry>Mass cure light wounds</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Heal/Harm</name>
-    <entry>6</entry>
+    <entry>Heal</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Regenerate</name>
-    <entry>7</entry>
+    <entry>Regenerate</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Mass cure/inflict critical wounds</name>
-    <entry>8</entry>
+    <entry>Mass cure critical wounds</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Mass heal/harm</name>
-    <entry>9</entry>
+    <entry>Mass heal</entry>
+	  <name>9</name>
   </collection>
 </collections>

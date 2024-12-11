@@ -14,7 +14,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Wizar
         [Test]
         public override void CollectionNames()
         {
-            var names = Enumerable.Range(0, 9).Select(n => n.ToString());
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 

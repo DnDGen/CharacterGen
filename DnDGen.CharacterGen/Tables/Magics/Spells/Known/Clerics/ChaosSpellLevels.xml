@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Protection from law</name>
-    <entry>1</entry>
+    <entry>Protection from law</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Shatter</name>
-    <entry>2</entry>
+    <entry>Shatter</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Magic circle against law</name>
-    <entry>3</entry>
+    <entry>Magic circle against law</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Chaos hammer</name>
-    <entry>4</entry>
+    <entry>Chaos hammer</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Dispel law</name>
-    <entry>5</entry>
+    <entry>Dispel law</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Animate objects</name>
-    <entry>6</entry>
+    <entry>Animate objects</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Word of chaos</name>
-    <entry>7</entry>
+    <entry>Word of chaos</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Cloak of chaos</name>
-    <entry>8</entry>
+    <entry>Cloak of chaos</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Summon monster IX</name>
-    <entry>9</entry>
+    <entry>Summon monster IX</entry>
+	  <name>9</name>
   </collection>
 </collections>

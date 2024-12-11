@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Cure/inflict light wounds</name>
-    <entry>1</entry>
+    <entry>Inflict light wounds</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Shatter</name>
-    <entry>2</entry>
+    <entry>Shatter</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Contagion</name>
-    <entry>3</entry>
+    <entry>Contagion</entry>
+    <name>3</name>
   </collection>
   <collection>
-    <name>Cure/inflict critical wounds</name>
-    <entry>4</entry>
+    <entry>Inflict critical wounds</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Mass cure/inflict light wounds</name>
-    <entry>5</entry>
+    <entry>Mass inflict light wounds</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Heal/Harm</name>
-    <entry>6</entry>
+    <entry>Harm</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Disintegrate</name>
-    <entry>7</entry>
+    <entry>Disintegrate</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Earthquake</name>
-    <entry>8</entry>
+    <entry>Earthquake</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Implosion</name>
-    <entry>9</entry>
+    <entry>Implosion</entry>
+	  <name>9</name>
   </collection>
 </collections>

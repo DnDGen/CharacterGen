@@ -1,660 +1,189 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Resistance</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Detect magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Read magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Daze</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Dancing lights</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Flare</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Light</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Ghost sound</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Mage hand</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Mending</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Message</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Open/Close</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Prestidigitation</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Alarm</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Grease</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Summon monster I</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Unseen servant</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Comprehend languages</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Detect secret doors</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Identify</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Charm person</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Hypnotism</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Sleep</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Nystul's magic aura</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Silent image</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Ventriloquism</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cause fear</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Animate rope</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Erase</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Expeditious retreat</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Feather fall</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Obscure object</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Glitterdust</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Summon monster II</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Summon swarm</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Detect thoughts</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Locate object</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>See invisibility</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Daze monster</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Tasha's hideous laughter</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Darkness</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Shatter</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Blur</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Hypnotic pattern</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Invisibility</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Magic mouth</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Minor image</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Mirror image</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Misdirection</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Blindness/deafness</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Scare</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Alter self</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Cat's grace</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Eagle's splendor</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Fox's cunning</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Pyrotechnics</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Whispering wind</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Dispel magic</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Phantom steed</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Sepia snake sigil</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Summon monster III</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Clairaudience/Clairvoyance</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Tongues</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Deep slumber</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Heroism</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Hold person</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Rage</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Suggestion</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Daylight</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Leomund's tiny hut</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Displacement</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Illusory script</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Invisibility sphere</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Major image</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Blink</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Gaseous form</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Haste</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Secret page</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Slow</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove curse</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Dimension door</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Leomund's secure shelter</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Summon monster IV</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Detect scrying</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Locate creature</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Scrying</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Charm monster</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Confusion</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Crushing despair</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Lesser geas</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Shout</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Hallucinatory terrain</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Greater invisibility</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Rainbow pattern</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Fear</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Break enchantment</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Summon monster V</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Dominate person</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Hold monster</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Mind fog</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Dream</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>False vision</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mirage arcana</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Nightmare</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Persistent image</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Seeming</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Shadow evocation</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Greater dispel magic</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Summon monster VI</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Analyze dweomer</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Legend lore</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Geas/Quest</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Greater heroism</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mass suggestion</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mislead</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Permanent image</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Programmed image</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Shadow walk</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Veil</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Eyebite</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cat's grace</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass eagle's splendor</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass fox's cunning</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Animal messenger</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Animal trance</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Animate objects</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Calm emotions</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Cure critical wounds</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Cure light wounds</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cure moderate wounds</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Cure serious wounds</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Delay poison</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Disguise self</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Enthrall</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Find the path</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Freedom of movement</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Glibness</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Good hope</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Greater scrying</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Greater shout</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Heroes' feast</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Otto's irresistible dance</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Know direction</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Lesser confusion</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Lullaby</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Mass charm monster</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cure light wounds</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Mass cure moderate wounds</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Modify memory</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Neutralize poison</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Project image</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Remove fear</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Repel vermin</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Sculpt sound</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Shadow conjuration</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Silence</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Song of discord</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Sound burst</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Speak with animals</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Speak with plants</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Summon instrument</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Sympathetic vibration</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Undetectable alignment</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Zone of silence</name>
-    <entry>4</entry>
-  </collection>
+	<collection>
+		<name>0</name>
+		<entry>Resistance</entry>
+		<entry>Detect magic</entry>
+		<entry>Read magic</entry>
+		<entry>Daze</entry>
+		<entry>Dancing lights</entry>
+		<entry>Know direction</entry>
+		<entry>Flare</entry>
+		<entry>Light</entry>
+		<entry>Ghost sound</entry>
+		<entry>Mage hand</entry>
+		<entry>Mending</entry>
+		<entry>Message</entry>
+		<entry>Open/Close</entry>
+		<entry>Prestidigitation</entry>
+		<entry>Lullaby</entry>
+		<entry>Summon instrument</entry>
+	</collection>
+	<collection>
+		<name>1</name>
+		<entry>Alarm</entry>
+		<entry>Summon monster I</entry>
+		<entry>Grease</entry>
+		<entry>Unseen servant</entry>
+		<entry>Comprehend languages</entry>
+		<entry>Detect secret doors</entry>
+		<entry>Identify</entry>
+		<entry>Charm person</entry>
+		<entry>Disguise self</entry>
+		<entry>Hypnotism</entry>
+		<entry>Sleep</entry>
+		<entry>Cure light wounds</entry>
+		<entry>Nystul's magic aura</entry>
+		<entry>Silent image</entry>
+		<entry>Ventriloquism</entry>
+		<entry>Cause fear</entry>
+		<entry>Animate rope</entry>
+		<entry>Erase</entry>
+		<entry>Expeditious retreat</entry>
+		<entry>Feather fall</entry>
+		<entry>Obscure object</entry>
+		<entry>Tasha's hideous laughter</entry>
+		<entry>Magic mouth</entry>
+		<entry>Lesser confusion</entry>
+		<entry>Remove fear</entry>
+		<entry>Undetectable alignment</entry>
+	</collection>
+	<collection>
+		<name>2</name>
+		<entry>Glitterdust</entry>
+		<entry>Summon monster II</entry>
+		<entry>Summon swarm</entry>
+		<entry>Detect thoughts</entry>
+		<entry>Locate object</entry>
+		<entry>Daze monster</entry>
+		<entry>Darkness</entry>
+		<entry>Shatter</entry>
+		<entry>Blur</entry>
+		<entry>Hypnotic pattern</entry>
+		<entry>Invisibility</entry>
+		<entry>Minor image</entry>
+		<entry>Mirror image</entry>
+		<entry>Misdirection</entry>
+		<entry>Blindness/deafness</entry>
+		<entry>Scare</entry>
+		<entry>Alter self</entry>
+		<entry>Cat's grace</entry>
+		<entry>Eagle's splendor</entry>
+		<entry>Enthrall</entry>
+		<entry>Fox's cunning</entry>
+		<entry>Animal messenger</entry>
+		<entry>Cure moderate wounds</entry>
+		<entry>Pyrotechnics</entry>
+		<entry>Delay poison</entry>
+		<entry>Calm emotions</entry>
+		<entry>Whispering wind</entry>
+		<entry>Tongues</entry>
+		<entry>Heroism</entry>
+		<entry>Hold person</entry>
+		<entry>Animal trance</entry>
+		<entry>Rage</entry>
+		<entry>Suggestion</entry>
+		<entry>Silence</entry>
+		<entry>Sound burst</entry>
+	</collection>
+	<collection>
+		<name>3</name>
+		<entry>See invisibility</entry>
+		<entry>Dispel magic</entry>
+		<entry>Phantom steed</entry>
+		<entry>Sepia snake sigil</entry>
+		<entry>Summon monster III</entry>
+		<entry>Clairaudience/Clairvoyance</entry>
+		<entry>Deep slumber</entry>
+		<entry>Daylight</entry>
+		<entry>Leomund's tiny hut</entry>
+		<entry>Displacement</entry>
+		<entry>Illusory script</entry>
+		<entry>Invisibility sphere</entry>
+		<entry>Major image</entry>
+		<entry>Blink</entry>
+		<entry>Gaseous form</entry>
+		<entry>Haste</entry>
+		<entry>Secret page</entry>
+		<entry>Cure serious wounds</entry>
+		<entry>Glibness</entry>
+		<entry>Slow</entry>
+		<entry>Remove curse</entry>
+		<entry>Scrying</entry>
+		<entry>Charm monster</entry>
+		<entry>Good hope</entry>
+		<entry>Confusion</entry>
+		<entry>Crushing despair</entry>
+		<entry>Lesser geas</entry>
+		<entry>Fear</entry>
+		<entry>Sculpt sound</entry>
+		<entry>Speak with animals</entry>
+	</collection>
+	<collection>
+		<name>4</name>
+		<entry>Dimension door</entry>
+		<entry>Leomund's secure shelter</entry>
+		<entry>Summon monster IV</entry>
+		<entry>Detect scrying</entry>
+		<entry>Locate creature</entry>
+		<entry>Shout</entry>
+		<entry>Hallucinatory terrain</entry>
+		<entry>Greater invisibility</entry>
+		<entry>Rainbow pattern</entry>
+		<entry>Break enchantment</entry>
+		<entry>Dominate person</entry>
+		<entry>Freedom of movement</entry>
+		<entry>Hold monster</entry>
+		<entry>Legend lore</entry>
+		<entry>Cure critical wounds</entry>
+		<entry>Modify memory</entry>
+		<entry>Neutralize poison</entry>
+		<entry>Repel vermin</entry>
+		<entry>Shadow conjuration</entry>
+		<entry>Speak with plants</entry>
+		<entry>Zone of silence</entry>
+	</collection>
+	<collection>
+		<name>5</name>
+		<entry>Summon monster V</entry>
+		<entry>Mind fog</entry>
+		<entry>Dream</entry>
+		<entry>False vision</entry>
+		<entry>Mirage arcana</entry>
+		<entry>Nightmare</entry>
+		<entry>Persistent image</entry>
+		<entry>Seeming</entry>
+		<entry>Shadow evocation</entry>
+		<entry>Greater dispel magic</entry>
+		<entry>Greater heroism</entry>
+		<entry>Mass suggestion</entry>
+		<entry>Mislead</entry>
+		<entry>Shadow walk</entry>
+		<entry>Mass cure light wounds</entry>
+		<entry>Song of discord</entry>
+	</collection>
+	<collection>
+		<name>6</name>
+		<entry>Summon monster VI</entry>
+		<entry>Analyze dweomer</entry>
+		<entry>Geas/Quest</entry>
+		<entry>Permanent image</entry>
+		<entry>Programmed image</entry>
+		<entry>Veil</entry>
+		<entry>Eyebite</entry>
+		<entry>Mass cat's grace</entry>
+		<entry>Mass eagle's splendor</entry>
+		<entry>Mass fox's cunning</entry>
+		<entry>Animate objects</entry>
+		<entry>Find the path</entry>
+		<entry>Greater scrying</entry>
+		<entry>Greater shout</entry>
+		<entry>Heroes' feast</entry>
+		<entry>Otto's irresistible dance</entry>
+		<entry>Mass charm monster</entry>
+		<entry>Mass cure moderate wounds</entry>
+		<entry>Project image</entry>
+		<entry>Sympathetic vibration</entry>
+	</collection>
 </collections>

@@ -2,39 +2,39 @@
 
 <collections>
   <collection>
-    <name>Longstrider</name>
-    <entry>1</entry>
+    <entry>Longstrider</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Locate object</name>
-    <entry>2</entry>
+    <entry>Locate object</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Fly</name>
-    <entry>3</entry>
+    <entry>Fly</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Dimension door</name>
-    <entry>4</entry>
+    <entry>Dimension door</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Teleport</name>
-    <entry>5</entry>
+    <entry>Teleport</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Find the path</name>
-    <entry>6</entry>
+    <entry>Find the path</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Greater teleport</name>
-    <entry>7</entry>
+    <entry>Greater teleport</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Phase door</name>
-    <entry>8</entry>
+    <entry>Phase door</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Astral projection</name>
-    <entry>9</entry>
+    <entry>Astral projection</entry>
+	  <name>9</name>
   </collection>
 </collections>
