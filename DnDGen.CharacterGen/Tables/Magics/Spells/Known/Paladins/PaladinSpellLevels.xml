@@ -1,172 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Detect poison</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Delay poison</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Read magic</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict light wounds</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict moderate wounds</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict serious wounds</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Endure elements</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Neutralize poison</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Resist energy</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Owl's wisdom</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Bless water</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Bless weapon</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Bless</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Break enchantment</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Bull's strength</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Create water</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Daylight</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Death ward</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Detect undead</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Discern lies</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Dispel good/evil/law/chaos</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Dispel magic</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Divine favor</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Eagle's splendor</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Greater magic weapon</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Heal mount</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Holy sword</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Lesser restoration</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Magic circle against chaos/law/good/evil</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Magic weapon</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Mark of justice</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Prayer</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Protection from chaos/law/good/evil</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Remove blindness/deafness</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove curse</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove paralysis</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Resistance</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Restoration</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Shield other</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Undetectable alignment</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Virtue</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Zone of truth</name>
-    <entry>2</entry>
-  </collection>
+	<collection>
+		<name>1</name>
+		<entry>Detect poison</entry>
+		<entry>Read magic</entry>
+		<entry>Cure light wounds</entry>
+		<entry>Endure elements</entry>
+		<entry>Bless water</entry>
+		<entry>Bless weapon</entry>
+		<entry>Bless</entry>
+		<entry>Create water</entry>
+		<entry>Detect undead</entry>
+		<entry>Divine favor</entry>
+		<entry>Lesser restoration</entry>
+		<entry>Magic weapon</entry>
+		<entry>Protection from evil</entry>
+		<entry>Protection from chaos</entry>
+		<entry>Resistance</entry>
+		<entry>Virtue</entry>
+	</collection>
+	<collection>
+		<name>2</name>
+		<entry>Delay poison</entry>
+		<entry>Resist energy</entry>
+		<entry>Owl's wisdom</entry>
+		<entry>Bull's strength</entry>
+		<entry>Eagle's splendor</entry>
+		<entry>Remove paralysis</entry>
+		<entry>Shield other</entry>
+		<entry>Undetectable alignment</entry>
+		<entry>Zone of truth</entry>
+	</collection>
+	<collection>
+		<name>3</name>
+		<entry>Cure moderate wounds</entry>
+		<entry>Daylight</entry>
+		<entry>Discern lies</entry>
+		<entry>Dispel magic</entry>
+		<entry>Greater magic weapon</entry>
+		<entry>Heal mount</entry>
+		<entry>Magic circle against evil</entry>
+		<entry>Magic circle against chaos</entry>
+		<entry>Prayer</entry>
+		<entry>Remove blindness/deafness</entry>
+		<entry>Remove curse</entry>
+	</collection>
+	<collection>
+		<name>4</name>
+		<entry>Cure serious wounds</entry>
+		<entry>Neutralize poison</entry>
+		<entry>Break enchantment</entry>
+		<entry>Death ward</entry>
+		<entry>Dispel evil</entry>
+		<entry>Dispel chaos</entry>
+		<entry>Holy sword</entry>
+		<entry>Mark of justice</entry>
+		<entry>Restoration</entry>
+	</collection>
 </collections>
