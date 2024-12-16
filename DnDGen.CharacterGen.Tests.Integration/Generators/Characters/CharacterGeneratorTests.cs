@@ -1,4 +1,5 @@
-﻿using DnDGen.CharacterGen.CharacterClasses;
+﻿using DnDGen.CharacterGen.Alignments;
+using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Characters;
 using DnDGen.CharacterGen.Generators.Characters;
 using DnDGen.CharacterGen.Races;
@@ -10,6 +11,7 @@ using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.TreasureGen.Items;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
@@ -742,6 +744,88 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
             characterAsserter.AssertCharacter(cleric);
             Assert.That(cleric.Class.IsNPC, Is.False, cleric.Summary);
             characterAsserter.AssertSpellcaster(cleric);
+
+            if (cleric.Alignment.Lawfulness == AlignmentConstants.Lawful)
+                Assert.That(cleric.Class.ProhibitedFields, Contains.Item(CharacterClassConstants.Domains.Chaos), cleric.Summary);
+            else
+                Assert.That(cleric.Class.ProhibitedFields, Does.Not.Contain(CharacterClassConstants.Domains.Chaos), cleric.Summary);
+
+            if (cleric.Alignment.Lawfulness == AlignmentConstants.Chaotic)
+                Assert.That(cleric.Class.ProhibitedFields, Contains.Item(CharacterClassConstants.Domains.Law), cleric.Summary);
+            else
+                Assert.That(cleric.Class.ProhibitedFields, Does.Not.Contain(CharacterClassConstants.Domains.Law), cleric.Summary);
+
+            if (cleric.Alignment.Goodness == AlignmentConstants.Good)
+                Assert.That(cleric.Class.ProhibitedFields, Contains.Item(CharacterClassConstants.Domains.Evil), cleric.Summary);
+            else
+                Assert.That(cleric.Class.ProhibitedFields, Does.Not.Contain(CharacterClassConstants.Domains.Evil), cleric.Summary);
+
+            if (cleric.Alignment.Goodness == AlignmentConstants.Evil)
+                Assert.That(cleric.Class.ProhibitedFields, Contains.Item(CharacterClassConstants.Domains.Good), cleric.Summary);
+            else
+                Assert.That(cleric.Class.ProhibitedFields, Does.Not.Contain(CharacterClassConstants.Domains.Good), cleric.Summary);
+
+            if (cleric.Class.SpecialistFields.Contains(CharacterClassConstants.Domains.Law))
+                Assert.That(cleric.Alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Lawful), cleric.Summary);
+
+            if (cleric.Class.SpecialistFields.Contains(CharacterClassConstants.Domains.Chaos))
+                Assert.That(cleric.Alignment.Lawfulness, Is.EqualTo(AlignmentConstants.Chaotic), cleric.Summary);
+
+            if (cleric.Class.SpecialistFields.Contains(CharacterClassConstants.Domains.Good))
+                Assert.That(cleric.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good), cleric.Summary);
+
+            if (cleric.Class.SpecialistFields.Contains(CharacterClassConstants.Domains.Evil))
+                Assert.That(cleric.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Evil), cleric.Summary);
+        }
+
+        [Repeat(100)]
+        [Test]
+        public void BUG_GenerateCharacterWithAnimal_LowLevelDoesNotHaveMount()
+        {
+            var minimums = new Dictionary<string, int>
+            {
+                { CharacterClassConstants.Adept, 2 },
+                { CharacterClassConstants.Aristocrat, 100 },
+                { CharacterClassConstants.Commoner, 100 },
+                { CharacterClassConstants.Expert, 100 },
+                { CharacterClassConstants.Warrior, 100 },
+                { CharacterClassConstants.Barbarian, 100 },
+                { CharacterClassConstants.Bard, 100 },
+                { CharacterClassConstants.Cleric, 100 },
+                { CharacterClassConstants.Druid, 1 },
+                { CharacterClassConstants.Fighter, 100 },
+                { CharacterClassConstants.Monk, 100 },
+                { CharacterClassConstants.Paladin, 5 },
+                { CharacterClassConstants.Ranger, 4 },
+                { CharacterClassConstants.Rogue, 100 },
+                { CharacterClassConstants.Sorcerer, 1 },
+                { CharacterClassConstants.Wizard, 1 },
+            };
+
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+            var baseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.AnyBase);
+            var metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.AnyMeta);
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var levelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.Any);
+
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var className = collectionSelector.SelectRandomFrom(minimums.Keys);
+            classNameRandomizer.SetClassName = className;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+
+            if (character.Class.Level < minimums[className])
+                Assert.That(character.Magic.Animal, Is.Empty, character.Summary);
+            else
+                Assert.That(character.Magic.Animal, Is.Not.Empty, character.Summary);
         }
     }
 }

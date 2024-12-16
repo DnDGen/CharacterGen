@@ -48,8 +48,6 @@
     </collection>
     <collection>
         <name>Neutral Good</name>
-        <entry>Law</entry>
-        <entry>Chaos</entry>
         <entry>Evil</entry>
     </collection>
     <collection>
@@ -60,21 +58,13 @@
     <collection>
         <name>Lawful Neutral</name>
         <entry>Chaos</entry>
-        <entry>Evil</entry>
-        <entry>Good</entry>
     </collection>
     <collection>
         <name>True Neutral</name>
-        <entry>Chaos</entry>
-        <entry>Law</entry>
-        <entry>Evil</entry>
-        <entry>Good</entry>
     </collection>
     <collection>
         <name>Chaotic Neutral</name>
         <entry>Law</entry>
-        <entry>Evil</entry>
-        <entry>Good</entry>
     </collection>
     <collection>
         <name>Lawful Evil</name>
@@ -83,8 +73,6 @@
     </collection>
     <collection>
         <name>Neutral Evil</name>
-        <entry>Chaos</entry>
-        <entry>Law</entry>
         <entry>Good</entry>
     </collection>
     <collection>

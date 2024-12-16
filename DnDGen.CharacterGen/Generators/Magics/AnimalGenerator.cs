@@ -6,6 +6,7 @@ using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +26,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
         public string GenerateFrom(Alignment alignment, CharacterClass characterClass, Race race, IEnumerable<Feat> feats)
         {
             var effectiveCharacterClass = GetEffectiveCharacterClass(characterClass);
-            if (effectiveCharacterClass.EffectiveLevel < 1)
+            if (effectiveCharacterClass.Level < 1)
                 return string.Empty;
 
             var animals = AnimalsForCharacter(effectiveCharacterClass, race, feats);
@@ -39,13 +40,23 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
         private CharacterClass GetEffectiveCharacterClass(CharacterClass characterClass)
         {
-            if (characterClass.Name != CharacterClassConstants.Ranger)
-                return characterClass;
+            var minimumLevel = adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, characterClass.Name);
+            var effectiveCharacterClass = new CharacterClass
+            {
+                Name = characterClass.Name,
+                Level = characterClass.Level
+            };
 
-            var effectiveCharacterClass = new CharacterClass();
-            effectiveCharacterClass.Name = CharacterClassConstants.Druid;
-            effectiveCharacterClass.IsNPC = true;
-            effectiveCharacterClass.Level = characterClass.Level;
+            if (characterClass.Level < minimumLevel)
+            {
+                effectiveCharacterClass.Level = 0;
+            }
+
+            if (characterClass.Name == CharacterClassConstants.Ranger)
+            {
+                effectiveCharacterClass.Name = CharacterClassConstants.Druid;
+                effectiveCharacterClass.Level /= 2;
+            }
 
             return effectiveCharacterClass;
         }
@@ -61,14 +72,14 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
             var arcaneSpellcasters = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Arcane);
 
-            if (arcaneSpellcasters.Contains(characterClass.Name) == false)
+            if (!arcaneSpellcasters.Contains(characterClass.Name))
                 return filteredAnimals;
 
             var improvedFamiliars = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, FeatConstants.ImprovedFamiliar);
             var characterHasImprovedFamiliarFeat = feats.Any(f => f.Name == FeatConstants.ImprovedFamiliar);
 
             var animalsForMetarace = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AnimalGroups, race.Metarace);
-            filteredAnimals = filteredAnimals.Where(a => characterHasImprovedFamiliarFeat || improvedFamiliars.Contains(a) == false);
+            filteredAnimals = filteredAnimals.Where(a => characterHasImprovedFamiliarFeat || !improvedFamiliars.Contains(a));
 
             return filteredAnimals.Intersect(animalsForMetarace);
         }
