@@ -7,7 +7,6 @@ using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
-using Ninject.Infrastructure.Language;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -126,7 +125,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
                 .Returns((string _, string _, string l) => spells[domain][l]);
             mockCollectionsSelector
                 .Setup(s => s.SelectAllFrom(Config.Name, tableName))
-                .Returns(() => spells[domain].ToDictionary(s => s.Key, s => s.Value.ToEnumerable()));
+                .Returns(() => spells[domain].ToDictionary(s => s.Key, s => s.Value.AsEnumerable()));
         }
 
         [Test]
