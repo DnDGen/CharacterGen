@@ -1,13 +1,9 @@
-﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Characters;
-using DnDGen.CharacterGen.Magics;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
+using DnDGen.CharacterGen.Tests.Integration.Generators.Characters;
 using NUnit.Framework;
-using System;
-using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
 {
@@ -20,12 +16,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
         private RaceRandomizer monsterBaseRaceRandomizer;
         private IAbilitiesRandomizer rawAbilitiesRandomizer;
         private IAbilitiesRandomizer heroicAbilitiesRandomizer;
-        private CharacterVerifier characterVerifier;
+        private CharacterAsserter characterAsserter;
 
         [SetUp]
         public void Setup()
         {
-            characterVerifier = new CharacterVerifier();
+            characterAsserter = new CharacterAsserter();
             heroicAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Heroic);
             rawAbilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
             monsterBaseRaceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.BaseRace.MonsterBase);
@@ -50,8 +46,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 metaraceRandomizer,
                 rawAbilitiesRandomizer);
 
-            characterVerifier.AssertCharacter(character);
-            AssertPlayerCharacter(character);
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.Class.IsNPC, Is.False, character.Summary);
         }
 
         [Test]
@@ -70,12 +66,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 metaraceRandomizer,
                 rawAbilitiesRandomizer);
 
-            characterVerifier.AssertCharacter(character);
-            AssertPlayerCharacter(character);
-        }
-
-        private void AssertPlayerCharacter(Character character)
-        {
+            characterAsserter.AssertCharacter(character);
             Assert.That(character.Class.IsNPC, Is.False, character.Summary);
         }
 
@@ -95,7 +86,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 metaraceRandomizer,
                 rawAbilitiesRandomizer);
 
-            characterVerifier.AssertCharacter(npc);
+            characterAsserter.AssertCharacter(npc);
             Assert.That(npc.Class.IsNPC, Is.True);
         }
 
@@ -115,8 +106,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 metaraceRandomizer,
                 rawAbilitiesRandomizer);
 
-            characterVerifier.AssertCharacter(aquaticCharacter);
-            AssertPlayerCharacter(aquaticCharacter);
+            characterAsserter.AssertCharacter(aquaticCharacter);
+            Assert.That(aquaticCharacter.Class.IsNPC, Is.False, aquaticCharacter.Summary);
             Assert.That(aquaticCharacter.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.AquaticElf)
                 .Or.EqualTo(RaceConstants.BaseRaces.Kapoacinth)
                 .Or.EqualTo(RaceConstants.BaseRaces.KuoToa)
@@ -147,72 +138,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                     heroicAbilitiesRandomizer),
                 c => c.Class.Level >= 4);
 
-            characterVerifier.AssertCharacter(spellcaster);
-            AssertPlayerCharacter(spellcaster);
-            AssertSpellcaster(spellcaster);
-        }
-
-        private void AssertSpellcaster(Character spellcaster)
-        {
-            Assert.That(spellcaster.Magic, Is.Not.Null);
-            Assert.That(spellcaster.Magic.Animal, Is.Not.Null);
-            Assert.That(spellcaster.Magic.ArcaneSpellFailure, Is.InRange(0, 100));
-
-            Assert.That(spellcaster.Magic.SpellsPerDay, Is.Not.Empty, spellcaster.Class.Name);
-
-            var levelsAndSources = spellcaster.Magic.SpellsPerDay.Select(s => s.Source + s.Level);
-            Assert.That(levelsAndSources, Is.Unique);
-
-            var spellsPerDayLevels = spellcaster.Magic.SpellsPerDay.Select(s => s.Level);
-            var maxSpellLevel = spellsPerDayLevels.Max();
-            var minSpellLevel = spellsPerDayLevels.Min();
-
-            Assert.That(minSpellLevel, Is.InRange(0, 1));
-            Assert.That(maxSpellLevel, Is.InRange(0, 9));
-
-            foreach (var spellQuantity in spellcaster.Magic.SpellsPerDay)
-            {
-                Assert.That(spellQuantity.Level, Is.InRange(minSpellLevel, maxSpellLevel));
-                Assert.That(spellQuantity.Quantity, Is.Not.Negative);
-                Assert.That(spellQuantity.Source, Is.Not.Empty);
-
-                if (spellQuantity.HasDomainSpell == false)
-                    Assert.That(spellQuantity.Quantity, Is.Positive);
-
-                if (spellQuantity.Level > 0 && spellQuantity.Source == spellcaster.Class.Name)
-                    Assert.That(spellQuantity.HasDomainSpell, Is.EqualTo(spellcaster.Class.SpecialistFields.Any()));
-                else
-                    Assert.That(spellQuantity.HasDomainSpell, Is.False);
-            }
-
-            Assert.That(spellcaster.Magic.KnownSpells, Is.Not.Empty, spellcaster.Class.Name);
-
-            //INFO: Adding 1 to max spell, because you might know a spell that you cannot yet cast
-            var maxKnownSpellLevel = Math.Min(9, maxSpellLevel + 1);
-
-            foreach (var knownSpell in spellcaster.Magic.KnownSpells)
-                AssertSpell(knownSpell, minSpellLevel, maxKnownSpellLevel);
-
-            if (spellcaster.Magic.SpellsPerDay.All(s => s.Source == CharacterClassConstants.Bard || s.Source == CharacterClassConstants.Sorcerer))
-            {
-                Assert.That(spellcaster.Magic.PreparedSpells, Is.Empty, spellcaster.Class.Name);
-            }
-            else
-            {
-                Assert.That(spellcaster.Magic.PreparedSpells, Is.Not.Empty, spellcaster.Class.Name);
-
-                foreach (var preparedSpell in spellcaster.Magic.PreparedSpells)
-                    AssertSpell(preparedSpell, minSpellLevel, maxSpellLevel);
-            }
-        }
-
-        private void AssertSpell(Spell spell, int minSpellLevel, int maxSpellLevel)
-        {
-            Assert.That(spell.Name, Is.Not.Empty);
-            Assert.That(spell.Sources, Is.Not.Empty, spell.Name);
-            Assert.That(spell.Sources, Is.All.Not.Empty, spell.Name);
-            Assert.That(spell.Level, Is.InRange(minSpellLevel, maxSpellLevel), spell.Summary);
-            Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
+            characterAsserter.AssertCharacter(spellcaster);
+            Assert.That(spellcaster.Class.IsNPC, Is.False, spellcaster.Summary);
+            characterAsserter.AssertSpellcaster(spellcaster);
         }
     }
 }

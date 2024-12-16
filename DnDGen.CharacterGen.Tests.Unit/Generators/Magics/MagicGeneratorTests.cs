@@ -120,9 +120,9 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             mockSpellsGenerator.Setup(g => g.GenerateKnown(characterClass, stats)).Returns(knownSpells);
             mockSpellsGenerator.Setup(g => g.GeneratePrepared(characterClass, knownSpells, spellsPerDay)).Returns(preparedSpells);
 
-            var rakshasaSpellsPerDay = new List<SpellQuantity> { new SpellQuantity { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
-            var rakshasaKnownSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa spell", Sources = [CharacterClassConstants.Sorcerer] } };
-            var rakshasaPreparedSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa prepared spell", Sources = [CharacterClassConstants.Sorcerer] } };
+            var rakshasaSpellsPerDay = new List<SpellQuantity> { new() { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
+            var rakshasaKnownSpells = new List<Spell> { new() { Name = "rakshasa spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
+            var rakshasaPreparedSpells = new List<Spell> { new() { Name = "rakshasa prepared spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
 
             mockSpellsGenerator
                 .Setup(g => g.GeneratePerDay(It.Is<CharacterClass>(c => c.Name == CharacterClassConstants.Sorcerer && c.Level == 7), stats))
@@ -150,17 +150,17 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             characterClass.Name = CharacterClassConstants.Sorcerer;
             characterClass.Level = 1;
 
-            var spellsPerDay = new List<SpellQuantity> { new SpellQuantity { Level = 1, Quantity = 1, Source = "wrong" } };
-            var knownSpells = new List<Spell> { new Spell { Level = 1, Name = "wrong spell", Sources = [CharacterClassConstants.Sorcerer] } };
-            var preparedSpells = new List<Spell> { new Spell { Level = 1, Name = "wrong prepared spell", Sources = [CharacterClassConstants.Sorcerer] } };
+            var spellsPerDay = new List<SpellQuantity> { new() { Level = 1, Quantity = 1, Source = "wrong" } };
+            var knownSpells = new List<Spell> { new() { Name = "wrong spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
+            var preparedSpells = new List<Spell> { new() { Name = "wrong prepared spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
 
             mockSpellsGenerator.Setup(g => g.GeneratePerDay(characterClass, stats)).Returns(spellsPerDay);
             mockSpellsGenerator.Setup(g => g.GenerateKnown(characterClass, stats)).Returns(knownSpells);
             mockSpellsGenerator.Setup(g => g.GeneratePrepared(characterClass, knownSpells, spellsPerDay)).Returns(preparedSpells);
 
-            var rakshasaSpellsPerDay = new List<SpellQuantity> { new SpellQuantity { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
-            var rakshasaKnownSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa spell", Sources = [CharacterClassConstants.Sorcerer] } };
-            var rakshasaPreparedSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa prepared spell", Sources = [CharacterClassConstants.Sorcerer] } };
+            var rakshasaSpellsPerDay = new List<SpellQuantity> { new() { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
+            var rakshasaKnownSpells = new List<Spell> { new() { Name = "rakshasa spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
+            var rakshasaPreparedSpells = new List<Spell> { new() { Name = "rakshasa prepared spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
 
             mockSpellsGenerator
                 .Setup(g => g.GeneratePerDay(It.Is<CharacterClass>(c => c.Name == CharacterClassConstants.Sorcerer && c.Level == 8), stats))
@@ -187,17 +187,17 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             race.BaseRace = RaceConstants.BaseRaces.Rakshasa;
             characterClass.Level = 2;
 
-            var spellsPerDay = new List<SpellQuantity> { new SpellQuantity { Level = 1, Quantity = 1, Source = characterClass.Name } };
-            var knownSpells = new List<Spell> { new Spell { Level = 1, Name = "spell", Sources = [characterClass.Name] } };
-            var preparedSpells = new List<Spell> { new Spell { Level = 1, Name = "prepared spell", Sources = [characterClass.Name] } };
+            var spellsPerDay = new List<SpellQuantity> { new() { Level = 1, Quantity = 1, Source = characterClass.Name } };
+            var knownSpells = new List<Spell> { new() { Name = "spell", Sources = { [characterClass.Name] = 1 } } };
+            var preparedSpells = new List<Spell> { new() { Name = "prepared spell", Sources = { [characterClass.Name] = 1 } } };
 
             mockSpellsGenerator.Setup(g => g.GeneratePerDay(characterClass, stats)).Returns(spellsPerDay);
             mockSpellsGenerator.Setup(g => g.GenerateKnown(characterClass, stats)).Returns(knownSpells);
             mockSpellsGenerator.Setup(g => g.GeneratePrepared(characterClass, knownSpells, spellsPerDay)).Returns(preparedSpells);
 
-            var rakshasaSpellsPerDay = new List<SpellQuantity> { new SpellQuantity { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
-            var rakshasaKnownSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa spell", Sources = [CharacterClassConstants.Sorcerer] } };
-            var rakshasaPreparedSpells = new List<Spell> { new Spell { Level = 1, Name = "rakshasa prepared spell", Sources = [CharacterClassConstants.Sorcerer] } };
+            var rakshasaSpellsPerDay = new List<SpellQuantity> { new() { Level = 1, Quantity = 1, Source = CharacterClassConstants.Sorcerer } };
+            var rakshasaKnownSpells = new List<Spell> { new() { Name = "rakshasa spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
+            var rakshasaPreparedSpells = new List<Spell> { new() { Name = "rakshasa prepared spell", Sources = { [CharacterClassConstants.Sorcerer] = 1 } } };
 
             mockSpellsGenerator
                 .Setup(g => g.GeneratePerDay(It.Is<CharacterClass>(c => c.Name == CharacterClassConstants.Sorcerer && c.Level == 7), stats))

@@ -116,7 +116,14 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
                 foreach (var spellName in spellNames)
                 {
-                    var spell = BuildSpell(spellName, spellLevel, [characterClass.Name]);
+                    var existingSpell = spells.FirstOrDefault(s => s.Name == spellName);
+                    if (existingSpell != null)
+                    {
+                        existingSpell.Sources[characterClass.Name] = spellLevel;
+                        continue;
+                    }
+
+                    var spell = BuildSpell(spellName, spellLevel, characterClass.Name);
                     spells.Add(spell);
                 }
 
@@ -126,14 +133,14 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
                     foreach (var spellName in specialistSpellNames)
                     {
-                        var existingSpell = spells.FirstOrDefault(s => s.Name == spellName && s.Level == spellLevel);
+                        var existingSpell = spells.FirstOrDefault(s => s.Name == spellName);
                         if (existingSpell != null)
                         {
-                            existingSpell.Sources = existingSpell.Sources.Union([field]);
+                            existingSpell.Sources[field] = spellLevel;
                             continue;
                         }
 
-                        var spell = BuildSpell(spellName, spellLevel, [field]);
+                        var spell = BuildSpell(spellName, spellLevel, field);
                         spells.Add(spell);
                     }
                 }
@@ -153,14 +160,13 @@ namespace DnDGen.CharacterGen.Generators.Magics
             return spellNames;
         }
 
-        private Spell BuildSpell(string name, int level, string[] sources)
+        private Spell BuildSpell(string name, int level, string source)
         {
             var spell = new Spell
             {
                 Name = name,
-                Level = level,
-                Sources = sources
             };
+            spell.Sources[source] = level;
 
             return spell;
         }
@@ -185,9 +191,10 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 var level = Convert.ToInt32(kvp.Key);
                 var spellQuantity = new SpellQuantity
                 {
+                    Source = characterClass.Name,
                     Level = level,
                     Quantity = kvp.Value,
-                    HasDomainSpell = characterClass.SpecialistFields.Any() && level > 0
+                    HasDomainSpell = characterClass.SpecialistFields.Any() && level > 0,
                 };
 
                 while (percentileSelector.SelectFrom<bool>(Config.Name, knowsMoreSpellsTableName))
@@ -208,7 +215,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             {
                 foreach (var spellName in spellNamesForLevel)
                 {
-                    var spell = BuildSpell(spellName, spellQuantity.Level, [characterClass.Name]);
+                    var spell = BuildSpell(spellName, spellQuantity.Level, characterClass.Name);
                     knownSpellsForLevel.Add(spell);
                 }
 
@@ -221,7 +228,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
             while (spellQuantity.Quantity > knownSpellsForLevel.Count)
             {
                 var spellName = collectionsSelector.SelectRandomFrom(unknownSpellNamesForLevel);
-                var spell = BuildSpell(spellName, spellQuantity.Level, [characterClass.Name]);
+                var spell = BuildSpell(spellName, spellQuantity.Level, characterClass.Name);
                 knownSpellsForLevel.Add(spell);
             }
 
@@ -232,8 +239,8 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
                 foreach (var spellName in knownSpecialistSpellNames)
                 {
-                    var spell = knownSpellsForLevel.First(s => s.Name == spellName && s.Level == spellQuantity.Level);
-                    spell.Sources = spell.Sources.Union([field]);
+                    var spell = knownSpellsForLevel.First(s => s.Name == spellName);
+                    spell.Sources[field] = spellQuantity.Level;
                 }
 
                 if (!spellQuantity.HasDomainSpell)
@@ -245,7 +252,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
                     while (spellQuantity.Quantity + 1 > knownSpellsForLevel.Count)
                     {
                         var spellName = collectionsSelector.SelectRandomFrom(unknownSpecialistSpells);
-                        var spell = BuildSpell(spellName, spellQuantity.Level, [field]);
+                        var spell = BuildSpell(spellName, spellQuantity.Level, field);
                         knownSpellsForLevel.Add(spell);
                     }
 
@@ -257,7 +264,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 while (spellQuantity.Quantity + 1 > knownSpellsForLevel.Count)
                 {
                     var spellName = collectionsSelector.SelectRandomFrom(unknownNonSpecialistSpells);
-                    var spell = BuildSpell(spellName, spellQuantity.Level, [characterClass.Name]);
+                    var spell = BuildSpell(spellName, spellQuantity.Level, characterClass.Name);
                     knownSpellsForLevel.Add(spell);
                 }
             }
@@ -285,8 +292,7 @@ namespace DnDGen.CharacterGen.Generators.Magics
         private IEnumerable<Spell> GetPreparedSpellsForLevel(SpellQuantity spellQuantity, IEnumerable<Spell> knownSpells, CharacterClass characterClass)
         {
             var preparedSpells = new List<Spell>();
-            var knownSpellsForLevel = knownSpells.Where(s => s.Level == spellQuantity.Level
-                && (s.Sources.Contains(spellQuantity.Source) || s.Sources.Intersect(characterClass.SpecialistFields).Any()));
+            var knownSpellsForLevel = knownSpells.Where(s => s.Sources.ContainsKey(spellQuantity.Source) && s.Sources[spellQuantity.Source] == spellQuantity.Level);
 
             while (spellQuantity.Quantity > preparedSpells.Count)
             {
@@ -294,15 +300,27 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 preparedSpells.Add(spell);
             }
 
-            if (spellQuantity.HasDomainSpell)
+            if (spellQuantity.HasDomainSpell && spellQuantity.Source == characterClass.Name)
             {
-                var specialistSpellsForLevel = knownSpellsForLevel.Where(s => s.Sources.Intersect(characterClass.SpecialistFields).Any());
+                var specialistSpellsForLevel = GetSpecialistSpellsForLevel(characterClass.SpecialistFields, spellQuantity.Level, knownSpells);
                 var spell = collectionsSelector.SelectRandomFrom(specialistSpellsForLevel);
 
                 preparedSpells.Add(spell);
             }
 
             return preparedSpells;
+        }
+
+        private IEnumerable<Spell> GetSpecialistSpellsForLevel(IEnumerable<string> fields, int level, IEnumerable<Spell> knownSpells)
+        {
+            var specialistSpellsForLevel = Enumerable.Empty<Spell>();
+            foreach (var field in fields)
+            {
+                var fieldSpellsForLevel = knownSpells.Where(s => s.Sources.ContainsKey(field) && s.Sources[field] == level);
+                specialistSpellsForLevel = specialistSpellsForLevel.Concat(fieldSpellsForLevel);
+            }
+
+            return specialistSpellsForLevel;
         }
 
         private IEnumerable<string> GetSpellNamesForFields(IEnumerable<string> fields)

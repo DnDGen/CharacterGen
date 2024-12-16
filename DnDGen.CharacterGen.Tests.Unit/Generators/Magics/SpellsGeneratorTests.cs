@@ -7,6 +7,7 @@ using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
 using Moq;
+using Ninject.Infrastructure.Language;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         private List<string> spellcasters;
         private Dictionary<string, int> spellsPerDayForClass;
         private Dictionary<string, int> spellsKnownForClass;
-        private Dictionary<string, List<string>> classSpells;
-        private Dictionary<int, List<string>> spellLevels;
+        private Dictionary<string, Dictionary<string, List<string>>> spells;
         private List<string> divineCasters;
 
         [SetUp]
@@ -38,21 +38,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             mockPercentileSelector = new Mock<IPercentileSelector>();
             spellsGenerator = new SpellsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();
-            spellcasters = new List<string>();
-            abilities = new Dictionary<string, Ability>();
-            spellsPerDayForClass = new Dictionary<string, int>();
-            spellsKnownForClass = new Dictionary<string, int>();
-            classSpells = new Dictionary<string, List<string>>();
-            spellLevels = new Dictionary<int, List<string>>
-            {
-                { 0, [] },
-                { 1, [] },
-                { 2, [] },
-                { 3, [] },
-                { 4, [] },
-                { 5, [] },
-            };
-            divineCasters = new List<string>();
+            spellcasters = [];
+            abilities = [];
+            spellsPerDayForClass = [];
+            spellsKnownForClass = [];
+            spells = [];
+            divineCasters = [];
 
             characterClass.Name = "class name";
             characterClass.Level = 9;
@@ -62,10 +53,14 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsPerDayForClass["1"] = 42;
             spellsKnownForClass["0"] = 2;
             spellsKnownForClass["1"] = 1;
-            abilities["stat"] = new Ability("stat");
-            abilities["stat"].Value = 11;
-            abilities["other stat"] = new Ability("other stat");
-            abilities["other stat"].Value = 11;
+            abilities["stat"] = new Ability("stat")
+            {
+                Value = 11
+            };
+            abilities["other stat"] = new Ability("other stat")
+            {
+                Value = 11
+            };
             divineCasters.Add("other divine class");
 
             mockCollectionsSelector
@@ -104,32 +99,34 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
 
         private void AddSpell(string spell, string source, int level)
         {
-            classSpells[source].Add(spell);
-            spellLevels[level].Add(spell);
+            if (!spells.ContainsKey(source))
+                SetUpDomain(source);
+
+            var levelKey = level.ToString();
+            if (!spells[source].ContainsKey(levelKey))
+                spells[source][levelKey] = [];
+
+            spells[source][levelKey].Add(spell);
         }
 
         private void SetUpDomain(string domain)
         {
-            classSpells[domain] = [];
+            spells[domain] = new Dictionary<string, List<string>> {
+                { "0", [] },
+                { "1", [] },
+                { "2", [] },
+                { "3", [] },
+                { "4", [] },
+                { "5", [] },
+            };
 
             var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, domain);
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, tableName, It.IsAny<string>()))
-                .Returns((string _, string _, string l) => spellLevels[Convert.ToInt32(l)].Intersect(classSpells[domain]));
+                .Returns((string _, string _, string l) => spells[domain][l]);
             mockCollectionsSelector
                 .Setup(s => s.SelectAllFrom(Config.Name, tableName))
-                .Returns(() => SelectAllSpellLevels(domain));
-        }
-
-        private Dictionary<string, IEnumerable<string>> SelectAllSpellLevels(string domain)
-        {
-            var subset = new Dictionary<string, IEnumerable<string>>();
-            foreach (var kvp in spellLevels)
-            {
-                subset[kvp.Key.ToString()] = kvp.Value.Intersect(classSpells[domain]);
-            }
-
-            return subset;
+                .Returns(() => spells[domain].ToDictionary(s => s.Key, s => s.Value.ToEnumerable()));
         }
 
         [Test]
@@ -458,8 +455,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
                 while (quantity-- > 0)
                 {
                     var spell = Guid.NewGuid().ToString();
-                    classSpells[characterClass.Name].Add(spell);
-                    spellLevels[spellLevel].Add(spell);
+                    AddSpell(spell, characterClass.Name, spellLevel);
                 }
             }
 
@@ -467,12 +463,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(level20KnownSpells);
 
             var knownSpells = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(knownSpells.Count(s => s.Level == 0), Is.EqualTo(90));
-            Assert.That(knownSpells.Count(s => s.Level == 1), Is.EqualTo(210));
-            Assert.That(knownSpells.Count(s => s.Level == 2), Is.EqualTo(42));
-            Assert.That(knownSpells.Count(s => s.Level == 3), Is.EqualTo(600));
-            Assert.That(knownSpells.Count(s => s.Level == 4), Is.EqualTo(13));
-            Assert.That(knownSpells.Count(s => s.Level == 5), Is.EqualTo(37));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 0), Is.EqualTo(90));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 1), Is.EqualTo(210));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 2), Is.EqualTo(42));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 3), Is.EqualTo(600));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 4), Is.EqualTo(13));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 5), Is.EqualTo(37));
             Assert.That(knownSpells.Count, Is.EqualTo(90 + 210 + 42 + 600 + 13 + 37));
         }
 
@@ -526,6 +522,41 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
             Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
             Assert.That(spellsKnown[5].Summary, Is.EqualTo("other special domain spell (special domain/1)"));
+        }
+
+        [Test]
+        public void BUG_GenerateKnown_DivineCastersKnowAllSpecialistSpells_DisparateLevels()
+        {
+            abilities["stat"].Value = 16;
+            divineCasters.Add(characterClass.Name);
+
+            characterClass.SpecialistFields = ["special domain", "other domain"];
+            SetUpDomain("special domain");
+            SetUpDomain("other domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 1);
+            AddSpell("too high domain spell", "special domain", 3);
+            AddSpell("spell 6", "other domain", 1);
+            AddSpell("other domain spell", "other domain", 1);
+            AddSpell("too high other domain spell", "other domain", 3);
+            AddSpell("spell 7", "special domain", 1);
+            AddSpell("spell 7", "class name", 2);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+            spellsKnownForClass["2"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(9));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
+            Assert.That(spellsKnown[5].Summary, Is.EqualTo("other special domain spell (special domain/1)"));
+            Assert.That(spellsKnown[6].Summary, Is.EqualTo("spell 7 (special domain/1, class name/2)"));
+            Assert.That(spellsKnown[7].Summary, Is.EqualTo("spell 6 (other domain/1)"));
+            Assert.That(spellsKnown[8].Summary, Is.EqualTo("other domain spell (other domain/1)"));
         }
 
         [Test]
@@ -914,11 +945,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
 
             var knownSpells = new List<Spell>
             {
-                new() { Name = classSpells[characterClass.Name][0], Level = 0, Sources = ["source"] },
-                new() { Name = classSpells[characterClass.Name][1], Level = 0, Sources = ["source"] },
-                new() { Name = "other cantrip", Level = 0, Sources = ["source"] },
-                new() { Name = classSpells[characterClass.Name][2], Level = 1, Sources = ["source"] },
-                new() { Name = "other spell", Level = 1, Sources = ["source"] }
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["source"] = 0 } },
+                new() { Name = "other cantrip", Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["source"] = 1 } }
             };
 
             var spellsPerDay = new List<SpellQuantity>
@@ -936,11 +967,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         {
             var knownSpells = new List<Spell>
             {
-                new() { Name = classSpells[characterClass.Name][0], Level = 0, Sources = ["source"] },
-                new() { Name = classSpells[characterClass.Name][1], Level = 0, Sources = ["source"] },
-                new() { Name = "other cantrip", Level = 0, Sources = ["source"] },
-                new() { Name = classSpells[characterClass.Name][2], Level = 1, Sources = ["source"] },
-                new() { Name = "other spell", Level = 1, Sources = ["source"] }
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["source"] = 0 } },
+                new() { Name = "other cantrip", Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["source"] = 1 } }
             };
 
             var spellsPerDay = new List<SpellQuantity>
@@ -964,25 +995,25 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
 
             var knownSpells = new List<Spell>
             {
-                new() { Name = classSpells[characterClass.Name][0], Level = 0, Sources = ["my source"] },
-                new() { Name = "wrong spell", Level = 0, Sources = ["my other source"] },
-                new() { Name = classSpells[characterClass.Name][1], Level = 0, Sources = ["my source", "domain 2"] },
-                new() { Name = "other cantrip", Level = 0, Sources = ["my source"] },
-                new() { Name = classSpells[characterClass.Name][2], Level = 1, Sources = ["my source"] },
-                new() { Name = "other spell", Level = 1, Sources = ["domain 2"] }
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { [characterClass.Name] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { [characterClass.Name] = 0, ["domain 2"] = 0 } },
+                new() { Name = "other cantrip", Sources = { [characterClass.Name] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "other spell", Sources = { ["domain 2"] = 1 } }
             };
 
             var spellsPerDay = new List<SpellQuantity>
             {
-                new() { Level = 0, Quantity = 2, Source = "my source" },
-                new() { Level = 1, Quantity = 1, Source = "my source", HasDomainSpell = true }
+                new() { Level = 0, Quantity = 2, Source = characterClass.Name },
+                new() { Level = 1, Quantity = 1, Source = characterClass.Name, HasDomainSpell = true }
             };
 
             var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
             Assert.That(spellsPrepared.Count, Is.EqualTo(4));
-            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (my source/0)"));
-            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (my source/0, domain 2/0)"));
-            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (my source/1)"));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (class name/0, domain 2/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
             Assert.That(spellsPrepared[3].Summary, Is.EqualTo("other spell (domain 2/1)"));
         }
 
@@ -995,27 +1026,27 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
 
             var knownSpells = new List<Spell>
             {
-                new() { Name = classSpells[characterClass.Name][0], Level = 0, Sources = ["my source"] },
-                new() { Name = "wrong spell", Level = 0, Sources = ["my other source"] },
-                new() { Name = classSpells[characterClass.Name][1], Level = 0, Sources = ["my source", "domain 2"] },
-                new() { Name = "other cantrip", Level = 0, Sources = ["my source"] },
-                new() { Name = classSpells[characterClass.Name][2], Level = 1, Sources = ["my source"] },
-                new() { Name = "domain 1 spell", Level = 1, Sources = ["domain 1"] },
-                new() { Name = classSpells[characterClass.Name][3], Level = 1, Sources = ["my source"] },
-                new() { Name = "domain 2 spell", Level = 1, Sources = ["domain 2"] },
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { [characterClass.Name] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { [characterClass.Name] = 0, ["domain 2"] = 0 }  },
+                new() { Name = "other cantrip", Sources = { [characterClass.Name] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "domain 1 spell", Sources = { ["domain 1"] = 1 } },
+                new() { Name = spells[characterClass.Name]["1"][1],Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "domain 2 spell", Sources = { ["domain 2"] = 1 }  },
             };
 
             var spellsPerDay = new List<SpellQuantity>
             {
-                new() { Level = 0, Quantity = 2, Source = "my source" },
-                new() { Level = 1, Quantity = 1, Source = "my source", HasDomainSpell = true }
+                new() { Level = 0, Quantity = 2, Source = characterClass.Name },
+                new() { Level = 1, Quantity = 1, Source = characterClass.Name, HasDomainSpell = true }
             };
 
             var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
             Assert.That(spellsPrepared.Count, Is.EqualTo(4));
-            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (my source/0)"));
-            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (my source/0, domain 2/0)"));
-            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 4 (my source/1)"));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (class name/0, domain 2/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
             Assert.That(spellsPrepared[3].Summary, Is.EqualTo("domain 2 spell (domain 2/1)"));
         }
 
@@ -1024,12 +1055,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         {
             var knownSpells = new List<Spell>
             {
-                new() { Name = classSpells[characterClass.Name][0], Level = 0, Sources = ["my source"] },
-                new() { Name = "wrong spell", Level = 0, Sources = ["my other source"] },
-                new() { Name = classSpells[characterClass.Name][1], Level = 0, Sources = ["my source", "domain 2"] },
-                new() { Name = "other cantrip", Level = 0, Sources = ["my source"] },
-                new() { Name = classSpells[characterClass.Name][2], Level = 1, Sources = ["my source"] },
-                new() { Name = "other spell", Level = 1, Sources = ["my source"] }
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["my source"] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["my source"] = 0, ["domain 2"] = 0 }  },
+                new() { Name = "other cantrip", Sources = { ["my source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["my source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["my source"] = 1 } }
             };
 
             var spellsPerDay = new List<SpellQuantity>

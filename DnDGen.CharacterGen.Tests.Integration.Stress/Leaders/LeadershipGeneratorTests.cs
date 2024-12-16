@@ -2,7 +2,7 @@
 using DnDGen.CharacterGen.Leaders;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
-using DnDGen.CharacterGen.Tests.Integration.Stress.Characters;
+using DnDGen.CharacterGen.Tests.Integration.Generators.Characters;
 using NUnit.Framework;
 using System;
 
@@ -16,12 +16,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
         private ILevelRandomizer veryHighLevelRandomizer;
         private Random random;
         private IClassNameRandomizer nPCClassNameRandomizer;
-        private CharacterVerifier characterVerifier;
+        private CharacterAsserter characterAsserter;
 
         [SetUp]
         public void Setup()
         {
-            characterVerifier = new CharacterVerifier();
+            characterAsserter = new CharacterAsserter();
             nPCClassNameRandomizer = GetNewInstanceOf<IClassNameRandomizer>(ClassNameRandomizerTypeConstants.AnyNPC);
             random = GetNewInstanceOf<Random>();
             veryHighLevelRandomizer = GetNewInstanceOf<ILevelRandomizer>(LevelRandomizerTypeConstants.VeryHigh);
@@ -75,7 +75,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             var cohortScore = random.Next(3, 26);
 
             var cohort = leadershipGenerator.GenerateCohort(cohortScore, leader.CharacterClass.Level, leader.Alignment.Full, leader.CharacterClass.Name);
-            characterVerifier.AssertCharacter(cohort);
+            characterAsserter.AssertCharacter(cohort);
             Assert.That(cohort.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(cohort.Class.Level, Is.InRange(1, leader.CharacterClass.Level - 2));
         }
@@ -92,7 +92,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             var cohortScore = random.Next(3, 26);
 
             var cohort = leadershipGenerator.GenerateCohort(cohortScore, leader.CharacterClass.Level, leader.Alignment.Full, leader.CharacterClass.Name);
-            characterVerifier.AssertCharacter(cohort);
+            characterAsserter.AssertCharacter(cohort);
             Assert.That(cohort.Class.Level, Is.InRange(1, leader.CharacterClass.Level - 2));
         }
 
@@ -108,7 +108,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             var followerLevel = random.Next(1, 7);
 
             var follower = leadershipGenerator.GenerateFollower(followerLevel, leader.Alignment.Full, leader.CharacterClass.Name);
-            characterVerifier.AssertCharacter(follower);
+            characterAsserter.AssertCharacter(follower);
             Assert.That(follower.Equipment.Treasure.Items, Is.Not.Empty);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
         }
@@ -126,7 +126,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Leaders
             var followerLevel = random.Next(1, 7);
 
             var follower = leadershipGenerator.GenerateFollower(followerLevel, leader.Alignment.Full, leaderClass);
-            characterVerifier.AssertCharacter(follower);
+            characterAsserter.AssertCharacter(follower);
             Assert.That(follower.Class.Level, Is.InRange(1, followerLevel));
         }
     }

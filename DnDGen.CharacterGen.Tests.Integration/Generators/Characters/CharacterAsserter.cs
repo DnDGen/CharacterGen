@@ -3,50 +3,52 @@ using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Characters;
 using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
 using DnDGen.TreasureGen.Items;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
+namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
 {
-    public class CharacterVerifier
+    public class CharacterAsserter
     {
         private readonly IEnumerable<string> skillsWithFoci;
 
-        public CharacterVerifier()
+        public CharacterAsserter()
         {
-            skillsWithFoci = new[]
-            {
+            skillsWithFoci =
+            [
                 SkillConstants.Craft,
                 SkillConstants.Knowledge,
                 SkillConstants.Perform,
                 SkillConstants.Profession,
-            };
+            ];
         }
 
         public void AssertCharacter(Character character)
         {
-            VerifySummary(character);
-            VerifyAlignment(character);
-            VerifyCharacterClass(character);
-            VerifyRace(character);
-            VerifyAbilities(character);
-            VerifyLanguages(character);
-            VerifySkills(character);
-            VerifyFeats(character);
-            VerifyEquipment(character);
-            VerifyMagic(character);
-            VerifyCombat(character);
+            AssertSummary(character);
+            AssertAlignment(character);
+            AssertCharacterClass(character);
+            AssertRace(character);
+            AssertAbilities(character);
+            AssertLanguages(character);
+            AssertSkills(character);
+            AssertFeats(character);
+            AssertEquipment(character);
+            AssertMagic(character);
+            AssertCombat(character);
 
             Assert.That(character.InterestingTrait, Is.Not.Empty, character.Summary);
             Assert.That(character.ChallengeRating, Is.Positive, character.Summary);
             Assert.That(character.ChallengeRating, Is.AtLeast(character.Race.ChallengeRating), character.Summary);
         }
 
-        private void VerifySummary(Character character)
+        private void AssertSummary(Character character)
         {
             Assert.That(character.Summary, Is.Not.Empty);
             Assert.That(character.Summary, Contains.Substring(character.Alignment.Full));
@@ -54,7 +56,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(character.Summary, Contains.Substring(character.Race.Summary));
         }
 
-        private void VerifyAlignment(Character character)
+        private void AssertAlignment(Character character)
         {
             Assert.That(character.Alignment.Goodness, Is.EqualTo(AlignmentConstants.Good)
                 .Or.EqualTo(AlignmentConstants.Neutral)
@@ -64,7 +66,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 .Or.EqualTo(AlignmentConstants.Chaotic), character.Summary);
         }
 
-        private void VerifyCharacterClass(Character character)
+        private void AssertCharacterClass(Character character)
         {
             Assert.That(character.Class.Name, Is.Not.Empty, character.Summary);
             Assert.That(character.Class.Level, Is.Positive, character.Summary);
@@ -97,7 +99,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             }
         }
 
-        private void VerifyRace(Character character)
+        private void AssertRace(Character character)
         {
             Assert.That(character.Race.BaseRace, Is.Not.Empty, character.Summary);
             Assert.That(character.Race.Metarace, Is.Not.Null, character.Summary);
@@ -112,16 +114,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 .Or.EqualTo(RaceConstants.Sizes.Medium)
                 .Or.EqualTo(RaceConstants.Sizes.Small), character.Summary);
 
-            VerifyLandSpeed(character);
-            VerifyAerialSpeed(character);
-            VerifySwimSpeed(character);
-            VerifyAge(character);
-            VerifyMaximumAge(character);
-            VerifyHeight(character);
-            VerifyWeight(character);
+            AssertLandSpeed(character);
+            AssertAerialSpeed(character);
+            AssertSwimSpeed(character);
+            AssertAge(character);
+            AssertMaximumAge(character);
+            AssertHeight(character);
+            AssertWeight(character);
         }
 
-        private void VerifyLandSpeed(Character character)
+        private void AssertLandSpeed(Character character)
         {
             Assert.That(character.Race.LandSpeed.Value, Is.Positive, character.Summary);
             Assert.That(character.Race.LandSpeed.Value % 5, Is.EqualTo(0), character.Summary);
@@ -133,7 +135,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(character.Race.LandSpeed.Description, Is.Empty, character.Summary);
         }
 
-        private void VerifyAerialSpeed(Character character)
+        private void AssertAerialSpeed(Character character)
         {
             Assert.That(character.Race.AerialSpeed.Value, Is.Not.Negative, character.Summary);
             Assert.That(character.Race.AerialSpeed.Value % 5, Is.EqualTo(0), character.Summary);
@@ -152,7 +154,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Race.AerialSpeed.Value, Is.Positive, character.Summary);
         }
 
-        private void VerifySwimSpeed(Character character)
+        private void AssertSwimSpeed(Character character)
         {
             Assert.That(character.Race.SwimSpeed.Value, Is.Not.Negative, character.Summary);
             Assert.That(character.Race.SwimSpeed.Value % 10, Is.EqualTo(0), character.Summary);
@@ -160,7 +162,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(character.Race.SwimSpeed.Description, Is.Empty, character.Summary);
         }
 
-        private void VerifyAge(Character character)
+        private void AssertAge(Character character)
         {
             Assert.That(character.Race.Age.Description, Is.EqualTo(RaceConstants.Ages.Adulthood)
                 .Or.EqualTo(RaceConstants.Ages.MiddleAge)
@@ -173,7 +175,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Race.Age.Value, Is.LessThanOrEqualTo(character.Race.MaximumAge.Value), character.Summary);
         }
 
-        private void VerifyMaximumAge(Character character)
+        private void AssertMaximumAge(Character character)
         {
             Assert.That(character.Race.MaximumAge.Value, Is.Positive.Or.EqualTo(RaceConstants.Ages.Ageless), character.Summary);
             Assert.That(character.Race.MaximumAge.Unit, Is.EqualTo("Years"), character.Summary);
@@ -186,26 +188,26 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
                 Assert.That(character.Race.MaximumAge.Description, Is.EqualTo("Will die of natural causes"), character.Summary);
         }
 
-        private void VerifyHeight(Character character)
+        private void AssertHeight(Character character)
         {
             Assert.That(character.Race.Height.Value, Is.Positive, character.Summary);
             Assert.That(character.Race.Height.Unit, Is.EqualTo("Inches"), character.Summary);
             Assert.That(character.Race.Height.Description, Is.EqualTo("Short").Or.EqualTo("Average").Or.EqualTo("Tall"), character.Summary);
         }
 
-        private void VerifyWeight(Character character)
+        private void AssertWeight(Character character)
         {
             Assert.That(character.Race.Weight.Value, Is.Positive, character.Summary);
             Assert.That(character.Race.Weight.Unit, Is.EqualTo("Pounds"), character.Summary);
             Assert.That(character.Race.Weight.Description, Is.EqualTo("Light").Or.EqualTo("Average").Or.EqualTo("Heavy"), character.Summary);
         }
 
-        private void VerifyLanguages(Character character)
+        private void AssertLanguages(Character character)
         {
             Assert.That(character.Languages, Is.Not.Empty, character.Summary);
         }
 
-        private void VerifyAbilities(Character character)
+        private void AssertAbilities(Character character)
         {
             Assert.That(character.Abilities.Count, Is.InRange(5, 6), character.Summary);
             Assert.That(character.Abilities.Keys, Contains.Item(AbilityConstants.Charisma), character.Summary);
@@ -225,7 +227,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             }
         }
 
-        private void VerifySkills(Character character)
+        private void AssertSkills(Character character)
         {
             Assert.That(character.Skills, Is.Not.Empty, character.Summary);
 
@@ -249,7 +251,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             Assert.That(skillNamesAndFoci, Is.Unique);
         }
 
-        private void VerifyFeats(Character character)
+        private void AssertFeats(Character character)
         {
             Assert.That(character.Feats.Class, Is.Not.Empty, character.Summary);
             Assert.That(character.Feats.Racial, Is.Not.Null, character.Summary);
@@ -276,7 +278,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             }
         }
 
-        private void VerifyEquipment(Character character)
+        private void AssertEquipment(Character character)
         {
             if (character.Feats.All.SelectMany(f => f.Foci).Contains(FeatConstants.Foci.UnarmedStrike) == false)
             {
@@ -365,7 +367,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
             }
         }
 
-        private void VerifyMagic(Character character)
+        private void AssertMagic(Character character)
         {
             Assert.That(character.Magic.Animal, Is.Not.Null, character.Summary);
 
@@ -378,28 +380,30 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
 
             foreach (var spell in character.Magic.KnownSpells)
             {
-                Assert.That(spell.Level, Is.Not.Negative, spell.Summary);
                 Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
                 Assert.That(spell.Name, Is.Not.Empty, spell.Summary);
                 Assert.That(spell.Sources, Is.Not.Empty, spell.Summary);
-                Assert.That(spell.Sources, Is.All.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources.Keys, Is.All.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources.Values, Is.All.Not.Negative, spell.Summary);
             }
 
             foreach (var spell in character.Magic.PreparedSpells)
             {
-                Assert.That(spell.Level, Is.Not.Negative, spell.Summary);
                 Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
                 Assert.That(spell.Name, Is.Not.Empty, spell.Summary);
                 Assert.That(spell.Sources, Is.Not.Empty, spell.Summary);
-                Assert.That(spell.Sources, Is.All.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources.Keys, Is.All.Not.Empty, spell.Summary);
+                Assert.That(spell.Sources.Values, Is.All.Not.Negative, spell.Summary);
             }
 
             var knownSpellNames = character.Magic.KnownSpells.Select(s => s.Name);
             var preparedSpellNames = character.Magic.PreparedSpells.Select(s => s.Name);
-            Assert.That(preparedSpellNames, Is.SubsetOf(knownSpellNames), character.Summary);
+
+            Assert.That(knownSpellNames, Is.Unique, character.Summary);
+            Assert.That(preparedSpellNames.Distinct(), Is.SubsetOf(knownSpellNames), character.Summary);
         }
 
-        private void VerifyCombat(Character character)
+        private void AssertCombat(Character character)
         {
             Assert.That(character.Combat.BaseAttack.BaseBonus, Is.Not.Negative, character.Summary);
             Assert.That(character.Combat.BaseAttack.DexterityBonus, Is.EqualTo(character.Abilities[AbilityConstants.Dexterity].Bonus), character.Summary);
@@ -435,8 +439,111 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Characters
 
         private string GetAllFeatsMessage(IEnumerable<Feat> feats)
         {
-            var featsWithFoci = feats.Where(f => f.Foci.Any()).Select(f => $"{f.Name}: {string.Join(", ", f.Foci)}").OrderBy(f => f);
+            var featsWithFoci = feats
+                .Where(f => f.Foci.Any())
+                .Select(f => $"{f.Name}: {string.Join(", ", f.Foci)}")
+                .OrderBy(f => f);
             return string.Join("; ", featsWithFoci);
+        }
+
+        public void AssertSpellcaster(Character spellcaster)
+        {
+            Assert.That(spellcaster.Magic, Is.Not.Null);
+            Assert.That(spellcaster.Magic.Animal, Is.Not.Null);
+            Assert.That(spellcaster.Magic.ArcaneSpellFailure, Is.InRange(0, 100));
+
+            Assert.That(spellcaster.Magic.SpellsPerDay, Is.Not.Empty, spellcaster.Class.Summary);
+
+            var levelsAndSources = spellcaster.Magic.SpellsPerDay.Select(s => s.Source + s.Level);
+            Assert.That(levelsAndSources, Is.Unique);
+
+            var spellsPerDayLevels = spellcaster.Magic.SpellsPerDay.Select(s => s.Level);
+            var maxSpellLevel = spellsPerDayLevels.Max();
+            var minSpellLevel = spellsPerDayLevels.Min();
+
+            Assert.That(minSpellLevel, Is.InRange(0, 1));
+            Assert.That(maxSpellLevel, Is.InRange(0, 9));
+
+            foreach (var spellQuantity in spellcaster.Magic.SpellsPerDay)
+            {
+                Assert.That(spellQuantity.Level, Is.InRange(minSpellLevel, maxSpellLevel));
+                Assert.That(spellQuantity.Quantity, Is.Not.Negative);
+                Assert.That(spellQuantity.Source, Is.Not.Empty);
+
+                if (spellQuantity.HasDomainSpell == false)
+                    Assert.That(spellQuantity.Quantity, Is.Positive);
+
+                if (spellQuantity.Level > 0 && spellQuantity.Source == spellcaster.Class.Name)
+                    Assert.That(spellQuantity.HasDomainSpell, Is.EqualTo(spellcaster.Class.SpecialistFields.Any()));
+                else
+                    Assert.That(spellQuantity.HasDomainSpell, Is.False);
+            }
+
+            Assert.That(spellcaster.Magic.KnownSpells, Is.Not.Empty, spellcaster.Class.Summary);
+
+            //INFO: Adding 1 to max spell, because you might know a spell that you cannot yet cast
+            var maxKnownSpellLevel = Math.Min(9, maxSpellLevel + 1);
+
+            foreach (var knownSpell in spellcaster.Magic.KnownSpells)
+                AssertSpell(knownSpell, minSpellLevel, maxKnownSpellLevel);
+
+            if (spellcaster.Magic.SpellsPerDay.All(s => s.Source == CharacterClassConstants.Bard || s.Source == CharacterClassConstants.Sorcerer))
+            {
+                Assert.That(spellcaster.Magic.PreparedSpells, Is.Empty, spellcaster.Class.Summary);
+                return;
+            }
+
+            Assert.That(spellcaster.Magic.PreparedSpells, Is.Not.Empty, spellcaster.Class.Summary);
+
+            foreach (var preparedSpell in spellcaster.Magic.PreparedSpells)
+                AssertSpell(preparedSpell, minSpellLevel, maxSpellLevel);
+        }
+
+        private void AssertSpell(Spell spell, int minSpellLevel, int maxSpellLevel)
+        {
+            Assert.That(spell.Name, Is.Not.Empty, spell.Summary);
+            Assert.That(spell.Sources, Is.Not.Empty, spell.Summary);
+            Assert.That(spell.Sources.Keys, Is.All.Not.Empty, spell.Summary);
+            Assert.That(spell.Sources.Values, Is.All.InRange(minSpellLevel, maxSpellLevel), spell.Summary);
+            Assert.That(spell.Metamagic, Is.Empty, spell.Summary);
+        }
+
+        public void AssertUndead(Character character)
+        {
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost)
+                .Or.EqualTo(RaceConstants.Metaraces.Lich)
+                .Or.EqualTo(RaceConstants.Metaraces.Mummy)
+                .Or.EqualTo(RaceConstants.Metaraces.Vampire));
+            Assert.That(character.Race.ChallengeRating, Is.Positive, character.Summary);
+            Assert.That(character.Abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution), character.Summary);
+            Assert.That(character.Combat.SavingThrows.HasFortitudeSave, Is.False, character.Summary);
+        }
+
+        public void AssertGhost(Character character)
+        {
+            AssertUndead(character);
+
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost));
+            Assert.That(character.Race.AerialSpeed.Value, Is.Positive);
+            Assert.That(character.Race.AerialSpeed.Description, Is.Not.Empty);
+
+            var ghostSpecialAttacks = new[]
+            {
+                FeatConstants.CorruptingGaze,
+                FeatConstants.CorruptingTouch,
+                FeatConstants.DrainingTouch,
+                FeatConstants.FrightfulMoan,
+                FeatConstants.HorrificAppearance,
+                FeatConstants.Malevolence,
+                FeatConstants.Telekinesis,
+            };
+
+            var featNames = character.Feats.All.Select(f => f.Name);
+            var ghostSpecialAttackFeats = featNames.Intersect(ghostSpecialAttacks);
+            var ghostSpecialAttackFeat = character.Feats.All.Single(f => f.Name == FeatConstants.GhostSpecialAttack);
+
+            Assert.That(ghostSpecialAttackFeats.Count, Is.EqualTo(ghostSpecialAttackFeat.Foci.Count()));
+            Assert.That(ghostSpecialAttackFeats.Count, Is.InRange(1, 3));
         }
     }
 }

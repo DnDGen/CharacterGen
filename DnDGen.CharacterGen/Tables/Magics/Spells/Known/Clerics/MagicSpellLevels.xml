@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
     <entry>Nystul's magic aura</entry>
 	  <name>1</name>

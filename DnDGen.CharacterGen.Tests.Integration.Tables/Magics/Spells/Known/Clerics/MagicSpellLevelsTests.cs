@@ -14,10 +14,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Cleri
         [Test]
         public override void CollectionNames()
         {
-            var names = Enumerable.Range(1, 9).Select(n => n.ToString());
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
+        [TestCase("0")]
         [TestCase("1", SpellConstants.NystulsMagicAura)]
         [TestCase("2", SpellConstants.Identify)]
         [TestCase("3", SpellConstants.DispelMagic)]
