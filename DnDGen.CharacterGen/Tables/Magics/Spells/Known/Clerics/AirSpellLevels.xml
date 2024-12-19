@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Obscuring mist</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Wind wall</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Gaseous form</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Air walk</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Control winds</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Chain lightning</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Control weather</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Whirlwind</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Elemental swarm</name>
-    <entry>9</entry>
-  </collection>
+	<collection>
+		<name>0</name>
+	</collection>
+	<collection>
+		<entry>Obscuring mist</entry>
+		<name>1</name>
+	</collection>
+	<collection>
+		<entry>Wind wall</entry>
+		<name>2</name>
+	</collection>
+	<collection>
+		<entry>Gaseous form</entry>
+		<name>3</name>
+	</collection>
+	<collection>
+		<entry>Air walk</entry>
+		<name>4</name>
+	</collection>
+	<collection>
+		<entry>Control winds</entry>
+		<name>5</name>
+	</collection>
+	<collection>
+		<entry>Chain lightning</entry>
+		<name>6</name>
+	</collection>
+	<collection>
+		<entry>Control weather</entry>
+		<name>7</name>
+	</collection>
+	<collection>
+		<entry>Whirlwind</entry>
+		<name>8</name>
+	</collection>
+	<collection>
+		<entry>Elemental swarm</entry>
+		<name>9</name>
+	</collection>
 </collections>

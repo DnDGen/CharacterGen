@@ -1,4 +1,5 @@
-﻿using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
@@ -119,8 +120,13 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
 
             var baseRaceGroups = GetTable(TableNameConstants.Set.Collection.BaseRaceGroups);
             var metaraceGroups = GetTable(TableNameConstants.Set.Collection.MetaraceGroups);
+            var classGroups = GetTable(TableNameConstants.Set.Collection.ClassNameGroups);
 
-            names = names.Union(baseRaceGroups[GroupConstants.All]).Union(metaraceGroups[GroupConstants.All]).ToArray();
+            names = names
+                .Union(baseRaceGroups[GroupConstants.All])
+                .Union(metaraceGroups[GroupConstants.All])
+                .Union(classGroups[GroupConstants.All])
+                .ToArray();
 
             AssertCollectionNames(names);
         }
@@ -305,6 +311,22 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.BaseRaces.Animals.WaterMephit, 6)]
         [TestCase(RaceConstants.BaseRaces.Animals.HeavyWarhorse, 4)]
         [TestCase(RaceConstants.BaseRaces.Animals.Warpony, 4)]
+        [TestCase(CharacterClassConstants.Adept, 2)]
+        [TestCase(CharacterClassConstants.Aristocrat, 100)]
+        [TestCase(CharacterClassConstants.Barbarian, 100)]
+        [TestCase(CharacterClassConstants.Bard, 100)]
+        [TestCase(CharacterClassConstants.Cleric, 100)]
+        [TestCase(CharacterClassConstants.Commoner, 100)]
+        [TestCase(CharacterClassConstants.Druid, 1)]
+        [TestCase(CharacterClassConstants.Expert, 100)]
+        [TestCase(CharacterClassConstants.Fighter, 100)]
+        [TestCase(CharacterClassConstants.Monk, 100)]
+        [TestCase(CharacterClassConstants.Paladin, 5)]
+        [TestCase(CharacterClassConstants.Ranger, 4)]
+        [TestCase(CharacterClassConstants.Rogue, 100)]
+        [TestCase(CharacterClassConstants.Sorcerer, 1)]
+        [TestCase(CharacterClassConstants.Warrior, 100)]
+        [TestCase(CharacterClassConstants.Wizard, 1)]
         public void LevelAdjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

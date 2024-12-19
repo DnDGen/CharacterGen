@@ -8,13 +8,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
     [TestFixture]
     public class ChallengeRatingsTests : AdjustmentsTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return TableNameConstants.Set.Adjustments.ChallengeRatings;
-            }
-        }
+        protected override string tableName => TableNameConstants.Set.Adjustments.ChallengeRatings;
 
         [Test]
         public override void CollectionNames()

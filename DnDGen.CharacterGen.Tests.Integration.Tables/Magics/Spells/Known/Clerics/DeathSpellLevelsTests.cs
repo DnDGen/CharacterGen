@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class DeathSpellLevelsTests : AdjustmentsTests
+    public class DeathSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Death);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Death);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.CauseFear,
-                SpellConstants.DeathKnell,
-                SpellConstants.AnimateDead,
-                SpellConstants.DeathWard,
-                SpellConstants.SlayLiving,
-                SpellConstants.CreateUndead,
-                SpellConstants.Destruction,
-                SpellConstants.CreateGreaterUndead,
-                SpellConstants.WailOfTheBanshee
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllDeathSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.CauseFear)]
+        [TestCase("2", SpellConstants.DeathKnell)]
+        [TestCase("3", SpellConstants.AnimateDead)]
+        [TestCase("4", SpellConstants.DeathWard)]
+        [TestCase("5", SpellConstants.SlayLiving)]
+        [TestCase("6", SpellConstants.CreateUndead)]
+        [TestCase("7", SpellConstants.Destruction)]
+        [TestCase("8", SpellConstants.CreateGreaterUndead)]
+        [TestCase("9", SpellConstants.WailOfTheBanshee)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Death]);
-        }
-
-        [TestCase(SpellConstants.CauseFear, 1)]
-        [TestCase(SpellConstants.DeathKnell, 2)]
-        [TestCase(SpellConstants.AnimateDead, 3)]
-        [TestCase(SpellConstants.DeathWard, 4)]
-        [TestCase(SpellConstants.SlayLiving, 5)]
-        [TestCase(SpellConstants.CreateUndead, 6)]
-        [TestCase(SpellConstants.Destruction, 7)]
-        [TestCase(SpellConstants.CreateGreaterUndead, 8)]
-        [TestCase(SpellConstants.WailOfTheBanshee, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

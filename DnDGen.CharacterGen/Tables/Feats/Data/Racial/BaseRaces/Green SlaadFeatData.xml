@@ -128,12 +128,12 @@
     <entry></entry>
   </collection>
   <collection>
-    <name>Spell-Like AbilityDispel good/evil/law/chaos</name>
+    <name>Spell-Like AbilityDispel law</name>
     <entry>Spell-Like Ability</entry>
     <entry></entry>
     <entry>0</entry>
     <entry>0</entry>
-    <entry>Dispel good/evil/law/chaos</entry>
+    <entry>Dispel law</entry>
     <entry>3</entry>
     <entry>Day</entry>
     <entry>0</entry>
@@ -170,12 +170,12 @@
     <entry></entry>
   </collection>
   <collection>
-    <name>Spell-Like AbilityProtection from chaos/law/good/evil</name>
+    <name>Spell-Like AbilityProtection from law</name>
     <entry>Spell-Like Ability</entry>
     <entry></entry>
     <entry>0</entry>
     <entry>0</entry>
-    <entry>Protection from chaos/law/good/evil</entry>
+    <entry>Protection from law</entry>
     <entry>0</entry>
     <entry>At Will</entry>
     <entry>0</entry>

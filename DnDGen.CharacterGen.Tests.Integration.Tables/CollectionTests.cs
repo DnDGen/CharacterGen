@@ -19,7 +19,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
             collectionsMapper = GetNewInstanceOf<CollectionMapper>();
 
             table = GetTable(tableName);
-            indices = new Dictionary<int, string>();
+            indices = [];
         }
 
         public abstract void CollectionNames();
@@ -57,59 +57,37 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables
         public virtual void Collection(string name, params string[] collection)
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
-
-            if (table[name].Count() == 1 && collection.Count() == 1)
-                Assert.That(table[name].Single(), Is.EqualTo(collection.Single()));
-
             AssertCollection(table[name], collection);
         }
 
         protected void AssertCollection(IEnumerable<string> actual, IEnumerable<string> expected)
         {
-            AssertMissingItems(expected, actual);
-            AssertExtraItems(expected, actual);
             Assert.That(actual, Is.EquivalentTo(expected));
-            Assert.That(expected, Is.EquivalentTo(actual));
-            Assert.That(actual.Count(), Is.EqualTo(expected.Count()));
         }
 
-        protected void AssertMissingItems(IEnumerable<string> expected, IEnumerable<string> collection)
-        {
-            var missingItems = expected.Except(collection);
-            Assert.That(missingItems, Is.Empty, $"{missingItems.Count()} of {expected.Count()} missing");
-        }
-
-        protected void AssertExtraItems(IEnumerable<string> expected, IEnumerable<string> collection)
-        {
-            var extras = collection.Except(expected);
-            Assert.That(extras, Is.Empty, $"{extras.Count()} extra");
-        }
-
-        public virtual void OrderedCollection(string name, params string[] collection)
+        public virtual void OrderedCollection(string name, params string[] expected)
         {
             Assert.That(table.Keys, Contains.Item(name), tableName);
 
-            PopulateIndices(collection);
+            PopulateIndices(expected);
+            var actual = table[name].ToArray();
 
             foreach (var index in indices.Keys.OrderBy(k => k))
             {
-                var actualItem = table[name].ElementAt(index);
-                var expectedItem = collection[index];
+                var message = $"Index {index}";
+                if (!string.IsNullOrEmpty(indices[index]))
+                    message += $" ({indices[index]})";
 
-                var message = string.Format("Index {0}", index);
-                if (string.IsNullOrEmpty(indices[index]) == false)
-                    message += string.Format(" ({0})", indices[index]);
-
-                Assert.That(actualItem, Is.EqualTo(expectedItem), message);
+                Assert.That(actual[index], Is.EqualTo(expected[index]), message);
             }
 
-            AssertExtraItems(table[name], collection);
+            Assert.That(table[name], Is.EqualTo(expected));
         }
 
-        public virtual void DistinctCollection(string name, params string[] collection)
+        public virtual void DistinctCollection(string name, params string[] expected)
         {
-            AssertUnique(collection);
-            Collection(name, collection);
+            AssertUnique(expected);
+            Collection(name, expected);
             AssertUnique(table[name]);
         }
     }

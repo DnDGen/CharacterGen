@@ -26,8 +26,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         private List<string> spellcasters;
         private Dictionary<string, int> spellsPerDayForClass;
         private Dictionary<string, int> spellsKnownForClass;
-        private List<string> classSpells;
-        private Dictionary<string, int> spellLevels;
+        private Dictionary<string, Dictionary<string, List<string>>> spells;
         private List<string> divineCasters;
 
         [SetUp]
@@ -38,13 +37,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             mockPercentileSelector = new Mock<IPercentileSelector>();
             spellsGenerator = new SpellsGenerator(mockCollectionsSelector.Object, mockAdjustmentsSelector.Object, mockPercentileSelector.Object);
             characterClass = new CharacterClass();
-            spellcasters = new List<string>();
-            abilities = new Dictionary<string, Ability>();
-            spellsPerDayForClass = new Dictionary<string, int>();
-            spellsKnownForClass = new Dictionary<string, int>();
-            classSpells = new List<string>();
-            spellLevels = new Dictionary<string, int>();
-            divineCasters = new List<string>();
+            spellcasters = [];
+            abilities = [];
+            spellsPerDayForClass = [];
+            spellsKnownForClass = [];
+            spells = [];
+            divineCasters = [];
 
             characterClass.Name = "class name";
             characterClass.Level = 9;
@@ -54,25 +52,25 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsPerDayForClass["1"] = 42;
             spellsKnownForClass["0"] = 2;
             spellsKnownForClass["1"] = 1;
-            abilities["stat"] = new Ability("stat");
-            abilities["stat"].Value = 11;
-            abilities["other stat"] = new Ability("other stat");
-            abilities["other stat"].Value = 11;
-            classSpells.Add("spell 1");
-            classSpells.Add("spell 2");
-            classSpells.Add("spell 3");
-            classSpells.Add("spell 4");
-            spellLevels[classSpells[0]] = 0;
-            spellLevels[classSpells[1]] = 0;
-            spellLevels[classSpells[2]] = 1;
-            spellLevels[classSpells[3]] = 1;
+            abilities["stat"] = new Ability("stat")
+            {
+                Value = 11
+            };
+            abilities["other stat"] = new Ability("other stat")
+            {
+                Value = 11
+            };
             divineCasters.Add("other divine class");
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters)).Returns(spellcasters);
-            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine)).Returns(divineCasters);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, GroupConstants.Spellcasters))
+                .Returns(spellcasters);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.ClassNameGroups, SpellConstants.Sources.Divine))
+                .Returns(divineCasters);
             mockCollectionsSelector
                 .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityGroups, characterClass.Name + GroupConstants.Spellcasters))
-                .Returns(new[] { "stat" });
+                .Returns(["stat"]);
 
             var tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSSpellsPerDay, characterClass.Level, characterClass.Name);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellsPerDayForClass);
@@ -80,25 +78,58 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             tableName = string.Format(TableNameConstants.Formattable.Adjustments.LevelXCLASSKnownSpells, characterClass.Level, characterClass.Name);
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellsKnownForClass);
 
-            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, characterClass.Name)).Returns(classSpells);
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 1"))
-                .Returns(new[] { classSpells[0], classSpells[2] });
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 2"))
-                .Returns(new[] { classSpells[1], classSpells[3] });
+            SetUpDomain(characterClass.Name);
+            SetUpDomain("domain 1");
+            SetUpDomain("domain 2");
 
-            tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, characterClass.Name);
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(spellLevels);
+            AddSpell("spell 1", characterClass.Name, 0);
+            AddSpell("spell 2", characterClass.Name, 0);
+            AddSpell("spell 3", characterClass.Name, 1);
+            AddSpell("spell 4", characterClass.Name, 1);
+            AddSpell("spell 1", "domain 1", 0);
+            AddSpell("spell 3", "domain 1", 1);
+            AddSpell("spell 2", "domain 2", 0);
+            AddSpell("spell 4", "domain 2", 1);
 
             var index = 0;
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>())).Returns((IEnumerable<string> c) => c.ElementAt(index++ % c.Count()));
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<Spell>>())).Returns((IEnumerable<Spell> c) => c.ElementAt(index++ % c.Count()));
+        }
 
+        private void AddSpell(string spell, string source, int level)
+        {
+            if (!spells.ContainsKey(source))
+                SetUpDomain(source);
+
+            var levelKey = level.ToString();
+            if (!spells[source].ContainsKey(levelKey))
+                spells[source][levelKey] = [];
+
+            spells[source][levelKey].Add(spell);
+        }
+
+        private void SetUpDomain(string domain)
+        {
+            spells[domain] = new Dictionary<string, List<string>> {
+                { "0", [] },
+                { "1", [] },
+                { "2", [] },
+                { "3", [] },
+                { "4", [] },
+                { "5", [] },
+            };
+
+            var tableName = string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, domain);
+            mockCollectionsSelector
+                .Setup(s => s.SelectFrom(Config.Name, tableName, It.IsAny<string>()))
+                .Returns((string _, string _, string l) => spells[domain][l]);
+            mockCollectionsSelector
+                .Setup(s => s.SelectAllFrom(Config.Name, tableName))
+                .Returns(() => spells[domain].ToDictionary(s => s.Key, s => s.Value.AsEnumerable()));
         }
 
         [Test]
-        public void DoNotGenerateSpellsPerDayIfNotASpellcaster()
+        public void GeneratePerDay_DoNotGenerateSpellsPerDayIfNotASpellcaster()
         {
             spellcasters.Remove(characterClass.Name);
             var spellsPerDay = spellsGenerator.GeneratePerDay(characterClass, abilities);
@@ -106,7 +137,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void GenerateSpellsPerDay()
+        public void GeneratePerDay_GenerateSpellsPerDay()
         {
             var spellsPerDay = spellsGenerator.GeneratePerDay(characterClass, abilities);
 
@@ -121,7 +152,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void IfLevelAbove20_UseLevel20SpellsPerDay()
+        public void GeneratePerDay_IfLevelAbove20_UseLevel20SpellsPerDay()
         {
             characterClass.Level = 9266;
             abilities["stat"].Value = 16;
@@ -192,7 +223,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         [TestCase(43, 0, 4, 4, 4, 4, 3, 3, 3, 3, 2)]
         [TestCase(44, 0, 5, 4, 4, 4, 4, 3, 3, 3, 3)]
         [TestCase(45, 0, 5, 4, 4, 4, 4, 3, 3, 3, 3)]
-        public void AddBonusSpellsPerDayForStat(int statValue, params int[] levelBonuses)
+        public void GeneratePerDay_AddBonusSpellsPerDayForStat(int statValue, params int[] levelBonuses)
         {
             abilities["stat"].Value = statValue;
             spellsPerDayForClass["0"] = 10;
@@ -219,7 +250,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void CannotGetSpellsPerDayInLevelThatAbilitiesDoNotAllow()
+        public void GeneratePerDay_CannotGetSpellsPerDayInLevelThatAbilitiesDoNotAllow()
         {
             abilities["stat"].Value = 10;
 
@@ -231,7 +262,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void CannotGetBonusSpellsPerDayInLevelThatCharacterCannotCast()
+        public void GeneratePerDay_CannotGetBonusSpellsPerDayInLevelThatCharacterCannotCast()
         {
             abilities["stat"].Value = 45;
 
@@ -246,7 +277,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void CanGetBonusSpellsPerDayInLevelWithQuantityOf0()
+        public void GeneratePerDay_CanGetBonusSpellsPerDayInLevelWithQuantityOf0()
         {
             abilities["stat"].Value = 45;
             spellsPerDayForClass["2"] = 0;
@@ -265,7 +296,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void IfTotalSpellsPerDayIs0AndDoesNotHaveDomainSpell_RemoveSpellLevel()
+        public void GeneratePerDay_IfTotalSpellsPerDayIs0AndDoesNotHaveDomainSpell_RemoveSpellLevel()
         {
             spellsPerDayForClass["1"] = 0;
 
@@ -277,7 +308,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void IfTotalSpellsPerDayIs0AndHasDomainSpell_DoNotRemoveSpellLevel()
+        public void GeneratePerDay_IfTotalSpellsPerDayIs0AndHasDomainSpell_DoNotRemoveSpellLevel()
         {
             spellsPerDayForClass["1"] = 0;
             characterClass.SpecialistFields = new[] { "specialist" };
@@ -295,7 +326,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void IfTotalSpellsPerDayIsGreaterThan0AndDoesNotHaveDomainSpell_DoNotRemoveSpellLevel()
+        public void GeneratePerDay_IfTotalSpellsPerDayIsGreaterThan0AndDoesNotHaveDomainSpell_DoNotRemoveSpellLevel()
         {
             spellsPerDayForClass["1"] = 1;
 
@@ -312,7 +343,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void AllSpellLevelsPerDayExcept0GetDomainSpellIfClassHasSpecialistFields()
+        public void GeneratePerDay_AllSpellLevelsPerDayExcept0GetDomainSpellIfClassHasSpecialistFields()
         {
             characterClass.SpecialistFields = new[] { "specialist" };
             spellsPerDayForClass["0"] = 10;
@@ -337,7 +368,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void AllSpellLevelsPerDayExcept0GetDomainSpellIfClassHasMultipleSpecialistFields()
+        public void GeneratePerDay_AllSpellLevelsPerDayExcept0GetDomainSpellIfClassHasMultipleSpecialistFields()
         {
             characterClass.SpecialistFields = new[] { "specialist", "also specialist" };
             spellsPerDayForClass["0"] = 10;
@@ -362,7 +393,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void NoSpellLevelsPerDayGetDomainSpellIfClassDoesNotHaveSpecialistFields()
+        public void GeneratePerDay_NoSpellLevelsPerDayGetDomainSpellIfClassDoesNotHaveSpecialistFields()
         {
             spellsPerDayForClass["0"] = 10;
             spellsPerDayForClass["1"] = 9;
@@ -382,7 +413,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void DoNotGenerateKnownSpellsIfNotASpellcaster()
+        public void GenerateKnown_DoNotGenerateKnownSpellsIfNotASpellcaster()
         {
             spellcasters.Remove(characterClass.Name);
             var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
@@ -390,33 +421,30 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
         }
 
         [Test]
-        public void GenerateKnownSpells()
+        public void GenerateKnown_GenerateKnownSpells()
         {
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(3));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
-
-            Assert.That(spellsKnown.Select(s => s.Source), Is.All.EqualTo(characterClass.Name));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(3));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
         }
 
         [Test]
-        public void IfLevelAbove20_UseLevel20KnownSpells()
+        public void GenerateKnown_IfLevelAbove20_UseLevel20KnownSpells()
         {
             characterClass.Level = 9266;
             abilities["stat"].Value = 16;
 
-            var level20KnownSpells = new Dictionary<string, int>();
-            level20KnownSpells["0"] = 90;
-            level20KnownSpells["1"] = 210;
-            level20KnownSpells["2"] = 42;
-            level20KnownSpells["3"] = 600;
-            level20KnownSpells["4"] = 13;
-            level20KnownSpells["5"] = 37;
+            var level20KnownSpells = new Dictionary<string, int>
+            {
+                ["0"] = 90,
+                ["1"] = 210,
+                ["2"] = 42,
+                ["3"] = 600,
+                ["4"] = 13,
+                ["5"] = 37
+            };
 
             foreach (var kvp in level20KnownSpells)
             {
@@ -426,8 +454,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
                 while (quantity-- > 0)
                 {
                     var spell = Guid.NewGuid().ToString();
-                    classSpells.Add(spell);
-                    spellLevels[spell] = spellLevel;
+                    AddSpell(spell, characterClass.Name, spellLevel);
                 }
             }
 
@@ -435,212 +462,252 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(level20KnownSpells);
 
             var knownSpells = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(knownSpells.Count(s => s.Level == 0), Is.EqualTo(90));
-            Assert.That(knownSpells.Count(s => s.Level == 1), Is.EqualTo(210));
-            Assert.That(knownSpells.Count(s => s.Level == 2), Is.EqualTo(42));
-            Assert.That(knownSpells.Count(s => s.Level == 3), Is.EqualTo(600));
-            Assert.That(knownSpells.Count(s => s.Level == 4), Is.EqualTo(13));
-            Assert.That(knownSpells.Count(s => s.Level == 5), Is.EqualTo(37));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 0), Is.EqualTo(90));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 1), Is.EqualTo(210));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 2), Is.EqualTo(42));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 3), Is.EqualTo(600));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 4), Is.EqualTo(13));
+            Assert.That(knownSpells.Count(s => s.Sources[characterClass.Name] == 5), Is.EqualTo(37));
             Assert.That(knownSpells.Count, Is.EqualTo(90 + 210 + 42 + 600 + 13 + 37));
         }
 
         [Test]
-        public void KnowAllSpellsBySheerQuantity()
+        public void GenerateKnown_KnowAllSpellsBySheerQuantity()
         {
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 3;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(3));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(1));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 4 (class name/1)"));
         }
 
         [Test]
-        public void DivineCastersKnowAllSpells()
+        public void GenerateKnown_DivineCastersKnowAllSpells()
         {
             divineCasters.Add(characterClass.Name);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
         }
 
         [Test]
-        public void DivineCastersKnowAllSpecialistSpells()
+        public void GenerateKnown_DivineCastersKnowAllSpecialistSpells()
         {
             divineCasters.Add(characterClass.Name);
 
-            characterClass.SpecialistFields = new[] { "special domain" };
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 1);
+            AddSpell("too high domain spell", "special domain", 2);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "spell 5", "other special domain spell" });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 1;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(5));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(3));
-            Assert.That(firstLevelSpells.Select(s => s.Name), Contains.Item("spell 5"));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(6));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
+            Assert.That(spellsKnown[5].Summary, Is.EqualTo("other special domain spell (special domain/1)"));
         }
 
         [Test]
-        public void DivineCastersDoNotKnowProhibitedSpells()
+        public void BUG_GenerateKnown_DivineCastersKnowAllSpecialistSpells_DisparateLevels()
+        {
+            abilities["stat"].Value = 16;
+            divineCasters.Add(characterClass.Name);
+
+            characterClass.SpecialistFields = ["special domain", "other domain"];
+            SetUpDomain("special domain");
+            SetUpDomain("other domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 1);
+            AddSpell("too high domain spell", "special domain", 3);
+            AddSpell("spell 6", "other domain", 1);
+            AddSpell("other domain spell", "other domain", 1);
+            AddSpell("too high other domain spell", "other domain", 3);
+            AddSpell("spell 7", "special domain", 1);
+            AddSpell("spell 7", "class name", 2);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+            spellsKnownForClass["2"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(9));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
+            Assert.That(spellsKnown[5].Summary, Is.EqualTo("other special domain spell (special domain/1)"));
+            Assert.That(spellsKnown[6].Summary, Is.EqualTo("spell 7 (special domain/1, class name/2)"));
+            Assert.That(spellsKnown[7].Summary, Is.EqualTo("spell 6 (other domain/1)"));
+            Assert.That(spellsKnown[8].Summary, Is.EqualTo("other domain spell (other domain/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_DivineCastersKnowAllOverlappingSpecialistSpells()
         {
             divineCasters.Add(characterClass.Name);
 
-            characterClass.ProhibitedFields = new[] { "prohibited field" };
-
-            classSpells.Add("spell 5");
-            spellLevels[classSpells[4]] = 0;
-
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "prohibited field"))
-                .Returns(new[] { "other forbidden spell", classSpells[4] });
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("spell 3", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-            Assert.That(spellsKnown.Select(s => s.Name), Has.None.EqualTo("spell 5"));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(5));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1, special domain/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
         }
 
         [Test]
-        public void DivineCastersKnowSpellsEvenIfQuantityForLevelIs0()
+        public void GenerateKnown_DivineCastersKnowAllSpecialistSpellsFromMultipleDomains()
+        {
+            divineCasters.Add(characterClass.Name);
+
+            characterClass.SpecialistFields = ["special domain", "other domain"];
+            SetUpDomain("special domain");
+            SetUpDomain("other domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 1);
+            AddSpell("too high domain spell", "special domain", 2);
+            AddSpell("spell 6", "other domain", 1);
+            AddSpell("other domain spell", "other domain", 1);
+            AddSpell("too high other domain spell", "other domain", 2);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(8));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
+            Assert.That(spellsKnown[5].Summary, Is.EqualTo("other special domain spell (special domain/1)"));
+            Assert.That(spellsKnown[6].Summary, Is.EqualTo("spell 6 (other domain/1)"));
+            Assert.That(spellsKnown[7].Summary, Is.EqualTo("other domain spell (other domain/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_DivineCastersDoNotKnowProhibitedSpells()
+        {
+            divineCasters.Add(characterClass.Name);
+
+            characterClass.ProhibitedFields = ["prohibited field"];
+            SetUpDomain("prohibited field");
+            AddSpell("spell 3", "prohibited field", 1);
+            AddSpell("other forbidden spell", "prohibited field", 1);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(3));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 4 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_DivineCastersKnowSpellsEvenIfQuantityForLevelIs0()
         {
             divineCasters.Add(characterClass.Name);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 0;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
         }
 
         [Test]
-        public void DivineCastersDoNotKnowSpellsBeyondLevel()
+        public void GenerateKnown_DivineCastersDoNotKnowSpellsBeyondLevel()
         {
             divineCasters.Add(characterClass.Name);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            classSpells.Add("spell 5");
-            spellLevels[classSpells[4]] = 2;
+            AddSpell("too high spell", characterClass.Name, 2);
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
         }
 
         [Test]
-        public void DivineCastersDoNotKnowSpecialistSpellsBeyondLevel()
+        public void GenerateKnown_DivineCastersDoNotKnowSpecialistSpellsBeyondLevel()
         {
             divineCasters.Add(characterClass.Name);
 
-            characterClass.ProhibitedFields = new[] { "special domain" };
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("domain spell", "special domain", 1);
+            AddSpell("too high spell", "special domain", 2);
 
-            spellsKnownForClass["0"] = 1;
-            spellsKnownForClass["1"] = 1;
-
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "spell 5", "other special domain spell" });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 2;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(5));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("domain spell (special domain/1)"));
         }
 
         [Test]
-        public void DivineCastersKnowSpecialistSpellsEvenIfQuantityForLevelIs0()
+        public void GenerateKnown_DivineCastersKnowSpecialistSpellsEvenIfQuantityForLevelIs0()
         {
             divineCasters.Add(characterClass.Name);
 
-            characterClass.SpecialistFields = new[] { "special domain" };
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 0;
 
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "spell 5", "other special domain spell" });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 1;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(5));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(3));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(5));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 5 (special domain/1)"));
         }
 
         [Test]
-        public void DivineCastersDoNotKnowSpellsBeyondWhatAbilitiesAllow()
+        public void GenerateKnown_DivineCastersDoNotKnowSpellsBeyondWhatAbilitiesAllow()
         {
             abilities["stat"].Value = 10;
             divineCasters.Add(characterClass.Name);
@@ -648,332 +715,366 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Magics
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(2));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
         }
 
         [Test]
-        public void DivineCastersDoNotKnowSpecialistSpellsBeyondWhatAbilitiesAllow()
+        public void GenerateKnown_DivineCastersDoNotKnowSpecialistSpellsBeyondWhatAbilitiesAllow()
         {
             abilities["stat"].Value = 10;
             divineCasters.Add(characterClass.Name);
 
-            characterClass.SpecialistFields = new[] { "special domain" };
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 0;
 
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "spell 5", "other special domain spell" });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 1;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(2));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
         }
 
         [Test]
-        public void CanHaveMoreThanNormalKnownSpellQuantity()
+        public void GenerateKnown_CannotHaveMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
             mockPercentileSelector
                 .SetupSequence(s => s.SelectFrom<bool>(Config.Name, tableName))
-                .Returns(true)
                 .Returns(false)
-                .Returns(true)
                 .Returns(false);
 
             spellsKnownForClass["0"] = 1;
             spellsKnownForClass["1"] = 1;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 4 (class name/1)"));
         }
 
         [Test]
-        public void CanHaveManyMoreThanNormalKnownSpellQuantity()
+        public void GenerateKnown_CanHaveMoreThanNormalKnownSpellQuantity()
+        {
+            var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
+            mockPercentileSelector
+                .SetupSequence(s => s.SelectFrom<bool>(Config.Name, tableName))
+                .Returns(true).Returns(false)
+                .Returns(true).Returns(false);
+
+            AddSpell("spell 5", characterClass.Name, 0);
+            AddSpell("spell 6", characterClass.Name, 1);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 5 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 6 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 4 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_CanHaveManyMoreThanNormalKnownSpellQuantity()
         {
             var tableName = string.Format(TableNameConstants.Formattable.TrueOrFalse.CLASSKnowsAdditionalSpells, characterClass.Name);
             mockPercentileSelector.SetupSequence(s => s.SelectFrom<bool>(Config.Name, tableName))
-                .Returns(true).Returns(true).Returns(false)
+                .Returns(true).Returns(true).Returns(true).Returns(false)
                 .Returns(true).Returns(true).Returns(false);
 
-            spellsKnownForClass["0"] = 0;
+            AddSpell("spell 5", characterClass.Name, 0);
+            AddSpell("spell 8", characterClass.Name, 0);
+            AddSpell("spell 6", characterClass.Name, 0);
+            AddSpell("spell 7", characterClass.Name, 1);
+            AddSpell("spell 9", characterClass.Name, 1);
+
+            spellsKnownForClass["0"] = 1;
+            spellsKnownForClass["1"] = 1;
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(7));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 5 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 6 (class name/0)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 8 (class name/0)"));
+            Assert.That(spellsKnown[4].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[5].Summary, Is.EqualTo("spell 9 (class name/1)"));
+            Assert.That(spellsKnown[6].Summary, Is.EqualTo("spell 4 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_GetRandomKnownSpecialistSpells()
+        {
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", characterClass.Name, 1);
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 5 (special domain/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_GetRandomKnownNonSpecialistSpellIfAllSpecialistSpellsAreKnown()
+        {
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", characterClass.Name, 1);
+            AddSpell("spell 3", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(4));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1, special domain/1)"));
+            Assert.That(spellsKnown[3].Summary, Is.EqualTo("spell 5 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_RandomKnownSpellsAreNotProhibitedSpells()
+        {
+            characterClass.ProhibitedFields = ["bad domain"];
+            SetUpDomain("bad domain");
+            AddSpell("spell 3", "bad domain", 1);
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(3));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 4 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_RandomKnownSpellsAreNotAnyProhibitedSpells()
+        {
+            characterClass.ProhibitedFields = ["bad domain", "domain 3"];
+            SetUpDomain("bad domain");
+            AddSpell("spell 3", "bad domain", 1);
+            SetUpDomain("domain 3");
+            AddSpell("spell 1", "domain 3", 1);
+
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 4 (class name/1)"));
+        }
+
+        [Test]
+        public void GenerateKnown_RandomKnownSpellsAreSpecialistSpellsEvenIfQuantityForLevelIs0()
+        {
+            characterClass.SpecialistFields = ["special domain"];
+            SetUpDomain("special domain");
+            AddSpell("spell 5", "special domain", 1);
+            AddSpell("other special domain spell", "special domain", 2);
+
             spellsKnownForClass["1"] = 0;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(3));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 5 (special domain/1)"));
         }
 
         [Test]
-        public void GetRandomKnownSpecialistSpells()
-        {
-            characterClass.SpecialistFields = new[] { "special domain" };
-
-            classSpells.Add("spell 5");
-            spellLevels[classSpells[4]] = 1;
-
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "other special domain spell", classSpells[4] });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 1;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void GetRandomKnownNonSpecialistSpellIfAllSpecialistSpellsAreKnown()
-        {
-            characterClass.SpecialistFields = new[] { "special domain" };
-
-            classSpells.Add("spell 5");
-            spellLevels[classSpells[4]] = 1;
-
-            mockCollectionsSelector.Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain")).Returns(new[] { classSpells[3] });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels[classSpells[3]] = 1;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
-        }
-
-        [Test]
-        public void RandomKnownSpellsAreNotProhibitedSpells()
-        {
-            characterClass.ProhibitedFields = new[] { "domain 1" };
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(2));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(1));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void RandomKnownSpellsAreSpecialistSpellsEvenIfQuantityForLevelIs0()
-        {
-            characterClass.SpecialistFields = new[] { "special domain" };
-
-            spellsKnownForClass["1"] = 0;
-
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "special domain"))
-                .Returns(new[] { "spell 5", "other special domain spell" });
-
-            var specialDomainSpellLevels = new Dictionary<string, int>();
-            specialDomainSpellLevels["spell 5"] = 1;
-            specialDomainSpellLevels["other special domain spell"] = 2;
-
-            var tableName = string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, "special domain");
-            mockAdjustmentsSelector.Setup(s => s.SelectAllFrom(tableName)).Returns(specialDomainSpellLevels);
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(3));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
-        }
-
-        [Test]
-        public void RandomKnownSpellsAreNotBeyondWhatAbilitiesAllow()
+        public void GenerateKnown_RandomKnownSpellsAreNotBeyondWhatAbilitiesAllow()
         {
             abilities["stat"].Value = 10;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(2));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
         }
 
         [Test]
-        public void RandomKnownSpellsAreNotSpecialistSpellsBeyondWhatAbilitiesAllow()
+        public void GenerateKnown_RandomKnownSpellsAreNotSpecialistSpellsBeyondWhatAbilitiesAllow()
         {
             abilities["stat"].Value = 10;
+            characterClass.SpecialistFields = ["domain 2"];
 
-            characterClass.SpecialistFields = new[] { "domain 2" };
-
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(2));
-
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(2));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
         }
 
         [Test]
-        public void CannotHaveDuplicateKnownSpells()
+        public void GenerateKnown_CannotHaveDuplicateKnownSpells()
         {
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
-                .Returns(classSpells[0]).Returns(classSpells[0])
-                .Returns(classSpells[1])
-                .Returns(classSpells[2])
-                .Returns(classSpells[3]);
+            var repeat = true;
+            var index = 0;
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
+                .Returns((IEnumerable<string> c) =>
+                {
+                    var item = c.ElementAt(index % c.Count());
+                    if (!repeat)
+                        index++;
 
-            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities);
-            Assert.That(spellsKnown.Count(), Is.EqualTo(3));
+                    repeat = !repeat;
+                    return item;
+                });
 
-            var cantrips = spellsKnown.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-            Assert.That(cantrips.Select(c => c.Name), Is.Unique);
-
-            var firstLevelSpells = spellsKnown.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
+            var spellsKnown = spellsGenerator.GenerateKnown(characterClass, abilities).ToList();
+            Assert.That(spellsKnown.Count, Is.EqualTo(3));
+            Assert.That(spellsKnown[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsKnown[1].Summary, Is.EqualTo("spell 2 (class name/0)"));
+            Assert.That(spellsKnown[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
         }
 
         [Test]
-        public void DoNotGeneratePreparedSpellsIfNotASpellcaster()
+        public void GeneratePrepared_DoNotGeneratePreparedSpellsIfNotASpellcaster()
         {
             spellcasters.Remove(characterClass.Name);
 
-            var knownSpells = new List<Spell>();
-            knownSpells.Add(new Spell { Name = classSpells[0], Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[1], Level = 0 });
-            knownSpells.Add(new Spell { Name = "other cantrip", Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[2], Level = 1 });
-            knownSpells.Add(new Spell { Name = "other spell", Level = 1 });
+            var knownSpells = new List<Spell>
+            {
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["source"] = 0 } },
+                new() { Name = "other cantrip", Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["source"] = 1 } }
+            };
 
-            var spellsPerDay = new List<SpellQuantity>();
-            spellsPerDay.Add(new SpellQuantity { Level = 0, Quantity = 2 });
-            spellsPerDay.Add(new SpellQuantity { Level = 1, Quantity = 1 });
+            var spellsPerDay = new List<SpellQuantity>
+            {
+                new() { Level = 0, Quantity = 2, Source = "source" },
+                new() { Level = 1, Quantity = 1, Source = "source" }
+            };
 
             var preparedSpells = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay);
             Assert.That(preparedSpells, Is.Empty);
         }
 
         [Test]
-        public void GetRandomPreparedSpells()
+        public void GeneratePrepared_GetRandomPreparedSpells()
         {
-            var knownSpells = new List<Spell>();
-            knownSpells.Add(new Spell { Name = classSpells[0], Level = 0, Source = "source" });
-            knownSpells.Add(new Spell { Name = classSpells[1], Level = 0, Source = "source" });
-            knownSpells.Add(new Spell { Name = "other cantrip", Level = 0, Source = "source" });
-            knownSpells.Add(new Spell { Name = classSpells[2], Level = 1, Source = "source" });
-            knownSpells.Add(new Spell { Name = "other spell", Level = 1, Source = "source" });
+            var knownSpells = new List<Spell>
+            {
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["source"] = 0 } },
+                new() { Name = "other cantrip", Sources = { ["source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["source"] = 1 } }
+            };
 
-            var spellsPerDay = new List<SpellQuantity>();
-            spellsPerDay.Add(new SpellQuantity { Level = 0, Quantity = 2, Source = "source" });
-            spellsPerDay.Add(new SpellQuantity { Level = 1, Quantity = 1, Source = "source" });
+            var spellsPerDay = new List<SpellQuantity>
+            {
+                new() { Level = 0, Quantity = 2, Source = "source" },
+                new() { Level = 1, Quantity = 1, Source = "source" }
+            };
 
-            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay);
-            Assert.That(spellsPrepared.Count(), Is.EqualTo(3));
-
-            var cantrips = spellsPrepared.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsPrepared.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
-
-            Assert.That(spellsPrepared.Select(s => s.Source), Is.All.EqualTo("source"));
+            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
+            Assert.That(spellsPrepared.Count, Is.EqualTo(3));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (source/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (source/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (source/1)"));
         }
 
         [Test]
-        public void GetRandomPreparedSpecialistSpells()
+        public void GeneratePrepared_GetRandomPreparedSpecialistSpells()
         {
-            characterClass.SpecialistFields = new[] { "domain 2" };
+            characterClass.SpecialistFields = ["domain 2"];
+            AddSpell("other spell", "domain 2", 1);
 
-            var knownSpells = new List<Spell>();
-            knownSpells.Add(new Spell { Name = classSpells[0], Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[1], Level = 0 });
-            knownSpells.Add(new Spell { Name = "other cantrip", Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[2], Level = 1 });
-            knownSpells.Add(new Spell { Name = "other spell", Level = 1 });
+            var knownSpells = new List<Spell>
+            {
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { [characterClass.Name] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { [characterClass.Name] = 0, ["domain 2"] = 0 } },
+                new() { Name = "other cantrip", Sources = { [characterClass.Name] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "other spell", Sources = { ["domain 2"] = 1 } }
+            };
 
-            var spellsPerDay = new List<SpellQuantity>();
-            spellsPerDay.Add(new SpellQuantity { Level = 0, Quantity = 2 });
-            spellsPerDay.Add(new SpellQuantity { Level = 1, Quantity = 1, HasDomainSpell = true });
+            var spellsPerDay = new List<SpellQuantity>
+            {
+                new() { Level = 0, Quantity = 2, Source = characterClass.Name },
+                new() { Level = 1, Quantity = 1, Source = characterClass.Name, HasDomainSpell = true }
+            };
 
-            mockCollectionsSelector
-                .Setup(s => s.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SpellGroups, "domain 2"))
-                .Returns(new[] { classSpells[1], classSpells[3], "other spell" });
-
-            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay);
-            Assert.That(spellsPrepared.Count(), Is.EqualTo(4));
-
-            var cantrips = spellsPrepared.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-
-            var firstLevelSpells = spellsPrepared.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(2));
+            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
+            Assert.That(spellsPrepared.Count, Is.EqualTo(4));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (class name/0, domain 2/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsPrepared[3].Summary, Is.EqualTo("other spell (domain 2/1)"));
         }
 
         [Test]
-        public void CanHaveDuplicatePreparedSpells()
+        public void GeneratePrepared_GetRandomPreparedSpecialistSpells_FromOnly1Domain()
         {
-            var knownSpells = new List<Spell>();
-            knownSpells.Add(new Spell { Name = classSpells[0], Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[1], Level = 0 });
-            knownSpells.Add(new Spell { Name = "other cantrip", Level = 0 });
-            knownSpells.Add(new Spell { Name = classSpells[2], Level = 1 });
-            knownSpells.Add(new Spell { Name = "other spell", Level = 1 });
+            characterClass.SpecialistFields = ["domain 1", "domain 2"];
+            AddSpell("domain 1 spell", "domain 1", 1);
+            AddSpell("domain 2 spell", "domain 2", 1);
 
-            var spellsPerDay = new List<SpellQuantity>();
-            spellsPerDay.Add(new SpellQuantity { Level = 0, Quantity = 2 });
-            spellsPerDay.Add(new SpellQuantity { Level = 1, Quantity = 1 });
+            var knownSpells = new List<Spell>
+            {
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { [characterClass.Name] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { [characterClass.Name] = 0, ["domain 2"] = 0 }  },
+                new() { Name = "other cantrip", Sources = { [characterClass.Name] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "domain 1 spell", Sources = { ["domain 1"] = 1 } },
+                new() { Name = spells[characterClass.Name]["1"][1],Sources = { [characterClass.Name] = 1 } },
+                new() { Name = "domain 2 spell", Sources = { ["domain 2"] = 1 }  },
+            };
+
+            var spellsPerDay = new List<SpellQuantity>
+            {
+                new() { Level = 0, Quantity = 2, Source = characterClass.Name },
+                new() { Level = 1, Quantity = 1, Source = characterClass.Name, HasDomainSpell = true }
+            };
+
+            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
+            Assert.That(spellsPrepared.Count, Is.EqualTo(4));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (class name/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 2 (class name/0, domain 2/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (class name/1)"));
+            Assert.That(spellsPrepared[3].Summary, Is.EqualTo("domain 2 spell (domain 2/1)"));
+        }
+
+        [Test]
+        public void GeneratePrepared_CanHaveDuplicatePreparedSpells()
+        {
+            var knownSpells = new List<Spell>
+            {
+                new() { Name = spells[characterClass.Name]["0"][0], Sources = { ["my source"] = 0 } },
+                new() { Name = "wrong spell", Sources = { ["my other source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["0"][1], Sources = { ["my source"] = 0, ["domain 2"] = 0 }  },
+                new() { Name = "other cantrip", Sources = { ["my source"] = 0 } },
+                new() { Name = spells[characterClass.Name]["1"][0], Sources = { ["my source"] = 1 } },
+                new() { Name = "other spell", Sources = { ["my source"] = 1 } }
+            };
+
+            var spellsPerDay = new List<SpellQuantity>
+            {
+                new() { Level = 0, Quantity = 2, Source = "my source" },
+                new() { Level = 1, Quantity = 1, Source = "my source" }
+            };
 
             mockCollectionsSelector.Setup(s => s.SelectRandomFrom(It.IsAny<IEnumerable<Spell>>())).Returns((IEnumerable<Spell> c) => c.First());
 
-            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay);
-            Assert.That(spellsPrepared.Count(), Is.EqualTo(3));
-
-            var cantrips = spellsPrepared.Where(s => s.Level == 0);
-            Assert.That(cantrips.Count(), Is.EqualTo(2));
-            Assert.That(cantrips.Select(c => c.Name), Is.All.EqualTo(classSpells[0]));
-
-            var firstLevelSpells = spellsPrepared.Where(s => s.Level == 1);
-            Assert.That(firstLevelSpells.Count(), Is.EqualTo(1));
+            var spellsPrepared = spellsGenerator.GeneratePrepared(characterClass, knownSpells, spellsPerDay).ToList();
+            Assert.That(spellsPrepared.Count, Is.EqualTo(3));
+            Assert.That(spellsPrepared[0].Summary, Is.EqualTo("spell 1 (my source/0)"));
+            Assert.That(spellsPrepared[1].Summary, Is.EqualTo("spell 1 (my source/0)"));
+            Assert.That(spellsPrepared[2].Summary, Is.EqualTo("spell 3 (my source/1)"));
         }
     }
 }

@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Enlarge person</name>
-    <entry>1</entry>
+    <entry>Enlarge person</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Bull's strength</name>
-    <entry>2</entry>
+    <entry>Bull's strength</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Magic vestment</name>
-    <entry>3</entry>
+    <entry>Magic vestment</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Spell immunity</name>
-    <entry>4</entry>
+    <entry>Spell immunity</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Righteous might</name>
-    <entry>5</entry>
+    <entry>Righteous might</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Stoneskin</name>
-    <entry>6</entry>
+    <entry>Stoneskin</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Grasping hand</name>
-    <entry>7</entry>
+    <entry>Bigby's grasping hand</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Clenched fist</name>
-    <entry>8</entry>
+    <entry>Bigby's clenched fist</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Crushing hand</name>
-    <entry>9</entry>
+    <entry>Bigby's crushing hand</entry>
+	  <name>9</name>
   </collection>
 </collections>

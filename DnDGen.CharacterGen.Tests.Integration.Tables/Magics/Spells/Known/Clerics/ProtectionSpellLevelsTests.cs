@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class ProtectionSpellLevelsTests : AdjustmentsTests
+    public class ProtectionSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Protection);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Protection);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.Sanctuary,
-                SpellConstants.ShieldOther,
-                SpellConstants.ProtectionFromEnergy,
-                SpellConstants.SpellImmunity,
-                SpellConstants.SpellResistance,
-                SpellConstants.AntimagicField,
-                SpellConstants.Repulsion,
-                SpellConstants.MindBlank,
-                SpellConstants.PrismaticSphere
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllProtectionSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.Sanctuary)]
+        [TestCase("2", SpellConstants.ShieldOther)]
+        [TestCase("3", SpellConstants.ProtectionFromEnergy)]
+        [TestCase("4", SpellConstants.SpellImmunity)]
+        [TestCase("5", SpellConstants.SpellResistance)]
+        [TestCase("6", SpellConstants.AntimagicField)]
+        [TestCase("7", SpellConstants.Repulsion)]
+        [TestCase("8", SpellConstants.MindBlank)]
+        [TestCase("9", SpellConstants.PrismaticSphere)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Protection]);
-        }
-
-        [TestCase(SpellConstants.Sanctuary, 1)]
-        [TestCase(SpellConstants.ShieldOther, 2)]
-        [TestCase(SpellConstants.ProtectionFromEnergy, 3)]
-        [TestCase(SpellConstants.SpellImmunity, 4)]
-        [TestCase(SpellConstants.SpellResistance, 5)]
-        [TestCase(SpellConstants.AntimagicField, 6)]
-        [TestCase(SpellConstants.Repulsion, 7)]
-        [TestCase(SpellConstants.MindBlank, 8)]
-        [TestCase(SpellConstants.PrismaticSphere, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

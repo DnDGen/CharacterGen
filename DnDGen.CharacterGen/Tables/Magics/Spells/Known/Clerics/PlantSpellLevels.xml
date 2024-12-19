@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Entangle</name>
-    <entry>1</entry>
+    <entry>Entangle</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Barkskin</name>
-    <entry>2</entry>
+    <entry>Barkskin</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Plant growth</name>
-    <entry>3</entry>
+    <entry>Plant growth</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Command plants</name>
-    <entry>4</entry>
+    <entry>Command plants</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Wall of thorns</name>
-    <entry>5</entry>
+    <entry>Wall of thorns</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Repel wood</name>
-    <entry>6</entry>
+    <entry>Repel wood</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Animate plants</name>
-    <entry>7</entry>
+    <entry>Animate plants</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Control plants</name>
-    <entry>8</entry>
+    <entry>Control plants</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Shambler</name>
-    <entry>9</entry>
+    <entry>Shambler</entry>
+	  <name>9</name>
   </collection>
 </collections>

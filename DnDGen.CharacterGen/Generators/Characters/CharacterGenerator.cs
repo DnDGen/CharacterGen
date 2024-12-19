@@ -1,7 +1,4 @@
-﻿using DnDGen.CharacterGen.Alignments;
-using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Characters;
-using DnDGen.CharacterGen.Feats;
+﻿using DnDGen.CharacterGen.Characters;
 using DnDGen.CharacterGen.Generators.Abilities;
 using DnDGen.CharacterGen.Generators.Alignments;
 using DnDGen.CharacterGen.Generators.Classes;
@@ -12,21 +9,16 @@ using DnDGen.CharacterGen.Generators.Languages;
 using DnDGen.CharacterGen.Generators.Magics;
 using DnDGen.CharacterGen.Generators.Races;
 using DnDGen.CharacterGen.Generators.Skills;
-using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Alignments;
 using DnDGen.CharacterGen.Randomizers.CharacterClasses;
 using DnDGen.CharacterGen.Randomizers.Races;
-using DnDGen.CharacterGen.Selectors.Collections;
-using DnDGen.CharacterGen.Skills;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Verifiers;
 using DnDGen.CharacterGen.Verifiers.Exceptions;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
-using DnDGen.TreasureGen.Items;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DnDGen.CharacterGen.Generators.Characters
@@ -36,7 +28,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
         private readonly IAlignmentGenerator alignmentGenerator;
         private readonly ICharacterClassGenerator characterClassGenerator;
         private readonly IRaceGenerator raceGenerator;
-        private readonly IAdjustmentsSelector adjustmentsSelector;
         private readonly IRandomizerVerifier randomizerVerifier;
         private readonly IPercentileSelector percentileSelector;
         private readonly ICombatGenerator combatGenerator;
@@ -51,7 +42,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
         public CharacterGenerator(IAlignmentGenerator alignmentGenerator,
             ICharacterClassGenerator characterClassGenerator,
             IRaceGenerator raceGenerator,
-            IAdjustmentsSelector adjustmentsSelector,
             IRandomizerVerifier randomizerVerifier,
             IPercentileSelector percentileSelector,
             ICombatGenerator combatGenerator,
@@ -74,7 +64,6 @@ namespace DnDGen.CharacterGen.Generators.Characters
             this.featsGenerator = featsGenerator;
             this.magicGenerator = magicGenerator;
 
-            this.adjustmentsSelector = adjustmentsSelector;
             this.randomizerVerifier = randomizerVerifier;
             this.percentileSelector = percentileSelector;
             this.collectionsSelector = collectionsSelector;
@@ -105,116 +94,23 @@ namespace DnDGen.CharacterGen.Generators.Characters
             var prototype = GeneratePrototypeWith(alignmentRandomizer, classNameRandomizer, levelRandomizer, baseRaceRandomizer, metaraceRandomizer);
 
             character.Alignment = alignmentGenerator.GenerateWith(prototype.Alignment);
-            character.Class = characterClassGenerator.GenerateWith(character.Alignment, prototype.CharacterClass);
+            character.Class = characterClassGenerator.GenerateWith(character.Alignment, prototype.CharacterClass, prototype.Race);
             character.Race = raceGenerator.GenerateWith(character.Alignment, character.Class, prototype.Race);
-
-            character.Class = EditCharacterClass(character.Alignment, character.Class, character.Race);
-
             character.Abilities = abilitiesGenerator.GenerateWith(statsRandomizer, character.Class, character.Race);
-            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, character.Abilities);
-
             character.Skills = skillsGenerator.GenerateWith(character.Class, character.Race, character.Abilities);
 
+            var baseAttack = combatGenerator.GenerateBaseAttackWith(character.Class, character.Race, character.Abilities);
             character.Feats = featsGenerator.GenerateWith(character.Class, character.Race, character.Abilities, character.Skills, baseAttack);
-            character.Skills = UpdateSkillsFromFeats(character.Skills, character.Feats.All);
-
             character.Equipment = equipmentGenerator.GenerateWith(character.Feats.All, character.Class, character.Race);
-            character.Skills = UpdateSkillsFromEquipment(character.Skills, character.Equipment);
+            character.Skills = skillsGenerator.UpdateSkillsFromFeats(character.Skills, character.Feats.All);
+            character.Skills = skillsGenerator.UpdateSkillsFromEquipment(character.Skills, character.Equipment);
 
             character.Languages = languageGenerator.GenerateWith(character.Race, character.Class, character.Abilities, character.Skills);
-
             character.Combat = combatGenerator.GenerateWith(baseAttack, character.Class, character.Race, character.Feats.All, character.Abilities, character.Equipment);
             character.InterestingTrait = percentileSelector.SelectFrom(Config.Name, TableNameConstants.Set.Percentile.Traits);
             character.Magic = magicGenerator.GenerateWith(character.Alignment, character.Class, character.Race, character.Abilities, character.Feats.All, character.Equipment);
 
             return character;
-        }
-
-        private IEnumerable<Skill> UpdateSkillsFromFeats(IEnumerable<Skill> skills, IEnumerable<Feat> feats)
-        {
-            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
-            var featGrantingSkillBonuses = feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
-            var allSkillFocusNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
-
-            foreach (var feat in featGrantingSkillBonuses)
-            {
-                if (feat.Foci.Any())
-                {
-                    foreach (var focus in feat.Foci)
-                    {
-                        if (!allSkillFocusNames.Any(s => focus.StartsWith(s)))
-                            continue;
-
-                        var skillName = allSkillFocusNames.First(s => focus.StartsWith(s));
-                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
-
-                        if (skill == null)
-                            continue;
-
-                        var circumstantial = !allSkillFocusNames.Contains(focus);
-                        skill.CircumstantialBonus |= circumstantial;
-
-                        if (!circumstantial)
-                            skill.Bonus += feat.Power;
-                    }
-                }
-                else
-                {
-                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, feat.Name);
-
-                    foreach (var skillName in skillsToReceiveBonus)
-                    {
-                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
-
-                        if (skill != null)
-                            skill.Bonus += feat.Power;
-                    }
-                }
-            }
-
-            return skills;
-        }
-
-        private IEnumerable<Skill> UpdateSkillsFromEquipment(IEnumerable<Skill> skills, Equipment equipment)
-        {
-            var armorCheckPenaltySkills = skills.Where(s => s.HasArmorCheckPenalty);
-
-            foreach (var skill in armorCheckPenaltySkills)
-            {
-                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.Armor, skill.Name);
-
-                if (equipment.OffHand != null && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
-                {
-                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.OffHand, skill.Name);
-                }
-            }
-
-            return skills;
-        }
-
-        private int ComputeArmorCheckPenalty(Item item, string skillName)
-        {
-            if (item == null || !(item is Armor))
-                return 0;
-
-            var armor = item as Armor;
-
-            if (skillName == SkillConstants.Swim && armor.Name == ArmorConstants.PlateArmorOfTheDeep)
-                return 0;
-
-            if (skillName == SkillConstants.Swim)
-                return armor.TotalArmorCheckPenalty * 2;
-
-            return armor.TotalArmorCheckPenalty;
-        }
-
-        private CharacterClass EditCharacterClass(Alignment alignment, CharacterClass characterClass, Race race)
-        {
-            characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.BaseRace);
-            characterClass.LevelAdjustment += adjustmentsSelector.SelectFrom(TableNameConstants.Set.Adjustments.LevelAdjustments, race.Metarace);
-            characterClass.SpecialistFields = characterClassGenerator.RegenerateSpecialistFields(alignment, characterClass, race);
-
-            return characterClass;
         }
 
         private void VerifyRandomizers(IAlignmentRandomizer alignmentRandomizer,
@@ -270,7 +166,7 @@ namespace DnDGen.CharacterGen.Generators.Characters
 
             if (!validRaces.Contains(prototype.Race))
             {
-                //TODO: Filter out metaraces, only allow "None"
+                //INFO: Filter out metaraces, only allow "None"
                 //If there are no races with No Metarace, then just let it be
                 //Otherwise, metaraces appear way too often, for how rare they are supposed to be
                 if (validRaces.Any(r => r.Metarace == RaceConstants.Metaraces.None))

@@ -1,7 +1,6 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.Characters;
 using DnDGen.CharacterGen.Feats;
-using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
 using NUnit.Framework;
 using System.Linq;
@@ -40,11 +39,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IsLeaderIfHasLeadershipFeat()
         {
-            character.Feats.Additional = new[]
-            {
+            character.Feats.Additional =
+            [
                 new Feat { Name = FeatConstants.Leadership },
                 new Feat { Name = "other feat" }
-            };
+            ];
 
             Assert.That(character.IsLeader, Is.True);
         }
@@ -52,11 +51,11 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         [Test]
         public void IsNotLeaderIfDoesNotHaveLeadershipFeat()
         {
-            character.Feats.Additional = new[]
-            {
+            character.Feats.Additional =
+            [
                 new Feat { Name = "feat" },
                 new Feat { Name = "other feat" }
-            };
+            ];
 
             Assert.That(character.IsLeader, Is.False);
         }
@@ -103,32 +102,63 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             Assert.That(character.ChallengeRating, Is.EqualTo(9266 + 90210));
         }
 
-        [Test]
-        public void ChallengeRatingForNPCIsHalfOfClassLevel()
+        [TestCase(-3)]
+        [TestCase(-2)]
+        [TestCase(-1)]
+        [TestCase(0)]
+        public void ChallengeRatingForNPCIsAdjustedByRace(int adjustment)
         {
             character.Class.Level = 9266;
             character.Class.IsNPC = true;
+            character.Race.NPCChallengeRatingAdjustment = adjustment;
 
-            Assert.That(character.ChallengeRating, Is.EqualTo(9266 / 2));
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 + adjustment));
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        public void ChallengeRatingForPCIsAdjustedByRace(int adjustment)
+        {
+            character.Class.Level = 9266;
+            character.Class.IsNPC = false;
+            character.Race.PCChallengeRatingAdjustment = adjustment;
+
+            Assert.That(character.ChallengeRating, Is.EqualTo(9266 + adjustment));
         }
 
         [Test]
-        public void ChallengeRatingForNPCIsHalfOfClassLevelAndAllOfRacialChallengeRating()
+        public void ChallengeRatingForNPCIsMinus1AndAllOfRacialChallengeRating()
         {
             character.Class.Level = 9266;
             character.Class.IsNPC = true;
             character.Race.ChallengeRating = 90210;
 
-            Assert.That(character.ChallengeRating, Is.EqualTo(9266 / 2 + 90210));
+            Assert.That(character.ChallengeRating, Is.EqualTo(9265 + 90210));
         }
 
-        [Test]
-        public void ChallengeRatingForLevel1NPCIsOneHalf()
+        [TestCase(1, 0, 1)]
+        [TestCase(1, -1, 1 / 2d)]
+        [TestCase(1, -2, 1 / 3d)]
+        [TestCase(1, -3, 1 / 4d)]
+        [TestCase(2, 0, 2)]
+        [TestCase(2, -1, 1)]
+        [TestCase(2, -2, 1 / 2d)]
+        [TestCase(2, -3, 1 / 3d)]
+        [TestCase(3, 0, 3)]
+        [TestCase(3, -1, 2)]
+        [TestCase(3, -2, 1)]
+        [TestCase(3, -3, 1 / 2d)]
+        [TestCase(4, 0, 4)]
+        [TestCase(4, -1, 3)]
+        [TestCase(4, -2, 2)]
+        [TestCase(4, -3, 1)]
+        public void ChallengeRatingForLowLevelNPC(int level, int adjustment, double cr)
         {
-            character.Class.Level = 1;
+            character.Class.Level = level;
             character.Class.IsNPC = true;
+            character.Race.NPCChallengeRatingAdjustment = adjustment;
 
-            Assert.That(character.ChallengeRating, Is.EqualTo(.5));
+            Assert.That(character.ChallengeRating, Is.EqualTo(cr));
         }
 
         [Test]
@@ -139,66 +169,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
             character.Race.ChallengeRating = 90210;
 
             Assert.That(character.ChallengeRating, Is.EqualTo(90210));
-        }
-
-        [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
-        [TestCase(RaceConstants.BaseRaces.Githyanki)]
-        [TestCase(RaceConstants.BaseRaces.Githzerai)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
-        public void SpecialNPCChallengeRatingIsClassLevel(string baseRace)
-        {
-            character.Class.Level = 9266;
-            character.Class.IsNPC = true;
-            character.Race.BaseRace = baseRace;
-
-            Assert.That(character.ChallengeRating, Is.EqualTo(9266));
-        }
-
-        [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
-        [TestCase(RaceConstants.BaseRaces.Githyanki)]
-        [TestCase(RaceConstants.BaseRaces.Githzerai)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
-        public void SpecialCharacterChallengeRatingIsClassLevelPlus1(string baseRace)
-        {
-            character.Class.Level = 9266;
-            character.Class.IsNPC = false;
-            character.Race.BaseRace = baseRace;
-
-            Assert.That(character.ChallengeRating, Is.EqualTo(9267));
-        }
-
-        [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
-        [TestCase(RaceConstants.BaseRaces.Githyanki)]
-        [TestCase(RaceConstants.BaseRaces.Githzerai)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
-        public void SpecialNPCChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
-        {
-            character.Class.Level = 9266;
-            character.Class.IsNPC = true;
-            character.Race.BaseRace = baseRace;
-            character.Race.Metarace = "metarace";
-            character.Race.ChallengeRating = 90210;
-
-            Assert.That(character.ChallengeRating, Is.EqualTo(9266 + 90210));
-        }
-
-        [TestCase(RaceConstants.BaseRaces.Drow)]
-        [TestCase(RaceConstants.BaseRaces.DuergarDwarf)]
-        [TestCase(RaceConstants.BaseRaces.Githyanki)]
-        [TestCase(RaceConstants.BaseRaces.Githzerai)]
-        [TestCase(RaceConstants.BaseRaces.Svirfneblin)]
-        public void SpecialCharacterChallengeRatingTakesRacialChallengeRatingIntoAccount(string baseRace)
-        {
-            character.Class.Level = 9266;
-            character.Class.IsNPC = false;
-            character.Race.BaseRace = baseRace;
-            character.Race.Metarace = "metarace";
-            character.Race.ChallengeRating = 90210;
-
-            Assert.That(character.ChallengeRating, Is.EqualTo(9267 + 90210));
         }
 
         [Test]
@@ -217,12 +187,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         {
             var ability = new Ability("base ability");
 
-            character.Skills = new[]
-            {
+            character.Skills =
+            [
                 new Skill("zzzz", ability, int.MaxValue),
                 new Skill("aaaa", ability, int.MaxValue),
                 new Skill("kkkk", ability, int.MaxValue),
-            };
+            ];
 
             var sortedSkills = character.Skills.OrderBy(a => a.Name);
             Assert.That(sortedSkills, Is.Ordered.By("Name"));
@@ -233,12 +203,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Characters
         {
             var ability = new Ability("base ability");
 
-            character.Skills = new[]
-            {
+            character.Skills =
+            [
                 new Skill("skill", ability, int.MaxValue, "zzzz"),
                 new Skill("skill", ability, int.MaxValue, "aaaa"),
                 new Skill("skill", ability, int.MaxValue, "kkkk"),
-            };
+            ];
 
             var sortedSkills = character.Skills.OrderBy(a => a.Focus);
             Assert.That(sortedSkills, Is.Ordered.By("Focus"));

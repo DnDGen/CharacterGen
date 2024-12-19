@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Entropic shield</name>
-    <entry>1</entry>
+    <entry>Entropic shield</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Aid</name>
-    <entry>2</entry>
+    <entry>Aid</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Protection from energy</name>
-    <entry>3</entry>
+    <entry>Protection from energy</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Freedom of movement</name>
-    <entry>4</entry>
+    <entry>Freedom of movement</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Break enchantment</name>
-    <entry>5</entry>
+    <entry>Break enchantment</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Mislead</name>
-    <entry>6</entry>
+    <entry>Mislead</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Spell turning</name>
-    <entry>7</entry>
+    <entry>Spell turning</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Moment of prescience</name>
-    <entry>8</entry>
+    <entry>Moment of prescience</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Miracle</name>
-    <entry>9</entry>
+    <entry>Miracle</entry>
+	  <name>9</name>
   </collection>
 </collections>

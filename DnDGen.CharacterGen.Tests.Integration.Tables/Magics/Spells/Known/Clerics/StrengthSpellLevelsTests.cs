@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class StrengthSpellLevelsTests : AdjustmentsTests
+    public class StrengthSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Strength);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Strength);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.EnlargePerson,
-                SpellConstants.BullsStrength,
-                SpellConstants.MagicVestment,
-                SpellConstants.SpellImmunity,
-                SpellConstants.RighteousMight,
-                SpellConstants.Stoneskin,
-                SpellConstants.GraspingHand,
-                SpellConstants.ClenchedFist,
-                SpellConstants.CrushingHand
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllStrengthSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.EnlargePerson)]
+        [TestCase("2", SpellConstants.BullsStrength)]
+        [TestCase("3", SpellConstants.MagicVestment)]
+        [TestCase("4", SpellConstants.SpellImmunity)]
+        [TestCase("5", SpellConstants.RighteousMight)]
+        [TestCase("6", SpellConstants.Stoneskin)]
+        [TestCase("7", SpellConstants.BigbysGraspingHand)]
+        [TestCase("8", SpellConstants.BigbysClenchedFist)]
+        [TestCase("9", SpellConstants.BigbysCrushingHand)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Strength]);
-        }
-
-        [TestCase(SpellConstants.EnlargePerson, 1)]
-        [TestCase(SpellConstants.BullsStrength, 2)]
-        [TestCase(SpellConstants.MagicVestment, 3)]
-        [TestCase(SpellConstants.SpellImmunity, 4)]
-        [TestCase(SpellConstants.RighteousMight, 5)]
-        [TestCase(SpellConstants.Stoneskin, 6)]
-        [TestCase(SpellConstants.GraspingHand, 7)]
-        [TestCase(SpellConstants.ClenchedFist, 8)]
-        [TestCase(SpellConstants.CrushingHand, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

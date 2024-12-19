@@ -1,8 +1,8 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
+﻿using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRaces
@@ -31,7 +31,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
                 FeatConstants.SkillBonus + SkillConstants.Spot,
                 FeatConstants.SpellLikeAbility + SpellConstants.Confusion_Lesser,
                 FeatConstants.SpellLikeAbility + SpellConstants.DancingLights,
-                FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectChaos,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectGood,
+                FeatConstants.SpellLikeAbility + SpellConstants.DetectLaw,
                 FeatConstants.SpellLikeAbility + SpellConstants.DetectThoughts,
                 FeatConstants.SpellLikeAbility + SpellConstants.DispelMagic,
                 FeatConstants.SpellLikeAbility + SpellConstants.Entangle,
@@ -141,9 +144,36 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectChaos,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DetectAlignment,
+            SpellConstants.DetectChaos,
+            1,
+            FeatConstants.Frequencies.Day,
+            0,
+            "",
+            0,
+            0, 0)]
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectEvil,
+            FeatConstants.SpellLikeAbility,
+            SpellConstants.DetectEvil,
+            1,
+            FeatConstants.Frequencies.Day,
+            0,
+            "",
+            0,
+            0, 0)]
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectGood,
+            FeatConstants.SpellLikeAbility,
+            SpellConstants.DetectGood,
+            1,
+            FeatConstants.Frequencies.Day,
+            0,
+            "",
+            0,
+            0, 0)]
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DetectLaw,
+            FeatConstants.SpellLikeAbility,
+            SpellConstants.DetectLaw,
             1,
             FeatConstants.Frequencies.Day,
             0,

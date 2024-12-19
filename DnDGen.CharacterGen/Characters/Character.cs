@@ -52,14 +52,16 @@ namespace DnDGen.CharacterGen.Characters
         {
             get
             {
-                if (specialChallengeRatings.Contains(Race.BaseRace))
-                {
-                    var extra = Class.IsNPC ? 0 : 1;
-                    return Class.Level + extra + Race.ChallengeRating;
-                }
+                var adjustment = Class.IsNPC ? Race.NPCChallengeRatingAdjustment : Race.PCChallengeRatingAdjustment;
+                var classChallengeRating = Class.Level + (double)adjustment;
 
-                var divisor = Class.IsNPC ? 2d : 1d;
-                var classChallengeRating = Class.Level / divisor;
+                switch (classChallengeRating)
+                {
+                    case 0: classChallengeRating = 1 / 2d; break;
+                    case -1: classChallengeRating = 1 / 3d; break;
+                    case -2: classChallengeRating = 1 / 4d; break;
+                    default: break;
+                }
 
                 var challengeRating = Race.ChallengeRating + classChallengeRating;
 
@@ -70,8 +72,6 @@ namespace DnDGen.CharacterGen.Characters
             }
         }
 
-        private readonly IEnumerable<string> specialChallengeRatings;
-
         public Character()
         {
             Alignment = new Alignment();
@@ -79,21 +79,12 @@ namespace DnDGen.CharacterGen.Characters
             Race = new Race();
             InterestingTrait = string.Empty;
             Combat = new Combat();
-            Skills = Enumerable.Empty<Skill>();
-            Languages = Enumerable.Empty<string>();
+            Skills = [];
+            Languages = [];
             Feats = new FeatCollections();
-            Abilities = new Dictionary<string, Ability>();
+            Abilities = [];
             Equipment = new Equipment();
             Magic = new Magic();
-
-            specialChallengeRatings = new[]
-            {
-                RaceConstants.BaseRaces.Drow,
-                RaceConstants.BaseRaces.DuergarDwarf,
-                RaceConstants.BaseRaces.Githyanki,
-                RaceConstants.BaseRaces.Githzerai,
-                RaceConstants.BaseRaces.Svirfneblin,
-            };
         }
     }
 }

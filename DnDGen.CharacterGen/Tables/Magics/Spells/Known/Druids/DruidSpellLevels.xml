@@ -1,680 +1,203 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Detect poison</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Delay poison</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Read magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict light wounds</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict moderate wounds</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict serious wounds</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Freedom of movement</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Endure elements</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Neutralize poison</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Remove disease</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Repel vermin</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Resist energy</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Bear's endurance</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Owl's wisdom</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Protection from energy</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Wind wall</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Air walk</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Antilife shell</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Atonement</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Bull's strength</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Contagion</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Control water</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Control weather</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Create water</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict critical wounds</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Cure/inflict minor wounds</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Daylight</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Death ward</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Detect magic</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Dispel magic</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Earthquake</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Find the path</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Fire storm</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Flame strike</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Giant vermin</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Greater scrying</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Guidance</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Hallow</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Greater dispel magic</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Heal/Harm</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Insect plague</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Lesser restoration</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Light</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Magic stone</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Mass bear's endurance</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass bull's strength</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass owl's wisdom</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict critical wounds</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict light wounds</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict moderate wounds</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Mass cure/inflict serious wounds</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Meld into stone</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Mending</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Obscuring mist</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Poison</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Purify food and drink</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Regenerate</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Resistance</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Scrying</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Stone shape</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Storm of vengeance</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally I</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally II</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally III</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally IV</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally V</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally VI</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally VII</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally VIII</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Summon nature's ally IX</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>True seeing</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Unhallow</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Virtue</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Wall of stone</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Water breathing</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Wind walk</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Word of recall</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Animal growth</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Animal messenger</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Animal shapes</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Animal trance</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Animate plants</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Antipathy</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Antiplant shell</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Awaken</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Baleful polymorph</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Barkskin</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Blight</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Call lightning storm</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Call lightning</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Calm animals</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Cat's grace</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Changestaff</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Charm animal</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Chill metal</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Command plants</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Commune with nature</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Control plants</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Control winds</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Creeping doom</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Detect animals or plants</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Detect snares and pits</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Diminish plants</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Dominate animal</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Elemental swarm</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Entangle</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Faerie fire</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Finger of death</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Fire seeds</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Fire trap</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Flame blade</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Flaming sphere</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Flare</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Fog cloud</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Foresight</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Goodberry</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Greater magic fang</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Gust of wind</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Heat metal</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Hide from animals</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Hold animal</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Ice storm</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Ironwood</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Jump</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Know direction</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Liveoak</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Longstrider</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Magic fang</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Mass cat's grace</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Move earth</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Pass without trace</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Plant growth</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Produce flame</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Quench</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Reduce animal</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Reincarnate</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Repel metal or stone</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Repel wood</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Reverse gravity</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Rusting grasp</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Shambler</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Shapechange</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Shillelagh</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Sleet storm</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Snare</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Soften earth and stone</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Speak with animals</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Speak with plants</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Spellstaff</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Spider climb</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Spike growth</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Spike stones</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Stone tell</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Stoneskin</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Summon swarm</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Sunbeam</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Sunburst</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Sympathy</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Transmute metal to wood</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Transmute mud to rock</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Transmute rock to mud</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Transport via plants</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Tree shape</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Tree stride</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Wall of fire</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Wall of thorns</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Warp wood</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Whirlwind</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Wood shape</name>
-    <entry>2</entry>
-  </collection>
+	<collection>
+		<name>0</name>
+		<entry>Detect poison</entry>
+		<entry>Read magic</entry>
+		<entry>Create water</entry>
+		<entry>Cure minor wounds</entry>
+		<entry>Detect magic</entry>
+		<entry>Guidance</entry>
+		<entry>Light</entry>
+		<entry>Mending</entry>
+		<entry>Purify food and drink</entry>
+		<entry>Resistance</entry>
+		<entry>Virtue</entry>
+		<entry>Flare</entry>
+		<entry>Know direction</entry>
+	</collection>
+	<collection>
+		<name>1</name>
+		<entry>Cure light wounds</entry>
+		<entry>Endure elements</entry>
+		<entry>Magic stone</entry>
+		<entry>Obscuring mist</entry>
+		<entry>Summon nature's ally I</entry>
+		<entry>Charm animal</entry>
+		<entry>Calm animals</entry>
+		<entry>Detect animals or plants</entry>
+		<entry>Detect snares and pits</entry>
+		<entry>Entangle</entry>
+		<entry>Faerie fire</entry>
+		<entry>Goodberry</entry>
+		<entry>Hide from animals</entry>
+		<entry>Jump</entry>
+		<entry>Longstrider</entry>
+		<entry>Magic fang</entry>
+		<entry>Pass without trace</entry>
+		<entry>Produce flame</entry>
+		<entry>Speak with animals</entry>
+		<entry>Shillelagh</entry>
+	</collection>
+	<collection>
+		<name>2</name>
+		<entry>Delay poison</entry>
+		<entry>Resist energy</entry>
+		<entry>Bear's endurance</entry>
+		<entry>Owl's wisdom</entry>
+		<entry>Bull's strength</entry>
+		<entry>Lesser restoration</entry>
+		<entry>Summon nature's ally II</entry>
+		<entry>Animal trance</entry>
+		<entry>Barkskin</entry>
+		<entry>Cat's grace</entry>
+		<entry>Chill metal</entry>
+		<entry>Fire trap</entry>
+		<entry>Flame blade</entry>
+		<entry>Flaming sphere</entry>
+		<entry>Fog cloud</entry>
+		<entry>Gust of wind</entry>
+		<entry>Heat metal</entry>
+		<entry>Hold animal</entry>
+		<entry>Reduce animal</entry>
+		<entry>Soften earth and stone</entry>
+		<entry>Spider climb</entry>
+		<entry>Summon swarm</entry>
+		<entry>Tree shape</entry>
+		<entry>Warp wood</entry>
+		<entry>Wood shape</entry>
+		<entry>Animal messenger</entry>
+	</collection>
+	<collection>
+		<name>3</name>
+		<entry>Cure moderate wounds</entry>
+		<entry>Neutralize poison</entry>
+		<entry>Remove disease</entry>
+		<entry>Protection from energy</entry>
+		<entry>Wind wall</entry>
+		<entry>Contagion</entry>
+		<entry>Daylight</entry>
+		<entry>Meld into stone</entry>
+		<entry>Poison</entry>
+		<entry>Stone shape</entry>
+		<entry>Summon nature's ally III</entry>
+		<entry>Water breathing</entry>
+		<entry>Call lightning</entry>
+		<entry>Diminish plants</entry>
+		<entry>Dominate animal</entry>
+		<entry>Greater magic fang</entry>
+		<entry>Plant growth</entry>
+		<entry>Quench</entry>
+		<entry>Sleet storm</entry>
+		<entry>Snare</entry>
+		<entry>Speak with plants</entry>
+		<entry>Spike growth</entry>
+	</collection>
+	<collection>
+		<name>4</name>
+		<entry>Cure serious wounds</entry>
+		<entry>Freedom of movement</entry>
+		<entry>Repel vermin</entry>
+		<entry>Air walk</entry>
+		<entry>Control water</entry>
+		<entry>Dispel magic</entry>
+		<entry>Flame strike</entry>
+		<entry>Giant vermin</entry>
+		<entry>Scrying</entry>
+		<entry>Summon nature's ally IV</entry>
+		<entry>Antiplant shell</entry>
+		<entry>Blight</entry>
+		<entry>Command plants</entry>
+		<entry>Ice storm</entry>
+		<entry>Reincarnate</entry>
+		<entry>Rusting grasp</entry>
+		<entry>Spike stones</entry>
+	</collection>
+	<collection>
+		<name>5</name>
+		<entry>Atonement</entry>
+		<entry>Cure critical wounds</entry>
+		<entry>Death ward</entry>
+		<entry>Hallow</entry>
+		<entry>Insect plague</entry>
+		<entry>Summon nature's ally V</entry>
+		<entry>Unhallow</entry>
+		<entry>Animal growth</entry>
+		<entry>Awaken</entry>
+		<entry>Baleful polymorph</entry>
+		<entry>Call lightning storm</entry>
+		<entry>Commune with nature</entry>
+		<entry>Control winds</entry>
+		<entry>Stoneskin</entry>
+		<entry>Transmute mud to rock</entry>
+		<entry>Transmute rock to mud</entry>
+		<entry>Tree stride</entry>
+		<entry>Wall of fire</entry>
+		<entry>Wall of thorns</entry>
+	</collection>
+	<collection>
+		<name>6</name>
+		<entry>Antilife shell</entry>
+		<entry>Find the path</entry>
+		<entry>Greater dispel magic</entry>
+		<entry>Mass bear's endurance</entry>
+		<entry>Mass bull's strength</entry>
+		<entry>Mass owl's wisdom</entry>
+		<entry>Mass cure light wounds</entry>
+		<entry>Summon nature's ally VI</entry>
+		<entry>Wall of stone</entry>
+		<entry>Fire seeds</entry>
+		<entry>Ironwood</entry>
+		<entry>Liveoak</entry>
+		<entry>Mass cat's grace</entry>
+		<entry>Move earth</entry>
+		<entry>Repel wood</entry>
+		<entry>Spellstaff</entry>
+		<entry>Stone tell</entry>
+		<entry>Transport via plants</entry>
+	</collection>
+	<collection>
+		<name>7</name>
+		<entry>Control weather</entry>
+		<entry>Fire storm</entry>
+		<entry>Greater scrying</entry>
+		<entry>Heal</entry>
+		<entry>Mass cure moderate wounds</entry>
+		<entry>Summon nature's ally VII</entry>
+		<entry>True seeing</entry>
+		<entry>Wind walk</entry>
+		<entry>Animate plants</entry>
+		<entry>Changestaff</entry>
+		<entry>Creeping doom</entry>
+		<entry>Sunbeam</entry>
+		<entry>Transmute metal to wood</entry>
+	</collection>
+	<collection>
+		<name>8</name>
+		<entry>Earthquake</entry>
+		<entry>Mass cure serious wounds</entry>
+		<entry>Summon nature's ally VIII</entry>
+		<entry>Word of recall</entry>
+		<entry>Animal shapes</entry>
+		<entry>Control plants</entry>
+		<entry>Finger of death</entry>
+		<entry>Repel metal or stone</entry>
+		<entry>Reverse gravity</entry>
+		<entry>Sunburst</entry>
+		<entry>Whirlwind</entry>
+	</collection>
+	<collection>
+		<name>9</name>
+		<entry>Mass cure critical wounds</entry>
+		<entry>Regenerate</entry>
+		<entry>Storm of vengeance</entry>
+		<entry>Summon nature's ally IX</entry>
+		<entry>Antipathy</entry>
+		<entry>Elemental swarm</entry>
+		<entry>Foresight</entry>
+		<entry>Shambler</entry>
+		<entry>Shapechange</entry>
+		<entry>Sympathy</entry>
+	</collection>
 </collections>

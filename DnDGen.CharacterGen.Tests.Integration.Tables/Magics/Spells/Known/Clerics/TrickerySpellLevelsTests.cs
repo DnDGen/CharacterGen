@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class TrickerySpellLevelsTests : AdjustmentsTests
+    public class TrickerySpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Trickery);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Trickery);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.DisguiseSelf,
-                SpellConstants.Invisibility,
-                SpellConstants.Nondetection,
-                SpellConstants.Confusion,
-                SpellConstants.FalseVision,
-                SpellConstants.Mislead,
-                SpellConstants.Screen,
-                SpellConstants.PolymorphAnyObject,
-                SpellConstants.TimeStop
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllTrickerySpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.DisguiseSelf)]
+        [TestCase("2", SpellConstants.Invisibility)]
+        [TestCase("3", SpellConstants.Nondetection)]
+        [TestCase("4", SpellConstants.Confusion)]
+        [TestCase("5", SpellConstants.FalseVision)]
+        [TestCase("6", SpellConstants.Mislead)]
+        [TestCase("7", SpellConstants.Screen)]
+        [TestCase("8", SpellConstants.PolymorphAnyObject)]
+        [TestCase("9", SpellConstants.TimeStop)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Trickery]);
-        }
-
-        [TestCase(SpellConstants.DisguiseSelf, 1)]
-        [TestCase(SpellConstants.Invisibility, 2)]
-        [TestCase(SpellConstants.Nondetection, 3)]
-        [TestCase(SpellConstants.Confusion, 4)]
-        [TestCase(SpellConstants.FalseVision, 5)]
-        [TestCase(SpellConstants.Mislead, 6)]
-        [TestCase(SpellConstants.Screen, 7)]
-        [TestCase(SpellConstants.PolymorphAnyObject, 8)]
-        [TestCase(SpellConstants.TimeStop, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

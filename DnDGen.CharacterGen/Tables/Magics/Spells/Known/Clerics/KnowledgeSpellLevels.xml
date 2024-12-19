@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Detect secret doors</name>
-    <entry>1</entry>
+    <entry>Detect secret doors</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Detect thoughts</name>
-    <entry>2</entry>
+    <entry>Detect thoughts</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Clairaudience/Clairvoyance</name>
-    <entry>3</entry>
+    <entry>Clairaudience/Clairvoyance</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Divination</name>
-    <entry>4</entry>
+    <entry>Divination</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>True seeing</name>
-    <entry>5</entry>
+    <entry>True seeing</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Find the path</name>
-    <entry>6</entry>
+    <entry>Find the path</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Legend lore</name>
-    <entry>7</entry>
+    <entry>Legend lore</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Discern location</name>
-    <entry>8</entry>
+    <entry>Discern location</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Foresight</name>
-    <entry>9</entry>
+    <entry>Foresight</entry>
+	  <name>9</name>
   </collection>
 </collections>

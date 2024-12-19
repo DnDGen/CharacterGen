@@ -5,31 +5,37 @@ namespace DnDGen.CharacterGen.Magics
 {
     public class Spell
     {
-        public string Source { get; set; }
-        public int Level { get; set; }
+        public Dictionary<string, int> Sources { get; set; }
         public string Name { get; set; }
         public IEnumerable<string> Metamagic { get; set; }
+
+        public string Summary => $"{Name} ({string.Join(", ", Sources.Select(s => $"{s.Key}/{s.Value}"))})";
 
         public Spell()
         {
             Name = string.Empty;
-            Source = string.Empty;
-            Metamagic = Enumerable.Empty<string>();
+            Sources = [];
+            Metamagic = [];
         }
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Spell))
+            if (obj is not Spell)
                 return false;
 
             var otherSpell = obj as Spell;
 
-            return Level == otherSpell.Level && Name == otherSpell.Name && Source == otherSpell.Source;
+            return Summary == otherSpell.Summary;
         }
 
         public override int GetHashCode()
         {
-            return Level.GetHashCode() + Name.GetHashCode() + Source.GetHashCode();
+            return Summary.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Summary;
         }
     }
 }

@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class HealingSpellLevelsTests : AdjustmentsTests
+    public class HealingSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Healing);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Healing);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.CureInflictLightWounds,
-                SpellConstants.CureInflictModerateWounds,
-                SpellConstants.CureInflictSeriousWounds,
-                SpellConstants.CureInflictCriticalWounds,
-                SpellConstants.CureInflictLightWounds_Mass,
-                SpellConstants.HealHarm,
-                SpellConstants.Regenerate,
-                SpellConstants.CureInflictCriticalWounds_Mass,
-                SpellConstants.HealHarm_Mass
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllHealingSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.CureLightWounds)]
+        [TestCase("2", SpellConstants.CureModerateWounds)]
+        [TestCase("3", SpellConstants.CureSeriousWounds)]
+        [TestCase("4", SpellConstants.CureCriticalWounds)]
+        [TestCase("5", SpellConstants.CureLightWounds_Mass)]
+        [TestCase("6", SpellConstants.Heal)]
+        [TestCase("7", SpellConstants.Regenerate)]
+        [TestCase("8", SpellConstants.CureCriticalWounds_Mass)]
+        [TestCase("9", SpellConstants.Heal_Mass)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Healing]);
-        }
-
-        [TestCase(SpellConstants.CureInflictLightWounds, 1)]
-        [TestCase(SpellConstants.CureInflictModerateWounds, 2)]
-        [TestCase(SpellConstants.CureInflictSeriousWounds, 3)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds, 4)]
-        [TestCase(SpellConstants.CureInflictLightWounds_Mass, 5)]
-        [TestCase(SpellConstants.HealHarm, 6)]
-        [TestCase(SpellConstants.Regenerate, 7)]
-        [TestCase(SpellConstants.CureInflictCriticalWounds_Mass, 8)]
-        [TestCase(SpellConstants.HealHarm_Mass, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

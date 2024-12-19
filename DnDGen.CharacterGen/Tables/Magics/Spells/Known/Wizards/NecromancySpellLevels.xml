@@ -1,168 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
-  <collection>
-    <name>Disrupt undead</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Touch of fatigue</name>
-    <entry>0</entry>
-  </collection>
-  <collection>
-    <name>Cause fear</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Chill touch</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Ray of enfeeblement</name>
-    <entry>1</entry>
-  </collection>
-  <collection>
-    <name>Blindness/deafness</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Command undead</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>False life</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Ghoul touch</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Scare</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Spectral hand</name>
-    <entry>2</entry>
-  </collection>
-  <collection>
-    <name>Gentle repose</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Halt undead</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Ray of exhaustion</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Vampiric touch</name>
-    <entry>3</entry>
-  </collection>
-  <collection>
-    <name>Animate dead</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Bestow curse</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Contagion</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Enervation</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Fear</name>
-    <entry>4</entry>
-  </collection>
-  <collection>
-    <name>Blight</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Magic jar</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Symbol of pain</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Waves of fatigue</name>
-    <entry>5</entry>
-  </collection>
-  <collection>
-    <name>Circle of death</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Create undead</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Eyebite</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Symbol of fear</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Undeath to death</name>
-    <entry>6</entry>
-  </collection>
-  <collection>
-    <name>Control undead</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Finger of death</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Symbol of weakness</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Waves of exhaustion</name>
-    <entry>7</entry>
-  </collection>
-  <collection>
-    <name>Clone</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Create greater undead</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Horrid wilting</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Symbol of death</name>
-    <entry>8</entry>
-  </collection>
-  <collection>
-    <name>Astral projection</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Energy drain</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Soul bind</name>
-    <entry>9</entry>
-  </collection>
-  <collection>
-    <name>Wail of the banshee</name>
-    <entry>9</entry>
-  </collection>
+	<collection>
+		<name>0</name>
+		<entry>Disrupt undead</entry>
+		<entry>Touch of fatigue</entry>
+	</collection>
+	<collection>
+		<name>1</name>
+		<entry>Cause fear</entry>
+		<entry>Chill touch</entry>
+		<entry>Ray of enfeeblement</entry>
+	</collection>
+	<collection>
+		<name>2</name>
+		<entry>Blindness/deafness</entry>
+		<entry>Command undead</entry>
+		<entry>False life</entry>
+		<entry>Ghoul touch</entry>
+		<entry>Scare</entry>
+		<entry>Spectral hand</entry>
+	</collection>
+	<collection>
+		<name>3</name>
+		<entry>Gentle repose</entry>
+		<entry>Halt undead</entry>
+		<entry>Ray of exhaustion</entry>
+		<entry>Vampiric touch</entry>
+	</collection>
+	<collection>
+		<name>4</name>
+		<entry>Animate dead</entry>
+		<entry>Bestow curse</entry>
+		<entry>Contagion</entry>
+		<entry>Enervation</entry>
+		<entry>Fear</entry>
+	</collection>
+	<collection>
+		<name>5</name>
+		<entry>Blight</entry>
+		<entry>Magic jar</entry>
+		<entry>Symbol of pain</entry>
+		<entry>Waves of fatigue</entry>
+	</collection>
+	<collection>
+		<name>6</name>
+		<entry>Circle of death</entry>
+		<entry>Create undead</entry>
+		<entry>Eyebite</entry>
+		<entry>Symbol of fear</entry>
+		<entry>Undeath to death</entry>
+	</collection>
+	<collection>
+		<name>7</name>
+		<entry>Control undead</entry>
+		<entry>Finger of death</entry>
+		<entry>Symbol of weakness</entry>
+		<entry>Waves of exhaustion</entry>
+	</collection>
+	<collection>
+		<name>8</name>
+		<entry>Clone</entry>
+		<entry>Create greater undead</entry>
+		<entry>Horrid wilting</entry>
+		<entry>Symbol of death</entry>
+	</collection>
+	<collection>
+		<name>9</name>
+		<entry>Astral projection</entry>
+		<entry>Energy drain</entry>
+		<entry>Soul bind</entry>
+		<entry>Wail of the banshee</entry>
+	</collection>
 </collections>

@@ -22,7 +22,11 @@ namespace DnDGen.CharacterGen.Generators.Magics
         private readonly ICollectionSelector collectionsSelector;
         private readonly IAdjustmentsSelector adjustmentsSelector;
 
-        public MagicGenerator(ISpellsGenerator spellsGenerator, IAnimalGenerator animalGenerator, ICollectionSelector collectionsSelector, IAdjustmentsSelector adjustmentsSelector)
+        public MagicGenerator(
+            ISpellsGenerator spellsGenerator,
+            IAnimalGenerator animalGenerator,
+            ICollectionSelector collectionsSelector,
+            IAdjustmentsSelector adjustmentsSelector)
         {
             this.spellsGenerator = spellsGenerator;
             this.animalGenerator = animalGenerator;
@@ -30,7 +34,13 @@ namespace DnDGen.CharacterGen.Generators.Magics
             this.adjustmentsSelector = adjustmentsSelector;
         }
 
-        public Magic GenerateWith(Alignment alignment, CharacterClass characterClass, Race race, Dictionary<string, Ability> abilities, IEnumerable<Feat> feats, Equipment equipment)
+        public Magic GenerateWith(
+            Alignment alignment,
+            CharacterClass characterClass,
+            Race race,
+            Dictionary<string, Ability> abilities,
+            IEnumerable<Feat> feats,
+            Equipment equipment)
         {
             var magic = new Magic();
 
@@ -41,26 +51,30 @@ namespace DnDGen.CharacterGen.Generators.Magics
 
             if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name == CharacterClassConstants.Sorcerer)
             {
-                var adjustedClass = new CharacterClass();
-                adjustedClass.Name = characterClass.Name;
-                adjustedClass.Level = characterClass.Level + 7;
-                adjustedClass.ProhibitedFields = characterClass.ProhibitedFields;
-                adjustedClass.SpecialistFields = characterClass.SpecialistFields;
+                var adjustedClass = new CharacterClass
+                {
+                    Name = characterClass.Name,
+                    Level = characterClass.Level + 7,
+                    ProhibitedFields = characterClass.ProhibitedFields,
+                    SpecialistFields = characterClass.SpecialistFields
+                };
 
                 magic = MakeSpells(magic, adjustedClass, abilities);
             }
             else if (race.BaseRace == RaceConstants.BaseRaces.Rakshasa && characterClass.Name != CharacterClassConstants.Sorcerer)
             {
-                var adjustedClass = new CharacterClass();
-                adjustedClass.Name = CharacterClassConstants.Sorcerer;
-                adjustedClass.Level = 7;
+                var adjustedClass = new CharacterClass
+                {
+                    Name = CharacterClassConstants.Sorcerer,
+                    Level = 7
+                };
 
                 var rakshasaMagic = new Magic();
                 rakshasaMagic = MakeSpells(rakshasaMagic, adjustedClass, abilities);
 
                 magic.SpellsPerDay = magic.SpellsPerDay.Union(rakshasaMagic.SpellsPerDay);
-                magic.KnownSpells = magic.KnownSpells.Union(rakshasaMagic.KnownSpells);
-                magic.PreparedSpells = magic.PreparedSpells.Union(rakshasaMagic.PreparedSpells);
+                magic.KnownSpells = CombineSpellLists(magic.KnownSpells, rakshasaMagic.KnownSpells, true);
+                magic.PreparedSpells = CombineSpellLists(magic.PreparedSpells, rakshasaMagic.PreparedSpells, false);
             }
 
             magic.Animal = animalGenerator.GenerateFrom(alignment, characterClass, race, feats);
@@ -81,6 +95,30 @@ namespace DnDGen.CharacterGen.Generators.Magics
                 magic.ArcaneSpellFailure += GetArcaneSpellFailure(equipment.OffHand);
 
             return magic;
+        }
+
+        private IEnumerable<Spell> CombineSpellLists(IEnumerable<Spell> first, IEnumerable<Spell> second, bool deduplicate)
+        {
+            var adjustedSecond = second;
+
+            foreach (var spell in first)
+            {
+                var secondSpell = adjustedSecond.FirstOrDefault(s => s.Name == spell.Name);
+                if (secondSpell == null)
+                    continue;
+
+                spell.Sources = spell.Sources
+                    .Union(secondSpell.Sources)
+                    .ToDictionary(s => s.Key, s => s.Value);
+                secondSpell.Sources = spell.Sources;
+
+                if (!deduplicate)
+                    continue;
+
+                adjustedSecond = adjustedSecond.Where(s => s.Name != spell.Name);
+            }
+
+            return first.Concat(adjustedSecond);
         }
 
         private Magic MakeSpells(Magic magic, CharacterClass characterClass, Dictionary<string, Ability> stats)

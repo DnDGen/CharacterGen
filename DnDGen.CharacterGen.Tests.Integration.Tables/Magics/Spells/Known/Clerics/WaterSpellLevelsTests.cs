@@ -1,40 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class WaterSpellLevelsTests : AdjustmentsTests
+    public class WaterSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Water);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Water);
 
         [Test]
         public override void CollectionNames()
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Water]);
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
+            AssertCollectionNames(names);
         }
 
-        [TestCase(SpellConstants.ObscuringMist, 1)]
-        [TestCase(SpellConstants.FogCloud, 2)]
-        [TestCase(SpellConstants.WaterBreathing, 3)]
-        [TestCase(SpellConstants.ControlWater, 4)]
-        [TestCase(SpellConstants.IceStorm, 5)]
-        [TestCase(SpellConstants.ConeOfCold, 6)]
-        [TestCase(SpellConstants.AcidFog, 7)]
-        [TestCase(SpellConstants.HorridWilting, 8)]
-        [TestCase(SpellConstants.ElementalSwarm, 9)]
-        public void WaterSpellLevel(string spell, int level)
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.ObscuringMist)]
+        [TestCase("2", SpellConstants.FogCloud)]
+        [TestCase("3", SpellConstants.WaterBreathing)]
+        [TestCase("4", SpellConstants.ControlWater)]
+        [TestCase("5", SpellConstants.IceStorm)]
+        [TestCase("6", SpellConstants.ConeOfCold)]
+        [TestCase("7", SpellConstants.AcidFog)]
+        [TestCase("8", SpellConstants.HorridWilting)]
+        [TestCase("9", SpellConstants.ElementalSwarm)]
+        public override void Collection(string name, params string[] collection)
         {
-            base.Adjustment(spell, level);
+            base.Collection(name, collection);
         }
     }
 }

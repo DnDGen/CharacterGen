@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Burning hands</name>
-    <entry>1</entry>
+    <entry>Burning hands</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Produce flame</name>
-    <entry>2</entry>
+    <entry>Produce flame</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Resist energy</name>
-    <entry>3</entry>
+    <entry>Resist energy</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Wall of fire</name>
-    <entry>4</entry>
+    <entry>Wall of fire</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Fire shield</name>
-    <entry>5</entry>
+    <entry>Fire shield</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Fire seeds</name>
-    <entry>6</entry>
+    <entry>Fire seeds</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Fire storm</name>
-    <entry>7</entry>
+    <entry>Fire storm</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Incendiary cloud</name>
-    <entry>8</entry>
+    <entry>Incendiary cloud</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Elemental swarm</name>
-    <entry>9</entry>
+    <entry>Elemental swarm</entry>
+	  <name>9</name>
   </collection>
 </collections>

@@ -26,7 +26,7 @@
 
         public override bool Equals(object toCompare)
         {
-            if (!(toCompare is CharacterClassPrototype))
+            if (toCompare is not CharacterClassPrototype)
                 return false;
 
             var alignment = toCompare as CharacterClassPrototype;

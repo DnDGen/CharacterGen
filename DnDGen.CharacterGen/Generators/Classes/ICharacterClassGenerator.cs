@@ -10,7 +10,6 @@ namespace DnDGen.CharacterGen.Generators.Classes
     {
         CharacterClassPrototype GeneratePrototype(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer);
         IEnumerable<CharacterClassPrototype> GeneratePrototypes(Alignment alignmentPrototype, IClassNameRandomizer classNameRandomizer, ILevelRandomizer levelRandomizer);
-        CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype);
-        IEnumerable<string> RegenerateSpecialistFields(Alignment alignment, CharacterClass characterClass, Race race);
+        CharacterClass GenerateWith(Alignment alignment, CharacterClassPrototype classPrototype, RacePrototype racePrototype);
     }
 }

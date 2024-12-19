@@ -1,5 +1,7 @@
 ﻿using DnDGen.CharacterGen.Abilities;
 using DnDGen.CharacterGen.CharacterClasses;
+using DnDGen.CharacterGen.Feats;
+using DnDGen.CharacterGen.Items;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Selectors.Collections;
 using DnDGen.CharacterGen.Selectors.Selections;
@@ -7,6 +9,7 @@ using DnDGen.CharacterGen.Skills;
 using DnDGen.CharacterGen.Tables;
 using DnDGen.Infrastructure.Selectors.Collections;
 using DnDGen.Infrastructure.Selectors.Percentiles;
+using DnDGen.TreasureGen.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -110,16 +113,16 @@ namespace DnDGen.CharacterGen.Generators.Skills
 
             foreach (var monsterSkillSelection in monsterSkillSelections)
             {
-                if (skillsList.Any(s => monsterSkillSelection.IsEqualTo(s)) == false)
+                if (!skillsList.Any(monsterSkillSelection.IsEqualTo))
                 {
-                    if (abilities.ContainsKey(monsterSkillSelection.BaseStatName) == false)
+                    if (!abilities.ContainsKey(monsterSkillSelection.BaseStatName))
                         continue;
 
                     var newSkill = new Skill(monsterSkillSelection.SkillName, abilities[monsterSkillSelection.BaseStatName], 3, monsterSkillSelection.Focus);
                     skillsList.Add(newSkill);
                 }
 
-                var monsterSkill = skillsList.First(s => monsterSkillSelection.IsEqualTo(s));
+                var monsterSkill = skillsList.First(monsterSkillSelection.IsEqualTo);
 
                 monsterSkill.RankCap += monsterHitDice;
                 monsterSkill.ClassSkill = true;
@@ -131,7 +134,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
             while (points-- > 0 && validMonsterSkills.Any())
             {
                 var skillSelection = collectionsSelector.SelectRandomFrom(validMonsterSkills);
-                var skill = skillsList.First(s => skillSelection.IsEqualTo(s));
+                var skill = skillsList.First(skillSelection.IsEqualTo);
                 skill.Ranks++;
 
                 validMonsterSkills = FilterOutInvalidSkills(monsterSkillSelections, skillsList);
@@ -152,7 +155,7 @@ namespace DnDGen.CharacterGen.Generators.Skills
         private IEnumerable<SkillSelection> ExplodeSelectedSkill(SkillSelection skillSelection)
         {
             if (skillSelection.RandomFociQuantity == 0)
-                return new[] { skillSelection };
+                return [skillSelection];
 
             var skillFoci = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, skillSelection.SkillName).ToList();
 
@@ -166,11 +169,12 @@ namespace DnDGen.CharacterGen.Generators.Skills
             while (skillSelection.RandomFociQuantity > selections.Count)
             {
                 var focus = collectionsSelector.SelectRandomFrom(skillFoci);
-                var selection = new SkillSelection();
-
-                selection.BaseStatName = skillSelection.BaseStatName;
-                selection.SkillName = skillSelection.SkillName;
-                selection.Focus = focus;
+                var selection = new SkillSelection
+                {
+                    BaseStatName = skillSelection.BaseStatName,
+                    SkillName = skillSelection.SkillName,
+                    Focus = focus
+                };
 
                 selections.Add(selection);
                 skillFoci.Remove(focus);
@@ -297,6 +301,84 @@ namespace DnDGen.CharacterGen.Generators.Skills
             }
 
             return skills;
+        }
+
+        public IEnumerable<Skill> UpdateSkillsFromFeats(IEnumerable<Skill> skills, IEnumerable<Feat> feats)
+        {
+            var allFeatGrantingSkillBonuses = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatGroups, FeatConstants.SkillBonus);
+            var featGrantingSkillBonuses = feats.Where(f => allFeatGrantingSkillBonuses.Contains(f.Name));
+            var allSkillFocusNames = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.FeatFoci, GroupConstants.Skills);
+
+            foreach (var feat in featGrantingSkillBonuses)
+            {
+                if (feat.Foci.Any())
+                {
+                    foreach (var focus in feat.Foci)
+                    {
+                        if (!allSkillFocusNames.Any(focus.StartsWith))
+                            continue;
+
+                        var skillName = allSkillFocusNames.First(focus.StartsWith);
+                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
+
+                        if (skill == null)
+                            continue;
+
+                        var circumstantial = !allSkillFocusNames.Contains(focus);
+                        skill.CircumstantialBonus |= circumstantial;
+
+                        if (!circumstantial)
+                            skill.Bonus += feat.Power;
+                    }
+                }
+                else
+                {
+                    var skillsToReceiveBonus = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.SkillGroups, feat.Name);
+
+                    foreach (var skillName in skillsToReceiveBonus)
+                    {
+                        var skill = skills.FirstOrDefault(s => s.IsEqualTo(skillName));
+
+                        if (skill != null)
+                            skill.Bonus += feat.Power;
+                    }
+                }
+            }
+
+            return skills;
+        }
+
+        public IEnumerable<Skill> UpdateSkillsFromEquipment(IEnumerable<Skill> skills, Equipment equipment)
+        {
+            var armorCheckPenaltySkills = skills.Where(s => s.HasArmorCheckPenalty);
+
+            foreach (var skill in armorCheckPenaltySkills)
+            {
+                skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.Armor, skill.Name);
+
+                if (equipment.OffHand != null && equipment.OffHand.Attributes.Contains(AttributeConstants.Shield))
+                {
+                    skill.ArmorCheckPenalty += ComputeArmorCheckPenalty(equipment.OffHand, skill.Name);
+                }
+            }
+
+            return skills;
+        }
+
+        private int ComputeArmorCheckPenalty(Item item, string skillName)
+        {
+            if (item == null || item is not Armor)
+                return 0;
+
+            var armor = item as Armor;
+
+            if (skillName == SkillConstants.Swim && armor.Name == ArmorConstants.PlateArmorOfTheDeep)
+                return 0;
+
+            if (skillName == SkillConstants.Swim)
+                return armor.TotalArmorCheckPenalty * 2;
+
+            return armor.TotalArmorCheckPenalty;
         }
     }
 }

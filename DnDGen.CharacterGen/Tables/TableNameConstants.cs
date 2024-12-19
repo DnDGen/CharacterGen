@@ -9,6 +9,8 @@
                 public const string AerialSpeeds = "AerialSpeeds";
                 public const string ArcaneSpellFailures = "ArcaneSpellFailures";
                 public const string ChallengeRatings = "ChallengeRatings";
+                public const string PCChallengeRatingAdjustments = "PCChallengeRatingAdjustments";
+                public const string NPCChallengeRatingAdjustments = "NPCChallengeRatingAdjustments";
                 public const string ClassHitDice = "ClassHitDice";
                 public const string CohortLevels = "CohortLevels";
                 public const string FeatArmorAdjustments = "FeatArmorAdjustments";
@@ -56,7 +58,6 @@
                 public const string SkillGroups = "SkillGroups";
                 public const string SkillSynergy = "SkillSynergy";
                 public const string SpecialistFields = "SpecialistFields";
-                public const string SpellGroups = "SpellGroups";
                 public const string WeightRolls = "WeightRolls";
             }
 
@@ -87,7 +88,6 @@
                 public const string RACEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string AGEAbilityAdjustments = "{0}AbilityAdjustments";
                 public const string CLASSFeatLevelRequirements = "{0}FeatLevelRequirements";
-                public const string CLASSSpellLevels = "{0}SpellLevels";
                 public const string FEATClassRequirements = "{0}ClassRequirements";
                 public const string FEATSkillRankRequirements = "{0}SkillRankRequirements";
                 public const string FEATAbilityRequirements = "{0}AbilityRequirements";
@@ -105,6 +105,7 @@
                 public const string RACEFeatData = "{0}FeatData";
                 public const string CLASSFeatData = "{0}FeatData";
                 public const string CLASSTYPEAgeRolls = "{0}AgeRolls";
+                public const string CLASSSpellLevels = "{0}SpellLevels";
             }
 
             internal static class Percentile

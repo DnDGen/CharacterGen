@@ -2,7 +2,6 @@
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
-using System;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
 {
@@ -66,36 +65,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Evil)]
         [TestCase(AlignmentConstants.NeutralGood,
-            CharacterClassConstants.Domains.Chaos,
-            CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Evil)]
         [TestCase(AlignmentConstants.ChaoticGood,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Evil)]
         [TestCase(AlignmentConstants.LawfulNeutral,
-            CharacterClassConstants.Domains.Chaos,
-            CharacterClassConstants.Domains.Good,
-            CharacterClassConstants.Domains.Evil)]
-        [TestCase(AlignmentConstants.TrueNeutral,
-            CharacterClassConstants.Domains.Chaos,
-            CharacterClassConstants.Domains.Law,
-            CharacterClassConstants.Domains.Good,
-            CharacterClassConstants.Domains.Evil)]
+            CharacterClassConstants.Domains.Chaos)]
+        [TestCase(AlignmentConstants.TrueNeutral)]
         [TestCase(AlignmentConstants.ChaoticNeutral,
-            CharacterClassConstants.Domains.Law,
-            CharacterClassConstants.Domains.Good,
-            CharacterClassConstants.Domains.Evil)]
+            CharacterClassConstants.Domains.Law)]
         [TestCase(AlignmentConstants.LawfulEvil,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Good)]
         [TestCase(AlignmentConstants.NeutralEvil,
-            CharacterClassConstants.Domains.Chaos,
-            CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good)]
         [TestCase(AlignmentConstants.ChaoticEvil,
             CharacterClassConstants.Domains.Law,
             CharacterClassConstants.Domains.Good)]
-        public override void DistinctCollection(String name, params String[] collection)
+        public override void DistinctCollection(string name, params string[] collection)
         {
             base.DistinctCollection(name, collection);
         }

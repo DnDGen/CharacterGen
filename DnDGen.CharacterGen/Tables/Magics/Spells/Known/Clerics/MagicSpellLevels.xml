@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Magic aura</name>
-    <entry>1</entry>
+    <entry>Nystul's magic aura</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Identify</name>
-    <entry>2</entry>
+    <entry>Identify</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Dispel magic</name>
-    <entry>3</entry>
+    <entry>Dispel magic</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Imbue with spell ability</name>
-    <entry>4</entry>
+    <entry>Imbue with spell ability</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Spell resistance</name>
-    <entry>5</entry>
+    <entry>Spell resistance</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Antimagic field</name>
-    <entry>6</entry>
+    <entry>Antimagic field</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Spell turning</name>
-    <entry>7</entry>
+    <entry>Spell turning</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Protection from spells</name>
-    <entry>8</entry>
+    <entry>Protection from spells</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Mage's disjunction</name>
-    <entry>9</entry>
+    <entry>Mordenkainen's disjunction</entry>
+	  <name>9</name>
   </collection>
 </collections>

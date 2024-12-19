@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Magic stone</name>
-    <entry>1</entry>
+    <entry>Magic stone</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Soften earth and stone</name>
-    <entry>2</entry>
+    <entry>Soften earth and stone</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Stone shape</name>
-    <entry>3</entry>
+    <entry>Stone shape</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Spike stones</name>
-    <entry>4</entry>
+    <entry>Spike stones</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Wall of stone</name>
-    <entry>5</entry>
+    <entry>Wall of stone</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Stoneskin</name>
-    <entry>6</entry>
+    <entry>Stoneskin</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Earthquake</name>
-    <entry>7</entry>
+    <entry>Earthquake</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Iron body</name>
-    <entry>8</entry>
+    <entry>Iron body</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Elemental swarm</name>
-    <entry>9</entry>
+    <entry>Elemental swarm</entry>
+	  <name>9</name>
   </collection>
 </collections>

@@ -1,9 +1,9 @@
 ﻿using DnDGen.CharacterGen.Combats;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Magics;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Skills;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRaces
@@ -31,14 +31,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
                 FeatConstants.SpellLikeAbility + SpellConstants.ChaosHammer,
                 FeatConstants.SpellLikeAbility + SpellConstants.DeeperDarkness,
                 FeatConstants.SpellLikeAbility + SpellConstants.DetectMagic,
-                FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.DispelLaw,
                 FeatConstants.SpellLikeAbility + SpellConstants.Fear,
                 FeatConstants.SpellLikeAbility + SpellConstants.FingerOfDeath,
                 FeatConstants.SpellLikeAbility + SpellConstants.Fireball,
                 FeatConstants.SpellLikeAbility + SpellConstants.Fly,
                 FeatConstants.SpellLikeAbility + SpellConstants.Identify,
                 FeatConstants.SpellLikeAbility + SpellConstants.Invisibility,
-                FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstAlignment,
+                FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstLaw,
                 FeatConstants.SpellLikeAbility + SpellConstants.SeeInvisibility,
                 FeatConstants.SpellLikeAbility + SpellConstants.Shatter,
                 FeatConstants.SpellLikeAbility + SpellConstants.CircleOfDeath,
@@ -162,9 +162,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.DispelLaw,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.DispelAlignment,
+            SpellConstants.DispelLaw,
             0,
             FeatConstants.Frequencies.AtWill,
             0,
@@ -225,9 +225,9 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstAlignment,
+        [TestCase(FeatConstants.SpellLikeAbility + SpellConstants.MagicCircleAgainstLaw,
             FeatConstants.SpellLikeAbility,
-            SpellConstants.MagicCircleAgainstAlignment,
+            SpellConstants.MagicCircleAgainstLaw,
             0,
             FeatConstants.Frequencies.AtWill,
             0,

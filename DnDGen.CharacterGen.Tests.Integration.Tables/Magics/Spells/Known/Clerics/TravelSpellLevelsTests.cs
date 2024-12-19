@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class TravelSpellLevelsTests : AdjustmentsTests
+    public class TravelSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Travel);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Travel);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.Longstrider,
-                SpellConstants.LocateObject,
-                SpellConstants.Fly,
-                SpellConstants.DimensionDoor,
-                SpellConstants.Teleport,
-                SpellConstants.FindThePath,
-                SpellConstants.Teleport_Greater,
-                SpellConstants.PhaseDoor,
-                SpellConstants.AstralProjection
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllTravelSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.Longstrider)]
+        [TestCase("2", SpellConstants.LocateObject)]
+        [TestCase("3", SpellConstants.Fly)]
+        [TestCase("4", SpellConstants.DimensionDoor)]
+        [TestCase("5", SpellConstants.Teleport)]
+        [TestCase("6", SpellConstants.FindThePath)]
+        [TestCase("7", SpellConstants.Teleport_Greater)]
+        [TestCase("8", SpellConstants.PhaseDoor)]
+        [TestCase("9", SpellConstants.AstralProjection)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Travel]);
-        }
-
-        [TestCase(SpellConstants.Longstrider, 1)]
-        [TestCase(SpellConstants.LocateObject, 2)]
-        [TestCase(SpellConstants.Fly, 3)]
-        [TestCase(SpellConstants.DimensionDoor, 4)]
-        [TestCase(SpellConstants.Teleport, 5)]
-        [TestCase(SpellConstants.FindThePath, 6)]
-        [TestCase(SpellConstants.Teleport_Greater, 7)]
-        [TestCase(SpellConstants.PhaseDoor, 8)]
-        [TestCase(SpellConstants.AstralProjection, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

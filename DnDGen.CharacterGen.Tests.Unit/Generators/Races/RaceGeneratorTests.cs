@@ -63,19 +63,19 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             alignment = new Alignment();
             characterClass = new CharacterClass();
             racePrototype = new RacePrototype();
-            landSpeeds = new Dictionary<string, int>();
-            aerialSpeeds = new Dictionary<string, int>();
-            swimSpeeds = new Dictionary<string, int>();
+            landSpeeds = [];
+            aerialSpeeds = [];
+            swimSpeeds = [];
             classType = CharacterClassConstants.TrainingTypes.Intuitive;
             baseRaceSize = RaceConstants.Sizes.Medium;
-            baseRacesWithWings = new List<string>();
-            metaracesWithWings = new List<string>();
-            challengeRatings = new Dictionary<string, int>();
-            maleHeights = new Dictionary<string, int>();
-            femaleHeights = new Dictionary<string, int>();
-            maleWeights = new Dictionary<string, int>();
-            femaleWeights = new Dictionary<string, int>();
-            aerialManeuverability = new Dictionary<string, List<string>>();
+            baseRacesWithWings = [];
+            metaracesWithWings = [];
+            challengeRatings = [];
+            maleHeights = [];
+            femaleHeights = [];
+            maleWeights = [];
+            femaleWeights = [];
+            aerialManeuverability = [];
             mockBaseRaceRandomizer = new Mock<RaceRandomizer>();
             mockMetaraceRandomizer = new Mock<RaceRandomizer>();
 
@@ -109,6 +109,12 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
             mockAdjustmentsSelector
                 .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.ChallengeRatings, It.IsAny<string>()))
                 .Returns((string table, string name) => challengeRatings[name]);
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.PCChallengeRatingAdjustments, It.IsAny<string>()))
+                .Returns(0);
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.NPCChallengeRatingAdjustments, It.IsAny<string>()))
+                .Returns(-1);
             mockAdjustmentsSelector
                 .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.AerialSpeeds, It.IsAny<string>()))
                 .Returns((string table, string name) => aerialSpeeds[name]);
@@ -850,6 +856,21 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 
             var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
             Assert.That(race.ChallengeRating, Is.EqualTo(9266 + 90210));
+        }
+
+        [Test]
+        public void SetChallengeRatingAdjustments()
+        {
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.PCChallengeRatingAdjustments, racePrototype.BaseRace))
+                .Returns(9266);
+            mockAdjustmentsSelector
+                .Setup(s => s.SelectFrom(TableNameConstants.Set.Adjustments.NPCChallengeRatingAdjustments, racePrototype.BaseRace))
+                .Returns(90210);
+
+            var race = raceGenerator.GenerateWith(alignment, characterClass, racePrototype);
+            Assert.That(race.PCChallengeRatingAdjustment, Is.EqualTo(9266));
+            Assert.That(race.NPCChallengeRatingAdjustment, Is.EqualTo(90210));
         }
     }
 }

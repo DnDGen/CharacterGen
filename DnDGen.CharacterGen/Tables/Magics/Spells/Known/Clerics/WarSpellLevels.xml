@@ -1,40 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <collections>
+	<collection>
+		<name>0</name>
+	</collection>
   <collection>
-    <name>Magic weapon</name>
-    <entry>1</entry>
+    <entry>Magic weapon</entry>
+	  <name>1</name>
   </collection>
   <collection>
-    <name>Spiritual weapon</name>
-    <entry>2</entry>
+    <entry>Spiritual weapon</entry>
+	  <name>2</name>
   </collection>
   <collection>
-    <name>Magic vestment</name>
-    <entry>3</entry>
+    <entry>Magic vestment</entry>
+	  <name>3</name>
   </collection>
   <collection>
-    <name>Divine power</name>
-    <entry>4</entry>
+    <entry>Divine power</entry>
+	  <name>4</name>
   </collection>
   <collection>
-    <name>Flame strike</name>
-    <entry>5</entry>
+    <entry>Flame strike</entry>
+	  <name>5</name>
   </collection>
   <collection>
-    <name>Blade barrier</name>
-    <entry>6</entry>
+    <entry>Blade barrier</entry>
+	  <name>6</name>
   </collection>
   <collection>
-    <name>Power word blind</name>
-    <entry>7</entry>
+    <entry>Power word blind</entry>
+	  <name>7</name>
   </collection>
   <collection>
-    <name>Power word stun</name>
-    <entry>8</entry>
+    <entry>Power word stun</entry>
+	  <name>8</name>
   </collection>
   <collection>
-    <name>Power word kill</name>
-    <entry>9</entry>
+    <entry>Power word kill</entry>
+	  <name>9</name>
   </collection>
 </collections>

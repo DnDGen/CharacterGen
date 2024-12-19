@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class SunSpellLevelsTests : AdjustmentsTests
+    public class SunSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Sun);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Sun);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.EndureElements,
-                SpellConstants.HeatMetal,
-                SpellConstants.SearingLight,
-                SpellConstants.FireShield,
-                SpellConstants.FlameStrike,
-                SpellConstants.FireSeeds,
-                SpellConstants.Sunbeam,
-                SpellConstants.Sunburst,
-                SpellConstants.PrismaticSphere
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllSunSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.EndureElements)]
+        [TestCase("2", SpellConstants.HeatMetal)]
+        [TestCase("3", SpellConstants.SearingLight)]
+        [TestCase("4", SpellConstants.FireShield)]
+        [TestCase("5", SpellConstants.FlameStrike)]
+        [TestCase("6", SpellConstants.FireSeeds)]
+        [TestCase("7", SpellConstants.Sunbeam)]
+        [TestCase("8", SpellConstants.Sunburst)]
+        [TestCase("9", SpellConstants.PrismaticSphere)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Sun]);
-        }
-
-        [TestCase(SpellConstants.EndureElements, 1)]
-        [TestCase(SpellConstants.HeatMetal, 2)]
-        [TestCase(SpellConstants.SearingLight, 3)]
-        [TestCase(SpellConstants.FireShield, 4)]
-        [TestCase(SpellConstants.FlameStrike, 5)]
-        [TestCase(SpellConstants.FireSeeds, 6)]
-        [TestCase(SpellConstants.Sunbeam, 7)]
-        [TestCase(SpellConstants.Sunburst, 8)]
-        [TestCase(SpellConstants.PrismaticSphere, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class LuckSpellLevelsTests : AdjustmentsTests
+    public class LuckSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Luck);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Luck);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.EntropicShield,
-                SpellConstants.Aid,
-                SpellConstants.ProtectionFromEnergy,
-                SpellConstants.FreedomOfMovement,
-                SpellConstants.BreakEnchantment,
-                SpellConstants.Mislead,
-                SpellConstants.SpellTurning,
-                SpellConstants.MomentOfPrescience,
-                SpellConstants.Miracle
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllLuckSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.EntropicShield)]
+        [TestCase("2", SpellConstants.Aid)]
+        [TestCase("3", SpellConstants.ProtectionFromEnergy)]
+        [TestCase("4", SpellConstants.FreedomOfMovement)]
+        [TestCase("5", SpellConstants.BreakEnchantment)]
+        [TestCase("6", SpellConstants.Mislead)]
+        [TestCase("7", SpellConstants.SpellTurning)]
+        [TestCase("8", SpellConstants.MomentOfPrescience)]
+        [TestCase("9", SpellConstants.Miracle)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Luck]);
-        }
-
-        [TestCase(SpellConstants.EntropicShield, 1)]
-        [TestCase(SpellConstants.Aid, 2)]
-        [TestCase(SpellConstants.ProtectionFromEnergy, 3)]
-        [TestCase(SpellConstants.FreedomOfMovement, 4)]
-        [TestCase(SpellConstants.BreakEnchantment, 5)]
-        [TestCase(SpellConstants.Mislead, 6)]
-        [TestCase(SpellConstants.SpellTurning, 7)]
-        [TestCase(SpellConstants.MomentOfPrescience, 8)]
-        [TestCase(SpellConstants.Miracle, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }

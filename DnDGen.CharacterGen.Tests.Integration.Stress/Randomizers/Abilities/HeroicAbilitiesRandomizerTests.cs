@@ -34,23 +34,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Abilities
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Intelligence));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Strength));
             Assert.That(stats.Keys, Contains.Item(AbilityConstants.Wisdom));
-            Assert.That(stats[AbilityConstants.Charisma].Value, Is.InRange(6, 18));
-            Assert.That(stats[AbilityConstants.Constitution].Value, Is.InRange(6, 18));
-            Assert.That(stats[AbilityConstants.Dexterity].Value, Is.InRange(6, 18));
-            Assert.That(stats[AbilityConstants.Intelligence].Value, Is.InRange(6, 18));
-            Assert.That(stats[AbilityConstants.Strength].Value, Is.InRange(6, 18));
-            Assert.That(stats[AbilityConstants.Wisdom].Value, Is.InRange(6, 18));
-
-            var average = stats.Values.Average(s => s.Value);
-            Assert.That(average, Is.InRange(15, 18));
-        }
-
-        [Test]
-        public void NonDefaultHeroicAbilitiesOccur()
-        {
-            var stats = stressor.GenerateOrFail(heroicAbilitiesRandomizer.Randomize, ss => ss.Values.Any(s => s.Value != 16));
-            var allAbilitiesAreDefault = stats.Values.All(s => s.Value == 16);
-            Assert.That(allAbilitiesAreDefault, Is.False);
+            Assert.That(stats.Values.Select(s => s.Value), Is.All.InRange(15, 18));
         }
     }
 }

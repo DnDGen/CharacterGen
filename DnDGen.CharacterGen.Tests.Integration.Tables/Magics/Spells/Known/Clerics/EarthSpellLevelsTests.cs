@@ -1,59 +1,36 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Magics;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics.Spells.Known.Clerics
 {
     [TestFixture]
-    public class EarthSpellLevelsTests : AdjustmentsTests
+    public class EarthSpellLevelsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get
-            {
-                return string.Format(TableNameConstants.Formattable.Adjustments.CLASSSpellLevels, CharacterClassConstants.Domains.Earth);
-            }
-        }
+        protected override string tableName => string.Format(TableNameConstants.Formattable.Collection.CLASSSpellLevels, CharacterClassConstants.Domains.Earth);
 
         [Test]
         public override void CollectionNames()
         {
-            var names = new[]
-            {
-                SpellConstants.MagicStone,
-                SpellConstants.SoftenEarthAndStone,
-                SpellConstants.StoneShape,
-                SpellConstants.SpikeStones,
-                SpellConstants.WallOfStone,
-                SpellConstants.Stoneskin,
-                SpellConstants.Earthquake,
-                SpellConstants.IronBody,
-                SpellConstants.ElementalSwarm
-            };
-
+            var names = Enumerable.Range(0, 10).Select(n => n.ToString());
             AssertCollectionNames(names);
         }
 
-        [Test]
-        public void AllEarthSpellsInAdjustmentsTable()
+        [TestCase("0")]
+        [TestCase("1", SpellConstants.MagicStone)]
+        [TestCase("2", SpellConstants.SoftenEarthAndStone)]
+        [TestCase("3", SpellConstants.StoneShape)]
+        [TestCase("4", SpellConstants.SpikeStones)]
+        [TestCase("5", SpellConstants.WallOfStone)]
+        [TestCase("6", SpellConstants.Stoneskin)]
+        [TestCase("7", SpellConstants.Earthquake)]
+        [TestCase("8", SpellConstants.IronBody)]
+        [TestCase("9", SpellConstants.ElementalSwarm)]
+        public override void Collection(string name, params string[] collection)
         {
-            var spellGroups = GetTable(TableNameConstants.Set.Collection.SpellGroups);
-            AssertCollectionNames(spellGroups[CharacterClassConstants.Domains.Earth]);
-        }
-
-        [TestCase(SpellConstants.MagicStone, 1)]
-        [TestCase(SpellConstants.SoftenEarthAndStone, 2)]
-        [TestCase(SpellConstants.StoneShape, 3)]
-        [TestCase(SpellConstants.SpikeStones, 4)]
-        [TestCase(SpellConstants.WallOfStone, 5)]
-        [TestCase(SpellConstants.Stoneskin, 6)]
-        [TestCase(SpellConstants.Earthquake, 7)]
-        [TestCase(SpellConstants.IronBody, 8)]
-        [TestCase(SpellConstants.ElementalSwarm, 9)]
-        public override void Adjustment(string name, int adjustment)
-        {
-            base.Adjustment(name, adjustment);
+            base.Collection(name, collection);
         }
     }
 }
