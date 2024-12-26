@@ -392,6 +392,9 @@
   <collection>
     <name>Wereboar</name>
   </collection>
+	<collection>
+		<name>Dire Wereboar</name>
+	</collection>
   <collection>
     <name>Wererat</name>
   </collection>
@@ -401,6 +404,9 @@
   <collection>
     <name>Werewolf</name>
   </collection>
+	<collection>
+		<name>Dire Werewolf</name>
+	</collection>
   <collection>
     <name>Wild Elf</name>
     <entry>Common</entry>

@@ -12,10 +12,12 @@
     <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
-    <entry>Wereboar</entry>
+	  <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
-    <entry>Werewolf</entry>
+	  <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Has Wings</name>
@@ -56,6 +58,7 @@
     <entry>Lich</entry>
     <entry>Vampire</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Chaotic Neutral</name>
@@ -84,6 +87,7 @@
     <entry></entry>
     <entry>Ghost</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
   </collection>
   <collection>
@@ -103,9 +107,11 @@
     <name>Lycanthrope</name>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Undead</name>
@@ -134,9 +140,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Aristocrat</name>
@@ -149,9 +157,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Barbarian</name>
@@ -164,9 +174,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Bard</name>
@@ -180,9 +192,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Cleric</name>
@@ -196,9 +210,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Commoner</name>
@@ -211,9 +227,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Druid</name>
@@ -227,9 +245,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Expert</name>
@@ -242,9 +262,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Fighter</name>
@@ -257,9 +279,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Monk</name>
@@ -272,9 +296,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Ranger</name>
@@ -288,9 +314,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Rogue</name>
@@ -303,9 +331,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Sorcerer</name>
@@ -319,9 +349,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Warrior</name>
@@ -334,9 +366,11 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Wizard</name>
@@ -350,8 +384,10 @@
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
 </collections>

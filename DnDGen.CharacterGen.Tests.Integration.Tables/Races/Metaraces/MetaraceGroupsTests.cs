@@ -10,10 +10,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
     [TestFixture]
     public class MetaraceGroupsTests : CollectionTests
     {
-        protected override string tableName
-        {
-            get { return TableNameConstants.Set.Collection.MetaraceGroups; }
-        }
+        protected override string tableName => TableNameConstants.Set.Collection.MetaraceGroups;
 
         [Test]
         public override void CollectionNames()
@@ -42,6 +39,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
             RaceConstants.Metaraces.Lich,
             RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Vampire,
+            RaceConstants.Metaraces.Werewolf_Dire,
             RaceConstants.Metaraces.Werewolf)]
         [TestCase(AlignmentConstants.ChaoticGood,
             RaceConstants.Metaraces.Ghost,
@@ -87,6 +85,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
             RaceConstants.Metaraces.Ghost,
             RaceConstants.Metaraces.None,
             RaceConstants.Metaraces.Wereboar,
+            RaceConstants.Metaraces.Wereboar_Dire,
             RaceConstants.Metaraces.Weretiger)]
         [TestCase(GroupConstants.Genetic,
             RaceConstants.Metaraces.HalfDragon,
@@ -95,8 +94,10 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
         [TestCase(GroupConstants.Lycanthrope,
             RaceConstants.Metaraces.Werebear,
             RaceConstants.Metaraces.Wereboar,
+            RaceConstants.Metaraces.Wereboar_Dire,
             RaceConstants.Metaraces.Weretiger,
             RaceConstants.Metaraces.Wererat,
+            RaceConstants.Metaraces.Werewolf_Dire,
             RaceConstants.Metaraces.Werewolf)]
         [TestCase(GroupConstants.Undead,
             RaceConstants.Metaraces.Ghost,
@@ -141,9 +142,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wereboar_Dire,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Werewolf,
+                RaceConstants.Metaraces.Werewolf_Dire,
             };
 
             base.DistinctCollection(GroupConstants.All, metaraces);
@@ -170,9 +173,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wereboar_Dire,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Werewolf,
+                RaceConstants.Metaraces.Werewolf_Dire,
             };
 
             base.DistinctCollection(className, metaraces);
@@ -199,9 +204,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wereboar_Dire,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Werewolf,
+                RaceConstants.Metaraces.Werewolf_Dire,
             };
 
             base.DistinctCollection(className, metaraces);

@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Languages;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -227,9 +227,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
         [TestCase(RaceConstants.Metaraces.Vampire)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire)]
         public void AutomaticLanguages(string name, params string[] languages)
         {
             base.DistinctCollection(name, languages);

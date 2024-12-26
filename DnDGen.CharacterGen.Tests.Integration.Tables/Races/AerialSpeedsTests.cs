@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -103,9 +103,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.Metaraces.Vampire, 0)]
         [TestCase(RaceConstants.Metaraces.Werebear, 0)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 0)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, 0)]
         [TestCase(RaceConstants.Metaraces.Wererat, 0)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 0)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 0)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, 0)]
         public void AerialSpeed(string name, int speed)
         {
             Adjustment(name, speed);

@@ -100,9 +100,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.Metaraces.Vampire, 2)]
         [TestCase(RaceConstants.Metaraces.Werebear, 5)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 4)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, 4)]
         [TestCase(RaceConstants.Metaraces.Wererat, 2)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 5)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 3)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, 4)]
         public void ChallengeRating(string name, int challengeRating)
         {
             base.Adjustment(name, challengeRating);

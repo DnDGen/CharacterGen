@@ -827,5 +827,59 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
             else
                 Assert.That(character.Magic.Animal, Is.Not.Empty, character.Summary);
         }
+
+        [Test]
+        public void BUG_GenerateWerewolfLord_ChallengeRatingisCorrect()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            levelRandomizer.SetLevel = 10;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Human;
+            metaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Werewolf_Dire;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.ChallengeRating, Is.EqualTo(14), character.Summary);
+        }
+
+        [Test]
+        public void BUG_GenerateHillGiantDireWereboar_ChallengeRatingisCorrect()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            levelRandomizer.SetLevel = 1;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.HillGiant;
+            metaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Wereboar_Dire;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.ChallengeRating, Is.EqualTo(12), character.Summary);
+        }
     }
 }

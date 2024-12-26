@@ -1,8 +1,8 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -555,6 +555,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics
         [TestCase(RaceConstants.Metaraces.HalfDragon)]
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         public void AnimalsForNeutralMetarace(string metarace)
         {
@@ -667,6 +668,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics
         [TestCase(RaceConstants.Metaraces.Mummy)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire)]
         public void AnimalsForEvilMetarace(string metarace)
         {
             var animals = new[]

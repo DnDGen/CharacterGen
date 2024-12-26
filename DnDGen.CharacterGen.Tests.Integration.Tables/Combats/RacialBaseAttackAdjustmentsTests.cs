@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -103,9 +103,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.Metaraces.Vampire, 0)]
         [TestCase(RaceConstants.Metaraces.Werebear, 5)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 3)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, 5)]
         [TestCase(RaceConstants.Metaraces.Wererat, 1)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 5)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 2)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, 4)]
         public void RacialBaseAttackAdjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

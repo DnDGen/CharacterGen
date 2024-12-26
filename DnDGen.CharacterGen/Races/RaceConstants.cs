@@ -209,9 +209,11 @@
             public const string Vampire = "Vampire";
             public const string Werebear = "Werebear";
             public const string Wereboar = "Wereboar";
+            public const string Wereboar_Dire = "Dire Wereboar";
             public const string Weretiger = "Weretiger";
             public const string Wererat = "Wererat";
             public const string Werewolf = "Werewolf";
+            public const string Werewolf_Dire = "Dire Werewolf";
 
             public static class Species
             {
