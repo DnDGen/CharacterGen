@@ -28,6 +28,8 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityGroups.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Races\Dire WereboarAbilityAdjustments.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Races\Dire WerewolfAbilityAdjustments.xml" />
     <EmbeddedResource Include="Tables\Races\PCChallengeRatingAdjustments.xml" />
     <EmbeddedResource Include="Tables\Races\NPCChallengeRatingAdjustments.xml" />
     <None Include="18531-twenty-sided-dice-vector-thumb.png">
