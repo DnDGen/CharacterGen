@@ -3,7 +3,7 @@
 <collections>
   <collection>
     <name>Charisma</name>
-    <entry>-2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Constitution</name>
@@ -15,14 +15,14 @@
   </collection>
   <collection>
     <name>Intelligence</name>
-    <entry>-2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Strength</name>
-    <entry>2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Wisdom</name>
-    <entry>4</entry>
+    <entry>2</entry>
   </collection>
 </collections>

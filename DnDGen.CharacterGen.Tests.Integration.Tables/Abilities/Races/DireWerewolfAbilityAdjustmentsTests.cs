@@ -20,12 +20,12 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
             AssertCollectionNames(abilityGroups[GroupConstants.All]);
         }
 
-        [TestCase(AbilityConstants.Charisma, 2)]
-        [TestCase(AbilityConstants.Constitution, 4)]
-        [TestCase(AbilityConstants.Dexterity, 4)]
+        [TestCase(AbilityConstants.Charisma, 0)]
+        [TestCase(AbilityConstants.Constitution, 0)]
+        [TestCase(AbilityConstants.Dexterity, 0)]
         [TestCase(AbilityConstants.Intelligence, 0)]
-        [TestCase(AbilityConstants.Strength, 6)]
-        [TestCase(AbilityConstants.Wisdom, 0)]
+        [TestCase(AbilityConstants.Strength, 0)]
+        [TestCase(AbilityConstants.Wisdom, 2)]
         public void RacialAbilityAdjustment(string name, int adjustment)
         {
             base.Adjustment(name, adjustment);

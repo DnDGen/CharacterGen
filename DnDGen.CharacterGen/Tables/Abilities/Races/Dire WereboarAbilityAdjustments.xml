@@ -3,11 +3,11 @@
 <collections>
   <collection>
     <name>Charisma</name>
-    <entry>-2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Constitution</name>
-    <entry>2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Dexterity</name>
@@ -19,10 +19,10 @@
   </collection>
   <collection>
     <name>Strength</name>
-    <entry>2</entry>
+    <entry>0</entry>
   </collection>
   <collection>
     <name>Wisdom</name>
-    <entry>0</entry>
+    <entry>2</entry>
   </collection>
 </collections>

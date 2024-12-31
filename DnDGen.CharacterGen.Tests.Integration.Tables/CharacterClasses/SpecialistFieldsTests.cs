@@ -526,9 +526,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire)]
         public void RaceHasAllSpecialistFields(string race)
         {
             var fields = new[]

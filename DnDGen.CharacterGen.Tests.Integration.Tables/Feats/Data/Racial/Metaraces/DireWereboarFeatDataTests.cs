@@ -1,6 +1,7 @@
 ﻿using DnDGen.CharacterGen.Combats;
 using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Skills;
 using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System;
@@ -8,11 +9,11 @@ using System;
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metaraces
 {
     [TestFixture]
-    public class WereboarFeatDataTests : RacialFeatDataTests
+    public class DireWereboarFeatDataTests : RacialFeatDataTests
     {
         protected override string tableName
         {
-            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Wereboar); }
+            get { return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Wereboar_Dire); }
         }
 
         [Test]
@@ -26,9 +27,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
                 FeatConstants.Ferocity,
                 FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
                 FeatConstants.SaveBonus + SavingThrowConstants.Fortitude,
+                FeatConstants.SaveBonus + SavingThrowConstants.Will,
+                FeatConstants.SkillBonus + SkillConstants.Listen,
+                FeatConstants.SkillBonus + SkillConstants.Spot,
                 FeatConstants.NaturalArmor,
                 FeatConstants.LowLightVision,
                 FeatConstants.Scent,
+                FeatConstants.Alertness,
+                FeatConstants.Endurance,
                 FeatConstants.IronWill,
             };
 
@@ -37,7 +43,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
 
         [TestCase(FeatConstants.AlternateForm,
             FeatConstants.AlternateForm,
-            RaceConstants.BaseRaces.Animals.Boar,
+            RaceConstants.BaseRaces.Animals.DireBoar,
             0,
             "",
             0,
@@ -46,7 +52,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
             0, 0)]
         [TestCase(FeatConstants.Empathy,
             FeatConstants.Empathy,
-            RaceConstants.BaseRaces.Animals.Boar,
+            RaceConstants.BaseRaces.Animals.DireBoar,
             0,
             "",
             0,
@@ -55,7 +61,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
             0, 0)]
         [TestCase(FeatConstants.Lycanthropy,
             FeatConstants.Lycanthropy,
-            RaceConstants.Metaraces.Wereboar,
+            RaceConstants.Metaraces.Wereboar_Dire,
             0,
             "",
             0,
@@ -78,7 +84,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
             "",
             0,
             "",
-            3,
+            5,
             0, 0)]
         [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Reflex,
             FeatConstants.SaveBonus,
@@ -87,7 +93,16 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
             "",
             0,
             "",
-            3,
+            5,
+            0, 0)]
+        [TestCase(FeatConstants.SaveBonus + SavingThrowConstants.Will,
+            FeatConstants.SaveBonus,
+            SavingThrowConstants.Will,
+            0,
+            "",
+            0,
+            "",
+            5,
             0, 0)]
         [TestCase(FeatConstants.NaturalArmor,
             FeatConstants.NaturalArmor,
@@ -107,14 +122,23 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
             "",
             0,
             0, 0)]
-        [TestCase(FeatConstants.Scent,
-            FeatConstants.Scent,
+        [TestCase(FeatConstants.Alertness,
+            FeatConstants.Alertness,
             "",
             0,
             "",
             0,
             "",
+            2,
+            0, 0)]
+        [TestCase(FeatConstants.Endurance,
+            FeatConstants.Endurance,
+            "",
             0,
+            "",
+            0,
+            "",
+            4,
             0, 0)]
         [TestCase(FeatConstants.IronWill,
             FeatConstants.IronWill,

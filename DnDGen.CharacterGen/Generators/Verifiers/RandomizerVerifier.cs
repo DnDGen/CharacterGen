@@ -42,7 +42,8 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
                 return false;
 
             //INFO: This is for the case when a set base race does not match an alignment, so we don't need to check any character classes
-            if (baseRaceRandomizer is ISetBaseRaceRandomizer)
+            //If the Metarace is set, however, Metarace alignment can override base race, so skip the check
+            if (baseRaceRandomizer is ISetBaseRaceRandomizer && metaraceRandomizer is not ISetMetaraceRandomizer)
             {
                 var setBaseRaceRandomizer = baseRaceRandomizer as ISetBaseRaceRandomizer;
                 var verified = VerifyBaseRace(alignmentPrototype, setBaseRaceRandomizer.SetBaseRace);
@@ -112,11 +113,21 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
             if (!validMetaraces.Any())
                 return false;
 
-            var baseRaces = baseRaceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
-            if (!baseRaces.Any())
-                return false;
+            //INFO: If the set metarace is overriding base race alignment compatibility, we should alter our check
+            var validBaseRaces = Enumerable.Empty<string>();
+            if (metaraceRandomizer is ISetMetaraceRandomizer)
+            {
+                var alignments = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AlignmentGroups, GroupConstants.All)
+                    .Select(a => new Alignment(a));
+                var baseRaces = alignments.SelectMany(a => baseRaceRandomizer.GetAllPossible(a, classPrototype)).Distinct();
+                validBaseRaces = alignments.SelectMany(a => baseRaces.Where(r => VerifyBaseRace(a, classPrototype, r))).Distinct();
+            }
+            else
+            {
+                var baseRaces = baseRaceRandomizer.GetAllPossible(alignmentPrototype, classPrototype);
+                validBaseRaces = baseRaces.Where(r => VerifyBaseRace(alignmentPrototype, classPrototype, r));
+            }
 
-            var validBaseRaces = baseRaces.Where(r => VerifyBaseRace(alignmentPrototype, classPrototype, r));
             if (!validBaseRaces.Any())
                 return false;
 
@@ -167,11 +178,18 @@ namespace DnDGen.CharacterGen.Generators.Verifiers
             if (!verified)
                 return false;
 
-            verified = VerifyBaseRace(alignmentPrototype, classPrototype, racePrototype.BaseRace);
-            if (!verified)
-                return false;
+            if (racePrototype.Metarace != RaceConstants.Metaraces.None)
+            {
+                var alignments = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AlignmentGroups, GroupConstants.All)
+                    .Select(a => new Alignment(a));
+                verified = alignments.Any(a => VerifyBaseRace(a, classPrototype, racePrototype.BaseRace));
+            }
+            else
+            {
+                verified = VerifyBaseRace(alignmentPrototype, classPrototype, racePrototype.BaseRace);
+            }
 
-            return true;
+            return verified;
         }
 
         private bool VerifyBaseRace(Alignment alignmentPrototype, CharacterClassPrototype classPrototype, string baseRace)
