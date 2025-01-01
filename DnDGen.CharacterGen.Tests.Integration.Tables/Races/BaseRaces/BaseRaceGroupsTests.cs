@@ -452,6 +452,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces
                 RaceConstants.BaseRaces.Grimlock,
                 RaceConstants.BaseRaces.HalfElf,
                 RaceConstants.BaseRaces.HalfOrc,
+                RaceConstants.BaseRaces.HillGiant,
                 RaceConstants.BaseRaces.Human,
                 RaceConstants.BaseRaces.Janni,
                 RaceConstants.BaseRaces.KuoToa,
