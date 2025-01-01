@@ -71,6 +71,7 @@
             public const string MindFlayer = "Mind Flayer";
             public const string Minotaur = "Minotaur";
             public const string MountainDwarf = "Mountain Dwarf";
+            public const string Mummy = "Mummy";
             public const string Ogre = "Ogre";
             public const string OgreMage = "Ogre Mage";
             public const string Orc = "Orc";
@@ -204,7 +205,6 @@
             public const string HalfDragon = "Half-Dragon";
             public const string HalfFiend = "Half-Fiend";
             public const string Lich = "Lich";
-            public const string Mummy = "Mummy";
             public const string None = "";
             public const string Vampire = "Vampire";
             public const string Werebear = "Werebear";

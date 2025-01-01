@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.Abilities;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
@@ -10,7 +10,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Abilities.Races
     {
         protected override string tableName
         {
-            get { return string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, RaceConstants.Metaraces.Mummy); }
+            get { return string.Format(TableNameConstants.Formattable.Adjustments.RACEAbilityAdjustments, RaceConstants.BaseRaces.Mummy); }
         }
 
         [Test]

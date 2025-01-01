@@ -487,6 +487,28 @@
     <entry>Ignan</entry>
     <entry>Terran</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>Abyssal</entry>
+		<entry>Common</entry>
+		<entry>Elven</entry>
+		<entry>Celestial</entry>
+		<entry>Undercommon</entry>
+		<entry>Goblin</entry>
+		<entry>Dwarven</entry>
+		<entry>Draconic</entry>
+		<entry>Giant</entry>
+		<entry>Infernal</entry>
+		<entry>Gnome</entry>
+		<entry>Sylvan</entry>
+		<entry>Gnoll</entry>
+		<entry>Orc</entry>
+		<entry>Halfling</entry>
+		<entry>Aquan</entry>
+		<entry>Auran</entry>
+		<entry>Ignan</entry>
+		<entry>Terran</entry>
+	</collection>
   <collection>
     <name>Minotaur</name>
     <entry>Terran</entry>

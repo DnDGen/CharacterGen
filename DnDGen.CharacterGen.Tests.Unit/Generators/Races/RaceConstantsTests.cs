@@ -179,7 +179,6 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [TestCase(RaceConstants.Metaraces.HalfDragon, "Half-Dragon")]
         [TestCase(RaceConstants.Metaraces.HalfFiend, "Half-Fiend")]
         [TestCase(RaceConstants.Metaraces.Lich, "Lich")]
-        [TestCase(RaceConstants.Metaraces.Mummy, "Mummy")]
         [TestCase(RaceConstants.Metaraces.None, "")]
         [TestCase(RaceConstants.Metaraces.Vampire, "Vampire")]
         [TestCase(RaceConstants.Metaraces.Werebear, "Werebear")]

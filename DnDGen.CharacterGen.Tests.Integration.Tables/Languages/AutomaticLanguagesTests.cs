@@ -162,6 +162,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
         [TestCase(RaceConstants.BaseRaces.MountainDwarf,
             LanguageConstants.Common,
             LanguageConstants.Dwarven)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, LanguageConstants.Common)]
         [TestCase(RaceConstants.BaseRaces.Ogre,
             LanguageConstants.Common,
             LanguageConstants.Giant)]
@@ -222,7 +223,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
             LanguageConstants.Common)]
         [TestCase(RaceConstants.Metaraces.Ghost)]
         [TestCase(RaceConstants.Metaraces.Lich, LanguageConstants.Common)]
-        [TestCase(RaceConstants.Metaraces.Mummy, LanguageConstants.Common)]
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Vampire)]
         [TestCase(RaceConstants.Metaraces.Werebear)]

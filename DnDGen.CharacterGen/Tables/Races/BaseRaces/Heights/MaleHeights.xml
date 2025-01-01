@@ -189,6 +189,10 @@
     <name>Mountain Dwarf</name>
     <entry>45</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>56</entry>
+	</collection>
   <collection>
     <name>Ogre</name>
     <entry>108</entry>

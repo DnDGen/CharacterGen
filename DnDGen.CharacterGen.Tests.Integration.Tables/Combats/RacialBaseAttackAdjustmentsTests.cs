@@ -98,7 +98,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.Metaraces.HalfDragon, 0)]
         [TestCase(RaceConstants.Metaraces.HalfFiend, 0)]
         [TestCase(RaceConstants.Metaraces.Lich, 0)]
-        [TestCase(RaceConstants.Metaraces.Mummy, 4)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
         [TestCase(RaceConstants.Metaraces.Vampire, 0)]
         [TestCase(RaceConstants.Metaraces.Werebear, 5)]

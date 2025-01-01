@@ -665,7 +665,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Magics
 
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
         [TestCase(RaceConstants.Metaraces.Lich)]
-        [TestCase(RaceConstants.Metaraces.Mummy)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
         [TestCase(RaceConstants.Metaraces.Werewolf_Dire)]

@@ -185,6 +185,10 @@
     <name>Minotaur</name>
     <entry>74</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>56</entry>
+	</collection>
   <collection>
     <name>Mountain Dwarf</name>
     <entry>43</entry>

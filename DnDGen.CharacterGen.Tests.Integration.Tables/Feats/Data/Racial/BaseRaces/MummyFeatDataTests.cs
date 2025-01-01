@@ -1,9 +1,9 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Feats;
+﻿using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
-namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metaraces
+namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.BaseRaces
 {
     [TestFixture]
     public class MummyFeatDataTests : RacialFeatDataTests
@@ -12,7 +12,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Feats.Data.Racial.Metarac
         {
             get
             {
-                return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.Metaraces.Mummy);
+                return string.Format(TableNameConstants.Formattable.Collection.RACEFeatData, RaceConstants.BaseRaces.Mummy);
             }
         }
 

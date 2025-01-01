@@ -1,7 +1,10 @@
-﻿using DnDGen.CharacterGen.Alignments;
+﻿using DnDGen.CharacterGen.Abilities;
+using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Characters;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Characters;
+using DnDGen.CharacterGen.Languages;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Alignments;
@@ -880,6 +883,50 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
 
             characterAsserter.AssertCharacter(character);
             Assert.That(character.ChallengeRating, Is.EqualTo(12), character.Summary);
+        }
+
+        [Repeat(100)]
+        [Test]
+        public void BUG_GenerateMummyLord()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Average);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Cleric;
+            levelRandomizer.SetLevel = 10;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Mummy;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.Class.Name, Is.EqualTo(CharacterClassConstants.Cleric));
+            Assert.That(character.Class.Level, Is.EqualTo(10));
+            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Mummy));
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Medium));
+            Assert.That(character.Race.LandSpeed, Is.EqualTo(20));
+            Assert.That(character.Race.Height, Is.InRange(60, 72));
+            Assert.That(character.Race.Weight, Is.EqualTo(120).Within(12));
+            Assert.That(character.Languages, Contains.Item(LanguageConstants.Common));
+            Assert.That(character.Combat.BaseAttack.BaseBonus, Is.EqualTo(11));
+            Assert.That(character.Feats.Racial.Select(f => f.Name), Contains.Item(FeatConstants.Despair)
+                .And.Contains(FeatConstants.MummyRot)
+                .And.Contains(FeatConstants.DamageReduction)
+                .And.Contains(FeatConstants.Darkvision)
+                .And.Contains(FeatConstants.NaturalArmor)
+                .And.Contains(FeatConstants.VulnerabilityToEffect));
+            Assert.That(character.Abilities[AbilityConstants.Constitution].Value, Is.Zero, character.Summary);
+            Assert.That(character.ChallengeRating, Is.EqualTo(15), character.Summary);
         }
     }
 }

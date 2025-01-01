@@ -237,6 +237,10 @@
     <name>Lich</name>
     <entry>Common</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>Common</entry>
+	</collection>
   <collection>
     <name>Lightfoot Halfling</name>
     <entry>Common</entry>
@@ -278,10 +282,6 @@
     <name>Mountain Dwarf</name>
     <entry>Common</entry>
     <entry>Dwarven</entry>
-  </collection>
-  <collection>
-    <name>Mummy</name>
-    <entry>Common</entry>
   </collection>
   <collection>
     <name>Ogre</name>

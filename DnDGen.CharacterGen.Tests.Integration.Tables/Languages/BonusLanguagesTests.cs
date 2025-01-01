@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Languages;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -401,6 +401,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Languages
         [TestCase(RaceConstants.BaseRaces.HalfElf)]
         [TestCase(RaceConstants.BaseRaces.Human)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer)]
+        [TestCase(RaceConstants.BaseRaces.Mummy)]
         [TestCase(RaceConstants.BaseRaces.RedSlaad)]
         [TestCase(RaceConstants.BaseRaces.Scorpionfolk)]
         public void AllGeneralLanguagesAreBonusLanguages(string name)

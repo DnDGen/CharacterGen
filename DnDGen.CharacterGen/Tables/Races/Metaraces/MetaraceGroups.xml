@@ -9,7 +9,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
 	  <entry>Wereboar</entry>
@@ -31,7 +30,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Wererat</entry>
   </collection>
@@ -39,7 +37,6 @@
     <name>Lawful Neutral</name>
     <entry></entry>
     <entry>Ghost</entry>
-    <entry>Mummy</entry>
   </collection>
   <collection>
     <name>Lawful Good</name>
@@ -79,7 +76,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
   </collection>
   <collection>
@@ -117,7 +113,6 @@
     <name>Undead</name>
     <entry>Ghost</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
   </collection>
   <collection>
@@ -136,7 +131,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -153,7 +147,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -170,7 +163,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -188,7 +180,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -206,7 +197,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -223,7 +213,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -241,7 +230,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -258,7 +246,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -275,7 +262,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -292,7 +278,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -310,7 +295,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -327,7 +311,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -345,7 +328,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -362,7 +344,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
@@ -380,7 +361,6 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>

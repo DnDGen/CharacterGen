@@ -213,10 +213,10 @@
     <name>Mountain Dwarf</name>
     <entry></entry>
   </collection>
-  <collection>
-    <name>Mummy</name>
-    <entry></entry>
-  </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry></entry>
+	</collection>
   <collection>
     <name>Ogre Mage</name>
     <entry>Good Maneuverability</entry>

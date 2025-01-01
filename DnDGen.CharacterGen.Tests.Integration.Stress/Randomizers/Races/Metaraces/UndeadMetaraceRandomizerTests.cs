@@ -16,7 +16,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
                 {
                     RaceConstants.Metaraces.Ghost,
                     RaceConstants.Metaraces.Lich,
-                    RaceConstants.Metaraces.Mummy,
                     RaceConstants.Metaraces.None,
                     RaceConstants.Metaraces.Vampire,
                 };
