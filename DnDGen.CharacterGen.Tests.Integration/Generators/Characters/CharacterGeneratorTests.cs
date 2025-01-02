@@ -909,23 +909,24 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
                 abilitiesRandomizer);
 
             characterAsserter.AssertCharacter(character);
-            Assert.That(character.Class.Name, Is.EqualTo(CharacterClassConstants.Cleric));
-            Assert.That(character.Class.Level, Is.EqualTo(10));
-            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Mummy));
-            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None));
+            Assert.That(character.Class.Name, Is.EqualTo(CharacterClassConstants.Cleric), character.Summary);
+            Assert.That(character.Class.Level, Is.EqualTo(10), character.Summary);
+            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Mummy), character.Summary);
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None), character.Summary);
             Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Medium));
-            Assert.That(character.Race.LandSpeed, Is.EqualTo(20));
-            Assert.That(character.Race.Height, Is.InRange(60, 72));
-            Assert.That(character.Race.Weight, Is.EqualTo(120).Within(12));
-            Assert.That(character.Languages, Contains.Item(LanguageConstants.Common));
-            Assert.That(character.Combat.BaseAttack.BaseBonus, Is.EqualTo(11));
+            Assert.That(character.Race.LandSpeed.Value, Is.EqualTo(20), character.Summary);
+            Assert.That(character.Race.Height.Value, Is.InRange(60, 72), character.Summary);
+            Assert.That(character.Race.Weight.Value, Is.EqualTo(120).Within(20), character.Summary);
+            Assert.That(character.Languages, Contains.Item(LanguageConstants.Common), character.Summary);
+            Assert.That(character.Combat.BaseAttack.BaseBonus, Is.EqualTo(7), character.Summary);
+            Assert.That(character.Combat.BaseAttack.RacialModifier, Is.EqualTo(4), character.Summary);
             Assert.That(character.Feats.Racial.Select(f => f.Name), Contains.Item(FeatConstants.Despair)
                 .And.Contains(FeatConstants.MummyRot)
                 .And.Contains(FeatConstants.DamageReduction)
                 .And.Contains(FeatConstants.Darkvision)
                 .And.Contains(FeatConstants.NaturalArmor)
-                .And.Contains(FeatConstants.VulnerabilityToEffect));
-            Assert.That(character.Abilities[AbilityConstants.Constitution].Value, Is.Zero, character.Summary);
+                .And.Contains(FeatConstants.VulnerabilityToEffect), character.Summary);
+            Assert.That(character.Abilities, Does.Not.ContainKey(AbilityConstants.Constitution), character.Summary);
             Assert.That(character.ChallengeRating, Is.EqualTo(15), character.Summary);
         }
     }

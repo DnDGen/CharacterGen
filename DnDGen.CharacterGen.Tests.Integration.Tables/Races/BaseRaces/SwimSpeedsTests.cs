@@ -66,6 +66,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 0)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 0)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 0)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 0)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 0)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]

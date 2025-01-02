@@ -67,20 +67,9 @@ namespace DnDGen.CharacterGen.Generators.Combats
             }
         }
 
-        private int GetGoodBaseAttackBonus(int level)
-        {
-            return level;
-        }
-
-        private int GetAverageBaseAttackBonus(int level)
-        {
-            return level * 3 / 4;
-        }
-
-        private int GetPoorBaseAttackBonus(int level)
-        {
-            return level / 2;
-        }
+        private int GetGoodBaseAttackBonus(int level) => level;
+        private int GetAverageBaseAttackBonus(int level) => level * 3 / 4;
+        private int GetPoorBaseAttackBonus(int level) => level / 2;
 
         private int GetRacialBaseAttackAdjustments(Race race)
         {

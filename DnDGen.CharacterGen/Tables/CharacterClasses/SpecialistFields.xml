@@ -1709,6 +1709,21 @@
     <entry>Necromancy</entry>
     <entry>Transmutation</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>Evil</entry>
+		<entry>Law</entry>
+		<entry>Protection</entry>
+		<entry>Death</entry>
+		<entry>Abjuration</entry>
+		<entry>Conjuration</entry>
+		<entry>Divination</entry>
+		<entry>Enchantment</entry>
+		<entry>Evocation</entry>
+		<entry>Illusion</entry>
+		<entry>Necromancy</entry>
+		<entry>Transmutation</entry>
+	</collection>
   <collection>
     <name>Ogre</name>
     <entry>Air</entry>
