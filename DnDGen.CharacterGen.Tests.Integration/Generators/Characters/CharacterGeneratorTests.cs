@@ -1,7 +1,10 @@
-﻿using DnDGen.CharacterGen.Alignments;
+﻿using DnDGen.CharacterGen.Abilities;
+using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
 using DnDGen.CharacterGen.Characters;
+using DnDGen.CharacterGen.Feats;
 using DnDGen.CharacterGen.Generators.Characters;
+using DnDGen.CharacterGen.Languages;
 using DnDGen.CharacterGen.Races;
 using DnDGen.CharacterGen.Randomizers.Abilities;
 using DnDGen.CharacterGen.Randomizers.Alignments;
@@ -826,6 +829,105 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
                 Assert.That(character.Magic.Animal, Is.Empty, character.Summary);
             else
                 Assert.That(character.Magic.Animal, Is.Not.Empty, character.Summary);
+        }
+
+        [Test]
+        public void BUG_GenerateWerewolfLord_ChallengeRatingisCorrect()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            levelRandomizer.SetLevel = 10;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Human;
+            metaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Werewolf_Dire;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.ChallengeRating, Is.EqualTo(14), character.Summary);
+        }
+
+        [Test]
+        public void BUG_GenerateHillGiantDireWereboar_ChallengeRatingisCorrect()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<ISetMetaraceRandomizer>();
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Raw);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Fighter;
+            levelRandomizer.SetLevel = 1;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.HillGiant;
+            metaraceRandomizer.SetMetarace = RaceConstants.Metaraces.Wereboar_Dire;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.ChallengeRating, Is.EqualTo(12), character.Summary);
+        }
+
+        [Repeat(100)]
+        [Test]
+        public void BUG_GenerateMummyLord()
+        {
+            var alignmentRandomizer = GetNewInstanceOf<IAlignmentRandomizer>(AlignmentRandomizerTypeConstants.Any);
+            var classNameRandomizer = GetNewInstanceOf<ISetClassNameRandomizer>();
+            var levelRandomizer = GetNewInstanceOf<ISetLevelRandomizer>();
+            var baseRaceRandomizer = GetNewInstanceOf<ISetBaseRaceRandomizer>();
+            var metaraceRandomizer = GetNewInstanceOf<RaceRandomizer>(RaceRandomizerTypeConstants.Metarace.NoMeta);
+            var abilitiesRandomizer = GetNewInstanceOf<IAbilitiesRandomizer>(AbilitiesRandomizerTypeConstants.Average);
+
+            classNameRandomizer.SetClassName = CharacterClassConstants.Cleric;
+            levelRandomizer.SetLevel = 10;
+            baseRaceRandomizer.SetBaseRace = RaceConstants.BaseRaces.Mummy;
+
+            var character = characterGenerator.GenerateWith(
+                alignmentRandomizer,
+                classNameRandomizer,
+                levelRandomizer,
+                baseRaceRandomizer,
+                metaraceRandomizer,
+                abilitiesRandomizer);
+
+            characterAsserter.AssertCharacter(character);
+            Assert.That(character.Class.Name, Is.EqualTo(CharacterClassConstants.Cleric), character.Summary);
+            Assert.That(character.Class.Level, Is.EqualTo(10), character.Summary);
+            Assert.That(character.Race.BaseRace, Is.EqualTo(RaceConstants.BaseRaces.Mummy), character.Summary);
+            Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.None), character.Summary);
+            Assert.That(character.Race.Size, Is.EqualTo(RaceConstants.Sizes.Medium));
+            Assert.That(character.Race.LandSpeed.Value, Is.EqualTo(20), character.Summary);
+            Assert.That(character.Race.Height.Value, Is.InRange(60, 72), character.Summary);
+            Assert.That(character.Race.Weight.Value, Is.EqualTo(120).Within(20), character.Summary);
+            Assert.That(character.Languages, Contains.Item(LanguageConstants.Common), character.Summary);
+            Assert.That(character.Combat.BaseAttack.BaseBonus, Is.EqualTo(7), character.Summary);
+            Assert.That(character.Combat.BaseAttack.RacialModifier, Is.EqualTo(4), character.Summary);
+            Assert.That(character.Feats.Racial.Select(f => f.Name), Contains.Item(FeatConstants.Despair)
+                .And.Contains(FeatConstants.MummyRot)
+                .And.Contains(FeatConstants.DamageReduction)
+                .And.Contains(FeatConstants.Darkvision)
+                .And.Contains(FeatConstants.NaturalArmor)
+                .And.Contains(FeatConstants.VulnerabilityToEffect), character.Summary);
+            Assert.That(character.Abilities, Does.Not.ContainKey(AbilityConstants.Constitution), character.Summary);
+            Assert.That(character.ChallengeRating, Is.EqualTo(15), character.Summary);
         }
     }
 }

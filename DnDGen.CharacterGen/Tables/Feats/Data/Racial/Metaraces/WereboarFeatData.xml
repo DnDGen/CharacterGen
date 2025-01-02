@@ -127,46 +127,18 @@
     <entry>0</entry>
     <entry></entry>
   </collection>
-  <collection>
-    <name>Save BonusWill</name>
-    <entry>Save Bonus</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry>1</entry>
-    <entry>Will</entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-  </collection>
-  <collection>
-    <name>Skill BonusListen</name>
-    <entry>Skill Bonus</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry>3</entry>
-    <entry>Listen</entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-  </collection>
-  <collection>
-    <name>Skill BonusSpot</name>
-    <entry>Skill Bonus</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry>3</entry>
-    <entry>Spot</entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-    <entry>0</entry>
-    <entry></entry>
-  </collection>
+	<collection>
+		<name>Iron Will</name>
+		<entry>Iron Will</entry>
+		<entry></entry>
+		<entry>0</entry>
+		<entry>2</entry>
+		<entry></entry>
+		<entry>0</entry>
+		<entry></entry>
+		<entry>0</entry>
+		<entry></entry>
+		<entry>0</entry>
+		<entry></entry>
+	</collection>
 </collections>

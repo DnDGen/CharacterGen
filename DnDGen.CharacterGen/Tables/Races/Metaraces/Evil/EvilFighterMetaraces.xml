@@ -4,11 +4,6 @@
   <percentile>
     <lower>1</lower>
     <content></content>
-    <upper>93</upper>
-  </percentile>
-  <percentile>
-    <lower>94</lower>
-    <content>Mummy</content>
     <upper>94</upper>
   </percentile>
   <percentile>

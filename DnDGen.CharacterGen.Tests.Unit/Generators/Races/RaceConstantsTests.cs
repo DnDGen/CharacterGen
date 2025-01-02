@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.Races;
-using NUnit.Framework;
 using DnDGen.TreasureGen.Items;
+using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
 {
@@ -179,14 +179,15 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Races
         [TestCase(RaceConstants.Metaraces.HalfDragon, "Half-Dragon")]
         [TestCase(RaceConstants.Metaraces.HalfFiend, "Half-Fiend")]
         [TestCase(RaceConstants.Metaraces.Lich, "Lich")]
-        [TestCase(RaceConstants.Metaraces.Mummy, "Mummy")]
         [TestCase(RaceConstants.Metaraces.None, "")]
         [TestCase(RaceConstants.Metaraces.Vampire, "Vampire")]
         [TestCase(RaceConstants.Metaraces.Werebear, "Werebear")]
         [TestCase(RaceConstants.Metaraces.Wereboar, "Wereboar")]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, "Dire Wereboar")]
         [TestCase(RaceConstants.Metaraces.Wererat, "Wererat")]
         [TestCase(RaceConstants.Metaraces.Weretiger, "Weretiger")]
         [TestCase(RaceConstants.Metaraces.Werewolf, "Werewolf")]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, "Dire Werewolf")]
         [TestCase(RaceConstants.Metaraces.Species.Bronze, "Bronze")]
         [TestCase(RaceConstants.Metaraces.Species.Black, "Black")]
         [TestCase(RaceConstants.Metaraces.Species.Blue, "Blue")]

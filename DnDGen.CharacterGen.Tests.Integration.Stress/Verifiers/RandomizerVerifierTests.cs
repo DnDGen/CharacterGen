@@ -196,32 +196,33 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Verifiers
                 RaceConstants.BaseRaces.YuanTiPureblood,
             };
 
-            metaraceRandomizers = new[]
-            {
+            metaraceRandomizers =
+            [
                 RaceRandomizerTypeConstants.Metarace.AnyMeta,
                 RaceRandomizerTypeConstants.Metarace.GeneticMeta,
                 RaceRandomizerTypeConstants.Metarace.LycanthropeMeta,
                 RaceRandomizerTypeConstants.Metarace.NoMeta,
                 RaceRandomizerTypeConstants.Metarace.UndeadMeta,
                 Set,
-            };
+            ];
 
-            metaraces = new[]
-            {
+            metaraces =
+            [
                 RaceConstants.Metaraces.Ghost,
                 RaceConstants.Metaraces.HalfCelestial,
                 RaceConstants.Metaraces.HalfDragon,
                 RaceConstants.Metaraces.HalfFiend,
                 RaceConstants.Metaraces.Lich,
-                RaceConstants.Metaraces.Mummy,
                 RaceConstants.Metaraces.None,
                 RaceConstants.Metaraces.Vampire,
                 RaceConstants.Metaraces.Werebear,
                 RaceConstants.Metaraces.Wereboar,
+                RaceConstants.Metaraces.Wereboar_Dire,
                 RaceConstants.Metaraces.Wererat,
                 RaceConstants.Metaraces.Weretiger,
                 RaceConstants.Metaraces.Werewolf,
-            };
+                RaceConstants.Metaraces.Werewolf_Dire,
+            ];
 
             stopwatch.Reset();
             timeLimit = TimeSpan.FromSeconds(1);

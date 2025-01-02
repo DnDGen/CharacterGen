@@ -42,8 +42,7 @@ namespace DnDGen.CharacterGen.Generators.Abilities
             }
 
             var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
-
-            if (undead.Contains(race.Metarace))
+            if (race.BaseRace == RaceConstants.BaseRaces.Mummy || undead.Contains(race.Metarace))
                 abilities.Remove(AbilityConstants.Constitution);
 
             return abilities;
@@ -51,7 +50,7 @@ namespace DnDGen.CharacterGen.Generators.Abilities
 
         private bool CanAdjustAbilities(IAbilitiesRandomizer abilitiesRandomizer)
         {
-            if ((abilitiesRandomizer is ISetAbilitiesRandomizer) == false)
+            if (abilitiesRandomizer is not ISetAbilitiesRandomizer)
                 return true;
 
             var setAbilitiesRandomizer = abilitiesRandomizer as ISetAbilitiesRandomizer;
@@ -136,15 +135,17 @@ namespace DnDGen.CharacterGen.Generators.Abilities
             var abilityPriorities = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.AbilityPriorities, characterClass.Name);
             var undead = collectionsSelector.SelectFrom(Config.Name, TableNameConstants.Set.Collection.MetaraceGroups, GroupConstants.Undead);
 
-            if (undead.Contains(race.Metarace))
-                abilityPriorities = abilityPriorities.Except(new[] { AbilityConstants.Constitution });
+            if (race.BaseRace == RaceConstants.BaseRaces.Mummy || undead.Contains(race.Metarace))
+                abilityPriorities = abilityPriorities.Except([AbilityConstants.Constitution]);
 
             if (!abilityPriorities.Any())
             {
-                var ability = collectionsSelector.SelectRandomFrom(abilities.Keys);
+                var valid = abilities.Keys.AsEnumerable();
 
-                while (undead.Contains(race.Metarace) && ability == AbilityConstants.Constitution)
-                    ability = collectionsSelector.SelectRandomFrom(abilities.Keys);
+                if (race.BaseRace == RaceConstants.BaseRaces.Mummy || undead.Contains(race.Metarace))
+                    valid = valid.Except([AbilityConstants.Constitution]);
+
+                var ability = collectionsSelector.SelectRandomFrom(valid);
 
                 return ability;
             }

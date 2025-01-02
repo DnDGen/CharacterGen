@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
@@ -95,6 +95,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Roll
         [TestCase(RaceConstants.BaseRaces.GraySlaad)]
         [TestCase(RaceConstants.BaseRaces.GreenSlaad)]
         [TestCase(RaceConstants.BaseRaces.Kapoacinth)]
+        [TestCase(RaceConstants.BaseRaces.Mummy)]
         [TestCase(RaceConstants.BaseRaces.RedSlaad)]
         public void ImmortalCreatures(string creature)
         {

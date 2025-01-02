@@ -707,6 +707,13 @@
     <entry>Search</entry>
     <entry>Spot</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>Hide</entry>
+		<entry>Listen</entry>
+		<entry>Move Silently</entry>
+		<entry>Spot</entry>
+	</collection>
   <collection>
     <name>Monk</name>
     <entry>Balance</entry>

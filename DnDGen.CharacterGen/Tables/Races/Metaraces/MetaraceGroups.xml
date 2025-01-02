@@ -9,13 +9,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
-    <entry>Wereboar</entry>
+	  <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
-    <entry>Werewolf</entry>
+	  <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Has Wings</name>
@@ -29,7 +30,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Wererat</entry>
   </collection>
@@ -37,7 +37,6 @@
     <name>Lawful Neutral</name>
     <entry></entry>
     <entry>Ghost</entry>
-    <entry>Mummy</entry>
   </collection>
   <collection>
     <name>Lawful Good</name>
@@ -56,6 +55,7 @@
     <entry>Lich</entry>
     <entry>Vampire</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Chaotic Neutral</name>
@@ -76,7 +76,6 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
   </collection>
   <collection>
@@ -84,6 +83,7 @@
     <entry></entry>
     <entry>Ghost</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
   </collection>
   <collection>
@@ -103,15 +103,16 @@
     <name>Lycanthrope</name>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Undead</name>
     <entry>Ghost</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
   </collection>
   <collection>
@@ -130,13 +131,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Aristocrat</name>
@@ -145,13 +147,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Barbarian</name>
@@ -160,13 +163,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Bard</name>
@@ -176,13 +180,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Cleric</name>
@@ -192,13 +197,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Commoner</name>
@@ -207,13 +213,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Druid</name>
@@ -223,13 +230,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Expert</name>
@@ -238,13 +246,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Fighter</name>
@@ -253,13 +262,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Monk</name>
@@ -268,13 +278,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Ranger</name>
@@ -284,13 +295,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Rogue</name>
@@ -299,13 +311,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Sorcerer</name>
@@ -315,13 +328,14 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Warrior</name>
@@ -330,13 +344,14 @@
     <entry>Half-Dragon</entry>
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
   <collection>
     <name>Wizard</name>
@@ -346,12 +361,13 @@
     <entry>Half-Celestial</entry>
     <entry>Half-Fiend</entry>
     <entry>Lich</entry>
-    <entry>Mummy</entry>
     <entry>Vampire</entry>
     <entry>Werebear</entry>
     <entry>Wereboar</entry>
+	  <entry>Dire Wereboar</entry>
     <entry>Weretiger</entry>
     <entry>Wererat</entry>
     <entry>Werewolf</entry>
+	  <entry>Dire Werewolf</entry>
   </collection>
 </collections>

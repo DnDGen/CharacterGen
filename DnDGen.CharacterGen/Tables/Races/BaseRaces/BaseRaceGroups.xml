@@ -50,6 +50,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -123,6 +124,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -207,6 +209,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -279,6 +282,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -351,6 +355,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -541,6 +546,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -617,6 +623,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -690,6 +697,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -763,6 +771,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -835,6 +844,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -912,6 +922,7 @@
     <entry>Kuo-toa</entry>
     <entry>Mind Flayer</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
     <entry>Rakshasa</entry>
@@ -961,6 +972,7 @@
     <entry>Merfolk</entry>
     <entry>Mind Flayer</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre Mage</entry>
     <entry>Sahuagin</entry>
     <entry>Scorpionfolk</entry>
@@ -1003,6 +1015,7 @@
     <entry>Merfolk</entry>
     <entry>Mind Flayer</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Orc</entry>
     <entry>Rakshasa</entry>
     <entry>Sahuagin</entry>
@@ -1062,6 +1075,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1120,6 +1134,7 @@
     <entry>Merrow</entry>
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1173,6 +1188,7 @@
     <entry>Merrow</entry>
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1288,6 +1304,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1359,6 +1376,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1444,6 +1462,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1500,7 +1519,8 @@
     <entry>Grimlock</entry>
     <entry>Half-Elf</entry>
     <entry>Half-Orc</entry>
-    <entry>Human</entry>
+	  <entry>Hill Giant</entry>
+	  <entry>Human</entry>
     <entry>Janni</entry>
     <entry>Kuo-toa</entry>
     <entry>Lightfoot Halfling</entry>
@@ -1564,6 +1584,7 @@
     <entry>Merrow</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>
@@ -1636,6 +1657,7 @@
     <entry>Mind Flayer</entry>
     <entry>Minotaur</entry>
     <entry>Mountain Dwarf</entry>
+	  <entry>Mummy</entry>
     <entry>Ogre</entry>
     <entry>Ogre Mage</entry>
     <entry>Orc</entry>

@@ -510,6 +510,11 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
             SkillConstants.Search,
             SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf)]
+        [TestCase(RaceConstants.BaseRaces.Mummy,
+            SkillConstants.Hide,
+            SkillConstants.Listen,
+            SkillConstants.MoveSilently,
+            SkillConstants.Spot)]
         [TestCase(RaceConstants.BaseRaces.Ogre,
             SkillConstants.Climb,
             SkillConstants.Listen,

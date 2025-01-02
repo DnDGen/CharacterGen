@@ -67,6 +67,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 4)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 5)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 3)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 8)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]
@@ -95,14 +96,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.Metaraces.HalfDragon, 2)]
         [TestCase(RaceConstants.Metaraces.HalfFiend, 1)]
         [TestCase(RaceConstants.Metaraces.Lich, 2)]
-        [TestCase(RaceConstants.Metaraces.Mummy, 5)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
         [TestCase(RaceConstants.Metaraces.Vampire, 2)]
         [TestCase(RaceConstants.Metaraces.Werebear, 5)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 4)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, 4)]
         [TestCase(RaceConstants.Metaraces.Wererat, 2)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 5)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 3)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, 4)]
         public void ChallengeRating(string name, int challengeRating)
         {
             base.Adjustment(name, challengeRating);

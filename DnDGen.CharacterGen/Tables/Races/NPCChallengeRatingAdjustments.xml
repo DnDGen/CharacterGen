@@ -189,6 +189,10 @@
     <name>Mountain Dwarf</name>
     <entry>-1</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>-1</entry>
+	</collection>
   <collection>
     <name>Ogre Mage</name>
 	  <entry>-1</entry>

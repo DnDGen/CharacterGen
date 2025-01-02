@@ -74,6 +74,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Skills
         [TestCase(RaceConstants.BaseRaces.Merrow, 2)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 2)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 2)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 4)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 2)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 2)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]

@@ -1,6 +1,6 @@
 ﻿using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Rolls
@@ -69,6 +69,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Ages.Roll
         [TestCase(RaceConstants.BaseRaces.MindFlayer, "4d6")]
         [TestCase(RaceConstants.BaseRaces.Minotaur, "1d6")]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, "5d6")]
+        [TestCase(RaceConstants.BaseRaces.Mummy, "6d20")]
         [TestCase(RaceConstants.BaseRaces.Ogre, "3d6")]
         [TestCase(RaceConstants.BaseRaces.OgreMage, "3d6")]
         [TestCase(RaceConstants.BaseRaces.Orc, "1d6")]

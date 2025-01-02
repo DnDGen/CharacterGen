@@ -1,21 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>13.0.0</Version>
+    <Version>14.0.0</Version>
     <Authors>Karl M. Speer</Authors>
     <Company>DnDGen</Company>
     <Product>CharacterGen</Product>
     <Description>This generates characters and NPCs for the Dungeons and Dragons 3.5 system. One can generate random characters or set various randomizers.</Description>
     <PackageReleaseNotes>
-	  13.0.0:
-	    * Bug #124, #147 - forbidden magic school incorrect
-		* Bug #150 - Fix security vulnerabilities
-		* Bug #114 - Kobold and NPC CR incorrect
-		* Bug #130 - Fix spell names to be non-generic
-		* Bug #146 - Undo reversible spells
-		* Bug #149 - Minimum levels for class animals
-		* Bug #152 - Clerics can't spells of opposing alignments
-		* Allow spells to have multiple sources
+	  14.0.0:
+	    * Fix Werewolf Lord CR, add Dire Werewolf and Dire Wereboar
+		* Remove Mummy as metarace, re-adding as base race for Mummy Lords
+		* Fix Hill Giant alignments, allowing True Neutral
 	</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/DnDGen/CharacterGen</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DnDGen/CharacterGen</RepositoryUrl>
@@ -28,6 +23,13 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\AbilityGroups.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Races\Dire WereboarAbilityAdjustments.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Races\Dire WerewolfAbilityAdjustments.xml" />
+    <EmbeddedResource Include="Tables\Abilities\Races\MummyAbilityAdjustments.xml" />
+    <EmbeddedResource Include="Tables\Feats\Data\Racial\BaseRaces\MummyFeatData.xml" />
+    <EmbeddedResource Include="Tables\Feats\Data\Racial\Metaraces\Dire WereboarFeatData.xml" />
+    <EmbeddedResource Include="Tables\Feats\Data\Racial\Metaraces\Dire WerewolfFeatData.xml" />
+    <EmbeddedResource Include="Tables\Races\BaseRaces\Ages\MummyAges.xml" />
     <EmbeddedResource Include="Tables\Races\PCChallengeRatingAdjustments.xml" />
     <EmbeddedResource Include="Tables\Races\NPCChallengeRatingAdjustments.xml" />
     <None Include="18531-twenty-sided-dice-vector-thumb.png">
@@ -212,9 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Races\Mountain DwarfAbilityAdjustments.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Tables\Abilities\Races\MummyAbilityAdjustments.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Abilities\Races\Ogre MageAbilityAdjustments.xml" />
@@ -833,9 +832,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Feats\Data\Racial\Metaraces\LichFeatData.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Tables\Feats\Data\Racial\Metaraces\MummyFeatData.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tables\Feats\Data\Racial\Metaraces\Species\BlackFeatData.xml" />

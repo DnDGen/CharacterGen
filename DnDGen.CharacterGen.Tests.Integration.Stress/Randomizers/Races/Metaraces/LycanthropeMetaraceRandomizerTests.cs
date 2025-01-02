@@ -12,15 +12,17 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.Metarac
         {
             get
             {
-                return new[]
-                {
+                return
+                [
                     RaceConstants.Metaraces.Werebear,
                     RaceConstants.Metaraces.Wereboar,
+                    RaceConstants.Metaraces.Wereboar_Dire,
                     RaceConstants.Metaraces.Wererat,
                     RaceConstants.Metaraces.Weretiger,
                     RaceConstants.Metaraces.Werewolf,
+                    RaceConstants.Metaraces.Werewolf_Dire,
                     RaceConstants.Metaraces.None
-                };
+                ];
             }
         }
 

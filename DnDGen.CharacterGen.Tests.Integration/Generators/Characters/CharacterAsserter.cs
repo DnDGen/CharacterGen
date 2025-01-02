@@ -512,7 +512,6 @@ namespace DnDGen.CharacterGen.Tests.Integration.Generators.Characters
         {
             Assert.That(character.Race.Metarace, Is.EqualTo(RaceConstants.Metaraces.Ghost)
                 .Or.EqualTo(RaceConstants.Metaraces.Lich)
-                .Or.EqualTo(RaceConstants.Metaraces.Mummy)
                 .Or.EqualTo(RaceConstants.Metaraces.Vampire));
             Assert.That(character.Race.ChallengeRating, Is.Positive, character.Summary);
             Assert.That(character.Abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution), character.Summary);

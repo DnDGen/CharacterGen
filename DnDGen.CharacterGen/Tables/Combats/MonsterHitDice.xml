@@ -133,6 +133,10 @@
     <name>Minotaur</name>
     <entry>6</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>8</entry>
+	</collection>
   <collection>
     <name>Ogre</name>
     <entry>4</entry>

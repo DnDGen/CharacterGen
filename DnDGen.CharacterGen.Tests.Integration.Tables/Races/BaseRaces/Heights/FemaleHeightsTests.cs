@@ -68,6 +68,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 72)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 74)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, 43)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 56)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 100)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 100)]
         [TestCase(RaceConstants.BaseRaces.Orc, 57)]

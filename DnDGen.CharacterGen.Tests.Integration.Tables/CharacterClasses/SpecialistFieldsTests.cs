@@ -168,6 +168,19 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
             CharacterClassConstants.Schools.Illusion,
             CharacterClassConstants.Schools.Necromancy,
             CharacterClassConstants.Schools.Transmutation)]
+        [TestCase(RaceConstants.BaseRaces.Mummy,
+            CharacterClassConstants.Domains.Death,
+            CharacterClassConstants.Domains.Evil,
+            CharacterClassConstants.Domains.Law,
+            CharacterClassConstants.Domains.Protection,
+            CharacterClassConstants.Schools.Abjuration,
+            CharacterClassConstants.Schools.Conjuration,
+            CharacterClassConstants.Schools.Divination,
+            CharacterClassConstants.Schools.Enchantment,
+            CharacterClassConstants.Schools.Evocation,
+            CharacterClassConstants.Schools.Illusion,
+            CharacterClassConstants.Schools.Necromancy,
+            CharacterClassConstants.Schools.Transmutation)]
         [TestCase(RaceConstants.BaseRaces.StormGiant,
             CharacterClassConstants.Domains.Chaos,
             CharacterClassConstants.Domains.Good,
@@ -522,13 +535,14 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.CharacterClasses
         [TestCase(RaceConstants.Metaraces.HalfDragon)]
         [TestCase(RaceConstants.Metaraces.HalfFiend)]
         [TestCase(RaceConstants.Metaraces.Lich)]
-        [TestCase(RaceConstants.Metaraces.Mummy)]
         [TestCase(RaceConstants.Metaraces.None)]
         [TestCase(RaceConstants.Metaraces.Werebear)]
         [TestCase(RaceConstants.Metaraces.Wereboar)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire)]
         [TestCase(RaceConstants.Metaraces.Wererat)]
         [TestCase(RaceConstants.Metaraces.Weretiger)]
         [TestCase(RaceConstants.Metaraces.Werewolf)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire)]
         public void RaceHasAllSpecialistFields(string race)
         {
             var fields = new[]

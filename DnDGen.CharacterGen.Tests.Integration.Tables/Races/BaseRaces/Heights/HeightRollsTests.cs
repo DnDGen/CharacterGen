@@ -68,6 +68,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.MindFlayer, "2d8")]
         [TestCase(RaceConstants.BaseRaces.Minotaur, "2d6")]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, "2d4")]
+        [TestCase(RaceConstants.BaseRaces.Mummy, "4d4")]
         [TestCase(RaceConstants.BaseRaces.Ogre, "2d6")]
         [TestCase(RaceConstants.BaseRaces.OgreMage, "2d6")]
         [TestCase(RaceConstants.BaseRaces.Orc, "2d12")]
@@ -93,7 +94,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.BaseRaces.Heights
         [TestCase(RaceConstants.BaseRaces.YuanTiPureblood, "2d10")]
         public void HeightRoll(string name, string heightRoll)
         {
-            base.DistinctCollection(name, new[] { heightRoll });
+            base.DistinctCollection(name, [heightRoll]);
         }
     }
 }

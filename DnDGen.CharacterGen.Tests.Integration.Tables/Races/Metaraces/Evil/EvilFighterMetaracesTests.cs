@@ -1,7 +1,7 @@
 ﻿using DnDGen.CharacterGen.Alignments;
 using DnDGen.CharacterGen.CharacterClasses;
-using DnDGen.CharacterGen.Tables;
 using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
@@ -20,8 +20,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races.Metaraces.Evil
             AssertTableIsComplete();
         }
 
-        [TestCase(1, 93, RaceConstants.Metaraces.None)]
-        [TestCase(94, 94, RaceConstants.Metaraces.Mummy)]
+        [TestCase(1, 94, RaceConstants.Metaraces.None)]
         [TestCase(95, 95, RaceConstants.Metaraces.Ghost)]
         [TestCase(96, 96, RaceConstants.Metaraces.Vampire)]
         [TestCase(97, 97, RaceConstants.Metaraces.Wererat)]

@@ -428,7 +428,7 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void UndeadHaveNoConstitution()
+        public void UndeadHaveNoConstitution_Metarace()
         {
             undead.Add(race.Metarace);
 
@@ -444,7 +444,23 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void UndeadDoNotTryToIncreaseConstitution()
+        public void UndeadHaveNoConstitution_Mummy()
+        {
+            race.BaseRace = RaceConstants.BaseRaces.Mummy;
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadDoNotTryToIncreaseConstitution_Metarace()
         {
             abilityPriorities.Clear();
             abilityPriorities.Add(AbilityConstants.Constitution);
@@ -466,24 +482,69 @@ namespace DnDGen.CharacterGen.Tests.Unit.Generators.Abilities
         }
 
         [Test]
-        public void UndeadDoNotTryToIncreaseConstitutionWhenNoPriorities()
+        public void UndeadDoNotTryToIncreaseConstitution_Mummy()
+        {
+            abilityPriorities.Clear();
+            abilityPriorities.Add(AbilityConstants.Constitution);
+            abilityPriorities.Add(AbilityConstants.Strength);
+
+            race.BaseRace = RaceConstants.BaseRaces.Mummy;
+            characterClass.Level = 4;
+            mockPercentileSelector.Setup(s => s.SelectFrom<bool>(Config.Name, TableNameConstants.Set.TrueOrFalse.IncreaseFirstPriorityAbility)).Returns(true);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadDoNotTryToIncreaseConstitutionWhenNoPriorities_Metarace()
         {
             abilityPriorities.Clear();
 
             undead.Add(race.Metarace);
             characterClass.Level = 4;
 
-            mockCollectionsSelector.SetupSequence(s => s.SelectRandomFrom(It.IsAny<IEnumerable<string>>()))
-                .Returns(AbilityConstants.Constitution)
-                .Returns(AbilityConstants.Intelligence);
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(aa => aa.Contains(AbilityConstants.Constitution))))
+                .Returns(AbilityConstants.Constitution);
 
             var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
             AssertAbilities(abilities);
             Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
             Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
-            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(11));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
             Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
-            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(11));
+            Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
+            Assert.That(abilities.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void UndeadDoNotTryToIncreaseConstitutionWhenNoPriorities_Mummy()
+        {
+            abilityPriorities.Clear();
+
+            race.BaseRace = RaceConstants.BaseRaces.Mummy;
+            characterClass.Level = 4;
+
+            mockCollectionsSelector
+                .Setup(s => s.SelectRandomFrom(It.Is<IEnumerable<string>>(aa => aa.Contains(AbilityConstants.Constitution))))
+                .Returns(AbilityConstants.Constitution);
+
+            var abilities = abilitiesGenerator.GenerateWith(mockAbilitiesRandomizer.Object, characterClass, race);
+            AssertAbilities(abilities);
+            Assert.That(abilities[AbilityConstants.Charisma].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Dexterity].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Intelligence].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Strength].Value, Is.EqualTo(10));
+            Assert.That(abilities[AbilityConstants.Wisdom].Value, Is.EqualTo(11));
             Assert.That(abilities.Keys, Is.All.Not.EqualTo(AbilityConstants.Constitution));
             Assert.That(abilities.Count, Is.EqualTo(5));
         }

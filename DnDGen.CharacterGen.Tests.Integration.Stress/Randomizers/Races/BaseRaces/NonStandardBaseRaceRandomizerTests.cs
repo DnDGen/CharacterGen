@@ -12,8 +12,8 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
         {
             get
             {
-                return new[]
-                {
+                return
+                [
                     RaceConstants.BaseRaces.Aasimar,
                     RaceConstants.BaseRaces.Azer,
                     RaceConstants.BaseRaces.BlueSlaad,
@@ -49,6 +49,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
                     RaceConstants.BaseRaces.MindFlayer,
                     RaceConstants.BaseRaces.Minotaur,
                     RaceConstants.BaseRaces.MountainDwarf,
+                    RaceConstants.BaseRaces.Mummy,
                     RaceConstants.BaseRaces.Ogre,
                     RaceConstants.BaseRaces.OgreMage,
                     RaceConstants.BaseRaces.Orc,
@@ -69,7 +70,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
                     RaceConstants.BaseRaces.YuanTiAbomination,
                     RaceConstants.BaseRaces.YuanTiHalfblood,
                     RaceConstants.BaseRaces.YuanTiPureblood,
-                };
+                ];
             }
         }
 

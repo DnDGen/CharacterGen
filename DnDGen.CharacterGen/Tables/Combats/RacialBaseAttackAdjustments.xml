@@ -213,10 +213,10 @@
     <name>Mountain Dwarf</name>
     <entry>0</entry>
   </collection>
-  <collection>
-    <name>Mummy</name>
-    <entry>4</entry>
-  </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>4</entry>
+	</collection>
   <collection>
     <name>Ogre Mage</name>
     <entry>3</entry>
@@ -301,6 +301,10 @@
     <name>Wereboar</name>
     <entry>3</entry>
   </collection>
+	<collection>
+		<name>Dire Wereboar</name>
+		<entry>5</entry>
+	</collection>
   <collection>
     <name>Wererat</name>
     <entry>1</entry>
@@ -313,6 +317,10 @@
     <name>Werewolf</name>
     <entry>2</entry>
   </collection>
+	<collection>
+		<name>Dire Werewolf</name>
+		<entry>4</entry>
+	</collection>
   <collection>
     <name>Wild Elf</name>
     <entry>0</entry>

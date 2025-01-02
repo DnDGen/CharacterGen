@@ -1709,39 +1709,21 @@
     <entry>Necromancy</entry>
     <entry>Transmutation</entry>
   </collection>
-  <collection>
-    <name>Mummy</name>
-    <entry>Air</entry>
-    <entry>Animal</entry>
-    <entry>Chaos</entry>
-    <entry>Death</entry>
-    <entry>Destruction</entry>
-    <entry>Earth</entry>
-    <entry>Evil</entry>
-    <entry>Fire</entry>
-    <entry>Good</entry>
-    <entry>Healing</entry>
-    <entry>Knowledge</entry>
-    <entry>Law</entry>
-    <entry>Luck</entry>
-    <entry>Magic</entry>
-    <entry>Plant</entry>
-    <entry>Protection</entry>
-    <entry>Strength</entry>
-    <entry>Sun</entry>
-    <entry>Travel</entry>
-    <entry>Trickery</entry>
-    <entry>War</entry>
-    <entry>Water</entry>
-    <entry>Abjuration</entry>
-    <entry>Conjuration</entry>
-    <entry>Divination</entry>
-    <entry>Enchantment</entry>
-    <entry>Evocation</entry>
-    <entry>Illusion</entry>
-    <entry>Necromancy</entry>
-    <entry>Transmutation</entry>
-  </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>Evil</entry>
+		<entry>Law</entry>
+		<entry>Protection</entry>
+		<entry>Death</entry>
+		<entry>Abjuration</entry>
+		<entry>Conjuration</entry>
+		<entry>Divination</entry>
+		<entry>Enchantment</entry>
+		<entry>Evocation</entry>
+		<entry>Illusion</entry>
+		<entry>Necromancy</entry>
+		<entry>Transmutation</entry>
+	</collection>
   <collection>
     <name>Ogre</name>
     <entry>Air</entry>
@@ -2413,6 +2395,39 @@
     <entry>Necromancy</entry>
     <entry>Transmutation</entry>
   </collection>
+	<collection>
+		<name>Dire Wereboar</name>
+		<entry>Air</entry>
+		<entry>Animal</entry>
+		<entry>Chaos</entry>
+		<entry>Death</entry>
+		<entry>Destruction</entry>
+		<entry>Earth</entry>
+		<entry>Evil</entry>
+		<entry>Fire</entry>
+		<entry>Good</entry>
+		<entry>Healing</entry>
+		<entry>Knowledge</entry>
+		<entry>Law</entry>
+		<entry>Luck</entry>
+		<entry>Magic</entry>
+		<entry>Plant</entry>
+		<entry>Protection</entry>
+		<entry>Strength</entry>
+		<entry>Sun</entry>
+		<entry>Travel</entry>
+		<entry>Trickery</entry>
+		<entry>War</entry>
+		<entry>Water</entry>
+		<entry>Abjuration</entry>
+		<entry>Conjuration</entry>
+		<entry>Divination</entry>
+		<entry>Enchantment</entry>
+		<entry>Evocation</entry>
+		<entry>Illusion</entry>
+		<entry>Necromancy</entry>
+		<entry>Transmutation</entry>
+	</collection>
   <collection>
     <name>Wererat</name>
     <entry>Air</entry>
@@ -2512,6 +2527,39 @@
     <entry>Necromancy</entry>
     <entry>Transmutation</entry>
   </collection>
+	<collection>
+		<name>Dire Werewolf</name>
+		<entry>Air</entry>
+		<entry>Animal</entry>
+		<entry>Chaos</entry>
+		<entry>Death</entry>
+		<entry>Destruction</entry>
+		<entry>Earth</entry>
+		<entry>Evil</entry>
+		<entry>Fire</entry>
+		<entry>Good</entry>
+		<entry>Healing</entry>
+		<entry>Knowledge</entry>
+		<entry>Law</entry>
+		<entry>Luck</entry>
+		<entry>Magic</entry>
+		<entry>Plant</entry>
+		<entry>Protection</entry>
+		<entry>Strength</entry>
+		<entry>Sun</entry>
+		<entry>Travel</entry>
+		<entry>Trickery</entry>
+		<entry>War</entry>
+		<entry>Water</entry>
+		<entry>Abjuration</entry>
+		<entry>Conjuration</entry>
+		<entry>Divination</entry>
+		<entry>Enchantment</entry>
+		<entry>Evocation</entry>
+		<entry>Illusion</entry>
+		<entry>Necromancy</entry>
+		<entry>Transmutation</entry>
+	</collection>
   <collection>
     <name>Wild Elf</name>
     <entry>Air</entry>

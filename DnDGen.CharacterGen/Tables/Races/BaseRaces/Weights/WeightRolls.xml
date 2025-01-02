@@ -189,6 +189,10 @@
     <name>Mountain Dwarf</name>
     <entry>2d6</entry>
   </collection>
+	<collection>
+		<name>Mummy</name>
+		<entry>1d2</entry>
+	</collection>
   <collection>
     <name>Ogre</name>
     <entry>4d6</entry>

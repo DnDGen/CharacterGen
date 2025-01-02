@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 
 namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
@@ -54,6 +54,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Combats
         [TestCase(RaceConstants.BaseRaces.Merrow, 4)]
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 8)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 6)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 8)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 4)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 5)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]

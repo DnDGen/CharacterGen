@@ -1,5 +1,5 @@
-﻿using DnDGen.CharacterGen.Tables;
-using DnDGen.CharacterGen.Races;
+﻿using DnDGen.CharacterGen.Races;
+using DnDGen.CharacterGen.Tables;
 using NUnit.Framework;
 using System.Linq;
 
@@ -70,6 +70,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.BaseRaces.MindFlayer, 0)]
         [TestCase(RaceConstants.BaseRaces.Minotaur, 0)]
         [TestCase(RaceConstants.BaseRaces.MountainDwarf, 0)]
+        [TestCase(RaceConstants.BaseRaces.Mummy, 0)]
         [TestCase(RaceConstants.BaseRaces.Ogre, 0)]
         [TestCase(RaceConstants.BaseRaces.OgreMage, 40)]
         [TestCase(RaceConstants.BaseRaces.Orc, 0)]
@@ -98,14 +99,15 @@ namespace DnDGen.CharacterGen.Tests.Integration.Tables.Races
         [TestCase(RaceConstants.Metaraces.HalfDragon, 2)]
         [TestCase(RaceConstants.Metaraces.HalfFiend, 1)]
         [TestCase(RaceConstants.Metaraces.Lich, 0)]
-        [TestCase(RaceConstants.Metaraces.Mummy, 0)]
         [TestCase(RaceConstants.Metaraces.None, 0)]
         [TestCase(RaceConstants.Metaraces.Vampire, 0)]
         [TestCase(RaceConstants.Metaraces.Werebear, 0)]
         [TestCase(RaceConstants.Metaraces.Wereboar, 0)]
+        [TestCase(RaceConstants.Metaraces.Wereboar_Dire, 0)]
         [TestCase(RaceConstants.Metaraces.Wererat, 0)]
         [TestCase(RaceConstants.Metaraces.Weretiger, 0)]
         [TestCase(RaceConstants.Metaraces.Werewolf, 0)]
+        [TestCase(RaceConstants.Metaraces.Werewolf_Dire, 0)]
         public void AerialSpeed(string name, int speed)
         {
             Adjustment(name, speed);

@@ -42,6 +42,7 @@ namespace DnDGen.CharacterGen.Tests.Integration.Stress.Randomizers.Races.BaseRac
                     RaceConstants.BaseRaces.Lizardfolk,
                     RaceConstants.BaseRaces.MindFlayer,
                     RaceConstants.BaseRaces.Minotaur,
+                    RaceConstants.BaseRaces.Mummy,
                     RaceConstants.BaseRaces.Ogre,
                     RaceConstants.BaseRaces.OgreMage,
                     RaceConstants.BaseRaces.Orc,
